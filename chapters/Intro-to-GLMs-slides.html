@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
+<link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<title>Regression Models for Epidemiology – Introduction to GLMs</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+<style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4df01d85d5cf19cc6202400f4f043f84.css">
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
+  </script><script type="text/javascript" charset="UTF-8">
+  document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({
+    "notice_banner_type":"simple",
+    "consent_type":"implied",
+    "palette":"light",
+    "language":"en",
+    "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+    "notice_banner_reject_button_hide":false,
+    "preferences_center_close_button_hide":false,
+    "website_name":""
+    ,
+  "language":"en"
+    });
+  });
+  </script><link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "theme": "clean",
+    "openSidebar": false,
+    "enableExperimentalNewNoteButton": true
+  }
+  </script><script async="" src="https://hypothes.is/embed.js"></script><script>
+    window.document.addEventListener("DOMContentLoaded", function (_event) {
+      document.body.classList.add('hypothesis-enabled');
+    });
+  </script><style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Introduction to GLMs</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section><section><section id="introduction" class="title-slide slide level1 center" data-number="1"><h1>
+<span class="header-section-number">1</span> Introduction</h1>
+
+</section><section class="slide level2"><!-- ::: {.content-hidden when-format="revealjs"} --></section><section class="slide level2"><h3 class="unnumbered" id="configuring-r">Configuring R</h3>
+<p>Functions from these packages will be used throughout this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rmarkdown) <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(pander) <span class="co"># format tables for markdown</span></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(ggplot2) <span class="co"># graphics</span></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="fu">library</span>(ggfortify) <span class="co"># help with graphics</span></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="fu">library</span>(dplyr) <span class="co"># manipulate data</span></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="fu">library</span>(tibble) <span class="co"># `tibble`s extend `data.frame`s</span></span>
+<span id="cb1-9"><a aria-label="9"></a><span class="fu">library</span>(magrittr) <span class="co"># `%&gt;%` and other additional piping tools</span></span>
+<span id="cb1-10"><a aria-label="10"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="fu">library</span>(knitr) <span class="co"># format R output for markdown</span></span>
+<span id="cb1-12"><a aria-label="12"></a><span class="fu">library</span>(tidyr) <span class="co"># Tools to help to create tidy data</span></span>
+<span id="cb1-13"><a aria-label="13"></a><span class="fu">library</span>(plotly) <span class="co"># interactive graphics</span></span>
+<span id="cb1-14"><a aria-label="14"></a><span class="fu">library</span>(dobson) <span class="co"># datasets from Dobson and Barnett 2018</span></span>
+<span id="cb1-15"><a aria-label="15"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for markdown</span></span>
+<span id="cb1-16"><a aria-label="16"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-17"><a aria-label="17"></a><span class="fu">library</span>(latex2exp) <span class="co"># use LaTeX in R code (for figures and tables)</span></span>
+<span id="cb1-18"><a aria-label="18"></a><span class="fu">library</span>(fs) <span class="co"># filesystem path manipulations</span></span>
+<span id="cb1-19"><a aria-label="19"></a><span class="fu">library</span>(survival) <span class="co"># survival analysis</span></span>
+<span id="cb1-20"><a aria-label="20"></a><span class="fu">library</span>(survminer) <span class="co"># survival analysis graphics</span></span>
+<span id="cb1-21"><a aria-label="21"></a><span class="fu">library</span>(KMsurv) <span class="co"># datasets from Klein and Moeschberger</span></span>
+<span id="cb1-22"><a aria-label="22"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for</span></span>
+<span id="cb1-23"><a aria-label="23"></a><span class="fu">library</span>(webshot2) <span class="co"># convert interactive content to static for pdf</span></span>
+<span id="cb1-24"><a aria-label="24"></a><span class="fu">library</span>(forcats) <span class="co"># functions for categorical variables ("factors")</span></span>
+<span id="cb1-25"><a aria-label="25"></a><span class="fu">library</span>(stringr) <span class="co"># functions for dealing with strings</span></span>
+<span id="cb1-26"><a aria-label="26"></a><span class="fu">library</span>(lubridate) <span class="co"># functions for dealing with dates and times</span></span>
+<span id="cb1-27"><a aria-label="27"></a><span class="fu">library</span>(broom) <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom.helpers) <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Here are some R settings I use in this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># delete any data that's already loaded into R</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
+<span id="cb2-4"><a aria-label="4"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
+<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb2-6"><a aria-label="6"></a>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span id="cb2-7"><a aria-label="7"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb2-8"><a aria-label="8"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)))</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a><span class="fu">options</span>(<span class="st">'digits'</span> <span class="ot">=</span> <span class="dv">6</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a></span>
+<span id="cb2-14"><a aria-label="14"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb2-16"><a aria-label="16"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) <span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span id="cb2-18"><a aria-label="18"></a>legend_text_size <span class="ot">=</span> <span class="dv">9</span></span>
+<span id="cb2-19"><a aria-label="19"></a>run_graphs <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<!-- ::: -->
+<style>
+.quarto-figure-center > figure {
+text-align: center;
+}
+</style></section></section><section><section id="welcome" class="title-slide slide level1 center" data-number="2"><h1>
+<span class="header-section-number">2</span> Welcome</h1>
+
+</section><section class="slide level2"><p>Welcome to Epidemiology 204: Quantitative Epidemiology III (Statistical Models).</p>
+<p>Epi 204 is a course on <strong>regression modeling</strong>.</p>
+</section></section><section><section id="what-you-should-already-know" class="title-slide slide level1 scrollable center" data-number="3"><h1>
+<span class="header-section-number">3</span> What you should already know</h1>
+
+</section><section class="slide level2"><div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Epi 202, Epi 203, and Sta 108 are prerequisites for this course. If you haven’t passed one of these courses, talk to me ASAP.</p>
+</div>
+</div>
+</div>
+<h3 id="epi-202-probability-models">Epi 202: probability models</h3>
+<ul>
+<li>Probability distributions
+<ul>
+<li>binomial</li>
+<li>Poisson</li>
+<li>Gaussian</li>
+<li>exponential</li>
+</ul>
+</li>
+</ul></section><section class="slide level2"><ul>
+<li>Characteristics of probability distributions
+<ul>
+<li>Mean, median, mode, quantiles</li>
+<li>Variance, standard deviation, overdispersion</li>
+</ul>
+</li>
+</ul></section><section class="slide level2"><ul>
+<li>Characteristics of samples
+<ul>
+<li>independence, dependence, covariance, correlation</li>
+<li>ranks, order statistics</li>
+<li>identical vs nonidentical distribution (homogeneity vs heterogeneity)</li>
+<li>Laws of Large Numbers</li>
+<li>Central Limit Theorem for the mean of an iid sample</li>
+</ul>
+</li>
+</ul>
+<h3 class="smaller" id="epi-203-inference-for-one-or-several-homogenous-populations">Epi 203: inference for one or several homogenous populations</h3>
+<ul>
+<li>the maximum likelihood inference framework:
+<ul>
+<li>likelihood functions</li>
+<li>log-likelihood functions</li>
+<li>score functions</li>
+<li>estimating equations</li>
+<li>information matrices</li>
+<li>point estimates</li>
+<li>standard errors</li>
+<li>confidence intervals</li>
+<li>hypothesis tests</li>
+<li>p-values</li>
+</ul>
+</li>
+</ul></section><section class="slide level2"><ul>
+<li>Hypothesis tests for one, two, and &gt;2 groups:
+<ul>
+<li>t-tests/ANOVA for Gaussian models</li>
+<li>chi-square tests for binomial and Poisson models</li>
+<li>nonparametric tests:
+<ul>
+<li>Wilcoxon signed-rank test for matched pairs</li>
+<li>Mann–Whitney/Kruskal-Wallis rank sum test for <span class="math inline">\(\geq 2\)</span> independent samples</li>
+<li>Fisher’s exact test for contingency tables</li>
+<li>Cochran–Mantel–Haenszel-Cox log-rank test</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section><section class="slide level2"><p>For all of these prerequisite concepts and quantities, and especially for confidence intervals and p-values, you should know how <strong>both</strong>:</p>
+<ul>
+<li>how to compute them</li>
+<li>how to interpret them</li>
+</ul></section><section class="slide level2"><h3 class="smaller" id="stat-108-linear-regression-models">Stat 108: linear regression models</h3>
+<ul>
+<li>building models for Gaussian outcomes
+<ul>
+<li>multiple predictors</li>
+<li>interactions</li>
+</ul>
+</li>
+<li>regression diagnostics</li>
+<li>fundamentals of R programming; e.g.:
+<ul>
+<li><span class="citation" data-cites="r4ds">Wickham et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></li>
+<li><span class="citation" data-cites="dalgaardintroductory">Dalgaard (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span></li>
+</ul>
+</li>
+<li>
+<a href="https://r4ds.hadley.nz/quarto">RMarkdown or Quarto for formatting homework</a>
+<ul>
+<li>LaTeX for writing math in RMarkdown/Quarto</li>
+</ul>
+</li>
+</ul></section></section><section><section id="what-we-will-cover-in-this-course" class="title-slide slide level1 center" data-number="4"><h1>
+<span class="header-section-number">4</span> What we will cover in this course</h1>
+
+</section><section class="slide level2"><ul>
+<li><p>Linear (Gaussian) regression models (review and more details)</p></li>
+<li>
+<p>Regression models for non-Gaussian outcomes</p>
+<ul>
+<li>binary</li>
+<li>count</li>
+<li>time to event</li>
+</ul>
+</li>
+<li><p>Statistical analysis using R</p></li>
+</ul>
+<p>We will start where Epi 203 left off: with linear regression models.</p>
+</section></section><section><section id="motivations-for-regression-models" class="title-slide slide level1 center" data-number="5"><h1>
+<span class="header-section-number">5</span> Motivations for regression models</h1>
+
+</section><section class="slide level2"><div id="exr-why-regression" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1</strong></span> Why do we need regression models?</p>
+</div>
+</section><section class="slide level2"><div id="sol-why-regression" class="proof solution">
+<p><span class="proof-title"><em>Solution 1</em>. </span></p>
+<ul>
+<li class="fragment"><p>when there’s not enough data to analyze every subgroup of interest individually</p></li>
+<li class="fragment"><p>especially when subgroups are defined using continuous predictors</p></li>
+</ul>
+</div>
+</section><section id="uses-of-regression-models" class="slide level2 scrollable" data-number="5.1"><h2>
+<span class="header-section-number">5.1</span> Uses of regression models</h2>
+<p><span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, sec. 1.3</a>)</span> identifies three broad motivations for using multipredictor regression models:</p>
+<blockquote>
+<p>Multipredictor regression can be a powerful tool for addressing three important practical questions. … [These] include prediction, isolating the effect of a single predictor, and understanding multiple predictors.</p>
+<ol type="1">
+<li><p><strong>Prediction</strong>: “Multipredictor regression is a powerful and general tool for using multiple measured predictors to make useful predictions for future observations.”</p></li>
+<li><p><strong>Isolating the Effect of a Single Predictor</strong>: “In settings where multiple, related predictors contribute to study outcomes, it will be important to consider multiple predictors even when a single predictor is of interest.” (e.g., to minimize confounding and support causal interpretation)</p></li>
+<li><p><strong>Understanding Multiple Predictors</strong>: “Multipredictor regression can also be used when our aim is to identify multiple independent predictors of a study outcome — independent in the sense that they appear to have an effect over and above other measured variables.” (including mediation and interaction)</p></li>
+</ol>
+</blockquote>
+<p><span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014, sec. 4.1</a>)</span> provides a more granular list of eight overlapping applications of regression analysis:</p>
+<blockquote>
+<p>In practice, a regression analysis is appropriate for several possibly overlapping situations, including the following:</p>
+<ol type="1">
+<li><p><strong>Characterize the association</strong>: “You want to characterize the relationship between the dependent and independent variables by determining the extent, direction, and strength of the association.”</p></li>
+<li><p><strong>Prediction</strong>: “You seek a quantitative formula or equation to describe (e.g., predict) the dependent variable <span class="math inline">\(Y\)</span> as a function of the independent variables <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span>.”</p></li>
+<li><p><strong>Controlled description</strong>: “You want to describe quantitatively or qualitatively the relationship between <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span> and <span class="math inline">\(Y\)</span> but control for the effects of still other variables <span class="math inline">\(X_{k+1}, X_{k+2}, \ldots, X_{k+p}\)</span>, which you believe have an important relationship with the dependent variable.”</p></li>
+<li><p><strong>Variable selection</strong>: “You want to determine which of several independent variables are important and which are not for describing or predicting a dependent variable. You may want to control for other variables. You may also want to rank independent variables in their order of importance.”</p></li>
+<li><p><strong>Model selection</strong>: “You want to determine the best mathematical model for describing the relationship between a dependent variable and one or more independent variables.”</p></li>
+<li><p><strong>Comparing regression relationships</strong>: “You want to compare several derived regression relationships.” (e.g., whether a relationship between two variables differs across subgroups)</p></li>
+<li><p><strong>Interaction</strong>: “You want to assess the interactive effects of two or more independent variables with regard to a dependent variable.”</p></li>
+<li><p><strong>Adjusted coefficient estimation</strong>: “You want to obtain a valid and precise estimate of one or more regression coefficients from a larger set of regression coefficients in a given model.” (i.e., estimating the effect of one variable after adjusting for others)</p></li>
+</ol>
+</blockquote>
+<h3 id="relating-the-two-lists">Relating the two lists</h3>
+<p>The two lists use different levels of granularity to describe the same landscape of regression uses. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> provides three broad categories, while <span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> identifies eight more specific applications.</p>
+<div id="tbl-regression-uses-comparison" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regression-uses-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparing the categorizations of regression model uses in <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, sec. 1.3</a>)</span> and <span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014, sec. 4.1</a>)</span>
+</figcaption><div aria-describedby="tbl-regression-uses-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr class="header">
+<th>
+<span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> category</th>
+<th>
+<span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> application(s)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Prediction</td>
+<td>Application 2 (prediction)</td>
+</tr>
+<tr class="even">
+<td>Isolating the Effect of a Single Predictor</td>
+<td>Application 8 (adjusted coefficient estimation)</td>
+</tr>
+<tr class="odd">
+<td>Understanding Multiple Predictors</td>
+<td>Application 1 (characterize association), Application 3 (controlled description), Application 4 (variable selection), Application 5 (model selection), Application 6 (comparing regression relationships), Application 7 (interaction)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Applications 6 and 7 are related but distinct: Application 6 asks whether a derived regression relationship (e.g., a coefficient or the overall model) differs across pre-defined groups, typically by comparing models fit separately for each group. Application 7 asks whether two predictors interact within a single model — that is, whether the effect of one predictor on the outcome depends on the value of another predictor. In that sense, Application 6 can be viewed as a special case of Application 7 where the grouping variable is the effect modifier.</p>
+<p>The key conceptual distinction made by <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> — but not explicitly highlighted by <span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span> — is between <strong>prediction</strong> (forecasting future outcomes) and <strong>causal inference</strong> (estimating the effect of a specific predictor). This distinction has important implications for model building strategy: prediction models can include any variables that improve predictive accuracy, while causal inference requires careful consideration of confounding, mediation, and the causal structure of the data.</p>
+<h3 id="sec-pred-inf-causal">Prediction, Inference, and Causal Inference</h3>
+<p>The goal of <strong>prediction</strong> is to forecast an outcome <span class="math inline">\(Y\)</span> for new observations, given observed predictor variables <span class="math inline">\(X_1, \ldots, X_p\)</span>. In a prediction problem, the model is often treated as a “black box”: we care about predictive accuracy, not about the exact form or interpretation of the relationship between predictors and outcome <span class="citation" data-cites="james2021islr2e">(<a href="#/references" role="doc-biblioref" onclick="">James et al. 2021, chap. 2</a>)</span>.</p>
+</section><section class="slide level2"><div id="exm-prediction-readmission" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> For example, a clinical prediction model might identify which patients are at highest risk of hospital readmission, using demographics, diagnoses, and laboratory values, without requiring that each predictor be causally related to readmission.</p>
+</div>
+<p>At its core, prediction aspires to minimize uncertainty: the goal is that, by including enough informative predictors and combining them flexibly, we can reduce as much as possible the residual randomness in our forecasts.</p>
+<p><strong>Statistical inference</strong> also studies the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1, \ldots, X_p\)</span>, but the goal shifts from accuracy to understanding: which predictors are associated with the response, in what direction, and by how much <span class="citation" data-cites="james2021islr2e">(<a href="#/references" role="doc-biblioref" onclick="">James et al. 2021, chap. 2</a>)</span>?</p>
+</section><section class="slide level2"><div id="exm-inference-smoking-cohort" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2</strong></span> For example, a cohort study might estimate the association between smoking and lung cancer incidence, along with a confidence interval quantifying uncertainty about the magnitude of that association.</p>
+</div>
+<p>Unlike prediction, statistical inference treats the uncertainty in outcomes as a meaningful quantity to characterize, not merely residual noise to be minimized.</p>
+<p><strong>Causal inference</strong> asks a distinct third question. A predictive association between a predictor <span class="math inline">\(X\)</span> and an outcome <span class="math inline">\(Y\)</span> does not imply that intervening to change <span class="math inline">\(X\)</span> will change <span class="math inline">\(Y\)</span>. Causal inference addresses this gap: it asks what would happen to <span class="math inline">\(Y\)</span> if we were to actively <em>set</em> <span class="math inline">\(X\)</span> to a particular value, rather than passively observe it <span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 12</a>)</span>.</p>
+</section><section class="slide level2"><div id="exm-causal-smoking-reduction" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3</strong></span> For example, even if smoking is strongly associated with lung cancer in observational data, causal inference asks whether reducing smoking rates would <em>cause</em> a reduction in lung cancer incidence — a question that requires additional assumptions about the data-generating process.</p>
+</div>
+<p>One useful framing of causal inference is as a prediction problem in <strong>counterfactual</strong> worlds: predicting what outcomes would have occurred under treatment conditions that were not actually administered. Under the <strong>potential outcomes framework</strong> <span class="citation" data-cites="neyman1923application rubin1974estimating vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Neyman 1990</a>; <a href="#/references" role="doc-biblioref" onclick="">Rubin 1974, 688–701</a>; <a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 12</a>)</span>, individual causal effects are treated as deterministic in principle — each person has a fixed potential outcome under each treatment condition — and uncertainty arises from the fact that we can observe only one potential outcome per person, and from heterogeneity in effects across individuals.</p>
+<p>Accurate causal inference typically requires accounting for <strong>confounding</strong>: in observational data, people who receive a treatment are often systematically different from those who do not in ways that also affect the outcome. These differences can make predictive associations misleading for causal questions.</p>
+<p>A useful informal distinction: <em>prediction</em> asks which individuals are at highest risk, while <em>causal inference</em> asks what is the effect of a particular intervention, and <em>statistical inference</em> asks what the association is without necessarily specifying an intervention.</p>
+<p>For an accessible introduction to the distinction between prediction and statistical inference, see <span class="citation" data-cites="james2021islr2e">James et al. (<a href="#/references" role="doc-biblioref" onclick="">2021, chap. 2</a>)</span>. For coverage of causal inference methods in an epidemiological setting, see <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, chap. 12</a>)</span> and <span class="citation" data-cites="hernan2020causal">Hernán and Robins (<a href="#/references" role="doc-biblioref" onclick="">2020, pt. I</a>)</span>. For an in-depth treatment, see <a href="../chapters/causal-inference.html">the causal inference chapter</a>.</p>
+</section><section id="example-adelie-penguins" class="slide level2" data-number="5.2"><h2>
+<span class="header-section-number">5.2</span> Example: Adelie penguins</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-palmer-1" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-palmer-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Palmer penguins
+</figcaption><div aria-describedby="fig-palmer-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Intro-to-GLMs_files/figure-revealjs/fig-palmer-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Palmer penguins"><img data-src="Intro-to-GLMs_files/figure-revealjs/fig-palmer-1-1.png" width="672"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="linear-regression" class="slide level2" data-number="5.3"><h2>
+<span class="header-section-number">5.3</span> Linear regression</h2>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a>ggpenguins2 <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a aria-label="2"></a>  ggpenguins <span class="sc">+</span></span>
+<span id="cb3-3"><a aria-label="3"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb3-4"><a aria-label="4"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb3-5"><a aria-label="5"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb3-6"><a aria-label="6"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb3-7"><a aria-label="7"></a>  )</span>
+<span id="cb3-8"><a aria-label="8"></a></span>
+<span id="cb3-9"><a aria-label="9"></a>ggpenguins2 <span class="sc">|&gt;</span> <span class="fu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-palmer-2" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-palmer-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Palmer penguins with linear regression fit
+</figcaption><div aria-describedby="fig-palmer-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Intro-to-GLMs_files/figure-revealjs/fig-palmer-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Palmer penguins with linear regression fit"><img data-src="Intro-to-GLMs_files/figure-revealjs/fig-palmer-2-1.png" width="672"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="curved-regression-lines" class="slide level2" data-number="5.4"><h2>
+<span class="header-section-number">5.4</span> Curved regression lines</h2>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>ggpenguins2 <span class="ot">&lt;-</span> ggpenguins <span class="sc">+</span></span>
+<span id="cb4-2"><a aria-label="2"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb4-3"><a aria-label="3"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb4-4"><a aria-label="4"></a>    <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">log</span>(x),</span>
+<span id="cb4-5"><a aria-label="5"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb4-6"><a aria-label="6"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-7"><a aria-label="7"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a aria-label="8"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb4-9"><a aria-label="9"></a>ggpenguins2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-palmer-3" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-palmer-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Palmer penguins - curved regression lines
+</figcaption><div aria-describedby="fig-palmer-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Intro-to-GLMs_files/figure-revealjs/fig-palmer-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Palmer penguins - curved regression lines"><img data-src="Intro-to-GLMs_files/figure-revealjs/fig-palmer-3-1.png" width="672"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="multiple-regression" class="slide level2" data-number="5.5"><h2>
+<span class="header-section-number">5.5</span> Multiple regression</h2>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>ggpenguins <span class="ot">&lt;-</span></span>
+<span id="cb5-2"><a aria-label="2"></a>  palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a aria-label="3"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb5-4"><a aria-label="4"></a>    <span class="fu">aes</span>(</span>
+<span id="cb5-5"><a aria-label="5"></a>      <span class="at">x =</span> bill_length_mm,</span>
+<span id="cb5-6"><a aria-label="6"></a>      <span class="at">y =</span> body_mass_g,</span>
+<span id="cb5-7"><a aria-label="7"></a>      <span class="at">color =</span> species</span>
+<span id="cb5-8"><a aria-label="8"></a>    )</span>
+<span id="cb5-9"><a aria-label="9"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-10"><a aria-label="10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-11"><a aria-label="11"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb5-12"><a aria-label="12"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb5-13"><a aria-label="13"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb5-14"><a aria-label="14"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb5-15"><a aria-label="15"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-16"><a aria-label="16"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a aria-label="17"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb5-18"><a aria-label="18"></a>ggpenguins <span class="sc">|&gt;</span> <span class="fu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="fig-palmer-4" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-palmer-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Palmer penguins - multiple groups
+</figcaption><div aria-describedby="fig-palmer-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Intro-to-GLMs_files/figure-revealjs/fig-palmer-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Palmer penguins - multiple groups"><img data-src="Intro-to-GLMs_files/figure-revealjs/fig-palmer-4-1.png" width="672"></a>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="modeling-non-gaussian-outcomes" class="slide level2" data-number="5.6"><h2>
+<span class="header-section-number">5.6</span> Modeling non-Gaussian outcomes</h2>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a></span>
+<span id="cb6-2"><a aria-label="2"></a><span class="fu">library</span>(glmx)</span>
+<span id="cb6-3"><a aria-label="3"></a><span class="fu">data</span>(BeetleMortality)</span>
+<span id="cb6-4"><a aria-label="4"></a>beetles <span class="ot">&lt;-</span> BeetleMortality <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a aria-label="5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-6"><a aria-label="6"></a>    <span class="at">pct =</span> died <span class="sc">/</span> n,</span>
+<span id="cb6-7"><a aria-label="7"></a>    <span class="at">survived =</span> n <span class="sc">-</span> died</span>
+<span id="cb6-8"><a aria-label="8"></a>  )</span>
+<span id="cb6-9"><a aria-label="9"></a></span>
+<span id="cb6-10"><a aria-label="10"></a>plot1 <span class="ot">&lt;-</span></span>
+<span id="cb6-11"><a aria-label="11"></a>  beetles <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a aria-label="12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> pct)) <span class="sc">+</span></span>
+<span id="cb6-13"><a aria-label="13"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n)) <span class="sc">+</span></span>
+<span id="cb6-14"><a aria-label="14"></a>  <span class="fu">xlab</span>(<span class="st">"Dose (log mg/L)"</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a aria-label="15"></a>  <span class="fu">ylab</span>(<span class="st">"Mortality rate (%)"</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a aria-label="16"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb6-17"><a aria-label="17"></a>  <span class="co"># xlab(bquote(log[10]), bquote(CS[2])) +</span></span>
+<span id="cb6-18"><a aria-label="18"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-19"><a aria-label="19"></a></span>
+<span id="cb6-20"><a aria-label="20"></a><span class="fu">print</span>(plot1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-beetles_1a" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles_1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+</figcaption><div aria-describedby="fig-beetles_1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section><section id="why-dont-we-use-linear-regression" class="slide level2" data-number="5.7"><h2>
+<span class="header-section-number">5.7</span> Why don’t we use linear regression?</h2>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>beetles_long <span class="ot">&lt;-</span></span>
+<span id="cb7-2"><a aria-label="2"></a>  beetles <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a aria-label="3"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb7-4"><a aria-label="4"></a>    <span class="at">.by =</span> <span class="fu">everything</span>(),</span>
+<span id="cb7-5"><a aria-label="5"></a>    <span class="at">outcome =</span> <span class="fu">c</span>(</span>
+<span id="cb7-6"><a aria-label="6"></a>      <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">times =</span> died),</span>
+<span id="cb7-7"><a aria-label="7"></a>      <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> survived)</span>
+<span id="cb7-8"><a aria-label="8"></a>    )</span>
+<span id="cb7-9"><a aria-label="9"></a>  )</span>
+<span id="cb7-10"><a aria-label="10"></a></span>
+<span id="cb7-11"><a aria-label="11"></a>lm1 <span class="ot">&lt;-</span></span>
+<span id="cb7-12"><a aria-label="12"></a>  beetles_long <span class="sc">|&gt;</span></span>
+<span id="cb7-13"><a aria-label="13"></a>  <span class="fu">lm</span>(</span>
+<span id="cb7-14"><a aria-label="14"></a>    <span class="at">formula =</span> outcome <span class="sc">~</span> dose,</span>
+<span id="cb7-15"><a aria-label="15"></a>    <span class="at">data =</span> _</span>
+<span id="cb7-16"><a aria-label="16"></a>  )</span>
+<span id="cb7-17"><a aria-label="17"></a></span>
+<span id="cb7-18"><a aria-label="18"></a></span>
+<span id="cb7-19"><a aria-label="19"></a>range1 <span class="ot">&lt;-</span> <span class="fu">range</span>(beetles<span class="sc">$</span>dose) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">2</span>, .<span class="dv">2</span>)</span>
+<span id="cb7-20"><a aria-label="20"></a></span>
+<span id="cb7-21"><a aria-label="21"></a>f_linear <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
+<span id="cb7-22"><a aria-label="22"></a></span>
+<span id="cb7-23"><a aria-label="23"></a>plot2 <span class="ot">&lt;-</span></span>
+<span id="cb7-24"><a aria-label="24"></a>  plot1 <span class="sc">+</span></span>
+<span id="cb7-25"><a aria-label="25"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linear, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Straight line"</span>)) <span class="sc">+</span></span>
+<span id="cb7-26"><a aria-label="26"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Model"</span>, <span class="at">size =</span> <span class="st">""</span>)</span>
+<span id="cb7-27"><a aria-label="27"></a><span class="fu">print</span>(plot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-beetles-plot1" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles-plot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+</figcaption><div aria-describedby="fig-beetles-plot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-2-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section><section id="zoom-out" class="slide level2" data-number="5.8"><h2>
+<span class="header-section-number">5.8</span> Zoom out</h2>
+<div id="fig-beetles2" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+</figcaption><div aria-describedby="fig-beetles2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-3-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section><section id="log-transformation-of-dose" class="slide level2" data-number="5.9"><h2>
+<span class="header-section-number">5.9</span> log transformation of dose?</h2>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a></span>
+<span id="cb8-2"><a aria-label="2"></a>lm2 <span class="ot">&lt;-</span></span>
+<span id="cb8-3"><a aria-label="3"></a>  beetles_long <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a aria-label="4"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> outcome <span class="sc">~</span> <span class="fu">log</span>(dose), <span class="at">data =</span> _)</span>
+<span id="cb8-5"><a aria-label="5"></a></span>
+<span id="cb8-6"><a aria-label="6"></a>f_linearlog <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
+<span id="cb8-7"><a aria-label="7"></a></span>
+<span id="cb8-8"><a aria-label="8"></a>plot3 <span class="ot">&lt;-</span> plot2 <span class="sc">+</span></span>
+<span id="cb8-9"><a aria-label="9"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb8-10"><a aria-label="10"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linearlog, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Log-transform dose"</span>))</span>
+<span id="cb8-11"><a aria-label="11"></a></span>
+<span id="cb8-12"><a aria-label="12"></a><span class="fu">print</span>(plot3 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-beetles3" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+</figcaption><div aria-describedby="fig-beetles3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-4-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section><section id="logistic-regression" class="slide level2" data-number="5.10"><h2>
+<span class="header-section-number">5.10</span> Logistic regression</h2>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a></span>
+<span id="cb9-2"><a aria-label="2"></a>glm1 <span class="ot">&lt;-</span> beetles <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a aria-label="3"></a>  <span class="fu">glm</span>(<span class="at">formula =</span> <span class="fu">cbind</span>(died, survived) <span class="sc">~</span> dose, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb9-4"><a aria-label="4"></a></span>
+<span id="cb9-5"><a aria-label="5"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-6"><a aria-label="6"></a>  glm1 <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a aria-label="7"></a>    <span class="fu">predict</span>(<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb9-8"><a aria-label="8"></a>}</span>
+<span id="cb9-9"><a aria-label="9"></a></span>
+<span id="cb9-10"><a aria-label="10"></a>plot4 <span class="ot">&lt;-</span> plot3 <span class="sc">+</span> <span class="fu">geom_function</span>(<span class="at">fun =</span> f, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Logistic regression"</span>))</span>
+<span id="cb9-11"><a aria-label="11"></a><span class="fu">print</span>(plot4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-beetles4b" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+</figcaption><div aria-describedby="fig-beetles4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-5-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section></section><section><section id="structure-of-regression-models" class="title-slide slide level1 center" data-number="6"><h1>
+<span class="header-section-number">6</span> Structure of regression models</h1>
+
+</section><section class="slide level2"><div id="exr-def-regression" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2</strong></span> What is a regression model?</p>
+</div>
+</section><section class="slide level2"><div id="def-regression-model" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Regression model)</strong></span> Regression models are conditional probability distribution models:</p>
+<p><span class="math display">\[\operatorname{P}(Y|\tilde{X})\]</span></p>
+</div>
+</section><section class="slide level2"><div id="exr-name-regression-model-variables" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3</strong></span> What are some of the names used for the variables in a regression model <span class="math inline">\(\operatorname{P}(Y|\tilde{X})\)</span>?</p>
+</div>
+</section><section class="slide level2"><div id="def-outcome" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Outcome)</strong></span> The outcome variable in a regression model is the variable whose distribution is being described; in other words, the variable on the left-hand side of the “|” (“pipe”) symbol.</p>
+<p>The outcome variable is also called the <strong>response variable</strong>, <strong>regressand</strong>, <strong>predicted variable</strong>, <strong>explained variable</strong>, <strong>experimental variable</strong>, <strong>output variable</strong>, <strong>dependent variable</strong>, <strong>endogenous variables</strong>, <strong>target</strong>, or <strong>label</strong>.</p>
+<p>and is typically denoted <span class="math inline">\(Y\)</span>.</p>
+</div>
+</section><section class="slide level2 scrollable"><div id="def-predictors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Predictors)</strong></span> The predictor variables in a regression model are the conditioning variables defining subpopulations among which the outcome distribution might vary.</p>
+<p>Predictors are also called <strong>regressors</strong>, <strong>covariates</strong>, <strong>independent variables</strong>, <strong>explanatory variables</strong>, <strong>risk factors</strong>, <strong>exposure variables</strong>, <strong>input variables</strong>, <strong>exogenous variables</strong>, <strong>candidate variables</strong> (<span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>), <strong>carriers</strong> (<span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>), <strong>manipulated variables</strong>, or <strong>features</strong> and are typically denoted <span class="math inline">\(\tilde{X}\)</span>. <sup>1</sup></p>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>The “~” (“tilde”) symbol in the notation <span class="math inline">\(\tilde{X}\)</span> indicates that <span class="math inline">\(\tilde{X}\)</span> is a vector. See <a href="../chapters/notation.html">the appendices</a> for a table of notation used in these notes.</p></li></ol></aside></section><section class="slide level2 scrollable"><div id="tbl-regression-antonyms" class="smaller quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regression-antonyms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Common pairings of terms for variables <span class="math inline">\(\tilde{X}\)</span> and <span class="math inline">\(Y\)</span> in regression models <span class="math inline">\(P(Y|\tilde{X})\)</span> <sup>1</sup>
+</figcaption><div aria-describedby="tbl-regression-antonyms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="smaller caption-top">
+<thead><tr class="header">
+<th><span class="math inline">\(\tilde{X}\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th>usual context</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>input</td>
+<td>output</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>independent</td>
+<td>dependent</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>predictor</td>
+<td>predicted or response</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>explanatory</td>
+<td>explained</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>exogenous</td>
+<td>endogenous</td>
+<td>econometrics</td>
+</tr>
+<tr class="even">
+<td>manipulated</td>
+<td>measured</td>
+<td>randomized controlled experiments</td>
+</tr>
+<tr class="odd">
+<td>exposure</td>
+<td>outcome</td>
+<td>epidemiology</td>
+</tr>
+<tr class="even">
+<td>feature</td>
+<td>label or target</td>
+<td>machine learning</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>adapted from <a href="https://en.wikipedia.org/wiki/Dependent_and_independent_variables#Synonyms" class="uri">https://en.wikipedia.org/wiki/Dependent_and_independent_variables#Synonyms</a></p></li></ol></aside></section><section class="slide level2"><div id="exr-glm-structure" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4</strong></span> What is the general structure of a generalized linear model?</p>
+</div>
+</section><section class="slide level2 scrollable"><div id="sol-glm-structure" class="proof solution">
+<p><span class="proof-title"><em>Solution 2</em>. </span>Generalized linear models have three components:</p>
+<ol type="1">
+<li><p>The <strong>outcome distribution</strong> family: <span class="math inline">\(\operatorname{p}(Y|\mu(\tilde{x}))\)</span></p></li>
+<li><p>The <strong>link function</strong>: <span class="math inline">\(g(\mu(\tilde{x})) = \eta(\tilde{x})\)</span></p></li>
+<li><p>The <strong>linear component</strong>: <span class="math inline">\(\eta(\tilde{x}) = \tilde{x}\cdot \beta\)</span></p></li>
+</ol>
+<hr>
+<ol type="1">
+<li>The <strong>outcome distribution</strong> family (a.k.a. the <strong>random component</strong> of the model)</li>
+</ol>
+<ul>
+<li>Gaussian (normal)</li>
+<li>Binomial</li>
+<li>Poisson</li>
+<li>Exponential</li>
+<li>Gamma</li>
+<li>Negative binomial</li>
+</ul>
+<hr>
+<ol start="2" type="1">
+<li>The <strong>linear component</strong> (a.k.a. the <em>linear predictor</em> or <em>linear functional form</em>) describing how the covariates combine to define subpopulations:</li>
+</ol>
+<p><span class="math display">\[\eta(\tilde{x}) \stackrel{\text{def}}{=}\tilde{x}^{\top} \tilde{\beta}= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...\]</span></p>
+<hr>
+<ol start="3" type="1">
+<li>The <strong>link function</strong> relating the outcome distribution to the linear component, typically through the mean:</li>
+</ol>
+<ul>
+<li>identity: <span class="math inline">\(\mu(y) = \eta(\tilde{x})\)</span>
+</li>
+<li>logit: <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\frac{\mu(y)}{1-\mu(y)}\right\}\mathclose{} = \eta(\tilde{x})\)</span>
+</li>
+<li>log: <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\mu(y)\right\}\mathclose{} = \eta(\tilde{x})\)</span>
+</li>
+<li>inverse: <span class="math inline">\(\mathopen{}\left(\mu(y)\right)^{-1}\mathclose{} = \eta(\tilde{x})\)</span>
+</li>
+<li>clog-log: <span class="math inline">\(\operatorname{log}\mathopen{}\left\{-\operatorname{log}\mathopen{}\left\{1-\mu(y)\right\}\mathclose{}\right\}\mathclose{} = \eta(\tilde{x})\)</span>
+</li>
+</ul>
+<p>Components 2 and 3 together are sometimes called the <strong>systematic component</strong> of the model (for example, in <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>).</p>
+</div>
+</section><section class="slide level2"></section></section><section><section id="exercises" class="title-slide slide level1 unnumbered center"><h1>Exercises</h1>
+
+</section><section class="slide level2 scrollable"><div id="exr-prac-glm-components" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5 (Identifying GLM components)</strong></span> (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 4, and <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 5)</p>
+<p>For each of the following scenarios, identify the three components of the GLM: (1) the outcome distribution, (2) the link function <span class="math inline">\(g(\cdot)\)</span>, and (3) the linear predictor <span class="math inline">\(\eta = \tilde{x}\cdot \tilde{\beta}\)</span>.</p>
+<p><strong>(a)</strong> Modeling the probability of a binary outcome (disease/no disease) as a function of continuous predictors, using the logit link.</p>
+<p><strong>(b)</strong> Modeling count data (number of events per person-year) as a function of continuous predictors, using the log link.</p>
+<p><strong>(c)</strong> Modeling a continuous, strictly positive outcome using a gamma distribution and log link.</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong> Logistic regression:</p>
+<ol type="1">
+<li>
+<strong>Outcome distribution</strong>: <span class="math inline">\(Y_i \mid \tilde{x}_i \ \sim_{\perp\!\!\!\perp}\ \text{Bernoulli}(\pi_i)\)</span>
+</li>
+<li>
+<strong>Link function</strong>: logit link, <span class="math inline">\(g(\pi) = \operatorname{log}\mathopen{}\left\{\pi/(1-\pi)\right\}\mathclose{}\)</span>
+</li>
+<li>
+<strong>Linear predictor</strong>: <span class="math inline">\(\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}\)</span>
+</li>
+</ol>
+<p>The mean function (inverse link) is: <span class="math inline">\(\pi_i = \operatorname{expit}(\eta_i) = \frac{e^{\eta_i}}{1 + e^{\eta_i}}\)</span>.</p>
+<p><strong>(b)</strong> Poisson (log-linear) regression:</p>
+<ol type="1">
+<li>
+<strong>Outcome distribution</strong>: <span class="math inline">\(Y_i \mid \tilde{x}_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i)\)</span>
+</li>
+<li>
+<strong>Link function</strong>: log link, <span class="math inline">\(g(\mu) = \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span>
+</li>
+<li>
+<strong>Linear predictor</strong>: <span class="math inline">\(\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}\)</span>
+</li>
+</ol>
+<p>The mean function (inverse link) is: <span class="math inline">\(\mu_i = e^{\eta_i}\)</span>.</p>
+<p><strong>(c)</strong> Gamma regression with log link:</p>
+<ol type="1">
+<li>
+<strong>Outcome distribution</strong>: <span class="math inline">\(Y_i \mid \tilde{x}_i \ \sim_{\perp\!\!\!\perp}\ \text{Gamma}(\text{mean} = \mu_i)\)</span>
+</li>
+<li>
+<strong>Link function</strong>: log link, <span class="math inline">\(g(\mu) = \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span>
+</li>
+<li>
+<strong>Linear predictor</strong>: <span class="math inline">\(\eta_i = \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}\)</span>
+</li>
+</ol>
+<p>The mean function is: <span class="math inline">\(\mu_i = e^{\eta_i}\)</span>.</p>
+</div>
+<!-- canonical-link exercise commented out until exponential family / natural parameters are defined
+---
+
+\providecommand{\cbl}[1]{\mathopen{}\left\{#1\right.}
+\providecommand{\cb}[1]{\mathopen{}\left\{#1\right\}\mathclose{}}
+\providecommand{\cbmat}[1]{\mathopen{}\left\{\begin{matrix}#1\end{matrix}\right\}\mathclose{}}
+\providecommand{\paren}[1]{\mathopen{}\left(#1\right)\mathclose{}}
+\providecommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\providecommand{\sparen}[1]{(#1)}
+\providecommand{\sb}[1]{\mathopen{}\left[#1\right]\mathclose{}}
+\def\distop{\operatorname}
+\providecommand{\sbmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\providecommand{\Prf}[1]{\Pr\paren{#1}}
+\def\am{\arg \max}
+\def\argmax{\arg \max}
+\def\amin{\arg \min}
+\def\argmin{\arg \min}
+\def\p{\distop{p}}
+\def\f{\distop{f}}
+\def\F{\distop{F}}
+\def\h{\distop{h}}
+\def\H{\distop{H}}
+\def\pr{\p}
+\def\dens{\p}
+\def\pdens{\p}
+\def\fdens{\f}
+\def\mass{\P}
+\def\pmass{\P}
+\def\fmass{\F}
+\def\S{\distop{S}}
+\providecommand{\Sf}[1]{\S\paren{#1}}
+\def\surv{\distop{S}}
+\providecommand{\survf}[1]{\surv\paren{#1}}
+\def\survratio{\ratio_{\surv}}
+\def\rsurv{\survratio}
+\def\survr{\survratio}
+\providecommand{\survratiof}[1]{\survratio\paren{#1}}
+\def\rsurvf{\survratiof}
+\def\survrf{\survratiof}
+\def\riskset{\mathcal{R}}
+\providecommand{\risksetf}[1]{\riskset\paren{#1}}
+\def\Q{\distop{Q}}
+\def\quantile{\distop{Q}}
+\providecommand{\Qf}[1]{\Q\paren{#1}}
+\providecommand{\quantilef}[1]{\quantile\paren{#1}}
+\def\hQ{\mathop{\hat{\Q}}\nolimits}
+\def\hquantile{\mathop{\hat{\quantile}}\nolimits}
+\providecommand{\hQf}[1]{\hQ\paren{#1}}
+\providecommand{\hquantilef}[1]{\hquantile\paren{#1}}
+\def\ph{\mathop{\hat{\p}}\nolimits}
+\def\P{\distop{P}}
+\def\hp{\mathop{\hat{\p}}\nolimits}
+\def\ga{\alpha}
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\providecommand{\floor}[1]{\mathopen{}\left\lfloor#1\right\rfloor\mathclose{}}
+\providecommand{\ceiling}[1]{\mathopen{}\left\lceil#1\right\rceil\mathclose{}}
+\providecommand{\ceil}[1]{\mathopen{}\left\lceil#1\right\rceil\mathclose{}}
+\def\Ber{\operatorname{Ber}}
+\def\Bernoulli{\operatorname{Bernoulli}}
+\def\Pois{\operatorname{Pois}}
+\def\Poisson{\operatorname{Poisson}}
+\def\Gaus{\operatorname{Gaussian}}
+\def\Normal{\operatorname{N}}
+\providecommand{\ndist}[1]{\Normal\paren{#1}}
+\def\NB{\operatorname{NegBin}}
+\def\NegBin{\operatorname{NegBin}}
+\def\vbeta{\vec \beta}
+\def\vb{\vec \b}
+\def\vzero{\vec{0}}
+\def\vone{\vec{1}}
+\def\gb{\beta}
+\def\gg{\gamma}
+\def\gd{\delta}
+\def\eps{\varepsilon}
+\def\veps{\vec{\varepsilon}}
+\providecommand{\epsp}[1]{\eps\paren{#1}}
+\providecommand{\epsf}[1]{\eps\paren{#1}}
+\def\om{\omega}
+\def\m{\mu}
+\def\mean{\mu}
+\def\pmean{\mu}
+\def\popmean{\mu}
+\def\vm{\vec \m}
+\def\s{\sigma}
+\def\l{\lambda}
+\def\gl{\lambda}
+\def\lam{\lambda}
+\def\k{\kappa}
+\def\cs{\kappa}
+\def\condsurv{\kappa}
+\def\gs{\sigma}
+\def\gm{\mu}
+\def\M{M}
+\def\gM{M}
+\def\Mu{M}
+\def\cd{\cdot}
+\def\cds{\cdots}
+\def\lds{\ldots}
+\def\eqdef{\stackrel{\text{def}}{=}}
+\def\defeq{\stackrel{\text{def}}{=}}
+\def\hb{\hat \beta}
+\def\hvb{\hat{\vb}}
+\def\hR{\hat{R}}
+\def\hk{\hat \kappa}
+\def\hkappa{\hat \kappa}
+\def\hl{\hat \lambda}
+\def\hy{\hat y}
+\def\yh{\hat y}
+\def\V{{\operatorname{Var}}}
+\def\hs{\hat \sigma}
+\def\hsig{\hat \sigma}
+\def\hS{\hat \Sigma}
+\def\hSig{\hat \Sigma}
+\def\hSigma{\hat \Sigma}
+\def\hsurv{\mathop{\hat{\surv}}\nolimits}
+\def\hSurv{\mathop{\hat{\surv}}\nolimits}
+\providecommand{\hSurvf}[1]{\hSurv\paren{#1}}
+\def\emp{\text{emp}}
+\def\km{\text{KM}}
+\def\naa{\text{NA}}
+\def\hsemp{\hsurv_{\emp}}
+\def\hskm{\hsurv_{\km}}
+\def\hsnaa{\hsurv_{\naa}}
+\providecommand{\hsempf}[1]{\hsemp\paren{#1}}
+\providecommand{\hskmf}[1]{\hskm\paren{#1}}
+\providecommand{\hsnaaf}[1]{\hsnaa\paren{#1}}
+\def\dist{\ \sim \ }
+\def\ddist{\ \dot{\sim} \ }
+\def\dsim{\ \dot{\sim} \ }
+\def\za{z_{1 - \frac{\alpha}{2}}}
+\def\ciradsym{\xi}
+\def\cirad{\za \cdot \hse{\hb}}
+\providecommand{\ciradf}[1]{\za \cdot \hse{#1}}
+\def\ci{\hb {\color{red}\pm} \cirad}
+\def\th{\theta}
+\def\vth{\vec{\theta}}
+\def\Th{\Theta}
+\def\xbar{\bar{x}}
+\def\hth{\hat\theta}
+\def\hthml{\hth_{\text{ML}}}
+\def\ba{\begin{aligned}}
+\def\ea{\end{aligned}}
+\def\ind{\perp\!\!\!\perp}
+\def\indpt{\ind}
+\def\indold{⫫}
+\def\all{\forall}
+\def\iid{\operatorname{iid}}
+\def\ciid{\operatorname{ciid}}
+\def\simind{\ \sim_{\ind}\ }
+\def\siid{\ \sim_{\iid}\ }
+\def\sciid{\ \sim_{\ciid}\ }
+\def\simiid{\siid}
+\def\distiid{\siid}
+\def\tf{\therefore}
+\def\Lik{\mathcal{L}}
+\def\llik{\ell}
+\def\loglik{\ell}
+\def\logl{\ell}
+\providecommand{\llikf}[1]{\llik \paren{#1}}
+\providecommand{\Likf}[1]{\Lik\paren{#1}}
+\def\loglikf{\llikf}
+\def\loglf{\llikf}
+\def\likf{\llikf}
+\def\deviation{e}
+\def\devn{\deviation}
+\providecommand{\deviationv}{\vec{\deviation}}
+\def\devnv{\deviationv}
+\def\Deviation{E}
+\def\Devn{\Deviation}
+\def\residual{r}
+\def\resid{\residual}
+\def\Residual{R}
+\def\Resid{\Residual}
+\def\stdresidual{r^\prime}
+\def\stdresid{\stdresidual}
+\def\StdResidual{R^\prime}
+\def\StdResid{\StdResidual}
+\def\modresidual{r^*}
+\def\modresid{\modresidual}
+\def\ModResidual{R^*}
+\def\ModResid{\ModResidual}
+\def\score{\ell'}
+\def\scorev{\vec{\ell'}}
+\def\scorei{\vec{\ell_i'}}
+\def\scorevi{\vec{\ell_i'}}
+\providecommand{\scoref}[1]{\score \paren{#1}}
+\def\hess{\llik''}
+\def\hessm{\llik''}
+\def\hessian{\hess}
+\def\hessij{\llik_{ij}''}
+\def\hessijalt{\sb{\hess}_{ij}}
+\providecommand{\hessf}[1]{\hess \paren{#1}}
+\providecommand{\hessianf}[1]{\hess \paren{#1}}
+\providecommand{\starf}[1]{#1^*}
+\def\lik{\ell}
+\providecommand{\est}[1]{\hat{#1}}
+\providecommand{\Est}[1]{\widehat{#1}}
+\providecommand{\esttmp}[1]{{\Est{#1}}^*}
+\def\esttmpl{\esttmp{\lambda}}
+\def\cR{\mathcal{R}}
+\def\range{\mathcal{R}}
+\def\Range{\mathcal{R}}
+\providecommand{\rangef}[1]{\cR(#1)}
+\providecommand{\seq}[2]{#1{:}#2}
+\def\~{\approx}
+\def\dapp{\dot\approx}
+\providecommand{\deriv}[1]{\frac{\partial}{\partial #1}}
+\providecommand{\dderiv}[1]{\frac{\partial^2}{\partial #1^2}}
+\providecommand{\derivf}[2]{\frac{\partial #1}{\partial #2}}
+\providecommand{\derivff}[2]{\frac{\partial #2}{\partial #1}}
+\providecommand{\derivfnd}[2]{\derivf{#1}{#2}}
+\providecommand{\derivfdn}[2]{\derivff{#1}{#2}}
+\providecommand{\dderivf}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\providecommand{\xderiv}[2]{\frac{\partial^2}{\partial #1 \partial #2}}
+\providecommand{\xderivf}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\providecommand{\xderivff}[3]{\frac{\partial^2 #3}{\partial #1 \partial #2}}
+\providecommand{\dif}[2]{\frac{d #1}{d #2}}
+\providecommand{\red}[1]{{\color{red}{#1}}}
+\providecommand{\green}[1]{{\color{green}{#1}}}
+\providecommand{\blue}[1]{{\color{blue}{#1}}}
+\providecommand{\cyan}[1]{{\color{cyan}{#1}}}
+\providecommand{\magenta}[1]{{\color{magenta}{#1}}}
+\providecommand{\yellow}[1]{{\color{yellow}{#1}}}
+\providecommand{\black}[1]{{\color{black}{#1}}}
+\providecommand{\gray}[1]{{\color{gray}{#1}}}
+\providecommand{\white}[1]{{\color{white}{#1}}}
+\providecommand{\darkgray}[1]{{\color{darkgray}{#1}}}
+\providecommand{\lightgray}[1]{{\color{lightgray}{#1}}}
+\providecommand{\brown}[1]{{\color{brown}{#1}}}
+\providecommand{\lime}[1]{{\color{lime}{#1}}}
+\providecommand{\olive}[1]{{\color{olive}{#1}}}
+\providecommand{\orange}[1]{{\color{orange}{#1}}}
+\providecommand{\pink}[1]{{\color{pink}{#1}}}
+\providecommand{\purple}[1]{{\color{purple}{#1}}}
+\providecommand{\teal}[1]{{\color{teal}{#1}}}
+\providecommand{\violet}[1]{{\color{violet}{#1}}}
+\providecommand{\hE}[1]{\mathop{\hat{\operatorname{E}}}\nolimits\sb{#1}}
+\providecommand{\hExp}[1]{\mathop{\hat{\operatorname{E}}}\nolimits\sb{#1}}
+\providecommand{\hExpf}[1]{\mathop{\hat{\operatorname{E}}}\nolimits\sb{#1}}
+\def\hmu{\hat{\mu}}
+\providecommand{\hmuf}[1]{\hmu\paren{#1}}
+\def\Expp{\distop{E}}
+\def\Ep{\distop{E}}
+\def\expit{\operatorname{expit}}
+\providecommand{\expitf}[1]{\expit\cb{#1}}
+\providecommand{\dexpitf}[1]{\expit'\cb{#1}}
+\def\logit{\operatorname{logit}}
+\providecommand{\logitf}[1]{\logit\cb{#1}}
+\providecommand{\E}[1]{\distop{E}\sb{#1}}
+\providecommand{\Ef}[1]{\distop{E}\sb{#1}}
+\providecommand{\Exp}[1]{\distop{E}\sb{#1}}
+\providecommand{\Expf}[1]{\distop{E}\sb{#1}}
+\providecommand{\Expfc}[2]{\distop{E}_{#1}\sb{#2}}
+\providecommand{\evalAt}[2]{\left.{#1}\right|_{#2}}
+\def\Varr{\operatorname{Var}}
+\def\Vart{\operatorname{Var}}
+\def\hvar{\mathop{\widehat{\Vart}}\nolimits}
+\def\hvart{\mathop{\widehat{\Vart}}\nolimits}
+\def\Covt{\operatorname{Cov}}
+\def\hcovt{\mathop{\widehat{\Covt}}\nolimits}
+\def\hCovt{\mathop{\widehat{\Covt}}\nolimits}
+\providecommand{\var}[1]{\operatorname{Var}\paren{#1}}
+\providecommand{\varf}[1]{\operatorname{Var}\paren{#1}}
+\providecommand{\Var}[1]{\operatorname{Var}\paren{#1}}
+\providecommand{\hVar}[1]{\mathop{\widehat{\operatorname{Var}}}\nolimits\paren{#1}}
+\providecommand{\Varf}[1]{\operatorname{Var}\paren{#1}}
+\providecommand{\hvarf}[1]{\hvart\paren{#1}}
+\providecommand{\Cov}[1]{\Covt \paren{#1}}
+\providecommand{\Covs}[2]{\Covt \paren{#1, #2}}
+\providecommand{\Covf}[1]{\Covt \paren{#1}}
+\providecommand{\covh}[1]{\hcovt\paren{#1}}
+\providecommand{\covhf}[1]{\hcovt\paren{#1}}
+\providecommand{\hcovf}[1]{\hcovt\paren{#1}}
+\def\Cort{\operatorname{Cor}}
+\def\hcort{\mathop{\widehat{\Cort}}\nolimits}
+\providecommand{\Cor}[1]{\Cort \paren{#1}}
+\providecommand{\Corf}[1]{\Cort \paren{#1}}
+\providecommand{\Cors}[2]{\Cort \paren{#1, #2}}
+\providecommand{\hCor}[1]{\hcort\paren{#1}}
+\providecommand{\hCorf}[1]{\hcort\paren{#1}}
+\providecommand{\hCors}[2]{\hcort\paren{#1, #2}}
+\def\med{\operatorname{med}}
+\providecommand{\medf}[1]{\med\paren{#1}}
+\def\IQR{\operatorname{IQR}}
+\providecommand{\IQRf}[1]{\IQR\paren{#1}}
+\def\varht{\mathop{\widehat{\operatorname{Var}}}\nolimits}
+\providecommand{\varh}[1]{\varht\paren{#1}}
+\providecommand{\varhf}[1]{\varht\paren{#1}}
+\providecommand{\vc}[1]{\boldsymbol{#1}}
+\providecommand{\sd}[1]{\operatorname{sd}\paren{#1}}
+\providecommand{\SD}[1]{\operatorname{SD}\paren{#1}}
+\providecommand{\hSD}[1]{\mathop{\widehat{\operatorname{SD}}}\nolimits\paren{#1}}
+\providecommand{\hSDf}[1]{\mathop{\widehat{\operatorname{SD}}}\nolimits\paren{#1}}
+\providecommand{\se}[1]{\operatorname{se}\paren{#1}}
+\def\hset{\mathop{\widehat{\operatorname{se}}}\nolimits}
+\def\hSE{\mathop{\widehat{\operatorname{SE}}}\nolimits}
+\def\hSEt{\mathop{\widehat{\operatorname{SE}}}\nolimits}
+\providecommand{\sef}[1]{\operatorname{se}\paren{#1}}
+\providecommand{\hse}[1]{\hset\paren{#1}}
+\providecommand{\hsef}[1]{\hset\paren{#1}}
+\providecommand{\SE}[1]{\operatorname{SE}\paren{#1}}
+\providecommand{\SEf}[1]{\operatorname{SE}\paren{#1}}
+\providecommand{\SDf}[1]{\operatorname{SD}\paren{#1}}
+\providecommand{\HSE}[1]{\hSE\paren{#1}}
+\providecommand{\hSEf}[1]{\hSE\paren{#1}}
+\def\logt{\operatorname{log}}
+\providecommand{\logf}[1]{\logt\cb{#1}}
+\def\dlog{\logt'}
+\providecommand{\dlogf}[1]{\dlog \cb{#1}}
+\renewcommand{\exp}[1]{\operatorname{exp}\cb{#1}}
+\def\expt{\operatorname{exp}}
+\providecommand{\expf}[1]{\operatorname{exp}\cb{#1}}
+\providecommand{\expfn}[1]{\expf{#1}}
+\def\dexp{\operatorname{exp}'}
+\providecommand{\dexpf}[1]{\dexp \cb{#1}}
+\providecommand{\e}[1]{\text{e}^{#1}}
+\providecommand{\ef}[1]{\text{e}^{#1}}
+\providecommand{\inv}[1]{\mathopen{}\left(#1\right)^{-1}\mathclose{}}
+\providecommand{\invf}[1]{\mathopen{}\left(#1\right)^{-1}\mathclose{}}
+\providecommand{\invp}[1]{\mathopen{}\left(#1\right)^{-1}\mathclose{}}
+\providecommand{\invcb}[1]{\mathopen{}\left\{#1\right\}^{-1}\mathclose{}}
+\providecommand{\invsb}[1]{\mathopen{}\left[#1\right]^{-1}\mathclose{}}
+\def\oinf{I}
+\def\oinfm{\mat{I}}
+\def\Nat{\mathbb{N}}
+\providecommand{\oinff}[1]{\oinf\paren{#1}}
+\def\einf{\mathcal{I}}
+\def\EInf{\einf}
+\def\FInf{\einf}
+\def\einfm{\mathcal{I}}
+\providecommand{\einff}[1]{\einf\paren{#1}}
+\def\heinf{\hat{\einf}}
+\providecommand{\heinff}[1]{\heinf \paren{#1}}
+\providecommand{\1}[1]{\text{1}_{#1}}
+\providecommand{\indic}[1]{\mathbb{1}_{#1}}
+\providecommand{\indicp}[1]{\mathbb{1}\paren{#1}}
+\providecommand{\indiccb}[1]{\mathbb{1}\cb{#1}}
+\providecommand{\indicf}[1]{\mathbb{1}_{#1}}
+\providecommand{\set}[1]{\cb{#1}}
+\providecommand{\pf}[1]{\p \paren{#1}}
+\providecommand{\Pf}[1]{\P \paren{#1}}
+\providecommand{\Bias}[1]{\operatorname{Bias}\paren{#1}}
+\providecommand{\bias}[1]{\operatorname{Bias}\paren{#1}}
+\def\ss{\sigma^2}
+\providecommand{\ssqf}[1]{\sigma^2\paren{#1}}
+\providecommand{\mselr}[1]{\operatorname{MSE}\paren{#1}}
+\providecommand{\maelr}[1]{\operatorname{MAE}\paren{#1}}
+\providecommand{\abs}[1]{\mathopen{}\left|#1\right|\mathclose{}}
+\providecommand{\norm}[1]{\mathopen{}\left\lVert#1\right\rVert\mathclose{}}
+\providecommand{\normsq}[1]{\mathopen{}\left\lVert#1\right\rVert^2\mathclose{}}
+\providecommand{\sqf}[1]{\mathopen{}\left(#1\right)^2\mathclose{}}
+\providecommand{\sq}{^2}
+\def\err{\eps}
+\providecommand{\erf}[1]{\err\paren{#1}}
+\renewcommand{\vec}[1]{\tilde{#1}}
+\providecommand{\vecf}[1]{\tilde{#1}}
+\renewcommand{\v}[1]{\vecf{#1}}
+\providecommand{\matr}[1]{\mathbf{#1}}
+\def\mX{\matr{X}}
+\def\mx{\matr{x}}
+\def\va{\vecf{a}}
+\def\vx{\vecf{x}}
+\def\vxs{{\vec{x}^*}}
+\def\diff{\Delta}
+\def\diffvx{\diff\vx}
+\def\vxi{\vecf{x}_i}
+\def\vX{\vecf{X}}
+\def\vy{\vecf{y}}
+\def\vY{\vecf{Y}}
+\def\vz{\vecf{z}}
+\def\vZ{\vecf{Z}}
+\def\vD{\vecf{D}}
+\def\vd{\vecf{d}}
+\def\vT{\vecf{T}}
+\def\vt{\vecf{t}}
+\def\vpi{\vecf{\pi}}
+\providecommand{\mat}[1]{\mathbf{#1}}
+\providecommand{\dsn}[1]{#1_1, \ldots, #1_n}
+\def\X1n{\dsn{X}}
+\def\Xin{\dsn{X}}
+\def\x1n{\dsn{x}}
+\def\y1n{\dsn{y}}
+\def\'{^{\top}}
+\providecommand{\pt}[1]{\paren{#1}\'}
+\providecommand{\tp}[1]{{#1}\'}
+\def\dpr{\cdot}
+\def\Xx1n{X_1=x_1, \ldots, X_n = x_n}
+\providecommand{\dprod}[2]{#1 \cdot #2}
+\def\dprodf{\dprod}
+\def\dpf{\dprodf}
+\providecommand{\tprod}[2]{\tp{#1} #2}
+\def\tprodf{\tprod}
+\providecommand{\iprod}[2]{\left\langle #1, #2 \right\rangle}
+\def\iprodf{\iprod}
+\providecommand{\oprod}[2]{#1 \tp{#2}}
+\providecommand{\stprod}[1]{\tprod{#1}{#1}}
+\providecommand{\siprod}[1]{\iprod{#1}{#1}}
+\providecommand{\soprod}[1]{#1 \tp{#1}}
+\providecommand{\sdprod}[1]{\dprod{#1}{#1}}
+\def\sdprodf{\sdprod}
+\providecommand{\dsvn}[2]{#1_1=#2_1, \ldots, #1_n = #2_n}
+\providecommand{\sumn}[1]{\sum_{#1=1}^n}
+\def\sumin{\sum_{i=1}^n}
+\def\sumiN{\sum_{i=1}^N}
+\def\sumip{\sum_{i=1}^p}
+\def\sumjn{\sum_{j=1}^n}
+\def\sumjp{\sum_{j=1}^p}
+\def\sumi1n{\sum_{i=1}^n}
+\def\prodin{\prod_{i=1}^n}
+\def\prodi1n{\prod_{i=1}^n}
+\providecommand{\lp}[1]{\dprodf{#1}{\vb}}
+\def\lpdp{\lp{\vx}}
+\def\lincomp{\eta}
+\def\odds{\omega}
+\def\OR{\operatorname{OR}}
+\def\ratio{\theta}
+\providecommand{\ratiof}[1]{\ratio\paren{#1}}
+\def\ror{\ratio_{\odds}}
+\providecommand{\orf}[1]{\ror\paren{#1}}
+\def\logodds{\lincomp}
+\providecommand{\logoddsf}[1]{\logodds \paren{#1}}
+\def\difflogodds{\diff \logodds}
+\def\hdifflogodds{\widehat{\difflogodds}}
+\def\diffeta{\diff \eta}
+\def\oddst{\operatorname{odds}}
+\def\probst{\operatorname{probs}}
+\def\probt{\operatorname{prob}}
+\def\riskt{\operatorname{risk}}
+\def\logoddst{\text{log-odds}}
+\def\prob{\pi}
+\def\probs{\pi}
+\def\risk{\pi}
+\def\prev{\pi}
+\providecommand{\potout}[1]{Y_{#1}}
+\providecommand{\potprob}[1]{\prob_{#1}}
+\providecommand{\potmean}[1]{\mean_{#1}}
+\providecommand{\obsprob}[1]{\prob\paren{#1}}
+\providecommand{\obsmean}[1]{\mean\paren{#1}}
+\def\py{\potout}
+\def\ppi{\potprob}
+\def\pmu{\potmean}
+\def\opi{\obsprob}
+\def\omu{\obsmean}
+\def\probit{\operatorname{probit}}
+\providecommand{\oddsf}[1]{\oddst\cb{#1}}
+\providecommand{\doddsf}[1]{{\oddst}'\cb{#1}}
+\def\oddsinv{\oddst^{-1}}
+\def\invodds{\operatorname{invodds}}
+\providecommand{\oddsinvf}[1]{\oddsinv\cb{#1}}
+\providecommand{\invoddsf}[1]{\invodds\cb{#1}}
+\providecommand{\doddsinvf}[1]{{\oddsinv}'\cb{#1}}
+\providecommand{\dinvoddsf}[1]{{\invodds}'\cb{#1}}
+\def\rate{{\lambda}}
+\def\lograte{\lincomp}
+\def\haz{{\lambda}}
+\def\hazratio{\ratio_{\haz}}
+\def\hr{\hazratio}
+\def\rhaz{\hazratio}
+\def\hazr{\hazratio}
+\providecommand{\hrf}[1]{\hazratio\paren{#1}}
+\def\rhazf{\hrf}
+\def\hazrf{\hrf}
+\def\rateratio{\ratio_{\rate}}
+\def\rater{\rateratio}
+\def\rrate{\rateratio}
+\providecommand{\rateratiof}[1]{\rateratio\paren{#1}}
+\def\raterf{\rateratiof}
+\def\rratef{\rateratiof}
+\def\riskratio{\ratio_{\risk}}
+\def\rrisk{\riskratio}
+\def\riskr{\riskratio}
+\providecommand{\riskratiof}[1]{\riskratio\paren{#1}}
+\def\rriskf{\riskratiof}
+\def\riskrf{\riskratiof}
+\def\prevratio{\ratio_{\prev}}
+\def\prr{\prevratio}
+\providecommand{\prevratiof}[1]{\prevratio\paren{#1}}
+\def\prrf{\prevratiof}
+\def\loghaz{\lincomp}
+\def\diffloghaz{\diff \loghaz}
+\def\cuhaz{{\Lambda}}
+\def\cumhaz{\cuhaz}
+\def\cuhazratio{\ratio_{\cuhaz}}
+\def\rcuhaz{\cuhazratio}
+\def\cuhazr{\cuhazratio}
+\providecommand{\cuhazratiof}[1]{\cuhazratio\paren{#1}}
+\def\rcuhazf{\cuhazratiof}
+\def\cuhazrf{\cuhazratiof}
+\def\factor{\theta}
+\providecommand{\factorf}[1]{\factor\paren{#1}}
+\def\oddsfactor{\factor_{\odds}}
+\providecommand{\oddsfactorf}[1]{\oddsfactor\paren{#1}}
+\def\fodds{\oddsfactor}
+\def\foddsf{\oddsfactorf}
+\def\hazfactor{\factor_{\haz}}
+\providecommand{\hazfactorf}[1]{\hazfactor\paren{#1}}
+\def\fhaz{\hazfactor}
+\def\fhazf{\hazfactorf}
+\def\ratefactor{\factor_{\rate}}
+\providecommand{\ratefactorf}[1]{\ratefactor\paren{#1}}
+\def\frate{\ratefactor}
+\def\fratef{\ratefactorf}
+\def\riskfactor{\factor_{\risk}}
+\providecommand{\riskfactorf}[1]{\riskfactor\paren{#1}}
+\def\frisk{\riskfactor}
+\def\friskf{\riskfactorf}
+\def\prevfactor{\factor_{\prev}}
+\providecommand{\prevfactorf}[1]{\prevfactor\paren{#1}}
+\def\fprev{\prevfactor}
+\def\fprevf{\prevfactorf}
+\def\cuhazfactor{\factor_{\cuhaz}}
+\providecommand{\cuhazfactorf}[1]{\cuhazfactor\paren{#1}}
+\def\fcuhaz{\cuhazfactor}
+\def\fcuhazf{\cuhazfactorf}
+\def\survfactor{\factor_{\surv}}
+\providecommand{\survfactorf}[1]{\survfactor\paren{#1}}
+\def\fsurv{\survfactor}
+\def\fsurvf{\survfactorf}
+\def\ff{\factorf}
+\def\oddsff{\oddsfactorf}
+\def\hazff{\hazfactorf}
+\def\rateff{\ratefactorf}
+\def\riskff{\riskfactorf}
+\def\prevff{\prevfactorf}
+\def\cuhazff{\cuhazfactorf}
+\def\survff{\survfactorf}
+\def\Surv{\surv}
+\def\incidence{\bar{\haz}}
+\def\phaz{\Expf{\haz}}
+\def\idmat{\mathbb{I}}
+\def\and{\cap}
+\def\reglincomb{\vx \cdot \vb}
+\def\regbetasum{\beta_1 x_1+ \dots + \beta_p x_p}
+\def\pdf{\distop{f}}
+\providecommand{\pmf}[1]{\distop{P}\paren{#1}}
+\def\cdf{\distop{F}}
+\providecommand{\cdff}[1]{\cdf\paren{#1}}
+\def\hcdf{\mathop{\hat{\cdf}}\nolimits}
+\providecommand{\hcdff}[1]{\hcdf\paren{#1}}
+\def\defLik{\Lik(\theta) \eqdef \p(\vX = \vx | \Theta = \theta)}
+\def\defLogLik{\lik \eqdef \logf{\Lik(\vx|\th)}}
+\def\defScore{\score \eqdef \deriv{\th} \lik(\vx|\th)}
+\def\defHess{\hess \eqdef \deriv{\vth}\deriv{\vth\'} \llik(\vx | \vth)}
+\def\thmHessij{\hessij =
+\deriv{\th_i}\deriv{\th_j} \llik(\vX = \vx | \vth)}
+\def\defOInf{\oinf \eqdef -\hess(\vx|\vth)}
+\def\defEInf{\einf \eqdef \E{\oinf(\vx|\theta)}}
+\def\thmADistMLE{\hth_{ML}\ \dot \sim\ \ndist{\th,\sb{\einf(\vth)}^{-1}}}
+\def\eqGLMRatio{\ror(\vx,\vxs) = \exp{(\diffvx) \cdot \vb}}
+\def\defHR{\hr(t| \vx : \vxs) \eqdef \frac{\haz(t|\vx)}{\haz(t|\vxs)}}
+\def\kerngaus{\frac{-1}{2}\frac{(x-\mu)^2}{\ss}}
+\def\likgaus{\paren{2\pi\ss}^{-1/2}\expf{\kerngaus}}
+\def\llgaus{\frac{-1}{2}\paren{\logf{2\pi\ss} + \frac{\devn^2}{\ss}}}
+\def\scoreexpf{\frac{\devn}{\Varf{X}}}
+\def\llexpmean{-\logf{\pmean} - \frac{x}{\pmean}}
+\def\signt{\operatorname{sign}}
+\providecommand{\signf}[1]{\signt\cb{#1}}
+\def\reals{\mathbb{R}}
+\def\NA{\text{NA}}
+\def\resid{r}
+\def\stdresid{r'}
+\def\modresid{r^*}
+\def\ub{\underbrace}
+\providecommand{\ubf}[2]{\ub{#1}_{#2}}
+\providecommand{\dims}[2]{\ub{#1}_{#2}}
+\providecommand{\residv}{\vec{r}}
+\def\hprob{\hat{\prob}}
+\def\hprobs{\hprob}
+\def\hrisk{\hprob}
+\def\hprev{\hprob}
+\def\hodds{\hat{\odds}}
+\def\hrate{\hat{\rate}}
+\def\hhaz{\hrate}
+\def\hcuhaz{\hat{\cuhaz}}
+\def\hcumhaz{\hcuhaz}
+\def\hratio{\hat{\ratio}}
+\providecommand{\hratiof}[1]{\hratio\paren{#1}}
+\def\hror{\hat{\ror}}
+\providecommand{\horf}[1]{\hror\paren{#1}}
+\def\hhazratio{\hat{\hazratio}}
+\def\hhr{\hhazratio}
+\def\hrhaz{\hhazratio}
+\def\hhazr{\hhazratio}
+\providecommand{\hhrf}[1]{\hhazratio\paren{#1}}
+\def\hrhazf{\hhrf}
+\def\hhazrf{\hhrf}
+\def\hrateratio{\hat{\rateratio}}
+\def\hrater{\hrateratio}
+\def\hrrate{\hrateratio}
+\providecommand{\hrateratiof}[1]{\hrateratio\paren{#1}}
+\def\hraterf{\hrateratiof}
+\def\hrratef{\hrateratiof}
+\def\hriskratio{\hat{\riskratio}}
+\def\hrrisk{\hriskratio}
+\def\hriskr{\hriskratio}
+\providecommand{\hriskratiof}[1]{\hriskratio\paren{#1}}
+\def\hrriskf{\hriskratiof}
+\def\hriskrf{\hriskratiof}
+\def\hprevratio{\hat{\prevratio}}
+\def\hprr{\hprevratio}
+\providecommand{\hprevratiof}[1]{\hprevratio\paren{#1}}
+\def\hprrf{\hprevratiof}
+\def\hsurvratio{\hat{\survratio}}
+\def\hrsurv{\hsurvratio}
+\def\hsurvr{\hsurvratio}
+\providecommand{\hsurvratiof}[1]{\hsurvratio\paren{#1}}
+\def\hrsurvf{\hsurvratiof}
+\def\hsurvrf{\hsurvratiof}
+\def\hcuhazratio{\hat{\cuhazratio}}
+\def\hrcuhaz{\hcuhazratio}
+\def\hcuhazr{\hcuhazratio}
+\providecommand{\hcuhazratiof}[1]{\hcuhazratio\paren{#1}}
+\def\hrcuhazf{\hcuhazratiof}
+\def\hcuhazrf{\hcuhazratiof}
+\def\hfactor{\hat{\factor}}
+\providecommand{\hfactorf}[1]{\hfactor\paren{#1}}
+\def\hff{\hfactorf}
+\def\hoddsfactor{\hat{\oddsfactor}}
+\providecommand{\hoddsfactorf}[1]{\hoddsfactor\paren{#1}}
+\def\hfodds{\hoddsfactor}
+\def\hfoddsf{\hoddsfactorf}
+\def\hoddsff{\hoddsfactorf}
+\def\hhazfactor{\hat{\hazfactor}}
+\providecommand{\hhazfactorf}[1]{\hhazfactor\paren{#1}}
+\def\hfhaz{\hhazfactor}
+\def\hfhazf{\hhazfactorf}
+\def\hhazff{\hhazfactorf}
+\def\hratefactor{\hat{\ratefactor}}
+\providecommand{\hratefactorf}[1]{\hratefactor\paren{#1}}
+\def\hfrate{\hratefactor}
+\def\hfratef{\hratefactorf}
+\def\hrateff{\hratefactorf}
+\def\hriskfactor{\hat{\riskfactor}}
+\providecommand{\hriskfactorf}[1]{\hriskfactor\paren{#1}}
+\def\hfrisk{\hriskfactor}
+\def\hfriskf{\hriskfactorf}
+\def\hriskff{\hriskfactorf}
+\def\hprevfactor{\hat{\prevfactor}}
+\providecommand{\hprevfactorf}[1]{\hprevfactor\paren{#1}}
+\def\hfprev{\hprevfactor}
+\def\hfprevf{\hprevfactorf}
+\def\hprevff{\hprevfactorf}
+\def\hcuhazfactor{\hat{\cuhazfactor}}
+\providecommand{\hcuhazfactorf}[1]{\hcuhazfactor\paren{#1}}
+\def\hfcuhaz{\hcuhazfactor}
+\def\hfcuhazf{\hcuhazfactorf}
+\def\hcuhazff{\hcuhazfactorf}
+\def\hsurvfactor{\hat{\survfactor}}
+\providecommand{\hsurvfactorf}[1]{\hsurvfactor\paren{#1}}
+\def\hfsurv{\hsurvfactor}
+\def\hfsurvf{\hsurvfactorf}
+\def\hsurvff{\hsurvfactorf}
+\def\eQ{\mathop{\est{\Q}}\nolimits}
+\def\equantile{\mathop{\est{\quantile}}\nolimits}
+\providecommand{\eQf}[1]{\eQ\paren{#1}}
+\providecommand{\equantilef}[1]{\equantile\paren{#1}}
+\def\ep{\mathop{\est{\p}}\nolimits}
+\def\eb{\est{\beta}}
+\def\evb{\est{\vb}}
+\def\eR{\est{R}}
+\def\ek{\est{\kappa}}
+\def\ekappa{\est{\kappa}}
+\def\el{\est{\lambda}}
+\def\ey{\est{y}}
+\def\es{\est{\sigma}}
+\def\esig{\est{\sigma}}
+\def\eS{\est{\Sigma}}
+\def\eSig{\est{\Sigma}}
+\def\eSigma{\est{\Sigma}}
+\def\esurv{\mathop{\est{\surv}}\nolimits}
+\def\eSurv{\mathop{\est{\surv}}\nolimits}
+\providecommand{\eSurvf}[1]{\eSurv\paren{#1}}
+\def\esemp{\esurv_{\emp}}
+\def\eskm{\esurv_{\km}}
+\def\esnaa{\esurv_{\naa}}
+\providecommand{\esempf}[1]{\esemp\paren{#1}}
+\providecommand{\eskmf}[1]{\eskm\paren{#1}}
+\providecommand{\esnaaf}[1]{\esnaa\paren{#1}}
+\def\eth{\est{\theta}}
+\def\ethml{\eth_{\text{ML}}}
+\providecommand{\eE}[1]{\mathop{\est{\operatorname{E}}}\nolimits\sb{#1}}
+\providecommand{\eExp}[1]{\mathop{\est{\operatorname{E}}}\nolimits\sb{#1}}
+\providecommand{\eExpf}[1]{\mathop{\est{\operatorname{E}}}\nolimits\sb{#1}}
+\def\emu{\est{\mu}}
+\providecommand{\emuf}[1]{\emu\paren{#1}}
+\def\evar{\mathop{\Est{\Vart}}\nolimits}
+\def\evart{\mathop{\Est{\Vart}}\nolimits}
+\def\ecovt{\mathop{\Est{\Covt}}\nolimits}
+\def\eCovt{\mathop{\Est{\Covt}}\nolimits}
+\providecommand{\eVar}[1]{\mathop{\Est{\operatorname{Var}}}\nolimits\paren{#1}}
+\providecommand{\evarf}[1]{\evart\paren{#1}}
+\providecommand{\ecovf}[1]{\ecovt\paren{#1}}
+\def\ecort{\mathop{\Est{\Cort}}\nolimits}
+\providecommand{\eCor}[1]{\ecort\paren{#1}}
+\providecommand{\eCorf}[1]{\ecort\paren{#1}}
+\providecommand{\eCors}[2]{\ecort\paren{#1, #2}}
+\providecommand{\eSD}[1]{\mathop{\Est{\operatorname{SD}}}\nolimits\paren{#1}}
+\providecommand{\eSDf}[1]{\mathop{\Est{\operatorname{SD}}}\nolimits\paren{#1}}
+\def\eset{\mathop{\Est{\operatorname{se}}}\nolimits}
+\def\eSE{\mathop{\Est{\operatorname{SE}}}\nolimits}
+\def\eSEt{\mathop{\Est{\operatorname{SE}}}\nolimits}
+\providecommand{\ese}[1]{\eset\paren{#1}}
+\providecommand{\esef}[1]{\eset\paren{#1}}
+\providecommand{\eSEf}[1]{\eSE\paren{#1}}
+\def\eeinf{\est{\einf}}
+\providecommand{\eeinff}[1]{\eeinf \paren{#1}}
+\def\edifflogodds{\Est{\difflogodds}}
+\def\ecdf{\mathop{\est{\cdf}}\nolimits}
+\providecommand{\ecdff}[1]{\ecdf\paren{#1}}
+\def\eprob{\est{\prob}}
+\def\eprobs{\eprob}
+\def\erisk{\eprob}
+\def\eprev{\eprob}
+\def\eodds{\est{\odds}}
+\def\erate{\est{\rate}}
+\def\ehaz{\erate}
+\def\ecuhaz{\est{\cuhaz}}
+\def\ecumhaz{\ecuhaz}
+\def\eratio{\est{\ratio}}
+\providecommand{\eratiof}[1]{\eratio\paren{#1}}
+\def\eror{\est{\ror}}
+\providecommand{\eorf}[1]{\eror\paren{#1}}
+\def\ehazratio{\est{\hazratio}}
+\def\ehr{\ehazratio}
+\def\erhaz{\ehazratio}
+\def\ehazr{\ehazratio}
+\providecommand{\ehrf}[1]{\ehazratio\paren{#1}}
+\def\erhazf{\ehrf}
+\def\ehazrf{\ehrf}
+\def\erateratio{\est{\rateratio}}
+\def\erater{\erateratio}
+\def\errate{\erateratio}
+\providecommand{\erateratiof}[1]{\erateratio\paren{#1}}
+\def\eraterf{\erateratiof}
+\def\erratef{\erateratiof}
+\def\eriskratio{\est{\riskratio}}
+\def\errisk{\eriskratio}
+\def\eriskr{\eriskratio}
+\providecommand{\eriskratiof}[1]{\eriskratio\paren{#1}}
+\def\erriskf{\eriskratiof}
+\def\eriskrf{\eriskratiof}
+\def\eprevratio{\est{\prevratio}}
+\def\eprr{\eprevratio}
+\providecommand{\eprevratiof}[1]{\eprevratio\paren{#1}}
+\def\eprrf{\eprevratiof}
+\def\esurvratio{\est{\survratio}}
+\def\ersurv{\esurvratio}
+\def\esurvr{\esurvratio}
+\providecommand{\esurvratiof}[1]{\esurvratio\paren{#1}}
+\def\ersurvf{\esurvratiof}
+\def\esurvrf{\esurvratiof}
+\def\ecuhazratio{\est{\cuhazratio}}
+\def\ercuhaz{\ecuhazratio}
+\def\ecuhazr{\ecuhazratio}
+\providecommand{\ecuhazratiof}[1]{\ecuhazratio\paren{#1}}
+\def\ercuhazf{\ecuhazratiof}
+\def\ecuhazrf{\ecuhazratiof}
+\def\efactor{\est{\factor}}
+\providecommand{\efactorf}[1]{\efactor\paren{#1}}
+\def\eff{\efactorf}
+\def\eoddsfactor{\est{\oddsfactor}}
+\providecommand{\eoddsfactorf}[1]{\eoddsfactor\paren{#1}}
+\def\efodds{\eoddsfactor}
+\def\efoddsf{\eoddsfactorf}
+\def\eoddsff{\eoddsfactorf}
+\def\ehazfactor{\est{\hazfactor}}
+\providecommand{\ehazfactorf}[1]{\ehazfactor\paren{#1}}
+\def\efhaz{\ehazfactor}
+\def\efhazf{\ehazfactorf}
+\def\ehazff{\ehazfactorf}
+\def\eratefactor{\est{\ratefactor}}
+\providecommand{\eratefactorf}[1]{\eratefactor\paren{#1}}
+\def\efrate{\eratefactor}
+\def\efratef{\eratefactorf}
+\def\erateff{\eratefactorf}
+\def\eriskfactor{\est{\riskfactor}}
+\providecommand{\eriskfactorf}[1]{\eriskfactor\paren{#1}}
+\def\efrisk{\eriskfactor}
+\def\efriskf{\eriskfactorf}
+\def\eriskff{\eriskfactorf}
+\def\eprevfactor{\est{\prevfactor}}
+\providecommand{\eprevfactorf}[1]{\eprevfactor\paren{#1}}
+\def\efprev{\eprevfactor}
+\def\efprevf{\eprevfactorf}
+\def\eprevff{\eprevfactorf}
+\def\ecuhazfactor{\est{\cuhazfactor}}
+\providecommand{\ecuhazfactorf}[1]{\ecuhazfactor\paren{#1}}
+\def\efcuhaz{\ecuhazfactor}
+\def\efcuhazf{\ecuhazfactorf}
+\def\ecuhazff{\ecuhazfactorf}
+\def\esurvfactor{\est{\survfactor}}
+\providecommand{\esurvfactorf}[1]{\esurvfactor\paren{#1}}
+\def\efsurv{\esurvfactor}
+\def\efsurvf{\esurvfactorf}
+\def\esurvff{\esurvfactorf}
+
+
+
+::: {#exr-prac-canonical-link}
+#### Canonical link functions
+(adapted from @dobson4e, Chapter 3, and @dunn2018generalized, Chapter 3)
+
+The *canonical link* for a distribution in the exponential family
+is the link $g(\cdot)$ such that
+$g(\mu) = \theta$,
+where $\theta$ is the natural parameter.
+
+For each listed distribution,
+state the canonical link function
+and the corresponding variance function $V(\mu)$,
+where $\Varf{Y} = \phi\, V(\mu)$ and $\phi$ is the dispersion parameter:
+
+**(a)** $Y \sim \Pois(\mu)$
+
+**(b)** $Y \sim \Bernoulli(\pi)$
+
+**(c)** $Y \sim \Normal(\mu, \sigma^2)$
+
+**(d)** $Y \sim \text{Gamma}(\mu, \phi)$
+:::
+
+::: {.solution}
+
+| Distribution | Canonical link | Variance function $V(\mu)$ | $\Varf{Y} = \phi V(\mu)$ |
+|---|---|---|---|
+| (a) Poisson | $g(\mu) = \logf{\mu}$ | $V(\mu) = \mu$ | $\phi = 1$ (fixed) |
+| (b) Bernoulli | $g(\pi) = \logf{\frac{\pi}{1-\pi}}$ (logit) | $V(\pi) = \pi(1-\pi)$ | $\phi = 1$ (fixed) |
+| (c) Normal | $g(\mu) = \mu$ (identity) | $V(\mu) = 1$ | $\Varf{Y} = \sigma^2$ |
+| (d) Gamma | $g(\mu) = -1/\mu$ (inverse) | $V(\mu) = \mu^2$ | $\Varf{Y} = \phi\mu^2$ |
+
+Notes:
+
+- For the Poisson distribution,
+  the variance equals the mean.
+  Overdispersion occurs when the empirical variance exceeds the mean.
+
+- For the Bernoulli distribution,
+  the variance is maximized at $\pi = 0.5$.
+
+- For the Normal distribution,
+  the variance does not depend on the mean;
+  the dispersion parameter $\phi = \sigma^2$.
+
+- For the Gamma distribution,
+  the coefficient of variation $\SD{Y}/\E{Y}$ is constant.
+
+The log link (not the inverse link) is more commonly used for Gamma regression in practice,
+because it ensures $\mu > 0$ and gives interpretable multiplicative effects.
+
+:::
+
+-->
+</section></section><section><section id="references" class="title-slide slide level1 unnumbered center"><h1>References</h1>
+
+</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-dalgaardintroductory" class="csl-entry" role="listitem">
+Dalgaard, Peter. 2008. <em>Introductory Statistics with r</em>. New York, NY: Springer New York. <a href="https://link.springer.com/book/10.1007/978-0-387-79054-1">https://link.springer.com/book/10.1007/978-0-387-79054-1</a>.
+</div>
+<div id="ref-dobson4e" class="csl-entry" role="listitem">
+Dobson, Annette J, and Adrian G Barnett. 2018. <em>An Introduction to Generalized Linear Models</em>. 4th ed. CRC press. <a href="https://doi.org/10.1201/9781315182780">https://doi.org/10.1201/9781315182780</a>.
+</div>
+<div id="ref-dunn2018generalized" class="csl-entry" role="listitem">
+Dunn, Peter K, and Gordon K Smyth. 2018. <em>Generalized Linear Models with Examples in <span>R</span></em>. Vol. 53. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-0118-7">https://link.springer.com/book/10.1007/978-1-4419-0118-7</a>.
+</div>
+<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
+Hernán, Miguel A., and James M. Robins. 2020. <em>Causal Inference: What If</em>. Chapman &amp; Hall/CRC. <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/</a>.
+</div>
+<div id="ref-james2021islr2e" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. <em>An Introduction to Statistical Learning: With Applications in <span>R</span></em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
+</div>
+<div id="ref-kleinbaum2014applied" class="csl-entry" role="listitem">
+Kleinbaum, David G, Lawrence L Kupper, Azhar Nizam, K Muller, and ES Rosenberg. 2014. <em>Applied Regression Analysis and Other Multivariable Methods</em>. 5th ed. Cengage Learning. <a href="https://www.cengage.com/c/applied-regression-analysis-and-other-multivariable-methods-5e-kleinbaum/9781285051086/">https://www.cengage.com/c/applied-regression-analysis-and-other-multivariable-methods-5e-kleinbaum/9781285051086/</a>.
+</div>
+<div id="ref-neyman1923application" class="csl-entry" role="listitem">
+Neyman, Jerzy. 1990. <span>“On the Application of Probability Theory to Agricultural Experiments. Essay on Principles. Section 9.”</span> <em>Statistical Science</em> 5 (4): 465–72. <a href="https://doi.org/10.1214/ss/1177012031">https://doi.org/10.1214/ss/1177012031</a>.
+</div>
+<div id="ref-rubin1974estimating" class="csl-entry" role="listitem">
+Rubin, Donald B. 1974. <span>“Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies.”</span> <em>Journal of Educational Psychology</em> 66 (5): 688–701. <a href="https://doi.org/10.1037/h0037350">https://doi.org/10.1037/h0037350</a>.
+</div>
+<div id="ref-vittinghoff2e" class="csl-entry" role="listitem">
+Vittinghoff, Eric, David V Glidden, Stephen C Shiboski, and Charles E McCulloch. 2012. <em>Regression Methods in Biostatistics: Linear, Logistic, Survival, and Repeated Measures Models</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>.
+</div>
+<div id="ref-r4ds" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science</em>. " O’Reilly Media, Inc." <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+</div>
+
+
+<script>
+function getQuartoHeadingAnchorIcon() {
+  const afterBodyScript = document.getElementById("quarto-html-after-body");
+  if (!afterBodyScript) {
+    return null;
+  }
+
+  const match = afterBodyScript.textContent.match(/const icon = ["']([^"']+)["']/);
+  return match ? match[1] : null;
+}
+
+// Quarto chain-link glyph from Bootstrap Icons.
+const chainLinkIconFallback = "\ue9cb";
+const headingAnchorIcon = getQuartoHeadingAnchorIcon();
+const defaultAnchorIconFallback =
+  headingAnchorIcon && headingAnchorIcon !== "#" ? headingAnchorIcon : chainLinkIconFallback;
+
+function getDefaultAnchorTemplate() {
+  // Prefer Quarto heading anchors first so the visible chain-link icon is reused.
+  const defaultAnchor =
+    document.querySelector(".anchored > a.anchorjs-link") ||
+    document.querySelector("a.anchorjs-link[data-anchorjs-icon]");
+  if (!defaultAnchor) {
+    return null;
+  }
+
+  return {
+    // Detect icon value from the template anchor's attribute or text.
+    icon: defaultAnchor.getAttribute("data-anchorjs-icon") || defaultAnchor.textContent.trim(),
+    hasDataIcon: defaultAnchor.hasAttribute("data-anchorjs-icon"),
+    style: defaultAnchor.getAttribute("style")
+  };
+}
+
+function normalizeAnchorIcon(icon) {
+  if (!icon || icon === "#") {
+    return defaultAnchorIconFallback;
+  }
+
+  return icon;
+}
+
+function createChainLinkSvgIcon() {
+  const svgNs = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNs, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("fill", "currentColor");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.setAttribute("class", "equation-anchor-icon");
+
+  [
+    "M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-2H11a4 4 0 0 1-4 3H4a4 4 0 0 1 0-8h2.354z",
+    "M9.646 10.5H12a3 3 0 1 0 0-6H9a3 3 0 0 0-2.83 2H5a4 4 0 0 1 4-3h3a4 4 0 0 1 0 8H9.646z",
+    "M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5"
+  ].forEach(function (pathData) {
+    const path = document.createElementNS(svgNs, "path");
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+  });
+
+  return svg;
+}
+
+function alignEquationAnchorWithDefault(anchor, template) {
+  if (!anchor) {
+    return;
+  }
+
+  anchor.classList.remove("external");
+  anchor.classList.add("no-external");
+
+  const normalizedIcon = normalizeAnchorIcon(template && template.icon);
+  if (normalizedIcon === chainLinkIconFallback) {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = "";
+    anchor.appendChild(createChainLinkSvgIcon());
+  } else if (template && template.hasDataIcon) {
+    anchor.setAttribute("data-anchorjs-icon", normalizedIcon);
+    anchor.textContent = normalizedIcon;
+  } else {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = normalizedIcon;
+  }
+
+  if (template && template.style) {
+    anchor.setAttribute("style", template.style);
+  } else {
+    anchor.removeAttribute("style");
+  }
+}
+
+function alignEquationAnchorsWithDefault() {
+  const template = getDefaultAnchorTemplate();
+  document.querySelectorAll("a.equation-anchor").forEach(function (anchor) {
+    alignEquationAnchorWithDefault(anchor, template);
+  });
+}
+
+function markCollapseTogglesExpanded(collapseEl) {
+  const toggleTargets = [];
+  if (collapseEl.id) {
+    toggleTargets.push("#" + collapseEl.id);
+  }
+
+  const genericCollapseClasses = new Set(["collapse", "show", "collapsing", "callout-collapse", "navbar-collapse"]);
+  collapseEl.classList.forEach(function (className) {
+    if (!genericCollapseClasses.has(className)) {
+      toggleTargets.push("." + className);
+    }
+  });
+
+  document.querySelectorAll("[data-bs-target], [href]").forEach(function (toggle) {
+    if (
+      toggleTargets.includes(toggle.getAttribute("data-bs-target")) ||
+      toggleTargets.includes(toggle.getAttribute("href"))
+    ) {
+      toggle.classList.remove("collapsed");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+}
+
+function expandCollapsedAncestors(target) {
+  if (!target) {
+    return;
+  }
+
+  const collapsedAncestors = [];
+  let current = target.parentElement;
+  while (current) {
+    if (current.classList && current.classList.contains("collapse") && !current.classList.contains("show")) {
+      collapsedAncestors.unshift(current);
+    }
+    current = current.parentElement;
+  }
+
+  collapsedAncestors.forEach(function (collapseEl) {
+    if (window.bootstrap && window.bootstrap.Collapse) {
+      window.bootstrap.Collapse.getOrCreateInstance(collapseEl, { toggle: false }).show();
+    } else {
+      collapseEl.classList.add("show");
+      collapseEl.style.height = "";
+    }
+
+    markCollapseTogglesExpanded(collapseEl);
+  });
+}
+
+function revealEquationHashTarget() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) {
+    return;
+  }
+
+  const target = document.getElementById(id);
+  if (!target) {
+    return;
+  }
+
+  expandCollapsedAncestors(target);
+
+  window.setTimeout(function () {
+    target.scrollIntoView({ block: "center" });
+  }, 400);
+}
+
+function ensureEquationAnchorStyles() {
+  if (document.getElementById("equation-anchor-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "equation-anchor-styles";
+  style.textContent = `
+    .equation-anchor-target {
+      --equation-anchor-offset: 1.2rem;
+      position: relative;
+      display: block;
+    }
+    .equation-anchor {
+      position: absolute;
+      left: calc(-1 * var(--equation-anchor-offset));
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+    .equation-anchor:hover {
+      opacity: 1;
+    }
+    .equation-anchor-icon {
+      width: 0.9em;
+      height: 0.9em;
+      vertical-align: -0.125em;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  ensureEquationAnchorStyles();
+
+  let counter = 0;
+
+  document.querySelectorAll(".math.display").forEach(function (mathEl) {
+    // For labeled equations, Quarto wraps the math display span in an eq-* span.
+    // For unlabeled equations, use the parent element (typically a <p>).
+    const labeledContainer = mathEl.closest("[id^='eq-']");
+    const target = labeledContainer || mathEl.parentElement;
+
+    if (!target) {
+      return;
+    }
+
+    // Skip if already processed.
+    if (target.querySelector(".equation-anchor")) {
+      return;
+    }
+
+    // Use the labeled container's id, or assign an auto-generated id.
+    let id = labeledContainer ? labeledContainer.id : target.id;
+    if (!id) {
+      counter++;
+      id = "eq-anchor-" + counter;
+      target.id = id;
+    }
+
+    target.classList.add("equation-anchor-target");
+
+    const anchor = document.createElement("a");
+    anchor.className = "equation-anchor anchorjs-link";
+    anchor.href = "#" + id;
+    anchor.setAttribute("aria-label", "Permalink to this equation");
+    target.appendChild(anchor);
+  });
+
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+
+window.addEventListener("load", function () {
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+window.addEventListener("hashchange", revealEquationHashTarget);
+</script><script>
+(function () {
+  var css = [
+    "#revealjs-html-link {",
+    "  position: fixed;",
+    "  top: 8px;",
+    "  right: 8px;",
+    "  z-index: 31;",
+    "  font-size: 0.55em;",
+    "  line-height: 1;",
+    "}",
+    "#revealjs-html-link a {",
+    "  color: rgba(0, 0, 0, 0.5);",
+    "  text-decoration: none;",
+    "  border: 1px solid rgba(0, 0, 0, 0.2);",
+    "  padding: 4px 8px;",
+    "  border-radius: 4px;",
+    "  background: rgba(255, 255, 255, 0.8);",
+    "  transition: color 0.15s, background 0.15s;",
+    "}",
+    "#revealjs-html-link a:hover {",
+    "  color: rgba(0, 0, 0, 0.9);",
+    "  background: rgba(255, 255, 255, 0.98);",
+    "  border-color: rgba(0, 0, 0, 0.4);",
+    "}"
+  ].join("\n");
+
+  function getHtmlBase() {
+    var url = window.location.href.split("#")[0];
+    return url.replace(/-slides\.html$/, ".html");
+  }
+
+  function getCurrentSectionId() {
+    if (typeof Reveal === "undefined" || !Reveal.getCurrentSlide) {
+      return null;
+    }
+    var slide = Reveal.getCurrentSlide();
+    if (!slide) {
+      return null;
+    }
+    // If the current slide itself has an id, use it
+    if (slide.id) {
+      return slide.id;
+    }
+    // Walk backwards through sibling sections to find the nearest one with an id
+    var sibling = slide.previousElementSibling;
+    while (sibling) {
+      if (sibling.tagName === "SECTION" && sibling.id) {
+        return sibling.id;
+      }
+      sibling = sibling.previousElementSibling;
+    }
+    // Fall back to the first section[id] inside the parent container
+    var parent = slide.parentElement;
+    if (parent && parent.tagName === "SECTION") {
+      var firstNamed = parent.querySelector("section[id]");
+      if (firstNamed) {
+        return firstNamed.id;
+      }
+    }
+    return null;
+  }
+
+  function updateHtmlLink() {
+    var anchor = document.getElementById("revealjs-html-anchor");
+    if (!anchor) {
+      return;
+    }
+    var sectionId = getCurrentSectionId();
+    anchor.href = getHtmlBase() + (sectionId ? "#" + sectionId : "");
+  }
+
+  function initRevealJsHtmlLink() {
+    var htmlBase = getHtmlBase();
+
+    // Don't add the link if the URL doesn't follow the -slides.html convention
+    if (htmlBase === window.location.href.split("#")[0]) {
+      return;
+    }
+
+    // Inject styles
+    var styleElement = document.createElement("style");
+    styleElement.textContent = css;
+    document.head.appendChild(styleElement);
+
+    // Create the link element and append it directly to body so it stays
+    // visible across all slides regardless of Reveal.js section visibility
+    var div = document.createElement("div");
+    div.id = "revealjs-html-link";
+    var anchor = document.createElement("a");
+    anchor.id = "revealjs-html-anchor";
+    anchor.href = htmlBase;
+    anchor.target = "_blank";
+    anchor.title = "View this section in the HTML notes";
+    anchor.setAttribute("aria-label", "View this section in the HTML notes");
+    anchor.innerHTML = "&#128196;&nbsp;Webpage version";
+    div.appendChild(anchor);
+    document.body.appendChild(div);
+
+    // Register Reveal.js slide-change listener to keep the link updated
+    if (typeof Reveal !== "undefined") {
+      Reveal.on("ready", updateHtmlLink);
+      Reveal.on("slidechanged", updateHtmlLink);
+    }
+
+    updateHtmlLink();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initRevealJsHtmlLink);
+  } else {
+    initRevealJsHtmlLink();
+  }
+})();
+</script></section></section>
+</div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/morrison-lab\.github\.io\/rme\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+
+
+</body></html>

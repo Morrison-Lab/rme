@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Exam Formula Sheet – Regression Models for Epidemiology</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-f31f138e729cba0c408ddaff1d64d9d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8aa2086e71da542471cda93120e8cffd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-f31f138e729cba0c408ddaff1d64d9d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
+<link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VS314RJ2KP"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-VS314RJ2KP', { 'anonymize_ip': true});
+</script><script type="application/json" class="js-hypothesis-config">
+{
+  "theme": "clean",
+  "openSidebar": false,
+  "enableExperimentalNewNoteButton": true
+}
+</script><script async="" src="https://hypothes.is/embed.js"></script><script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
+}
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
+}
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-remark.callout {
+  border-left-color: #AD1457;
+}
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
+}
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exr.callout {
+  border-left-color: #FFA500;
+}
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
+}
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Regression Models for Epidemiology</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../chapters/index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-course-logistics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Course Logistics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-course-logistics">
+<li>
+    <a class="dropdown-item" href="../chapters/syllabus.html">
+ <span class="dropdown-text">Syllabus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/schedule.html">
+ <span class="dropdown-text">Schedule</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">
+<li>
+    <a class="dropdown-item" href="../chapters/Intro-to-GLMs.html">
+ <span class="dropdown-text">Introduction to GLMs</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../chapters/glms.html">
+ <span class="dropdown-text">Generalized Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/Linear-models-overview.html">
+ <span class="dropdown-text">Linear Models Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/binary-outcome-associations.html">
+ <span class="dropdown-text">Measures of Association for Binary Outcomes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/logistic-regression.html">
+ <span class="dropdown-text">Logistic Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/count-regression.html">
+ <span class="dropdown-text">Count Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/causal-inference.html">
+ <span class="dropdown-text">Causal Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/predictor-selection.html">
+ <span class="dropdown-text">Predictor Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/intro-multilevel-models.html">
+ <span class="dropdown-text">Multilevel Models</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../chapters/time-to-event-models.html">
+ <span class="dropdown-text">Time to Event Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/intro-to-survival-analysis.html">
+ <span class="dropdown-text">Introduction to Survival Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/proportional-hazards-models.html">
+ <span class="dropdown-text">Proportional Hazards Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/parametric-survival-models.html">
+ <span class="dropdown-text">Parametric Survival Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/midterm-2-review-session.html">
+ <span class="dropdown-text">Midterm 2 Review Session</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../chapters/top-ten-concepts.html">
+ <span class="dropdown-text">Top Ten Concepts</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-appendices" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Appendices</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-appendices">
+<li>
+    <a class="dropdown-item" href="../chapters/math-prereqs.html">
+ <span class="dropdown-text">Math Prerequisites</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/data.html">
+ <span class="dropdown-text">Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/exploratory-descriptive.html">
+ <span class="dropdown-text">Exploratory and Descriptive Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/probability.html">
+ <span class="dropdown-text">Probability</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/basic-statistical-methods.html">
+ <span class="dropdown-text">Basic Statistical Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/classification.html">
+ <span class="dropdown-text">Classification</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/estimation.html">
+ <span class="dropdown-text">Estimation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/nonparametric-models.html">
+ <span class="dropdown-text">Nonparametric Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/inference.html">
+ <span class="dropdown-text">Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/intro-MLEs.html">
+ <span class="dropdown-text">Introduction to MLEs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/bayesian-inference.html">
+ <span class="dropdown-text">Bayesian Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/common-mistakes.html">
+ <span class="dropdown-text">Common Mistakes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/notation.html">
+ <span class="dropdown-text">Notation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/proof-writing.html">
+ <span class="dropdown-text">Proof Writing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/intro-to-R.html">
+ <span class="dropdown-text">Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/exam-formula-sheet.html">
+ <span class="dropdown-text">Exam Formula Sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/package-versions.html">
+ <span class="dropdown-text">Package Versions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapters/concept-map.html">
+ <span class="dropdown-text">Concept Map</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/d-morrison/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="exam-formula-sheet-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="exam-formula-sheet-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="exam-formula-sheet-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Exam Formula Sheet</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Last modified: 2026-09-23: 21:05:36 (UTC)</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header><section id="epi-202-probability" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Epi 202: Probability</h1>
+<div style="column-count: 2; column-gap: 2em;">
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\mathopen{}\left(\tilde{a}\cdot \tilde{X}\right)\mathclose{}
+&amp;= \operatorname{Var}\mathopen{}\left(\sum_{i=1}^na_i X_i\right)\mathclose{}
+\\ &amp;= \tilde{a}^{\top} \operatorname{Var}\mathopen{}\left(\tilde{X}\right)\mathclose{} \tilde{a}
+\\ &amp;= \sum_{i=1}^n\sum_{j=1}^n a_i a_j \operatorname{Cov}\mathopen{}\left(X_i,X_j\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[\operatorname{E}\mathopen{}\left[Y\right]\mathclose{} = \operatorname{E}\mathopen{}\left[\operatorname{E}\mathopen{}\left[Y \mid X\right]\mathclose{}\right]\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{E}\mathopen{}\left[Y \mid Z\right]\mathclose{} = \operatorname{E}\mathopen{}\left[\operatorname{E}\mathopen{}\left[Y \mid X,Z\right]\mathclose{} \mid Z\right]\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{} = \operatorname{E}\mathopen{}\left[\operatorname{Var}\mathopen{}\left(Y \mid X\right)\mathclose{}\right]\mathclose{} + \operatorname{Var}\mathopen{}\left(\operatorname{E}\mathopen{}\left[Y \mid X\right]\mathclose{}\right)\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{Cov}\mathopen{}\left(Y,Z\right)\mathclose{} = \operatorname{E}\mathopen{}\left[\operatorname{Cov}\mathopen{}\left(Y,Z \mid X\right)\mathclose{}\right]\mathclose{} + \operatorname{Cov}\mathopen{}\left(\operatorname{E}\mathopen{}\left[Y \mid X\right]\mathclose{}, \operatorname{E}\mathopen{}\left[Z \mid X\right]\mathclose{}\right)\mathclose{}\]</span></p>
+</div>
+</section><section id="epi-203-statistical-inference" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> Epi 203: Statistical inference</h1>
+<div style="column-count: 2; column-gap: 2em;">
+<p><span class="math display">\[\mathcal{L}(\theta) \stackrel{\text{def}}{=}\operatorname{p}(\tilde{X}= \tilde{x}| \Theta = \theta)\]</span></p>
+<p><span class="math display">\[\ell\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mathcal{L}(\tilde{x}|\theta)\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\ell'\stackrel{\text{def}}{=}\frac{\partial}{\partial \theta} \ell(\tilde{x}|\theta)\]</span></p>
+<p><span class="math display">\[\ell''\stackrel{\text{def}}{=}\frac{\partial}{\partial \tilde{\theta}}\frac{\partial}{\partial \tilde{\theta}^{\top}} \ell(\tilde{x}| \tilde{\theta})\]</span></p>
+<p><span class="math display">\[\ell_{ij}''=
+\frac{\partial}{\partial \theta_i}\frac{\partial}{\partial \theta_j} \ell(\tilde{X}= \tilde{x}| \tilde{\theta})\]</span></p>
+<p><span class="math display">\[I\stackrel{\text{def}}{=}-\ell''(\tilde{x}|\tilde{\theta})\]</span> <span class="math display">\[\mathcal{I}\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[I(\tilde{x}|\theta)\right]\mathclose{}\]</span></p>
+<p><span class="math display">\[\hat\theta_{ML}\ \dot \sim\ \operatorname{N}\mathopen{}\left(\theta,\mathopen{}\left[\mathcal{I}(\tilde{\theta})\right]\mathclose{}^{-1}\right)\mathclose{}\]</span></p>
+<p>For one parameter <span class="math inline">\(\theta_k\)</span>:</p>
+<p><span class="math display">\[
+\text{CI}_{1-\alpha}(\theta_k)
+=
+\left[
+\hat\theta_k
+\pm
+z_{1 - \frac{\alpha}{2}}
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\theta_k\right)\mathclose{}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+Z_k
+\stackrel{\text{def}}{=}
+\frac{\hat\theta_k-\theta_{k,0}}{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\theta_k\right)\mathclose{}}
+\ \dot{\sim} \
+\operatorname{N}\mathopen{}\left(0,1\right)\mathclose{}
+\qquad
+\text{under }H_0:\theta_k=\theta_{k,0}
+\qquad
+z_k\text{ = observed }Z_k
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+p\text{-value}
+&amp;= 2\Pr \mathopen{}\left(\mathopen{}\left|Z\right|\mathclose{}\ge \mathopen{}\left|z_k\right|\mathclose{}\right)\mathclose{},\quad Z\sim \operatorname{N}\mathopen{}\left(0,1\right)\mathclose{}
+\\
+&amp;= 2\mathopen{}\left(1-\Phi\mathopen{}\left(\mathopen{}\left|z_k\right|\mathclose{}\right)\mathclose{}\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="sta-108-linear-regression" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> Sta 108: Linear regression</h1>
+<div style="column-count: 2; column-gap: 2em;">
+<p><span class="math display">\[
+t_k
+\stackrel{\text{def}}{=}
+\frac{\hat \beta_k-\beta_{k,0}}{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}}
+\ \dot{\sim} \
+t_{n-p}
+\qquad
+\text{under }H_0:\beta_k=\beta_{k,0}
+\qquad
+t_k^{\text{obs}}\text{ = observed }t_k
+\]</span></p>
+<p><span class="math display">\[
+\text{CI}_{1-\alpha}(\beta_k)
+=
+\left[
+\hat \beta_k
+\pm
+t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}
+\right]
+\]</span></p>
+<p>Let <span class="math inline">\(T_{n-p}\sim t_{n-p}\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+p\text{-value}
+&amp;=
+2\Pr \mathopen{}\left(\mathopen{}\left|T_{n-p}\right|\mathclose{}\ge \mathopen{}\left|t_k^{\text{obs}}\right|\mathclose{}\right)\mathclose{}
+\\
+&amp;=
+2\mathopen{}\left(1-F_{t_{n-p}}\mathopen{}\left(\mathopen{}\left|t_k^{\text{obs}}\right|\mathclose{}\right)\mathclose{}\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\text{CI}_{1-\alpha}\mathopen{}\left(\mu\mathopen{}\left({\tilde{x}^*}\right)\mathclose{}\right)\mathclose{}
+=
+\left[
+\hat{\mu}\mathopen{}\left({\tilde{x}^*}\right)\mathclose{}
+\pm
+t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left({\tilde{x}^*}\right)\mathclose{}\right)\mathclose{}
+\right]
+\]</span></p>
+<p><span class="math inline">\(Y^*\)</span> denotes a new observation (not in the training data), with corresponding covariate pattern <span class="math inline">\({\tilde{x}^*}\)</span>. Let <span class="math inline">\(\hat{Y}^* \stackrel{\text{def}}{=}\hat{\mu}\mathopen{}\left({\tilde{x}^*}\right)\mathclose{}\)</span>.</p>
+<p><span class="math display">\[
+\text{PI}_{1-\alpha}\mathopen{}\left(Y^*|{\tilde{x}^*}\right)\mathclose{}
+=
+\left[
+\hat{Y}^*
+\pm
+t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(Y^*-\hat{Y}^*\right)\mathclose{}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(Y^*-\hat{Y}^*\right)\mathclose{}
+=
+\hat \sigma\sqrt{1 + {({\tilde{x}^*})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}{\tilde{x}^*}}
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{Var}\mathopen{}\left(Y^* - \hat{Y}^*\right)\mathclose{}
+= \sigma^2\mathopen{}\left(1 + {({\tilde{x}^*})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}{\tilde{x}^*}\right)\mathclose{}
+\]</span></p>
+<p>Let <span class="math inline">\(\hat{\Sigma} \stackrel{\text{def}}{=}\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat \beta\right)\mathclose{} = \hat \sigma^2(\mathbf{X}'\mathbf{X})^{-1}\)</span>.</p>
+<p><span class="math display">\[
+\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left(\tilde{x}\right)\mathclose{}\right)\mathclose{} = {\tilde{x}}^{\top}\hat{\Sigma}\tilde{x}
+\]</span></p>
+<p>Let <span class="math inline">\(\Delta\mu\mathopen{}\left(\tilde{x}, {\tilde{x}^*}\right)\mathclose{} = \mu\mathopen{}\left(\tilde{x}\right)\mathclose{} - \mu\mathopen{}\left({\tilde{x}^*}\right)\mathclose{}\)</span>, and let <span class="math inline">\(\Delta\tilde{x}= \tilde{x}- {\tilde{x}^*}\)</span>; then:</p>
+<p><span class="math display">\[
+\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta\mu}\mathopen{}\left(\tilde{x}, {\tilde{x}^*}\right)\mathclose{}\right)\mathclose{} = {\Delta\tilde{x}}^{\top}\hat{\Sigma}\Delta\tilde{x}
+\]</span></p>
+</div>
+</section><section id="epi-204-generalized-linear-models" class="level1" data-number="4"><h1 data-number="4">
+<span class="header-section-number">4</span> Epi 204: Generalized linear models</h1>
+<p>Generalized linear models have three components:</p>
+<ol type="1">
+<li><p>The <strong>outcome distribution</strong> family: <span class="math inline">\(\operatorname{p}(Y|\mu(\tilde{x}))\)</span></p></li>
+<li><p>The <strong>link function</strong>: <span class="math inline">\(g(\mu(\tilde{x})) = \eta(\tilde{x})\)</span></p></li>
+<li><p>The <strong>linear component</strong>: <span class="math inline">\(\eta(\tilde{x}) = \tilde{x}\cdot \beta\)</span></p></li>
+</ol>
+<p><span class="math display">\[\theta_{\omega}(\tilde{x},{\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{(\Delta\tilde{x}) \cdot \tilde{\beta}\right\}\mathclose{}\]</span></p>
+<section id="estimates-of-odds-ratios-from-2x2-contingency-tables" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="estimates-of-odds-ratios-from-2x2-contingency-tables">
+<span class="header-section-number">4.1</span> Estimates of odds ratios from 2x2 contingency tables</h2>
+<p><span class="math display">\[\hat\theta=\frac{ad}{bc}\]</span></p>
+<!-- ### Logistic model interpretation -->
+<!-- {{< include _subfiles/logistic-regression/_sec_wcgs_notation.qmd >}} -->
+<!-- {{< include _subfiles/logistic-regression/_eq_wcgs_model_1.qmd >}} -->
+<!-- {{< include _subfiles/misc/_sec-logistic-interp-formulas.qmd >}} -->
+<!--  -->
+</section><section id="summary-of-logistic-regression-definitions-and-results" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="summary-of-logistic-regression-definitions-and-results">Summary of logistic regression definitions and results</h2>
+
+</section><section id="odds-and-log-odds" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="odds-and-log-odds">Odds and log-odds</h2>
+<p>These association-measure results are covered in <a href="../chapters/binary-outcome-associations.html">Measures of Association for Binary Outcomes</a>.</p>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Odds</strong> (<a href="../chapters/binary-outcome-associations.html#def-odds">def</a>) <span class="math display">\[\omega\stackrel{\text{def}}{=}\frac{\Pr(A)}{\Pr(\neg A)}\]</span></p>
+<p><strong>Conditional odds</strong> (<a href="../chapters/binary-outcome-associations.html#def-c-odds">def</a>) <span class="math display">\[\omega(A|B) \stackrel{\text{def}}{=}\frac{\Pr(A|B)}{\Pr(\neg A|B)}\]</span></p>
+<p><strong>Odds function</strong> (<a href="../chapters/binary-outcome-associations.html#def-odds-fn">def</a>) <span class="math display">\[\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{} \stackrel{\text{def}}{=}\frac{\pi}{1-\pi}\]</span></p>
+<p><strong>Probability to odds</strong> (<a href="../chapters/binary-outcome-associations.html#thm-prob-to-odds">thm</a>, <a href="../chapters/binary-outcome-associations.html#cor-oddsf-to-odds">cor</a>) <span class="math display">\[\omega= \frac{\pi}{1-\pi} = \operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{}\]</span></p>
+<p><strong>Simplified odds expressions; odds of a non-event</strong> (<a href="../chapters/binary-outcome-associations.html#thm-odds-simplified">thm</a>, <a href="../chapters/binary-outcome-associations.html#cor-odds-neg">cor</a>) <span class="math display">\[\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{} = \frac{1}{\pi^{-1}-1} = \mathopen{}\left(\pi^{-1}-1\right)^{-1}\mathclose{},
+\qquad \omega(\neg A) = \frac{1-\pi}{\pi} = \pi^{-1}-1\]</span></p>
+<p><strong>Odds ratio</strong> (<a href="../chapters/binary-outcome-associations.html#def-OR">def</a>) <span class="math display">\[\theta(\omega_1, \omega_2) \stackrel{\text{def}}{=}\frac{\omega_1}{\omega_2}\]</span></p>
+<p><strong>OR as ratio of probability ratios</strong> (<a href="../chapters/binary-outcome-associations.html#thm-or-ratio-ratio">thm</a>) <span class="math display">\[\theta(\omega_1, \omega_2)
+= \frac{\omega_1}{\omega_2}
+= \frac{\mathopen{}\left(\frac{\pi_1}{1-\pi_1}\right)\mathclose{}}{\mathopen{}\left(\frac{\pi_2}{1-\pi_2}\right)\mathclose{}}\]</span></p>
+<p><strong>Odds ratios are reversible, marginally and conditionally</strong> (<a href="../chapters/binary-outcome-associations.html#thm-or-swap">thm</a>, <a href="../chapters/binary-outcome-associations.html#thm-conditional-OR-swap">thm</a>) <span class="math display">\[\theta_{\omega}(A|B) = \theta_{\omega}(B|A),
+\qquad \theta_{\omega}(A|B,C) = \theta_{\omega}(B|A,C)\]</span></p>
+</div>
+</section><section id="inverse-odds-and-probability-recovery" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="inverse-odds-and-probability-recovery">Inverse-odds and probability recovery</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Odds to probability</strong> (<a href="../chapters/binary-outcome-associations.html#thm-odds-to-prob">thm</a>) <span class="math display">\[\pi = \frac{\omega}{1+\omega}\]</span></p>
+<p><strong>Inverse-odds function</strong> (<a href="../chapters/binary-outcome-associations.html#def-inv-odds">def</a>; recovers probability by <a href="../chapters/binary-outcome-associations.html#cor-invodds-pi">cor</a>) <span class="math display">\[\operatorname{invodds}\mathopen{}\left\{\omega\right\}\mathclose{} \stackrel{\text{def}}{=}\frac{\omega}{1 + \omega},
+\qquad \pi= \operatorname{invodds}\mathopen{}\left\{\omega\right\}\mathclose{}\]</span></p>
+<p><strong>Simplified inverse-odds</strong> (<a href="../chapters/binary-outcome-associations.html#lem-invodds-simplified">lem</a>) <span class="math display">\[\operatorname{invodds}\mathopen{}\left\{\omega\right\}\mathclose{} = \frac{1}{1+\omega^{-1}} = (1+\omega^{-1})^{-1}\]</span></p>
+<p><strong>One minus inverse-odds, and its complement</strong> (<a href="../chapters/binary-outcome-associations.html#lem-one-minus-odds-inv">lem</a>, <a href="../chapters/binary-outcome-associations.html#cor-inverse-odds-nonevent">cor</a>) <span class="math display">\[1 - \pi= \frac{1}{1+\omega},
+\qquad 1+\omega= \frac{1}{1-\pi}\]</span></p>
+</div>
+</section><section id="log-odds-logit-and-expit" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="log-odds-logit-and-expit">Log-odds (logit) and expit</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Log-odds, and log-odds from probability</strong> (<a href="../chapters/binary-outcome-associations.html#def-logodds">def</a>, <a href="../chapters/binary-outcome-associations.html#thm-logodds-pi">thm</a>) <span class="math display">\[\eta\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\omega\right\}\mathclose{},
+\qquad \eta= \operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}\]</span></p>
+<p><strong>Logit function, and expanded form</strong> (<a href="../chapters/binary-outcome-associations.html#def-logit-fn">def</a>, <a href="../chapters/binary-outcome-associations.html#thm-logit-function">thm</a>) <span class="math display">\[\operatorname{logit}(\pi) \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{}\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}\]</span></p>
+<p><strong>Log-odds equals logit</strong> (<a href="../chapters/binary-outcome-associations.html#cor-logodds-logit">cor</a>) <span class="math display">\[\eta= \operatorname{logit}\mathopen{}\left\{\pi\right\}\mathclose{}\]</span></p>
+<p><strong>Odds and probability from log-odds</strong> (<a href="../chapters/binary-outcome-associations.html#lem-odds-from-logodds">lem</a>, <a href="../chapters/binary-outcome-associations.html#thm-prob-from-logodds">thm</a>) <span class="math display">\[\omega= \operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{},
+\qquad \pi= \frac{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}{1+\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}\]</span></p>
+<p><strong>Expit / inverse-logit function, and equivalent expressions</strong> (<a href="../chapters/binary-outcome-associations.html#def-expit">def</a>, <a href="../chapters/binary-outcome-associations.html#thm-expit-expressions">thm</a>) <span class="math display">\[\operatorname{expit}(\eta) \stackrel{\text{def}}{=}\operatorname{invodds}\mathopen{}\left\{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}\right\}\mathclose{}
+= \frac{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}{1+\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}} = (1 + \operatorname{exp}\mathopen{}\left\{-\eta\right\}\mathclose{})^{-1}\]</span></p>
+<p><strong>Probability as expit</strong> (<a href="../chapters/binary-outcome-associations.html#thm-expit-prob-logodds">thm</a>) <span id="eq-prob-as-expit"><span class="math display">\[\pi= \operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{} \tag{1}\]</span></span></p>
+<p><strong>Logit and expit are inverses</strong> (<a href="../chapters/binary-outcome-associations.html#thm-logit-expit">thm</a>) <span class="math display">\[\operatorname{logit}\mathopen{}\left\{\operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}\right\}\mathclose{} = \eta\qquad \operatorname{expit}\mathopen{}\left\{\operatorname{logit}\mathopen{}\left\{\pi\right\}\mathclose{}\right\}\mathclose{} = \pi\]</span></p>
+</div>
+<div id="fig-expit-logit-diagram-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-expit-logit-diagram-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Diagram of logistic regression link and inverse link functions
+</figcaption><div aria-describedby="fig-expit-logit-diagram-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><span class="math display">\[
+\underbrace{\pi}_{\Pr\mathopen{}\left(Y=1\right)\mathclose{}}
+\overbrace{
+\underbrace{
+\underset{
+\xleftarrow[\frac{\omega}{1+\omega}]{}
+}
+{
+\xrightarrow{\frac{\pi}{1-\pi}}
+}
+\underbrace{\omega}_{\operatorname{odds}\mathopen{}\left\{Y=1\right\}\mathclose{}}
+\underset{
+\xleftarrow[\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}]{}
+}
+{
+\xrightarrow{\operatorname{log}\mathopen{}\left\{\omega\right\}\mathclose{}}
+}
+}_{\operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}}
+}^{\operatorname{logit}\mathopen{}\left\{\pi\right\}\mathclose{}}
+\underbrace{\eta}_{\eta\mathopen{}\left(Y=1\right)\mathclose{}}
+\]</span></p>
+</div>
+</figure>
+</div>
+</section><section id="rare-events" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="rare-events">Rare events</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Odds minus probability</strong> (<a href="../chapters/binary-outcome-associations.html#thm-odds-minus-probs">thm</a>) <span class="math display">\[\omega- \pi = \frac{\pi^2}{1-\pi}, \quad \text{where } \omega= \frac{\pi}{1-\pi}\]</span></p>
+<p><strong>OR as RR times a correction factor</strong> (<a href="../chapters/binary-outcome-associations.html#thm-rare-disease-or-rr">thm</a>) <span class="math display">\[\theta(\omega_1, \omega_2)
+= \rho(\pi_1, \pi_2) \cdot \frac{1-\pi_2}{1-\pi_1}\]</span> When <span class="math inline">\(\pi_1\)</span> and <span class="math inline">\(\pi_2\)</span> are both small, the correction factor is close to 1, so the odds ratio is close to the risk ratio.</p>
+</div>
+</section><section id="derivatives" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="derivatives">Derivatives</h2>
+<p><span class="math display">\[
+\begin{array}{r|ccccc}
+&amp; \pi&amp; \omega&amp; \eta&amp; \tilde{x}&amp; \tilde{\beta}\\
+\hline
+\pi
+  &amp; 1
+  &amp; \mathopen{}\left(1+\omega\right)^2\mathclose{}
+  &amp; \dfrac{\mathopen{}\left(1+\omega\right)^2\mathclose{}}{\omega}
+  &amp; \text{undef}
+  &amp; \text{undef} \\[10pt]
+\omega
+  &amp; \mathopen{}\left(1-\pi\right)^2\mathclose{}
+  &amp; 1
+  &amp; \dfrac{1}{\omega}
+  &amp; \text{undef}
+  &amp; \text{undef} \\[10pt]
+\eta
+  &amp; \pi(1-\pi)
+  &amp; \omega
+  &amp; 1
+  &amp; \text{undef}
+  &amp; \text{undef} \\[10pt]
+\tilde{x}
+  &amp; \underbrace{\tilde{\beta}\pi(1-\pi)}_{p \times 1}
+  &amp; \underbrace{\tilde{\beta}\omega}_{p \times 1}
+  &amp; \underbrace{\tilde{\beta}}_{p \times 1}
+  &amp; \underbrace{\mathbb{I}}_{p \times p}
+  &amp; \mathbf{0}_{p \times p} \\[10pt]
+\tilde{\beta}
+  &amp; \underbrace{\tilde{x}\pi(1-\pi)}_{p \times 1}
+  &amp; \underbrace{\tilde{x}\omega}_{p \times 1}
+  &amp; \underbrace{\tilde{x}}_{p \times 1}
+  &amp; \mathbf{0}_{p \times p}
+  &amp; \underbrace{\mathbb{I}}_{p \times p} \\
+\end{array}
+\]</span></p>
+<p>Column labels indicate the numerators of the derivatives; row labels indicate the denominators (dimensions and details in <a href="../chapters/logistic-regression.html#tbl-logistic-deriv-matrix">tbl</a>).</p>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Derivative of expit</strong> (<a href="../chapters/logistic-regression.html#cor-deriv-expit">cor</a>) <span class="math display">\[\operatorname{expit}'\mathopen{}\left\{\eta\right\}\mathclose{} = \operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}(1 - \operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{})\]</span></p>
+</div>
+</section><section id="logistic-regression-model" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="logistic-regression-model">Logistic regression model</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Logistic regression</strong> (<a href="../chapters/logistic-regression.html#def-logistic-regression">def</a>) <span class="math display">\[Y_i|\tilde{X}_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Ber}(\pi(\tilde{X}_i)), \qquad \operatorname{logit}\mathopen{}\left\{\pi(\tilde{x})\right\}\mathclose{} = {\tilde{x}}^{\top}\tilde{\beta}\]</span></p>
+</div>
+<p>Throughout this summary, <span class="math inline">\(\tilde{\beta}= (\beta_0, \beta_1, \ldots, \beta_p)\)</span> is the <span class="math inline">\((p+1) \times 1\)</span> coefficient vector (including the intercept), <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(n \times (p+1)\)</span> design matrix whose <span class="math inline">\(i^{\text{th}}\)</span> row is <span class="math inline">\({\tilde{x}_i}^{\top}\)</span>, and <span class="math inline">\(\tilde{\varepsilon}\)</span> is the <span class="math inline">\(n \times 1\)</span> error vector with components <span class="math inline">\(\varepsilon_i \stackrel{\text{def}}{=}y_i - \pi_i\)</span>.</p>
+</section><section id="log-likelihood-and-score-function" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="log-likelihood-and-score-function">Log-likelihood and score function</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Log-likelihood component</strong> (<a href="../chapters/logistic-regression.html#lem-logistic-loglik-component">lem</a>) <span class="math display">\[\ell_i(\pi_i) = y_i \eta_i - \operatorname{log}\mathopen{}\left\{1+\omega_i\right\}\mathclose{}\]</span></p>
+<p><strong>Score function as sum of components</strong> (<a href="../chapters/logistic-regression.html#lem-score-logistic">lem</a>, <a href="../chapters/logistic-regression.html#thm-logistic-score-comp">thm</a>) <span class="math display">\[\tilde{\ell'}(\tilde{\beta}) = \sum_{i=1}^n\tilde{\ell'_i}(\tilde{\beta}),
+\qquad \ell_i'(\tilde{\beta}) = \tilde{x}_i \varepsilon_i\]</span></p>
+</div>
+<p><strong>Score function</strong> (<a href="../chapters/logistic-regression.html#thm-logistic-score-fn">thm</a>) <span class="math display">\[\tilde{\ell'}(\tilde{\beta}) = \sum_{i=1}^n\tilde{x}_i\varepsilon_i
+= \underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n}\underbrace{\tilde{\varepsilon}}_{n \times 1}\]</span></p>
+</section><section id="maximum-likelihood-estimation" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="maximum-likelihood-estimation">Maximum likelihood estimation</h2>
+<p><strong>Estimating equation</strong> (<a href="../chapters/logistic-regression.html#eq-score-logistic">eq</a>) The MLE <span class="math inline">\(\hat{\tilde{\beta}}\)</span> solves the score equation: <span class="math display">\[\underbrace{\tilde{\ell'}(\hat{\tilde{\beta}})}_{(p+1) \times 1} = \sum_{i=1}^n\underbrace{\tilde{x}_i}_{(p+1) \times 1}\underbrace{\mathopen{}\left(y_i - \operatorname{expit}\mathopen{}\left\{{\tilde{x}_i}^{\top}\hat{\tilde{\beta}}\right\}\mathclose{}\right)\mathclose{}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}\]</span></p>
+<p>This estimating equation has no closed-form solution in general; <span class="math inline">\(\hat{\tilde{\beta}}\)</span> must be computed by numerical iteration.</p>
+<p><strong>Hessian</strong> (<a href="../chapters/logistic-regression.html#eq-logistic-hess">eq</a>) <span class="math display">\[\underbrace{\ell''(\tilde{\beta})}_{(p+1) \times (p+1)} = -\underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}, \qquad \mathbf{D} \stackrel{\text{def}}{=}\text{diag}(\operatorname{Var}\mathopen{}\left(Y_i|\tilde{X}_i=\tilde{x}_i\right)\mathclose{}) = \text{diag}(\pi_i(1-\pi_i))\]</span></p>
+<p><strong>Concavity</strong> (<a href="../chapters/logistic-regression.html#rem-hessian-nsd">rem</a>): the Hessian is negative semi-definite for every <span class="math inline">\(\tilde{\beta}\)</span> (negative definite when <span class="math inline">\(\mathbf{X}\)</span> has full column rank), so the log-likelihood is concave and every solution of the score equation is a global maximum.</p>
+<p><strong>Newton-Raphson update</strong> (<a href="../chapters/intro-MLEs.html#sec-newton-raphson">Newton-Raphson method</a>) <span class="math display">\[\underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} \leftarrow \underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} - \underbrace{\mathopen{}\left(\ell''\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}\right)^{-1}\mathclose{}}_{(p+1) \times (p+1)} \underbrace{\ell'\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}}_{(p+1) \times 1}\]</span></p>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>One-sample MLE for odds</strong> (<a href="../chapters/binary-outcome-associations.html#thm-est-odds">thm</a>) <span class="math display">\[\hat{\omega}= \frac{x}{n-x}\]</span></p>
+</div>
+</section><section id="wald-tests-and-confidence-intervals-for-coefficients" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="wald-tests-and-confidence-intervals-for-coefficients">Wald tests and confidence intervals for coefficients</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Wald test statistic</strong> for <span class="math inline">\(H_0: \beta_k = \beta_{k,0}\)</span> (<a href="../chapters/intro-MLEs.html#thm-dist-mle">CLT for MLEs</a>) <span class="math display">\[z_k = \frac{\hat \beta_k - \beta_{k,0}}{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}},
+\qquad z_k \ \dot{\sim} \ N(0,1) \text{ under } H_0\]</span></p>
+<p><strong>95% confidence intervals for <span class="math inline">\(\beta_k\)</span> and <span class="math inline">\(e^{\beta_k}\)</span></strong> (MLE invariance) <span class="math display">\[\hat \beta_k \pm 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{},
+\qquad e^{\beta_k} \in \mathopen{}\left(e^{\hat \beta_k - 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}},\; e^{\hat \beta_k + 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}}\right)\mathclose{}\]</span></p>
+<p>For <span class="math inline">\(k \neq 0\)</span>, <span class="math inline">\(e^{\beta_k}\)</span> is an odds ratio; for <span class="math inline">\(k = 0\)</span>, <span class="math inline">\(e^{\beta_0}\)</span> is the baseline odds.</p>
+</div>
+</section><section id="odds-ratios-in-logistic-regression" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="odds-ratios-in-logistic-regression">Odds ratios in logistic regression</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>General OR formula</strong> (<a href="../chapters/logistic-regression.html#lem-logistic-OR">lem</a>) <span class="math display">\[\theta_{\omega}(\tilde{x},{\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}) - \eta({\tilde{x}^*})\right\}\mathclose{}\]</span></p>
+<p><strong>Difference in log-odds; OR in terms of <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#def-difflogodds">def</a>, <a href="../chapters/logistic-regression.html#cor-logistic-OR">cor</a>) <span class="math display">\[\Delta\eta\stackrel{\text{def}}{=}\eta(\tilde{x}) - \eta({\tilde{x}^*}),
+\qquad \theta_{\omega}(\tilde{x},{\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta\right\}\mathclose{}\]</span></p>
+<p><strong><span class="math inline">\(\Delta\eta\)</span> from covariates</strong> (<a href="../chapters/logistic-regression.html#lem-diff-logodds">lem</a>) <span class="math display">\[\Delta\eta= (\tilde{x}- {\tilde{x}^*})\cdot\tilde{\beta}\]</span></p>
+<p><strong>Difference in covariate patterns; <span class="math inline">\(\Delta\eta\)</span> from <span class="math inline">\(\Delta\tilde{x}\)</span></strong> (<a href="../chapters/logistic-regression.html#def-diff-covs">def</a>, <a href="../chapters/logistic-regression.html#cor-diff-logodds">cor</a>) <span class="math display">\[\Delta\tilde{x}\stackrel{\text{def}}{=}\tilde{x}- {\tilde{x}^*},
+\qquad \Delta\eta= \Delta\tilde{x}\cdot \tilde{\beta}\]</span></p>
+<p><strong>OR in terms of <span class="math inline">\(\Delta\tilde{x}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-logistic-OR">thm</a>) <span class="math display">\[\theta_{\omega}(\tilde{x},{\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{(\Delta\tilde{x}) \cdot \tilde{\beta}\right\}\mathclose{}\]</span></p>
+<p><strong>Log OR equals <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#cor-log-or">cor</a>) <span class="math display">\[\operatorname{log}\mathopen{}\left\{\theta_{\omega}(\tilde{x},{\tilde{x}^*})\right\}\mathclose{} = \Delta\eta\]</span></p>
+</div>
+</section><section id="inference-for-log-odds-and-odds-ratios" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="inference-for-log-odds-and-odds-ratios">Inference for log-odds and odds ratios</h2>
+<p><strong>Estimated SE of log-odds</strong> (<a href="../chapters/logistic-regression.html#thm-est-se-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\eta(\tilde{x})\right)\mathclose{} = \underbrace{{\tilde{x}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{\tilde{x}}_{(p+1) \times 1},
+\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\tilde{x})\right)\mathclose{} = \sqrt{{\tilde{x}}^{\top}\hat{\Sigma}\tilde{x}}\]</span></p>
+<p><strong>Estimated SE of <span class="math inline">\(\Delta\widehat{\eta}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-est-se-diff-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \underbrace{{\Delta\tilde{x}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{(\Delta\tilde{x})}_{(p+1) \times 1},
+\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \sqrt{{\Delta\tilde{x}}^{\top}\hat{\Sigma}(\Delta\tilde{x})}\]</span></p>
+<p><strong>CI for an odds ratio</strong> (<a href="../chapters/logistic-regression.html#eq-ci-OR-exp">eq</a>; details in <a href="../chapters/logistic-regression.html#sec-or-inference">sec</a>): exponentiate the endpoints of the CI for <span class="math inline">\(\Delta\eta\)</span>: <span class="math display">\[\theta_{\omega}(\tilde{x},{\tilde{x}^*}) \in (e^L, e^R),
+\qquad (L, R) = \widehat{\Delta\eta}\mp 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}\]</span></p>
+</section><section id="odds-ratios-in-study-designs" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="odds-ratios-in-study-designs">Odds ratios in study designs</h2>
+<p><strong>Disease and exposure odds ratios</strong> (<a href="../chapters/binary-outcome-associations.html#def-disease-OR">def</a>, <a href="../chapters/binary-outcome-associations.html#def-exposure-OR">def</a>) <span class="math display">\[\theta_{\omega}(D|E) \stackrel{\text{def}}{=}\frac{\omega(D|E)}{\omega(D|\neg E)},
+\qquad \theta_{\omega}(E|D) \stackrel{\text{def}}{=}\frac{\omega(E|D)}{\omega(E|\neg D)}\]</span></p>
+<p><strong>Case-control studies</strong> (<a href="../chapters/binary-outcome-associations.html#sec-CC-studies">section</a>): outcome-stratified sampling breaks estimation of risks, risk ratios, and the components of the disease odds ratio (<a href="../chapters/binary-outcome-associations.html#def-disease-OR">def</a>), but the exposure odds ratio (<a href="../chapters/binary-outcome-associations.html#def-exposure-OR">def</a>) is estimable, and it equals the disease odds ratio by reversibility (<a href="../chapters/binary-outcome-associations.html#thm-or-swap">thm</a>).</p>
+<p><strong>2×2 table shortcut</strong> (<a href="../chapters/binary-outcome-associations.html#tbl-2x2-generic">table</a>; cell counts <span class="math inline">\(a, b\)</span> = exposed events and non-events, <span class="math inline">\(c, d\)</span> = unexposed events and non-events): <span class="math display">\[\hat{\omega}(Event|Exposed) = \frac{a}{b},
+\qquad \hat{\omega}(Event|\neg Exposed) = \frac{c}{d},
+\qquad \theta_{\omega}(Exposed, \neg Exposed) = \frac{ad}{bc}\]</span></p>
+</section><section id="model-fit-and-comparison" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="model-fit-and-comparison">Model fit and comparison</h2>
+<p>Details in <a href="../chapters/logistic-regression.html#sec-gof">sec</a>; here <span class="math inline">\(q\)</span> is the number of distinct covariate patterns, <span class="math inline">\(p\)</span> is the number of <span class="math inline">\(\beta\)</span> parameters, and <span class="math inline">\(\ell_{\text{full}}\)</span> is the saturated-model log-likelihood.</p>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Deviance test</strong> (<a href="../chapters/logistic-regression.html#def-deviance-test">def</a>) <span class="math display">\[D \stackrel{\text{def}}{=}2(\ell_{\text{full}} - \ell(\hat \beta; \mathbf x)),
+\qquad D \ \dot{\sim} \ \chi^2(q - p)\]</span></p>
+<p><strong>Hosmer-Lemeshow test</strong> (<a href="../chapters/logistic-regression.html#def-hosmer-lemeshow">def</a>; <span class="math inline">\(g\)</span> groups by predicted probability) <span class="math display">\[X^2 \stackrel{\text{def}}{=}\sum_{c=1}^g \frac{(o_c - e_c)^2}{e_c} \ \dot{\sim} \ \chi^2(g-2)\]</span></p>
+<p><strong>Pearson chi-squared GOF test</strong> (sum of squared Pearson residuals, <a href="../chapters/logistic-regression.html#def-pearson-residual">def</a>) <span class="math display">\[X^2 = \sum_{k=1}^q X_k^2 \ \dot{\sim} \ \chi^2(q-p)\]</span></p>
+<p><strong>AIC and BIC</strong> [lower is better] (<a href="../chapters/Linear-models-overview.html#def-aic">AIC</a> <span class="citation" data-cites="akaike1974new">(<a href="#ref-akaike1974new" role="doc-biblioref">Akaike 1974</a>)</span>; <a href="../chapters/Linear-models-overview.html#def-bic">BIC</a> <span class="citation" data-cites="schwarz1978estimating">(<a href="#ref-schwarz1978estimating" role="doc-biblioref">Schwarz 1978</a>)</span>) <span class="math display">\[\text{AIC} = -2 \ell(\hat\theta) + 2p,
+\qquad \text{BIC} = -2 \ell(\hat\theta) + p \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}\]</span></p>
+<p><strong>Likelihood ratio test</strong> (<a href="../chapters/logistic-regression.html#def-lrt">def</a>; for nested models with <span class="math inline">\(p_0 &lt; p_1\)</span> parameters — here <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span> are the two fitted models’ log-likelihoods, not the saturated model’s) <span class="math display">\[\Lambda \stackrel{\text{def}}{=}2(\ell_1(\hat\theta_1) - \ell_0(\hat\theta_0)),
+\qquad \Lambda \ \dot{\sim} \ \chi^2(p_1 - p_0) \text{ under } H_0\]</span> by <a href="../chapters/intro-MLEs.html#thm-wilks">Wilks’ theorem</a>.</p>
+</div>
+</section><section id="residual-based-diagnostics" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="residual-based-diagnostics">Residual-based diagnostics</h2>
+<p>Residuals are computed per covariate pattern <span class="math inline">\(k\)</span> (grouped data); <span class="math inline">\(h_k\)</span> denotes the leverage of pattern <span class="math inline">\(k\)</span> (<a href="../chapters/logistic-regression.html#def-leverage-glm">def</a>).</p>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Response residual</strong> (<a href="../chapters/logistic-regression.html#def-response-residual-logistic">def</a>) <span class="math display">\[e_k \stackrel{\text{def}}{=}\bar y_k - \hat{\pi}(x_k)\]</span></p>
+<p><strong>Pearson residual (and standardized version)</strong> (<a href="../chapters/logistic-regression.html#def-pearson-residual">def</a>, <a href="../chapters/logistic-regression.html#def-standardized-pearson-residual">def</a>) <span class="math display">\[X_k \stackrel{\text{def}}{=}\frac{\bar y_k - \hat\pi_k}{\sqrt{\hat \pi_k (1-\hat\pi_k)/n_k}},
+\qquad r_{P_k} \stackrel{\text{def}}{=}\frac{X_k}{\sqrt{1-h_k}}\]</span></p>
+<p><strong>Deviance residual (and standardized version)</strong> (<a href="../chapters/logistic-regression.html#def-deviance-residual-logistic">def</a>) <span class="math display">\[d_k \stackrel{\text{def}}{=}\operatorname{sign}(y_k - n_k \hat \pi_k)\left\{\sqrt{2[\ell_{\text{full}}(x_k) - \ell(\hat \beta; x_k)]}\right\},
+\qquad r_{D_k} \stackrel{\text{def}}{=}\frac{d_k}{\sqrt{1-h_k}}\]</span></p>
+<p><strong>Cook’s distance</strong> (<a href="../chapters/logistic-regression.html#def-cooks-distance-glm">def</a>) <span class="math display">\[D_k \stackrel{\text{def}}{=}\frac{(r_{P_k})^2}{p} \cdot \frac{h_k}{1 - h_k}\]</span></p>
+</div>
+<p><strong>Leverage</strong> (<a href="../chapters/logistic-regression.html#def-leverage-glm">def</a>): <span class="math inline">\(h_k\)</span> is the <span class="math inline">\(k\)</span>-th diagonal element of the weighted hat matrix (with <span class="math inline">\(\mathbf{X}\)</span> here the <span class="math inline">\(q \times p\)</span> design matrix of covariate patterns): <span class="math display">\[\underbrace{\mathbf{H}}_{q \times q}
+\stackrel{\text{def}}{=}
+\underbrace{\mathbf{W}^{1/2}}_{q \times q}
+\underbrace{\mathbf{X}}_{q \times p}
+\mathopen{}\left(\underbrace{{\mathbf{X}}^{\top}\,\mathbf{W}\,\mathbf{X}}_{p \times p}\right)\mathclose{}^{-1}
+\underbrace{{\mathbf{X}}^{\top}}_{p \times q}
+\underbrace{\mathbf{W}^{1/2}}_{q \times q},
+\qquad \underbrace{\mathbf{W}}_{q \times q} \stackrel{\text{def}}{=}\text{diag}\mathopen{}\left(n_k \, \hat\pi_k \, (1 - \hat\pi_k)\right)\mathclose{}\]</span></p>
+</section><section id="comparing-probabilities" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="comparing-probabilities">Comparing probabilities</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Risk difference</strong> (<a href="../chapters/binary-outcome-associations.html#def-RD">def</a>) <span class="math display">\[\delta(\pi_1,\pi_2) \stackrel{\text{def}}{=}\pi_1 - \pi_2\]</span></p>
+<p><strong>Risk ratio</strong> (<a href="../chapters/binary-outcome-associations.html#def-RR">def</a>) <span class="math display">\[\rho(\pi_1,\pi_2) \stackrel{\text{def}}{=}\frac{\pi_1}{\pi_2}\]</span></p>
+<p><strong>Relative risk difference</strong> (<a href="../chapters/binary-outcome-associations.html#def-RRD">def</a>; equals RR minus 1 by <a href="../chapters/binary-outcome-associations.html#thm-rrd-vs-rr">thm</a>) <span class="math display">\[\xi(\pi_1,\pi_2) \stackrel{\text{def}}{=}\frac{\delta(\pi_1,\pi_2)}{\pi_2} = \rho(\pi_1,\pi_2) - 1\]</span></p>
+</div>
+</section><section id="marginal-risks-from-logistic-regression" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="marginal-risks-from-logistic-regression">Marginal risks from logistic regression</h2>
+<div style="column-count: 2; column-gap: 2em;">
+<p><strong>Conditional predicted risk</strong> (<a href="../chapters/logistic-regression.html#def-cond-predicted-risk">def</a>) <span class="math display">\[\pi(a, z) \stackrel{\text{def}}{=}\Pr(Y = 1 \mid A = a, Z = z)\]</span></p>
+<p><strong>Conditional RD and RR</strong> (<a href="../chapters/logistic-regression.html#def-cond-rd">def</a>, <a href="../chapters/logistic-regression.html#def-cond-rrr">def</a>) <span class="math display">\[\text{RD}(z) \stackrel{\text{def}}{=}\pi(1, z) - \pi(0, z),
+\qquad \text{RR}(z) \stackrel{\text{def}}{=}\frac{\pi(1, z)}{\pi(0, z)}\]</span></p>
+<p><strong>Observed marginal risk</strong> (<a href="../chapters/logistic-regression.html#def-observed-marginal-risk">def</a>; standardization form by <a href="../chapters/logistic-regression.html#thm-observed-marginal-risk">thm</a>) <span class="math display">\[\pi(a) \stackrel{\text{def}}{=}\Pr(Y = 1 \mid A = a) = \operatorname{E}\mathopen{}\left[\pi(a, Z) \mid A = a\right]\mathclose{}\]</span></p>
+<p><strong>Potential mean and causal marginal risk</strong> (<a href="../chapters/logistic-regression.html#def-potential-mean">def</a>, <a href="../chapters/logistic-regression.html#def-causal-marginal-risk">def</a>; identification form by <a href="../chapters/logistic-regression.html#thm-causal-marginal-risk">thm</a>) <span class="math display">\[\mu_a \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y^a\right]\mathclose{},
+\qquad \pi_a \stackrel{\text{def}}{=}\Pr(Y^a = 1) = \operatorname{E}\mathopen{}\left[\pi(a, Z)\right]\mathclose{}\]</span></p>
+<p><strong>No confounding: observed = causal</strong> (<a href="../chapters/logistic-regression.html#cor-observed-equals-causal">cor</a>; the two estimands are contrasted in <a href="../chapters/logistic-regression.html#rem-observed-vs-causal-marginal-risk">rem</a>) <span class="math display">\[Z \perp\!\!\!\perp A \implies \pi(a) = \pi_a\]</span></p>
+<p><strong>G-computation estimator</strong> (<a href="../chapters/logistic-regression.html#def-g-computation">def</a>; consistent for <span class="math inline">\(\pi_a\)</span> by <a href="../chapters/logistic-regression.html#thm-g-computation-consistency">thm</a>) <span class="math display">\[\hat\pi_a \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n\hat\pi_{a,i},
+\qquad \hat\pi_{a,i} \stackrel{\text{def}}{=}\hat\pi(a, z_i)\]</span></p>
+<p><strong>Predictive margins</strong> (<a href="../chapters/logistic-regression.html#def-predictive-margins">def</a>; full-sample form <a href="../chapters/logistic-regression.html#def-full-sample-predictive-margin">def</a> is consistent for <span class="math inline">\(\pi_a\)</span> by <a href="../chapters/logistic-regression.html#cor-full-sample-pm">cor</a>) <span class="math display">\[\widehat{\text{PM}}(a \mid S) \stackrel{\text{def}}{=}\frac{1}{|S|} \sum_{i \in S} \hat\pi_{a,i},
+\qquad \widehat{\text{PM}}(a) \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n\hat\pi_{a,i} = \hat\pi_a\]</span></p>
+<p><strong>Exposed-subgroup predictive margin</strong> (<a href="../chapters/logistic-regression.html#def-subgroup-predictive-margin">def</a>; consistent for <span class="math inline">\(\pi(a)\)</span> by <a href="../chapters/logistic-regression.html#thm-subgroup-pm">thm</a>; equals <span class="math inline">\(\bar Y_a\)</span> exactly by <a href="../chapters/logistic-regression.html#lem-subgroup-pm-proportion">lem</a>) <span class="math display">\[\hat\pi_a(a) \stackrel{\text{def}}{=}\frac{1}{n_a} \sum_{i : A_i = a} \hat\pi_{a,i} = \bar Y_a\]</span></p>
+<p><strong>Observed marginal RD and RR</strong> (<a href="../chapters/logistic-regression.html#def-observed-marginal-rd">def</a>, <a href="../chapters/logistic-regression.html#def-observed-marginal-rr">def</a>) <span class="math display">\[\text{OMRD} \stackrel{\text{def}}{=}\pi(1) - \pi(0),
+\qquad \text{OMRR} \stackrel{\text{def}}{=}\frac{\pi(1)}{\pi(0)}\]</span></p>
+<p><strong>Causal marginal RD and RR</strong> (<a href="../chapters/logistic-regression.html#def-causal-marginal-rd">def</a>, <a href="../chapters/logistic-regression.html#def-causal-marginal-rr">def</a>) <span class="math display">\[\text{CMRD} \stackrel{\text{def}}{=}\pi_1 - \pi_0,
+\qquad \text{CMRR} \stackrel{\text{def}}{=}\frac{\pi_1}{\pi_0}\]</span></p>
+</div>
+<p><strong>Bootstrap SE and CI for marginal contrasts</strong> (<a href="../chapters/logistic-regression.html#def-bootstrap-marginal-rd">def</a>; see <a href="../chapters/basic-statistical-methods.html#sec-bootstrap-ci">Bootstrap Confidence Intervals</a> and <a href="../chapters/logistic-regression.html#exm-wcgs-marginal-rd">exm</a>): resample the data with replacement <span class="math inline">\(B\)</span> times; refit the logistic model and recompute the marginal contrast on each resample; the bootstrap SE is the standard deviation of the <span class="math inline">\(B\)</span> estimates, and a 95% percentile CI uses their 2.5th and 97.5th percentiles.</p>
+<p><strong>Collapsibility</strong> (<a href="../chapters/logistic-regression.html#def-collapsibility">def</a>): an estimand <span class="math inline">\(\theta\)</span> is collapsible with respect to <span class="math inline">\(Z\)</span> if <span class="math display">\[\theta \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}\]</span> Risk differences are collapsible; risk ratios and odds ratios are not collapsible in general (<a href="../chapters/logistic-regression.html#thm-collapsibility">thm</a>; counterexample in <a href="../chapters/logistic-regression.html#exm-collapsibility">exm</a>).</p>
+</section><section id="survival-analysis" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="survival-analysis">
+<span class="header-section-number">4.2</span> Survival analysis</h2>
+<section id="probability-distribution-functions" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="probability-distribution-functions">
+<span class="header-section-number">4.2.1</span> Probability distribution functions</h3>
+<div id="tbl-prob-dist-fns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prob-dist-fns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Probability distribution functions
+</figcaption><div aria-describedby="tbl-prob-dist-fns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 48%">
+<col style="width: 19%">
+<col style="width: 32%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Name</th>
+<th>Symbols</th>
+<th>Definition</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Probability density function (PDF)</td>
+<td><span class="math inline">\(\operatorname{f}(t), \operatorname{p}(t)\)</span></td>
+<td><span class="math inline">\(\operatorname{p}(T=t)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cumulative distribution function (CDF)</td>
+<td><span class="math inline">\(\operatorname{F}(t), \operatorname{P}(t)\)</span></td>
+<td><span class="math inline">\(\operatorname{P}(T\leq t)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Survival function</td>
+<td><span class="math inline">\(\operatorname{S}(t), \bar{\operatorname{F}}(t)\)</span></td>
+<td><span class="math inline">\(\operatorname{P}(T &gt; t)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hazard function</td>
+<td><span class="math inline">\(\lambda(t), \operatorname{h}(t)\)</span></td>
+<td><span class="math inline">\(\operatorname{p}(T=t|T\ge t)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cumulative hazard function</td>
+<td><span class="math inline">\(\Lambda(t), \operatorname{H}(t)\)</span></td>
+<td><span class="math inline">\(\int_{u=-\infty}^t {\lambda}(u)du\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Log-hazard function</td>
+<td><span class="math inline">\(\eta(t)\)</span></td>
+<td><span class="math inline">\(\operatorname{log}\mathopen{}\left\{{\lambda}(t)\right\}\mathclose{}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section><section id="diagram-of-survival-distribution-function-relationships" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="diagram-of-survival-distribution-function-relationships">
+<span class="header-section-number">4.2.2</span> Diagram of survival distribution function relationships</h3>
+<p><span class="math display">\[
+\operatorname{f}(t)
+\xleftarrow[\operatorname{S}(t){\lambda}(t)]{-S'(t)}
+\operatorname{S}(t)
+\xleftarrow[]{\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}
+{\Lambda}(t)
+\xleftarrow[]{\int_{u=0}^t {\lambda}(u)du}
+{\lambda}(t)
+\xleftarrow[]{\operatorname{exp}\mathopen{}\left\{\eta(t)\right\}\mathclose{}}
+\eta(t)
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{f}(t)
+\xrightarrow[\int_{u=t}^\infty \operatorname{f}(u)du]{\operatorname{f}(t)/{\lambda}(t)}
+\operatorname{S}(t)
+\xrightarrow[-\log{\operatorname{S}(t)}]{}
+{\Lambda}(t)
+\xrightarrow[{\Lambda}'(t)]{}
+{\lambda}(t)
+\xrightarrow[\operatorname{log}\mathopen{}\left\{{\lambda}(t)\right\}\mathclose{}]{}
+\eta(t)
+\]</span></p>
+</section><section id="survival-likelihood-contributions-assuming-non-informative-censoring" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="survival-likelihood-contributions-assuming-non-informative-censoring">
+<span class="header-section-number">4.2.3</span> Survival likelihood contributions, assuming non-informative censoring</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{p}(Y=y,D=d)
+&amp;= [\operatorname{f}_T(y)]^{d} [\operatorname{S}_T(y)]^{1-d}
+\\
+&amp;= [{\lambda}_T(y)]^{d} [\operatorname{S}_T(y)]
+\end{aligned}
+\]</span></p>
+</section><section id="nonparametric-time-to-event-distribution-estimators" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="nonparametric-time-to-event-distribution-estimators">
+<span class="header-section-number">4.2.4</span> Nonparametric time-to-event distribution estimators</h3>
+<p><span class="math display">\[\hat{{\lambda}}_i = \frac{d_i}{r_i}\]</span></p>
+<p><span class="math display">\[\hat{\kappa}_i = 1 - \hat{{\lambda}}_i = \frac{r_i - d_i}{r_i}\]</span></p>
+<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} \stackrel{\text{def}}{=}\prod_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}} \hat{\kappa}_i\]</span></p>
+<p><span class="math display">\[\hat{{\Lambda}}_{NA}(t) \stackrel{\text{def}}{=}\sum_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}}\hat{{\lambda}}_i\]</span></p>
+</section><section id="proportional-hazards-model-structure" class="level3" data-number="4.2.5"><h3 data-number="4.2.5" class="anchored" data-anchor-id="proportional-hazards-model-structure">
+<span class="header-section-number">4.2.5</span> Proportional hazards model structure</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Formula</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\({\lambda}(t\mid\tilde{x}) = {\lambda}_0(t)\cdot\theta_{{\lambda}}(\tilde{x})\)</span></td>
+<td style="text-align: left;">Proportional hazards assumption</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\({\Lambda}(t\mid\tilde{x}) = {\Lambda}_0(t)\cdot\theta_{{\lambda}}(\tilde{x})\)</span></td>
+<td style="text-align: left;">Cumulative hazard factorization</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\eta(t\mid\tilde{x}) = \eta_0(t) + \Delta\eta(\tilde{x})\)</span></td>
+<td style="text-align: left;">Log-hazard decomposition</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Delta\eta(\tilde{x}) = \tilde{x} \cdot \tilde{\beta} = \beta_1 x_1 + \cdots + \beta_p x_p\)</span></td>
+<td style="text-align: left;">Linear predictor</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x})\right\}\mathclose{}\)</span></td>
+<td style="text-align: left;">Hazard multiplier</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\theta_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\)</span></td>
+<td style="text-align: left;">Hazard ratio definition</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\theta_{{\lambda}}(t\mid\tilde{x}:{\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x}) - \Delta\eta({\tilde{x}^*})\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{(\tilde{x}-{\tilde{x}^*}) \cdot \tilde{\beta}\right\}\mathclose{}\)</span></td>
+<td style="text-align: left;">Hazard ratio formula</td>
+</tr>
+</tbody>
+</table></section><section id="proportional-hazards-model-partial-likelihood-formula" class="level3" data-number="4.2.6"><h3 data-number="4.2.6" class="anchored" data-anchor-id="proportional-hazards-model-partial-likelihood-formula">
+<span class="header-section-number">4.2.6</span> Proportional hazards model partial likelihood formula:</h3>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-ph-partial-lik" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Cox PH partial likelihood)</strong></span> <span class="math display">\[
+\begin{aligned}
+\mathcal{L}^*_i(\tilde{\beta}) &amp;\stackrel{\text{def}}{=}\frac{{\color{red}{\theta_{{\lambda}}(\tilde{x}_{(i)})}}}{\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(\tilde{x}_k)}}}
+\\
+\mathcal{L}^*(\tilde{\beta}) &amp;\stackrel{\text{def}}{=}
+\prod_{\mathopen{}\left\{i:\ d_i = 1\right\}\mathclose{}} \mathcal{L}^*_i(\tilde{\beta})
+\end{aligned}
+\]</span></p>
+<p>where, for the distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> of the data set:</p>
+<ul>
+<li>
+<span class="math inline">\((i)\)</span> is the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption);</li>
+<li>
+<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the risk set at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
+<li>
+<span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span> (so <span class="math inline">\(d_i = 1\)</span> when there are no ties);</li>
+<li>
+<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (risk score) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section id="proportional-hazards-model-baseline-cumulative-hazard-estimator" class="level3" data-number="4.2.7"><h3 data-number="4.2.7" class="anchored" data-anchor-id="proportional-hazards-model-baseline-cumulative-hazard-estimator">
+<span class="header-section-number">4.2.7</span> Proportional hazards model baseline cumulative hazard estimator:</h3>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-breslow-baseline-cuhaz-est" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Breslow estimator of the baseline cumulative hazard)</strong></span> <span class="math display">\[\hat {\Lambda}_0(t) \stackrel{\text{def}}{=}
+\sum_{t_i \le t} \frac{d_i}{\sum_{k\in R(t_i)} \theta_{{\lambda}}(\tilde{x}_k)}\]</span></p>
+<p>where, for the distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> of the data set:</p>
+<ul>
+<li>
+<span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span>;</li>
+<li>
+<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the risk set at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
+<li>
+<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (risk score) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-breslow-baseline-cuhaz-est" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Breslow estimator with two event times)</strong></span> Suppose there are two distinct event times <span class="math inline">\(t_1 = 2\)</span> and <span class="math inline">\(t_2 = 4\)</span> (no ties, <span class="math inline">\(d_1 = d_2 = 1\)</span>), with risk-set-weighted totals <span class="math inline">\(\sum_{k \in R(2)} \theta_{{\lambda}}(\tilde{x}_k) = 10\)</span> and <span class="math inline">\(\sum_{k \in R(4)} \theta_{{\lambda}}(\tilde{x}_k) = 6\)</span>. Then</p>
+<p><span class="math display">\[
+\hat{\Lambda}_0(4) = \frac{1}{10} + \frac{1}{6} \approx 0.267 .
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+<script>
+function getQuartoHeadingAnchorIcon() {
+  const afterBodyScript = document.getElementById("quarto-html-after-body");
+  if (!afterBodyScript) {
+    return null;
+  }
+
+  const match = afterBodyScript.textContent.match(/const icon = ["']([^"']+)["']/);
+  return match ? match[1] : null;
+}
+
+// Quarto chain-link glyph from Bootstrap Icons.
+const chainLinkIconFallback = "\ue9cb";
+const headingAnchorIcon = getQuartoHeadingAnchorIcon();
+const defaultAnchorIconFallback =
+  headingAnchorIcon && headingAnchorIcon !== "#" ? headingAnchorIcon : chainLinkIconFallback;
+
+function getDefaultAnchorTemplate() {
+  // Prefer Quarto heading anchors first so the visible chain-link icon is reused.
+  const defaultAnchor =
+    document.querySelector(".anchored > a.anchorjs-link") ||
+    document.querySelector("a.anchorjs-link[data-anchorjs-icon]");
+  if (!defaultAnchor) {
+    return null;
+  }
+
+  return {
+    // Detect icon value from the template anchor's attribute or text.
+    icon: defaultAnchor.getAttribute("data-anchorjs-icon") || defaultAnchor.textContent.trim(),
+    hasDataIcon: defaultAnchor.hasAttribute("data-anchorjs-icon"),
+    style: defaultAnchor.getAttribute("style")
+  };
+}
+
+function normalizeAnchorIcon(icon) {
+  if (!icon || icon === "#") {
+    return defaultAnchorIconFallback;
+  }
+
+  return icon;
+}
+
+function createChainLinkSvgIcon() {
+  const svgNs = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNs, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("fill", "currentColor");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.setAttribute("class", "equation-anchor-icon");
+
+  [
+    "M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-2H11a4 4 0 0 1-4 3H4a4 4 0 0 1 0-8h2.354z",
+    "M9.646 10.5H12a3 3 0 1 0 0-6H9a3 3 0 0 0-2.83 2H5a4 4 0 0 1 4-3h3a4 4 0 0 1 0 8H9.646z",
+    "M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5"
+  ].forEach(function (pathData) {
+    const path = document.createElementNS(svgNs, "path");
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+  });
+
+  return svg;
+}
+
+function alignEquationAnchorWithDefault(anchor, template) {
+  if (!anchor) {
+    return;
+  }
+
+  anchor.classList.remove("external");
+  anchor.classList.add("no-external");
+
+  const normalizedIcon = normalizeAnchorIcon(template && template.icon);
+  if (normalizedIcon === chainLinkIconFallback) {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = "";
+    anchor.appendChild(createChainLinkSvgIcon());
+  } else if (template && template.hasDataIcon) {
+    anchor.setAttribute("data-anchorjs-icon", normalizedIcon);
+    anchor.textContent = normalizedIcon;
+  } else {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = normalizedIcon;
+  }
+
+  if (template && template.style) {
+    anchor.setAttribute("style", template.style);
+  } else {
+    anchor.removeAttribute("style");
+  }
+}
+
+function alignEquationAnchorsWithDefault() {
+  const template = getDefaultAnchorTemplate();
+  document.querySelectorAll("a.equation-anchor").forEach(function (anchor) {
+    alignEquationAnchorWithDefault(anchor, template);
+  });
+}
+
+function markCollapseTogglesExpanded(collapseEl) {
+  const toggleTargets = [];
+  if (collapseEl.id) {
+    toggleTargets.push("#" + collapseEl.id);
+  }
+
+  const genericCollapseClasses = new Set(["collapse", "show", "collapsing", "callout-collapse", "navbar-collapse"]);
+  collapseEl.classList.forEach(function (className) {
+    if (!genericCollapseClasses.has(className)) {
+      toggleTargets.push("." + className);
+    }
+  });
+
+  document.querySelectorAll("[data-bs-target], [href]").forEach(function (toggle) {
+    if (
+      toggleTargets.includes(toggle.getAttribute("data-bs-target")) ||
+      toggleTargets.includes(toggle.getAttribute("href"))
+    ) {
+      toggle.classList.remove("collapsed");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+}
+
+function expandCollapsedAncestors(target) {
+  if (!target) {
+    return;
+  }
+
+  const collapsedAncestors = [];
+  let current = target.parentElement;
+  while (current) {
+    if (current.classList && current.classList.contains("collapse") && !current.classList.contains("show")) {
+      collapsedAncestors.unshift(current);
+    }
+    current = current.parentElement;
+  }
+
+  collapsedAncestors.forEach(function (collapseEl) {
+    if (window.bootstrap && window.bootstrap.Collapse) {
+      window.bootstrap.Collapse.getOrCreateInstance(collapseEl, { toggle: false }).show();
+    } else {
+      collapseEl.classList.add("show");
+      collapseEl.style.height = "";
+    }
+
+    markCollapseTogglesExpanded(collapseEl);
+  });
+}
+
+function revealEquationHashTarget() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) {
+    return;
+  }
+
+  const target = document.getElementById(id);
+  if (!target) {
+    return;
+  }
+
+  expandCollapsedAncestors(target);
+
+  window.setTimeout(function () {
+    target.scrollIntoView({ block: "center" });
+  }, 400);
+}
+
+function ensureEquationAnchorStyles() {
+  if (document.getElementById("equation-anchor-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "equation-anchor-styles";
+  style.textContent = `
+    .equation-anchor-target {
+      --equation-anchor-offset: 1.2rem;
+      position: relative;
+      display: block;
+    }
+    .equation-anchor {
+      position: absolute;
+      left: calc(-1 * var(--equation-anchor-offset));
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+    .equation-anchor:hover {
+      opacity: 1;
+    }
+    .equation-anchor-icon {
+      width: 0.9em;
+      height: 0.9em;
+      vertical-align: -0.125em;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  ensureEquationAnchorStyles();
+
+  let counter = 0;
+
+  document.querySelectorAll(".math.display").forEach(function (mathEl) {
+    // For labeled equations, Quarto wraps the math display span in an eq-* span.
+    // For unlabeled equations, use the parent element (typically a <p>).
+    const labeledContainer = mathEl.closest("[id^='eq-']");
+    const target = labeledContainer || mathEl.parentElement;
+
+    if (!target) {
+      return;
+    }
+
+    // Skip if already processed.
+    if (target.querySelector(".equation-anchor")) {
+      return;
+    }
+
+    // Use the labeled container's id, or assign an auto-generated id.
+    let id = labeledContainer ? labeledContainer.id : target.id;
+    if (!id) {
+      counter++;
+      id = "eq-anchor-" + counter;
+      target.id = id;
+    }
+
+    target.classList.add("equation-anchor-target");
+
+    const anchor = document.createElement("a");
+    anchor.className = "equation-anchor anchorjs-link";
+    anchor.href = "#" + id;
+    anchor.setAttribute("aria-label", "Permalink to this equation");
+    target.appendChild(anchor);
+  });
+
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+
+window.addEventListener("load", function () {
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+window.addEventListener("hashchange", revealEquationHashTarget);
+</script>
+</section></section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-akaike1974new" class="csl-entry" role="listitem">
+Akaike, Hirotugu. 1974. <span>“A New Look at the Statistical Model Identification.”</span> <em>IEEE Transactions on Automatic Control</em> 19 (6): 716–23. <a href="https://doi.org/10.1109/TAC.1974.1100705">https://doi.org/10.1109/TAC.1974.1100705</a>.
+</div>
+<div id="ref-schwarz1978estimating" class="csl-entry" role="listitem">
+Schwarz, Gideon. 1978. <span>“Estimating the Dimension of a Model.”</span> <em>The Annals of Statistics</em> 6 (2): 461–64. <a href="https://doi.org/10.1214/aos/1176344136">https://doi.org/10.1214/aos/1176344136</a>.
+</div>
+</div></section></div></main><!-- /main --><script>
+  // Mobile within-chapter table of contents.
+  //
+  // Quarto hides the right "On this page" TOC below its `md` breakpoint
+  // (max-width: 767.98px) and offers no built-in mobile replacement, so phone
+  // readers lose within-chapter navigation. This injects a "Contents" button
+  // into the navbar and a dropdown panel (cloned from nav#TOC) just below it.
+  // Living inside #quarto-header, the button and panel ride Quarto's headroom:
+  // they hide on scroll-down and reappear on scroll-up with the navbar. The
+  // matching rules in custom.scss show them only on narrow screens.
+  (function () {
+    function buildMobileToc() {
+      var toc = document.querySelector("nav#TOC");
+      if (!toc) {
+        return;
+      }
+
+      var list = toc.querySelector("ul");
+      if (!list) {
+        return;
+      }
+
+      var header = document.querySelector("#quarto-header");
+      var navContainer = header
+        ? header.querySelector(".navbar-container")
+        : null;
+      if (!header || !navContainer) {
+        return;
+      }
+
+      // Guard against firing twice (e.g. Quarto live-preview hot-reload).
+      if (header.querySelector(".mobile-toc-toggle")) {
+        return;
+      }
+
+      var titleEl = toc.querySelector("#toc-title");
+      var label = titleEl ? titleEl.textContent : "On this page";
+
+      var button = buildToggleButton();
+      var panel = buildPanel(list, label);
+
+      wireToggle(button, panel);
+
+      // Place the button before the navbar hamburger when present.
+      var hamburger = navContainer.querySelector(".navbar-toggler");
+      if (hamburger) {
+        navContainer.insertBefore(button, hamburger);
+      } else {
+        navContainer.appendChild(button);
+      }
+      header.appendChild(panel);
+    }
+
+    function buildToggleButton() {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "mobile-toc-toggle btn";
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-controls", "mobile-toc-panel");
+      // No aria-label: the accessible name comes from the visible "Contents"
+      // text, so it matches what voice-control users say (WCAG 2.5.3).
+
+      var icon = document.createElement("i");
+      icon.className = "bi bi-list-nested";
+      icon.setAttribute("aria-hidden", "true");
+      button.appendChild(icon);
+
+      var text = document.createElement("span");
+      text.className = "mobile-toc-toggle-text";
+      text.textContent = "Contents";
+      button.appendChild(text);
+
+      return button;
+    }
+
+    function buildPanel(list, label) {
+      var panel = document.createElement("div");
+      panel.id = "mobile-toc-panel";
+      panel.className = "mobile-toc-panel";
+
+      // Clone only the list (not the heading) so no element ids are duplicated.
+      var nav = document.createElement("nav");
+      nav.setAttribute("aria-label", label);
+      nav.appendChild(list.cloneNode(true));
+      panel.appendChild(nav);
+
+      return panel;
+    }
+
+    function wireToggle(button, panel) {
+      var close = function () {
+        panel.classList.remove("show");
+        button.setAttribute("aria-expanded", "false");
+      };
+
+      button.addEventListener("click", function () {
+        var open = panel.classList.toggle("show");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // Collapse once the reader taps through to a section.
+      panel.addEventListener("click", function (event) {
+        var target = event.target;
+        if (target instanceof Element && target.closest("a")) {
+          close();
+        }
+      });
+
+      // Collapse on scroll so the bar behaves like the navbar: it reappears
+      // closed on scroll-up rather than re-opening the menu.
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (panel.classList.contains("show")) {
+            close();
+          }
+        },
+        { passive: true }
+      );
+
+      // Collapse on a tap outside the button or panel.
+      document.addEventListener("click", function (event) {
+        if (!panel.classList.contains("show")) {
+          return;
+        }
+        var target = event.target;
+        if (
+          target instanceof Element &&
+          (button.contains(target) || panel.contains(target))
+        ) {
+          return;
+        }
+        close();
+      });
+
+      // Collapse on Escape and return focus to the button (ARIA disclosure
+      // pattern), so keyboard users can dismiss the menu without navigating.
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && panel.classList.contains("show")) {
+          close();
+          button.focus();
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", buildMobileToc);
+    } else {
+      buildMobileToc();
+    }
+  })();
+</script><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/d-morrison\.github\.io\/rme\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exam Formula Sheet"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: false</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: exam-formula-sheet-handout.pdf</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    fontsize: 10pt</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    geometry:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">      - top=10mm</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - bottom=10mm</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - left=12mm</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - right=12mm</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">      text: |</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{parskip}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlength{\parskip}{2pt}</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlength{\abovedisplayskip}{3pt}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlength{\belowdisplayskip}{3pt}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlength{\abovedisplayshortskip}{1pt}</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">        \setlength{\belowdisplayshortskip}{1pt}</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{titlesec}</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{needspace}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">        \usepackage{etoolbox}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">        \AtBeginEnvironment{longtable}{\Needspace{10\baselineskip}}</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">        \titleformat{\section}{\normalfont\large\bfseries}{}{0pt}{}</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">        \titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{0pt}{}</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">        \titleformat{\subsubsection}{\normalfont\small\bfseries}{}{0pt}{}</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">        \titlespacing*{\section}{0pt}{6pt}{2pt}</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">        \titlespacing*{\subsection}{0pt}{4pt}{1pt}</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">        \titlespacing*{\subsubsection}{0pt}{3pt}{1pt}</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">  docx:</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: false</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: exam-formula-sheet-handout.docx</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: false</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">  revealjs:</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: exam-formula-sheet-slides.html</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE, include = FALSE}</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># quarto render "exam-formula-sheet.qmd" --profile "handout"</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>{{&lt; include latex-macros/macros.qmd &gt;}}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Epi 202: Probability</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/exam-formula-sheet/_sec_epi202_probability.qmd &gt;}}</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu"># Epi 203: Statistical inference</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/exam-formula-sheet/_sec_epi203_statistical-inference.qmd &gt;}}</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu"># Sta 108: Linear regression</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/exam-formula-sheet/_sec_sta108_linear-regression.qmd &gt;}}</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu"># Epi 204: Generalized linear models</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/exam-formula-sheet/_sec_epi204_glms-and-survival.qmd &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item">
+ Copyright 2024-2026, Douglas Ezra Morrison
+  </li>  
+</ul>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions"><ul><li><a href="https://github.com/d-morrison/rme/edit/main/chapters/exam-formula-sheet.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/d-morrison/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/d-morrison/rme/blob/main/chapters/exam-formula-sheet.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

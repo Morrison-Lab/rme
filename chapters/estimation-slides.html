@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
+<link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <title>Regression Models for Epidemiology – Estimation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4df01d85d5cf19cc6202400f4f043f84.css">
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script>
+
+  <script type="text/plain" cookie-consent="tracking">
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
+  </script>
+  
+  <script type="text/javascript" charset="UTF-8">
+  document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({
+    "notice_banner_type":"simple",
+    "consent_type":"implied",
+    "palette":"light",
+    "language":"en",
+    "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+    "notice_banner_reject_button_hide":false,
+    "preferences_center_close_button_hide":false,
+    "website_name":""
+    ,
+  "language":"en"
+    });
+  });
+  </script> 
+    
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <script type="application/json" class="js-hypothesis-config">
+  {
+    "theme": "clean",
+    "openSidebar": false,
+    "enableExperimentalNewNoteButton": true
+  }
+  </script>
+  <script async="" src="https://hypothes.is/embed.js"></script>
+  <script>
+    window.document.addEventListener("DOMContentLoaded", function (_event) {
+      document.body.classList.add('hypothesis-enabled');
+    });
+  </script>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Estimation</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="probabilistic-models" class="title-slide slide level1 scrollable center" data-number="1">
+<h1><span class="header-section-number">1</span> Probabilistic models</h1>
+
+</section>
+<section class="slide level2">
+
+
+</section>
+<section class="slide level2">
+
+<div id="def-model" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Scientific models)</strong></span> <strong>Scientific models</strong> are attempts to describe <em>physical conditions or changes</em> that occur in the world and universe around us.</p>
+</div>
+<div id="exm-model" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Scientific models in epidemiology)</strong></span> Epidemiologists typically study <em>biological conditions and changes</em>, such as the spread of infectious diseases through populations, or the effects of environmental factors on individuals.</p>
+</div>
+</section>
+<section id="all-models-are-wrong-some-are-useful" class="slide level2" data-number="1.1">
+<h2><span class="header-section-number">1.1</span> All models are wrong, some are useful</h2>
+<p><span class="citation" data-cites="box_draper_1987">Box and Draper (<a href="#/references" role="doc-biblioref" onclick="">1987</a>)</span>, p424 (emphasis added):</p>
+<blockquote>
+<p>…Essentially, all models are wrong, but some are useful. <strong>However, the approximate nature of the model must always be borne in mind.</strong></p>
+</blockquote>
+<aside class="notes">
+<p>see also <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, §1.8</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statistical-analysis-of-scientific-models" class="slide level2" data-number="1.2">
+<h2><span class="header-section-number">1.2</span> Statistical analysis of scientific models</h2>
+<p>When we perform statistical analyses, we use data to help us choose between models - specifically, to determine which models best explain that data.</p>
+<p>However, physical processes do not produce data on their own. Data is only produced when scientists implement an <em>observation process</em> (i.e., a <em>scientific study</em>), which is distinct from the underlying <em>physical process</em>. In some cases, the observation process and the physical process interact with each other. This phenomenon is called the <a href="https://en.wikipedia.org/wiki/Observer_effect">“observer effect”</a>.</p>
+<p>In order to learn about the physical processes we are ultimately interested in, we often need to make special considerations for the observation process that produced the data which we are analyzing. In particular, if some of the planned observations in the study design were not completed, we will likely need to account for the incompleteness of the resulting data set in our analysis. If we are not sure why some observations are incomplete, we may need to model the observation process in addition to the physical process we were originally interested in. For example, if some participants in a study dropped out part-way through the study, we may need investigate why those participants dropped out, as opposed to other participants who completed the study.</p>
+<p>These kinds of <em>missing data</em> issues are outside of the scope of this course; see <span class="citation" data-cites="van2018flexible">Van Buuren (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> for more details.</p>
+</section></section>
+<section>
+<section id="estimands-estimates-and-estimators" class="title-slide slide level1 center" data-number="2">
+<h1><span class="header-section-number">2</span> Estimands, estimates, and estimators</h1>
+
+</section>
+<section id="estimands" class="slide level2" data-number="2.1">
+<h2><span class="header-section-number">2.1</span> Estimands</h2>
+<p></p>
+<div id="def-estimand" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Estimand)</strong></span> An <strong>estimand</strong> is an unknown quantity whose value we want to know <span class="citation" data-cites="pohl2021estimands lawrance2020estimand">(<a href="#/references" role="doc-biblioref" onclick="">Pohl et al. 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Lawrance et al. 2020</a>)</span>.</p>
+</div>
+<div id="exm-estimand" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (Mean height of students)</strong></span> If we are trying to determine the mean height of students at our school, then the <em>population mean</em> is our <strong>estimand</strong>.</p>
+</div>
+<p>In statistical contexts, most estimands are parameters of probabilistic models, or functions of model parameters.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Notation for estimands</strong></p>
+</div>
+<div class="callout-content">
+<p>Model paramaters and other estimands are often symbolized using lower-case Greek letters: <span class="math inline">\(\alpha, \beta, \gamma, \delta\)</span>, etc.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="estimates" class="slide level2" data-number="2.2">
+<h2><span class="header-section-number">2.2</span> Estimates</h2>
+<p> </p>
+<div id="def-estimate" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Estimate/estimated value)</strong></span> In statistics, an <strong>estimate</strong> or <strong>estimated value</strong> is an informed guess of an estimand’s value, based on observed data.</p>
+</div>
+<div id="exm-estimate" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (Mean height of students)</strong></span> Suppose we measure the heights of 50 random students from our school, and the sample mean was 175cm. We might use 175cm as an <em>estimate</em> of the population mean.</p>
+</div>
+</section>
+<section id="estimators" class="slide level2" data-number="2.3">
+<h2><span class="header-section-number">2.3</span> Estimators</h2>
+<p></p>
+<div id="def-estimator" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Estimator)</strong></span> An <strong>estimator</strong> is a function <span class="math inline">\(\hat\theta(x_1,...x_n)\)</span> that transforms data <span class="math inline">\(x_1,...x_n\)</span> into an estimate.</p>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Estimators are random variables</strong></p>
+</div>
+<div class="callout-content">
+<p>When estimators are applied to random variables, the estimators are also random variables.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Notation for estimators</strong></p>
+</div>
+<div class="callout-content">
+<p>Estimators are often symbolized by placing a ^ (“hat”) symbol on top of the corresponding estimand; for example, <span class="math inline">\(\hat\theta\)</span>.</p>
+<p>Usually, their dependence on the data is implicit:</p>
+<p><span class="math display">\[\hat\theta\stackrel{\text{def}}{=}\hat\theta(x_1,...x_n)\]</span></p>
+</div>
+</div>
+</div>
+<div id="exm-estimator" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Mean height of students)</strong></span> If we want to estimate the mean height of students at our university, which we will represent as <span class="math inline">\(\mu\)</span>, we might measure the heights of <span class="math inline">\(n= 50\)</span> randomly sampled students as random variables <span class="math inline">\(X_1,...,X_n\)</span>. Then we could use the function</p>
+<p><span class="math display">\[\hat\mu(X_1,...,X_n) = \frac{1}{n} \sum_{i=1}^n X_i \stackrel{\text{def}}{=}\bar X\]</span></p>
+<p>as an <em>estimator</em> to produce an <em>estimate</em> <span class="math inline">\(\hat\mu = \bar x\)</span> of <span class="math inline">\(\mu\)</span>.</p>
+<p>Another estimator would be just the height of the first student sampled:</p>
+<p><span class="math display">\[\hat\mu^{(2)}(X_1,...,X_n) = X_1\]</span></p>
+<p>A third possible estimator would be the mean of all sampled students’ heights, except for the two most extreme; specifically, if we re-order the observations <span class="math inline">\(X_{(1)} = \min_{i\in 1:n} X_i\)</span>, <span class="math inline">\(X_{(2)} = \min_{i\in \{1:n\} - \arg X_{(1)}} X_i\)</span>, …, <span class="math inline">\(X_{(n)} = \max_{i\in 1:n} X_i\)</span>, then we could define the estimator:</p>
+<p><span class="math display">\[\hat\mu^{(3)}(X_1,...,X_n) = \frac{1}{n}\sum_{i=2}^{n-1} X_{(i)}\]</span></p>
+<p>Which of these estimators is best? It depends on how we evaluate them (see <a href="#/sec-est-accuracy" class="quarto-xref">Section&nbsp;3</a>).</p>
+</div>
+</section>
+<section id="contrasting-estimands-estimates-and-estimators" class="slide level2" data-number="2.4">
+<h2><span class="header-section-number">2.4</span> Contrasting estimands, estimates, and estimators</h2>
+<p>It’s helpful to keep in mind the mathematical type of each estimation concept:</p>
+<ul>
+<li>estimands are numbers (or vector of numbers)</li>
+<li>estimates are also numbers (or vectors)</li>
+<li>estimators are functions of random variables, so they are also random variables</li>
+</ul>
+</section></section>
+<section>
+<section id="sec-est-accuracy" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Accuracy of estimators</h1>
+
+</section>
+<section id="accuracy" class="slide level2" data-number="3.1">
+<h2><span class="header-section-number">3.1</span> Accuracy</h2>
+<p>To determine which estimator is best, we need to define <em>best</em>. “Accuracy” is usually most important; easy computation is usually secondary.</p>
+<div id="def-accuracy" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (Accuracy)</strong></span> The <strong>accuracy</strong> of an estimator for a given estimand does not have a consensus formal definition, but all of the usual candidates are related to the distributions of the <em>estimation errors</em> made by the resulting estimates.</p>
+</div>
+</section>
+<section id="estimation-error" class="slide level2" data-number="3.2">
+<h2><span class="header-section-number">3.2</span> Estimation error</h2>
+<div id="def-estimation-error" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (Estimation error)</strong></span> The <strong>estimation error</strong> of an estimate <span class="math inline">\(\hat\theta\)</span> of a true value <span class="math inline">\(\theta\)</span> is the difference between the estimate and the estimand <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{} \stackrel{\text{def}}{=}\hat\theta- \theta\]</span></p>
+</div>
+</section>
+<section id="residuals" class="slide level2" data-number="3.3">
+<h2><span class="header-section-number">3.3</span> Residuals</h2>
+<p>See <a href="../chapters/Linear-models-overview.html#sec-lm-residuals">Linear-model residual definitions and terminology</a> for residual definitions and for the relationship between residuals, model deviations, and estimation error.</p>
+<p>Some frequently-used measures of accuracy include:</p>
+</section>
+<section id="mean-squared-error" class="slide level2 scrollable" data-number="3.4">
+<h2><span class="header-section-number">3.4</span> Mean squared error</h2>
+<div id="def-mse" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (Mean squared error)</strong></span> The <strong>mean squared error</strong> of an estimator <span class="math inline">\(\hat\theta\)</span>, denoted <span class="math inline">\(\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span>, is the expectation of the square of the estimation error<sup>1</sup>:</p>
+<p><span class="math display">\[\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\mathopen{}\left(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\right]\mathclose{}\]</span></p>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Does_exactly_what_it_says_on_the_tin" class="uri">https://en.wikipedia.org/wiki/Does_exactly_what_it_says_on_the_tin</a></p></li></ol></aside></section>
+<section id="mean-absolute-error" class="slide level2" data-number="3.5">
+<h2><span class="header-section-number">3.5</span> Mean absolute error</h2>
+<div id="def-mae" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 8 (Mean absolute error)</strong></span> The <strong>mean absolute error</strong> of an estimator is the expectation of the absolute value of the estimation error:</p>
+<p><span class="math display">\[
+\operatorname{MAE}\mathopen{}\left(\hat\theta\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\mathopen{}\left|\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right|\mathclose{}\right]\mathclose{}
+\]</span></p>
+</div>
+</section>
+<section id="bias" class="slide level2" data-number="3.6">
+<h2><span class="header-section-number">3.6</span> Bias</h2>
+<div id="def-bias" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 9 (Bias)</strong></span> The <strong>bias</strong> of an estimator <span class="math inline">\(\hat\theta\)</span> for an estimand <span class="math inline">\(\theta\)</span> is the expected value of the estimation error:</p>
+<p><span id="eq-bias-def"><span class="math display">\[\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right]\mathclose{} \tag{1}\]</span></span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="thm-bias-exprs" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Bias equals Expectation minus Truth)</strong></span> <span class="math display">\[\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{} =\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} - \theta\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
+\begin{aligned}
+\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right]\mathclose{}\\
+&amp;= \operatorname{E}\mathopen{}\left[\hat\theta- \theta\right]\mathclose{}\\
+&amp;=\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} - \operatorname{E}\mathopen{}\left[\theta\right]\mathclose{}\\
+&amp;=\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} - \theta
+\end{aligned}
+\]</span></p>
+<p>The third equality is by the linearity of expectation.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="thm-mse-bias-variance" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Mean Squared Error equals Bias Squared plus Variance)</strong></span> For any one-dimensional estimator <span class="math inline">\(\hat\theta\)</span>:</p>
+<p><span id="eq-mse"><span class="math display">\[\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} = \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{} \tag{2}\]</span></span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let’s start by expanding each term of the right-hand side:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}
+&amp;=\mathopen{}\left(\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} - \theta\right)^2\mathclose{}\\
+&amp;=\mathopen{}\left(\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\right)^2\mathclose{} - 2\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\theta+\theta^2\\
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{} = \operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - \mathopen{}\left(\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\right)^2\mathclose{}\]</span></p>
+<p>Now, add them together and simplify:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}
+&amp;=\mathopen{}\left(\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\right)^2\mathclose{} - 2\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\theta+\theta^2 + \operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - \mathopen{}\left(\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\right)^2\mathclose{}\\
+&amp;=\operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - 2\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\theta+\theta^2\\
+\end{aligned}
+\]</span></p>
+<p>Now let’s expand the left-hand side to reach the same expression:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\mathopen{}\left(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\right]\mathclose{}\\
+&amp;= \operatorname{E}\mathopen{}\left[(\hat\theta- \theta)^2\right]\mathclose{}\\
+&amp;= \operatorname{E}\mathopen{}\left[\hat\theta^2 - 2\hat\theta\theta+ \theta^2\right]\mathclose{}\\
+&amp;=\operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - \operatorname{E}\mathopen{}\left[2\hat\theta\theta\right]\mathclose{}+\operatorname{E}\mathopen{}\left[\theta^2\right]\mathclose{}\\
+&amp;=\operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - 2\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\theta+\theta^2\\
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span> and <span class="math inline">\(\mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span> both equal <span class="math inline">\(\operatorname{E}\mathopen{}\left[\hat\theta^2\right]\mathclose{} - 2\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\theta+\theta^2\)</span>. Equality is transitive, so <span class="math inline">\(\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span> and <span class="math inline">\(\mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span> are equal to each other:</p>
+<p><span class="math display">\[\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} = \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sec-unbiased-estimators">Unbiased estimators</h3>
+<div id="def-unbiased" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 10 (Unbiased estimator)</strong></span> An estimator <span class="math inline">\(\hat\theta\)</span> is <strong>unbiased</strong> if <span class="math inline">\(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{} = 0\)</span>.</p>
+</div>
+<div id="thm-unbiased-props" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Properties of unbiased estimators)</strong></span> If <span class="math inline">\(\hat\theta\)</span> is unbiased, then:</p>
+<p><span id="eq-unbiased-exp"><span class="math display">\[\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} = \theta \tag{3}\]</span></span> <span id="eq-unbiased-mse"><span class="math display">\[\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} = \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{} \tag{4}\]</span></span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(\hat\theta\)</span> is unbiased, then:</p>
+<p><a href="#/eq-unbiased-exp" class="quarto-xref">Equation&nbsp;3</a>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{} &amp;= 0\\
+\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} - \theta &amp;= 0\\
+\operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{} &amp;= \theta
+\end{aligned}
+\]</span></p>
+<p><a href="#/eq-unbiased-mse" class="quarto-xref">Equation&nbsp;4</a>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[\mathopen{}\left(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\right]\mathclose{}\\
+&amp;= \operatorname{E}\mathopen{}\left[\mathopen{}\left(\hat\theta- \theta\right)^2\mathclose{}\right]\mathclose{}\\
+&amp;= \operatorname{E}\mathopen{}\left[\mathopen{}\left(\hat\theta- \operatorname{E}\mathopen{}\left[\hat\theta\right]\mathclose{}\right)^2\mathclose{}\right]\mathclose{}\\
+&amp;\stackrel{\text{def}}{=}\operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+<p>(<em>Alternative proof of <a href="#/eq-unbiased-mse" class="quarto-xref">Equation&nbsp;4</a></em>) We could have started from <a href="#/thm-mse-bias-variance" class="quarto-xref">Theorem&nbsp;2</a> instead:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}
+&amp;= \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\\
+&amp;= \mathopen{}\left(0\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\\
+&amp;= 0 + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\\
+&amp;= \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\\
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="standard-error" class="slide level2" data-number="3.7">
+<h2><span class="header-section-number">3.7</span> Standard error</h2>
+<div id="def-SE" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 11 (Standard error)</strong></span> The <strong>standard error</strong> of an estimator <span class="math inline">\(\hat\theta\)</span> is just the <a href="../chapters/probability.html#def-sd">standard deviation</a> of <span class="math inline">\(\hat\theta\)</span>; specifically:</p>
+<p><span class="math display">\[\operatorname{SE}\mathopen{}\left(\hat\theta\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{SD}\mathopen{}\left(\hat\theta\right)\mathclose{}\]</span></p>
+</div>
+<p>“Standard error” is a confusing concept in a few ways. First of all, it isn’t even defined as a characteristic of the <a href="#/def-estimation-error">estimation error</a>, <span class="math inline">\(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\)</span>! Moreover, it is just a synonym for standard deviation, so it seems like a redundant concept. However, standard errors help us construct p-values and confidence intervals, so they come up a lot - often enough to give them their own name.</p>
+<p>We can relate standard error to estimation error, by rearranging the result from <a href="#/thm-mse-bias-variance" class="quarto-xref">Theorem&nbsp;2</a>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{} &amp;= \operatorname{Var}\mathopen{}\left(\hat\theta- \theta\right)\mathclose{}\\
+&amp;= \operatorname{Var}\mathopen{}\left(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right)\mathclose{}\\
+\end{aligned}
+\]</span> So the variance of the estimator is equal to the variance of the estimation error, and the standard error is equal to the standard deviation of the estimation error:</p>
+<p><span class="math display">\[\operatorname{SE}\mathopen{}\left(\hat\theta\right)\mathclose{} = \operatorname{SD}\mathopen{}\left(\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right)\mathclose{}\]</span></p>
+</section>
+<section class="slide level2">
+
+<div id="cor-var-mse-bias" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Standard error squared equals MSE minus squared bias)</strong></span> standard error is what is left over of MSE after bias is removed:</p>
+<p><span class="math display">\[\mathopen{}\left(\operatorname{SE}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} = \operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} - \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
+\begin{aligned}
+\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} &amp;= \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} + \operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{}\\
+\therefore\operatorname{Var}\mathopen{}\left(\hat\theta\right)\mathclose{} &amp;= \operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} - \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\\
+\therefore\mathopen{}\left(\operatorname{SE}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{} &amp;= \operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{} - \mathopen{}\left(\operatorname{Bias}\mathopen{}\left(\hat\theta\right)\mathclose{}\right)^2\mathclose{}\\
+\end{aligned}
+\]</span></p>
+</div>
+<div id="cor-se-rmse-unbiased" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (For unbiased estimators, SE = RMSE)</strong></span> If <span class="math inline">\(\operatorname{E}\mathopen{}\left[\varepsilon\mathopen{}\left(\hat\theta\right)\mathclose{}\right]\mathclose{} = 0\)</span>, then:</p>
+<p><span class="math display">\[\operatorname{SE}\mathopen{}\left(\hat\theta\right)\mathclose{} = \sqrt{\operatorname{MSE}\mathopen{}\left(\hat\theta\right)\mathclose{}}\]</span></p>
+<p>(this result is equivalent to <a href="#/eq-unbiased-mse" class="quarto-xref">Equation&nbsp;4</a>)</p>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="exercises" class="title-slide slide level1 unnumbered center">
+<h1>Exercises</h1>
+
+</section>
+<section class="slide level2">
+
+<div id="exr-prac-binom-lik" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1 (Binomial likelihood (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 3))</strong></span> Let <span class="math inline">\(Y \sim \text{Binomial}(n, \pi)\)</span>, so that</p>
+<p><span class="math display">\[
+\operatorname{p}(Y = y \mid \pi) = \binom{n}{y} \pi^y (1-\pi)^{n-y},
+\quad y \in \{0, 1, \ldots, n\}.
+\]</span></p>
+<p>Assume <span class="math inline">\(0 &lt; y &lt; n\)</span> so the MLE lies in the interior of <span class="math inline">\((0, 1)\)</span>.</p>
+<p><strong>(a)</strong> Write the log-likelihood <span class="math inline">\(\ell(\pi; y)\)</span> for a single observation <span class="math inline">\(y\)</span>.</p>
+<p><strong>(b)</strong> Derive the score function <span class="math inline">\(\ell'(\pi; y) \stackrel{\text{def}}{=}\frac{\partial}{\partial \pi}\ell(\pi; y)\)</span>.</p>
+<p><strong>(c)</strong> Set the score equal to zero and solve for <span class="math inline">\(\hat\pi_{ML}\)</span>. Confirm that <span class="math inline">\(\hat\pi_{ML} = y/n\)</span>.</p>
+<p><strong>(d)</strong> Compute the second derivative <span class="math inline">\(\ell''(\pi; y)\)</span> and verify that it is negative, confirming a maximum.</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell(\pi; y)
+&amp;= \operatorname{log}\mathopen{}\left\{\binom{n}{y} \pi^y (1-\pi)^{n-y}\right\}\mathclose{}
+\\
+&amp;= \operatorname{log}\mathopen{}\left\{\binom{n}{y}\right\}\mathclose{} + y\operatorname{log}\mathopen{}\left\{\pi\right\}\mathclose{} + (n-y)\operatorname{log}\mathopen{}\left\{1-\pi\right\}\mathclose{}
+\\
+&amp;\propto y\operatorname{log}\mathopen{}\left\{\pi\right\}\mathclose{} + (n-y)\operatorname{log}\mathopen{}\left\{1-\pi\right\}\mathclose{}
+\end{aligned}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell'(\pi; y)
+&amp;= \frac{\partial}{\partial \pi}\mathopen{}\left[y\operatorname{log}\mathopen{}\left\{\pi\right\}\mathclose{} + (n-y)\operatorname{log}\mathopen{}\left\{1-\pi\right\}\mathclose{}\right]\mathclose{}
+\\
+&amp;= \frac{y}{\pi} - \frac{n-y}{1-\pi}
+\\
+&amp;= \frac{y(1-\pi) - (n-y)\pi}{\pi(1-\pi)}
+\\
+&amp;= \frac{y - n\pi}{\pi(1-\pi)}
+\end{aligned}
+\]</span></p>
+<p><strong>(c)</strong></p>
+<p>Setting <span class="math inline">\(\ell'(\pi; y) = 0\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+0 &amp;= \frac{y - n\pi}{\pi(1-\pi)}
+\\
+y &amp;= n\pi
+\\
+\hat\pi_{ML} &amp;= \frac{y}{n}
+\end{aligned}
+\]</span></p>
+<p><strong>(d)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell''(\pi; y)
+&amp;= \frac{\partial}{\partial \pi}\mathopen{}\left[\frac{y}{\pi} - \frac{n-y}{1-\pi}\right]\mathclose{}
+\\
+&amp;= -\frac{y}{\pi^2} - \frac{n-y}{(1-\pi)^2}
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(y \geq 0\)</span>, <span class="math inline">\(n - y \geq 0\)</span>, and <span class="math inline">\(\pi \in (0,1)\)</span>, each term is non-positive, and <span class="math inline">\(\ell''(\hat\pi_{ML}; y) &lt; 0\)</span> whenever <span class="math inline">\(0 &lt; y &lt; n\)</span>, confirming <span class="math inline">\(\hat\pi_{ML} = y/n\)</span> is a maximum.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exr-prac-gauss-iid-lik" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2 (Gaussian log-likelihood (adapted from <span class="citation" data-cites="kleinbaum2014applied">Kleinbaum et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>, Chapter 5))</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \ \sim_{\operatorname{iid}}\ \operatorname{N}(\mu, \sigma^2)\)</span>.</p>
+<p><strong>(a)</strong> Write the likelihood <span class="math inline">\(\mathcal{L}(\mu, \sigma^2; \tilde{x})\)</span> for the observed data <span class="math inline">\(\tilde{x}= (x_1, \ldots, x_n)\)</span>.</p>
+<p><strong>(b)</strong> Write the log-likelihood <span class="math inline">\(\ell(\mu, \sigma^2; \tilde{x})\)</span>. Show that it can be written as</p>
+<p><span class="math display">\[
+\ell(\mu, \sigma^2; \tilde{x})
+= -\frac{n}{2}\operatorname{log}\mathopen{}\left\{2\pi\sigma^2\right\}\mathclose{}
+  - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2.
+\]</span></p>
+<p><strong>(c)</strong> Derive the MLE <span class="math inline">\(\hat\mu_{ML}\)</span> and <span class="math inline">\(\hat\sigma^2_{ML}\)</span>.</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
+<p><span class="math display">\[
+\mathcal{L}(\mu, \sigma^2; \tilde{x})
+= \prod_{i=1}^n (2\pi\sigma^2)^{-1/2}
+  \operatorname{exp}\mathopen{}\left\{-\frac{(x_i - \mu)^2}{2\sigma^2}\right\}\mathclose{}
+= (2\pi\sigma^2)^{-n/2}
+  \operatorname{exp}\mathopen{}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2\right\}\mathclose{}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell(\mu, \sigma^2; \tilde{x})
+&amp;= \operatorname{log}\mathopen{}\left\{\mathcal{L}(\mu, \sigma^2; \tilde{x})\right\}\mathclose{}
+\\
+&amp;= -\frac{n}{2}\operatorname{log}\mathopen{}\left\{2\pi\sigma^2\right\}\mathclose{}
+   - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2
+\end{aligned}
+\]</span></p>
+<p><strong>(c)</strong></p>
+<p><strong>Deriving <span class="math inline">\(\hat\mu_{ML}\)</span>:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial}{\partial \mu}\ell
+&amp;= \frac{\partial}{\partial \mu}\mathopen{}\left[-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2\right]\mathclose{}
+\\
+&amp;= \frac{1}{\sigma^2}\sum_{i=1}^n (x_i - \mu)
+\\
+&amp;= \frac{1}{\sigma^2}\mathopen{}\left(\sum_{i=1}^n x_i - n\mu\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+<p>Setting this to zero: <span class="math inline">\(\hat\mu_{ML} = \bar{x} \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n x_i\)</span>.</p>
+<p><strong>Deriving <span class="math inline">\(\hat\sigma^2_{ML}\)</span>:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial}{\partial \sigma^2}\ell
+&amp;= -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n (x_i - \mu)^2
+\end{aligned}
+\]</span></p>
+<p>Setting this to zero and solving:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{n}{2\sigma^2}
+&amp;= \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n (x_i - \mu)^2
+\\
+\sigma^2
+&amp;= \frac{1}{n}\sum_{i=1}^n (x_i - \mu)^2
+\end{aligned}
+\]</span></p>
+<p>Substituting <span class="math inline">\(\hat\mu_{ML} = \bar{x}\)</span>:</p>
+<p><span class="math display">\[
+\hat\sigma^2_{ML} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2
+\]</span></p>
+<p>Note: this maximum likelihood estimator is a biased estimator of <span class="math inline">\(\sigma^2\)</span>; the unbiased sample variance divides by <span class="math inline">\(n-1\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exr-prac-score-zero" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3 (Score at the MLE (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 3))</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \ \sim_{\operatorname{iid}}\ \operatorname{Pois}({\lambda})\)</span>.</p>
+<p><strong>(a)</strong> Write the log-likelihood <span class="math inline">\(\ell({\lambda}; \tilde{x})\)</span>.</p>
+<p><strong>(b)</strong> Derive the score function <span class="math inline">\(\ell'({\lambda}; \tilde{x})\)</span>.</p>
+<p><strong>(c)</strong> Show that <span class="math inline">\(\hat{\lambda}_{ML} = \bar{x}\)</span>, and verify that the score equals zero at the MLE.</p>
+<p><strong>(d)</strong> Provide an intuitive interpretation: why does the score being zero at <span class="math inline">\(\hat{\lambda}_{ML}\)</span> make sense?</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell({\lambda}; \tilde{x})
+&amp;= \operatorname{log}\mathopen{}\left\{\prod_{i=1}^n \frac{{\lambda}^{x_i} e^{-{\lambda}}}{x_i!}\right\}\mathclose{}
+\\
+&amp;= \sum_{i=1}^n \mathopen{}\left(x_i \operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{} - {\lambda}- \operatorname{log}\mathopen{}\left\{x_i!\right\}\mathclose{}\right)\mathclose{}
+\\
+&amp;= \mathopen{}\left(\sum_{i=1}^n x_i\right)\mathclose{}\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{} - n{\lambda}- \sum_{i=1}^n \operatorname{log}\mathopen{}\left\{x_i!\right\}\mathclose{}
+\end{aligned}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell'({\lambda}; \tilde{x})
+&amp;= \frac{\partial}{\partial {\lambda}}\mathopen{}\left[\mathopen{}\left(\sum_{i=1}^n x_i\right)\mathclose{}\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{} - n{\lambda}\right]\mathclose{}
+\\
+&amp;= \frac{\sum_{i=1}^n x_i}{{\lambda}} - n
+\\
+&amp;= \frac{n\bar{x}}{{\lambda}} - n
+\end{aligned}
+\]</span></p>
+<p><strong>(c)</strong></p>
+<p>Setting <span class="math inline">\(\ell'({\lambda}; \tilde{x}) = 0\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{n\bar{x}}{{\lambda}} &amp;= n
+\\
+\hat{\lambda}_{ML} &amp;= \bar{x}
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(\bar{x} &gt; 0\)</span> (equivalently, at least one <span class="math inline">\(x_i &gt; 0\)</span>), then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell'(\bar{x}; \tilde{x})
+&amp;= \frac{n\bar{x}}{\bar{x}} - n
+\\
+&amp;= n - n
+\\
+&amp;= 0.
+\end{aligned}
+\]</span></p>
+<p>If instead all <span class="math inline">\(x_i = 0\)</span>, then <span class="math inline">\(\bar{x} = 0\)</span> and <span class="math inline">\(\hat{\lambda}_{ML} = 0\)</span> is a boundary value. In that case, the score formula <span class="math inline">\(\ell'({\lambda}; \tilde{x}) = \frac{n\bar{x}}{{\lambda}} - n\)</span> is not defined at <span class="math inline">\({\lambda}= 0\)</span>, so the usual interior verification <span class="math inline">\(\ell'(\hat{\lambda}_{ML}; \tilde{x}) = 0\)</span> does not apply.</p>
+<p><strong>(d)</strong></p>
+<p>The score measures the rate of change of the log-likelihood. When it equals zero, increasing or decreasing <span class="math inline">\({\lambda}\)</span> slightly would not improve the fit; we are at a “flat” point. Intuitively, <span class="math inline">\(\hat{\lambda}_{ML} = \bar{x}\)</span> is the value of <span class="math inline">\({\lambda}\)</span> that makes the expected count per observation (<span class="math inline">\({\lambda}\)</span>) exactly equal to the observed average count (<span class="math inline">\(\bar{x}\)</span>), the best possible match between model and data.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exr-prac-mle-se" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4 (Standard error of an MLE (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 5))</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \ \sim_{\operatorname{iid}}\ \operatorname{Pois}({\lambda})\)</span>.</p>
+<p><strong>(a)</strong> Derive the Hessian <span class="math inline">\(\ell''({\lambda}; \tilde{x}) = \frac{\partial}{\partial [}2]{{\lambda}}\ell({\lambda};\tilde{x})\)</span>.</p>
+<p><strong>(b)</strong> Derive the observed information <span class="math inline">\(I({\lambda}; \tilde{x}) = -\ell''({\lambda}; \tilde{x})\)</span>.</p>
+<p><strong>(c)</strong> Evaluate <span class="math inline">\(I(\hat{\lambda}_{ML}; \tilde{x})\)</span>.</p>
+<p><strong>(d)</strong> Give an approximate 95% confidence interval for <span class="math inline">\({\lambda}\)</span> using the asymptotic normal distribution of the MLE.</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
+<p>From <a href="#/exr-prac-score-zero" class="quarto-xref">Exercise&nbsp;3</a>, <span class="math inline">\(\ell'({\lambda}; \tilde{x}) = \frac{n\bar{x}}{{\lambda}} - n\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell''({\lambda}; \tilde{x})
+&amp;= \frac{\partial}{\partial {\lambda}}\mathopen{}\left[\frac{n\bar{x}}{{\lambda}} - n\right]\mathclose{}
+\\
+&amp;= -\frac{n\bar{x}}{{\lambda}^2}
+\end{aligned}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+I({\lambda}; \tilde{x}) = -\ell''({\lambda}; \tilde{x}) = \frac{n\bar{x}}{{\lambda}^2}
+\]</span></p>
+<p><strong>(c)</strong></p>
+<p>Assuming <span class="math inline">\(\bar{x} &gt; 0\)</span> (i.e., at least one <span class="math inline">\(x_i &gt; 0\)</span>), substituting <span class="math inline">\(\hat{\lambda}_{ML} = \bar{x}\)</span>:</p>
+<p><span class="math display">\[
+I(\hat{\lambda}_{ML}; \tilde{x}) = \frac{n\bar{x}}{\bar{x}^2} = \frac{n}{\bar{x}}
+\]</span></p>
+<p><strong>(d)</strong></p>
+<p>By the asymptotic theory of MLEs:</p>
+<p><span class="math display">\[
+\hat{\lambda}_{ML}
+\;\dot\sim\;
+\operatorname{N}\!\mathopen{}\left({\lambda},\; \frac{1}{n\mathcal{I}({\lambda})}\right)\mathclose{}
+\]</span></p>
+<p>We estimate this asymptotic variance using the observed information evaluated at the MLE. Since <span class="math inline">\(I(\hat{\lambda}_{ML};\tilde{x})^{-1} = \bar{x}/n\)</span>:</p>
+<p><span class="math display">\[
+\operatorname{SE}\mathopen{}\left(\hat{\lambda}_{ML}\right)\mathclose{} \approx \sqrt{\frac{\bar{x}}{n}}
+\]</span></p>
+<p>An approximate 95% CI for <span class="math inline">\({\lambda}\)</span> is:</p>
+<p><span class="math display">\[
+\hat{\lambda}_{ML} \pm 1.96 \times \sqrt{\frac{\bar{x}}{n}}
+= \bar{x} \pm 1.96\sqrt{\frac{\bar{x}}{n}}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="exr-prac-exp-mle" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5 (Exponential MLE (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, Chapter 3))</strong></span> Let <span class="math inline">\(X_1, \ldots, X_n \ \sim_{\operatorname{iid}}\ \text{Exponential}(\mu)\)</span>, so that <span class="math display">\[
+\operatorname{p}(X = x \mid \mu) = \frac{1}{\mu} e^{-x/\mu},
+\quad x &gt; 0, \quad \mu&gt; 0.
+\]</span></p>
+<p><strong>(a)</strong> Write the log-likelihood <span class="math inline">\(\ell(\mu; \tilde{x})\)</span> for the observed data <span class="math inline">\(\tilde{x}= (x_1, \ldots, x_n)\)</span>.</p>
+<p><strong>(b)</strong> Derive the score function <span class="math inline">\(\ell'(\mu; \tilde{x}) = \frac{\partial}{\partial \mu}\ell(\mu; \tilde{x})\)</span>.</p>
+<p><strong>(c)</strong> Set the score equal to zero and show that <span class="math inline">\(\hat\mu_{ML} = \bar{x}\)</span>. Compute the second derivative and verify this critical point is a maximum.</p>
+<p><strong>(d)</strong> Derive the observed information <span class="math inline">\(I(\mu; \tilde{x}) = -\ell''(\mu; \tilde{x})\)</span>, evaluate it at <span class="math inline">\(\hat\mu_{ML}\)</span>, and give an approximate 95% confidence interval for <span class="math inline">\(\mu\)</span>.</p>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell(\mu; \tilde{x})
+&amp;= \operatorname{log}\mathopen{}\left\{\prod_{i=1}^n \frac{1}{\mu} e^{-x_i/\mu}\right\}\mathclose{}
+\\
+&amp;= \sum_{i=1}^n \operatorname{log}\mathopen{}\left\{\frac{1}{\mu} e^{-x_i/\mu}\right\}\mathclose{}
+\\
+&amp;= \sum_{i=1}^n \mathopen{}\left(-\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{} - \frac{x_i}{\mu}\right)\mathclose{}
+\\
+&amp;= -n\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{} - \frac{1}{\mu}\sum_{i=1}^n x_i
+\\
+&amp;= -n\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{} - \frac{n\bar{x}}{\mu}
+\end{aligned}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell'(\mu; \tilde{x})
+&amp;= \frac{\partial}{\partial \mu}\mathopen{}\left(-n\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{} - \frac{n\bar{x}}{\mu}\right)\mathclose{}
+\\
+&amp;= -\frac{n}{\mu} + \frac{n\bar{x}}{\mu^2}
+\\
+&amp;= \frac{n}{\mu^2}\mathopen{}\left(\bar{x} - \mu\right)\mathclose{}
+\end{aligned}
+\]</span></p>
+<p><strong>(c)</strong></p>
+<p>Setting <span class="math inline">\(\ell'(\mu; \tilde{x}) = 0\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+0 &amp;= \frac{n}{\mu^2}\mathopen{}\left(\bar{x} - \mu\right)\mathclose{}
+\\
+\hat\mu_{ML} &amp;= \bar{x}
+\end{aligned}
+\]</span></p>
+<p>The second derivative is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell''(\mu; \tilde{x})
+&amp;= \frac{\partial}{\partial \mu}\mathopen{}\left(-\frac{n}{\mu} + \frac{n\bar{x}}{\mu^2}\right)\mathclose{}
+\\
+&amp;= \frac{n}{\mu^2} - \frac{2n\bar{x}}{\mu^3}
+\end{aligned}
+\]</span></p>
+<p>Evaluated at <span class="math inline">\(\hat\mu_{ML} = \bar{x}\)</span>:</p>
+<p><span class="math display">\[
+\ell''(\bar{x}; \tilde{x})
+= \frac{n}{\bar{x}^2} - \frac{2n\bar{x}}{\bar{x}^3}
+= \frac{n}{\bar{x}^2} - \frac{2n}{\bar{x}^2}
+= -\frac{n}{\bar{x}^2} &lt; 0
+\]</span></p>
+<p>Since the second derivative is negative, <span class="math inline">\(\hat\mu_{ML} = \bar{x}\)</span> is a maximum.</p>
+<p><strong>(d)</strong></p>
+<p>The observed information is:</p>
+<p><span class="math display">\[
+I(\mu; \tilde{x}) = -\ell''(\mu; \tilde{x})
+= \frac{2n\bar{x}}{\mu^3} - \frac{n}{\mu^2}
+\]</span></p>
+<p>Evaluated at <span class="math inline">\(\hat\mu_{ML} = \bar{x}\)</span>:</p>
+<p><span class="math display">\[
+I(\hat\mu_{ML}; \tilde{x}) = \frac{2n\bar{x}}{\bar{x}^3} - \frac{n}{\bar{x}^2}
+= \frac{2n}{\bar{x}^2} - \frac{n}{\bar{x}^2}
+= \frac{n}{\bar{x}^2}
+\]</span></p>
+<p>So <span class="math inline">\(\operatorname{SE}\mathopen{}\left(\hat\mu_{ML}\right)\mathclose{} \approx \sqrt{I(\hat\mu_{ML}; \tilde{x})^{-1}} = \frac{\bar{x}}{\sqrt{n}}\)</span>.</p>
+<p>An approximate 95% CI for <span class="math inline">\(\mu\)</span> is:</p>
+<p><span class="math display">\[
+\hat\mu_{ML} \pm 1.96 \times \frac{\bar{x}}{\sqrt{n}}
+= \bar{x} \pm \frac{1.96\bar{x}}{\sqrt{n}}
+\]</span></p>
+<p>Note: the exponential distribution has <span class="math inline">\(\operatorname{Var}\mathopen{}\left(X\right)\mathclose{} = \mu^2\)</span>, so <span class="math inline">\(\operatorname{SE}\mathopen{}\left(\hat\mu_{ML}\right)\mathclose{} = \mu/\sqrt{n}\)</span>, which is estimated by <span class="math inline">\(\bar{x}/\sqrt{n}\)</span>. More generally, the standard error of a sample mean is <span class="math inline">\(\operatorname{SD}\mathopen{}\left(X\right)\mathclose{}/\sqrt{n}\)</span>; here that reduces to <span class="math inline">\(\mu/\sqrt{n}\)</span> because <span class="math inline">\(\operatorname{SD}\mathopen{}\left(X\right)\mathclose{} = \mu\)</span> for the exponential distribution.</p>
+</div>
+</section></section>
+<section>
+<section id="references" class="title-slide slide level1 unnumbered center">
+<h1>References</h1>
+
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-box_draper_1987" class="csl-entry" role="listitem">
+Box, George E. P., and Norman Richard. Draper. 1987. <em>Empirical Model-Building and Response Surfaces</em>. Wiley Series in Probability and Mathematical Statistics. Applied Probability and Statistics. Wiley.
+</div>
+<div id="ref-dobson4e" class="csl-entry" role="listitem">
+Dobson, Annette J, and Adrian G Barnett. 2018. <em>An Introduction to Generalized Linear Models</em>. 4th ed. CRC press. <a href="https://doi.org/10.1201/9781315182780">https://doi.org/10.1201/9781315182780</a>.
+</div>
+<div id="ref-dunn2018generalized" class="csl-entry" role="listitem">
+Dunn, Peter K, and Gordon K Smyth. 2018. <em>Generalized Linear Models with Examples in <span>R</span></em>. Vol. 53. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-0118-7">https://link.springer.com/book/10.1007/978-1-4419-0118-7</a>.
+</div>
+<div id="ref-kleinbaum2014applied" class="csl-entry" role="listitem">
+Kleinbaum, David G, Lawrence L Kupper, Azhar Nizam, K Muller, and ES Rosenberg. 2014. <em>Applied Regression Analysis and Other Multivariable Methods</em>. 5th ed. Cengage Learning. <a href="https://www.cengage.com/c/applied-regression-analysis-and-other-multivariable-methods-5e-kleinbaum/9781285051086/">https://www.cengage.com/c/applied-regression-analysis-and-other-multivariable-methods-5e-kleinbaum/9781285051086/</a>.
+</div>
+<div id="ref-lawrance2020estimand" class="csl-entry" role="listitem">
+Lawrance, Rachael, Evgeny Degtyarev, Philip Griffiths, et al. 2020. <span>“What Is an Estimand, and How Does It Relate to Quantifying the Effect of Treatment on Patient-Reported Quality of Life Outcomes in Clinical Trials?”</span> <em>Journal of Patient-Reported Outcomes</em> 4 (1): 1–8. <a href="https://link.springer.com/article/10.1186/s41687-020-00218-5">https://link.springer.com/article/10.1186/s41687-020-00218-5</a>.
+</div>
+<div id="ref-pohl2021estimands" class="csl-entry" role="listitem">
+Pohl, Moritz, Lukas Baumann, Rouven Behnisch, Marietta Kirchner, Johannes Krisam, and Anja Sander. 2021. <span>“<span class="nocase">Estimands—A Basic Element for Clinical Trials</span>.”</span> <em>Deutsches <span>Ä</span>rzteblatt International</em> 118 (51-52): 883–88. <a href="https://doi.org/10.3238/arztebl.m2021.0373">https://doi.org/10.3238/arztebl.m2021.0373</a>.
+</div>
+<div id="ref-van2018flexible" class="csl-entry" role="listitem">
+Van Buuren, Stef. 2018. <em>Flexible Imputation of Missing Data</em>. CRC press. <a href="https://stefvanbuuren.name/fimd/">https://stefvanbuuren.name/fimd/</a>.
+</div>
+</div>
+
+
+<script>
+function getQuartoHeadingAnchorIcon() {
+  const afterBodyScript = document.getElementById("quarto-html-after-body");
+  if (!afterBodyScript) {
+    return null;
+  }
+
+  const match = afterBodyScript.textContent.match(/const icon = ["']([^"']+)["']/);
+  return match ? match[1] : null;
+}
+
+// Quarto chain-link glyph from Bootstrap Icons.
+const chainLinkIconFallback = "\ue9cb";
+const headingAnchorIcon = getQuartoHeadingAnchorIcon();
+const defaultAnchorIconFallback =
+  headingAnchorIcon && headingAnchorIcon !== "#" ? headingAnchorIcon : chainLinkIconFallback;
+
+function getDefaultAnchorTemplate() {
+  // Prefer Quarto heading anchors first so the visible chain-link icon is reused.
+  const defaultAnchor =
+    document.querySelector(".anchored > a.anchorjs-link") ||
+    document.querySelector("a.anchorjs-link[data-anchorjs-icon]");
+  if (!defaultAnchor) {
+    return null;
+  }
+
+  return {
+    // Detect icon value from the template anchor's attribute or text.
+    icon: defaultAnchor.getAttribute("data-anchorjs-icon") || defaultAnchor.textContent.trim(),
+    hasDataIcon: defaultAnchor.hasAttribute("data-anchorjs-icon"),
+    style: defaultAnchor.getAttribute("style")
+  };
+}
+
+function normalizeAnchorIcon(icon) {
+  if (!icon || icon === "#") {
+    return defaultAnchorIconFallback;
+  }
+
+  return icon;
+}
+
+function createChainLinkSvgIcon() {
+  const svgNs = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNs, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("fill", "currentColor");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.setAttribute("class", "equation-anchor-icon");
+
+  [
+    "M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-2H11a4 4 0 0 1-4 3H4a4 4 0 0 1 0-8h2.354z",
+    "M9.646 10.5H12a3 3 0 1 0 0-6H9a3 3 0 0 0-2.83 2H5a4 4 0 0 1 4-3h3a4 4 0 0 1 0 8H9.646z",
+    "M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5"
+  ].forEach(function (pathData) {
+    const path = document.createElementNS(svgNs, "path");
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+  });
+
+  return svg;
+}
+
+function alignEquationAnchorWithDefault(anchor, template) {
+  if (!anchor) {
+    return;
+  }
+
+  anchor.classList.remove("external");
+  anchor.classList.add("no-external");
+
+  const normalizedIcon = normalizeAnchorIcon(template && template.icon);
+  if (normalizedIcon === chainLinkIconFallback) {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = "";
+    anchor.appendChild(createChainLinkSvgIcon());
+  } else if (template && template.hasDataIcon) {
+    anchor.setAttribute("data-anchorjs-icon", normalizedIcon);
+    anchor.textContent = normalizedIcon;
+  } else {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = normalizedIcon;
+  }
+
+  if (template && template.style) {
+    anchor.setAttribute("style", template.style);
+  } else {
+    anchor.removeAttribute("style");
+  }
+}
+
+function alignEquationAnchorsWithDefault() {
+  const template = getDefaultAnchorTemplate();
+  document.querySelectorAll("a.equation-anchor").forEach(function (anchor) {
+    alignEquationAnchorWithDefault(anchor, template);
+  });
+}
+
+function markCollapseTogglesExpanded(collapseEl) {
+  const toggleTargets = [];
+  if (collapseEl.id) {
+    toggleTargets.push("#" + collapseEl.id);
+  }
+
+  const genericCollapseClasses = new Set(["collapse", "show", "collapsing", "callout-collapse", "navbar-collapse"]);
+  collapseEl.classList.forEach(function (className) {
+    if (!genericCollapseClasses.has(className)) {
+      toggleTargets.push("." + className);
+    }
+  });
+
+  document.querySelectorAll("[data-bs-target], [href]").forEach(function (toggle) {
+    if (
+      toggleTargets.includes(toggle.getAttribute("data-bs-target")) ||
+      toggleTargets.includes(toggle.getAttribute("href"))
+    ) {
+      toggle.classList.remove("collapsed");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+}
+
+function expandCollapsedAncestors(target) {
+  if (!target) {
+    return;
+  }
+
+  const collapsedAncestors = [];
+  let current = target.parentElement;
+  while (current) {
+    if (current.classList && current.classList.contains("collapse") && !current.classList.contains("show")) {
+      collapsedAncestors.unshift(current);
+    }
+    current = current.parentElement;
+  }
+
+  collapsedAncestors.forEach(function (collapseEl) {
+    if (window.bootstrap && window.bootstrap.Collapse) {
+      window.bootstrap.Collapse.getOrCreateInstance(collapseEl, { toggle: false }).show();
+    } else {
+      collapseEl.classList.add("show");
+      collapseEl.style.height = "";
+    }
+
+    markCollapseTogglesExpanded(collapseEl);
+  });
+}
+
+function revealEquationHashTarget() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) {
+    return;
+  }
+
+  const target = document.getElementById(id);
+  if (!target) {
+    return;
+  }
+
+  expandCollapsedAncestors(target);
+
+  window.setTimeout(function () {
+    target.scrollIntoView({ block: "center" });
+  }, 400);
+}
+
+function ensureEquationAnchorStyles() {
+  if (document.getElementById("equation-anchor-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "equation-anchor-styles";
+  style.textContent = `
+    .equation-anchor-target {
+      --equation-anchor-offset: 1.2rem;
+      position: relative;
+      display: block;
+    }
+    .equation-anchor {
+      position: absolute;
+      left: calc(-1 * var(--equation-anchor-offset));
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+    .equation-anchor:hover {
+      opacity: 1;
+    }
+    .equation-anchor-icon {
+      width: 0.9em;
+      height: 0.9em;
+      vertical-align: -0.125em;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  ensureEquationAnchorStyles();
+
+  let counter = 0;
+
+  document.querySelectorAll(".math.display").forEach(function (mathEl) {
+    // For labeled equations, Quarto wraps the math display span in an eq-* span.
+    // For unlabeled equations, use the parent element (typically a <p>).
+    const labeledContainer = mathEl.closest("[id^='eq-']");
+    const target = labeledContainer || mathEl.parentElement;
+
+    if (!target) {
+      return;
+    }
+
+    // Skip if already processed.
+    if (target.querySelector(".equation-anchor")) {
+      return;
+    }
+
+    // Use the labeled container's id, or assign an auto-generated id.
+    let id = labeledContainer ? labeledContainer.id : target.id;
+    if (!id) {
+      counter++;
+      id = "eq-anchor-" + counter;
+      target.id = id;
+    }
+
+    target.classList.add("equation-anchor-target");
+
+    const anchor = document.createElement("a");
+    anchor.className = "equation-anchor anchorjs-link";
+    anchor.href = "#" + id;
+    anchor.setAttribute("aria-label", "Permalink to this equation");
+    target.appendChild(anchor);
+  });
+
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+
+window.addEventListener("load", function () {
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+window.addEventListener("hashchange", revealEquationHashTarget);
+</script>
+
+<script>
+(function () {
+  var css = [
+    "#revealjs-html-link {",
+    "  position: fixed;",
+    "  top: 8px;",
+    "  right: 8px;",
+    "  z-index: 31;",
+    "  font-size: 0.55em;",
+    "  line-height: 1;",
+    "}",
+    "#revealjs-html-link a {",
+    "  color: rgba(0, 0, 0, 0.5);",
+    "  text-decoration: none;",
+    "  border: 1px solid rgba(0, 0, 0, 0.2);",
+    "  padding: 4px 8px;",
+    "  border-radius: 4px;",
+    "  background: rgba(255, 255, 255, 0.8);",
+    "  transition: color 0.15s, background 0.15s;",
+    "}",
+    "#revealjs-html-link a:hover {",
+    "  color: rgba(0, 0, 0, 0.9);",
+    "  background: rgba(255, 255, 255, 0.98);",
+    "  border-color: rgba(0, 0, 0, 0.4);",
+    "}"
+  ].join("\n");
+
+  function getHtmlBase() {
+    var url = window.location.href.split("#")[0];
+    return url.replace(/-slides\.html$/, ".html");
+  }
+
+  function getCurrentSectionId() {
+    if (typeof Reveal === "undefined" || !Reveal.getCurrentSlide) {
+      return null;
+    }
+    var slide = Reveal.getCurrentSlide();
+    if (!slide) {
+      return null;
+    }
+    // If the current slide itself has an id, use it
+    if (slide.id) {
+      return slide.id;
+    }
+    // Walk backwards through sibling sections to find the nearest one with an id
+    var sibling = slide.previousElementSibling;
+    while (sibling) {
+      if (sibling.tagName === "SECTION" && sibling.id) {
+        return sibling.id;
+      }
+      sibling = sibling.previousElementSibling;
+    }
+    // Fall back to the first section[id] inside the parent container
+    var parent = slide.parentElement;
+    if (parent && parent.tagName === "SECTION") {
+      var firstNamed = parent.querySelector("section[id]");
+      if (firstNamed) {
+        return firstNamed.id;
+      }
+    }
+    return null;
+  }
+
+  function updateHtmlLink() {
+    var anchor = document.getElementById("revealjs-html-anchor");
+    if (!anchor) {
+      return;
+    }
+    var sectionId = getCurrentSectionId();
+    anchor.href = getHtmlBase() + (sectionId ? "#" + sectionId : "");
+  }
+
+  function initRevealJsHtmlLink() {
+    var htmlBase = getHtmlBase();
+
+    // Don't add the link if the URL doesn't follow the -slides.html convention
+    if (htmlBase === window.location.href.split("#")[0]) {
+      return;
+    }
+
+    // Inject styles
+    var styleElement = document.createElement("style");
+    styleElement.textContent = css;
+    document.head.appendChild(styleElement);
+
+    // Create the link element and append it directly to body so it stays
+    // visible across all slides regardless of Reveal.js section visibility
+    var div = document.createElement("div");
+    div.id = "revealjs-html-link";
+    var anchor = document.createElement("a");
+    anchor.id = "revealjs-html-anchor";
+    anchor.href = htmlBase;
+    anchor.target = "_blank";
+    anchor.title = "View this section in the HTML notes";
+    anchor.setAttribute("aria-label", "View this section in the HTML notes");
+    anchor.innerHTML = "&#128196;&nbsp;Webpage version";
+    div.appendChild(anchor);
+    document.body.appendChild(div);
+
+    // Register Reveal.js slide-change listener to keep the link updated
+    if (typeof Reveal !== "undefined") {
+      Reveal.on("ready", updateHtmlLink);
+      Reveal.on("slidechanged", updateHtmlLink);
+    }
+
+    updateHtmlLink();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initRevealJsHtmlLink);
+  } else {
+    initRevealJsHtmlLink();
+  }
+})();
+</script>
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/morrison-lab\.github\.io\/rme\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
