@@ -495,8 +495,13 @@ When a section heading immediately precedes the div
 the `{{< slidebreak >}}` may be omitted
 so the heading shares its slide with the div,
 rather than producing a title-only slide.
-Mark the intentional omission with an inline
-`<!-- ... do not re-flag -->` comment at that spot.
+Mark the intentional omission with an inline HTML comment
+that states the reason,
+addressed to whoever edits the page next rather than to the review bot —
+e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` —
+not `<!-- ... do not re-flag -->`.
+A comment written to instruct a bot goes stale when the bot changes;
+a comment stating the reason stays true regardless.
 
 ## Example Formatting
 
