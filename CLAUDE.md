@@ -47,7 +47,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Use `{{< slidebreak >}}` instead of `---` for slide breaks
 - Add `{{< slidebreak >}}` immediately before every theorem-type div (`#thm-`, `#lem-`, `#cor-`, `#prp-`, `#cnj-`, `#def-`, `#exm-`, `#exr-`, `#rem-`, `#sol-`)
 - When a subfile begins with a theorem-type div, put the preceding `{{< slidebreak >}}` in the **parent** file (before the `{{< include >}}`), not inside the subfile
-  - Exception: when a section heading immediately precedes the div (or the `{{< include >}}` of a subfile that begins with one), the slidebreak may be omitted so the heading shares its slide with the div, rather than producing a title-only slide. Mark the intentional omission with an inline HTML comment that states the reason, addressed to whoever edits the page next rather than to the review bot — e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` — not `<!-- ... do not re-flag -->`. A comment written to instruct a bot goes stale when the bot changes; a comment stating the reason stays true regardless. (Decided 2026-09-28; `Morrison-Lab/pds` and `Morrison-Lab/sds` made the same change.)
+  - Exception: when a section heading immediately precedes the div (or the `{{< include >}}` of a subfile that begins with one), the slidebreak may be omitted so the heading shares its slide with the div, rather than producing a title-only slide.
+    Mark the intentional omission with an inline HTML comment that states the reason, addressed to whoever edits the page next rather than to the review bot — e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` — not `<!-- ... do not re-flag -->`.
+    A comment written to instruct a bot goes stale when the bot changes;
+    a comment stating the reason stays true regardless.
+    (Decided 2026-09-28; `Morrison-Lab/pds` and `Morrison-Lab/sds` made the same change.)
   - `{{< slidebreak >}}` and `---` are **not equivalent** and must not be combined: per `_extensions/slidebreak/slidebreak.lua`, the shortcode only renders a rule in the `revealjs` profile and is a no-op everywhere else, while a bare `---` renders a visible `<hr>` in *every* profile (book, website, PDF handout). When relocating an example/theorem div next to an existing `---` separator, replace that `---` with `{{< slidebreak >}}` rather than adding the shortcode alongside it — leaving both introduces a stray `<hr>` in the non-slide renders.
 - Default to `#| code-fold: true` for figure/table chunks
 - Use div format (`:::{#fig-...}`) for figures and tables, not chunk-option `fig-cap`/`tbl-cap`
@@ -113,7 +117,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Variable definitions in exercises: use bullet points/table with symbol, meaning, and dataset column
 - After every definition or concept, include a concrete example — preferably numerical — to illustrate the abstract idea; use a `{#exm-...}` div; if a counterexample is feasible, include one immediately after the example
 - After every theoretical claim (thm, cor, lem): when a proof is feasible and in scope, (1) immediately follow with a proof, then (2) immediately follow with an example utilizing the claim; when a proof is non-elementary or out of scope (e.g., `@thm-fubini`, `@thm-fubini-tonelli`), omit the proof block and proceed directly to the example
-  - Narrow exception: an immediate corollary whose statement is itself a concrete instance of the result it follows needs no separate example — the corollary already is one. For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of expectation needs no further example: a filler example there would just restate the corollary in different symbols, costing the reader more than it teaches. This exemption is narrow — it covers only a corollary whose own statement already instantiates the preceding result; definitions and theorems still require a genuine example, and a corollary that adds new content of its own still needs one. (Decided 2026-09-28.)
+  - Narrow exception: an immediate corollary whose statement is itself a concrete instance of the result it follows needs no separate example — the corollary already is one.
+    For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of expectation needs no further example: a filler example there would just restate the corollary in different symbols, costing the reader more than it teaches.
+    This exemption is narrow — it covers only a corollary whose own statement already instantiates the preceding result;
+    definitions and theorems still require a genuine example, and a corollary that adds new content of its own still needs one.
+    (Decided 2026-09-28.)
 - Always arrange divs and sections so that related items are adjacent: theorem → proof → example(s) → counterexample(s)
 - Never use "above" or "below" to refer to content — cross-reference with `@label` syntax instead
 - Always add a noun phrase after "This", "That", and "Those" to clarify the referent (e.g., "This estimator", not "This")
