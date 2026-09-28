@@ -81,6 +81,18 @@ strive for **straightforward narrative flow**:
   Use a `{#exm-...}` div immediately following the `{#def-...}` div.
   The example should show specific numbers or a small dataset,
   not just repeat the definition in different words.
+  - Narrow exception: an immediate corollary whose statement is itself
+    a concrete instance of the result it follows needs no separate example —
+    the corollary already is one.
+    For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of
+    expectation needs no further example:
+    a filler example there would just restate the corollary in different
+    symbols, costing the reader more than it teaches.
+    This exemption is narrow — it covers only a corollary whose own statement
+    already instantiates the preceding result;
+    definitions and theorems still require a genuine example,
+    and a corollary that adds new content of its own still needs one.
+    (Decided 2026-09-28.)
 
 ## Code Review Scope
 
@@ -483,8 +495,13 @@ When a section heading immediately precedes the div
 the `{{< slidebreak >}}` may be omitted
 so the heading shares its slide with the div,
 rather than producing a title-only slide.
-Mark the intentional omission with an inline
-`<!-- ... do not re-flag -->` comment at that spot.
+Mark the intentional omission with an inline HTML comment
+that states the reason,
+addressed to whoever edits the page next rather than to the review bot —
+e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` —
+not `<!-- ... do not re-flag -->`.
+A comment written to instruct a bot goes stale when the bot changes;
+a comment stating the reason stays true regardless.
 
 ## Example Formatting
 
