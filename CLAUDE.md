@@ -152,7 +152,7 @@ If a failure is not caused by your changes, document it in the PR description.
 
 When summarizing PRs, issues, workflow runs, or jobs, always include the
 GitHub URL alongside the reference (e.g.,
-[#897](https://github.com/d-morrison/rme/pull/897), not just "#897").
+[#897](https://github.com/Morrison-Lab/rme/pull/897), not just "#897").
 
 ## ai-config skills and memories
 

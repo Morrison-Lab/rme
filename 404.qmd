@@ -1,0 +1,25 @@
+---
+title: "Page not found"
+format:
+  html:
+    include-in-header:
+      text: |
+        <script>
+        // Chapters used to be served from the site root (e.g. /rme/estimation.html)
+        // and now live under chapters/. Send old links to the new location,
+        // keeping any query string and #anchor.
+        (function () {
+          var p = location.pathname;
+          var m = p.match(/^(.*\/)([^\/]+)$/);
+          if (m && p.indexOf("/chapters/") === -1) {
+            location.replace(m[1] + "chapters/" + m[2] + location.search + location.hash);
+          }
+        })();
+        </script>
+---
+
+Sorry, that page doesn't exist.
+
+If you followed an old link, the chapter has probably moved under
+[`chapters/`](chapters/index.qmd); try the [home page](chapters/index.qmd)
+or the search box.
