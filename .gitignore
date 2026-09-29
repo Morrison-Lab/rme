@@ -11,12 +11,14 @@
 .posit/assistant/
 # Ignore everything under .claude/ (local session state,
 # settings.local.json, etc.) EXCEPT the shared, committed settings.json
-# (permission allowlist plus the ai-config plugin/marketplace config) and
-# the shared slash commands.
+# (permission allowlist plus the ai-config plugin/marketplace config),
+# the shared slash commands, and the shared repo skills.
 .claude/*
 !.claude/settings.json
 !.claude/commands
 !.claude/commands/**
+!.claude/skills
+!.claude/skills/**
 /.luarc.json
 
 # Quarto and render artifacts
@@ -54,8 +56,9 @@ rsconnect/
 !CLAUDE.md
 !CODE_OF_CONDUCT.md
 !LICENSE.md
-# Keep the shared .claude slash commands (their .md files override *.md above).
+# Keep the shared .claude slash commands and skills (their .md files override *.md above).
 !.claude/commands/**
+!.claude/skills/**
 !SUBMODULE_SETUP.md
 !.github/**/*.md
 
