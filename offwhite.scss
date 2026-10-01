@@ -15,13 +15,15 @@
   --bs-body-color: #{$ink};
   --bs-link-color: #{$link};
   --bs-link-hover-color: #{$link-hover};
+  --bs-link-color-rgb: #{red($link)}, #{green($link)}, #{blue($link)};
+  --bs-link-hover-color-rgb: #{red($link-hover)}, #{green($link-hover)}, #{blue($link-hover)};
   --bs-secondary-color: #{$muted};
   --bs-border-color: #{$border};
   background-color: $page;
   color: $ink;
 
-  a { color: $link; }
-  a:hover { color: $link-hover; }
+  // Links take the palette colour through Bootstrap's own link variables
+  // above, so component anchors (.btn, .nav-link, .page-link) keep theirs.
   .text-muted { color: $muted !important; }
   // Cosmo's greys (#6d7a86 quotes and captions, #6c757d code buttons) fall to
   // 3.6-4.2:1 on the tinted pages; use the palette's muted ink (5.2-5.4:1).
