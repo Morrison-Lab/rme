@@ -1,8 +1,8 @@
 :::{#def-incidence-rate}
 #### Incidence rate
 
-Given a population of $N$ individuals indexed by $i$, 
-each with their own hazard rate $\haz_i(t)$, 
+Given a population of $N$ individuals indexed by $i$,
+each with their own hazard rate $\haz_i(t)$,
 the **incidence rate** for that population is the mean hazard rate:
 
 $$\incidence(t) \eqdef \frac{1}{N}\sumiN \haz_i(t)$$
@@ -15,11 +15,26 @@ $$\incidence(t) \eqdef \frac{1}{N}\sumiN \haz_i(t)$$
 
 #### Incidence rate in a homogenous population
 
-If a population of individuals indexed by $i$ 
-all have identical hazard rates $\haz_i(t) = \haz(t)$, 
-then the **incidence rate** for that population 
+If a population of individuals indexed by $i$
+all have identical hazard rates $\haz_i(t) = \haz(t)$,
+then the **incidence rate** for that population
 is equal to the hazard rate:
 
 $$\incidence(t) = \haz(t)$$
 
+:::
+
+::: proof
+By Definition @def-incidence-rate,
+the incidence rate is:
+
+$$
+\ba
+\incidence(t)
+&= \frac{1}{N}\sumiN \haz_i(t) && \text{(by Definition @def-incidence-rate)} \\
+&= \frac{1}{N}\sumiN \haz(t) && \text{(since } \haz_i(t) = \haz(t) \text{ for all } i \text{)} \\
+&= \frac{1}{N} \cdot N \haz(t) && \text{(summing } N \text{ identical terms)} \\
+&= \haz(t) && \text{(simplifying)}
+\ea
+$$
 :::

@@ -1,38 +1,16 @@
-Let's start by expanding each term of the right-hand side:
-
 $$
 \ba
-\sqf{\bias{\hth}}
-&=\sqf{\E{\hth} - \th}\\
-&=\sqf{\E{\hth}} - 2\E{\hth}\th+\th^2\\
+\mselr{\hth}
+&= \E{\sqf{\erf{\hth}}} && \text{(by Definition @def-mse)} \\
+&= \E{(\hth - \th)^2} && \text{(by Definition @def-estimation-error)} \\
+&= \E{\paren{(\hth - \E{\hth}) + (\E{\hth} - \th)}^2} && \text{(adding and subtracting } \E{\hth} \text{)} \\
+&= \E{\paren{\hth - \E{\hth}}^2 + 2(\hth - \E{\hth})(\E{\hth} - \th) + (\E{\hth} - \th)^2} && \text{(expanding the square)} \\
+&= \E{(\hth - \E{\hth})^2} + \E{2(\hth - \E{\hth})(\E{\hth} - \th)} + \E{(\E{\hth} - \th)^2} && \text{(by linearity of expectation)} \\
+&= \E{(\hth - \E{\hth})^2} + 2(\E{\hth} - \th)\E{\hth - \E{\hth}} + (\E{\hth} - \th)^2 && \text{(since } \E{\hth} - \th \text{ is constant)} \\
+&= \Var{\hth} + 2(\E{\hth} - \th)(\E{\hth} - \E{\hth}) && \text{(by Definition @def-variance and linearity of expectation)} \\
+&\quad + \sqf{\bias{\hth}} && \text{(by @thm-bias-exprs)} \\
+&= \Var{\hth} + 2(\E{\hth} - \th)(0) + \sqf{\bias{\hth}} && \text{(since } \E{\hth} - \E{\hth} = 0 \text{)} \\
+&= \Var{\hth} + \sqf{\bias{\hth}} && \text{(simplifying)} \\
+&= \sqf{\bias{\hth}} + \Var{\hth} && \text{(by commutativity of addition)}
 \ea
 $$
-
-$$\var{\hth} = \E{\hth^2} - \sqf{\E{\hth}}$$
-
-Now, add them together and simplify:
-
-$$
-\ba
-\sqf{\bias{\hth}} + \var{\hth}
-&=\sqf{\E{\hth}} - 2\E{\hth}\th+\th^2 + \E{\hth^2} - \sqf{\E{\hth}}\\
-&=\E{\hth^2} - 2\E{\hth}\th+\th^2\\
-\ea
-$$
-
-Now let's expand the left-hand side to reach the same expression:
-
-$$
-\ba
-\mselr{\hth} 
-&= \E{\sqf{\erf{\hth}}}\\
-&= \E{(\hth - \th)^2}\\
-&= \E{\hth^2 - 2\hth\th + \th^2}\\
-&=\E{\hth^2} - \E{2\hth\th}+\E{\th^2}\\
-&=\E{\hth^2} - 2\E{\hth}\th+\th^2\\
-\ea
-$$
-
-$\mselr{\hth}$ and $\sqf{\bias{\hth}} + \var{\hth}$ both equal $\E{\hth^2} - 2\E{\hth}\th+\th^2$. Equality is transitive, so $\mselr{\hth}$ and $\sqf{\bias{\hth}} + \var{\hth}$ are equal to each other:
-
-$$\mselr{\hth} = \sqf{\bias{\hth}} + \var{\hth}$$

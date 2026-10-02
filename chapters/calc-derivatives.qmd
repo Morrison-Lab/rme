@@ -7,17 +7,17 @@ $$\deriv{x}c = 0$$
 
 {{< slidebreak >}}
 
-
 :::{#thm-deriv-const-factor}
-#### Power rule
+#### Constant factor rule
 
-If $a$ is constant with respect to $x$, then:
-$$\deriv{x}ay = a \derivf{x}{y}$$
+If $a$ is constant with respect to $x$,
+then:
+
+$$\deriv{x}ay = a \derivf{y}{x}$$
 
 :::
 
 {{< slidebreak >}}
-
 
 :::{#thm-deriv-polynomial}
 #### Power rule
@@ -31,34 +31,43 @@ $$\deriv{x}x^q = qx^{q-1}$$
 :::{#thm-deriv-log}
 
 #### Derivative of natural logarithm
+
 $$\dlogf{x} = \frac{1}{x} = x^{-1}$$
+
 :::
 
 {{< slidebreak >}}
 
 :::{#thm-deriv-exp}
-#### derivative of exponential
+#### Derivative of exponential
+
 $$\dexpf{x} = \expf{x}$$
+
 :::
 
 {{< slidebreak >}}
 
 :::{#thm-product-rule}
 #### Product rule
+
 $$(ab)' = ab' + ba'$$
+
 :::
 
 {{< slidebreak >}}
 
 :::{#thm-quotient-rule}
 #### Quotient rule
+
 $$(a/b)' = a'/b - (a/b^2)b'$$
+
 :::
 
 {{< slidebreak >}}
 
 :::{#thm-chain-rule}
 #### Chain rule
+
 $$\ba
 \derivf{a}{c} &=
 \derivf{a}{b} \derivf{b}{c}
@@ -70,6 +79,7 @@ $$
 or in [Euler/Lagrange notation](https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange's_notation):
 
 $$(f(g(x)))' = g'(x) f'(g(x))$$
+
 :::
 
 {{< slidebreak >}}
@@ -77,6 +87,7 @@ $$(f(g(x)))' = g'(x) f'(g(x))$$
 :::{#cor-deriv-log-chain}
 
 #### Chain rule for logarithms
+
 $$
 \deriv{x}\log{f(x)} = \frac{f'(x)}{f(x)}
 $$
@@ -84,7 +95,17 @@ $$
 :::
 
 ::: proof
-Apply @thm-chain-rule and @thm-deriv-log.
+Let $u = f(x)$.
+By the chain rule (@thm-chain-rule):
+
+$$
+\ba
+\deriv{x}\log{f(x)}
+&= \paren{\deriv{u}\log(u)} \cdot \paren{\deriv{x}f(x)} && \text{(by @thm-chain-rule)} \\
+&= \frac{1}{u} \cdot f'(x) && \text{(by @thm-deriv-log)} \\
+&= \frac{f'(x)}{f(x)} && \text{(substituting } u = f(x) \text{)}
+\ea
+$$
 :::
 
 ---
