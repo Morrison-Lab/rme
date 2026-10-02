@@ -99,9 +99,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-94cd69d05cc65796c3a1d047b1435211.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-1bcb2eaaf09c6c3c9f1dc9011af1d06d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-94cd69d05cc65796c3a1d047b1435211.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
@@ -164,18 +164,70 @@ cookieconsent.run({
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
+</script><script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
 div.callout-proof.callout {
   border-left-color: #37474F;
 }
@@ -185,26 +237,6 @@ div.callout-proof.callout-style-default .callout-header {
 div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-def.callout {
-  border-left-color: #1B5E20;
-}
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
-}
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-prp.callout {
-  border-left-color: #827717;
-}
-div.callout-prp.callout-style-default .callout-header {
-  background-color: rgba(130, 119, 23, 0.13);
-}
-div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-cor.callout {
   border-left-color: #00838F;
@@ -216,35 +248,25 @@ div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-cnj.callout {
-  border-left-color: #558B2F;
+div.callout-remark.callout {
+  border-left-color: #AD1457;
 }
-div.callout-cnj.callout-style-default .callout-header {
-  background-color: rgba(85, 139, 47, 0.13);
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
 }
-div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-lem.callout {
-  border-left-color: #1565C0;
+div.callout-solution.callout {
+  border-left-color: #4E342E;
 }
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
 }
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-exm.callout {
-  border-left-color: #6A1B9A;
-}
-div.callout-exm.callout-style-default .callout-header {
-  background-color: rgba(106, 27, 154, 0.13);
-}
-div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-exr.callout {
   border-left-color: #FFA500;
@@ -256,15 +278,55 @@ div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-remark.callout {
-  border-left-color: #AD1457;
+div.callout-prp.callout {
+  border-left-color: #827717;
 }
-div.callout-remark.callout-style-default .callout-header {
-  background-color: rgba(173, 20, 87, 0.13);
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
 }
-div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
+}
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
+}
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
@@ -737,7 +799,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-09-30: 23:17:08 (UTC)</p>
+      <p class="date">Last modified: 2026-10-02: 1:10:28 (UTC)</p>
     </div>
   </div>
   
@@ -1444,23 +1506,23 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="gyrxgostyt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gyrxgostyt table {
+<div id="zbjrgoxqie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zbjrgoxqie table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gyrxgostyt thead, #gyrxgostyt tbody, #gyrxgostyt tfoot, #gyrxgostyt tr, #gyrxgostyt td, #gyrxgostyt th {
+#zbjrgoxqie thead, #zbjrgoxqie tbody, #zbjrgoxqie tfoot, #zbjrgoxqie tr, #zbjrgoxqie td, #zbjrgoxqie th {
   border-style: none;
 }
 
-#gyrxgostyt p {
+#zbjrgoxqie p {
   margin: 0;
   padding: 0;
 }
 
-#gyrxgostyt .gt_table {
+#zbjrgoxqie .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1486,12 +1548,12 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-left-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_caption {
+#zbjrgoxqie .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gyrxgostyt .gt_title {
+#zbjrgoxqie .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1503,7 +1565,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-width: 0;
 }
 
-#gyrxgostyt .gt_subtitle {
+#zbjrgoxqie .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1515,7 +1577,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-width: 0;
 }
 
-#gyrxgostyt .gt_heading {
+#zbjrgoxqie .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1527,13 +1589,13 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_bottom_border {
+#zbjrgoxqie .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_col_headings {
+#zbjrgoxqie .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1548,7 +1610,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_col_heading {
+#zbjrgoxqie .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1568,7 +1630,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#gyrxgostyt .gt_column_spanner_outer {
+#zbjrgoxqie .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1580,15 +1642,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 4px;
 }
 
-#gyrxgostyt .gt_column_spanner_outer:first-child {
+#zbjrgoxqie .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gyrxgostyt .gt_column_spanner_outer:last-child {
+#zbjrgoxqie .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gyrxgostyt .gt_column_spanner {
+#zbjrgoxqie .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1600,11 +1662,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   width: 100%;
 }
 
-#gyrxgostyt .gt_spanner_row {
+#zbjrgoxqie .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gyrxgostyt .gt_group_heading {
+#zbjrgoxqie .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1630,7 +1692,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   text-align: left;
 }
 
-#gyrxgostyt .gt_empty_group_heading {
+#zbjrgoxqie .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1645,15 +1707,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: middle;
 }
 
-#gyrxgostyt .gt_from_md > :first-child {
+#zbjrgoxqie .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gyrxgostyt .gt_from_md > :last-child {
+#zbjrgoxqie .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gyrxgostyt .gt_row {
+#zbjrgoxqie .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1672,7 +1734,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#gyrxgostyt .gt_stub {
+#zbjrgoxqie .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1685,7 +1747,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#gyrxgostyt .gt_stub_row_group {
+#zbjrgoxqie .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1699,15 +1761,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: top;
 }
 
-#gyrxgostyt .gt_row_group_first td {
+#zbjrgoxqie .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gyrxgostyt .gt_row_group_first th {
+#zbjrgoxqie .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gyrxgostyt .gt_summary_row {
+#zbjrgoxqie .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1717,16 +1779,16 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#gyrxgostyt .gt_first_summary_row {
+#zbjrgoxqie .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_first_summary_row.thick {
+#zbjrgoxqie .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gyrxgostyt .gt_last_summary_row {
+#zbjrgoxqie .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1736,7 +1798,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_grand_summary_row {
+#zbjrgoxqie .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1746,7 +1808,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#gyrxgostyt .gt_first_grand_summary_row {
+#zbjrgoxqie .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1756,7 +1818,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_last_grand_summary_row_top {
+#zbjrgoxqie .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1766,11 +1828,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_striped {
+#zbjrgoxqie .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gyrxgostyt .gt_table_body {
+#zbjrgoxqie .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1779,7 +1841,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_footnotes {
+#zbjrgoxqie .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1793,7 +1855,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_footnote {
+#zbjrgoxqie .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1802,7 +1864,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#gyrxgostyt .gt_sourcenotes {
+#zbjrgoxqie .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1816,7 +1878,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#gyrxgostyt .gt_sourcenote {
+#zbjrgoxqie .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1824,72 +1886,72 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#gyrxgostyt .gt_left {
+#zbjrgoxqie .gt_left {
   text-align: left;
 }
 
-#gyrxgostyt .gt_center {
+#zbjrgoxqie .gt_center {
   text-align: center;
 }
 
-#gyrxgostyt .gt_right {
+#zbjrgoxqie .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gyrxgostyt .gt_font_normal {
+#zbjrgoxqie .gt_font_normal {
   font-weight: normal;
 }
 
-#gyrxgostyt .gt_font_bold {
+#zbjrgoxqie .gt_font_bold {
   font-weight: bold;
 }
 
-#gyrxgostyt .gt_font_italic {
+#zbjrgoxqie .gt_font_italic {
   font-style: italic;
 }
 
-#gyrxgostyt .gt_super {
+#zbjrgoxqie .gt_super {
   font-size: 65%;
 }
 
-#gyrxgostyt .gt_footnote_marks {
+#zbjrgoxqie .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gyrxgostyt .gt_asterisk {
+#zbjrgoxqie .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gyrxgostyt .gt_indent_1 {
+#zbjrgoxqie .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gyrxgostyt .gt_indent_2 {
+#zbjrgoxqie .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gyrxgostyt .gt_indent_3 {
+#zbjrgoxqie .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gyrxgostyt .gt_indent_4 {
+#zbjrgoxqie .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gyrxgostyt .gt_indent_5 {
+#zbjrgoxqie .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gyrxgostyt .katex-display {
+#zbjrgoxqie .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gyrxgostyt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zbjrgoxqie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1985,23 +2047,23 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-unadj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="zhiizawgfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zhiizawgfc table {
+<div id="ejknhgwriy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ejknhgwriy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zhiizawgfc thead, #zhiizawgfc tbody, #zhiizawgfc tfoot, #zhiizawgfc tr, #zhiizawgfc td, #zhiizawgfc th {
+#ejknhgwriy thead, #ejknhgwriy tbody, #ejknhgwriy tfoot, #ejknhgwriy tr, #ejknhgwriy td, #ejknhgwriy th {
   border-style: none;
 }
 
-#zhiizawgfc p {
+#ejknhgwriy p {
   margin: 0;
   padding: 0;
 }
 
-#zhiizawgfc .gt_table {
+#ejknhgwriy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2027,12 +2089,12 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_caption {
+#ejknhgwriy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zhiizawgfc .gt_title {
+#ejknhgwriy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2044,7 +2106,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#zhiizawgfc .gt_subtitle {
+#ejknhgwriy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2056,7 +2118,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#zhiizawgfc .gt_heading {
+#ejknhgwriy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2068,13 +2130,13 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_bottom_border {
+#ejknhgwriy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_col_headings {
+#ejknhgwriy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2089,7 +2151,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_col_heading {
+#ejknhgwriy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2109,7 +2171,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#zhiizawgfc .gt_column_spanner_outer {
+#ejknhgwriy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2121,15 +2183,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#zhiizawgfc .gt_column_spanner_outer:first-child {
+#ejknhgwriy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zhiizawgfc .gt_column_spanner_outer:last-child {
+#ejknhgwriy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zhiizawgfc .gt_column_spanner {
+#ejknhgwriy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2141,11 +2203,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#zhiizawgfc .gt_spanner_row {
+#ejknhgwriy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zhiizawgfc .gt_group_heading {
+#ejknhgwriy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2171,7 +2233,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#zhiizawgfc .gt_empty_group_heading {
+#ejknhgwriy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2186,15 +2248,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#zhiizawgfc .gt_from_md > :first-child {
+#ejknhgwriy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zhiizawgfc .gt_from_md > :last-child {
+#ejknhgwriy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zhiizawgfc .gt_row {
+#ejknhgwriy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2213,7 +2275,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#zhiizawgfc .gt_stub {
+#ejknhgwriy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2226,7 +2288,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#zhiizawgfc .gt_stub_row_group {
+#ejknhgwriy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2240,15 +2302,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#zhiizawgfc .gt_row_group_first td {
+#ejknhgwriy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zhiizawgfc .gt_row_group_first th {
+#ejknhgwriy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zhiizawgfc .gt_summary_row {
+#ejknhgwriy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2258,16 +2320,16 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#zhiizawgfc .gt_first_summary_row {
+#ejknhgwriy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_first_summary_row.thick {
+#ejknhgwriy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zhiizawgfc .gt_last_summary_row {
+#ejknhgwriy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2277,7 +2339,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_grand_summary_row {
+#ejknhgwriy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2287,7 +2349,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#zhiizawgfc .gt_first_grand_summary_row {
+#ejknhgwriy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2297,7 +2359,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_last_grand_summary_row_top {
+#ejknhgwriy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2307,11 +2369,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_striped {
+#ejknhgwriy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zhiizawgfc .gt_table_body {
+#ejknhgwriy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2320,7 +2382,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_footnotes {
+#ejknhgwriy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2334,7 +2396,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_footnote {
+#ejknhgwriy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2343,7 +2405,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#zhiizawgfc .gt_sourcenotes {
+#ejknhgwriy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2357,7 +2419,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#zhiizawgfc .gt_sourcenote {
+#ejknhgwriy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2365,72 +2427,72 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#zhiizawgfc .gt_left {
+#ejknhgwriy .gt_left {
   text-align: left;
 }
 
-#zhiizawgfc .gt_center {
+#ejknhgwriy .gt_center {
   text-align: center;
 }
 
-#zhiizawgfc .gt_right {
+#ejknhgwriy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zhiizawgfc .gt_font_normal {
+#ejknhgwriy .gt_font_normal {
   font-weight: normal;
 }
 
-#zhiizawgfc .gt_font_bold {
+#ejknhgwriy .gt_font_bold {
   font-weight: bold;
 }
 
-#zhiizawgfc .gt_font_italic {
+#ejknhgwriy .gt_font_italic {
   font-style: italic;
 }
 
-#zhiizawgfc .gt_super {
+#ejknhgwriy .gt_super {
   font-size: 65%;
 }
 
-#zhiizawgfc .gt_footnote_marks {
+#ejknhgwriy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zhiizawgfc .gt_asterisk {
+#ejknhgwriy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zhiizawgfc .gt_indent_1 {
+#ejknhgwriy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zhiizawgfc .gt_indent_2 {
+#ejknhgwriy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zhiizawgfc .gt_indent_3 {
+#ejknhgwriy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zhiizawgfc .gt_indent_4 {
+#ejknhgwriy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zhiizawgfc .gt_indent_5 {
+#ejknhgwriy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zhiizawgfc .katex-display {
+#ejknhgwriy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zhiizawgfc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ejknhgwriy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2494,23 +2556,23 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ntwvpuzdpr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ntwvpuzdpr table {
+<div id="qsohdmzdio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qsohdmzdio table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ntwvpuzdpr thead, #ntwvpuzdpr tbody, #ntwvpuzdpr tfoot, #ntwvpuzdpr tr, #ntwvpuzdpr td, #ntwvpuzdpr th {
+#qsohdmzdio thead, #qsohdmzdio tbody, #qsohdmzdio tfoot, #qsohdmzdio tr, #qsohdmzdio td, #qsohdmzdio th {
   border-style: none;
 }
 
-#ntwvpuzdpr p {
+#qsohdmzdio p {
   margin: 0;
   padding: 0;
 }
 
-#ntwvpuzdpr .gt_table {
+#qsohdmzdio .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2536,12 +2598,12 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_caption {
+#qsohdmzdio .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ntwvpuzdpr .gt_title {
+#qsohdmzdio .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2553,7 +2615,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#ntwvpuzdpr .gt_subtitle {
+#qsohdmzdio .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2565,7 +2627,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#ntwvpuzdpr .gt_heading {
+#qsohdmzdio .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2577,13 +2639,13 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_bottom_border {
+#qsohdmzdio .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_col_headings {
+#qsohdmzdio .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2598,7 +2660,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_col_heading {
+#qsohdmzdio .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2618,7 +2680,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#ntwvpuzdpr .gt_column_spanner_outer {
+#qsohdmzdio .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2630,15 +2692,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#ntwvpuzdpr .gt_column_spanner_outer:first-child {
+#qsohdmzdio .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ntwvpuzdpr .gt_column_spanner_outer:last-child {
+#qsohdmzdio .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ntwvpuzdpr .gt_column_spanner {
+#qsohdmzdio .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2650,11 +2712,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#ntwvpuzdpr .gt_spanner_row {
+#qsohdmzdio .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ntwvpuzdpr .gt_group_heading {
+#qsohdmzdio .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2680,7 +2742,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#ntwvpuzdpr .gt_empty_group_heading {
+#qsohdmzdio .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2695,15 +2757,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#ntwvpuzdpr .gt_from_md > :first-child {
+#qsohdmzdio .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ntwvpuzdpr .gt_from_md > :last-child {
+#qsohdmzdio .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ntwvpuzdpr .gt_row {
+#qsohdmzdio .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2722,7 +2784,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#ntwvpuzdpr .gt_stub {
+#qsohdmzdio .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2735,7 +2797,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ntwvpuzdpr .gt_stub_row_group {
+#qsohdmzdio .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2749,15 +2811,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#ntwvpuzdpr .gt_row_group_first td {
+#qsohdmzdio .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ntwvpuzdpr .gt_row_group_first th {
+#qsohdmzdio .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ntwvpuzdpr .gt_summary_row {
+#qsohdmzdio .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2767,16 +2829,16 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ntwvpuzdpr .gt_first_summary_row {
+#qsohdmzdio .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_first_summary_row.thick {
+#qsohdmzdio .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ntwvpuzdpr .gt_last_summary_row {
+#qsohdmzdio .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2786,7 +2848,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_grand_summary_row {
+#qsohdmzdio .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2796,7 +2858,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ntwvpuzdpr .gt_first_grand_summary_row {
+#qsohdmzdio .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2806,7 +2868,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_last_grand_summary_row_top {
+#qsohdmzdio .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2816,11 +2878,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_striped {
+#qsohdmzdio .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ntwvpuzdpr .gt_table_body {
+#qsohdmzdio .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2829,7 +2891,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_footnotes {
+#qsohdmzdio .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2843,7 +2905,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_footnote {
+#qsohdmzdio .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2852,7 +2914,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ntwvpuzdpr .gt_sourcenotes {
+#qsohdmzdio .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2866,7 +2928,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ntwvpuzdpr .gt_sourcenote {
+#qsohdmzdio .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2874,72 +2936,72 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ntwvpuzdpr .gt_left {
+#qsohdmzdio .gt_left {
   text-align: left;
 }
 
-#ntwvpuzdpr .gt_center {
+#qsohdmzdio .gt_center {
   text-align: center;
 }
 
-#ntwvpuzdpr .gt_right {
+#qsohdmzdio .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ntwvpuzdpr .gt_font_normal {
+#qsohdmzdio .gt_font_normal {
   font-weight: normal;
 }
 
-#ntwvpuzdpr .gt_font_bold {
+#qsohdmzdio .gt_font_bold {
   font-weight: bold;
 }
 
-#ntwvpuzdpr .gt_font_italic {
+#qsohdmzdio .gt_font_italic {
   font-style: italic;
 }
 
-#ntwvpuzdpr .gt_super {
+#qsohdmzdio .gt_super {
   font-size: 65%;
 }
 
-#ntwvpuzdpr .gt_footnote_marks {
+#qsohdmzdio .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ntwvpuzdpr .gt_asterisk {
+#qsohdmzdio .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ntwvpuzdpr .gt_indent_1 {
+#qsohdmzdio .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ntwvpuzdpr .gt_indent_2 {
+#qsohdmzdio .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ntwvpuzdpr .gt_indent_3 {
+#qsohdmzdio .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ntwvpuzdpr .gt_indent_4 {
+#qsohdmzdio .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ntwvpuzdpr .gt_indent_5 {
+#qsohdmzdio .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ntwvpuzdpr .katex-display {
+#qsohdmzdio .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ntwvpuzdpr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qsohdmzdio div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3229,23 +3291,23 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 </figcaption><div aria-describedby="tbl-causal-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="qvjqiiujcs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qvjqiiujcs table {
+<div id="hmwlolvlia" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hmwlolvlia table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qvjqiiujcs thead, #qvjqiiujcs tbody, #qvjqiiujcs tfoot, #qvjqiiujcs tr, #qvjqiiujcs td, #qvjqiiujcs th {
+#hmwlolvlia thead, #hmwlolvlia tbody, #hmwlolvlia tfoot, #hmwlolvlia tr, #hmwlolvlia td, #hmwlolvlia th {
   border-style: none;
 }
 
-#qvjqiiujcs p {
+#hmwlolvlia p {
   margin: 0;
   padding: 0;
 }
 
-#qvjqiiujcs .gt_table {
+#hmwlolvlia .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3271,12 +3333,12 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-left-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_caption {
+#hmwlolvlia .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qvjqiiujcs .gt_title {
+#hmwlolvlia .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3288,7 +3350,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-width: 0;
 }
 
-#qvjqiiujcs .gt_subtitle {
+#hmwlolvlia .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3300,7 +3362,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-width: 0;
 }
 
-#qvjqiiujcs .gt_heading {
+#hmwlolvlia .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3312,13 +3374,13 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_bottom_border {
+#hmwlolvlia .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_col_headings {
+#hmwlolvlia .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3333,7 +3395,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_col_heading {
+#hmwlolvlia .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3353,7 +3415,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#qvjqiiujcs .gt_column_spanner_outer {
+#hmwlolvlia .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3365,15 +3427,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 4px;
 }
 
-#qvjqiiujcs .gt_column_spanner_outer:first-child {
+#hmwlolvlia .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qvjqiiujcs .gt_column_spanner_outer:last-child {
+#hmwlolvlia .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qvjqiiujcs .gt_column_spanner {
+#hmwlolvlia .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3385,11 +3447,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   width: 100%;
 }
 
-#qvjqiiujcs .gt_spanner_row {
+#hmwlolvlia .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qvjqiiujcs .gt_group_heading {
+#hmwlolvlia .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3415,7 +3477,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   text-align: left;
 }
 
-#qvjqiiujcs .gt_empty_group_heading {
+#hmwlolvlia .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3430,15 +3492,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: middle;
 }
 
-#qvjqiiujcs .gt_from_md > :first-child {
+#hmwlolvlia .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qvjqiiujcs .gt_from_md > :last-child {
+#hmwlolvlia .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qvjqiiujcs .gt_row {
+#hmwlolvlia .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3457,7 +3519,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#qvjqiiujcs .gt_stub {
+#hmwlolvlia .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3470,7 +3532,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvjqiiujcs .gt_stub_row_group {
+#hmwlolvlia .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3484,15 +3546,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: top;
 }
 
-#qvjqiiujcs .gt_row_group_first td {
+#hmwlolvlia .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qvjqiiujcs .gt_row_group_first th {
+#hmwlolvlia .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qvjqiiujcs .gt_summary_row {
+#hmwlolvlia .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3502,16 +3564,16 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvjqiiujcs .gt_first_summary_row {
+#hmwlolvlia .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_first_summary_row.thick {
+#hmwlolvlia .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qvjqiiujcs .gt_last_summary_row {
+#hmwlolvlia .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3521,7 +3583,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_grand_summary_row {
+#hmwlolvlia .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3531,7 +3593,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvjqiiujcs .gt_first_grand_summary_row {
+#hmwlolvlia .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3541,7 +3603,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_last_grand_summary_row_top {
+#hmwlolvlia .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3551,11 +3613,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_striped {
+#hmwlolvlia .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qvjqiiujcs .gt_table_body {
+#hmwlolvlia .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3564,7 +3626,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_footnotes {
+#hmwlolvlia .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3578,7 +3640,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_footnote {
+#hmwlolvlia .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3587,7 +3649,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvjqiiujcs .gt_sourcenotes {
+#hmwlolvlia .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3601,7 +3663,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvjqiiujcs .gt_sourcenote {
+#hmwlolvlia .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3609,72 +3671,72 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvjqiiujcs .gt_left {
+#hmwlolvlia .gt_left {
   text-align: left;
 }
 
-#qvjqiiujcs .gt_center {
+#hmwlolvlia .gt_center {
   text-align: center;
 }
 
-#qvjqiiujcs .gt_right {
+#hmwlolvlia .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qvjqiiujcs .gt_font_normal {
+#hmwlolvlia .gt_font_normal {
   font-weight: normal;
 }
 
-#qvjqiiujcs .gt_font_bold {
+#hmwlolvlia .gt_font_bold {
   font-weight: bold;
 }
 
-#qvjqiiujcs .gt_font_italic {
+#hmwlolvlia .gt_font_italic {
   font-style: italic;
 }
 
-#qvjqiiujcs .gt_super {
+#hmwlolvlia .gt_super {
   font-size: 65%;
 }
 
-#qvjqiiujcs .gt_footnote_marks {
+#hmwlolvlia .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qvjqiiujcs .gt_asterisk {
+#hmwlolvlia .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qvjqiiujcs .gt_indent_1 {
+#hmwlolvlia .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qvjqiiujcs .gt_indent_2 {
+#hmwlolvlia .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qvjqiiujcs .gt_indent_3 {
+#hmwlolvlia .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qvjqiiujcs .gt_indent_4 {
+#hmwlolvlia .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qvjqiiujcs .gt_indent_5 {
+#hmwlolvlia .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qvjqiiujcs .katex-display {
+#hmwlolvlia .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qvjqiiujcs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hmwlolvlia div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3902,23 +3964,23 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
 </figcaption><div aria-describedby="tbl-ps-wcgs-ipw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="xjsvvtnmaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xjsvvtnmaz table {
+<div id="rxtkwcytvh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rxtkwcytvh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xjsvvtnmaz thead, #xjsvvtnmaz tbody, #xjsvvtnmaz tfoot, #xjsvvtnmaz tr, #xjsvvtnmaz td, #xjsvvtnmaz th {
+#rxtkwcytvh thead, #rxtkwcytvh tbody, #rxtkwcytvh tfoot, #rxtkwcytvh tr, #rxtkwcytvh td, #rxtkwcytvh th {
   border-style: none;
 }
 
-#xjsvvtnmaz p {
+#rxtkwcytvh p {
   margin: 0;
   padding: 0;
 }
 
-#xjsvvtnmaz .gt_table {
+#rxtkwcytvh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3944,12 +4006,12 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-left-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_caption {
+#rxtkwcytvh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xjsvvtnmaz .gt_title {
+#rxtkwcytvh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3961,7 +4023,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-width: 0;
 }
 
-#xjsvvtnmaz .gt_subtitle {
+#rxtkwcytvh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3973,7 +4035,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-width: 0;
 }
 
-#xjsvvtnmaz .gt_heading {
+#rxtkwcytvh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3985,13 +4047,13 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_bottom_border {
+#rxtkwcytvh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_col_headings {
+#rxtkwcytvh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4006,7 +4068,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_col_heading {
+#rxtkwcytvh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4026,7 +4088,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#xjsvvtnmaz .gt_column_spanner_outer {
+#rxtkwcytvh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4038,15 +4100,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 4px;
 }
 
-#xjsvvtnmaz .gt_column_spanner_outer:first-child {
+#rxtkwcytvh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xjsvvtnmaz .gt_column_spanner_outer:last-child {
+#rxtkwcytvh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xjsvvtnmaz .gt_column_spanner {
+#rxtkwcytvh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4058,11 +4120,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   width: 100%;
 }
 
-#xjsvvtnmaz .gt_spanner_row {
+#rxtkwcytvh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xjsvvtnmaz .gt_group_heading {
+#rxtkwcytvh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4088,7 +4150,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   text-align: left;
 }
 
-#xjsvvtnmaz .gt_empty_group_heading {
+#rxtkwcytvh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4103,15 +4165,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: middle;
 }
 
-#xjsvvtnmaz .gt_from_md > :first-child {
+#rxtkwcytvh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xjsvvtnmaz .gt_from_md > :last-child {
+#rxtkwcytvh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xjsvvtnmaz .gt_row {
+#rxtkwcytvh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4130,7 +4192,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#xjsvvtnmaz .gt_stub {
+#rxtkwcytvh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4143,7 +4205,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#xjsvvtnmaz .gt_stub_row_group {
+#rxtkwcytvh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4157,15 +4219,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: top;
 }
 
-#xjsvvtnmaz .gt_row_group_first td {
+#rxtkwcytvh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xjsvvtnmaz .gt_row_group_first th {
+#rxtkwcytvh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xjsvvtnmaz .gt_summary_row {
+#rxtkwcytvh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4175,16 +4237,16 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#xjsvvtnmaz .gt_first_summary_row {
+#rxtkwcytvh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_first_summary_row.thick {
+#rxtkwcytvh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xjsvvtnmaz .gt_last_summary_row {
+#rxtkwcytvh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4194,7 +4256,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_grand_summary_row {
+#rxtkwcytvh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4204,7 +4266,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#xjsvvtnmaz .gt_first_grand_summary_row {
+#rxtkwcytvh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4214,7 +4276,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_last_grand_summary_row_top {
+#rxtkwcytvh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4224,11 +4286,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_striped {
+#rxtkwcytvh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xjsvvtnmaz .gt_table_body {
+#rxtkwcytvh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4237,7 +4299,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_footnotes {
+#rxtkwcytvh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4251,7 +4313,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_footnote {
+#rxtkwcytvh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4260,7 +4322,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#xjsvvtnmaz .gt_sourcenotes {
+#rxtkwcytvh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4274,7 +4336,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#xjsvvtnmaz .gt_sourcenote {
+#rxtkwcytvh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4282,72 +4344,72 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#xjsvvtnmaz .gt_left {
+#rxtkwcytvh .gt_left {
   text-align: left;
 }
 
-#xjsvvtnmaz .gt_center {
+#rxtkwcytvh .gt_center {
   text-align: center;
 }
 
-#xjsvvtnmaz .gt_right {
+#rxtkwcytvh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xjsvvtnmaz .gt_font_normal {
+#rxtkwcytvh .gt_font_normal {
   font-weight: normal;
 }
 
-#xjsvvtnmaz .gt_font_bold {
+#rxtkwcytvh .gt_font_bold {
   font-weight: bold;
 }
 
-#xjsvvtnmaz .gt_font_italic {
+#rxtkwcytvh .gt_font_italic {
   font-style: italic;
 }
 
-#xjsvvtnmaz .gt_super {
+#rxtkwcytvh .gt_super {
   font-size: 65%;
 }
 
-#xjsvvtnmaz .gt_footnote_marks {
+#rxtkwcytvh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xjsvvtnmaz .gt_asterisk {
+#rxtkwcytvh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xjsvvtnmaz .gt_indent_1 {
+#rxtkwcytvh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xjsvvtnmaz .gt_indent_2 {
+#rxtkwcytvh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xjsvvtnmaz .gt_indent_3 {
+#rxtkwcytvh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xjsvvtnmaz .gt_indent_4 {
+#rxtkwcytvh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xjsvvtnmaz .gt_indent_5 {
+#rxtkwcytvh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xjsvvtnmaz .katex-display {
+#rxtkwcytvh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xjsvvtnmaz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rxtkwcytvh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

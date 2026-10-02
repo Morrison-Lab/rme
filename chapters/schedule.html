@@ -80,9 +80,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-94cd69d05cc65796c3a1d047b1435211.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-1bcb2eaaf09c6c3c9f1dc9011af1d06d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-94cd69d05cc65796c3a1d047b1435211.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -142,6 +142,68 @@ cookieconsent.run({
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
+</script><script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 div.callout-proof.callout {
@@ -153,6 +215,76 @@ div.callout-proof.callout-style-default .callout-header {
 div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exr.callout {
+  border-left-color: #FFA500;
+}
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
+}
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
+}
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
+}
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-remark.callout {
   border-left-color: #AD1457;
@@ -173,76 +305,6 @@ div.callout-cnj.callout-style-default .callout-header {
 div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-def.callout {
-  border-left-color: #1B5E20;
-}
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
-}
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-exm.callout {
-  border-left-color: #6A1B9A;
-}
-div.callout-exm.callout-style-default .callout-header {
-  background-color: rgba(106, 27, 154, 0.13);
-}
-div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-prp.callout {
-  border-left-color: #827717;
-}
-div.callout-prp.callout-style-default .callout-header {
-  background-color: rgba(130, 119, 23, 0.13);
-}
-div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-exr.callout {
-  border-left-color: #FFA500;
-}
-div.callout-exr.callout-style-default .callout-header {
-  background-color: rgba(255, 165, 0, 0.13);
-}
-div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cor.callout {
-  border-left-color: #00838F;
-}
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
-}
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
 </head>
@@ -633,7 +695,7 @@ div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.cal
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-09-30: 23:17:08 (UTC)</p>
+      <p class="date">Last modified: 2026-10-02: 1:10:28 (UTC)</p>
     </div>
   </div>
   
@@ -724,23 +786,23 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
 </figcaption><div aria-describedby="tbl-schedule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="gscehaxzjt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gscehaxzjt table {
+<div id="fyooehryvc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fyooehryvc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gscehaxzjt thead, #gscehaxzjt tbody, #gscehaxzjt tfoot, #gscehaxzjt tr, #gscehaxzjt td, #gscehaxzjt th {
+#fyooehryvc thead, #fyooehryvc tbody, #fyooehryvc tfoot, #fyooehryvc tr, #fyooehryvc td, #fyooehryvc th {
   border-style: none;
 }
 
-#gscehaxzjt p {
+#fyooehryvc p {
   margin: 0;
   padding: 0;
 }
 
-#gscehaxzjt .gt_table {
+#fyooehryvc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -766,12 +828,12 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-left-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_caption {
+#fyooehryvc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gscehaxzjt .gt_title {
+#fyooehryvc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -783,7 +845,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-bottom-width: 0;
 }
 
-#gscehaxzjt .gt_subtitle {
+#fyooehryvc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -795,7 +857,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-top-width: 0;
 }
 
-#gscehaxzjt .gt_heading {
+#fyooehryvc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -807,13 +869,13 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_bottom_border {
+#fyooehryvc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_col_headings {
+#fyooehryvc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -828,7 +890,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_col_heading {
+#fyooehryvc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -848,7 +910,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   overflow-x: hidden;
 }
 
-#gscehaxzjt .gt_column_spanner_outer {
+#fyooehryvc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -860,15 +922,15 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 4px;
 }
 
-#gscehaxzjt .gt_column_spanner_outer:first-child {
+#fyooehryvc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gscehaxzjt .gt_column_spanner_outer:last-child {
+#fyooehryvc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gscehaxzjt .gt_column_spanner {
+#fyooehryvc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -880,11 +942,11 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   width: 100%;
 }
 
-#gscehaxzjt .gt_spanner_row {
+#fyooehryvc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gscehaxzjt .gt_group_heading {
+#fyooehryvc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -910,7 +972,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   text-align: left;
 }
 
-#gscehaxzjt .gt_empty_group_heading {
+#fyooehryvc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -925,15 +987,15 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   vertical-align: middle;
 }
 
-#gscehaxzjt .gt_from_md > :first-child {
+#fyooehryvc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gscehaxzjt .gt_from_md > :last-child {
+#fyooehryvc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gscehaxzjt .gt_row {
+#fyooehryvc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -952,7 +1014,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   overflow-x: hidden;
 }
 
-#gscehaxzjt .gt_stub {
+#fyooehryvc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -965,7 +1027,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 5px;
 }
 
-#gscehaxzjt .gt_stub_row_group {
+#fyooehryvc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -979,15 +1041,15 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   vertical-align: top;
 }
 
-#gscehaxzjt .gt_row_group_first td {
+#fyooehryvc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gscehaxzjt .gt_row_group_first th {
+#fyooehryvc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gscehaxzjt .gt_summary_row {
+#fyooehryvc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -997,16 +1059,16 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 5px;
 }
 
-#gscehaxzjt .gt_first_summary_row {
+#fyooehryvc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_first_summary_row.thick {
+#fyooehryvc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gscehaxzjt .gt_last_summary_row {
+#fyooehryvc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1016,7 +1078,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_grand_summary_row {
+#fyooehryvc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1026,7 +1088,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 5px;
 }
 
-#gscehaxzjt .gt_first_grand_summary_row {
+#fyooehryvc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1036,7 +1098,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-top-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_last_grand_summary_row_top {
+#fyooehryvc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1046,11 +1108,11 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_striped {
+#fyooehryvc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gscehaxzjt .gt_table_body {
+#fyooehryvc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1059,7 +1121,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_footnotes {
+#fyooehryvc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1073,7 +1135,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_footnote {
+#fyooehryvc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1082,7 +1144,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 5px;
 }
 
-#gscehaxzjt .gt_sourcenotes {
+#fyooehryvc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1096,7 +1158,7 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#gscehaxzjt .gt_sourcenote {
+#fyooehryvc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1104,72 +1166,72 @@ Table&nbsp;1: Tentative schedule of class sessions (Spring 2026).
   padding-right: 5px;
 }
 
-#gscehaxzjt .gt_left {
+#fyooehryvc .gt_left {
   text-align: left;
 }
 
-#gscehaxzjt .gt_center {
+#fyooehryvc .gt_center {
   text-align: center;
 }
 
-#gscehaxzjt .gt_right {
+#fyooehryvc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gscehaxzjt .gt_font_normal {
+#fyooehryvc .gt_font_normal {
   font-weight: normal;
 }
 
-#gscehaxzjt .gt_font_bold {
+#fyooehryvc .gt_font_bold {
   font-weight: bold;
 }
 
-#gscehaxzjt .gt_font_italic {
+#fyooehryvc .gt_font_italic {
   font-style: italic;
 }
 
-#gscehaxzjt .gt_super {
+#fyooehryvc .gt_super {
   font-size: 65%;
 }
 
-#gscehaxzjt .gt_footnote_marks {
+#fyooehryvc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gscehaxzjt .gt_asterisk {
+#fyooehryvc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gscehaxzjt .gt_indent_1 {
+#fyooehryvc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gscehaxzjt .gt_indent_2 {
+#fyooehryvc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gscehaxzjt .gt_indent_3 {
+#fyooehryvc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gscehaxzjt .gt_indent_4 {
+#fyooehryvc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gscehaxzjt .gt_indent_5 {
+#fyooehryvc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gscehaxzjt .katex-display {
+#fyooehryvc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gscehaxzjt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fyooehryvc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1466,23 +1528,23 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
 </figcaption><div aria-describedby="tbl-assignments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="svazqzfpxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#svazqzfpxk table {
+<div id="jzxdpwsged" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jzxdpwsged table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#svazqzfpxk thead, #svazqzfpxk tbody, #svazqzfpxk tfoot, #svazqzfpxk tr, #svazqzfpxk td, #svazqzfpxk th {
+#jzxdpwsged thead, #jzxdpwsged tbody, #jzxdpwsged tfoot, #jzxdpwsged tr, #jzxdpwsged td, #jzxdpwsged th {
   border-style: none;
 }
 
-#svazqzfpxk p {
+#jzxdpwsged p {
   margin: 0;
   padding: 0;
 }
 
-#svazqzfpxk .gt_table {
+#jzxdpwsged .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1508,12 +1570,12 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-left-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_caption {
+#jzxdpwsged .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#svazqzfpxk .gt_title {
+#jzxdpwsged .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1525,7 +1587,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-bottom-width: 0;
 }
 
-#svazqzfpxk .gt_subtitle {
+#jzxdpwsged .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1537,7 +1599,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-top-width: 0;
 }
 
-#svazqzfpxk .gt_heading {
+#jzxdpwsged .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1549,13 +1611,13 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_bottom_border {
+#jzxdpwsged .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_col_headings {
+#jzxdpwsged .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1570,7 +1632,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_col_heading {
+#jzxdpwsged .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1590,7 +1652,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   overflow-x: hidden;
 }
 
-#svazqzfpxk .gt_column_spanner_outer {
+#jzxdpwsged .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1602,15 +1664,15 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 4px;
 }
 
-#svazqzfpxk .gt_column_spanner_outer:first-child {
+#jzxdpwsged .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#svazqzfpxk .gt_column_spanner_outer:last-child {
+#jzxdpwsged .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#svazqzfpxk .gt_column_spanner {
+#jzxdpwsged .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1622,11 +1684,11 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   width: 100%;
 }
 
-#svazqzfpxk .gt_spanner_row {
+#jzxdpwsged .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#svazqzfpxk .gt_group_heading {
+#jzxdpwsged .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1652,7 +1714,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   text-align: left;
 }
 
-#svazqzfpxk .gt_empty_group_heading {
+#jzxdpwsged .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1667,15 +1729,15 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   vertical-align: middle;
 }
 
-#svazqzfpxk .gt_from_md > :first-child {
+#jzxdpwsged .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#svazqzfpxk .gt_from_md > :last-child {
+#jzxdpwsged .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#svazqzfpxk .gt_row {
+#jzxdpwsged .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +1756,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   overflow-x: hidden;
 }
 
-#svazqzfpxk .gt_stub {
+#jzxdpwsged .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1707,7 +1769,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 5px;
 }
 
-#svazqzfpxk .gt_stub_row_group {
+#jzxdpwsged .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1721,15 +1783,15 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   vertical-align: top;
 }
 
-#svazqzfpxk .gt_row_group_first td {
+#jzxdpwsged .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#svazqzfpxk .gt_row_group_first th {
+#jzxdpwsged .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#svazqzfpxk .gt_summary_row {
+#jzxdpwsged .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1739,16 +1801,16 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 5px;
 }
 
-#svazqzfpxk .gt_first_summary_row {
+#jzxdpwsged .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_first_summary_row.thick {
+#jzxdpwsged .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#svazqzfpxk .gt_last_summary_row {
+#jzxdpwsged .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1758,7 +1820,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_grand_summary_row {
+#jzxdpwsged .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1768,7 +1830,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 5px;
 }
 
-#svazqzfpxk .gt_first_grand_summary_row {
+#jzxdpwsged .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1778,7 +1840,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-top-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_last_grand_summary_row_top {
+#jzxdpwsged .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1788,11 +1850,11 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_striped {
+#jzxdpwsged .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#svazqzfpxk .gt_table_body {
+#jzxdpwsged .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1801,7 +1863,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-bottom-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_footnotes {
+#jzxdpwsged .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1815,7 +1877,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_footnote {
+#jzxdpwsged .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1824,7 +1886,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 5px;
 }
 
-#svazqzfpxk .gt_sourcenotes {
+#jzxdpwsged .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1838,7 +1900,7 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   border-right-color: #D3D3D3;
 }
 
-#svazqzfpxk .gt_sourcenote {
+#jzxdpwsged .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1846,72 +1908,72 @@ Table&nbsp;2: Homework assignments and exams (Spring 2026).
   padding-right: 5px;
 }
 
-#svazqzfpxk .gt_left {
+#jzxdpwsged .gt_left {
   text-align: left;
 }
 
-#svazqzfpxk .gt_center {
+#jzxdpwsged .gt_center {
   text-align: center;
 }
 
-#svazqzfpxk .gt_right {
+#jzxdpwsged .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#svazqzfpxk .gt_font_normal {
+#jzxdpwsged .gt_font_normal {
   font-weight: normal;
 }
 
-#svazqzfpxk .gt_font_bold {
+#jzxdpwsged .gt_font_bold {
   font-weight: bold;
 }
 
-#svazqzfpxk .gt_font_italic {
+#jzxdpwsged .gt_font_italic {
   font-style: italic;
 }
 
-#svazqzfpxk .gt_super {
+#jzxdpwsged .gt_super {
   font-size: 65%;
 }
 
-#svazqzfpxk .gt_footnote_marks {
+#jzxdpwsged .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#svazqzfpxk .gt_asterisk {
+#jzxdpwsged .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#svazqzfpxk .gt_indent_1 {
+#jzxdpwsged .gt_indent_1 {
   text-indent: 5px;
 }
 
-#svazqzfpxk .gt_indent_2 {
+#jzxdpwsged .gt_indent_2 {
   text-indent: 10px;
 }
 
-#svazqzfpxk .gt_indent_3 {
+#jzxdpwsged .gt_indent_3 {
   text-indent: 15px;
 }
 
-#svazqzfpxk .gt_indent_4 {
+#jzxdpwsged .gt_indent_4 {
   text-indent: 20px;
 }
 
-#svazqzfpxk .gt_indent_5 {
+#jzxdpwsged .gt_indent_5 {
   text-indent: 25px;
 }
 
-#svazqzfpxk .katex-display {
+#jzxdpwsged .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#svazqzfpxk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jzxdpwsged div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
