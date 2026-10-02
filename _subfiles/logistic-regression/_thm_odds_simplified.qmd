@@ -15,6 +15,59 @@ $$ {#eq-odds-reduced}
 
 :::
 
+::: proof
+Starting from the definition of the odds function:
+
+$$
+\ba
+\oddsf{\pi} &\eqdef \frac{\pi}{1-\pi}
+&& \text{(definition of the odds function)}
+\\
+&= \frac{\pi}{1-\pi}\cdot\frac{\pi^{-1}}{\pi^{-1}}
+&& \text{(multiply numerator and denominator by } \pi^{-1} \text{)}
+\\
+&= \frac{\pi\pi^{-1}}{(1-\pi)\pi^{-1}}
+&& \text{(distribute multiplication across fraction)}
+\\
+&= \frac{1}{\pi^{-1}-\pi\pi^{-1}}
+&& \text{(simplify numerator } \pi\pi^{-1}=1 \text{ and expand denominator)}
+\\
+&= \frac{1}{\pi^{-1}-1}
+&& \text{(simplify } \pi\pi^{-1}=1 \text{ in denominator)}
+\\
+&= \invf{\pi^{-1}-1}
+&& \text{(notation for reciprocal function)}
+\ea
+$$
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-odds-simplified}
+
+#### Computing odds using the simplified expression
+
+Suppose an event has probability $\pi = 0.25$.
+
+Using the simplified expression from @thm-odds-simplified:
+
+$$
+\ba
+\pi^{-1} &= \frac{1}{0.25} = 4
+&& \text{(compute the reciprocal of probability)}
+\\
+\oddsf{0.25} &= \frac{1}{4 - 1} = \frac{1}{3}
+&& \text{(apply @thm-odds-simplified)}
+\ea
+$$
+
+Checking against the standard odds definition:
+
+$$\oddsf{0.25} = \frac{0.25}{1 - 0.25} = \frac{0.25}{0.75} = \frac{1}{3}$$
+
+Both formulas yield identical odds of $1/3$.
+:::
+
 {{< slidebreak >}}
 
 :::{#exr-odds2}

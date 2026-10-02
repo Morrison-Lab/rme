@@ -270,3 +270,28 @@ by about $`r round(exp(coef(beetles_glm_grouped)["dose"] * (beetles$dose[2] - be
 $$\logf {\ror(\vx,\vxs)} = \difflogodds$$
 
 :::
+
+::: proof
+Taking the natural logarithm of both sides of @cor-logistic-OR:
+
+$$
+\ba
+\logf{\ror(\vx,\vxs)} &\eqdef \logf{\expf{\difflogodds}}
+&& \text{(apply logarithm to @cor-logistic-OR)}
+\\
+&= \difflogodds
+&& \text{(natural logarithm and exponential are inverse functions)}
+\ea
+$$
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-cor-log-or}
+
+#### Log odds ratio example
+
+If the difference in log-odds between two subjects is $\difflogodds = 0.693$, then by @cor-logistic-OR, the odds ratio is $\ror = \exp(0.693) \approx 2.0$.
+
+Taking the logarithm yields $\log(\ror) = \log(2.0) \approx 0.693 = \difflogodds$, illustrating @cor-log-or.
+:::
