@@ -29,7 +29,23 @@ If $\loghaz(t|\vx) = \loghaz_0(t) + \reglincomb$, then:
 $$
 \ba
 \diffloghaz(t|\vx: \vxs)
-&= (\vx - \vxs) \cdot \beta
+&= (\vx - \vxs) \cdot \vb
+\ea
+$$
+
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+$$
+\ba
+\diffloghaz(t|\vx : \vxs)
+&\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs) && \text{(definition of log-hazard difference)} \\
+&= \left[\loghaz_0(t) + \tp{\vx}\vb\right] - \left[\loghaz_0(t) + \tp{\vxs}\vb\right] && \text{(substituting model definition)} \\
+&= \tp{\vx}\vb - \tp{\vxs}\vb && \text{(canceling shared baseline log-hazard } \loghaz_0(t)\text{)} \\
+&= (\vx - \vxs) \cdot \vb && \text{(factoring out } \vb\text{)}
 \ea
 $$
 
@@ -48,9 +64,9 @@ $$
 \hr(t|\vx: \vxs)
 &= \expf{\diffloghaz(t|\vx: \vxs)}
 \\
-&= \expf{(\vx - \vxs) \cdot \beta}
+&= \expf{(\vx - \vxs) \cdot \vb}
 \\
-&= \expf{\diffvx \cdot \beta}
+&= \expf{\diffvx \cdot \vb}
 \ea
 $$
 
@@ -71,9 +87,9 @@ $$
 \\
 &= \expf{\diffloghaz(t|\vx: \vxs)}
 \\
-&= \expf{(\vx - \vxs) \cdot \beta}
+&= \expf{(\vx - \vxs) \cdot \vb}
 \\
-&= \expf{\diffvx \cdot \beta}
+&= \expf{\diffvx \cdot \vb}
 \ea
 $$
 
@@ -101,6 +117,21 @@ $$\diffloghaz(t|\vx)= \reglincomb$${#eq-diffloghaz-0-ph}
 
 {{< slidebreak >}}
 
+::: proof
+
+$$
+\ba
+\diffloghaz(t|\vx)
+&\eqdef \diffloghaz(t|\vx : \vzero) && \text{(definition of difference from baseline)} \\
+&= (\vx - \vzero) \cdot \vb && \text{(applying @lem-diffloghaz-ph with } \vxs = \vzero\text{)} \\
+&= \reglincomb && \text{(evaluating vector difference)}
+\ea
+$$
+
+:::
+
+{{< slidebreak >}}
+
 :::{#thm-hazard-ratio-vs-baseline-ph}
 
 #### Hazard ratio versus baseline under proportional hazards
@@ -118,11 +149,11 @@ $$\hazfactor(t|\vx) = \expf{\reglincomb}$$
 $$
 \ba
 \hazfactor(t|\vx)
-&\eqdef \hr(t| \vx : \vec{0})
+&\eqdef \hr(t| \vx : \vzero) && \text{(definition of hazard factor)}
 \\
-&= \expf{\diffloghaz(t|\vx)}
+&= \expf{\diffloghaz(t|\vx)} && \text{(applying @cor-hazard-ratio-vs-baseline)}
 \\
-&= \expf{\reglincomb}
+&= \expf{\reglincomb} && \text{(substituting @lem-ph-diffloghaz-0)}
 \ea
 $$
 
@@ -134,6 +165,22 @@ $$
 #### Proportional-hazards decomposition of the hazard
 
 $$\haz(t|\vx) = \haz_0(t)\hazfactor(\vx)$$
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+$$
+\ba
+\haz(t|\vx)
+&= \expf{\loghaz(t|\vx)} && \text{(relationship between hazard and log-hazard)} \\
+&= \expf{\loghaz_0(t) + \reglincomb} && \text{(substituting proportional hazards model)} \\
+&= \expf{\loghaz_0(t)} \cdot \expf{\reglincomb} && \text{(exponent rule for sums)} \\
+&= \haz_0(t) \hazfactor(\vx) && \text{(definitions of baseline hazard } \haz_0(t) \text{ and hazard factor } \hazfactor(\vx)\text{)}
+\ea
+$$
+
 :::
 
 {{< slidebreak >}}
@@ -209,11 +256,11 @@ it is called the **proportional hazards assumption**.
 A conditional probability distribution $p(T|X)$
 has **proportional hazards** if the hazard ratio $\haz(t|\vx_1)/\haz(t|\vx_2)$
 does not depend on $t$.
-Mathematically, it can be written as:
+Mathematically, it is defined as:
 
 $$
 \frac{\haz(t|\vx_1)}{\haz(t|\vx_2)}
-= \hr(\vx_1,\vx_2)
+\eqdef \hr(\vx_1,\vx_2)
 $$
 
 :::
@@ -244,16 +291,41 @@ $$\hazfactor(\vzero) = \hr(\vzero, \vzero) = 1$$
 
 {{< slidebreak >}}
 
+::: proof
+
+$$
+\ba
+\hr(\vx, \vxs)
+&= \frac{\haz(t|\vx)}{\haz(t|\vxs)} && \text{(definition of hazard ratio)} \\
+&= \frac{\haz_0(t)\hazfactor(\vx)}{\haz_0(t)\hazfactor(\vxs)} && \text{(applying @thm-ph-haz-decomp)} \\
+&= \frac{\hazfactor(\vx)}{\hazfactor(\vxs)} && \text{(canceling baseline hazard } \haz_0(t)\text{)}
+\ea
+$$
+
+Setting $\vx = \vzero$ yields:
+
+$$
+\hazfactor(\vzero)
+\eqdef \expf{\vzero \cdot \vb}
+= e^0
+= 1
+$$
+
+:::
+
+{{< slidebreak >}}
+
 The proportional hazards model also has additional notable properties:
 
 $$
 \ba
 \frac{\haz(t|\vx_1)}{\haz(t|\vx_2)}
-&=\frac{\hazfactor(\vx_1)}{\hazfactor(\vx_2)}\\
-&=\frac{\expf{\eta(\vx_1)}}{\expf{\eta(\vx_2)}}\\
-&=\expf{\eta(\vx_1)-\eta(\vx_2)}\\
-&=\expf{\vx_1'\vb-\vx_2'\vb}\\
-&=\expf{(\vx_1 - \vx_2)'\vb}\\
+&=\frac{\haz_0(t)\hazfactor(\vx_1)}{\haz_0(t)\hazfactor(\vx_2)} && \text{(applying @thm-ph-haz-decomp)} \\
+&=\frac{\hazfactor(\vx_1)}{\hazfactor(\vx_2)} && \text{(canceling baseline hazard } \haz_0(t)\text{)} \\
+&=\frac{\expf{\eta(\vx_1)}}{\expf{\eta(\vx_2)}} && \text{(substituting hazard factor definition)} \\
+&=\expf{\eta(\vx_1)-\eta(\vx_2)} && \text{(quotient rule for exponentials)} \\
+&=\expf{\tp{\vx_1}\vb-\tp{\vx_2}\vb} && \text{(substituting linear predictors)} \\
+&=\expf{\tp{(\vx_1 - \vx_2)}\vb} && \text{(factoring out } \vb\text{)}
 \ea
 $$
 
@@ -267,13 +339,17 @@ Hence on the log scale, we have:
 $$
 \ba
 \logf{\frac{\haz(t|\vx)}{\haz(t|\vxs)}}
-&= \diffloghaz(t|\vx : \vxs)
+&= \logf{\haz(t|\vx)} - \logf{\haz(t|\vxs)} && \text{(logarithm of quotient rule)}
 \\
-&\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs)
+&\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs) && \text{(definition of log-hazards)}
 \\
-&=\eta(\vx)-\eta(\vxs)\\
-&= \vx'\vb-\paren{\vxs}'\vb\\
-&= (\vx - \vxs)'\vb
+&= \diffloghaz(t|\vx : \vxs) && \text{(definition of log-hazard difference)}
+\\
+&= \eta(\vx) - \eta(\vxs) && \text{(linear predictor form)}
+\\
+&= \tp{\vx}\vb - \tp{\vxs}\vb && \text{(substituting linear predictors)}
+\\
+&= \tp{(\vx - \vxs)}\vb && \text{(factoring out } \vb\text{)}
 \ea
 $$
 :::
@@ -293,7 +369,7 @@ $$
 $$
 
 ::: notes
-Specifically, under Cox's model $\haz(t|\vx) = \haz_0(t)\expf{\vx'\vb}$, the log of the hazard ratio is proportional to the difference in $x_j$, with the proportionality coefficient equal to $\beta_j$.
+Specifically, under Cox's model $\haz(t|\vx) = \haz_0(t)\expf{\tp{\vx}\vb}$, the log of the hazard ratio is proportional to the difference in $x_j$, with the proportionality coefficient equal to $\beta_j$.
 :::
 
 {{< slidebreak >}}
@@ -308,7 +384,8 @@ $$
 $$
 
 ::: notes
-This structure means that covariate effects are additive on the log-hazard scale; hazard functions for different covariate patterns should be vertical shifts of each other.
+This additive structure means that covariate effects are additive on the log-hazard scale;
+hazard functions for different covariate patterns should be vertical shifts of each other.
 
 See also:
 
@@ -351,11 +428,42 @@ $$
 
 {{< slidebreak >}}
 
+::: proof
+
+$$
+\ba
+\logf{\cuhaz(t|\vx)}
+&= \logf{\hazfactor(\vx)\cuhaz_0(t)} && \text{(applying @thm-ph-cuhaz)} \\
+&= \logf{\cuhaz_0(t)} + \logf{\hazfactor(\vx)} && \text{(logarithm of product rule)} \\
+&= \logf{\cuhaz_0(t)} + \logf{\expf{\reglincomb}} && \text{(substituting definition of } \hazfactor(\vx)\text{)} \\
+&= \logf{\cuhaz_0(t)} + \reglincomb && \text{(simplifying } \log(\exp(\cdot))\text{)}
+\ea
+$$
+
+:::
+
+{{< slidebreak >}}
+
 :::{#cor-log-nlog-surv}
 #### Linear model for log-negative-log survival
 $$
 \logf{-\logf{\surv(t|\vx)}} = 
 \logf{-\logf{\surv_0(t)}}  + \reglincomb
+$$
+
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+$$
+\ba
+\logf{-\logf{\surv(t|\vx)}}
+&= \logf{\cuhaz(t|\vx)} && \text{(since } -\log \surv(t|\vx) = \cuhaz(t|\vx)\text{)} \\
+&= \logf{\cuhaz_0(t)} + \reglincomb && \text{(applying @thm-log-cuhaz-parallel)} \\
+&= \logf{-\logf{\surv_0(t)}} + \reglincomb && \text{(substituting baseline cumulative hazard } \cuhaz_0(t) = -\log \surv_0(t)\text{)}
+\ea
 $$
 
 :::
@@ -375,10 +483,10 @@ $$\surv(t|\vx) = \sb{\surv_0(t)}^{\hazfactor(\vx)}$$
 $$
 \ba
 \surv(t|\vx)
-&= \expf{-\cuhaz(t|\vx)}\\
-&= \expf{-\hazfactor(\vx)\cdot \cuhaz_0(t)}\\
-&= \paren{\expf{- \cuhaz_0(t)}}^{\hazfactor(\vx)}\\
-&= \sb{\surv_0(t)}^{\hazfactor(\vx)}\\
+&= \expf{-\cuhaz(t|\vx)} && \text{(definition of survival function in terms of cumulative hazard)} \\
+&= \expf{-\hazfactor(\vx)\cdot \cuhaz_0(t)} && \text{(applying @thm-ph-cuhaz)} \\
+&= \paren{\expf{- \cuhaz_0(t)}}^{\hazfactor(\vx)} && \text{(power rule for exponents } e^{ab} = (e^a)^b\text{)} \\
+&= \sb{\surv_0(t)}^{\hazfactor(\vx)} && \text{(substituting baseline survival } \surv_0(t) \eqdef \expf{-\cuhaz_0(t)}\text{)}
 \ea
 $$
 

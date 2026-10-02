@@ -14,6 +14,20 @@ given $T \ge t$ and $\vX = \vx$:
 
 {{< slidebreak >}}
 
+::: proof
+
+$$
+\ba
+\expf{\loghaz(t|\vx)}
+&= \expf{\logf{\haz(t|\vx)}} && \text{(definition of log-hazard)} \\
+&= \haz(t|\vx) && \text{(inverse property of logarithm and exponential)}
+\ea
+$$
+
+:::
+
+{{< slidebreak >}}
+
 :::{#def-base-hazard}
 
 #### baseline hazard
@@ -137,5 +151,20 @@ $$
 #### Difference of log-hazard from baseline equals log of the hazard factor
 
 $$\diffloghaz(t|\vx) = \logf{\hazfactor(t| \vx)}$$
+
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+$$
+\ba
+\diffloghaz(t|\vx)
+&\eqdef \diffloghaz(t|\vx : \vzero) && \text{(definition of log-hazard difference from baseline)} \\
+&= \logf{\hr(t|\vx : \vzero)} && \text{(applying @thm-diff-loghaz with } \vxs = \vzero\text{)} \\
+&= \logf{\hazfactor(t|\vx)} && \text{(definition of hazard factor } \hazfactor(t|\vx) \eqdef \hr(t|\vx : \vzero)\text{)}
+\ea
+$$
 
 :::
