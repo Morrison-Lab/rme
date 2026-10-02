@@ -1,0 +1,59 @@
+/*-- scss:rules --*/
+
+// Two optional palettes on the light theme, chosen from the theme dropdown
+// (theme-picker.html), which sets data-palette="offwhite" or "parchment" on
+// <html>. With no data-palette the page keeps cosmo's white; every rule is
+// scoped to body:not(.quarto-dark), so dark mode and the slides are unchanged.
+//
+// WCAG 2.x contrast, text / link / muted on the page background, then text /
+// link on the code background, then Quarto's syntax colours on the code
+// background:
+//   offwhite  page #f5f2ea: 12.8 / 5.3 / 5.2; code #f8f6f0: 12.9 / 5.5; 4.8 and above
+//   parchment page #f1e8d0: 10.7 / 6.3 / 5.4; code #faf5e8: 12.0 / 7.1; 4.7 and above
+@mixin palette($page, $ink, $link, $link-hover, $muted, $code, $nav, $border, $box) {
+  --bs-body-bg: #{$page};
+  --bs-body-color: #{$ink};
+  --bs-link-color: #{$link};
+  --bs-link-hover-color: #{$link-hover};
+  --bs-link-color-rgb: #{red($link)}, #{green($link)}, #{blue($link)};
+  --bs-link-hover-color-rgb: #{red($link-hover)}, #{green($link-hover)}, #{blue($link-hover)};
+  --bs-secondary-color: #{$muted};
+  --bs-border-color: #{$border};
+  background-color: $page;
+  color: $ink;
+
+  // Links take the palette colour through Bootstrap's own link variables
+  // above, so component anchors (.btn, .nav-link, .page-link) keep theirs.
+  .text-muted { color: $muted !important; }
+  // Cosmo's greys (#6d7a86 quotes and captions, #6c757d code buttons) fall to
+  // 3.6-4.2:1 on the tinted pages; use the palette's muted ink (5.2-5.4:1).
+  blockquote, .blockquote, figcaption, .figure-caption, .code-tools-button,
+  details > summary { color: $muted; }
+  .observablehq--string { color: #17603c; }
+  pre, pre.sourceCode, div.sourceCode { background-color: $code; }
+  code:not(pre > code) { background-color: $code; }
+  .navbar, #quarto-header .navbar { background-color: $nav !important; }
+  .dropdown-menu { background-color: $code; }
+  // Quarto's callout outline is a fixed #dee2e6, which vanishes on a tinted
+  // page; the left accent bar keeps the callout's own colour.
+  .callout {
+    border-top-color: $box;
+    border-right-color: $box;
+    border-bottom-color: $box;
+  }
+}
+
+html[data-palette="offwhite"] body:not(.quarto-dark) {
+  @include palette(#f5f2ea, #2b2a27, #1a64b8, #134a88, #5f666d, #f8f6f0, #eceae1, #dcd8cc, #b9b4a2);
+}
+
+html[data-palette="parchment"] body:not(.quarto-dark) {
+  @include palette(#f1e8d0, #3a2f1f, #8a3b0f, #5e2808, #6b5a43, #faf5e8, #e8dcbc, #d8c9a8, #b5a37a);
+}
+
+// Light keeps cosmo's white page, but its #6d7a86 quote and caption grey is
+// 4.39:1 on it, just under AA.
+html:not([data-palette]) body:not(.quarto-dark) {
+  blockquote, .blockquote, figcaption, .figure-caption, .code-tools-button,
+  details > summary { color: #5f666d; }
+}
