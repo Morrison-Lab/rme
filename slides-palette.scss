@@ -1,0 +1,101 @@
+/*-- scss:rules --*/
+
+// The same Light / Off-white / Parchment palettes as the website's theme
+// dropdown (offwhite.scss), for the slide decks. Decks are dark by default;
+// deck-theme.html sets data-palette on <html> from the choice the website
+// saved under "mln-theme", or from its own dropdown. Keep these hex values in
+// step with offwhite.scss.
+// Quarto's light syntax colours, copied from its light highlighting stylesheet:
+// the decks load the dark one, whose pale tokens vanish on these backgrounds.
+// The selector is inside .reveal so it outranks the dark stylesheet's rules.
+@mixin light-syntax {
+  --quarto-hl-co-color: #5E5E5E;
+  .reveal {
+    code span.al { color: #AD0000; }
+    code span.an { color: #5E5E5E; }
+    code span.at { color: #657422; }
+    code span.bn { color: #AD0000; }
+    code span.cf { color: #003B4F; }
+    code span.ch { color: #20794D; }
+    code span.cn { color: #8f5902; }
+    code span.co { color: #5E5E5E; }
+    code span.cv { color: #5E5E5E; }
+    code span.do { color: #5E5E5E; }
+    code span.dt { color: #AD0000; }
+    code span.dv { color: #AD0000; }
+    code span.er { color: #AD0000; }
+    code span.ex { color: #003B4F; }
+    code span.fl { color: #AD0000; }
+    code span.fu { color: #4758AB; }
+    code span.im { color: #00769E; }
+    code span.in { color: #5E5E5E; }
+    code span.kw { color: #003B4F; }
+    code span.op { color: #5E5E5E; }
+    code span.ot { color: #003B4F; }
+    code span.pp { color: #AD0000; }
+    code span.sc { color: #5E5E5E; }
+    code span.ss { color: #20794D; }
+    code span.st { color: #20794D; }
+    code span.va { color: #111111; }
+    code span.vs { color: #20794D; }
+    code span.wa { color: #5E5E5E; }
+  }
+}
+
+@mixin deck-palette($page, $ink, $link, $muted, $code, $box) {
+  --r-background-color: #{$page};
+  --r-main-color: #{$ink};
+  --r-heading-color: #{$ink};
+  --r-link-color: #{$link};
+  --r-link-color-hover: #{$link};
+  --r-selection-background-color: #{$box};
+  --r-selection-color: #{$ink};
+
+  @include light-syntax;
+
+  background-color: $page;
+  color: $ink;
+  .reveal-viewport, .reveal { background-color: $page; color: $ink; }
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6,
+  .reveal .title, .reveal .subtitle, .reveal .quarto-title-author-name { color: $ink; }
+  .reveal a { color: $link; }
+  .reveal .slide-number, .reveal .quarto-title-meta, .reveal figcaption,
+  .reveal .caption, .reveal .date { color: $muted; }
+  .reveal pre, .reveal pre.sourceCode, .reveal div.sourceCode { background-color: $code; color: $ink; }
+  .reveal div.cell-output pre, .reveal div.cell-output pre code,
+  .reveal pre.sourceCode code { background-color: $code; color: $ink; }
+  .reveal pre.sourceCode code span:not([class]) { color: $ink; }
+  .reveal pre.numberSource code > span > a:first-child::before { color: $muted; }
+  .reveal code:not(pre > code) { background-color: $code; color: $ink; }
+  .reveal table, .reveal th, .reveal td { color: $ink; border-color: $box; }
+  // The dark deck theme pins pale text on blockquotes.
+  .reveal blockquote { color: $ink; border-left-color: $box; }
+  .reveal details > summary { color: $muted; }
+  // Observable's inspector keeps the dark deck's pale token colours.
+  .reveal .observablehq--string, .reveal .observablehq--keyword, .reveal .observablehq--key,
+  .reveal .bu, .reveal .observablehq--number, .reveal .observablehq--null,
+  .reveal .observablehq--undefined, .reveal .observablehq--boolean { color: $ink; }
+  .reveal .keybox:not([style*="background-color"]) { background-color: $code; color: $ink; }
+  .reveal .callout { border-top-color: $box; border-right-color: $box; border-bottom-color: $box; }
+  // Quarto tints the built-in callout headers dark for the dark deck; these are
+  // the same Bootstrap accents at a pale tint, so the title stays legible.
+  .reveal .callout-title-container, .reveal .callout-body { color: $ink; }
+  .reveal .callout .callout-title { color: $ink; }
+  .reveal .callout-note.callout-style-default .callout-title { background-color: rgba(13, 110, 253, 0.13); }
+  .reveal .callout-tip.callout-style-default .callout-title { background-color: rgba(25, 135, 84, 0.13); }
+  .reveal .callout-important.callout-style-default .callout-title { background-color: rgba(220, 53, 69, 0.13); }
+  .reveal .callout-caution.callout-style-default .callout-title { background-color: rgba(253, 126, 20, 0.13); }
+  .reveal .callout-warning.callout-style-default .callout-title { background-color: rgba(255, 193, 7, 0.13); }
+  // The plate rescues dark ink from a dark page; on a light page it is a stray box.
+  .reveal img.figure-plate { background-color: transparent; }
+}
+
+html[data-palette="light"] {
+  @include deck-palette(#ffffff, #222222, #1a64b8, #5f666d, #f8f9fa, #dee2e6);
+}
+html[data-palette="offwhite"] {
+  @include deck-palette(#f5f2ea, #2b2a27, #1a64b8, #5f666d, #f8f6f0, #b9b4a2);
+}
+html[data-palette="parchment"] {
+  @include deck-palette(#f1e8d0, #3a2f1f, #8a3b0f, #6b5a43, #faf5e8, #b5a37a);
+}
