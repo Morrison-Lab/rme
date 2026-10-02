@@ -1,7 +1,7 @@
 -- Revealjs only: put a slide break after every section (level 1) header,
 -- so the header gets its own title slide and the content starts on the next.
 -- A header already followed by a slide break or another header is left alone.
-if not quarto.doc.isFormat("revealjs") then
+if not quarto.doc.is_format("revealjs") then
   return {}
 end
 
