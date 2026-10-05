@@ -40,16 +40,16 @@ collapses and there is no gutter to put them in.
   font-size: 16px;
   line-height: 1;
   text-decoration: none;
-  color: var(--bs-body-color);
+  /* Muted but fully opaque when idle: opacity would also fade the border and
+     icon below the 3:1 contrast that controls need (WCAG 1.4.11). */
+  color: var(--bs-secondary-color, var(--bs-body-color));
   background-color: var(--bs-body-bg);
   /* currentColor, because darkly does not redefine --bs-border-color. */
   border: 1px solid currentColor;
-  opacity: 0.4;
-  transition: opacity 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out;
 }
 .page-nav-arrow:hover,
 .page-nav-arrow:focus-visible {
-  opacity: 1;
   color: var(--bs-link-color);
 }
 @media (max-width: 991.98px) {
@@ -66,8 +66,11 @@ collapses and there is no gutter to put them in.
 (function () {
   // GitHub Pages serves /x, /x.html, / and /index.html, so compare paths
   // without the "index.html" or ".html" ending.
+  // Links to other sites (e.g. a GitHub icon) never match the current page.
   const norm = function (u) {
-    return new URL(u, location.href).pathname
+    const url = new URL(u, location.href);
+    if (url.origin !== location.origin) return null;
+    return url.pathname
       .replace(/index\.html$/, "")
       .replace(/\.html$/, "");
   };
