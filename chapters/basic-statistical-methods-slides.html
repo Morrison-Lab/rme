@@ -127,7 +127,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4df01d85d5cf19cc6202400f4f043f84.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
   window.dataLayer = window.dataLayer || [];
@@ -250,6 +250,49 @@
       margin-left: auto;
       margin-right: 0; 
     }
+  </style>
+<script>
+  // Colour themes for the slide decks. Reads the choice the website's theme
+  // dropdown saved ("mln-theme"); a deck with nothing saved stays dark.
+  (function () {
+    var KEY = "mln-theme";
+    var OPTIONS = [["dark", "Dark"], ["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"]];
+    var root = document.documentElement;
+    function stored() {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function apply(choice) {
+      if (choice === "dark") root.removeAttribute("data-palette");
+      else root.setAttribute("data-palette", choice);
+    }
+    var saved = stored();
+    var start = OPTIONS.some(function (o) { return o[0] === saved; }) ? saved : "dark";
+    apply(start);
+    document.addEventListener("DOMContentLoaded", function () {
+      var sel = document.createElement("select");
+      sel.className = "deck-theme-picker";
+      sel.setAttribute("aria-label", "Colour theme");
+      OPTIONS.forEach(function (o) {
+        var opt = document.createElement("option");
+        opt.value = o[0];
+        opt.textContent = o[1];
+        sel.appendChild(opt);
+      });
+      sel.value = start;
+      sel.addEventListener("change", function () {
+        apply(sel.value);
+        try { localStorage.setItem(KEY, sel.value); } catch (e) {}
+      });
+      document.body.appendChild(sel);
+    });
+  })();
+  </script><style>
+  .deck-theme-picker {
+    position: fixed; top: 4px; left: 4px; z-index: 30;
+    font: 12px sans-serif; padding: 2px 4px; opacity: 0.55;
+  }
+  .deck-theme-picker:hover, .deck-theme-picker:focus { opacity: 1; }
+  @media print { .deck-theme-picker { display: none; } }
   </style>
 <link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
@@ -433,23 +476,23 @@ text-align: center;
 Table&nbsp;1
 </figcaption><div aria-describedby="tbl-hers-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fgkjjybilv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fgkjjybilv table {
+<div id="cgyxmvfwmj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cgyxmvfwmj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fgkjjybilv thead, #fgkjjybilv tbody, #fgkjjybilv tfoot, #fgkjjybilv tr, #fgkjjybilv td, #fgkjjybilv th {
+#cgyxmvfwmj thead, #cgyxmvfwmj tbody, #cgyxmvfwmj tfoot, #cgyxmvfwmj tr, #cgyxmvfwmj td, #cgyxmvfwmj th {
   border-style: none;
 }
 
-#fgkjjybilv p {
+#cgyxmvfwmj p {
   margin: 0;
   padding: 0;
 }
 
-#fgkjjybilv .gt_table {
+#cgyxmvfwmj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -475,12 +518,12 @@ Table&nbsp;1
   border-left-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_caption {
+#cgyxmvfwmj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fgkjjybilv .gt_title {
+#cgyxmvfwmj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -492,7 +535,7 @@ Table&nbsp;1
   border-bottom-width: 0;
 }
 
-#fgkjjybilv .gt_subtitle {
+#cgyxmvfwmj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -504,7 +547,7 @@ Table&nbsp;1
   border-top-width: 0;
 }
 
-#fgkjjybilv .gt_heading {
+#cgyxmvfwmj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -516,13 +559,13 @@ Table&nbsp;1
   border-right-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_bottom_border {
+#cgyxmvfwmj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_col_headings {
+#cgyxmvfwmj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -537,7 +580,7 @@ Table&nbsp;1
   border-right-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_col_heading {
+#cgyxmvfwmj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -557,7 +600,7 @@ Table&nbsp;1
   overflow-x: hidden;
 }
 
-#fgkjjybilv .gt_column_spanner_outer {
+#cgyxmvfwmj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -569,15 +612,15 @@ Table&nbsp;1
   padding-right: 4px;
 }
 
-#fgkjjybilv .gt_column_spanner_outer:first-child {
+#cgyxmvfwmj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fgkjjybilv .gt_column_spanner_outer:last-child {
+#cgyxmvfwmj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fgkjjybilv .gt_column_spanner {
+#cgyxmvfwmj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -589,11 +632,11 @@ Table&nbsp;1
   width: 100%;
 }
 
-#fgkjjybilv .gt_spanner_row {
+#cgyxmvfwmj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fgkjjybilv .gt_group_heading {
+#cgyxmvfwmj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -619,7 +662,7 @@ Table&nbsp;1
   text-align: left;
 }
 
-#fgkjjybilv .gt_empty_group_heading {
+#cgyxmvfwmj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -634,15 +677,15 @@ Table&nbsp;1
   vertical-align: middle;
 }
 
-#fgkjjybilv .gt_from_md > :first-child {
+#cgyxmvfwmj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fgkjjybilv .gt_from_md > :last-child {
+#cgyxmvfwmj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fgkjjybilv .gt_row {
+#cgyxmvfwmj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -661,7 +704,7 @@ Table&nbsp;1
   overflow-x: hidden;
 }
 
-#fgkjjybilv .gt_stub {
+#cgyxmvfwmj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -674,7 +717,7 @@ Table&nbsp;1
   padding-right: 5px;
 }
 
-#fgkjjybilv .gt_stub_row_group {
+#cgyxmvfwmj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -688,15 +731,15 @@ Table&nbsp;1
   vertical-align: top;
 }
 
-#fgkjjybilv .gt_row_group_first td {
+#cgyxmvfwmj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fgkjjybilv .gt_row_group_first th {
+#cgyxmvfwmj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fgkjjybilv .gt_summary_row {
+#cgyxmvfwmj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -706,16 +749,16 @@ Table&nbsp;1
   padding-right: 5px;
 }
 
-#fgkjjybilv .gt_first_summary_row {
+#cgyxmvfwmj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_first_summary_row.thick {
+#cgyxmvfwmj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fgkjjybilv .gt_last_summary_row {
+#cgyxmvfwmj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -725,7 +768,7 @@ Table&nbsp;1
   border-bottom-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_grand_summary_row {
+#cgyxmvfwmj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -735,7 +778,7 @@ Table&nbsp;1
   padding-right: 5px;
 }
 
-#fgkjjybilv .gt_first_grand_summary_row {
+#cgyxmvfwmj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -745,7 +788,7 @@ Table&nbsp;1
   border-top-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_last_grand_summary_row_top {
+#cgyxmvfwmj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -755,11 +798,11 @@ Table&nbsp;1
   border-bottom-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_striped {
+#cgyxmvfwmj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fgkjjybilv .gt_table_body {
+#cgyxmvfwmj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -768,7 +811,7 @@ Table&nbsp;1
   border-bottom-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_footnotes {
+#cgyxmvfwmj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -782,7 +825,7 @@ Table&nbsp;1
   border-right-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_footnote {
+#cgyxmvfwmj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -791,7 +834,7 @@ Table&nbsp;1
   padding-right: 5px;
 }
 
-#fgkjjybilv .gt_sourcenotes {
+#cgyxmvfwmj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,7 +848,7 @@ Table&nbsp;1
   border-right-color: #D3D3D3;
 }
 
-#fgkjjybilv .gt_sourcenote {
+#cgyxmvfwmj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -813,72 +856,72 @@ Table&nbsp;1
   padding-right: 5px;
 }
 
-#fgkjjybilv .gt_left {
+#cgyxmvfwmj .gt_left {
   text-align: left;
 }
 
-#fgkjjybilv .gt_center {
+#cgyxmvfwmj .gt_center {
   text-align: center;
 }
 
-#fgkjjybilv .gt_right {
+#cgyxmvfwmj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fgkjjybilv .gt_font_normal {
+#cgyxmvfwmj .gt_font_normal {
   font-weight: normal;
 }
 
-#fgkjjybilv .gt_font_bold {
+#cgyxmvfwmj .gt_font_bold {
   font-weight: bold;
 }
 
-#fgkjjybilv .gt_font_italic {
+#cgyxmvfwmj .gt_font_italic {
   font-style: italic;
 }
 
-#fgkjjybilv .gt_super {
+#cgyxmvfwmj .gt_super {
   font-size: 65%;
 }
 
-#fgkjjybilv .gt_footnote_marks {
+#cgyxmvfwmj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fgkjjybilv .gt_asterisk {
+#cgyxmvfwmj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fgkjjybilv .gt_indent_1 {
+#cgyxmvfwmj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fgkjjybilv .gt_indent_2 {
+#cgyxmvfwmj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fgkjjybilv .gt_indent_3 {
+#cgyxmvfwmj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fgkjjybilv .gt_indent_4 {
+#cgyxmvfwmj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fgkjjybilv .gt_indent_5 {
+#cgyxmvfwmj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fgkjjybilv .katex-display {
+#cgyxmvfwmj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fgkjjybilv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cgyxmvfwmj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1304,23 +1347,23 @@ Figure&nbsp;3: Fasting glucose versus BMI in HERS participants
 Table&nbsp;2: Exercise by hormone therapy group in HERS
 </figcaption><div aria-describedby="tbl-hers-crosstab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="ejqfzkwktm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ejqfzkwktm table {
+<div id="qttdwtyheo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qttdwtyheo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ejqfzkwktm thead, #ejqfzkwktm tbody, #ejqfzkwktm tfoot, #ejqfzkwktm tr, #ejqfzkwktm td, #ejqfzkwktm th {
+#qttdwtyheo thead, #qttdwtyheo tbody, #qttdwtyheo tfoot, #qttdwtyheo tr, #qttdwtyheo td, #qttdwtyheo th {
   border-style: none;
 }
 
-#ejqfzkwktm p {
+#qttdwtyheo p {
   margin: 0;
   padding: 0;
 }
 
-#ejqfzkwktm .gt_table {
+#qttdwtyheo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1346,12 +1389,12 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-left-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_caption {
+#qttdwtyheo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ejqfzkwktm .gt_title {
+#qttdwtyheo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1363,7 +1406,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-bottom-width: 0;
 }
 
-#ejqfzkwktm .gt_subtitle {
+#qttdwtyheo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1375,7 +1418,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-top-width: 0;
 }
 
-#ejqfzkwktm .gt_heading {
+#qttdwtyheo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1387,13 +1430,13 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-right-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_bottom_border {
+#qttdwtyheo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_col_headings {
+#qttdwtyheo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1408,7 +1451,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-right-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_col_heading {
+#qttdwtyheo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1428,7 +1471,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   overflow-x: hidden;
 }
 
-#ejqfzkwktm .gt_column_spanner_outer {
+#qttdwtyheo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1440,15 +1483,15 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 4px;
 }
 
-#ejqfzkwktm .gt_column_spanner_outer:first-child {
+#qttdwtyheo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ejqfzkwktm .gt_column_spanner_outer:last-child {
+#qttdwtyheo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ejqfzkwktm .gt_column_spanner {
+#qttdwtyheo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1460,11 +1503,11 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   width: 100%;
 }
 
-#ejqfzkwktm .gt_spanner_row {
+#qttdwtyheo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ejqfzkwktm .gt_group_heading {
+#qttdwtyheo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1490,7 +1533,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   text-align: left;
 }
 
-#ejqfzkwktm .gt_empty_group_heading {
+#qttdwtyheo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1505,15 +1548,15 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   vertical-align: middle;
 }
 
-#ejqfzkwktm .gt_from_md > :first-child {
+#qttdwtyheo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ejqfzkwktm .gt_from_md > :last-child {
+#qttdwtyheo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ejqfzkwktm .gt_row {
+#qttdwtyheo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1532,7 +1575,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   overflow-x: hidden;
 }
 
-#ejqfzkwktm .gt_stub {
+#qttdwtyheo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1545,7 +1588,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 5px;
 }
 
-#ejqfzkwktm .gt_stub_row_group {
+#qttdwtyheo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1559,15 +1602,15 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   vertical-align: top;
 }
 
-#ejqfzkwktm .gt_row_group_first td {
+#qttdwtyheo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ejqfzkwktm .gt_row_group_first th {
+#qttdwtyheo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ejqfzkwktm .gt_summary_row {
+#qttdwtyheo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1577,16 +1620,16 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 5px;
 }
 
-#ejqfzkwktm .gt_first_summary_row {
+#qttdwtyheo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_first_summary_row.thick {
+#qttdwtyheo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ejqfzkwktm .gt_last_summary_row {
+#qttdwtyheo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1596,7 +1639,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_grand_summary_row {
+#qttdwtyheo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1606,7 +1649,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 5px;
 }
 
-#ejqfzkwktm .gt_first_grand_summary_row {
+#qttdwtyheo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1616,7 +1659,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-top-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_last_grand_summary_row_top {
+#qttdwtyheo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1626,11 +1669,11 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_striped {
+#qttdwtyheo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ejqfzkwktm .gt_table_body {
+#qttdwtyheo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1639,7 +1682,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_footnotes {
+#qttdwtyheo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1653,7 +1696,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-right-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_footnote {
+#qttdwtyheo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1662,7 +1705,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 5px;
 }
 
-#ejqfzkwktm .gt_sourcenotes {
+#qttdwtyheo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1676,7 +1719,7 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   border-right-color: #D3D3D3;
 }
 
-#ejqfzkwktm .gt_sourcenote {
+#qttdwtyheo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1684,72 +1727,72 @@ Table&nbsp;2: Exercise by hormone therapy group in HERS
   padding-right: 5px;
 }
 
-#ejqfzkwktm .gt_left {
+#qttdwtyheo .gt_left {
   text-align: left;
 }
 
-#ejqfzkwktm .gt_center {
+#qttdwtyheo .gt_center {
   text-align: center;
 }
 
-#ejqfzkwktm .gt_right {
+#qttdwtyheo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ejqfzkwktm .gt_font_normal {
+#qttdwtyheo .gt_font_normal {
   font-weight: normal;
 }
 
-#ejqfzkwktm .gt_font_bold {
+#qttdwtyheo .gt_font_bold {
   font-weight: bold;
 }
 
-#ejqfzkwktm .gt_font_italic {
+#qttdwtyheo .gt_font_italic {
   font-style: italic;
 }
 
-#ejqfzkwktm .gt_super {
+#qttdwtyheo .gt_super {
   font-size: 65%;
 }
 
-#ejqfzkwktm .gt_footnote_marks {
+#qttdwtyheo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ejqfzkwktm .gt_asterisk {
+#qttdwtyheo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ejqfzkwktm .gt_indent_1 {
+#qttdwtyheo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ejqfzkwktm .gt_indent_2 {
+#qttdwtyheo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ejqfzkwktm .gt_indent_3 {
+#qttdwtyheo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ejqfzkwktm .gt_indent_4 {
+#qttdwtyheo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ejqfzkwktm .gt_indent_5 {
+#qttdwtyheo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ejqfzkwktm .katex-display {
+#qttdwtyheo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ejqfzkwktm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qttdwtyheo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

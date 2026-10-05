@@ -58,7 +58,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-4df01d85d5cf19cc6202400f4f043f84.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
   window.dataLayer = window.dataLayer || [];
@@ -181,6 +181,49 @@
       margin-left: auto;
       margin-right: 0; 
     }
+  </style>
+<script>
+  // Colour themes for the slide decks. Reads the choice the website's theme
+  // dropdown saved ("mln-theme"); a deck with nothing saved stays dark.
+  (function () {
+    var KEY = "mln-theme";
+    var OPTIONS = [["dark", "Dark"], ["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"]];
+    var root = document.documentElement;
+    function stored() {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function apply(choice) {
+      if (choice === "dark") root.removeAttribute("data-palette");
+      else root.setAttribute("data-palette", choice);
+    }
+    var saved = stored();
+    var start = OPTIONS.some(function (o) { return o[0] === saved; }) ? saved : "dark";
+    apply(start);
+    document.addEventListener("DOMContentLoaded", function () {
+      var sel = document.createElement("select");
+      sel.className = "deck-theme-picker";
+      sel.setAttribute("aria-label", "Colour theme");
+      OPTIONS.forEach(function (o) {
+        var opt = document.createElement("option");
+        opt.value = o[0];
+        opt.textContent = o[1];
+        sel.appendChild(opt);
+      });
+      sel.value = start;
+      sel.addEventListener("change", function () {
+        apply(sel.value);
+        try { localStorage.setItem(KEY, sel.value); } catch (e) {}
+      });
+      document.body.appendChild(sel);
+    });
+  })();
+  </script><style>
+  .deck-theme-picker {
+    position: fixed; top: 4px; left: 4px; z-index: 30;
+    font: 12px sans-serif; padding: 2px 4px; opacity: 0.55;
+  }
+  .deck-theme-picker:hover, .deck-theme-picker:focus { opacity: 1; }
+  @media print { .deck-theme-picker { display: none; } }
   </style>
 <link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
