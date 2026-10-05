@@ -1,0 +1,142 @@
+<!--
+Page-navigation helpers for the HTML format. Opt-in: turn them on with
+`include-after-body: page-navigation.html` under `format.html` in
+_quarto-website.yml. Vendored from Morrison-Lab/lbt.
+
+1. Navbar highlighting.
+Quarto marks as active the first top-level navbar link whose target also
+appears in the sidebar. Once Home is in the sidebar, "Home" would be
+highlighted on every page. The script below instead highlights the navbar
+link (or the dropdown holding the link) for the current page.
+
+2. Floating previous/next arrows in the page margins.
+Quarto has no built-in option for these, so this script copies the
+previous/next links that `page-navigation: true` puts at the foot of each
+page into two fixed-position tabs. The links follow the sidebar order.
+Each tab sits in empty space so that it never covers, or takes clicks from,
+the text, the sidebar, or the table of contents:
+
+- previous: in the gutter between the docked sidebar and the page text;
+- next: in the right margin when the window is wide enough, otherwise in the
+  gutter between the page text and the table of contents.
+
+Both are hidden below Bootstrap's large breakpoint, where the sidebar
+collapses and there is no gutter to put them in.
+-->
+<style>
+.page-nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Narrow enough to fit the ~25px gutters beside the page text; px, not
+     rem, because the theme's rem is about 17px. */
+  width: 20px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  /* currentColor, because darkly does not redefine --bs-border-color. */
+  border: 1px solid currentColor;
+  opacity: 0.4;
+  transition: opacity 0.15s ease-in-out;
+}
+.page-nav-arrow:hover,
+.page-nav-arrow:focus-visible {
+  opacity: 1;
+  color: var(--bs-link-color);
+}
+@media (max-width: 991.98px) {
+  .page-nav-arrow { display: none; }
+}
+@media print {
+  .page-nav-arrow { display: none; }
+}
+</style>
+<script>
+// This file is included at the end of <body>, so the navbar already exists.
+// Run straight away rather than on DOMContentLoaded, so that the wrong
+// highlight is never painted and then faded out by Bootstrap's transition.
+(function () {
+  // GitHub Pages serves /x, /x.html, / and /index.html, so compare paths
+  // without the "index.html" or ".html" ending.
+  const norm = function (u) {
+    return new URL(u, location.href).pathname
+      .replace(/index\.html$/, "")
+      .replace(/\.html$/, "");
+  };
+  document.querySelectorAll("#quarto-header .navbar-nav > .nav-item").forEach(
+    function (item) {
+      const toggle = item.querySelector(":scope > a.nav-link");
+      if (!toggle) return;
+      const targets = [toggle, ...item.querySelectorAll("a.dropdown-item")];
+      const current = targets.some(function (a) {
+        return a.getAttribute("href") && !a.classList.contains("dropdown-toggle") &&
+          norm(a.href) === norm(location.href);
+      });
+      toggle.classList.toggle("active", current);
+      if (current) toggle.setAttribute("aria-current", "page");
+      else toggle.removeAttribute("aria-current");
+    }
+  );
+})();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const nav = document.querySelector("nav.page-navigation");
+  if (!nav) return;
+
+  const make = function (dir, icon) {
+    const link = nav.querySelector(".nav-page-" + dir + " a.pagination-link");
+    if (!link) return null;
+    const title = link.querySelector(".nav-page-text")?.textContent.trim() || dir;
+    const arrow = document.createElement("a");
+    arrow.href = link.getAttribute("href");
+    arrow.className = "page-nav-arrow page-nav-arrow-" + dir;
+    arrow.title = (dir === "previous" ? "Previous: " : "Next: ") + title;
+    arrow.setAttribute("aria-label", arrow.title);
+    arrow.innerHTML = '<i class="bi ' + icon + '" aria-hidden="true"></i>';
+    document.body.appendChild(arrow);
+    return arrow;
+  };
+  const prev = make("previous", "bi-chevron-left");
+  const next = make("next", "bi-chevron-right");
+
+  const box = function (selector) {
+    const el = document.querySelector(selector);
+    if (!el || el.offsetWidth === 0) return null;
+    return el.getBoundingClientRect();
+  };
+  // Left edge that centres an arrow between x = from and x = to.
+  const centre = function (arrow, from, to) {
+    return (from + to - arrow.offsetWidth) / 2 + "px";
+  };
+
+  function place() {
+    const main = box("main.content");
+    if (!main) return;
+    if (prev) {
+      const sidebar = box("#quarto-sidebar");
+      prev.style.left = centre(prev, sidebar ? sidebar.right : 0, main.left);
+    }
+    if (next) {
+      const margin = box("#quarto-margin-sidebar");
+      const viewport = document.documentElement.clientWidth;
+      if (!margin) {
+        next.style.left = centre(next, main.right, viewport);
+      } else if (viewport - margin.right >= next.offsetWidth + 16) {
+        next.style.left = centre(next, margin.right, viewport);
+      } else {
+        next.style.left = centre(next, main.right, margin.left);
+      }
+    }
+  }
+  place();
+  window.addEventListener("resize", place);
+});
+</script>
