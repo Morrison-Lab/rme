@@ -1,7 +1,7 @@
 <!--
 Page-navigation helpers for the HTML format. Opt-in: turn them on with
 `include-after-body: page-navigation.html` under `format.html` in
-_quarto-website.yml. Vendored from Morrison-Lab/lbt.
+_quarto-website.yml. Vendored from Morrison-Lab/lbt (a private repo).
 
 1. Navbar highlighting.
 Quarto marks as active the first top-level navbar link whose target also
@@ -79,13 +79,17 @@ collapses and there is no gutter to put them in.
       const toggle = item.querySelector(":scope > a.nav-link");
       if (!toggle) return;
       const targets = [toggle, ...item.querySelectorAll("a.dropdown-item")];
-      const current = targets.some(function (a) {
+      const match = targets.find(function (a) {
         return a.getAttribute("href") && !a.classList.contains("dropdown-toggle") &&
           norm(a.href) === norm(location.href);
       });
-      toggle.classList.toggle("active", current);
-      if (current) toggle.setAttribute("aria-current", "page");
-      else toggle.removeAttribute("aria-current");
+      // The top-level item is highlighted, but aria-current goes on the link
+      // for this page itself, not on a dropdown toggle that only holds it.
+      toggle.classList.toggle("active", Boolean(match));
+      targets.forEach(function (a) {
+        if (a === match) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
     }
   );
 })();
