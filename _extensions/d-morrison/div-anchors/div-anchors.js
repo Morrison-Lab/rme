@@ -29,6 +29,16 @@
     ".proof[id]",
     ".remark[id]",
     ".solution[id]",
+    "div[id^='thm-']",
+    "div[id^='lem-']",
+    "div[id^='cor-']",
+    "div[id^='prp-']",
+    "div[id^='cnj-']",
+    "div[id^='def-']",
+    "div[id^='exm-']",
+    "div[id^='exr-']",
+    "div[id^='rem-']",
+    "div[id^='sol-']"
   ].join(", ");
 
   /**
@@ -59,13 +69,36 @@
         return;
       }
 
+      // Avoid duplicate anchor if already present
+      if (div.querySelector("a.div-anchor")) {
+        return;
+      }
+
       // Find the theorem-title or proof-title span
       var titleSpan = div.querySelector(".theorem-title, .proof-title");
       var anchor = createAnchor(id);
 
       if (titleSpan) {
+        // If the title ends with whitespace (e.g. Quarto's proof-title ending in ". "),
+        // trim the trailing whitespace so the anchor stays attached to the title,
+        // and ensure a trailing space separates the anchor from following content.
+        var lastTextNode = titleSpan.lastChild;
+        while (lastTextNode && lastTextNode.nodeType !== Node.TEXT_NODE && lastTextNode.lastChild) {
+          lastTextNode = lastTextNode.lastChild;
+        }
+        var hadTrailingWhitespace = false;
+        if (lastTextNode && lastTextNode.nodeType === Node.TEXT_NODE && /\s+$/.test(lastTextNode.textContent)) {
+          lastTextNode.textContent = lastTextNode.textContent.replace(/\s+$/, "");
+          hadTrailingWhitespace = true;
+        }
+
         // Insert anchor immediately after the title span
         titleSpan.insertAdjacentElement("afterend", anchor);
+
+        if (hadTrailingWhitespace && anchor.nextSibling &&
+            !(anchor.nextSibling.nodeType === Node.TEXT_NODE && /^\s/.test(anchor.nextSibling.textContent))) {
+          anchor.after(" ");
+        }
       } else {
         // Fallback: prepend to the first paragraph
         var firstPara = div.querySelector("p");
