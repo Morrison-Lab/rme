@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Models for Count Outcomes – Regression Models for Epidemiology</title>
 <style>
@@ -86,22 +86,27 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/causal-inference.html" rel="next">
+<link href="../chapters/logistic-regression.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-1bcb2eaaf09c6c3c9f1dc9011af1d06d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-aaecb91e40cc87e9caa896179b56e095.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -130,12 +135,27 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VS314RJ2KP"></script><script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-VS314RJ2KP', { 'anonymize_ip': true});
+gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
+</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
 </script><script type="application/json" class="js-hypothesis-config">
 {
   "theme": "clean",
@@ -146,18 +166,70 @@ gtag('config', 'G-VS314RJ2KP', { 'anonymize_ip': true});
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
+</script><script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-div.callout-remark.callout {
-  border-left-color: #AD1457;
-}
-div.callout-remark.callout-style-default .callout-header {
-  background-color: rgba(173, 20, 87, 0.13);
-}
-div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
 div.callout-cnj.callout {
   border-left-color: #558B2F;
 }
@@ -167,26 +239,6 @@ div.callout-cnj.callout-style-default .callout-header {
 div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-proof.callout {
-  border-left-color: #37474F;
-}
-div.callout-proof.callout-style-default .callout-header {
-  background-color: rgba(55, 71, 79, 0.13);
-}
-div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-exm.callout {
   border-left-color: #6A1B9A;
@@ -198,15 +250,15 @@ div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-cor.callout {
-  border-left-color: #00838F;
+div.callout-remark.callout {
+  border-left-color: #AD1457;
 }
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
 }
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-def.callout {
   border-left-color: #1B5E20;
@@ -218,15 +270,25 @@ div.callout-def .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-exr.callout {
-  border-left-color: #FFA500;
+div.callout-cor.callout {
+  border-left-color: #00838F;
 }
-div.callout-exr.callout-style-default .callout-header {
-  background-color: rgba(255, 165, 0, 0.13);
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
 }
-div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-prp.callout {
   border-left-color: #827717;
@@ -237,6 +299,26 @@ div.callout-prp.callout-style-default .callout-header {
 div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exr.callout {
+  border-left-color: #FFA500;
+}
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
+}
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-solution.callout {
   border-left-color: #4E342E;
@@ -276,7 +358,7 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -624,7 +706,7 @@ window.Quarto = {
 </ul>
 <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/d-morrison/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/Morrison-Lab/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -639,8 +721,264 @@ window.Quarto = {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/count-regression.html">Models for Count Outcomes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Logistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Chapters</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Linear-models-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear (Gaussian) Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/binary-outcome-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Association for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/logistic-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/count-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Models for Count Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/predictor-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predictor Selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-multilevel-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Multi-level Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time-to-event-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time to Event Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-survival-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Survival Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/proportional-hazards-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proportional Hazards Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/parametric-survival-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parametric Survival Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/midterm-2-review-session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm 2 Review Session</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/top-ten-concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of Regression Modeling Concepts</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/math-prereqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematics Prerequisites</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exploratory-descriptive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory and Descriptive Methods</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/basic-statistical-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Statistical Methods</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/nonparametric-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonparametric Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-MLEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Maximum Likelihood Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/bayesian-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/common-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Common Mistakes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/proof-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proof Writing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Computing in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exam-formula-sheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam Formula Sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/package-versions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package Versions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/concept-map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concept Map: Definitions and Results</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
@@ -699,10 +1037,10 @@ window.Quarto = {
   <li><a href="#more-on-count-regression" id="toc-more-on-count-regression" class="nav-link" data-scroll-target="#more-on-count-regression"><span class="header-section-number">9</span> More on count regression</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/d-morrison/rme/edit/main/chapters/count-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/d-morrison/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/d-morrison/rme/blob/main/chapters/count-regression.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="count-regression-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="count-regression-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="count-regression-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/count-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/count-regression.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="count-regression-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="count-regression-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="count-regression-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/count-regression.html">Models for Count Outcomes</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Models for Count Outcomes</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Poisson regression and variations</p>
 </div>
@@ -715,7 +1053,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-09-24: 21:30:45 (UTC)</p>
+      <p class="date">Last modified: 2026-10-08: 22:21:03 (UTC)</p>
     </div>
   </div>
   
@@ -1146,23 +1484,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="nspueqeuuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nspueqeuuz table {
+<div id="qnkoujulku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qnkoujulku table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nspueqeuuz thead, #nspueqeuuz tbody, #nspueqeuuz tfoot, #nspueqeuuz tr, #nspueqeuuz td, #nspueqeuuz th {
+#qnkoujulku thead, #qnkoujulku tbody, #qnkoujulku tfoot, #qnkoujulku tr, #qnkoujulku td, #qnkoujulku th {
   border-style: none;
 }
 
-#nspueqeuuz p {
+#qnkoujulku p {
   margin: 0;
   padding: 0;
 }
 
-#nspueqeuuz .gt_table {
+#qnkoujulku .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1188,12 +1526,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_caption {
+#qnkoujulku .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nspueqeuuz .gt_title {
+#qnkoujulku .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1205,7 +1543,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#nspueqeuuz .gt_subtitle {
+#qnkoujulku .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1217,7 +1555,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#nspueqeuuz .gt_heading {
+#qnkoujulku .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1229,13 +1567,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_bottom_border {
+#qnkoujulku .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_col_headings {
+#qnkoujulku .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1250,7 +1588,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_col_heading {
+#qnkoujulku .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1270,7 +1608,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#nspueqeuuz .gt_column_spanner_outer {
+#qnkoujulku .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1282,15 +1620,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#nspueqeuuz .gt_column_spanner_outer:first-child {
+#qnkoujulku .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nspueqeuuz .gt_column_spanner_outer:last-child {
+#qnkoujulku .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nspueqeuuz .gt_column_spanner {
+#qnkoujulku .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1302,11 +1640,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#nspueqeuuz .gt_spanner_row {
+#qnkoujulku .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nspueqeuuz .gt_group_heading {
+#qnkoujulku .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1332,7 +1670,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#nspueqeuuz .gt_empty_group_heading {
+#qnkoujulku .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1347,15 +1685,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#nspueqeuuz .gt_from_md > :first-child {
+#qnkoujulku .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nspueqeuuz .gt_from_md > :last-child {
+#qnkoujulku .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nspueqeuuz .gt_row {
+#qnkoujulku .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1374,7 +1712,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#nspueqeuuz .gt_stub {
+#qnkoujulku .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1387,7 +1725,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#nspueqeuuz .gt_stub_row_group {
+#qnkoujulku .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1401,15 +1739,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#nspueqeuuz .gt_row_group_first td {
+#qnkoujulku .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nspueqeuuz .gt_row_group_first th {
+#qnkoujulku .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nspueqeuuz .gt_summary_row {
+#qnkoujulku .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1419,16 +1757,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#nspueqeuuz .gt_first_summary_row {
+#qnkoujulku .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_first_summary_row.thick {
+#qnkoujulku .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nspueqeuuz .gt_last_summary_row {
+#qnkoujulku .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1438,7 +1776,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_grand_summary_row {
+#qnkoujulku .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1448,7 +1786,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#nspueqeuuz .gt_first_grand_summary_row {
+#qnkoujulku .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1458,7 +1796,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_last_grand_summary_row_top {
+#qnkoujulku .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1468,11 +1806,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_striped {
+#qnkoujulku .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nspueqeuuz .gt_table_body {
+#qnkoujulku .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1481,7 +1819,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_footnotes {
+#qnkoujulku .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1495,7 +1833,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_footnote {
+#qnkoujulku .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1504,7 +1842,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#nspueqeuuz .gt_sourcenotes {
+#qnkoujulku .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1518,7 +1856,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#nspueqeuuz .gt_sourcenote {
+#qnkoujulku .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1526,72 +1864,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#nspueqeuuz .gt_left {
+#qnkoujulku .gt_left {
   text-align: left;
 }
 
-#nspueqeuuz .gt_center {
+#qnkoujulku .gt_center {
   text-align: center;
 }
 
-#nspueqeuuz .gt_right {
+#qnkoujulku .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nspueqeuuz .gt_font_normal {
+#qnkoujulku .gt_font_normal {
   font-weight: normal;
 }
 
-#nspueqeuuz .gt_font_bold {
+#qnkoujulku .gt_font_bold {
   font-weight: bold;
 }
 
-#nspueqeuuz .gt_font_italic {
+#qnkoujulku .gt_font_italic {
   font-style: italic;
 }
 
-#nspueqeuuz .gt_super {
+#qnkoujulku .gt_super {
   font-size: 65%;
 }
 
-#nspueqeuuz .gt_footnote_marks {
+#qnkoujulku .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nspueqeuuz .gt_asterisk {
+#qnkoujulku .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nspueqeuuz .gt_indent_1 {
+#qnkoujulku .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nspueqeuuz .gt_indent_2 {
+#qnkoujulku .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nspueqeuuz .gt_indent_3 {
+#qnkoujulku .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nspueqeuuz .gt_indent_4 {
+#qnkoujulku .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nspueqeuuz .gt_indent_5 {
+#qnkoujulku .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nspueqeuuz .katex-display {
+#qnkoujulku .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nspueqeuuz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qnkoujulku div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2674,40 +3012,40 @@ Table&nbsp;7: Negative binomial model for needle-sharing data
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
 <span><span class="co">#&gt; glm.nb(formula = shared_syr ~ homeless + age + sex + ethn + polydrug + </span></span>
-<span><span class="co">#&gt;     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.0903642555, </span></span>
+<span><span class="co">#&gt;     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.08315440712, </span></span>
 <span><span class="co">#&gt;     link = log)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
-<span><span class="co">#&gt; (Intercept)                   2.8948     1.9293    1.50   0.1335   </span></span>
-<span><span class="co">#&gt; homelesshomeless              2.5534     0.8024    3.18   0.0015 **</span></span>
-<span><span class="co">#&gt; age                          -0.0729     0.0447   -1.63   0.1027   </span></span>
-<span><span class="co">#&gt; sexF                         -0.5545     0.8869   -0.63   0.5318   </span></span>
-<span><span class="co">#&gt; ethnAA                        0.9100     0.9416    0.97   0.3339   </span></span>
-<span><span class="co">#&gt; ethnHispanic                  2.6222     1.5835    1.66   0.0977 . </span></span>
-<span><span class="co">#&gt; ethnOther                    -1.5963     2.1745   -0.73   0.4629   </span></span>
-<span><span class="co">#&gt; polydrugmultiple drugs used  -3.7062     1.3330   -2.78   0.0054 **</span></span>
-<span><span class="co">#&gt; hivstatHIV+                  -3.4809     1.5036   -2.32   0.0206 * </span></span>
-<span><span class="co">#&gt; sexabuseyes                  -1.5612     1.2484   -1.25   0.2111   </span></span>
-<span><span class="co">#&gt; hplsns                       -0.0449     0.0685   -0.66   0.5119   </span></span>
+<span><span class="co">#&gt;                             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span><span class="co">#&gt; (Intercept)                   6.4536     1.8421    3.50  0.00046 ***</span></span>
+<span><span class="co">#&gt; homelesshomeless              1.1508     0.7366    1.56  0.11820    </span></span>
+<span><span class="co">#&gt; age                          -0.1485     0.0433   -3.43  0.00059 ***</span></span>
+<span><span class="co">#&gt; sexF                          0.2198     0.8179    0.27  0.78813    </span></span>
+<span><span class="co">#&gt; ethnAA                        1.5958     0.8890    1.79  0.07265 .  </span></span>
+<span><span class="co">#&gt; ethnHispanic                  3.7763     1.5240    2.48  0.01322 *  </span></span>
+<span><span class="co">#&gt; ethnOther                    -3.2365     2.2663   -1.43  0.15327    </span></span>
+<span><span class="co">#&gt; polydrugmultiple drugs used  -4.0532     1.0898   -3.72  0.00020 ***</span></span>
+<span><span class="co">#&gt; hivstatHIV+                  -1.1548     1.3185   -0.88  0.38113    </span></span>
+<span><span class="co">#&gt; sexabuseyes                  -2.6449     1.0772   -2.46  0.01408 *  </span></span>
+<span><span class="co">#&gt; hplsns                        0.0948     0.0648    1.46  0.14306    </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; (Dispersion parameter for Negative Binomial(0.0899) family taken to be 1)</span></span>
+<span><span class="co">#&gt; (Dispersion parameter for Negative Binomial(0.0913) family taken to be 1)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     Null deviance: 61.511  on 108  degrees of freedom</span></span>
-<span><span class="co">#&gt; Residual deviance: 52.284  on  98  degrees of freedom</span></span>
+<span><span class="co">#&gt;     Null deviance: 62.231  on 108  degrees of freedom</span></span>
+<span><span class="co">#&gt; Residual deviance: 60.031  on  98  degrees of freedom</span></span>
 <span><span class="co">#&gt;   (18 observations deleted due to missingness)</span></span>
-<span><span class="co">#&gt; AIC: 261.5</span></span>
+<span><span class="co">#&gt; AIC: 267.9</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of Fisher Scoring iterations: 25</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;               Theta:  0.0904 </span></span>
-<span><span class="co">#&gt;           Std. Err.:  0.0239 </span></span>
+<span><span class="co">#&gt;               Theta:  0.0832 </span></span>
+<span><span class="co">#&gt;           Std. Err.:  0.0216 </span></span>
 <span><span class="co">#&gt; Warning while fitting theta: alternation limit reached </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  2 x log-likelihood:  -237.5430</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="co">#&gt;  2 x log-likelihood:  -243.8880</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </figure>
@@ -2730,11 +3068,11 @@ Table&nbsp;8: Poisson vs.&nbsp;Negative Binomial regression estimates
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 37%">
-<col style="width: 18%">
+<col style="width: 38%">
+<col style="width: 19%">
 <col style="width: 16%">
-<col style="width: 13%">
-<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: center;">Parameter</th>
@@ -2748,78 +3086,78 @@ Table&nbsp;8: Poisson vs.&nbsp;Negative Binomial regression estimates
 <td style="text-align: center;">(Intercept)</td>
 <td style="text-align: center;">1.306</td>
 <td style="text-align: center;">0.3649</td>
-<td style="text-align: center;">2.895</td>
-<td style="text-align: center;">1.929</td>
+<td style="text-align: center;">6.454</td>
+<td style="text-align: center;">1.842</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">homelesshomeless</td>
 <td style="text-align: center;">1.799</td>
 <td style="text-align: center;">0.1676</td>
-<td style="text-align: center;">2.553</td>
-<td style="text-align: center;">0.8024</td>
+<td style="text-align: center;">1.151</td>
+<td style="text-align: center;">0.7366</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">age</td>
 <td style="text-align: center;">-0.0436</td>
 <td style="text-align: center;">0.009183</td>
-<td style="text-align: center;">-0.07291</td>
-<td style="text-align: center;">0.04468</td>
+<td style="text-align: center;">-0.1485</td>
+<td style="text-align: center;">0.04326</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sexF</td>
 <td style="text-align: center;">0.8835</td>
 <td style="text-align: center;">0.1479</td>
-<td style="text-align: center;">-0.5545</td>
-<td style="text-align: center;">0.8869</td>
+<td style="text-align: center;">0.2198</td>
+<td style="text-align: center;">0.8179</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">ethnAA</td>
 <td style="text-align: center;">0.9525</td>
 <td style="text-align: center;">0.1858</td>
-<td style="text-align: center;">0.91</td>
-<td style="text-align: center;">0.9416</td>
+<td style="text-align: center;">1.596</td>
+<td style="text-align: center;">0.889</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">ethnHispanic</td>
 <td style="text-align: center;">0.5775</td>
 <td style="text-align: center;">0.3183</td>
-<td style="text-align: center;">2.622</td>
-<td style="text-align: center;">1.584</td>
+<td style="text-align: center;">3.776</td>
+<td style="text-align: center;">1.524</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">ethnOther</td>
 <td style="text-align: center;">0.03598</td>
 <td style="text-align: center;">0.3933</td>
-<td style="text-align: center;">-1.596</td>
-<td style="text-align: center;">2.175</td>
+<td style="text-align: center;">-3.236</td>
+<td style="text-align: center;">2.266</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">polydrugmultiple drugs used</td>
 <td style="text-align: center;">-1.676</td>
 <td style="text-align: center;">0.3062</td>
-<td style="text-align: center;">-3.706</td>
-<td style="text-align: center;">1.333</td>
+<td style="text-align: center;">-4.053</td>
+<td style="text-align: center;">1.09</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">hivstatHIV+</td>
 <td style="text-align: center;">-2.179</td>
 <td style="text-align: center;">0.4617</td>
-<td style="text-align: center;">-3.481</td>
-<td style="text-align: center;">1.504</td>
+<td style="text-align: center;">-1.155</td>
+<td style="text-align: center;">1.319</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sexabuseyes</td>
 <td style="text-align: center;">-1.474</td>
 <td style="text-align: center;">0.3132</td>
-<td style="text-align: center;">-1.561</td>
-<td style="text-align: center;">1.248</td>
+<td style="text-align: center;">-2.645</td>
+<td style="text-align: center;">1.077</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">hplsns</td>
 <td style="text-align: center;">-0.03147</td>
 <td style="text-align: center;">0.01423</td>
-<td style="text-align: center;">-0.0449</td>
-<td style="text-align: center;">0.06845</td>
+<td style="text-align: center;">0.09484</td>
+<td style="text-align: center;">0.06476</td>
 </tr>
 </tbody>
 </table>
@@ -3891,7 +4229,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/d-morrison\.github\.io\/rme\/");
+        var filterRegex = new RegExp("https:\/\/morrison-lab\.github\.io\/rme\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -4219,7 +4557,17 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/logistic-regression.html" class="pagination-link" aria-label="Models for Binary Outcomes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Models for Binary Outcomes</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/causal-inference.html" class="pagination-link" aria-label="Causal Inference">
+        <span class="nav-page-text">Causal Inference</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Models for Count Outcomes"</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Poisson regression and variations"</span></span>
@@ -4364,8 +4712,8 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 </ul>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/d-morrison/rme/edit/main/chapters/count-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/d-morrison/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/d-morrison/rme/blob/main/chapters/count-regression.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/count-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/count-regression.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
