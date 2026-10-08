@@ -1,0 +1,50 @@
+The models in earlier chapters assumed that the outcomes
+$Y_1, \ldots, Y_n$ were mutually independent given the covariates.
+Many epidemiologic studies collect data in **clusters**:
+repeated measurements on the same person,
+patients treated at the same hospital,
+or houses in the same county
+[@dobson4e, Chapter 11].
+Observations in the same cluster
+tend to resemble one another more than observations in different clusters,
+so the independence assumption fails.
+Ignoring that correlation usually makes standard errors too small,
+because the data carry less information
+than the same number of independent observations would
+[@dobson4e, Chapter 11].
+
+Two kinds of model term describe clusters.
+A **fixed effect** is a parameter for a specific group
+whose particular value we want to estimate,
+such as the effect of a specific treatment.
+A **random effect** treats the groups in the data
+as a sample from a larger population of groups,
+and models each group's effect as a random variable drawn from a distribution;
+the parameters of interest are then the parameters of that distribution,
+especially its variance
+[@rocke2021epi204].
+
+{{< slidebreak >}}
+
+:::{#exm-fixed-vs-random}
+#### Fixed versus random effects
+
+- In a trial comparing a new drug with a placebo,
+the treatment groups are the only two groups of interest,
+so treatment is a fixed effect.
+- In a study that measures each of 20 patients several times,
+the 20 patients are a sample from the population of all patients,
+and we want conclusions that apply to patients beyond these 20,
+so patient is a random effect.
+:::
+
+Random effects can be **nested** or **crossed**.
+Effects are nested when each lower-level group belongs to exactly one higher-level group,
+such as batches within laboratories.
+Effects are crossed when every level of one factor can appear with every level of the other,
+such as patients and raters when every rater scores every patient
+[@rocke2021epi204].
+
+A model that contains both fixed and random effects is called a **mixed model**.
+The same ideas extend from linear models to logistic and Poisson regression
+[@rocke2021epi204].
