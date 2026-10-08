@@ -1,0 +1,63 @@
+<script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
+</script>
