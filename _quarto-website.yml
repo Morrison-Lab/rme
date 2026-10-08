@@ -51,6 +51,9 @@ website:
     left:
       - text: "Copyright 2024-2026, Douglas Ezra Morrison"
   back-to-top-navigation: true
+  # Previous/next links at the foot of each page follow the sidebar's order,
+  # so page-navigation does nothing without the sidebar below.
+  # https://quarto.org/docs/websites/website-navigation.html#page-navigation
   page-navigation: true
   reader-mode: true
   repo-url: https://github.com/Morrison-Lab/rme
@@ -146,6 +149,60 @@ website:
           - text: "Concept Map"
             href: chapters/concept-map.qmd
 
+  # The sidebar sets the previous/next page links, so keep it in the same
+  # order as the navbar and add each new page to both.
+  # It leaves out Home on purpose: Quarto highlights the first navbar link
+  # whose target appears anywhere in the sidebar, so a Home entry here would
+  # highlight "Home" on every page. So the chain starts at the syllabus,
+  # and the home page has no "next" link. To put Home in the chain, add it
+  # as the first entry and turn on page-navigation.html (see
+  # `include-after-body` under `format.html`), which fixes the highlighting.
+  sidebar:
+    style: docked
+    search: false # the navbar already has search
+    contents:
+      - section: "Course Logistics"
+        contents:
+          - chapters/syllabus.qmd
+          - chapters/schedule.qmd
+      - section: "Chapters"
+        contents:
+          - chapters/Intro-to-GLMs.qmd
+          - chapters/glms.qmd
+          - chapters/Linear-models-overview.qmd
+          - chapters/binary-outcome-associations.qmd
+          - chapters/logistic-regression.qmd
+          - chapters/count-regression.qmd
+          - chapters/causal-inference.qmd
+          - chapters/predictor-selection.qmd
+          - chapters/intro-multilevel-models.qmd
+          - chapters/time-to-event-models.qmd
+          - chapters/intro-to-survival-analysis.qmd
+          - chapters/proportional-hazards-models.qmd
+          - chapters/parametric-survival-models.qmd
+          - chapters/midterm-2-review-session.qmd
+          - chapters/top-ten-concepts.qmd
+      - section: "Appendices"
+        contents:
+          - chapters/math-prereqs.qmd
+          - chapters/data.qmd
+          - chapters/exploratory-descriptive.qmd
+          - chapters/probability.qmd
+          - chapters/basic-statistical-methods.qmd
+          - chapters/classification.qmd
+          - chapters/estimation.qmd
+          - chapters/nonparametric-models.qmd
+          - chapters/inference.qmd
+          - chapters/intro-MLEs.qmd
+          - chapters/bayesian-inference.qmd
+          - chapters/common-mistakes.qmd
+          - chapters/notation.qmd
+          - chapters/proof-writing.qmd
+          - chapters/intro-to-R.qmd
+          - chapters/exam-formula-sheet.qmd
+          - chapters/package-versions.qmd
+          - chapters/concept-map.qmd
+
 bibliography: references.bib
 
 callouty-theorem:
@@ -210,12 +267,10 @@ callouty-theorem:
       collapse: true
       icon: false
   remark:
-    override-title: true
+    override-title: false
     callout:
       type: remark
-      appearance: default
-      collapse: false
-      icon: true
+      appearance: minimal
 
 # Color palette for theorem/proof environments.
 # The coatless-quarto/custom-callout extension reads this block and injects
@@ -249,8 +304,10 @@ format:
       - callouty-theorem
       - coatless-quarto/custom-callout
     theme:
-      light: [cosmo, custom.scss]
+      light: [cosmo, offwhite.scss, custom.scss]
       dark: [darkly, custom.scss]
+    # Replaces Quarto's two-way toggle with a Light / Off-white / Parchment / Dark dropdown.
+    include-in-header: theme-picker.html
     toc: true
     toc-location: right
     toc-depth: 3
@@ -258,6 +315,9 @@ format:
     # Quarto hides the right-margin TOC (see _mobile-toc.html / custom.scss).
     include-after-body:
       - _mobile-toc.html
+      # Opt-in: floating previous/next arrows in the page margins, and navbar
+      # highlighting that works when Home is in the sidebar.
+      # - page-navigation.html
     code-fold: true
     code-tools: true
     code-link: true
@@ -280,7 +340,8 @@ format:
       - d-morrison/revealjs-html-links
     search: false
     lightbox: true
-    theme: dark
+    theme: [dark, slides-palette.scss]
+    include-in-header: deck-theme.html
     embed-resources: false
     fig-cap-location: top
     html-math-method: mathjax
