@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Exploratory and Descriptive Methods – Regression Models for Epidemiology</title>
 <style>
@@ -86,22 +86,27 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/probability.html" rel="next">
+<link href="../chapters/data.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-1bcb2eaaf09c6c3c9f1dc9011af1d06d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-e63f7d1578450dc4cc96f417ea5ce542.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-aaecb91e40cc87e9caa896179b56e095.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
@@ -130,12 +135,27 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VS314RJ2KP"></script><script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-VS314RJ2KP', { 'anonymize_ip': true});
+gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
+</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
 </script><script type="application/json" class="js-hypothesis-config">
 {
   "theme": "clean",
@@ -146,68 +166,70 @@ gtag('config', 'G-VS314RJ2KP', { 'anonymize_ip': true});
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
+</script><script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-def.callout {
-  border-left-color: #1B5E20;
-}
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
-}
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-proof.callout {
-  border-left-color: #37474F;
-}
-div.callout-proof.callout-style-default .callout-header {
-  background-color: rgba(55, 71, 79, 0.13);
-}
-div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-prp.callout {
-  border-left-color: #827717;
-}
-div.callout-prp.callout-style-default .callout-header {
-  background-color: rgba(130, 119, 23, 0.13);
-}
-div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-remark.callout {
-  border-left-color: #AD1457;
-}
-div.callout-remark.callout-style-default .callout-header {
-  background-color: rgba(173, 20, 87, 0.13);
-}
-div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
 div.callout-cnj.callout {
   border-left-color: #558B2F;
 }
@@ -217,16 +239,6 @@ div.callout-cnj.callout-style-default .callout-header {
 div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cor.callout {
-  border-left-color: #00838F;
-}
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
-}
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-exm.callout {
   border-left-color: #6A1B9A;
@@ -247,6 +259,76 @@ div.callout-exr.callout-style-default .callout-header {
 div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-remark.callout {
+  border-left-color: #AD1457;
+}
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
+}
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
@@ -276,7 +358,7 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -624,7 +706,7 @@ window.Quarto = {
 </ul>
 <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/d-morrison/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/Morrison-Lab/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -639,8 +721,264 @@ window.Quarto = {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/math-prereqs.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/exploratory-descriptive.html">Exploratory and Descriptive Methods</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Logistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Chapters</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Linear-models-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear (Gaussian) Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/binary-outcome-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Association for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/logistic-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/count-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Count Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/predictor-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predictor Selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-multilevel-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Multi-level Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time-to-event-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time to Event Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-survival-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Survival Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/proportional-hazards-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proportional Hazards Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/parametric-survival-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parametric Survival Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/midterm-2-review-session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm 2 Review Session</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/top-ten-concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of Regression Modeling Concepts</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/math-prereqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mathematics Prerequisites</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exploratory-descriptive.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exploratory and Descriptive Methods</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/basic-statistical-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Statistical Methods</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/nonparametric-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonparametric Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-MLEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Maximum Likelihood Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/bayesian-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/common-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Common Mistakes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/proof-writing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proof Writing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Computing in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exam-formula-sheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam Formula Sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/package-versions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package Versions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/concept-map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concept Map: Definitions and Results</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
@@ -707,10 +1045,10 @@ window.Quarto = {
   <li><a href="#data-transformations" id="toc-data-transformations" class="nav-link" data-scroll-target="#data-transformations"><span class="header-section-number">5</span> Data transformations</a></li>
   <li><a href="#putting-it-all-together-an-eda-workflow" id="toc-putting-it-all-together-an-eda-workflow" class="nav-link" data-scroll-target="#putting-it-all-together-an-eda-workflow"><span class="header-section-number">6</span> Putting it all together: an EDA workflow</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/d-morrison/rme/edit/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/d-morrison/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/d-morrison/rme/blob/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="exploratory-descriptive-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="exploratory-descriptive-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="exploratory-descriptive-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="exploratory-descriptive-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="exploratory-descriptive-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="exploratory-descriptive-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/math-prereqs.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/exploratory-descriptive.html">Exploratory and Descriptive Methods</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Exploratory and Descriptive Methods</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -722,7 +1060,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-09-25: 21:01:24 (UTC)</p>
+      <p class="date">Last modified: 2026-10-08: 22:31:44 (UTC)</p>
     </div>
   </div>
   
@@ -1050,23 +1388,23 @@ Note
 Table&nbsp;1: WCGS: descriptive statistics for continuous variables
 </figcaption><div aria-describedby="tbl-wcgs-summary-continuous-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="eixmieikrb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#eixmieikrb table {
+<div id="zvxtijgnbu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zvxtijgnbu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#eixmieikrb thead, #eixmieikrb tbody, #eixmieikrb tfoot, #eixmieikrb tr, #eixmieikrb td, #eixmieikrb th {
+#zvxtijgnbu thead, #zvxtijgnbu tbody, #zvxtijgnbu tfoot, #zvxtijgnbu tr, #zvxtijgnbu td, #zvxtijgnbu th {
   border-style: none;
 }
 
-#eixmieikrb p {
+#zvxtijgnbu p {
   margin: 0;
   padding: 0;
 }
 
-#eixmieikrb .gt_table {
+#zvxtijgnbu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1092,12 +1430,12 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-left-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_caption {
+#zvxtijgnbu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#eixmieikrb .gt_title {
+#zvxtijgnbu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1109,7 +1447,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-bottom-width: 0;
 }
 
-#eixmieikrb .gt_subtitle {
+#zvxtijgnbu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1121,7 +1459,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-top-width: 0;
 }
 
-#eixmieikrb .gt_heading {
+#zvxtijgnbu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1133,13 +1471,13 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-right-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_bottom_border {
+#zvxtijgnbu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_col_headings {
+#zvxtijgnbu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1154,7 +1492,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-right-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_col_heading {
+#zvxtijgnbu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1174,7 +1512,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   overflow-x: hidden;
 }
 
-#eixmieikrb .gt_column_spanner_outer {
+#zvxtijgnbu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1186,15 +1524,15 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 4px;
 }
 
-#eixmieikrb .gt_column_spanner_outer:first-child {
+#zvxtijgnbu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#eixmieikrb .gt_column_spanner_outer:last-child {
+#zvxtijgnbu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#eixmieikrb .gt_column_spanner {
+#zvxtijgnbu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1206,11 +1544,11 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   width: 100%;
 }
 
-#eixmieikrb .gt_spanner_row {
+#zvxtijgnbu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#eixmieikrb .gt_group_heading {
+#zvxtijgnbu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1236,7 +1574,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   text-align: left;
 }
 
-#eixmieikrb .gt_empty_group_heading {
+#zvxtijgnbu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1251,15 +1589,15 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   vertical-align: middle;
 }
 
-#eixmieikrb .gt_from_md > :first-child {
+#zvxtijgnbu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#eixmieikrb .gt_from_md > :last-child {
+#zvxtijgnbu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#eixmieikrb .gt_row {
+#zvxtijgnbu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1278,7 +1616,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   overflow-x: hidden;
 }
 
-#eixmieikrb .gt_stub {
+#zvxtijgnbu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1291,7 +1629,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 5px;
 }
 
-#eixmieikrb .gt_stub_row_group {
+#zvxtijgnbu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1305,15 +1643,15 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   vertical-align: top;
 }
 
-#eixmieikrb .gt_row_group_first td {
+#zvxtijgnbu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#eixmieikrb .gt_row_group_first th {
+#zvxtijgnbu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#eixmieikrb .gt_summary_row {
+#zvxtijgnbu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1323,16 +1661,16 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 5px;
 }
 
-#eixmieikrb .gt_first_summary_row {
+#zvxtijgnbu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_first_summary_row.thick {
+#zvxtijgnbu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#eixmieikrb .gt_last_summary_row {
+#zvxtijgnbu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1342,7 +1680,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-bottom-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_grand_summary_row {
+#zvxtijgnbu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1352,7 +1690,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 5px;
 }
 
-#eixmieikrb .gt_first_grand_summary_row {
+#zvxtijgnbu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1362,7 +1700,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-top-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_last_grand_summary_row_top {
+#zvxtijgnbu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1372,11 +1710,11 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-bottom-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_striped {
+#zvxtijgnbu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#eixmieikrb .gt_table_body {
+#zvxtijgnbu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1385,7 +1723,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-bottom-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_footnotes {
+#zvxtijgnbu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1399,7 +1737,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-right-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_footnote {
+#zvxtijgnbu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1408,7 +1746,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 5px;
 }
 
-#eixmieikrb .gt_sourcenotes {
+#zvxtijgnbu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1422,7 +1760,7 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   border-right-color: #D3D3D3;
 }
 
-#eixmieikrb .gt_sourcenote {
+#zvxtijgnbu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1430,72 +1768,72 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
   padding-right: 5px;
 }
 
-#eixmieikrb .gt_left {
+#zvxtijgnbu .gt_left {
   text-align: left;
 }
 
-#eixmieikrb .gt_center {
+#zvxtijgnbu .gt_center {
   text-align: center;
 }
 
-#eixmieikrb .gt_right {
+#zvxtijgnbu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#eixmieikrb .gt_font_normal {
+#zvxtijgnbu .gt_font_normal {
   font-weight: normal;
 }
 
-#eixmieikrb .gt_font_bold {
+#zvxtijgnbu .gt_font_bold {
   font-weight: bold;
 }
 
-#eixmieikrb .gt_font_italic {
+#zvxtijgnbu .gt_font_italic {
   font-style: italic;
 }
 
-#eixmieikrb .gt_super {
+#zvxtijgnbu .gt_super {
   font-size: 65%;
 }
 
-#eixmieikrb .gt_footnote_marks {
+#zvxtijgnbu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#eixmieikrb .gt_asterisk {
+#zvxtijgnbu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#eixmieikrb .gt_indent_1 {
+#zvxtijgnbu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#eixmieikrb .gt_indent_2 {
+#zvxtijgnbu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#eixmieikrb .gt_indent_3 {
+#zvxtijgnbu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#eixmieikrb .gt_indent_4 {
+#zvxtijgnbu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#eixmieikrb .gt_indent_5 {
+#zvxtijgnbu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#eixmieikrb .katex-display {
+#zvxtijgnbu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#eixmieikrb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zvxtijgnbu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1559,23 +1897,23 @@ Table&nbsp;1: WCGS: descriptive statistics for continuous variables
 Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
 </figcaption><div aria-describedby="tbl-wcgs-summary-cat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="uvokifwlzg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uvokifwlzg table {
+<div id="jtjsmkauxr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jtjsmkauxr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uvokifwlzg thead, #uvokifwlzg tbody, #uvokifwlzg tfoot, #uvokifwlzg tr, #uvokifwlzg td, #uvokifwlzg th {
+#jtjsmkauxr thead, #jtjsmkauxr tbody, #jtjsmkauxr tfoot, #jtjsmkauxr tr, #jtjsmkauxr td, #jtjsmkauxr th {
   border-style: none;
 }
 
-#uvokifwlzg p {
+#jtjsmkauxr p {
   margin: 0;
   padding: 0;
 }
 
-#uvokifwlzg .gt_table {
+#jtjsmkauxr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1601,12 +1939,12 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-left-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_caption {
+#jtjsmkauxr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uvokifwlzg .gt_title {
+#jtjsmkauxr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1618,7 +1956,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-bottom-width: 0;
 }
 
-#uvokifwlzg .gt_subtitle {
+#jtjsmkauxr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1630,7 +1968,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-top-width: 0;
 }
 
-#uvokifwlzg .gt_heading {
+#jtjsmkauxr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1642,13 +1980,13 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-right-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_bottom_border {
+#jtjsmkauxr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_col_headings {
+#jtjsmkauxr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1663,7 +2001,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-right-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_col_heading {
+#jtjsmkauxr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1683,7 +2021,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   overflow-x: hidden;
 }
 
-#uvokifwlzg .gt_column_spanner_outer {
+#jtjsmkauxr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1695,15 +2033,15 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 4px;
 }
 
-#uvokifwlzg .gt_column_spanner_outer:first-child {
+#jtjsmkauxr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uvokifwlzg .gt_column_spanner_outer:last-child {
+#jtjsmkauxr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uvokifwlzg .gt_column_spanner {
+#jtjsmkauxr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1715,11 +2053,11 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   width: 100%;
 }
 
-#uvokifwlzg .gt_spanner_row {
+#jtjsmkauxr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uvokifwlzg .gt_group_heading {
+#jtjsmkauxr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1745,7 +2083,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   text-align: left;
 }
 
-#uvokifwlzg .gt_empty_group_heading {
+#jtjsmkauxr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1760,15 +2098,15 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   vertical-align: middle;
 }
 
-#uvokifwlzg .gt_from_md > :first-child {
+#jtjsmkauxr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uvokifwlzg .gt_from_md > :last-child {
+#jtjsmkauxr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uvokifwlzg .gt_row {
+#jtjsmkauxr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1787,7 +2125,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   overflow-x: hidden;
 }
 
-#uvokifwlzg .gt_stub {
+#jtjsmkauxr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1800,7 +2138,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 5px;
 }
 
-#uvokifwlzg .gt_stub_row_group {
+#jtjsmkauxr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1814,15 +2152,15 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   vertical-align: top;
 }
 
-#uvokifwlzg .gt_row_group_first td {
+#jtjsmkauxr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uvokifwlzg .gt_row_group_first th {
+#jtjsmkauxr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uvokifwlzg .gt_summary_row {
+#jtjsmkauxr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1832,16 +2170,16 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 5px;
 }
 
-#uvokifwlzg .gt_first_summary_row {
+#jtjsmkauxr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_first_summary_row.thick {
+#jtjsmkauxr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uvokifwlzg .gt_last_summary_row {
+#jtjsmkauxr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1851,7 +2189,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-bottom-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_grand_summary_row {
+#jtjsmkauxr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1861,7 +2199,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 5px;
 }
 
-#uvokifwlzg .gt_first_grand_summary_row {
+#jtjsmkauxr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1871,7 +2209,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-top-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_last_grand_summary_row_top {
+#jtjsmkauxr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1881,11 +2219,11 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-bottom-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_striped {
+#jtjsmkauxr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uvokifwlzg .gt_table_body {
+#jtjsmkauxr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1894,7 +2232,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-bottom-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_footnotes {
+#jtjsmkauxr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1908,7 +2246,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-right-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_footnote {
+#jtjsmkauxr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1917,7 +2255,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 5px;
 }
 
-#uvokifwlzg .gt_sourcenotes {
+#jtjsmkauxr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1931,7 +2269,7 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   border-right-color: #D3D3D3;
 }
 
-#uvokifwlzg .gt_sourcenote {
+#jtjsmkauxr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1939,72 +2277,72 @@ Table&nbsp;2: Frequency table for categorical variables in the WCGS dataset
   padding-right: 5px;
 }
 
-#uvokifwlzg .gt_left {
+#jtjsmkauxr .gt_left {
   text-align: left;
 }
 
-#uvokifwlzg .gt_center {
+#jtjsmkauxr .gt_center {
   text-align: center;
 }
 
-#uvokifwlzg .gt_right {
+#jtjsmkauxr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uvokifwlzg .gt_font_normal {
+#jtjsmkauxr .gt_font_normal {
   font-weight: normal;
 }
 
-#uvokifwlzg .gt_font_bold {
+#jtjsmkauxr .gt_font_bold {
   font-weight: bold;
 }
 
-#uvokifwlzg .gt_font_italic {
+#jtjsmkauxr .gt_font_italic {
   font-style: italic;
 }
 
-#uvokifwlzg .gt_super {
+#jtjsmkauxr .gt_super {
   font-size: 65%;
 }
 
-#uvokifwlzg .gt_footnote_marks {
+#jtjsmkauxr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uvokifwlzg .gt_asterisk {
+#jtjsmkauxr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uvokifwlzg .gt_indent_1 {
+#jtjsmkauxr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uvokifwlzg .gt_indent_2 {
+#jtjsmkauxr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uvokifwlzg .gt_indent_3 {
+#jtjsmkauxr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uvokifwlzg .gt_indent_4 {
+#jtjsmkauxr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uvokifwlzg .gt_indent_5 {
+#jtjsmkauxr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uvokifwlzg .katex-display {
+#jtjsmkauxr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uvokifwlzg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jtjsmkauxr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2328,23 +2666,23 @@ Figure&nbsp;8: Box plots of cholesterol by behavioral pattern in the WCGS datase
 Table&nbsp;3: Cholesterol summary statistics by CHD status
 </figcaption><div aria-describedby="tbl-chol-by-chd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="afmdpzenir" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#afmdpzenir table {
+<div id="hqoxdmfsyp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hqoxdmfsyp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#afmdpzenir thead, #afmdpzenir tbody, #afmdpzenir tfoot, #afmdpzenir tr, #afmdpzenir td, #afmdpzenir th {
+#hqoxdmfsyp thead, #hqoxdmfsyp tbody, #hqoxdmfsyp tfoot, #hqoxdmfsyp tr, #hqoxdmfsyp td, #hqoxdmfsyp th {
   border-style: none;
 }
 
-#afmdpzenir p {
+#hqoxdmfsyp p {
   margin: 0;
   padding: 0;
 }
 
-#afmdpzenir .gt_table {
+#hqoxdmfsyp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2370,12 +2708,12 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-left-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_caption {
+#hqoxdmfsyp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#afmdpzenir .gt_title {
+#hqoxdmfsyp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2387,7 +2725,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-bottom-width: 0;
 }
 
-#afmdpzenir .gt_subtitle {
+#hqoxdmfsyp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2399,7 +2737,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-top-width: 0;
 }
 
-#afmdpzenir .gt_heading {
+#hqoxdmfsyp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2411,13 +2749,13 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-right-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_bottom_border {
+#hqoxdmfsyp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_col_headings {
+#hqoxdmfsyp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2432,7 +2770,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-right-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_col_heading {
+#hqoxdmfsyp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2452,7 +2790,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   overflow-x: hidden;
 }
 
-#afmdpzenir .gt_column_spanner_outer {
+#hqoxdmfsyp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2464,15 +2802,15 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 4px;
 }
 
-#afmdpzenir .gt_column_spanner_outer:first-child {
+#hqoxdmfsyp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#afmdpzenir .gt_column_spanner_outer:last-child {
+#hqoxdmfsyp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#afmdpzenir .gt_column_spanner {
+#hqoxdmfsyp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2484,11 +2822,11 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   width: 100%;
 }
 
-#afmdpzenir .gt_spanner_row {
+#hqoxdmfsyp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#afmdpzenir .gt_group_heading {
+#hqoxdmfsyp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2514,7 +2852,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   text-align: left;
 }
 
-#afmdpzenir .gt_empty_group_heading {
+#hqoxdmfsyp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2529,15 +2867,15 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   vertical-align: middle;
 }
 
-#afmdpzenir .gt_from_md > :first-child {
+#hqoxdmfsyp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#afmdpzenir .gt_from_md > :last-child {
+#hqoxdmfsyp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#afmdpzenir .gt_row {
+#hqoxdmfsyp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2556,7 +2894,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   overflow-x: hidden;
 }
 
-#afmdpzenir .gt_stub {
+#hqoxdmfsyp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2569,7 +2907,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 5px;
 }
 
-#afmdpzenir .gt_stub_row_group {
+#hqoxdmfsyp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2583,15 +2921,15 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   vertical-align: top;
 }
 
-#afmdpzenir .gt_row_group_first td {
+#hqoxdmfsyp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#afmdpzenir .gt_row_group_first th {
+#hqoxdmfsyp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#afmdpzenir .gt_summary_row {
+#hqoxdmfsyp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2601,16 +2939,16 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 5px;
 }
 
-#afmdpzenir .gt_first_summary_row {
+#hqoxdmfsyp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_first_summary_row.thick {
+#hqoxdmfsyp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#afmdpzenir .gt_last_summary_row {
+#hqoxdmfsyp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2620,7 +2958,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-bottom-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_grand_summary_row {
+#hqoxdmfsyp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2630,7 +2968,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 5px;
 }
 
-#afmdpzenir .gt_first_grand_summary_row {
+#hqoxdmfsyp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2640,7 +2978,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-top-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_last_grand_summary_row_top {
+#hqoxdmfsyp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2650,11 +2988,11 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-bottom-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_striped {
+#hqoxdmfsyp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#afmdpzenir .gt_table_body {
+#hqoxdmfsyp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2663,7 +3001,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-bottom-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_footnotes {
+#hqoxdmfsyp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2677,7 +3015,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-right-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_footnote {
+#hqoxdmfsyp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2686,7 +3024,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 5px;
 }
 
-#afmdpzenir .gt_sourcenotes {
+#hqoxdmfsyp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2700,7 +3038,7 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   border-right-color: #D3D3D3;
 }
 
-#afmdpzenir .gt_sourcenote {
+#hqoxdmfsyp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2708,72 +3046,72 @@ Table&nbsp;3: Cholesterol summary statistics by CHD status
   padding-right: 5px;
 }
 
-#afmdpzenir .gt_left {
+#hqoxdmfsyp .gt_left {
   text-align: left;
 }
 
-#afmdpzenir .gt_center {
+#hqoxdmfsyp .gt_center {
   text-align: center;
 }
 
-#afmdpzenir .gt_right {
+#hqoxdmfsyp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#afmdpzenir .gt_font_normal {
+#hqoxdmfsyp .gt_font_normal {
   font-weight: normal;
 }
 
-#afmdpzenir .gt_font_bold {
+#hqoxdmfsyp .gt_font_bold {
   font-weight: bold;
 }
 
-#afmdpzenir .gt_font_italic {
+#hqoxdmfsyp .gt_font_italic {
   font-style: italic;
 }
 
-#afmdpzenir .gt_super {
+#hqoxdmfsyp .gt_super {
   font-size: 65%;
 }
 
-#afmdpzenir .gt_footnote_marks {
+#hqoxdmfsyp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#afmdpzenir .gt_asterisk {
+#hqoxdmfsyp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#afmdpzenir .gt_indent_1 {
+#hqoxdmfsyp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#afmdpzenir .gt_indent_2 {
+#hqoxdmfsyp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#afmdpzenir .gt_indent_3 {
+#hqoxdmfsyp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#afmdpzenir .gt_indent_4 {
+#hqoxdmfsyp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#afmdpzenir .gt_indent_5 {
+#hqoxdmfsyp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#afmdpzenir .katex-display {
+#hqoxdmfsyp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#afmdpzenir div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hqoxdmfsyp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2894,23 +3232,23 @@ Table&nbsp;5
 Table&nbsp;6: Smoking status and CHD event in WCGS
 </figcaption><div aria-describedby="tbl-gtsummary-smoke-chd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="onbhjbahzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#onbhjbahzi table {
+<div id="qmwctqsgey" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qmwctqsgey table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#onbhjbahzi thead, #onbhjbahzi tbody, #onbhjbahzi tfoot, #onbhjbahzi tr, #onbhjbahzi td, #onbhjbahzi th {
+#qmwctqsgey thead, #qmwctqsgey tbody, #qmwctqsgey tfoot, #qmwctqsgey tr, #qmwctqsgey td, #qmwctqsgey th {
   border-style: none;
 }
 
-#onbhjbahzi p {
+#qmwctqsgey p {
   margin: 0;
   padding: 0;
 }
 
-#onbhjbahzi .gt_table {
+#qmwctqsgey .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2936,12 +3274,12 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-left-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_caption {
+#qmwctqsgey .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#onbhjbahzi .gt_title {
+#qmwctqsgey .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2953,7 +3291,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-bottom-width: 0;
 }
 
-#onbhjbahzi .gt_subtitle {
+#qmwctqsgey .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2965,7 +3303,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-top-width: 0;
 }
 
-#onbhjbahzi .gt_heading {
+#qmwctqsgey .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2977,13 +3315,13 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-right-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_bottom_border {
+#qmwctqsgey .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_col_headings {
+#qmwctqsgey .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2998,7 +3336,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-right-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_col_heading {
+#qmwctqsgey .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3018,7 +3356,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   overflow-x: hidden;
 }
 
-#onbhjbahzi .gt_column_spanner_outer {
+#qmwctqsgey .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3030,15 +3368,15 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 4px;
 }
 
-#onbhjbahzi .gt_column_spanner_outer:first-child {
+#qmwctqsgey .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#onbhjbahzi .gt_column_spanner_outer:last-child {
+#qmwctqsgey .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#onbhjbahzi .gt_column_spanner {
+#qmwctqsgey .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3050,11 +3388,11 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   width: 100%;
 }
 
-#onbhjbahzi .gt_spanner_row {
+#qmwctqsgey .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#onbhjbahzi .gt_group_heading {
+#qmwctqsgey .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3080,7 +3418,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   text-align: left;
 }
 
-#onbhjbahzi .gt_empty_group_heading {
+#qmwctqsgey .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3095,15 +3433,15 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   vertical-align: middle;
 }
 
-#onbhjbahzi .gt_from_md > :first-child {
+#qmwctqsgey .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#onbhjbahzi .gt_from_md > :last-child {
+#qmwctqsgey .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#onbhjbahzi .gt_row {
+#qmwctqsgey .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3122,7 +3460,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   overflow-x: hidden;
 }
 
-#onbhjbahzi .gt_stub {
+#qmwctqsgey .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3135,7 +3473,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 5px;
 }
 
-#onbhjbahzi .gt_stub_row_group {
+#qmwctqsgey .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3149,15 +3487,15 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   vertical-align: top;
 }
 
-#onbhjbahzi .gt_row_group_first td {
+#qmwctqsgey .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#onbhjbahzi .gt_row_group_first th {
+#qmwctqsgey .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#onbhjbahzi .gt_summary_row {
+#qmwctqsgey .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3167,16 +3505,16 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 5px;
 }
 
-#onbhjbahzi .gt_first_summary_row {
+#qmwctqsgey .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_first_summary_row.thick {
+#qmwctqsgey .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#onbhjbahzi .gt_last_summary_row {
+#qmwctqsgey .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3186,7 +3524,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-bottom-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_grand_summary_row {
+#qmwctqsgey .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3196,7 +3534,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 5px;
 }
 
-#onbhjbahzi .gt_first_grand_summary_row {
+#qmwctqsgey .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3206,7 +3544,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-top-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_last_grand_summary_row_top {
+#qmwctqsgey .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3216,11 +3554,11 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-bottom-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_striped {
+#qmwctqsgey .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#onbhjbahzi .gt_table_body {
+#qmwctqsgey .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3229,7 +3567,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-bottom-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_footnotes {
+#qmwctqsgey .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3243,7 +3581,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-right-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_footnote {
+#qmwctqsgey .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3252,7 +3590,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 5px;
 }
 
-#onbhjbahzi .gt_sourcenotes {
+#qmwctqsgey .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3266,7 +3604,7 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   border-right-color: #D3D3D3;
 }
 
-#onbhjbahzi .gt_sourcenote {
+#qmwctqsgey .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3274,72 +3612,72 @@ Table&nbsp;6: Smoking status and CHD event in WCGS
   padding-right: 5px;
 }
 
-#onbhjbahzi .gt_left {
+#qmwctqsgey .gt_left {
   text-align: left;
 }
 
-#onbhjbahzi .gt_center {
+#qmwctqsgey .gt_center {
   text-align: center;
 }
 
-#onbhjbahzi .gt_right {
+#qmwctqsgey .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#onbhjbahzi .gt_font_normal {
+#qmwctqsgey .gt_font_normal {
   font-weight: normal;
 }
 
-#onbhjbahzi .gt_font_bold {
+#qmwctqsgey .gt_font_bold {
   font-weight: bold;
 }
 
-#onbhjbahzi .gt_font_italic {
+#qmwctqsgey .gt_font_italic {
   font-style: italic;
 }
 
-#onbhjbahzi .gt_super {
+#qmwctqsgey .gt_super {
   font-size: 65%;
 }
 
-#onbhjbahzi .gt_footnote_marks {
+#qmwctqsgey .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#onbhjbahzi .gt_asterisk {
+#qmwctqsgey .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#onbhjbahzi .gt_indent_1 {
+#qmwctqsgey .gt_indent_1 {
   text-indent: 5px;
 }
 
-#onbhjbahzi .gt_indent_2 {
+#qmwctqsgey .gt_indent_2 {
   text-indent: 10px;
 }
 
-#onbhjbahzi .gt_indent_3 {
+#qmwctqsgey .gt_indent_3 {
   text-indent: 15px;
 }
 
-#onbhjbahzi .gt_indent_4 {
+#qmwctqsgey .gt_indent_4 {
   text-indent: 20px;
 }
 
-#onbhjbahzi .gt_indent_5 {
+#qmwctqsgey .gt_indent_5 {
   text-indent: 25px;
 }
 
-#onbhjbahzi .katex-display {
+#qmwctqsgey .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#onbhjbahzi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qmwctqsgey div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3471,23 +3809,23 @@ Figure&nbsp;9: SBP distribution: raw and log scale (WCGS)
 Table&nbsp;7: Summary of selected WCGS variables
 </figcaption><div aria-describedby="tbl-wcgs-all-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tsahhtlxmb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tsahhtlxmb table {
+<div id="mgriafhtuy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgriafhtuy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tsahhtlxmb thead, #tsahhtlxmb tbody, #tsahhtlxmb tfoot, #tsahhtlxmb tr, #tsahhtlxmb td, #tsahhtlxmb th {
+#mgriafhtuy thead, #mgriafhtuy tbody, #mgriafhtuy tfoot, #mgriafhtuy tr, #mgriafhtuy td, #mgriafhtuy th {
   border-style: none;
 }
 
-#tsahhtlxmb p {
+#mgriafhtuy p {
   margin: 0;
   padding: 0;
 }
 
-#tsahhtlxmb .gt_table {
+#mgriafhtuy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3513,12 +3851,12 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-left-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_caption {
+#mgriafhtuy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tsahhtlxmb .gt_title {
+#mgriafhtuy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3530,7 +3868,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-bottom-width: 0;
 }
 
-#tsahhtlxmb .gt_subtitle {
+#mgriafhtuy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3542,7 +3880,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-top-width: 0;
 }
 
-#tsahhtlxmb .gt_heading {
+#mgriafhtuy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3554,13 +3892,13 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-right-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_bottom_border {
+#mgriafhtuy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_col_headings {
+#mgriafhtuy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3575,7 +3913,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-right-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_col_heading {
+#mgriafhtuy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3595,7 +3933,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   overflow-x: hidden;
 }
 
-#tsahhtlxmb .gt_column_spanner_outer {
+#mgriafhtuy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3607,15 +3945,15 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 4px;
 }
 
-#tsahhtlxmb .gt_column_spanner_outer:first-child {
+#mgriafhtuy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tsahhtlxmb .gt_column_spanner_outer:last-child {
+#mgriafhtuy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tsahhtlxmb .gt_column_spanner {
+#mgriafhtuy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3627,11 +3965,11 @@ Table&nbsp;7: Summary of selected WCGS variables
   width: 100%;
 }
 
-#tsahhtlxmb .gt_spanner_row {
+#mgriafhtuy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tsahhtlxmb .gt_group_heading {
+#mgriafhtuy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3657,7 +3995,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   text-align: left;
 }
 
-#tsahhtlxmb .gt_empty_group_heading {
+#mgriafhtuy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3672,15 +4010,15 @@ Table&nbsp;7: Summary of selected WCGS variables
   vertical-align: middle;
 }
 
-#tsahhtlxmb .gt_from_md > :first-child {
+#mgriafhtuy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tsahhtlxmb .gt_from_md > :last-child {
+#mgriafhtuy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tsahhtlxmb .gt_row {
+#mgriafhtuy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3699,7 +4037,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   overflow-x: hidden;
 }
 
-#tsahhtlxmb .gt_stub {
+#mgriafhtuy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3712,7 +4050,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 5px;
 }
 
-#tsahhtlxmb .gt_stub_row_group {
+#mgriafhtuy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3726,15 +4064,15 @@ Table&nbsp;7: Summary of selected WCGS variables
   vertical-align: top;
 }
 
-#tsahhtlxmb .gt_row_group_first td {
+#mgriafhtuy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tsahhtlxmb .gt_row_group_first th {
+#mgriafhtuy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tsahhtlxmb .gt_summary_row {
+#mgriafhtuy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3744,16 +4082,16 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 5px;
 }
 
-#tsahhtlxmb .gt_first_summary_row {
+#mgriafhtuy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_first_summary_row.thick {
+#mgriafhtuy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tsahhtlxmb .gt_last_summary_row {
+#mgriafhtuy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3763,7 +4101,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-bottom-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_grand_summary_row {
+#mgriafhtuy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3773,7 +4111,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 5px;
 }
 
-#tsahhtlxmb .gt_first_grand_summary_row {
+#mgriafhtuy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3783,7 +4121,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-top-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_last_grand_summary_row_top {
+#mgriafhtuy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3793,11 +4131,11 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-bottom-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_striped {
+#mgriafhtuy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tsahhtlxmb .gt_table_body {
+#mgriafhtuy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3806,7 +4144,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-bottom-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_footnotes {
+#mgriafhtuy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3820,7 +4158,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-right-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_footnote {
+#mgriafhtuy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3829,7 +4167,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 5px;
 }
 
-#tsahhtlxmb .gt_sourcenotes {
+#mgriafhtuy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3843,7 +4181,7 @@ Table&nbsp;7: Summary of selected WCGS variables
   border-right-color: #D3D3D3;
 }
 
-#tsahhtlxmb .gt_sourcenote {
+#mgriafhtuy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3851,72 +4189,72 @@ Table&nbsp;7: Summary of selected WCGS variables
   padding-right: 5px;
 }
 
-#tsahhtlxmb .gt_left {
+#mgriafhtuy .gt_left {
   text-align: left;
 }
 
-#tsahhtlxmb .gt_center {
+#mgriafhtuy .gt_center {
   text-align: center;
 }
 
-#tsahhtlxmb .gt_right {
+#mgriafhtuy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tsahhtlxmb .gt_font_normal {
+#mgriafhtuy .gt_font_normal {
   font-weight: normal;
 }
 
-#tsahhtlxmb .gt_font_bold {
+#mgriafhtuy .gt_font_bold {
   font-weight: bold;
 }
 
-#tsahhtlxmb .gt_font_italic {
+#mgriafhtuy .gt_font_italic {
   font-style: italic;
 }
 
-#tsahhtlxmb .gt_super {
+#mgriafhtuy .gt_super {
   font-size: 65%;
 }
 
-#tsahhtlxmb .gt_footnote_marks {
+#mgriafhtuy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tsahhtlxmb .gt_asterisk {
+#mgriafhtuy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tsahhtlxmb .gt_indent_1 {
+#mgriafhtuy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tsahhtlxmb .gt_indent_2 {
+#mgriafhtuy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tsahhtlxmb .gt_indent_3 {
+#mgriafhtuy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tsahhtlxmb .gt_indent_4 {
+#mgriafhtuy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tsahhtlxmb .gt_indent_5 {
+#mgriafhtuy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tsahhtlxmb .katex-display {
+#mgriafhtuy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tsahhtlxmb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mgriafhtuy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4568,7 +4906,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/d-morrison\.github\.io\/rme\/");
+        var filterRegex = new RegExp("https:\/\/morrison-lab\.github\.io\/rme\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -4896,7 +5234,17 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/data.html" class="pagination-link" aria-label="Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/probability.html" class="pagination-link" aria-label="Probability">
+        <span class="nav-page-text">Probability</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exploratory and Descriptive Methods"</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
@@ -5444,8 +5792,8 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 </ul>
 </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/d-morrison/rme/edit/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/d-morrison/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/d-morrison/rme/blob/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/exploratory-descriptive.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
