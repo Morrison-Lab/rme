@@ -352,7 +352,7 @@ $$
 \\
 &\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs) && \text{(definition of log-hazards)}
 \\
-&= \diffloghaz(t|\vx : \vxs) && \text{(definition of log-hazard difference)}
+&\eqdef \diffloghaz(t|\vx : \vxs) && \text{(definition of log-hazard difference)}
 \\
 &= \eta(\vx) - \eta(\vxs) && \text{(linear predictor form)}
 \\
@@ -473,7 +473,9 @@ This derivation uses @thm-log-cuhaz-parallel.
 $$
 \ba
 \logf{-\logf{\surv(t|\vx)}}
-&= \logf{\cuhaz(t|\vx)} && \text{(since } -\log \surv(t|\vx) = \cuhaz(t|\vx)\text{)} \\
+&= \logf{-\logf{\expf{-\cuhaz(t|\vx)}}} && \text{(substituting } \surv(t|\vx) = \expf{-\cuhaz(t|\vx)}\text{)} \\
+&= \logf{-(-\cuhaz(t|\vx))} && \text{(logarithm inverts the exponential)} \\
+&= \logf{\cuhaz(t|\vx)} && \text{(double negation)} \\
 &= \logf{\cuhaz_0(t)} + \reglincomb && \text{(applying the parallel log-cumulative-hazard theorem)} \\
 &= \logf{-\logf{\surv_0(t)}} + \reglincomb && \text{(substituting baseline cumulative hazard } \cuhaz_0(t) = -\log \surv_0(t)\text{)}
 \ea
