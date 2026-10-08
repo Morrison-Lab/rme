@@ -1,14 +1,21 @@
+This proof uses
+the definitions of MSE (@def-mse),
+estimation error (@def-estimation-error),
+and [variance](probability.qmd#def-variance),
+along with @thm-bias-exprs and linearity of expectation.
+
 $$
 \ba
 \mselr{\hth}
-&= \E{\sqf{\erf{\hth}}} && \text{(by Definition @def-mse)} \\
-&= \E{(\hth - \th)^2} && \text{(by Definition @def-estimation-error)} \\
+&\eqdef \E{\sqf{\erf{\hth}}} && \text{(definition of MSE)} \\
+&= \E{(\hth - \th)^2} && \text{(definition of estimation error)} \\
 &= \E{\paren{(\hth - \E{\hth}) + (\E{\hth} - \th)}^2} && \text{(adding and subtracting } \E{\hth} \text{)} \\
 &= \E{\paren{\hth - \E{\hth}}^2 + 2(\hth - \E{\hth})(\E{\hth} - \th) + (\E{\hth} - \th)^2} && \text{(expanding the square)} \\
 &= \E{(\hth - \E{\hth})^2} + \E{2(\hth - \E{\hth})(\E{\hth} - \th)} + \E{(\E{\hth} - \th)^2} && \text{(by linearity of expectation)} \\
 &= \E{(\hth - \E{\hth})^2} + 2(\E{\hth} - \th)\E{\hth - \E{\hth}} + (\E{\hth} - \th)^2 && \text{(since } \E{\hth} - \th \text{ is constant)} \\
-&= \Var{\hth} + 2(\E{\hth} - \th)(\E{\hth} - \E{\hth}) && \text{(by Definition @def-variance and linearity of expectation)} \\
-&\quad + \sqf{\bias{\hth}} && \text{(by @thm-bias-exprs)} \\
+&\eqdef \Var{\hth} + 2(\E{\hth} - \th)\E{\hth - \E{\hth}} + (\E{\hth} - \th)^2 && \text{(definition of variance)} \\
+&= \Var{\hth} + 2(\E{\hth} - \th)(\E{\hth} - \E{\hth}) + (\E{\hth} - \th)^2 && \text{(by linearity of expectation)} \\
+&= \Var{\hth} + 2(\E{\hth} - \th)(\E{\hth} - \E{\hth}) + \sqf{\bias{\hth}} && \text{(bias equals expected value minus estimand)} \\
 &= \Var{\hth} + 2(\E{\hth} - \th)(0) + \sqf{\bias{\hth}} && \text{(since } \E{\hth} - \E{\hth} = 0 \text{)} \\
 &= \Var{\hth} + \sqf{\bias{\hth}} && \text{(simplifying)} \\
 &= \sqf{\bias{\hth}} + \Var{\hth} && \text{(by commutativity of addition)}
