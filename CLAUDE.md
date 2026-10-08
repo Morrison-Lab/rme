@@ -39,7 +39,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Aim to keep `.qmd` source files under ~100 lines; split longer files into named subfiles in `_subfiles/`
 - `_extensions/` is vendored third-party code — do not review or modify it
 - New book pages must be wired into each render profile that should include them — the profiles keep independent page lists, so a page added to only one is missing from the others:
-  - `_quarto-website.yml` — the default profile (`profile.default: website` in `_quarto.yml`): add to the `render:` list, and to the navbar if it's a primary/navigable chapter (supplemental pages like appendices can stay in `render:` without a navbar entry)
+  - `_quarto-website.yml` — the default profile (`profile.default: website` in `_quarto.yml`):
+    add to the `render:` list, and to the navbar if it's a primary/navigable chapter (supplemental pages like appendices can stay in `render:` without a navbar entry).
+    Add every navbar page to `website.sidebar` too, in the same position,
+    because the sidebar order sets the previous/next page links.
+    Home stays out of the sidebar unless the opt-in `page-navigation.html` include is on (see the comments in `_quarto-website.yml`).
   - `_quarto-book.yml` — the book/PDF TOC: add to `book.chapters:` (directly or inside a `part:` grouping)
   - `_quarto-handout.yml` — a curated PDF-handout subset with its own `render:` list; add the page here too if it belongs in the handouts
 
@@ -47,7 +51,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Use `{{< slidebreak >}}` instead of `---` for slide breaks
 - Add `{{< slidebreak >}}` immediately before every theorem-type div (`#thm-`, `#lem-`, `#cor-`, `#prp-`, `#cnj-`, `#def-`, `#exm-`, `#exr-`, `#rem-`, `#sol-`)
 - When a subfile begins with a theorem-type div, put the preceding `{{< slidebreak >}}` in the **parent** file (before the `{{< include >}}`), not inside the subfile
-  - Exception: when a section heading immediately precedes the div (or the `{{< include >}}` of a subfile that begins with one), the slidebreak may be omitted so the heading shares its slide with the div, rather than producing a title-only slide. Mark the intentional omission with an inline `<!-- ... do not re-flag -->` comment at that spot.
+  - Exception: when a section heading immediately precedes the div (or the `{{< include >}}` of a subfile that begins with one), the slidebreak may be omitted so the heading shares its slide with the div, rather than producing a title-only slide.
+    Mark the intentional omission with an inline HTML comment that states the reason, addressed to whoever edits the page next rather than to the review bot — e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` — not `<!-- ... do not re-flag -->`.
+    A comment written to instruct a bot goes stale when the bot changes;
+    a comment stating the reason stays true regardless.
+    (Decided 2026-09-28; `Morrison-Lab/pds` and `Morrison-Lab/sds` made the same change.)
   - `{{< slidebreak >}}` and `---` are **not equivalent** and must not be combined: per `_extensions/slidebreak/slidebreak.lua`, the shortcode only renders a rule in the `revealjs` profile and is a no-op everywhere else, while a bare `---` renders a visible `<hr>` in *every* profile (book, website, PDF handout). When relocating an example/theorem div next to an existing `---` separator, replace that `---` with `{{< slidebreak >}}` rather than adding the shortcode alongside it — leaving both introduces a stray `<hr>` in the non-slide renders.
 - Default to `#| code-fold: true` for figure/table chunks
 - Use div format (`:::{#fig-...}`) for figures and tables, not chunk-option `fig-cap`/`tbl-cap`
@@ -113,6 +121,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Variable definitions in exercises: use bullet points/table with symbol, meaning, and dataset column
 - After every definition or concept, include a concrete example — preferably numerical — to illustrate the abstract idea; use a `{#exm-...}` div; if a counterexample is feasible, include one immediately after the example
 - After every theoretical claim (thm, cor, lem): when a proof is feasible and in scope, (1) immediately follow with a proof, then (2) immediately follow with an example utilizing the claim; when a proof is non-elementary or out of scope (e.g., `@thm-fubini`, `@thm-fubini-tonelli`), omit the proof block and proceed directly to the example
+  - Narrow exception: an immediate corollary whose statement is itself a concrete instance of the result it follows needs no separate example — the corollary already is one.
+    For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of expectation needs no further example: a filler example there would just restate the corollary in different symbols, costing the reader more than it teaches.
+    This exemption is narrow — it covers only a corollary whose own statement already instantiates the preceding result;
+    definitions and theorems still require a genuine example, and a corollary that adds new content of its own still needs one.
+    (Decided 2026-09-28.)
 - Always arrange divs and sections so that related items are adjacent: theorem → proof → example(s) → counterexample(s)
 - Never use "above" or "below" to refer to content — cross-reference with `@label` syntax instead
 - Always add a noun phrase after "This", "That", and "Those" to clarify the referent (e.g., "This estimator", not "This")
@@ -152,7 +165,7 @@ If a failure is not caused by your changes, document it in the PR description.
 
 When summarizing PRs, issues, workflow runs, or jobs, always include the
 GitHub URL alongside the reference (e.g.,
-[#897](https://github.com/d-morrison/rme/pull/897), not just "#897").
+[#897](https://github.com/Morrison-Lab/rme/pull/897), not just "#897").
 
 ## ai-config skills and memories
 
@@ -198,3 +211,16 @@ Don't assume a fragment is unavailable just because a guessed path missed.
   see `.github/copilot-instructions.md` → "Accessing the private
   `ucdavis/epi204` repository" for usage snippets. If the variable is
   empty, the repo is unavailable for this session.
+
+<!-- ai-config:begin (managed by Morrison-Lab/ai-config scripts/wire-repo-config.py) -->
+## Cross-project agent rules (ai-config)
+
+This repository follows the maintainer's cross-project agent rules in
+[Morrison-Lab/ai-config](https://github.com/Morrison-Lab/ai-config).
+If your harness has not already loaded them (Claude Code loads them through
+the ai-config plugin), read
+[AGENTS.md](https://github.com/Morrison-Lab/ai-config/blob/main/AGENTS.md)
+before starting work, and follow it alongside this file.
+This file's own instructions add to those rules, and win only where they are
+more specific.
+<!-- ai-config:end -->
