@@ -81,20 +81,15 @@ that involve $\mu$ and completing the square:
 $$
 \ba
 p(M=\mu \mid X=x)
-&\propto p(X=x \mid M=\mu)\, p(M=\mu) \\
-&\quad \text{(by Bayes' theorem, dropping marginal likelihood factor } p(X=x)\text{)} \\
-&\propto \expf{-\frac{1}{2}\sum_{i=1}^n (x_i - \mu)^2} \cdot \expf{-\frac{1}{2}\mu^2} \\
-&\quad \text{(substituting normal likelihood and prior kernels)} \\
-&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n (x_i^2 - 2x_i \mu + \mu^2) + \mu^2}} \\
-&\quad \text{(expanding quadratic term inside exponent)} \\
-&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2\mu \sum_{i=1}^n x_i + n\mu^2 + \mu^2}} \\
-&\quad \text{(distributing summation across terms)} \\
-&\propto \expf{-\frac{1}{2}\sb{(n+1)\mu^2 - 2n\bar{x}\mu}} \\
-&\quad \text{(substituting } \sum x_i = n\bar{x} \text{ and dropping factor independent of } \mu\text{)} \\
-&= \expf{-\frac{1}{2}(n+1)\sb{\mu^2 - 2 \frac{n}{n+1}\bar{x}\mu}} \\
-&\quad \text{(factoring out } (n+1)\text{)} \\
-&\propto \expf{-\frac{1}{2}(n+1)\paren{\mu - \frac{n}{n+1}\bar{x}}^2} \\
-&\quad \text{(completing the square in } \mu \text{ and dropping term independent of } \mu\text{)}
+&\propto p(X=x \mid M=\mu)\, p(M=\mu) && \text{(by Bayes' theorem, dropping marginal likelihood factor } p(X=x)\text{)} \\
+&\propto \expf{-\frac{1}{2}\sum_{i=1}^n (x_i - \mu)^2} \cdot \expf{-\frac{1}{2}\mu^2} && \text{(substituting normal likelihood and prior kernels)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n (x_i^2 - 2x_i \mu + \mu^2) + \mu^2}} && \text{(expanding quadratic term inside exponent)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2\mu \sum_{i=1}^n x_i + n\mu^2 + \mu^2}} && \text{(distributing summation across terms)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2n\bar{x}\mu + (n+1)\mu^2}} && \text{(substituting } \sum x_i = n\bar{x} \text{ and collecting } \mu^2 \text{ terms)} \\
+&\propto \expf{-\frac{1}{2}\sb{(n+1)\mu^2 - 2n\bar{x}\mu}} && \text{(dropping factor } \expf{-\tfrac{1}{2}\sum x_i^2} \text{, which does not depend on } \mu\text{)} \\
+&= \expf{-\frac{1}{2}(n+1)\sb{\mu^2 - 2 \frac{n}{n+1}\bar{x}\mu}} && \text{(factoring out } (n+1)\text{)} \\
+&= \expf{-\frac{1}{2}(n+1)\sb{\paren{\mu - \frac{n}{n+1}\bar{x}}^2 - \paren{\frac{n}{n+1}\bar{x}}^2}} && \text{(completing the square in } \mu\text{)} \\
+&\propto \expf{-\frac{1}{2}(n+1)\paren{\mu - \frac{n}{n+1}\bar{x}}^2} && \text{(dropping factor that does not depend on } \mu\text{)}
 \ea
 $$
 

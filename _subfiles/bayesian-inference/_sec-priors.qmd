@@ -85,20 +85,15 @@ we derive the exact posterior density by combining the normal likelihood and the
 $$
 \ba
 p(M=\mu \mid X=x)
-&\propto p(X=x \mid M=\mu)\, p(M=\mu) \\
-&\quad \text{(by Bayes' theorem, dropping marginal likelihood factor } p(X=x)\text{)} \\
-&\propto \expf{-\frac{1}{2}\sum_{i=1}^n (x_i - \mu)^2} \cdot \expf{-\frac{1}{2\tau^2}\mu^2} \\
-&\quad \text{(substituting normal likelihood and prior kernels)} \\
-&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n (x_i^2 - 2x_i \mu + \mu^2) + \frac{\mu^2}{\tau^2}}} \\
-&\quad \text{(expanding quadratic term inside exponent)} \\
-&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2\mu \sum_{i=1}^n x_i + n\mu^2 + \frac{\mu^2}{\tau^2}}} \\
-&\quad \text{(distributing summation across terms)} \\
-&\propto \expf{-\frac{1}{2}\sb{\paren{n + \frac{1}{\tau^2}}\mu^2 - 2n\bar{x}\mu}} \\
-&\quad \text{(substituting } \sum x_i = n\bar{x} \text{ and dropping factor independent of } \mu\text{)} \\
-&= \expf{-\frac{1}{2}\paren{n + \frac{1}{\tau^2}}\sb{\mu^2 - 2 \frac{n\bar{x}}{n + 1/\tau^2}\mu}} \\
-&\quad \text{(factoring out precision } n + 1/\tau^2\text{)} \\
-&\propto \expf{-\frac{1}{2}\paren{n + \frac{1}{\tau^2}}\paren{\mu - \frac{n\bar{x}}{n + 1/\tau^2}}^2} \\
-&\quad \text{(completing square in } \mu \text{ and dropping factor independent of } \mu\text{)}
+&\propto p(X=x \mid M=\mu)\, p(M=\mu) && \text{(by Bayes' theorem, dropping marginal likelihood factor } p(X=x)\text{)} \\
+&\propto \expf{-\frac{1}{2}\sum_{i=1}^n (x_i - \mu)^2} \cdot \expf{-\frac{1}{2\tau^2}\mu^2} && \text{(substituting normal likelihood and prior kernels)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n (x_i^2 - 2x_i \mu + \mu^2) + \frac{\mu^2}{\tau^2}}} && \text{(expanding quadratic term inside exponent)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2\mu \sum_{i=1}^n x_i + n\mu^2 + \frac{\mu^2}{\tau^2}}} && \text{(distributing summation across terms)} \\
+&= \expf{-\frac{1}{2}\sb{\sum_{i=1}^n x_i^2 - 2n\bar{x}\mu + \paren{n + \frac{1}{\tau^2}}\mu^2}} && \text{(substituting } \sum x_i = n\bar{x} \text{ and collecting } \mu^2 \text{ terms)} \\
+&\propto \expf{-\frac{1}{2}\sb{\paren{n + \frac{1}{\tau^2}}\mu^2 - 2n\bar{x}\mu}} && \text{(dropping factor } \expf{-\tfrac{1}{2}\sum x_i^2} \text{, which does not depend on } \mu\text{)} \\
+&= \expf{-\frac{1}{2}\paren{n + \frac{1}{\tau^2}}\sb{\mu^2 - 2 \frac{n\bar{x}}{n + 1/\tau^2}\mu}} && \text{(factoring out precision } n + 1/\tau^2\text{)} \\
+&= \expf{-\frac{1}{2}\paren{n + \frac{1}{\tau^2}}\sb{\paren{\mu - \frac{n\bar{x}}{n + 1/\tau^2}}^2 - \paren{\frac{n\bar{x}}{n + 1/\tau^2}}^2}} && \text{(completing the square in } \mu\text{)} \\
+&\propto \expf{-\frac{1}{2}\paren{n + \frac{1}{\tau^2}}\paren{\mu - \frac{n\bar{x}}{n + 1/\tau^2}}^2} && \text{(dropping factor that does not depend on } \mu\text{)}
 \ea
 $$
 
