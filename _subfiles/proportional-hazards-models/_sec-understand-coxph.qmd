@@ -119,11 +119,13 @@ $$\diffloghaz(t|\vx)= \reglincomb$${#eq-diffloghaz-0-ph}
 
 ::: proof
 
+This derivation uses @lem-diffloghaz-ph.
+
 $$
 \ba
 \diffloghaz(t|\vx)
 &\eqdef \diffloghaz(t|\vx : \vzero) && \text{(definition of difference from baseline)} \\
-&= (\vx - \vzero) \cdot \vb && \text{(applying @lem-diffloghaz-ph with } \vxs = \vzero\text{)} \\
+&= (\vx - \vzero) \cdot \vb && \text{(applying the PH log-hazard-difference lemma with } \vxs = \vzero\text{)} \\
 &= \reglincomb && \text{(evaluating vector difference)}
 \ea
 $$
@@ -146,14 +148,16 @@ $$\hazfactor(t|\vx) = \expf{\reglincomb}$$
 
 ::: proof
 
+This derivation uses @cor-hazard-ratio-vs-baseline and @lem-ph-diffloghaz-0.
+
 $$
 \ba
 \hazfactor(t|\vx)
 &\eqdef \hr(t| \vx : \vzero) && \text{(definition of hazard factor)}
 \\
-&= \expf{\diffloghaz(t|\vx)} && \text{(applying @cor-hazard-ratio-vs-baseline)}
+&= \expf{\diffloghaz(t|\vx)} && \text{(applying the hazard-factor corollary)}
 \\
-&= \expf{\reglincomb} && \text{(substituting @lem-ph-diffloghaz-0)}
+&= \expf{\reglincomb} && \text{(substituting the log-hazard difference from baseline)}
 \ea
 $$
 
@@ -293,34 +297,39 @@ $$\hazfactor(\vzero) = \hr(\vzero, \vzero) = 1$$
 
 ::: proof
 
+This derivation uses @thm-ph-haz-decomp.
+
 $$
 \ba
 \hr(\vx, \vxs)
 &= \frac{\haz(t|\vx)}{\haz(t|\vxs)} && \text{(definition of hazard ratio)} \\
-&= \frac{\haz_0(t)\hazfactor(\vx)}{\haz_0(t)\hazfactor(\vxs)} && \text{(applying @thm-ph-haz-decomp)} \\
+&= \frac{\haz_0(t)\hazfactor(\vx)}{\haz_0(t)\hazfactor(\vxs)} && \text{(applying the PH hazard decomposition)} \\
 &= \frac{\hazfactor(\vx)}{\hazfactor(\vxs)} && \text{(canceling baseline hazard } \haz_0(t)\text{)}
 \ea
 $$
 
-Setting $\vx = \vzero$ yields:
+Setting $\vx = \vzero$ in @thm-hazard-ratio-vs-baseline-ph yields:
 
 $$
+\ba
 \hazfactor(\vzero)
-\eqdef \expf{\vzero \cdot \vb}
-= e^0
-= 1
+&= \expf{\vzero \cdot \vb} && \text{(hazard factor under proportional hazards, with } \vx = \vzero\text{)} \\
+&= \expf{0} && \text{(dot product with the zero vector)} \\
+&= 1 && \text{(exponential of zero)}
+\ea
 $$
 
 :::
 
 {{< slidebreak >}}
 
-The proportional hazards model also has additional notable properties:
+The proportional hazards model also has additional notable properties,
+which follow from @thm-ph-haz-decomp:
 
 $$
 \ba
 \frac{\haz(t|\vx_1)}{\haz(t|\vx_2)}
-&=\frac{\haz_0(t)\hazfactor(\vx_1)}{\haz_0(t)\hazfactor(\vx_2)} && \text{(applying @thm-ph-haz-decomp)} \\
+&=\frac{\haz_0(t)\hazfactor(\vx_1)}{\haz_0(t)\hazfactor(\vx_2)} && \text{(applying the PH hazard decomposition)} \\
 &=\frac{\hazfactor(\vx_1)}{\hazfactor(\vx_2)} && \text{(canceling baseline hazard } \haz_0(t)\text{)} \\
 &=\frac{\expf{\eta(\vx_1)}}{\expf{\eta(\vx_2)}} && \text{(substituting hazard factor definition)} \\
 &=\expf{\eta(\vx_1)-\eta(\vx_2)} && \text{(quotient rule for exponentials)} \\
@@ -384,7 +393,7 @@ $$
 $$
 
 ::: notes
-This additive structure means that covariate effects are additive on the log-hazard scale;
+Under this structure, covariate effects combine by addition on the log-hazard scale;
 hazard functions for different covariate patterns should be vertical shifts of each other.
 
 See also:
@@ -430,10 +439,12 @@ $$
 
 ::: proof
 
+This derivation uses @thm-ph-cuhaz.
+
 $$
 \ba
 \logf{\cuhaz(t|\vx)}
-&= \logf{\hazfactor(\vx)\cuhaz_0(t)} && \text{(applying @thm-ph-cuhaz)} \\
+&= \logf{\hazfactor(\vx)\cuhaz_0(t)} && \text{(applying the PH cumulative-hazard theorem)} \\
 &= \logf{\cuhaz_0(t)} + \logf{\hazfactor(\vx)} && \text{(logarithm of product rule)} \\
 &= \logf{\cuhaz_0(t)} + \logf{\expf{\reglincomb}} && \text{(substituting definition of } \hazfactor(\vx)\text{)} \\
 &= \logf{\cuhaz_0(t)} + \reglincomb && \text{(simplifying } \log(\exp(\cdot))\text{)}
@@ -457,11 +468,13 @@ $$
 
 ::: proof
 
+This derivation uses @thm-log-cuhaz-parallel.
+
 $$
 \ba
 \logf{-\logf{\surv(t|\vx)}}
 &= \logf{\cuhaz(t|\vx)} && \text{(since } -\log \surv(t|\vx) = \cuhaz(t|\vx)\text{)} \\
-&= \logf{\cuhaz_0(t)} + \reglincomb && \text{(applying @thm-log-cuhaz-parallel)} \\
+&= \logf{\cuhaz_0(t)} + \reglincomb && \text{(applying the parallel log-cumulative-hazard theorem)} \\
 &= \logf{-\logf{\surv_0(t)}} + \reglincomb && \text{(substituting baseline cumulative hazard } \cuhaz_0(t) = -\log \surv_0(t)\text{)}
 \ea
 $$
@@ -480,11 +493,13 @@ $$\surv(t|\vx) = \sb{\surv_0(t)}^{\hazfactor(\vx)}$$
 {{< slidebreak >}}
 
 ::: proof
+This derivation uses @thm-ph-cuhaz.
+
 $$
 \ba
 \surv(t|\vx)
 &= \expf{-\cuhaz(t|\vx)} && \text{(definition of survival function in terms of cumulative hazard)} \\
-&= \expf{-\hazfactor(\vx)\cdot \cuhaz_0(t)} && \text{(applying @thm-ph-cuhaz)} \\
+&= \expf{-\hazfactor(\vx)\cdot \cuhaz_0(t)} && \text{(applying the PH cumulative-hazard theorem)} \\
 &= \paren{\expf{- \cuhaz_0(t)}}^{\hazfactor(\vx)} && \text{(power rule for exponents } e^{ab} = (e^a)^b\text{)} \\
 &= \sb{\surv_0(t)}^{\hazfactor(\vx)} && \text{(substituting baseline survival } \surv_0(t) \eqdef \expf{-\cuhaz_0(t)}\text{)}
 \ea
