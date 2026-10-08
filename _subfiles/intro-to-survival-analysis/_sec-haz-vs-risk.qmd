@@ -1,0 +1,56 @@
+The hazard and the risk are easy to confuse,
+because both are probabilities of an event by some time.
+They answer different questions
+[@hernan2020causal, Chapter 17, p. 229]:
+
+> The risk and the hazard are different measures.
+> The denominator of the risk—the number of individuals at baseline—is constant across times $k$
+> and its numerator—all events between baseline and $k$—is cumulative.
+> That is, the risk will stay flat or increase as $k$ increases.
+> On the other hand, the denominator of the hazard—the number of individuals alive at $k$—varies over time $t$
+> and its numerator includes only recent events—those during interval $k$.
+> That is, the hazard may increase or decrease over time.
+
+To make that comparison precise,
+consider an event time $T$ that takes values in $\{1, 2, 3, \ldots\}$,
+such as the follow-up interval in which an event occurs.
+
+{{< slidebreak >}}
+
+:::{#def-discrete-haz-risk}
+#### Discrete-time hazard and risk
+
+For $k = 1, 2, \ldots$:
+
+- the **discrete-time hazard** at $k$ is
+$\haz_k \eqdef \Pr(T = k \mid T \ge k)$,
+the probability of an event in interval $k$
+among those still event-free at the start of interval $k$;
+- the **risk** by $k$ is
+$\risk(k) \eqdef \Pr(T \le k)$,
+the probability of an event in any interval up to and including $k$
+among everyone at baseline.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-haz-vs-risk}
+#### Hazard versus risk in a cohort
+
+Suppose 1000 people are followed for four years with no censoring,
+and 100, 50, 40, and 60 of them have the event in years 1 through 4.
+The hazard divides each year's events by the number still event-free at the start of that year;
+the risk divides the running total of events by the 1000 people at baseline:
+
+| Year $k$ | Events | Event-free at start of $k$ | $\haz_k$ | Total events by $k$ | $\risk(k)$ |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 100 | 1000 | $100/1000 = 0.100$ | 100 | $0.10$ |
+| 2 | 50 | 900 | $50/900 \approx 0.056$ | 150 | $0.15$ |
+| 3 | 40 | 850 | $40/850 \approx 0.047$ | 190 | $0.19$ |
+| 4 | 60 | 810 | $60/810 \approx 0.074$ | 250 | $0.25$ |
+
+The hazard falls and then rises,
+while the risk increases every year.
+:::
+
+{{< include _subfiles/intro-to-survival-analysis/_thm-risk-from-haz.qmd >}}
