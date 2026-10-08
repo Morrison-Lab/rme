@@ -18,7 +18,7 @@ future macro updates.
 When cloning this repository, include submodules:
 
 ```bash
-git clone --recurse-submodules https://github.com/d-morrison/rme.git
+git clone --recurse-submodules https://github.com/Morrison-Lab/rme.git
 ```
 
 Or if already cloned:
