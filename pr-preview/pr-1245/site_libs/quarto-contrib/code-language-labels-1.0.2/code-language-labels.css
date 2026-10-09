@@ -1,0 +1,74 @@
+/* Label each highlighted code block with its language.
+ * Pandoc emits <pre class="sourceCode LANG ...">, for executed chunks and
+ * plain fences alike, and a bare <pre> for chunk output, so only code gets a
+ * label. The exception is a language Pandoc cannot highlight (qmd): its
+ * fence renders as <pre class="qmd"> with no sourceCode class, so it is
+ * matched by name below. A language missing from the map simply gets no
+ * label. */
+
+pre.sourceCode::before,
+pre.qmd::before,
+pre.quarto::before {
+  display: block;
+  font-size: 0.8em;
+  font-family: var(--bs-font-sans-serif, sans-serif);
+  text-align: left;
+  opacity: 0.8;
+  color: var(--quarto-hl-co-color, currentColor);
+  border-bottom: 1px solid var(--quarto-hl-co-color, currentColor);
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
+}
+
+pre.sourceCode.r::before { content: "R"; }
+pre.sourceCode.python::before { content: "Python"; }
+pre.sourceCode.julia::before { content: "Julia"; }
+pre.sourceCode.stan::before { content: "Stan"; }
+pre.sourceCode.sql::before { content: "SQL"; }
+pre.sourceCode.sh::before,
+pre.sourceCode.bash::before,
+pre.sourceCode.zsh::before { content: "Shell"; }
+pre.sourceCode.powershell::before { content: "PowerShell"; }
+pre.sourceCode.yaml::before { content: "YAML"; }
+pre.sourceCode.json::before { content: "JSON"; }
+pre.sourceCode.toml::before { content: "TOML"; }
+pre.sourceCode.markdown::before,
+pre.sourceCode.md::before { content: "Markdown"; }
+/* Pandoc does not highlight Quarto source, so these fences render as a bare
+ * <pre class="qmd"> with no sourceCode class. */
+pre.qmd::before,
+pre.quarto::before { content: "Quarto"; }
+pre.sourceCode.latex::before,
+pre.sourceCode.tex::before { content: "LaTeX"; }
+pre.sourceCode.html::before { content: "HTML"; }
+pre.sourceCode.css::before { content: "CSS"; }
+pre.sourceCode.scss::before { content: "SCSS"; }
+pre.sourceCode.javascript::before,
+pre.sourceCode.js::before { content: "JavaScript"; }
+pre.sourceCode.ojs::before { content: "Observable JS"; }
+pre.sourceCode.typescript::before { content: "TypeScript"; }
+pre.sourceCode.lua::before { content: "Lua"; }
+pre.sourceCode.c::before { content: "C"; }
+pre.sourceCode.cpp::before { content: "C++"; }
+pre.sourceCode.java::before { content: "Java"; }
+pre.sourceCode.rust::before { content: "Rust"; }
+pre.sourceCode.go::before { content: "Go"; }
+pre.sourceCode.matlab::before { content: "MATLAB"; }
+pre.sourceCode.sas::before { content: "SAS"; }
+pre.sourceCode.stata::before { content: "Stata"; }
+pre.sourceCode.dockerfile::before { content: "Dockerfile"; }
+pre.sourceCode.diff::before { content: "Diff"; }
+
+/* Opt out per block with the class `no-language-label`, and skip blocks that
+ * already carry a Quarto `filename` header. This block must stay last: it only
+ * ties the sourceCode language rules in specificity, so it wins over them by
+ * coming after. (It beats the one-class qmd/quarto rules outright.) */
+pre.sourceCode.no-language-label::before,
+pre.qmd.no-language-label::before,
+pre.quarto.no-language-label::before,
+.code-with-filename pre.sourceCode::before,
+.code-with-filename pre.qmd::before,
+.code-with-filename pre.quarto::before {
+  content: none;
+  display: none;
+}
