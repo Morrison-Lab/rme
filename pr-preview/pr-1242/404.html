@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Page not found – Regression Models for Epidemiology</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="/rme/site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="/rme/site_libs/quarto-nav/headroom.min.js"></script>
+<script src="/rme/site_libs/clipboard/clipboard.min.js"></script>
+<script src="/rme/site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="/rme/site_libs/quarto-search/fuse.min.js"></script>
+<script src="/rme/site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="/rme/">
+<script src="/rme/site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="/rme/site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="/rme/site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="/rme/site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="/rme/site_libs/quarto-html/popper.min.js"></script>
+<script src="/rme/site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="/rme/site_libs/quarto-html/anchor.min.js"></script>
+<link href="/rme/site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="/rme/site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="/rme/site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="/rme/site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="/rme/site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="/rme/site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="/rme/site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="/rme/site_libs/bootstrap/bootstrap-dark-aaecb91e40cc87e9caa896179b56e095.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="/rme/site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="/rme/site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
+<link href="/rme/site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
+<link href="/rme/site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script type="application/json" class="js-hypothesis-config">
+{
+  "theme": "clean",
+  "openSidebar": false,
+  "enableExperimentalNewNoteButton": true
+}
+</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+<script>
+// Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
+// handles light/dark and remembers it; the two tinted palettes are a
+// data-palette attribute on <html>. The choice is kept under "mln-theme".
+// Off-white is the default for a first visit.
+(function () {
+  var KEY = "mln-theme";
+  var OPTIONS = [["light", "Light"], ["offwhite", "Off-white"], ["parchment", "Parchment"], ["dark", "Dark"]];
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function isDark() { return document.body.classList.contains("quarto-dark"); }
+  function apply(choice, remember) {
+    if (choice === "offwhite" || choice === "parchment") {
+      document.documentElement.setAttribute("data-palette", choice);
+    } else {
+      document.documentElement.removeAttribute("data-palette");
+    }
+    if ((choice === "dark") !== isDark() && window.quartoToggleColorScheme) {
+      window.quartoToggleColorScheme();
+    }
+    if (remember) { try { localStorage.setItem(KEY, choice); } catch (e) {} }
+    mark(choice);
+  }
+  function mark(choice) {
+    document.querySelectorAll(".theme-picker [data-theme-choice]").forEach(function (b) {
+      var on = b.getAttribute("data-theme-choice") === choice;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+  }
+  // Set the palette before first paint to avoid a flash.
+  var early = stored();
+  if (early !== "light" && early !== "dark" && early !== "parchment") early = "offwhite";
+  if (early === "offwhite" || early === "parchment") {
+    document.documentElement.setAttribute("data-palette", early);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggles = document.querySelectorAll(".quarto-color-scheme-toggle");
+    if (!toggles.length) return;
+    var tools = toggles[0];
+    var wrap = document.createElement("div");
+    wrap.className = "theme-picker dropdown";
+    wrap.innerHTML =
+      '<button type="button" class="nav-link dropdown-toggle px-1 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour theme"><i class="bi bi-palette"></i></button>' +
+      '<ul class="dropdown-menu dropdown-menu-end" role="menu">' +
+      OPTIONS.map(function (o) {
+        return '<li role="none"><button type="button" class="dropdown-item" role="menuitemradio" aria-checked="false" data-theme-choice="' + o[0] + '">' + o[1] + "</button></li>";
+      }).join("") + "</ul>";
+    tools.parentNode.insertBefore(wrap, tools);
+    toggles.forEach(function (t) { t.style.display = "none"; });
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-theme-choice]");
+      if (b) apply(b.getAttribute("data-theme-choice"), true);
+    });
+    var choice = stored();
+    if (OPTIONS.every(function (o) { return o[0] !== choice; })) {
+      choice = isDark() ? "dark" : "offwhite";
+    }
+    apply(choice, false);
+  });
+})();
+</script>
+<script>
+// Most of rme's prerequisite appendices moved to the lab's shared notes
+// (mds, pds and sds; see rme#1204). Send old links to those pages to the
+// page that now holds the same item, keeping its #anchor when the id is known.
+// Generated from the appendices' ids; maps old page -> {old id: new path}.
+(function () {
+  var map = {"algebra":{"":"mds/algebra.html","cor-exp-ab":"mds/algebra.html#cor-exp-ab","cor-exp-sum":"mds/algebra.html#cor-exp-sum","cor-log-quot":"mds/algebra.html#cor-log-quot","def-infimum":"mds/algebra.html#def-infimum","def-proportion":"mds/algebra.html#def-proportion","def-proportional":"mds/algebra.html#def-proportional","def-quotient":"mds/algebra.html#def-quotient","def-ratio":"mds/algebra.html#def-ratio","def-supremum":"mds/algebra.html#def-supremum","eq-double-exp-log-scale":"mds/algebra.html#eq-double-exp-log-scale","exm-infimum":"mds/algebra.html#exm-infimum","exm-supremum":"mds/algebra.html#exm-supremum","exr-double-exponential":"mds/algebra.html#exr-double-exponential","exr-exp-vs-mult":"mds/algebra.html#exr-exp-vs-mult","fig-double-exponential":"mds/algebra.html#fig-double-exponential","fig-double-exponential2":"mds/algebra.html#fig-double-exponential2","sol-double-exponential":"mds/algebra.html#sol-double-exponential","sol-exp-vs-mult":"mds/algebra.html#sol-exp-vs-mult","thm-add-ident":"mds/algebra.html#thm-add-ident","thm-add-ineq":"mds/algebra.html#thm-add-ineq","thm-double-exp":"mds/algebra.html#thm-double-exp","thm-equal-trans":"mds/algebra.html#thm-equal-trans","thm-exp-log-inverse":"mds/algebra.html#thm-exp-log-inverse","thm-exp-sum":"mds/algebra.html#thm-exp-sum","thm-log-exp":"mds/algebra.html#thm-log-exp","thm-log-prod":"mds/algebra.html#thm-log-prod","thm-mult-distr":"mds/algebra.html#thm-mult-distr","thm-mult-ineq":"mds/algebra.html#thm-mult-ineq","thm-mult-one":"mds/algebra.html#thm-mult-one","thm-neg-ineq":"mds/algebra.html#thm-neg-ineq","thm-negative-one":"mds/algebra.html#thm-negative-one","thm-prod-assoc":"mds/algebra.html#thm-prod-assoc","thm-prod-div":"mds/algebra.html#thm-prod-div","thm-prod-symmetric":"mds/algebra.html#thm-prod-symmetric","thm-substitution":"mds/algebra.html#thm-substitution","thm-sum-assoc":"mds/algebra.html#thm-sum-assoc","thm-sum-symmetric":"mds/algebra.html#thm-sum-symmetric"},"basic-statistical-methods":{"":"sds/basic-statistical-methods.html","def-IQR":"sds/exploratory-descriptive.html#def-IQR","def-alternative-hypothesis":"sds/inference.html#def-alternative-hypothesis","def-bootstrap-distribution":"sds/bootstrap.html#def-bootstrap-distribution","def-bootstrap-sample":"sds/bootstrap.html#def-bootstrap-sample","def-chi-square-test":"sds/categorical-tests.html#def-chi-square-test","def-contingency-table":"sds/exploratory-descriptive.html#def-contingency-table","def-fishers-exact":"sds/categorical-tests.html#def-fishers-exact","def-null-hypothesis":"sds/inference.html#def-null-hypothesis","def-one-sample-t-test":"sds/basic-statistical-methods.html#def-one-sample-t-test","def-one-way-anova":"sds/basic-statistical-methods.html#def-one-way-anova","def-paired-t-test":"sds/basic-statistical-methods.html#def-paired-t-test","def-pearson-r":"sds/exploratory-descriptive.html#def-pearson-r","def-r-squared":"sds/correlation-regression.html#def-r-squared","def-sample-mean":"sds/exploratory-descriptive.html#def-sample-mean","def-sample-median":"sds/exploratory-descriptive.html#def-sample-median","def-sample-proportion":"sds/exploratory-descriptive.html#def-sample-proportion","def-sample-sd":"sds/exploratory-descriptive.html#def-sample-sd","def-sample-variance":"sds/exploratory-descriptive.html#def-sample-variance","def-slr":"sds/correlation-regression.html#def-slr","def-spearman-r":"sds/correlation-regression.html#def-spearman-r","def-two-sample-t-test":"sds/basic-statistical-methods.html#def-two-sample-t-test","exm-bootstrap-bca-toy":"sds/bootstrap.html#exm-bootstrap-bca-toy","exm-bootstrap-distribution-toy":"sds/bootstrap.html#exm-bootstrap-distribution-toy","exm-bootstrap-normal-toy":"sds/bootstrap.html#exm-bootstrap-normal-toy","exm-bootstrap-percentile-toy":"sds/bootstrap.html#exm-bootstrap-percentile-toy","exm-bootstrap-sample-toy":"sds/bootstrap.html#exm-bootstrap-sample-toy","exm-hers-anova":"sds/basic-statistical-methods.html#exm-hers-anova","exm-hers-bootstrap":"sds/bootstrap.html#exm-hers-bootstrap","exm-hers-boxplot":"sds/exploratory-descriptive.html#def-boxplot","exm-hers-chisq":"sds/categorical-tests.html#exm-hers-chisq","exm-hers-cor":"sds/correlation-regression.html#exm-hers-cor","exm-hers-crosstab":"sds/categorical-tests.html#exm-hers-crosstab","exm-hers-fisher":"sds/categorical-tests.html#exm-hers-fisher","exm-hers-histogram":"sds/exploratory-descriptive.html#def-histogram","exm-hers-paired":"sds/basic-statistical-methods.html#exm-hers-paired","exm-hers-scatter":"sds/exploratory-descriptive.html#def-scatterplot","exm-hers-slr":"sds/correlation-regression.html#exm-hers-slr","exm-hers-spearman":"sds/correlation-regression.html#exm-hers-spearman","exm-hers-summary":"sds/basic-statistical-methods.html#exm-hers-summary","exm-hers-ttest":"sds/basic-statistical-methods.html#exm-hers-ttest","fig-boot-dist-toy":"sds/bootstrap.html#fig-boot-dist-toy","fig-hers-boxplot":"sds/basic-statistical-methods.html#fig-hers-boxplot","fig-hers-scatter":"sds/correlation-regression.html#fig-hers-scatter","further-reading":"sds/correlation-regression.html#further-reading","introduction":"sds/basic-statistical-methods.html#introduction","sec-2x2-measures":"sds/categorical-tests.html#sec-2x2-measures","sec-CI-diff-means":"sds/basic-statistical-methods.html#sec-CI-diff-means","sec-anova":"sds/basic-statistical-methods.html#sec-anova","sec-bootstrap-R":"sds/bootstrap.html#sec-bootstrap-R","sec-bootstrap-bca":"sds/bootstrap.html#sec-bootstrap-bca","sec-bootstrap-ci":"sds/bootstrap.html#sec-bootstrap-ci","sec-bootstrap-hers":"sds/bootstrap.html#sec-bootstrap-hers","sec-bootstrap-methods":"sds/bootstrap.html#sec-bootstrap-methods","sec-bootstrap-normal":"sds/bootstrap.html#sec-bootstrap-normal","sec-bootstrap-percentile":"sds/bootstrap.html#sec-bootstrap-percentile","sec-bootstrap-procedure":"sds/bootstrap.html#sec-bootstrap-procedure","sec-bootstrap-when":"sds/bootstrap.html#sec-bootstrap-when","sec-boxplots":"sds/exploratory-descriptive.html#def-boxplot","sec-chi-square":"sds/categorical-tests.html#sec-chi-square","sec-contingency-tables":"sds/categorical-tests.html#sec-contingency-tables","sec-correlation":"sds/correlation-regression.html#sec-correlation","sec-descriptive-stats":"sds/basic-statistical-methods.html#sec-descriptive-stats","sec-eda":"sds/exploratory-descriptive.html","sec-fisher":"sds/categorical-tests.html#sec-fisher","sec-hers-intro":"sds/basic-statistical-methods.html#sec-hers-intro","sec-histograms":"sds/exploratory-descriptive.html#def-histogram","sec-hypotheses":"sds/basic-statistical-methods.html#sec-hypotheses","sec-ols":"sds/correlation-regression.html#sec-ols","sec-one-sample-t-test":"sds/basic-statistical-methods.html#sec-one-sample-t-test","sec-paired-t-test":"sds/basic-statistical-methods.html#sec-paired-t-test","sec-pearson":"sds/correlation-regression.html#sec-pearson","sec-r-squared":"sds/correlation-regression.html#sec-r-squared","sec-scatterplots":"sds/exploratory-descriptive.html#def-scatterplot","sec-simple-linear-regression":"sds/correlation-regression.html#sec-simple-linear-regression","sec-slr-R":"sds/correlation-regression.html#sec-slr-R","sec-slr-model":"sds/correlation-regression.html#sec-slr-model","sec-spearman":"sds/correlation-regression.html#sec-spearman","sec-summary-R":"sds/basic-statistical-methods.html#exm-hers-summary","sec-summary-categorical":"sds/exploratory-descriptive.html#def-sample-proportion","sec-summary-continuous":"sds/exploratory-descriptive.html#def-sample-mean","sec-two-group-categorical":"sds/categorical-tests.html#sec-two-group-categorical","sec-two-group-continuous":"sds/basic-statistical-methods.html#sec-two-group-continuous","sec-two-sample-t-test":"sds/basic-statistical-methods.html#sec-two-sample-t-test","tbl-hers-crosstab":"sds/categorical-tests.html#tbl-hers-crosstab","tbl-hers-summary":"sds/basic-statistical-methods.html#tbl-hers-summary"},"bayesian-inference":{"":"sds/bayesian-inference.html","books":"sds/bayesian-inference.html#books","def-burnin":"sds/mcmc.html#def-burnin","def-credible-interval":"sds/bayesian-inference.html#def-credible-interval","def-dic":"sds/mcmc.html#def-dic","def-markov-chain":"sds/mcmc.html#def-markov-chain","def-mh":"sds/mcmc.html#def-mh","def-posterior":"sds/bayesian-inference.html#def-posterior","eq-bayes-posterior":"sds/bayesian-inference.html#eq-bayes-posterior","eq-bayes-proportional":"sds/bayesian-inference.html#eq-bayes-proportional","exm-bayes-bma":"sds/bayesian-examples.html#exm-bayes-bma","exm-bayes-logistic":"sds/bayesian-examples.html#exm-bayes-logistic","exm-bayes-proportion":"sds/bayesian-examples.html#exm-bayes-proportion","exm-bayes-random-effects":"sds/bayesian-examples.html#exm-bayes-random-effects","exm-bayes-survival":"sds/bayesian-examples.html#exm-bayes-survival","exm-beta-bernoulli":"sds/bayesian-inference.html#exm-beta-bernoulli","exm-mc-bernoulli":"sds/mcmc.html#exm-mc-bernoulli","exm-mcmc-vs-mle":"sds/mcmc.html#exm-mcmc-vs-mle","exm-mh-bernoulli":"sds/mcmc.html#exm-mh-bernoulli","exm-normal-credible-vs-confidence":"sds/bayesian-inference.html#exm-normal-credible-vs-confidence","exm-normal-normal":"sds/bayesian-inference.html#exm-normal-normal","exm-skeptical-prior":"sds/bayesian-inference.html#exm-skeptical-prior","markov-chains":"sds/mcmc.html#markov-chains","monte-carlo-integration":"sds/mcmc.html#monte-carlo-integration","sec-bayes-conjugate":"sds/bayesian-inference.html#sec-bayes-conjugate","sec-bayes-equation":"sds/bayesian-inference.html#sec-bayes-equation","sec-bayes-examples":"sds/bayesian-examples.html#sec-bayes-examples","sec-bayes-examples-bma":"sds/bayesian-examples.html#sec-bayes-examples-bma","sec-bayes-examples-logistic":"sds/bayesian-examples.html#sec-bayes-examples-logistic","sec-bayes-examples-random-effects":"sds/bayesian-examples.html#sec-bayes-examples-random-effects","sec-bayes-examples-survival":"sds/bayesian-examples.html#sec-bayes-examples-survival","sec-bayes-hierarchies":"sds/bayesian-inference.html#sec-bayes-hierarchies","sec-bayes-informativeness":"sds/bayesian-inference.html#sec-bayes-informativeness","sec-bayes-interval-interp":"sds/bayesian-inference.html#sec-bayes-interval-interp","sec-bayes-normal-normal":"sds/bayesian-inference.html#sec-bayes-normal-normal","sec-bayes-paradigms":"sds/bayesian-inference.html#sec-bayes-paradigms","sec-bayes-parameter-space":"sds/bayesian-inference.html#sec-bayes-parameter-space","sec-bayes-priors":"sds/bayesian-inference.html#sec-bayes-priors","sec-bayes-resources":"sds/bayesian-inference.html#sec-bayes-resources","sec-bayes-skeptical":"sds/bayesian-inference.html#sec-bayes-skeptical","sec-burnin":"sds/mcmc.html#sec-burnin","sec-diagnostics":"sds/mcmc.html#sec-diagnostics","sec-dic":"sds/mcmc.html#sec-dic","sec-foundations":"sds/mcmc.html#sec-foundations","sec-mcmc-parameterization":"sds/mcmc.html#sec-mcmc-parameterization","sec-mcmc-vs-mle":"sds/mcmc.html#sec-mcmc-vs-mle","sec-samplers":"sds/mcmc.html#sec-samplers","the-gibbs-sampler":"sds/mcmc.html#the-gibbs-sampler","uc-davis-courses":"sds/bayesian-inference.html#uc-davis-courses"},"calc-derivatives":{"":"mds/calculus.html","cor-deriv-log-chain":"mds/calculus.html#cor-deriv-log-chain","thm-chain-rule":"mds/calculus.html#thm-chain-rule","thm-deriv-const":"mds/calculus.html#thm-deriv-const","thm-deriv-const-factor":"mds/calculus.html#thm-deriv-const-factor","thm-deriv-exp":"mds/calculus.html#thm-deriv-exp","thm-deriv-log":"mds/calculus.html#thm-deriv-log","thm-deriv-polynomial":"mds/calculus.html#thm-deriv-polynomial","thm-product-rule":"mds/calculus.html#thm-product-rule","thm-quotient-rule":"mds/calculus.html#thm-quotient-rule"},"calc-integrals":{"":"mds/calculus.html","def-antiderivative":"mds/calculus.html#def-antiderivative","def-continuous":"mds/calculus.html#def-continuous","def-differentiable":"mds/calculus.html#def-differentiable","def-integrable":"mds/calculus.html#def-integrable","def-integrable-general":"mds/calculus.html#def-integrable","eq-ftc-deriv-of-integral":"mds/calculus.html#eq-ftc-deriv-of-integral","eq-ftc-integral-of-deriv":"mds/calculus.html#eq-ftc-integral-of-deriv","eq-ftc-part2":"mds/calculus.html#eq-ftc-part2","exm-antiderivative-power":"mds/calculus.html#exm-antiderivative-power","exm-cont-implies-int":"mds/calculus.html#exm-cont-implies-int","exm-cont-not-diff":"mds/calculus.html#exm-cont-not-diff","exm-diff-implies-cont":"mds/calculus.html#exm-diff-implies-cont","exm-ftc-cdf-pdf":"mds/calculus.html#exm-ftc-cdf-pdf","exm-ftc-part1-accumulation":"mds/calculus.html#exm-ftc-part1-accumulation","exm-int-not-cont":"mds/calculus.html#exm-int-not-cont","exm-integral-rules-quadratic":"mds/calculus.html#exm-integral-rules-quadratic","fig-abs-value":"mds/calculus.html#fig-abs-value","fig-antiderivatives":"mds/calculus.html#fig-antiderivatives","fig-antiderivatives-F":"mds/calculus.html#fig-antiderivatives-F","fig-antiderivatives-f":"mds/calculus.html#fig-antiderivatives-f","fig-exp-pdf-cdf":"mds/calculus.html#fig-exp-pdf-cdf","fig-exp-pdf-cdf-cdf":"mds/calculus.html#fig-exp-pdf-cdf-cdf","fig-exp-pdf-cdf-pdf":"mds/calculus.html#fig-exp-pdf-cdf-pdf","fig-ftc-part1":"mds/calculus.html#fig-ftc-part1","fig-ftc-part1-left":"mds/calculus.html#fig-ftc-part1-left","fig-ftc-part1-right":"mds/calculus.html#fig-ftc-part1-right","fig-step":"mds/calculus.html#fig-step","thm-cont-implies-int":"mds/calculus.html#thm-cont-implies-int","thm-diff-implies-cont":"mds/calculus.html#thm-diff-implies-cont","thm-ftc":"mds/calculus.html#thm-ftc","thm-integral-rules":"mds/calculus.html#thm-integral-rules","thm-riemann-general":"mds/calculus.html#thm-riemann-general"},"data":{"":"sds/data.html","def-binary":"sds/data.html#def-binary","def-binary-var":"sds/data.html#def-binary-var","def-categorical-var":"sds/data.html#def-categorical-var","def-continuous-var":"sds/data.html#def-continuous-var","def-count":"sds/data.html#def-count","def-discrete-var":"sds/data.html#def-discrete-var","def-interval-var":"sds/data.html#def-interval-var","def-nominal-var":"sds/data.html#def-nominal-var","def-numerical-var":"sds/data.html#def-numerical-var","def-ordinal-var":"sds/data.html#def-ordinal-var","def-ratio-var":"sds/data.html#def-ratio-var","exr-binary-examples":"sds/data.html#exr-binary-examples","exr-count-examples":"sds/data.html#exr-count-examples","fig-var-taxonomy":"sds/data.html#fig-var-taxonomy","probability-distributions-for-count-outcomes":"sds/data.html#probability-distributions-for-count-outcomes","random-variables":"sds/data.html#random-variables","sec-binary-vars":"sds/data.html#sec-binary-vars","sec-count-vars":"sds/data.html#sec-count-vars","tbl-wcgs-vartypes":"sds/data.html#tbl-wcgs-vartypes","types-of-variables":"sds/data.html#types-of-variables"},"estimation":{"":"sds/estimation.html","accuracy":"sds/estimation.html#accuracy","bias":"sds/estimation.html#def-bias","contrasting-estimands-estimates-and-estimators":"sds/estimation.html#contrasting-estimands-estimates-and-estimators","cor-se-rmse-unbiased":"sds/estimation.html#cor-se-rmse-unbiased","cor-var-mse-bias":"sds/estimation.html#cor-var-mse-bias","def-SE":"sds/estimation.html#def-SE","def-accuracy":"sds/estimation.html#def-estimation-error","def-bias":"sds/estimation.html#def-bias","def-estimand":"sds/estimation.html#def-estimand","def-estimate":"sds/estimation.html#def-estimate","def-estimation-error":"sds/estimation.html#def-estimation-error","def-estimator":"sds/estimation.html#def-estimator","def-mae":"sds/estimation.html#def-mae","def-model":"sds/estimation.html#def-model","def-mse":"sds/estimation.html#def-mse","def-unbiased":"sds/estimation.html#def-unbiased","eq-bias-def":"sds/estimation.html#eq-bias-def","eq-mse":"sds/estimation.html#eq-mse","eq-unbiased-exp":"sds/estimation.html#eq-unbiased-exp","eq-unbiased-mse":"sds/estimation.html#eq-unbiased-mse","estimands":"sds/estimation.html#estimands","estimands-estimates-and-estimators":"sds/estimation.html#estimands-estimates-and-estimators","estimates":"sds/estimation.html#estimates","estimation-error":"sds/estimation.html#estimation-error","estimators":"sds/estimation.html#estimators","exm-estimand":"sds/estimation.html#exm-estimand","exm-estimate":"sds/estimation.html#exm-estimate","exm-estimator":"sds/estimation.html#exm-estimator","exm-model":"sds/estimation.html#exm-model","exr-prac-binom-lik":"sds/intro-MLEs.html#exr-prac-binom-lik","exr-prac-exp-mle":"sds/intro-MLEs.html#exr-prac-exp-mle","exr-prac-gauss-iid-lik":"sds/intro-MLEs.html#exr-prac-gauss-iid-lik","exr-prac-mle-se":"sds/intro-MLEs.html#exr-prac-mle-se","exr-prac-score-zero":"sds/intro-MLEs.html#exr-prac-score-zero","mean-absolute-error":"sds/estimation.html#def-mae","mean-squared-error":"sds/estimation.html#def-mse","residuals":"sds/estimation.html#residuals","sec-est-accuracy":"sds/estimation.html#sec-est-accuracy","sec-unbiased-estimators":"sds/estimation.html#sec-unbiased-estimators","standard-error":"sds/estimation.html#standard-error","statistical-analysis-of-scientific-models":"sds/estimation.html#statistical-analysis-of-scientific-models","thm-bias-exprs":"sds/estimation.html#thm-bias-exprs","thm-mse-bias-variance":"sds/estimation.html#thm-mse-bias-variance","thm-unbiased-props":"sds/estimation.html#thm-unbiased-props"},"exploratory-descriptive":{"":"sds/exploratory-descriptive.html","bar-charts":"sds/exploratory-descriptive.html#bar-charts","binary-and-categorical-variables":"sds/exploratory-descriptive.html#binary-and-categorical-variables","bivariate-relationships":"sds/exploratory-descriptive.html#bivariate-relationships","box-plots":"sds/exploratory-descriptive.html#box-plots","data-transformations":"sds/exploratory-descriptive.html#data-transformations","def-correlation":"sds/exploratory-descriptive.html#def-pearson-r","def-eda-sd":"sds/exploratory-descriptive.html#def-sample-sd","def-eda-variance":"sds/exploratory-descriptive.html#def-sample-variance","def-iqr":"sds/exploratory-descriptive.html#def-IQR","def-mean":"sds/exploratory-descriptive.html#def-sample-mean","def-median":"sds/exploratory-descriptive.html#def-sample-median","def-quantile":"sds/nonparametric-models.html#def-sample-quantile","density-plots":"sds/exploratory-descriptive.html#density-plots","exr-def-type-A":"sds/exploratory-descriptive.html#exr-def-type-A","fig-bar-behpat":"sds/exploratory-descriptive.html#fig-bar-behpat","fig-box-chol":"sds/exploratory-descriptive.html#fig-box-chol","fig-box-chol-by-behpat":"sds/exploratory-descriptive.html#fig-box-chol-by-behpat","fig-box-chol-by-smoke":"sds/exploratory-descriptive.html#fig-box-chol-by-smoke","fig-density-chol":"sds/exploratory-descriptive.html#fig-density-chol","fig-hist-chol":"sds/exploratory-descriptive.html#fig-hist-chol","fig-hist-sbp-log":"sds/exploratory-descriptive.html#fig-hist-sbp-log","fig-qq-chol":"sds/exploratory-descriptive.html#fig-qq-chol","fig-scatter-chol-sbp":"sds/exploratory-descriptive.html#fig-scatter-chol-sbp","graphical-methods":"sds/exploratory-descriptive.html#graphical-methods","histograms":"sds/exploratory-descriptive.html#histograms","introduction":"sds/exploratory-descriptive.html#introduction","measures-of-center":"sds/exploratory-descriptive.html#measures-of-center","measures-of-spread":"sds/exploratory-descriptive.html#measures-of-spread","sec-load-wcgs":"sds/exploratory-descriptive.html#sec-load-wcgs","sol-def-type-A":"sds/exploratory-descriptive.html#sol-def-type-A","study-design":"sds/exploratory-descriptive.html#study-design","summarizing-a-single-variable":"sds/exploratory-descriptive.html#summarizing-a-single-variable","summary-statistics-in-r":"sds/exploratory-descriptive.html#summary-statistics-in-r","tbl-chol-by-chd":"sds/exploratory-descriptive.html#tbl-chol-by-chd","tbl-gtsummary-smoke-chd":"sds/exploratory-descriptive.html#tbl-gtsummary-smoke-chd","tbl-wcgs-all-summary":"sds/exploratory-descriptive.html#tbl-wcgs-all-summary","tbl-wcgs-summary-cat":"sds/exploratory-descriptive.html#tbl-wcgs-summary-cat","tbl-wcgs-summary-continuous":"sds/exploratory-descriptive.html#tbl-wcgs-summary-continuous"},"inference":{"":"sds/inference.html","def-inference":"sds/inference.html#def-inference","def-margin-error":"sds/inference.html#def-margin-error","fig-CI-interp":"sds/inference.html#fig-CI-interp","inference":"sds/inference.html#inference","interpretation-of-negative-findings":"sds/inference.html#interpretation-of-negative-findings","sec-CI":"sds/inference.html#sec-CI"},"intro-MLEs":{"":"sds/intro-MLEs.html","asymptotic-distribution-of-the-maximum-likelihood-estimate":"sds/intro-MLEs.html#asymptotic-distribution-of-the-maximum-likelihood-estimate","confidence-intervals-for-mles":"sds/intro-MLEs.html#confidence-intervals-for-mles","def-einf":"sds/intro-MLEs.html#def-einf","def-hessian":"sds/intro-MLEs.html#def-hessian","def-lik":"sds/intro-MLEs.html#def-lik","def-lik-factor":"sds/intro-MLEs.html#def-lik-factor","def-lik-obs":"sds/intro-MLEs.html#def-lik-obs","def-loglik":"sds/intro-MLEs.html#def-loglik","def-mle":"sds/intro-MLEs.html#def-mle","def-oinf":"sds/intro-MLEs.html#def-oinf","def-score":"sds/intro-MLEs.html#def-score","directly-maximizing-the-likelihood-function-for-independent-data":"sds/intro-MLEs.html#directly-maximizing-the-likelihood-function-for-independent-data","eq-Lik":"sds/intro-MLEs.html#eq-Lik","eq-adist-mle":"sds/intro-MLEs.html#eq-adist-mle","eq-def-einf":"sds/intro-MLEs.html#eq-def-einf","eq-def-hess":"sds/intro-MLEs.html#eq-def-hess","eq-def-loglik":"sds/intro-MLEs.html#eq-def-loglik","eq-def-oinf":"sds/intro-MLEs.html#eq-def-oinf","eq-def-score":"sds/intro-MLEs.html#eq-def-score","eq-deriv-Lik":"sds/intro-MLEs.html#eq-deriv-Lik","eq-deriv-llik":"sds/intro-MLEs.html#eq-deriv-llik","eq-hess-entries":"sds/intro-MLEs.html#eq-hess-entries","eq-iid-model":"sds/intro-MLEs.html#eq-iid-model","eq-loglik-ind":"sds/intro-MLEs.html#eq-loglik-ind","eq-mle":"sds/intro-MLEs.html#eq-mle","estimating-the-model-parameters-using-maximum-likelihood":"sds/intro-MLEs.html#estimating-the-model-parameters-using-maximum-likelihood","example-maximum-likelihood-for-tropical-cyclones-in-australia":"sds/intro-MLEs.html#example-maximum-likelihood-for-tropical-cyclones-in-australia","exm-dobson-cyclones-Newton":"sds/intro-MLEs.html#exm-dobson-cyclones-Newton","exploratory-analysis":"sds/intro-MLEs.html#exploratory-analysis","exr-bernoulli-likelihood-one-group":"sds/intro-MLEs.html#exr-bernoulli-likelihood-one-group","exr-bernoulli-loglik-one-group":"sds/intro-MLEs.html#exr-bernoulli-loglik-one-group","exr-check-hessian":"sds/intro-MLEs.html#exr-check-hessian","exr-cyclone-choose-dist":"sds/intro-MLEs.html#exr-cyclone-choose-dist","exr-cyclone-score-fn":"sds/intro-MLEs.html#exr-cyclone-score-fn","exr-def-poisson":"sds/intro-MLEs.html#exr-def-poisson","exr-derive-bernoulli-score":"sds/intro-MLEs.html#exr-derive-bernoulli-score","exr-exp-score-fn":"sds/intro-MLEs.html#exr-exp-score-fn","exr-find-mle":"sds/intro-MLEs.html#exr-find-mle","exr-gauss-score-fn":"sds/intro-MLEs.html#exr-gauss-score-fn","exr-graph-hession":"sds/intro-MLEs.html#exr-graph-hessian","exr-graph-likelihood":"sds/intro-MLEs.html#exr-graph-likelihood","exr-graph-loglikelihood":"sds/intro-MLEs.html#exr-graph-loglikelihood","exr-graph-mle":"sds/intro-MLEs.html#exr-graph-mle","exr-graph-score-function":"sds/intro-MLEs.html#exr-graph-score-function","exr-hessian":"sds/intro-MLEs.html#exr-hessian","exr-pois-score-fn":"sds/intro-MLEs.html#exr-pois-score-fn","exr-poisson-likelihood":"sds/intro-MLEs.html#exr-poisson-likelihood","exr-poisson-mean-and-variance":"sds/intro-MLEs.html#exr-poisson-mean-and-variance","exr-poisson-parameters":"sds/intro-MLEs.html#exr-poisson-parameters","exr-sample-likelihood":"sds/intro-MLEs.html#exr-sample-likelihood","exr-sample-llik":"sds/intro-MLEs.html#exr-sample-llik","exr-score-equation":"sds/intro-MLEs.html#exr-score-equation","exr-solve-score-equation":"sds/intro-MLEs.html#exr-solve-score-equation","fig-3d-llik":"sds/intro-MLEs.html#fig-3d-llik","fig-NR-converge":"sds/intro-MLEs.html#fig-NR-converge","fig-cyclone-hessian":"sds/intro-MLEs.html#fig-cyclone-hessian","fig-cyclone-lik":"sds/intro-MLEs.html#fig-cyclone-lik","fig-cyclone-llik":"sds/intro-MLEs.html#fig-cyclone-llik","fig-cyclone-llik-mle":"sds/intro-MLEs.html#fig-cyclone-llik-mle","fig-cyclone-newton-step1":"sds/intro-MLEs.html#fig-cyclone-newton-step1","fig-cyclone-newton-step1-loglik":"sds/intro-MLEs.html#fig-cyclone-newton-step1-loglik","fig-cyclone-newton-step1-with-new-est":"sds/intro-MLEs.html#fig-cyclone-newton-step1-with-new-est","fig-cyclone-newton-step2":"sds/intro-MLEs.html#fig-cyclone-newton-step2","fig-cyclone-score":"sds/intro-MLEs.html#fig-cyclone-score","fig-cyclones-bar-plot":"sds/intro-MLEs.html#fig-cyclones-bar-plot","fig-dobson-cyclone-time-series":"sds/intro-MLEs.html#fig-dobson-cyclone-time-series","fig-likelihood-mu":"sds/intro-MLEs.html#fig-likelihood-mu","fig-loglik-mu":"sds/intro-MLEs.html#fig-loglik-mu","fig-obs-inf-matrix":"sds/intro-MLEs.html#fig-obs-inf-matrix","finding-the-maximum-of-a-function":"sds/intro-MLEs.html#finding-the-maximum-of-a-function","finding-the-mle-analytically":"sds/intro-MLEs.html#finding-the-mle-analytically","finding-the-mle-using-the-newton-raphson-algorithm":"sds/intro-MLEs.html#finding-the-mle-using-the-newton-raphson-algorithm","information-matrices":"sds/intro-MLEs.html#information-matrices","mle-of-mu":"sds/intro-MLEs.html#mle-of-mu","sec-covariance-matrix":"sds/intro-MLEs.html#sec-covariance-matrix","sec-dobson-cyclones-data":"sds/intro-MLEs.html#sec-dobson-cyclones-data","sec-hessian":"sds/intro-MLEs.html#sec-hessian","sec-intro-MLEs":"sds/intro-MLEs.html#sec-intro-MLEs","sec-lrt-mles":"sds/intro-MLEs.html#sec-lrt-mles","sec-newton-raphson":"sds/intro-MLEs.html#sec-newton-raphson","sol-bernoulli-likelihood-one-group":"sds/intro-MLEs.html#sol-bernoulli-likelihood-one-group","sol-bernoulli-loglik-one-group":"sds/intro-MLEs.html#sol-bernoulli-loglik-one-group","sol-derive-bernoulli-score":"sds/intro-MLEs.html#sol-derive-bernoulli-score","sol-exp-score-fn":"sds/intro-MLEs.html#sol-exp-score-fn","sol-gauss-score-fn":"sds/intro-MLEs.html#sol-gauss-score-fn","sol-pois-score-fn":"sds/intro-MLEs.html#sol-pois-score-fn","standard-errors-by-sample-size":"sds/intro-MLEs.html#standard-errors-by-sample-size","tbl-HERS":"sds/intro-MLEs.html#tbl-HERS","tbl-cyclones-data":"sds/intro-MLEs.html#tbl-cyclones-data","tbl-dobson-cyclones-sumstat":"sds/intro-MLEs.html#tbl-dobson-cyclones-sumstat","tbl-gaussian-vs-mle-tests":"sds/intro-MLEs.html#tbl-gaussian-vs-mle-tests","tbl-mle-converge":"sds/intro-MLEs.html#tbl-mle-converge","the-likelihood-function":"sds/intro-MLEs.html#the-likelihood-function","the-log-likelihood-function":"sds/intro-MLEs.html#the-log-likelihood-function","the-maximum-likelihood-estimate":"sds/intro-MLEs.html#the-maximum-likelihood-estimate","the-score-function":"sds/intro-MLEs.html#the-score-function","thm-deriv-llik-iid":"sds/intro-MLEs.html#thm-deriv-llik-iid","thm-dist-mle":"sds/intro-MLEs.html#thm-dist-mle","thm-ds-lik-obs-lik":"sds/intro-MLEs.html#thm-ds-lik-obs-lik","thm-hessian-elements":"sds/intro-MLEs.html#thm-hessian-elements","thm-hessian-score":"sds/intro-MLEs.html#thm-hessian-score","thm-lik-iid":"sds/intro-MLEs.html#thm-lik-iid","thm-loglik-iid":"sds/intro-MLEs.html#thm-loglik-iid","thm-mle-use-log":"sds/intro-MLEs.html#thm-mle-use-log","thm-wilks":"sds/intro-MLEs.html#thm-wilks"},"math-prereqs":{"":"mds/","antiderivatives":"mds/calculus.html#antiderivatives","cor-chain-qf":"mds/vector-calculus.html#cor-chain-qf","cor-deriv-lincom-tp":"mds/vector-calculus.html#cor-deriv-lincom-tp","cor-deriv-log-chain":"mds/calculus.html#cor-deriv-log-chain","cor-deriv-normsq":"mds/vector-calculus.html#cor-deriv-normsq","cor-exp-ab":"mds/algebra.html#cor-exp-ab","cor-exp-sum":"mds/algebra.html#cor-exp-sum","cor-fubini-rect":"mds/calculus.html#cor-fubini-rect","cor-log-quot":"mds/algebra.html#cor-log-quot","def-antiderivative":"mds/calculus.html#def-antiderivative","def-column-vector":"mds/linear-algebra.html#def-column-vector","def-constant-wrt-vector":"mds/vector-calculus.html#def-constant-wrt-vector","def-continuous":"mds/calculus.html#def-continuous","def-design-matrix":"mds/linear-algebra.html#def-design-matrix","def-diagonal-matrix":"mds/linear-algebra.html#def-diagonal-matrix","def-differentiable":"mds/calculus.html#def-differentiable","def-dot-product":"mds/linear-algebra.html#def-dot-product","def-idempotent-matrix":"mds/linear-algebra.html#def-idempotent-matrix","def-identity-matrix":"mds/linear-algebra.html#def-identity-matrix","def-indicator-vector":"mds/linear-algebra.html#def-indicator-vector","def-infimum":"mds/algebra.html#def-infimum","def-integrable":"mds/calculus.html#def-integrable","def-integrable-general":"mds/calculus.html#def-integrable","def-matrix":"mds/linear-algebra.html#def-matrix","def-matrix-addition":"mds/linear-algebra.html#def-matrix-addition","def-matrix-inverse":"mds/linear-algebra.html#def-matrix-inverse","def-matrix-mult":"mds/linear-algebra.html#def-matrix-mult","def-matrix-power":"mds/linear-algebra.html#def-matrix-power","def-matrix-transpose":"mds/linear-algebra.html#def-matrix-transpose","def-matvec-mult":"mds/linear-algebra.html#def-matvec-mult","def-ones-vector":"mds/linear-algebra.html#def-ones-vector","def-orthogonal-vectors":"mds/linear-algebra.html#def-orthogonal-vectors","def-orthonormal-vectors":"mds/linear-algebra.html#def-orthonormal-vectors","def-projection-matrix":"mds/linear-algebra.html#def-projection-matrix","def-proportion":"mds/algebra.html#def-proportion","def-proportional":"mds/algebra.html#def-proportional","def-quadratic-form":"mds/linear-algebra.html#def-quadratic-form","def-quotient":"mds/algebra.html#def-quotient","def-ratio":"mds/algebra.html#def-ratio","def-row-vector-derivative":"mds/vector-calculus.html#def-row-vector-derivative","def-scalar-mult":"mds/linear-algebra.html#def-scalar-mult","def-square-matrix":"mds/linear-algebra.html#def-square-matrix","def-supremum":"mds/algebra.html#def-supremum","def-symmetric-matrix":"mds/linear-algebra.html#def-symmetric-matrix","def-transpose":"mds/linear-algebra.html#def-transpose","def-vector-derivative":"mds/vector-calculus.html#def-vector-derivative","def-zero-matrix":"mds/linear-algebra.html#def-zero-matrix","def-zero-vector":"mds/linear-algebra.html#def-zero-vector","design-matrix":"mds/linear-algebra.html#design-matrix","division":"mds/algebra.html#division","eq-double-exp-log-scale":"mds/algebra.html#eq-double-exp-log-scale","eq-ftc-deriv-of-integral":"mds/calculus.html#eq-ftc-deriv-of-integral","eq-ftc-integral-of-deriv":"mds/calculus.html#eq-ftc-integral-of-deriv","eq-ftc-part2":"mds/calculus.html#eq-ftc-part2","equalities":"mds/algebra.html#equalities","exm-antiderivative-power":"mds/calculus.html#exm-antiderivative-power","exm-constant-wrt-vector":"mds/vector-calculus.html#exm-constant-wrt-vector","exm-cont-implies-int":"mds/calculus.html#exm-cont-implies-int","exm-cont-not-diff":"mds/calculus.html#exm-cont-not-diff","exm-deriv-dot-product":"mds/vector-calculus.html#exm-deriv-dot-product","exm-deriv-lincom":"mds/vector-calculus.html#exm-deriv-lincom","exm-deriv-lincom-tp":"mds/vector-calculus.html#exm-deriv-lincom-tp","exm-deriv-linear-map":"mds/vector-calculus.html#exm-deriv-linear-map","exm-deriv-matrix-vector":"mds/vector-calculus.html#exm-deriv-matrix-vector","exm-deriv-normsq":"mds/vector-calculus.html#exm-deriv-normsq","exm-deriv-quadratic-form":"mds/vector-calculus.html#exm-deriv-quadratic-form","exm-diff-implies-cont":"mds/calculus.html#exm-diff-implies-cont","exm-dot-product-matmul":"mds/linear-algebra.html#exm-dot-product-matmul","exm-ftc-cdf-pdf":"mds/calculus.html#exm-ftc-cdf-pdf","exm-ftc-part1-accumulation":"mds/calculus.html#exm-ftc-part1-accumulation","exm-fubini-fail":"mds/calculus.html#exm-fubini-fail","exm-fubini-fail-tonelli":"mds/calculus.html#exm-fubini-fail-tonelli","exm-fubini-nonrect":"mds/calculus.html#exm-fubini-nonrect","exm-fubini-rect":"mds/calculus.html#exm-fubini-rect","exm-fubini-tonelli-apply":"mds/calculus.html#exm-fubini-tonelli-apply","exm-infimum":"mds/algebra.html#exm-infimum","exm-int-not-cont":"mds/calculus.html#exm-int-not-cont","exm-integral-rules-quadratic":"mds/calculus.html#exm-integral-rules-quadratic","exm-supremum":"mds/algebra.html#exm-supremum","exponentials-and-logarithms":"mds/algebra.html#exponentials-and-logarithms","exr-double-exponential":"mds/algebra.html#exr-double-exponential","exr-exp-vs-mult":"mds/algebra.html#exr-exp-vs-mult","fig-abs-value":"mds/calculus.html#fig-abs-value","fig-antiderivatives":"mds/calculus.html#fig-antiderivatives","fig-antiderivatives-F":"mds/calculus.html#fig-antiderivatives-F","fig-antiderivatives-f":"mds/calculus.html#fig-antiderivatives-f","fig-double-exponential":"mds/algebra.html#fig-double-exponential","fig-double-exponential2":"mds/algebra.html#fig-double-exponential2","fig-exp-pdf-cdf":"mds/calculus.html#fig-exp-pdf-cdf","fig-exp-pdf-cdf-cdf":"mds/calculus.html#fig-exp-pdf-cdf-cdf","fig-exp-pdf-cdf-pdf":"mds/calculus.html#fig-exp-pdf-cdf-pdf","fig-ftc-part1":"mds/calculus.html#fig-ftc-part1","fig-ftc-part1-left":"mds/calculus.html#fig-ftc-part1-left","fig-ftc-part1-right":"mds/calculus.html#fig-ftc-part1-right","fig-fubini-fail":"mds/calculus.html#fig-fubini-fail","fig-fubini-nonrect":"mds/calculus.html#fig-fubini-nonrect","fig-fubini-nonrect-region":"mds/calculus.html#fig-fubini-nonrect-region","fig-fubini-rect":"mds/calculus.html#fig-fubini-rect","fig-fubini-rect-region":"mds/calculus.html#fig-fubini-rect-region","fig-step":"mds/calculus.html#fig-step","fundamental-theorem-of-calculus":"mds/calculus.html#fundamental-theorem-of-calculus","inequalities":"mds/algebra.html#inequalities","infimum-and-supremum":"mds/algebra.html#infimum-and-supremum","matrices":"mds/linear-algebra.html#matrices","matrix-addition":"mds/linear-algebra.html#matrix-addition","matrix-multiplication":"mds/linear-algebra.html#matrix-multiplication","matrix-vector-multiplication":"mds/linear-algebra.html#matrix-vector-multiplication","orthogonality":"mds/linear-algebra.html#orthogonality","products":"mds/algebra.html#products","quadratic-forms":"mds/linear-algebra.html#quadratic-forms","quotients":"mds/algebra.html#quotients","regularity-conditions":"mds/calculus.html#regularity-conditions","scalar-multiplication":"mds/linear-algebra.html#scalar-multiplication","sec-algebra":"mds/algebra.html","sec-derivatives":"mds/calculus.html#sec-derivatives","sec-double-integrals":"mds/calculus.html#sec-double-integrals","sec-integration":"mds/calculus.html#sec-integration","sec-linear-algebra":"mds/linear-algebra.html","sec-matrix-transpose":"mds/linear-algebra.html#sec-matrix-transpose","sec-vector-calculus":"mds/vector-calculus.html","sol-double-exponential":"mds/algebra.html#sol-double-exponential","sol-exp-vs-mult":"mds/algebra.html#sol-exp-vs-mult","special-matrices":"mds/linear-algebra.html#special-matrices","special-vectors":"mds/linear-algebra.html#special-vectors","sums":"mds/algebra.html#sums","sums-and-products-together":"mds/algebra.html#sums-and-products-together","thm-add-ident":"mds/algebra.html#thm-add-ident","thm-add-ineq":"mds/algebra.html#thm-add-ineq","thm-chain-rule":"mds/calculus.html#thm-chain-rule","thm-chain-vec":"mds/vector-calculus.html#thm-chain-vec","thm-cont-implies-int":"mds/calculus.html#thm-cont-implies-int","thm-deriv-const":"mds/calculus.html#thm-deriv-const","thm-deriv-const-factor":"mds/calculus.html#thm-deriv-const-factor","thm-deriv-dot-product":"mds/vector-calculus.html#thm-deriv-dot-product","thm-deriv-exp":"mds/calculus.html#thm-deriv-exp","thm-deriv-lincom":"mds/vector-calculus.html#thm-deriv-lincom","thm-deriv-linear-map":"mds/vector-calculus.html#thm-deriv-linear-map","thm-deriv-log":"mds/calculus.html#thm-deriv-log","thm-deriv-matrix-vector":"mds/vector-calculus.html#thm-deriv-matrix-vector","thm-deriv-polynomial":"mds/calculus.html#thm-deriv-polynomial","thm-diff-implies-cont":"mds/calculus.html#thm-diff-implies-cont","thm-double-exp":"mds/algebra.html#thm-double-exp","thm-equal-trans":"mds/algebra.html#thm-equal-trans","thm-exp-log-inverse":"mds/algebra.html#thm-exp-log-inverse","thm-exp-sum":"mds/algebra.html#thm-exp-sum","thm-ftc":"mds/calculus.html#thm-ftc","thm-fubini":"mds/calculus.html#thm-fubini","thm-fubini-tonelli":"mds/calculus.html#thm-fubini-tonelli","thm-hat-matrix":"mds/linear-algebra.html#thm-hat-matrix","thm-identity":"mds/linear-algebra.html#thm-identity","thm-indicator-selection":"mds/linear-algebra.html#thm-indicator-selection","thm-integral-rules":"mds/calculus.html#thm-integral-rules","thm-inverse-product":"mds/linear-algebra.html#thm-inverse-product","thm-lincom-symmetric":"mds/linear-algebra.html#thm-lincom-symmetric","thm-log-exp":"mds/algebra.html#thm-log-exp","thm-log-prod":"mds/algebra.html#thm-log-prod","thm-matadd-assoc":"mds/linear-algebra.html#thm-matadd-assoc","thm-matadd-commutative":"mds/linear-algebra.html#thm-matadd-commutative","thm-matadd-identity":"mds/linear-algebra.html#thm-matadd-identity","thm-matadd-inverse":"mds/linear-algebra.html#thm-matadd-inverse","thm-matmul-assoc":"mds/linear-algebra.html#thm-matmul-assoc","thm-matmul-distrib":"mds/linear-algebra.html#thm-matmul-distrib","thm-mult-distr":"mds/algebra.html#thm-mult-distr","thm-mult-ineq":"mds/algebra.html#thm-mult-ineq","thm-mult-one":"mds/algebra.html#thm-mult-one","thm-neg-ineq":"mds/algebra.html#thm-neg-ineq","thm-negative-one":"mds/algebra.html#thm-negative-one","thm-prod-assoc":"mds/algebra.html#thm-prod-assoc","thm-prod-div":"mds/algebra.html#thm-prod-div","thm-prod-symmetric":"mds/algebra.html#thm-prod-symmetric","thm-product-rule":"mds/calculus.html#thm-product-rule","thm-projection-complement":"mds/linear-algebra.html#thm-projection-complement","thm-projection-orthogonal":"mds/linear-algebra.html#thm-projection-orthogonal","thm-quadratic-form":"mds/vector-calculus.html#thm-quadratic-form","thm-quadratic-form-symmetric":"mds/linear-algebra.html#thm-quadratic-form-symmetric","thm-quotient-rule":"mds/calculus.html#thm-quotient-rule","thm-riemann-general":"mds/calculus.html#thm-riemann-general","thm-row-deriv-tp-col-deriv":"mds/vector-calculus.html#thm-row-deriv-tp-col-deriv","thm-substitution":"mds/algebra.html#thm-substitution","thm-sum-assoc":"mds/algebra.html#thm-sum-assoc","thm-sum-symmetric":"mds/algebra.html#thm-sum-symmetric","thm-transpose-product":"mds/linear-algebra.html#thm-transpose-product","thm-transpose-sum":"mds/linear-algebra.html#thm-transpose-sum","vectors":"mds/linear-algebra.html#vectors"},"nonparametric-models":{"":"sds/nonparametric-models.html","def-empirical-cdf":"sds/nonparametric-models.html#def-empirical-cdf","def-order-statistics":"sds/nonparametric-models.html#def-order-statistics","def-sample-quantile":"sds/nonparametric-models.html#def-sample-quantile","exm-order-statistics":"sds/nonparametric-models.html#exm-order-statistics","exm-sample-quantile":"sds/nonparametric-models.html#exm-sample-quantile","fig-ecdf-sample-quantile-example":"sds/nonparametric-models.html#fig-ecdf-sample-quantile-example","thm-sample-quantile-order-statistics":"sds/nonparametric-models.html#thm-sample-quantile-order-statistics"},"notation":{"":"mds/notation.html","conventions-in-this-book":"mds/notation.html#conventions-in-this-book","def-indicator-function":"mds/notation.html#def-indicator-function","equivalence-between-paradigms":"mds/notation.html#equivalence-between-paradigms","exm-indicator-numerical":"mds/notation.html#exm-indicator-numerical","iverson-bracket-notation":"mds/notation.html#iverson-bracket-notation","key-algebraic-properties":"mds/notation.html#key-algebraic-properties","percent-sign":"mds/notation.html#percent-sign","predicate-notation":"mds/notation.html#predicate-notation","proofs":"mds/notation.html#proofs","sec-indicator-functions":"mds/notation.html#sec-indicator-functions","sec-stochastic-probabilistic-random":"pds/notation.html#sec-stochastic-probabilistic-random","set-notation":"mds/notation.html#set-notation","strengths-and-limitations-of-the-iverson-bracket":"mds/notation.html#strengths-and-limitations-of-the-iverson-bracket","summary-of-indicator-notations":"mds/notation.html#summary-of-indicator-notations","tbl-indicator-notations":"mds/notation.html#tbl-indicator-notations","tbl-info-mat-symbols":"sds/intro-MLEs.html#tbl-info-mat-symbols","tbl-notation-collected":"mds/notation.html#tbl-notation-collected","tbl-random-stochastic-probabilistic":"pds/notation.html#tbl-random-stochastic-probabilistic","two-primary-notational-paradigms-set-vs.-predicate-notation":"mds/notation.html#two-primary-notational-paradigms-set-vs.-predicate-notation","why-is-notation-in-probability-and-statistics-so-inconsistent-and-disorganized":"mds/notation.html#why-is-notation-in-probability-and-statistics-so-inconsistent-and-disorganized"},"probability":{"":"pds/","characteristics-of-probability-distributions":"pds/random-variables.html#characteristics-of-probability-distributions","conditional-distributions-and-expectations":"pds/expectation.html#conditional-distributions-and-expectations","conditional-probability":"pds/probability-basics.html#conditional-probability","cor-fubini-joint":"pds/expectation.html#cor-fubini-joint","cor-p-neg":"pds/probability-basics.html#cor-p-neg","cor-p-neg0":"pds/probability-basics.html#cor-p-neg0","cor-var-lincom2":"pds/variance-covariance.html#cor-var-lincom2","def-bernoulli":"pds/random-variables.html#def-bernoulli","def-cdf":"pds/random-variables.html#def-cdf","def-cident":"pds/independence.html#def-cident","def-ciid":"pds/independence.html#def-ciid","def-cind":"pds/independence.html#def-cind","def-cond-expectation":"pds/expectation.html#def-cond-expectation","def-cond-expectation-function":"pds/expectation.html#def-cond-expectation-function","def-cond-mixed":"pds/expectation.html#def-cond-mixed","def-cond-pdf":"pds/expectation.html#def-cond-pdf","def-cond-pmf":"pds/expectation.html#def-cond-pmf","def-conditional-prob":"pds/probability-basics.html#def-conditional-prob","def-cov":"pds/variance-covariance.html#def-cov","def-cov-vec-x":"pds/variance-covariance.html#def-cov-vec-x","def-deviation":"pds/variance-covariance.html#def-deviation","def-deviation-pop-mean":"pds/variance-covariance.html#def-deviation-pop-mean","def-event-rate":"pds/distributions.html#def-event-rate","def-expectation":"pds/expectation.html#def-expectation","def-expectation-matrix":"pds/expectation.html#def-expectation-matrix","def-exposure":"pds/distributions.html#def-exposure","def-hazard":"pds/random-variables.html#def-hazard","def-homosked":"pds/variance-covariance.html#def-homosked","def-ident":"pds/independence.html#def-ident","def-iid":"pds/independence.html#def-iid","def-indpt":"pds/independence.html#def-indpt","def-nb":"pds/distributions.html#def-nb","def-offset":"pds/distributions.html#def-offset","def-pdf":"pds/random-variables.html#def-pdf","def-poisson":"pds/distributions.html#def-poisson","def-precision":"pds/variance-covariance.html#def-precision","def-probability":"pds/probability-basics.html#def-probability","def-quantile-function":"pds/random-variables.html#def-quantile-function","def-sd":"pds/variance-covariance.html#def-sd","def-variance":"pds/variance-covariance.html#def-variance","defining-probabilities":"pds/probability-basics.html#defining-probabilities","eq-def-event-rate":"pds/distributions.html#eq-def-event-rate","eq-lambda-to-mu":"pds/distributions.html#eq-lambda-to-mu","eq-pois-cdf":"pds/distributions.html#eq-pois-cdf","eq-pois-pmf":"pds/distributions.html#eq-pois-pmf","exm-bayes":"pds/probability-basics.html#exm-bayes","exm-cdf-pois":"pds/distributions.html#exm-cdf-pois","exm-cond-expectation":"pds/expectation.html#exm-cond-expectation","exm-cond-expectation-function":"pds/expectation.html#exm-cond-expectation-function","exm-cond-mixed":"pds/expectation.html#exm-cond-mixed","exm-cond-pdf":"pds/expectation.html#exm-cond-pdf","exm-cond-pmf":"pds/expectation.html#exm-cond-pmf","exm-exposure-log-scale":"pds/distributions.html#exm-exposure-log-scale","exm-fubini-joint":"pds/expectation.html#exm-fubini-joint","exm-fubini-prob":"pds/expectation.html#exm-fubini-prob","exm-fubini-prob-fail":"pds/expectation.html#exm-fubini-prob-fail","exm-fubini-survfn":"pds/expectation.html#exm-fubini-survfn","exm-law-conditional-prob":"pds/probability-basics.html#exm-law-conditional-prob","exm-lie":"pds/expectation.html#exm-lie","exm-lotus":"pds/expectation.html#exm-lotus","exm-lotus-continuous":"pds/expectation.html#exm-lotus-continuous","exm-mean-vs-event-rate":"pds/distributions.html#exm-mean-vs-event-rate","exm-non-exposed":"pds/distributions.html#exm-non-exposed","exm-sum-pois":"pds/distributions.html#exm-sum-pois","exr-def-poisson":"pds/distributions.html#def-poisson","exr-exposure-magnitude":"pds/distributions.html#exr-exposure-magnitude","exr-fubini-joint-disc":"pds/expectation.html#exr-fubini-joint-disc","exr-fubini-joint-disc-infinite":"pds/expectation.html#exr-fubini-joint-disc-infinite","exr-fubini-joint-mixed":"pds/expectation.html#exr-fubini-joint-mixed","exr-fubini-joint-mixed-infinite":"pds/expectation.html#exr-fubini-joint-mixed-infinite","exr-pois-dist-funs":"pds/distributions.html#exr-pois-dist-funs","exr-poisson-properties":"pds/distributions.html#thm-poisson-properties","exr-range-poisson":"pds/distributions.html#exr-range-poisson","fig-clt-1d6":"pds/limit-theorems.html#fig-clt-1d6","fig-clt-5d6":"pds/limit-theorems.html#fig-clt-5d6","fig-fubini-joint":"pds/expectation.html#fig-fubini-joint","fig-fubini-joint-disc":"pds/expectation.html#fig-fubini-joint-disc","fig-fubini-joint-mixed":"pds/expectation.html#fig-fubini-joint-mixed","fig-fubini-prob-fail":"pds/expectation.html#fig-fubini-prob-fail","fig-pois-cdfs":"pds/distributions.html#fig-pois-cdfs","fig-pois-pmf":"pds/distributions.html#fig-pois-pmf","fig-poissons":"pds/distributions.html#sec-poisson-dist","fubinitonelli-for-expectations":"pds/expectation.html#fubinitonelli-for-expectations","lem-cov-xx":"pds/variance-covariance.html#lem-cov-xx","sec-bern-dist":"pds/distributions.html#sec-bern-dist","sec-expectation":"pds/expectation.html#sec-expectation","sec-nb-dist":"pds/distributions.html#sec-nb-dist","sec-poisson-dist":"pds/distributions.html#sec-poisson-dist","sec-prob-dens":"pds/random-variables.html#def-pdf","sec-prob-haz":"pds/random-variables.html#sec-prob-haz","sec-weibull":"pds/distributions.html#sec-weibull","sol-def-poisson":"pds/distributions.html#def-poisson","sol-range-poisson":"pds/distributions.html#sol-range-poisson","tbl-exposure-units":"pds/distributions.html#tbl-exposure-units","tbl-outcome-distns":"pds/distributions.html#tbl-outcome-distns","tbl-prob-dist-fns":"pds/random-variables.html#tbl-prob-dist-fns","tbl-test-stat-distns":"pds/distributions.html#tbl-test-stat-distns","thm-alt-cov":"pds/variance-covariance.html#thm-alt-cov","thm-bayes":"pds/probability-basics.html#thm-bayes","thm-bernoulli-mean":"pds/expectation.html#thm-bernoulli-mean","thm-cdf-pois":"pds/distributions.html#thm-cdf-pois","thm-conditional-lie":"pds/expectation.html#thm-conditional-lie","thm-density-sums-to-one":"pds/random-variables.html#thm-density-sums-to-one","thm-density-vs-CDF":"pds/random-variables.html#thm-density-vs-CDF","thm-exposure-log-scale":"pds/distributions.html#thm-exposure-log-scale","thm-law-conditional-prob":"pds/probability-basics.html#thm-law-conditional-prob","thm-lie":"pds/expectation.html#thm-lie","thm-lotus":"pds/expectation.html#thm-lotus","thm-mean-vs-event-rate":"pds/distributions.html#thm-mean-vs-event-rate","thm-nb":"pds/distributions.html#thm-nb","thm-non-exposed":"pds/distributions.html#thm-non-exposed","thm-poisson-properties":"pds/distributions.html#thm-poisson-properties","thm-prob-subset":"pds/probability-basics.html#thm-prob-subset","thm-sum-pois":"pds/distributions.html#thm-sum-pois","thm-surv-mean":"pds/expectation.html#thm-surv-mean","thm-total-cov":"pds/variance-covariance.html#thm-total-cov","thm-total-prob":"pds/probability-basics.html#thm-total-prob","thm-total-prob-1":"pds/probability-basics.html#thm-total-prob-1","thm-total-variance":"pds/variance-covariance.html#thm-total-variance","thm-var-lincom":"pds/variance-covariance.html#thm-var-lincom","thm-variance":"pds/variance-covariance.html#thm-variance","thm-variance-expanded":"pds/variance-covariance.html#thm-variance-expanded","thm-vcov-elements":"pds/variance-covariance.html#thm-vcov-elements","thm-vcov-vec":"pds/variance-covariance.html#thm-vcov-vec","variance-and-related-characteristics":"pds/variance-covariance.html#variance-and-related-characteristics"},"proof-writing":{"":"mds/proof-writing.html","sec-annotate-each-step":"mds/proof-writing.html#sec-annotate-each-step","sec-dont-skip-steps":"mds/proof-writing.html#sec-dont-skip-steps","sec-golden-rule":"mds/proof-writing.html#sec-golden-rule"},"sec-CLT":{"":"pds/limit-theorems.html","fig-clt-1d6":"pds/limit-theorems.html#fig-clt-1d6","fig-clt-5d6":"pds/limit-theorems.html#fig-clt-5d6"}};
+  var m = location.pathname.match(/\/([^\/]+?)(?:-slides)?(?:\.html)?$/);
+  if (!m || !Object.prototype.hasOwnProperty.call(map, m[1])) return;
+  var page = map[m[1]];
+  var id;
+  try {
+    id = decodeURIComponent(location.hash.slice(1));
+  } catch (e) {
+    id = "";
+  }
+  var target = Object.prototype.hasOwnProperty.call(page, id) ? page[id] : page[""];
+  var cut = target.indexOf("#");
+  var path = cut < 0 ? target : target.slice(0, cut);
+  var hash = cut < 0 ? "" : target.slice(cut);
+  window.rmeAppendixRedirect = true;
+  location.replace("https://morrison-lab.github.io/" + path + location.search + hash);
+})();
+</script>
+<script>
+// Chapters used to be served from the site root (e.g. /rme/estimation.html)
+// and now live under chapters/. Send old links to the new location,
+// keeping any query string and #anchor.
+(function () {
+  if (window.rmeAppendixRedirect) return;
+  var p = location.pathname;
+  var m = p.match(/^(.*\/)([^\/]+)$/);
+  if (m && p.indexOf("/chapters/") === -1) {
+    location.replace(m[1] + "chapters/" + m[2] + location.search + location.hash);
+  }
+})();
+</script>
+<style>
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exr.callout {
+  border-left-color: #FFA500;
+}
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
+}
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
+}
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
+}
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-remark.callout {
+  border-left-color: #AD1457;
+}
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
+}
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="/rme/index.html">
+    <span class="navbar-title">Regression Models for Epidemiology</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="/rme/chapters/index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-course-logistics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Course Logistics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-course-logistics">    
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/syllabus.html">
+ <span class="dropdown-text">Syllabus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/schedule.html">
+ <span class="dropdown-text">Schedule</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/Intro-to-GLMs.html">
+ <span class="dropdown-text">Introduction to GLMs</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/glms.html">
+ <span class="dropdown-text">Generalized Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/Linear-models-overview.html">
+ <span class="dropdown-text">Linear Models Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/binary-outcome-associations.html">
+ <span class="dropdown-text">Measures of Association for Binary Outcomes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/logistic-regression.html">
+ <span class="dropdown-text">Logistic Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/count-regression.html">
+ <span class="dropdown-text">Count Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/causal-inference.html">
+ <span class="dropdown-text">Causal Inference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/predictor-selection.html">
+ <span class="dropdown-text">Predictor Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/intro-multilevel-models.html">
+ <span class="dropdown-text">Multilevel Models</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/time-to-event-models.html">
+ <span class="dropdown-text">Time to Event Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/intro-to-survival-analysis.html">
+ <span class="dropdown-text">Introduction to Survival Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/proportional-hazards-models.html">
+ <span class="dropdown-text">Proportional Hazards Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/parametric-survival-models.html">
+ <span class="dropdown-text">Parametric Survival Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/midterm-2-review-session.html">
+ <span class="dropdown-text">Midterm 2 Review Session</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/top-ten-concepts.html">
+ <span class="dropdown-text">Top Ten Concepts</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-appendices" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Appendices</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-appendices">    
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/appendices-are-prereqs.html">
+ <span class="dropdown-text">Overview of Appendices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/mds/">
+ <span class="dropdown-text">Mathematics for Data Science (mds)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/pds/">
+ <span class="dropdown-text">Probability for Data Science (pds)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/sds/">
+ <span class="dropdown-text">Statistics for Data Science (sds)</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/classification.html">
+ <span class="dropdown-text">Classification</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/common-mistakes.html">
+ <span class="dropdown-text">Common Mistakes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/intro-to-R.html">
+ <span class="dropdown-text">Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/exam-formula-sheet.html">
+ <span class="dropdown-text">Exam Formula Sheet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/package-versions.html">
+ <span class="dropdown-text">Package Versions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/rme/chapters/concept-map.html">
+ <span class="dropdown-text">Concept Map</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Morrison-Lab/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Page not found</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Logistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Chapters</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/Linear-models-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear (Gaussian) Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/binary-outcome-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Association for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/logistic-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/count-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Count Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/causal-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/predictor-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predictor Selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/intro-multilevel-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Multi-level Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/time-to-event-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time to Event Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/intro-to-survival-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Survival Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/proportional-hazards-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proportional Hazards Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/parametric-survival-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parametric Survival Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/midterm-2-review-session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm 2 Review Session</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/top-ten-concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of Regression Modeling Concepts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/appendices-are-prereqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of Appendices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/common-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Common Mistakes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/intro-to-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Computing in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/exam-formula-sheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam Formula Sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/package-versions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package Versions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/rme/chapters/concept-map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concept Map: Definitions and Results</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Page not found</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Last modified: 2026-10-09: 18:12:53 (UTC)</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Sorry, that page doesn’t exist.</p>
+<p>If you followed an old link, the chapter has probably moved under <a href="/rme/./chapters/index.html"><code>chapters/</code></a>; try the <a href="/rme/./chapters/index.html">home page</a> or the search box.</p>
+
+
+<!-- -->
+
+<script>
+function getQuartoHeadingAnchorIcon() {
+  const afterBodyScript = document.getElementById("quarto-html-after-body");
+  if (!afterBodyScript) {
+    return null;
+  }
+
+  const match = afterBodyScript.textContent.match(/const icon = ["']([^"']+)["']/);
+  return match ? match[1] : null;
+}
+
+// Quarto chain-link glyph from Bootstrap Icons.
+const chainLinkIconFallback = "\ue9cb";
+const headingAnchorIcon = getQuartoHeadingAnchorIcon();
+const defaultAnchorIconFallback =
+  headingAnchorIcon && headingAnchorIcon !== "#" ? headingAnchorIcon : chainLinkIconFallback;
+
+function getDefaultAnchorTemplate() {
+  // Prefer Quarto heading anchors first so the visible chain-link icon is reused.
+  const defaultAnchor =
+    document.querySelector(".anchored > a.anchorjs-link") ||
+    document.querySelector("a.anchorjs-link[data-anchorjs-icon]");
+  if (!defaultAnchor) {
+    return null;
+  }
+
+  return {
+    // Detect icon value from the template anchor's attribute or text.
+    icon: defaultAnchor.getAttribute("data-anchorjs-icon") || defaultAnchor.textContent.trim(),
+    hasDataIcon: defaultAnchor.hasAttribute("data-anchorjs-icon"),
+    style: defaultAnchor.getAttribute("style")
+  };
+}
+
+function normalizeAnchorIcon(icon) {
+  if (!icon || icon === "#") {
+    return defaultAnchorIconFallback;
+  }
+
+  return icon;
+}
+
+function createChainLinkSvgIcon() {
+  const svgNs = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNs, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("fill", "currentColor");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.setAttribute("class", "equation-anchor-icon");
+
+  [
+    "M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-2H11a4 4 0 0 1-4 3H4a4 4 0 0 1 0-8h2.354z",
+    "M9.646 10.5H12a3 3 0 1 0 0-6H9a3 3 0 0 0-2.83 2H5a4 4 0 0 1 4-3h3a4 4 0 0 1 0 8H9.646z",
+    "M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5"
+  ].forEach(function (pathData) {
+    const path = document.createElementNS(svgNs, "path");
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+  });
+
+  return svg;
+}
+
+function alignEquationAnchorWithDefault(anchor, template) {
+  if (!anchor) {
+    return;
+  }
+
+  anchor.classList.remove("external");
+  anchor.classList.add("no-external");
+
+  const normalizedIcon = normalizeAnchorIcon(template && template.icon);
+  if (normalizedIcon === chainLinkIconFallback) {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = "";
+    anchor.appendChild(createChainLinkSvgIcon());
+  } else if (template && template.hasDataIcon) {
+    anchor.setAttribute("data-anchorjs-icon", normalizedIcon);
+    anchor.textContent = normalizedIcon;
+  } else {
+    anchor.removeAttribute("data-anchorjs-icon");
+    anchor.textContent = normalizedIcon;
+  }
+
+  if (template && template.style) {
+    anchor.setAttribute("style", template.style);
+  } else {
+    anchor.removeAttribute("style");
+  }
+}
+
+function alignEquationAnchorsWithDefault() {
+  const template = getDefaultAnchorTemplate();
+  document.querySelectorAll("a.equation-anchor").forEach(function (anchor) {
+    alignEquationAnchorWithDefault(anchor, template);
+  });
+}
+
+function markCollapseTogglesExpanded(collapseEl) {
+  const toggleTargets = [];
+  if (collapseEl.id) {
+    toggleTargets.push("#" + collapseEl.id);
+  }
+
+  const genericCollapseClasses = new Set(["collapse", "show", "collapsing", "callout-collapse", "navbar-collapse"]);
+  collapseEl.classList.forEach(function (className) {
+    if (!genericCollapseClasses.has(className)) {
+      toggleTargets.push("." + className);
+    }
+  });
+
+  document.querySelectorAll("[data-bs-target], [href]").forEach(function (toggle) {
+    if (
+      toggleTargets.includes(toggle.getAttribute("data-bs-target")) ||
+      toggleTargets.includes(toggle.getAttribute("href"))
+    ) {
+      toggle.classList.remove("collapsed");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+}
+
+function expandCollapsedAncestors(target) {
+  if (!target) {
+    return;
+  }
+
+  const collapsedAncestors = [];
+  let current = target.parentElement;
+  while (current) {
+    if (current.classList && current.classList.contains("collapse") && !current.classList.contains("show")) {
+      collapsedAncestors.unshift(current);
+    }
+    current = current.parentElement;
+  }
+
+  collapsedAncestors.forEach(function (collapseEl) {
+    if (window.bootstrap && window.bootstrap.Collapse) {
+      window.bootstrap.Collapse.getOrCreateInstance(collapseEl, { toggle: false }).show();
+    } else {
+      collapseEl.classList.add("show");
+      collapseEl.style.height = "";
+    }
+
+    markCollapseTogglesExpanded(collapseEl);
+  });
+}
+
+function revealEquationHashTarget() {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (!id) {
+    return;
+  }
+
+  const target = document.getElementById(id);
+  if (!target) {
+    return;
+  }
+
+  expandCollapsedAncestors(target);
+
+  window.setTimeout(function () {
+    target.scrollIntoView({ block: "center" });
+  }, 400);
+}
+
+function ensureEquationAnchorStyles() {
+  if (document.getElementById("equation-anchor-styles")) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.id = "equation-anchor-styles";
+  style.textContent = `
+    .equation-anchor-target {
+      --equation-anchor-offset: 1.2rem;
+      position: relative;
+      display: block;
+    }
+    .equation-anchor {
+      position: absolute;
+      left: calc(-1 * var(--equation-anchor-offset));
+      top: 50%;
+      transform: translateY(-50%);
+      text-decoration: none;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+    .equation-anchor:hover {
+      opacity: 1;
+    }
+    .equation-anchor-icon {
+      width: 0.9em;
+      height: 0.9em;
+      vertical-align: -0.125em;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  ensureEquationAnchorStyles();
+
+  let counter = 0;
+
+  document.querySelectorAll(".math.display").forEach(function (mathEl) {
+    // For labeled equations, Quarto wraps the math display span in an eq-* span.
+    // For unlabeled equations, use the parent element (typically a <p>).
+    const labeledContainer = mathEl.closest("[id^='eq-']");
+    const target = labeledContainer || mathEl.parentElement;
+
+    if (!target) {
+      return;
+    }
+
+    // Skip if already processed.
+    if (target.querySelector(".equation-anchor")) {
+      return;
+    }
+
+    // Use the labeled container's id, or assign an auto-generated id.
+    let id = labeledContainer ? labeledContainer.id : target.id;
+    if (!id) {
+      counter++;
+      id = "eq-anchor-" + counter;
+      target.id = id;
+    }
+
+    target.classList.add("equation-anchor-target");
+
+    const anchor = document.createElement("a");
+    anchor.className = "equation-anchor anchorjs-link";
+    anchor.href = "#" + id;
+    anchor.setAttribute("aria-label", "Permalink to this equation");
+    target.appendChild(anchor);
+  });
+
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+
+window.addEventListener("load", function () {
+  alignEquationAnchorsWithDefault();
+  revealEquationHashTarget();
+});
+window.addEventListener("hashchange", revealEquationHashTarget);
+</script>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script>
+  // Mobile within-chapter table of contents.
+  //
+  // Quarto hides the right "On this page" TOC below its `md` breakpoint
+  // (max-width: 767.98px) and offers no built-in mobile replacement, so phone
+  // readers lose within-chapter navigation. This injects a "Contents" button
+  // into the navbar and a dropdown panel (cloned from nav#TOC) just below it.
+  // Living inside #quarto-header, the button and panel ride Quarto's headroom:
+  // they hide on scroll-down and reappear on scroll-up with the navbar. The
+  // matching rules in custom.scss show them only on narrow screens.
+  (function () {
+    function buildMobileToc() {
+      var toc = document.querySelector("nav#TOC");
+      if (!toc) {
+        return;
+      }
+
+      var list = toc.querySelector("ul");
+      if (!list) {
+        return;
+      }
+
+      var header = document.querySelector("#quarto-header");
+      var navContainer = header
+        ? header.querySelector(".navbar-container")
+        : null;
+      if (!header || !navContainer) {
+        return;
+      }
+
+      // Guard against firing twice (e.g. Quarto live-preview hot-reload).
+      if (header.querySelector(".mobile-toc-toggle")) {
+        return;
+      }
+
+      var titleEl = toc.querySelector("#toc-title");
+      var label = titleEl ? titleEl.textContent : "On this page";
+
+      var button = buildToggleButton();
+      var panel = buildPanel(list, label);
+
+      wireToggle(button, panel);
+
+      // Place the button before the navbar hamburger when present.
+      var hamburger = navContainer.querySelector(".navbar-toggler");
+      if (hamburger) {
+        navContainer.insertBefore(button, hamburger);
+      } else {
+        navContainer.appendChild(button);
+      }
+      header.appendChild(panel);
+    }
+
+    function buildToggleButton() {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "mobile-toc-toggle btn";
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-controls", "mobile-toc-panel");
+      // No aria-label: the accessible name comes from the visible "Contents"
+      // text, so it matches what voice-control users say (WCAG 2.5.3).
+
+      var icon = document.createElement("i");
+      icon.className = "bi bi-list-nested";
+      icon.setAttribute("aria-hidden", "true");
+      button.appendChild(icon);
+
+      var text = document.createElement("span");
+      text.className = "mobile-toc-toggle-text";
+      text.textContent = "Contents";
+      button.appendChild(text);
+
+      return button;
+    }
+
+    function buildPanel(list, label) {
+      var panel = document.createElement("div");
+      panel.id = "mobile-toc-panel";
+      panel.className = "mobile-toc-panel";
+
+      // Clone only the list (not the heading) so no element ids are duplicated.
+      var nav = document.createElement("nav");
+      nav.setAttribute("aria-label", label);
+      nav.appendChild(list.cloneNode(true));
+      panel.appendChild(nav);
+
+      return panel;
+    }
+
+    function wireToggle(button, panel) {
+      var close = function () {
+        panel.classList.remove("show");
+        button.setAttribute("aria-expanded", "false");
+      };
+
+      button.addEventListener("click", function () {
+        var open = panel.classList.toggle("show");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // Collapse once the reader taps through to a section.
+      panel.addEventListener("click", function (event) {
+        var target = event.target;
+        if (target instanceof Element && target.closest("a")) {
+          close();
+        }
+      });
+
+      // Collapse on scroll so the bar behaves like the navbar: it reappears
+      // closed on scroll-up rather than re-opening the menu.
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (panel.classList.contains("show")) {
+            close();
+          }
+        },
+        { passive: true }
+      );
+
+      // Collapse on a tap outside the button or panel.
+      document.addEventListener("click", function (event) {
+        if (!panel.classList.contains("show")) {
+          return;
+        }
+        var target = event.target;
+        if (
+          target instanceof Element &&
+          (button.contains(target) || panel.contains(target))
+        ) {
+          return;
+        }
+        close();
+      });
+
+      // Collapse on Escape and return focus to the button (ARIA disclosure
+      // pattern), so keyboard users can dismiss the menu without navigating.
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && panel.classList.contains("show")) {
+          close();
+          button.focus();
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", buildMobileToc);
+    } else {
+      buildMobileToc();
+    }
+  })();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/morrison-lab\.github\.io\/rme\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Page not found"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">      # Runs first: old appendix pages now live in mds, pds or sds.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">      - appendix-redirects.html</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;script&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">          // Chapters used to be served from the site root (e.g. /rme/estimation.html)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">          // and now live under chapters/. Send old links to the new location,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">          // keeping any query string and #anchor.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">          (function () {</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">            if (window.rmeAppendixRedirect) return;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">            var p = location.pathname;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">            var m = p.match(/^(.*\/)([^\/]+)$/);</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">            if (m &amp;&amp; p.indexOf("/chapters/") === -1) {</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">              location.replace(m[1] + "chapters/" + m[2] + location.search + location.hash);</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">            }</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">          })();</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;/script&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Sorry, that page doesn't exist.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>If you followed an old link, the chapter has probably moved under</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`chapters/`</span><span class="co">](chapters/index.qmd)</span>; try the <span class="co">[</span><span class="ot">home page</span><span class="co">](chapters/index.qmd)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>or the search box.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Copyright 2024-2026, Douglas Ezra Morrison
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/404.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/404.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
