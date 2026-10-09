@@ -31,7 +31,7 @@ $$
 \diffloghaz(t|\vx: \vxs)
 &= (\vx - \vxs) \cdot \vb
 \ea
-$$
+$$ {#eq-difference-of-log-hazards-between-1}
 
 :::
 
@@ -44,10 +44,11 @@ $$
 \diffloghaz(t|\vx : \vxs)
 &\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs) && \text{(definition of log-hazard difference)} \\
 &= \left[\loghaz_0(t) + \tp{\vx}\vb\right] - \left[\loghaz_0(t) + \tp{\vxs}\vb\right] && \text{(substituting model definition)} \\
+&= \loghaz_0(t) + \tp{\vx}\vb - \loghaz_0(t) - \tp{\vxs}\vb && \text{(distributing the subtraction)} \\
 &= \tp{\vx}\vb - \tp{\vxs}\vb && \text{(canceling shared baseline log-hazard } \loghaz_0(t)\text{)} \\
 &= (\vx - \vxs) \cdot \vb && \text{(factoring out } \vb\text{)}
 \ea
-$$
+$$ {#eq-difference-of-log-hazards-between-2}
 
 :::
 
@@ -68,7 +69,7 @@ $$
 \\
 &= \expf{\diffvx \cdot \vb}
 \ea
-$$
+$$ {#eq-hazard-ratio-under-proportional-hazards-1}
 
 where $\diffvx \eqdef \vx - \vxs$ is the difference in covariate vectors.
 
@@ -91,7 +92,7 @@ $$
 \\
 &= \expf{\diffvx \cdot \vb}
 \ea
-$$
+$$ {#eq-hazard-ratio-under-proportional-hazards-2}
 
 Expanding the definition of $\hr$, the first equality writes the ratio
 as the exponential of a difference of logarithms;
@@ -128,7 +129,7 @@ $$
 &= (\vx - \vzero) \cdot \vb && \text{(applying the PH log-hazard-difference lemma with } \vxs = \vzero\text{)} \\
 &= \reglincomb && \text{(evaluating vector difference)}
 \ea
-$$
+$$ {#eq-difference-of-log-hazard-from-2}
 
 :::
 
@@ -159,7 +160,7 @@ $$
 \\
 &= \expf{\reglincomb} && \text{(substituting the log-hazard difference from baseline)}
 \ea
-$$
+$$ {#eq-hazard-ratio-versus-baseline-under-1}
 
 :::
 
@@ -183,7 +184,7 @@ $$
 &= \expf{\loghaz_0(t)} \cdot \expf{\reglincomb} && \text{(exponent rule for sums)} \\
 &= \haz_0(t) \hazfactor(\vx) && \text{(definitions of baseline hazard } \haz_0(t) \text{ and hazard factor } \hazfactor(\vx)\text{)}
 \ea
-$$
+$$ {#eq-proportional-hazards-decomposition-of-the-1}
 
 :::
 
@@ -265,7 +266,7 @@ Mathematically, it is defined as:
 $$
 \frac{\haz(t|\vx_1)}{\haz(t|\vx_2)}
 \eqdef \hr(\vx_1,\vx_2)
-$$
+$$ {#eq-proportional-hazards-1}
 
 :::
 
@@ -306,7 +307,7 @@ $$
 &= \frac{\haz_0(t)\hazfactor(\vx)}{\haz_0(t)\hazfactor(\vxs)} && \text{(applying the PH hazard decomposition)} \\
 &= \frac{\hazfactor(\vx)}{\hazfactor(\vxs)} && \text{(canceling baseline hazard } \haz_0(t)\text{)}
 \ea
-$$
+$$ {#eq-relating-the-hazard-ratio-and-1}
 
 Setting $\vx = \vzero$ in @thm-hazard-ratio-vs-baseline-ph yields:
 
@@ -317,7 +318,7 @@ $$
 &= \expf{0} && \text{(dot product with the zero vector)} \\
 &= 1 && \text{(exponential of zero)}
 \ea
-$$
+$$ {#eq-relating-the-hazard-ratio-and-2}
 
 :::
 
@@ -336,7 +337,7 @@ $$
 &=\expf{\tp{\vx_1}\vb-\tp{\vx_2}\vb} && \text{(substituting linear predictors)} \\
 &=\expf{\tp{(\vx_1 - \vx_2)}\vb} && \text{(factoring out } \vb\text{)}
 \ea
-$$
+$$ {#eq-relating-the-hazard-ratio-and-3}
 
 {{< slidebreak >}}
 
@@ -360,7 +361,7 @@ $$
 \\
 &= \tp{(\vx - \vxs)}\vb && \text{(factoring out } \vb\text{)}
 \ea
-$$
+$$ {#eq-difference-of-log-hazards-is-1}
 :::
 
 {{< slidebreak >}}
@@ -449,7 +450,7 @@ $$
 &= \logf{\cuhaz_0(t)} + \logf{\expf{\reglincomb}} && \text{(substituting definition of } \hazfactor(\vx)\text{)} \\
 &= \logf{\cuhaz_0(t)} + \reglincomb && \text{(simplifying } \log(\exp(\cdot))\text{)}
 \ea
-$$
+$$ {#eq-the-logarithms-of-cumulative-hazard-1}
 
 :::
 
@@ -479,7 +480,7 @@ $$
 &= \logf{\cuhaz_0(t)} + \reglincomb && \text{(applying the parallel log-cumulative-hazard theorem)} \\
 &= \logf{-\logf{\surv_0(t)}} + \reglincomb && \text{(substituting baseline cumulative hazard } \cuhaz_0(t) = -\log \surv_0(t)\text{)}
 \ea
-$$
+$$ {#eq-linear-model-for-log-negative-1}
 
 :::
 
@@ -505,7 +506,7 @@ $$
 &= \paren{\expf{- \cuhaz_0(t)}}^{\hazfactor(\vx)} && \text{(power rule for exponents } e^{ab} = (e^a)^b\text{)} \\
 &= \sb{\surv_0(t)}^{\hazfactor(\vx)} && \text{(substituting baseline survival } \surv_0(t) \eqdef \expf{-\cuhaz_0(t)}\text{)}
 \ea
-$$
+$$ {#eq-survival-functions-are-exponential-multiples-1}
 
 :::
 
