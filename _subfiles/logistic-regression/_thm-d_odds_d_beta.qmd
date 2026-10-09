@@ -1,11 +1,15 @@
 :::{#thm-d_odds_d_beta}
 #### Gradient of odds w.r.t. coefficients
 
-::: notes
-To derive $\derivf{\odds}{\vb}$,
-we can apply the [vector chain rule](https://morrison-lab.github.io/mds/vector-calculus.html#thm-chain-vec) again
-along with @lem-deriv-invodds and @lem-d_logodds-d_vb:
+$$
+\ub{\derivf{\odds}{\vb}}_{(p+1) \times 1}
+= \ub{\vx}_{(p+1) \times 1} \cdot \odds
+$$ {#eq-d-odds-d-beta}
+
 :::
+
+::: proof
+Applying the [vector chain rule](https://morrison-lab.github.io/mds/vector-calculus.html#thm-chain-vec) along with @lem-deriv-invodds and @lem-d_logodds-d_vb:
 
 $$
 \ba
@@ -19,13 +23,53 @@ $$
 &= \red{\vx} \teal{\odds}
 && \text{(derivative of odds w.r.t. log-odds: } \derivf{\odds}{\logodds} = \odds \text{)}
 \ea
-$$
-
+$$ {#eq-d-odds-d-beta-proof}
 :::
+
+{{< slidebreak >}}
+
+:::{#exm-d-odds-d-beta}
+
+#### Evaluating gradient of odds w.r.t. coefficients
+
+Consider a subject with covariate vector $\vx = (1, 2)'$
+and linear predictor $\eta = \vx'\vb = 0$,
+so $\odds = \expf{0} = 1$.
+
+By @thm-d_odds_d_beta:
+
+$$
+\ba
+\derivf{\odds}{\vb}
+&= \vx \cdot \odds
+&& \text{(gradient of odds w.r.t. coefficients)}
+\\
+&= \ub{\pmat{1 \\ 2}}_{2 \times 1} \cdot 1
+&& \text{(substitute } \vx = (1,2)' \text{ and } \odds = 1 \text{)}
+\\
+&= \ub{\pmat{1 \\ 2}}_{2 \times 1}
+&& \text{(scalar multiplication)}
+\ea
+$$ {#eq-d-odds-d-beta-example}
+
+The gradient vector indicates that increasing $\beta_0$ or $\beta_1$ increases the odds at rates 1 and 2, respectively.
+:::
+
+{{< slidebreak >}}
 
 :::{#cor-d_odds_d_beta}
 
 #### Gradient of odds w.r.t. coefficients in terms of probability
+
+$$
+\ub{\derivf{\odds}{\vb}}_{(p+1) \times 1}
+= \ub{\vx}_{(p+1) \times 1} \cdot \frac{\pi}{1-\pi}
+$$ {#eq-d-odds-d-beta-prob}
+
+:::
+
+::: proof
+By @thm-d_odds_d_beta and the definition of odds in terms of probability $\pi$:
 
 $$
 \ba
@@ -36,6 +80,33 @@ $$
 &= \red{\vx} \frac{\pi}{1-\pi}
 && \text{(odds in terms of probability: } \odds = \frac{\pi}{1-\pi} \text{)}
 \ea
-$$
+$$ {#eq-d-odds-d-beta-prob-proof}
+:::
 
+{{< slidebreak >}}
+
+:::{#exm-cor-d-odds-d-beta}
+
+#### Gradient of odds in terms of probability
+
+For a model where a subject has event probability $\pi = 0.5$
+and covariate vector $\vx = (1, 3)'$,
+@cor-d_odds_d_beta gives:
+
+$$
+\ba
+\derivf{\odds}{\vb}
+&= \vx \cdot \frac{\pi}{1-\pi}
+&& \text{(gradient of odds in terms of probability)}
+\\
+&= \ub{\pmat{1 \\ 3}}_{2 \times 1} \cdot \frac{0.5}{1-0.5}
+&& \text{(substitute } \vx = (1,3)' \text{ and } \pi = 0.5 \text{)}
+\\
+&= \ub{\pmat{1 \\ 3}}_{2 \times 1} \cdot 1
+&& \text{(simplify the fraction)}
+\\
+&= \ub{\pmat{1 \\ 3}}_{2 \times 1}
+&& \text{(scalar multiplication)}
+\ea
+$$ {#eq-d-odds-d-beta-prob-example}
 :::
