@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.19">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Introduction to Multi-level Models – Regression Models for Epidemiology</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -111,7 +107,9 @@ div.csl-indent {
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -137,18 +135,13 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script>
-
-<script type="text/plain" cookie-consent="tracking">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
-</script>
-
-<script type="text/javascript" charset="UTF-8">
+</script><script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
@@ -163,22 +156,17 @@ cookieconsent.run({
 "language":"en"
   });
 });
-</script> 
-  
-<script type="application/json" class="js-hypothesis-config">
+</script><script type="application/json" class="js-hypothesis-config">
 {
   "theme": "clean",
   "openSidebar": false,
   "enableExperimentalNewNoteButton": true
 }
-</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-<script>
+</script><script async="" src="https://hypothes.is/embed.js"></script><script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     document.body.classList.add('hypothesis-enabled');
   });
-</script>
-<script>
+</script><script>
 // Theme dropdown: Light, Off-white, Parchment, Dark. Quarto's own toggle
 // handles light/dark and remembers it; the two tinted palettes are a
 // data-palette attribute on <html>. The choice is kept under "mln-theme".
@@ -240,48 +228,8 @@ cookieconsent.run({
     apply(choice, false);
   });
 })();
-</script>
-<style>
-div.callout-exm.callout {
-  border-left-color: #6A1B9A;
-}
-div.callout-exm.callout-style-default .callout-header {
-  background-color: rgba(106, 27, 154, 0.13);
-}
-div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-remark.callout {
-  border-left-color: #AD1457;
-}
-div.callout-remark.callout-style-default .callout-header {
-  background-color: rgba(173, 20, 87, 0.13);
-}
-div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-proof.callout {
-  border-left-color: #37474F;
-}
-div.callout-proof.callout-style-default .callout-header {
-  background-color: rgba(55, 71, 79, 0.13);
-}
-div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
+</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
 div.callout-exr.callout {
   border-left-color: #FFA500;
 }
@@ -291,26 +239,6 @@ div.callout-exr.callout-style-default .callout-header {
 div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cnj.callout {
-  border-left-color: #558B2F;
-}
-div.callout-cnj.callout-style-default .callout-header {
-  background-color: rgba(85, 139, 47, 0.13);
-}
-div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-def.callout {
   border-left-color: #1B5E20;
@@ -322,15 +250,35 @@ div.callout-def .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-cor.callout {
-  border-left-color: #00838F;
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
 }
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
 }
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-prp.callout {
   border-left-color: #827717;
@@ -342,11 +290,74 @@ div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-remark.callout {
+  border-left-color: #AD1457;
+}
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
+}
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
 </style>
-
-
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
-
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -512,9 +523,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Regression Models for Epidemiology</span>
@@ -526,7 +535,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../chapters/index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -534,8 +543,8 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-course-logistics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Course Logistics</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-course-logistics">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-course-logistics">
+<li>
     <a class="dropdown-item" href="../chapters/syllabus.html">
  <span class="dropdown-text">Syllabus</span></a>
   </li>  
@@ -544,13 +553,13 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
  <span class="dropdown-text">Schedule</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Chapters</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">
+<li>
     <a class="dropdown-item" href="../chapters/Intro-to-GLMs.html">
  <span class="dropdown-text">Introduction to GLMs</span></a>
   </li>  
@@ -614,67 +623,36 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
  <span class="dropdown-text">Top Ten Concepts</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-appendices" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Appendices</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-appendices">    
-        <li>
-    <a class="dropdown-item" href="../chapters/math-prereqs.html">
- <span class="dropdown-text">Math Prerequisites</span></a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-appendices">
+<li>
+    <a class="dropdown-item" href="../chapters/appendices-are-prereqs.html">
+ <span class="dropdown-text">Overview of Appendices</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/data.html">
- <span class="dropdown-text">Data</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/mds/">
+ <span class="dropdown-text">Mathematics for Data Science (mds)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/exploratory-descriptive.html">
- <span class="dropdown-text">Exploratory and Descriptive Methods</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/pds/">
+ <span class="dropdown-text">Probability for Data Science (pds)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/probability.html">
- <span class="dropdown-text">Probability</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/sds/">
+ <span class="dropdown-text">Statistics for Data Science (sds)</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/basic-statistical-methods.html">
- <span class="dropdown-text">Basic Statistical Methods</span></a>
-  </li>  
+        <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="../chapters/classification.html">
  <span class="dropdown-text">Classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/estimation.html">
- <span class="dropdown-text">Estimation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/nonparametric-models.html">
- <span class="dropdown-text">Nonparametric Models</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/inference.html">
- <span class="dropdown-text">Inference</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/intro-MLEs.html">
- <span class="dropdown-text">Introduction to MLEs</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/bayesian-inference.html">
- <span class="dropdown-text">Bayesian Inference</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../chapters/common-mistakes.html">
  <span class="dropdown-text">Common Mistakes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/notation.html">
- <span class="dropdown-text">Notation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/proof-writing.html">
- <span class="dropdown-text">Proof Writing</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../chapters/intro-to-R.html">
@@ -693,16 +671,16 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
  <span class="dropdown-text">Concept Map</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/Morrison-Lab/rme"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -712,9 +690,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -722,15 +698,11 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Course Logistics</span></a>
@@ -738,8 +710,8 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
@@ -752,7 +724,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -761,8 +733,8 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to GLMs</span></a>
@@ -853,7 +825,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -862,35 +834,11 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/math-prereqs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mathematics Prerequisites</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/exploratory-descriptive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exploratory and Descriptive Methods</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/basic-statistical-methods.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Statistical Methods</span></a>
+  <a href="../chapters/appendices-are-prereqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of Appendices</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -901,50 +849,8 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/estimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Estimation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/nonparametric-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Nonparametric Models</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/intro-MLEs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Maximum Likelihood Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/bayesian-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bayesian Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/common-mistakes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Common Mistakes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/notation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/proof-writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Proof Writing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -972,29 +878,30 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-multi-level-models-for-correlated-data" id="toc-introduction-to-multi-level-models-for-correlated-data" class="nav-link active" data-scroll-target="#introduction-to-multi-level-models-for-correlated-data"><span class="header-section-number">1</span> Introduction to multi-level models for correlated data</a></li>
+<li><a href="#configuring-r" id="toc-configuring-r" class="nav-link active" data-scroll-target="#configuring-r">Configuring R</a></li>
+  <li><a href="#correlated-data" id="toc-correlated-data" class="nav-link" data-scroll-target="#correlated-data"><span class="header-section-number">1</span> Correlated data</a></li>
+  <li><a href="#one-way-random-effects-models" id="toc-one-way-random-effects-models" class="nav-link" data-scroll-target="#one-way-random-effects-models"><span class="header-section-number">2</span> One-way random-effects models</a></li>
+  <li><a href="#variance-components" id="toc-variance-components" class="nav-link" data-scroll-target="#variance-components"><span class="header-section-number">3</span> Variance components</a></li>
+  <li><a href="#nested-random-effects" id="toc-nested-random-effects" class="nav-link" data-scroll-target="#nested-random-effects"><span class="header-section-number">4</span> Nested random effects</a></li>
+  <li><a href="#multilevel-models-complete-no-and-partial-pooling" id="toc-multilevel-models-complete-no-and-partial-pooling" class="nav-link" data-scroll-target="#multilevel-models-complete-no-and-partial-pooling"><span class="header-section-number">5</span> Multilevel models: complete, no, and partial pooling</a></li>
+  <li><a href="#adding-predictors-to-a-multilevel-model" id="toc-adding-predictors-to-a-multilevel-model" class="nav-link" data-scroll-target="#adding-predictors-to-a-multilevel-model"><span class="header-section-number">6</span> Adding predictors to a multilevel model</a></li>
+  <li><a href="#multilevel-logistic-regression" id="toc-multilevel-logistic-regression" class="nav-link" data-scroll-target="#multilevel-logistic-regression"><span class="header-section-number">7</span> Multilevel logistic regression</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">8</span> Further reading</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-multilevel-models-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="intro-multilevel-models-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="intro-multilevel-models-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-multilevel-models-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="intro-multilevel-models-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="intro-multilevel-models-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/intro-multilevel-models.html">Introduction to Multi-level Models</a></li></ol></nav>
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Introduction to Multi-level Models</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/intro-multilevel-models.html">Introduction to Multi-level Models</a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Introduction to Multi-level Models</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -1005,7 +912,7 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-10-07: 0:47:00 (UTC)</p>
+      <p class="date">Last modified: 2026-10-09: 20:13:26 (UTC)</p>
     </div>
   </div>
   
@@ -1014,54 +921,985 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
   
 
 
-</header>
-
-
-<section id="introduction-to-multi-level-models-for-correlated-data" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction to multi-level models for correlated data</h1>
+</header><!-- ::: {.content-hidden when-format="revealjs"} --><hr>
+<section id="configuring-r" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="configuring-r">Configuring R</h3>
+<p>Functions from these packages will be used throughout this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span> <span class="co"># check for conflicting function definitions</span></span>
+<span><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/rmarkdown">rmarkdown</a></span><span class="op">)</span> <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rapporter.github.io/pander/">pander</a></span><span class="op">)</span> <span class="co"># format tables for markdown</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co"># graphics</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span> <span class="co"># help with graphics</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span> <span class="co"># manipulate data</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span> <span class="co"># `tibble`s extend `data.frame`s</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span> <span class="co"># `%&gt;%` and other additional piping tools</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span> <span class="co"># import Stata files</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># format R output for markdown</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span> <span class="co"># Tools to help to create tidy data</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span> <span class="co"># interactive graphics</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">dobson</span><span class="op">)</span> <span class="co"># datasets from Dobson and Barnett 2018</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/">parameters</a></span><span class="op">)</span> <span class="co"># format model output tables for markdown</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span> <span class="co"># import Stata files</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.stefanom.io/latex2exp/">latex2exp</a></span><span class="op">)</span> <span class="co"># use LaTeX in R code (for figures and tables)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org">fs</a></span><span class="op">)</span> <span class="co"># filesystem path manipulations</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span> <span class="co"># survival analysis</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span> <span class="co"># survival analysis graphics</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jun-yan/KMsurv">KMsurv</a></span><span class="op">)</span> <span class="co"># datasets from Klein and Moeschberger</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/parameters/">parameters</a></span><span class="op">)</span> <span class="co"># format model output tables for</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/webshot2/">webshot2</a></span><span class="op">)</span> <span class="co"># convert interactive content to static for pdf</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span> <span class="co"># functions for categorical variables ("factors")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span> <span class="co"># functions for dealing with strings</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span> <span class="co"># functions for dealing with dates and times</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span> <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://larmarange.github.io/broom.helpers/">broom.helpers</a></span><span class="op">)</span> <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Here are some R settings I use in this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># delete any data that's already loaded into R</span></span>
+<span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflicts_prefer.html">conflicts_prefer</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">)</span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>      legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>      text <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>message <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">'digits'</span> <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/panderOptions.html">panderOptions</a></span><span class="op">(</span><span class="st">"big.mark"</span>, <span class="st">","</span><span class="op">)</span></span>
+<span><span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/panderOptions.html">panderOptions</a></span><span class="op">(</span><span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/panderOptions.html">panderOptions</a></span><span class="op">(</span><span class="st">"table.split.table"</span>, <span class="cn">Inf</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflicts_prefer.html">conflicts_prefer</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">)</span> <span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span><span class="va">legend_text_size</span> <span class="op">=</span> <span class="fl">9</span></span>
+<span><span class="va">run_graphs</span> <span class="op">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<!-- ::: -->
+<style>
+.quarto-figure-center > figure {
+text-align: center;
+}
+</style>
+<p>This chapter adapts <a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s May 25 – June 1 lectures from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a> <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+</section><section id="correlated-data" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> Correlated data</h1>
+<p>The models in earlier chapters assumed that the outcomes <span class="math inline">\(Y_1, \ldots, Y_n\)</span> were mutually independent given the covariates. Many epidemiologic studies collect data in <strong>clusters</strong>: repeated measurements on the same person, patients treated at the same hospital, or houses in the same county <span class="citation" data-cites="dobson4e">(<a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, chap. 11</a>)</span>. Observations in the same cluster tend to resemble one another more than observations in different clusters, so the independence assumption fails. Ignoring that correlation usually makes standard errors too small, because the data carry less information than the same number of independent observations would <span class="citation" data-cites="dobson4e">(<a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+<p>Two kinds of model term describe clusters. A <strong>fixed effect</strong> is a parameter for a specific group whose particular value we want to estimate, such as the effect of a specific treatment. A <strong>random effect</strong> treats the groups in the data as a sample from a larger population of groups, and models each group’s effect as a random variable drawn from a distribution; the parameters of interest are then the parameters of that distribution, especially its variance <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-fixed-vs-random" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Fixed versus random effects)</strong></span> &nbsp;</p>
+<ul>
+<li>In a trial comparing a new drug with a placebo, the treatment groups are the only two groups of interest, so treatment is a fixed effect.</li>
+<li>In a study that measures each of 20 patients several times, the 20 patients are a sample from the population of all patients, and we want conclusions that apply to patients beyond these 20, so patient is a random effect.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Random effects can be <strong>nested</strong> or <strong>crossed</strong>. Effects are nested when each lower-level group belongs to exactly one higher-level group, such as batches within laboratories. Effects are crossed when every level of one factor can appear with every level of the other, such as patients and raters when every rater scores every patient <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+<p>A model that contains both fixed and random effects is called a <strong>mixed model</strong>. The same ideas extend from linear models to logistic and Poisson regression <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+</section><section id="one-way-random-effects-models" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> One-way random-effects models</h1>
+<p>The simplest model with a random effect has one grouping factor and no covariates <span class="citation" data-cites="rocke2021epi204 dobson4e">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>; <a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-one-way-re" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (One-way random-effects model)</strong></span> Suppose we observe <span class="math inline">\(m\)</span> outcomes <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> in each of <span class="math inline">\(a\)</span> groups <span class="math inline">\(i = 1, \ldots, a\)</span>. The <strong>one-way random-effects model</strong> is <span id="eq-one-way-re"><span class="math display">\[
+Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
+\tag{1}\]</span></span> where:</p>
+<ul>
+<li>
+<span class="math inline">\(\mu\)</span> is a fixed overall mean;</li>
+<li>
+<span class="math inline">\(\alpha_1, \ldots, \alpha_a \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> are the <strong>random effects</strong> of the groups;</li>
+<li>
+<span class="math inline">\(\epsilon_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> are the within-group errors;</li>
+<li>the <span class="math inline">\(\alpha_i\)</span>s and the <span class="math inline">\(\epsilon_{ij}\)</span>s are mutually independent.</li>
+</ul>
+<p>The variances <span class="math inline">\(\sigma_\alpha^2\)</span> and <span class="math inline">\(\sigma^2\)</span> are called <strong>variance components</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-dyestuff" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (Batches of dyestuff)</strong></span> The <code>Dyestuff</code> data in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#ref-bates2015lme4" role="doc-biblioref">Bates et al. 2015</a>)</span> record the yield of dyestuff (in grams of standard color) from <span class="math inline">\(m = 5\)</span> preparations in each of <span class="math inline">\(a = 6\)</span> batches of an intermediate product. The batches are a sample of all the batches the process could produce, so a one-way random-effects model treats <span class="math inline">\(\alpha_i\)</span> as the deviation of batch <span class="math inline">\(i\)</span>’s mean yield from the overall mean <span class="math inline">\(\mu\)</span>.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Dyestuff</span>, <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Yield</span>, <span class="va">Batch</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    A    B    C    D    E    F </span></span>
+<span><span class="co">#&gt; 1505 1528 1564 1498 1600 1470</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The shared random effect <span class="math inline">\(\alpha_i\)</span> is what makes observations in the same group correlated.</p>
+<div class="callout callout-style-simple callout-lem no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-re-cov" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Moments of the one-way random-effects model)</strong></span> Under <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, for any group <span class="math inline">\(i\)</span> and observations <span class="math inline">\(j \neq k\)</span>:</p>
+<p><span id="eq-re-cov"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{} &amp;= \mu
+\\
+\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{} &amp;= \sigma_\alpha^2 + \sigma^2
+\\
+\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{} &amp;= \sigma_\alpha^2
+\end{aligned}
+\tag{2}\]</span></span></p>
+<p>and observations in different groups are independent.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-proof callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Proof</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cov">the definition of covariance</a>, <a href="https://morrison-lab.github.io/pds/variance-covariance.html#lem-cov-xx">the covariance of a variable with itself</a>, and linearity of expectation.</p>
+<p>Mean:</p>
+<p><span id="eq-re-cov-proof-1"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\mu + \alpha_i + \epsilon_{ij}\right]\mathclose{}
+&amp;&amp; \text{(definition of the model)}
+\\
+&amp;= \mu + \operatorname{E}\mathopen{}\left[\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \mu + 0 + 0
+&amp;&amp; \text{(both have mean zero)}
+\\
+&amp;= \mu
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\tag{3}\]</span></span></p>
+<p>Covariance, for <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> equal or not:</p>
+<p><span id="eq-re-cov-proof-2"><span class="math display">\[
+\begin{aligned}
+\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[(Y_{ij} - \mu)(Y_{ik} - \mu)\right]\mathclose{}
+&amp;&amp; \text{(definition of covariance)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[(\alpha_i + \epsilon_{ij})(\alpha_i + \epsilon_{ik})\right]\mathclose{}
+&amp;&amp; \text{(substitute the model)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[\alpha_i^2 + \alpha_i\epsilon_{ik} + \epsilon_{ij}\alpha_i + \epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(distribute)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[\alpha_i^2\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\alpha_i\epsilon_{ik}\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \sigma_\alpha^2 + \operatorname{E}\mathopen{}\left[\alpha_i\epsilon_{ik}\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{($\operatorname{E}\mathopen{}\left[\alpha_i\right]\mathclose{} = 0$, so $\operatorname{E}\mathopen{}\left[\alpha_i^2\right]\mathclose{} = \operatorname{Var}\mathopen{}\left(\alpha_i\right)\mathclose{}$)}
+\\
+&amp;= \sigma_\alpha^2 + 0 + 0 + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(independent, mean-zero factors)}
+\end{aligned}
+\tag{4}\]</span></span></p>
+<p>If <span class="math inline">\(j \neq k\)</span>, <span class="math inline">\(\epsilon_{ij}\)</span> and <span class="math inline">\(\epsilon_{ik}\)</span> are independent with mean zero, so <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{} = 0\)</span> and the covariance is <span class="math inline">\(\sigma_\alpha^2\)</span>. If <span class="math inline">\(j = k\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}^2\right]\mathclose{} = \sigma^2\)</span>, so the covariance of <span class="math inline">\(Y_{ij}\)</span> with itself, which is its variance, is <span class="math inline">\(\sigma_\alpha^2 + \sigma^2\)</span>.</p>
+<p>Observations in different groups <span class="math inline">\(i \neq i'\)</span> are functions of the disjoint sets of independent variables <span class="math inline">\(\{\alpha_i, \epsilon_{ij}\}\)</span> and <span class="math inline">\(\{\alpha_{i'}, \epsilon_{i'k}\}\)</span>, so they are independent.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-dyestuff-cov" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (Covariance between two dyestuff preparations)</strong></span> Suppose the batch-level variance in <a href="#exm-dyestuff" class="quarto-xref">Example&nbsp;2</a> is <span class="math inline">\(\sigma_\alpha^2 = 1764\)</span> and the within-batch variance is <span class="math inline">\(\sigma^2 = 2451\)</span>. Then by <a href="#thm-re-cov" class="quarto-xref">Theorem&nbsp;1</a> two preparations from the same batch would have covariance <span class="math inline">\(1764\)</span>, and each preparation would have variance <span class="math inline">\(1764 + 2451 = 4215\)</span>. Two preparations from different batches would have covariance <span class="math inline">\(0\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-icc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Intraclass correlation)</strong></span> Under <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, the <strong>intraclass correlation</strong> is the correlation between two observations <span class="math inline">\(j \neq k\)</span> in the same group:</p>
+<p><span id="eq-icc"><span class="math display">\[
+\rho \stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+\tag{5}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-cor no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-icc" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Intraclass correlation in terms of variance components)</strong></span> Under <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>,</p>
+<p><span id="eq-icc-vc"><span class="math display">\[
+\rho = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}.
+\tag{6}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-proof callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Proof</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#thm-re-cov" class="quarto-xref">Theorem&nbsp;1</a>.</p>
+<p><span id="eq-icc-vc-proof"><span class="math display">\[
+\begin{aligned}
+\rho
+&amp;\stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+&amp;&amp; \text{(definition of intraclass correlation)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+&amp;&amp; \text{(covariance from the moments theorem)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sqrt{(\sigma_\alpha^2 + \sigma^2)(\sigma_\alpha^2 + \sigma^2)}}
+&amp;&amp; \text{(variances from the moments theorem)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}
+&amp;&amp; \text{(square root of a square)}
+\end{aligned}
+\tag{7}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-dyestuff-icc" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Intraclass correlation for the dyestuff batches)</strong></span> With the variance components from <a href="#exm-dyestuff-cov" class="quarto-xref">Example&nbsp;3</a>, <a href="#cor-icc" class="quarto-xref">Corollary&nbsp;1</a> gives</p>
+<p><span id="eq-dyestuff-icc"><span class="math display">\[
+\begin{aligned}
+\rho
+&amp;= \frac{1764}{1764 + 2451}
+&amp;&amp; \text{(substitute the variance components)}
+\\
+&amp;= \frac{1764}{4215}
+&amp;&amp; \text{(add)}
+\\
+&amp;\approx 0.4185
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 0.42
+&amp;&amp; \text{(round to two decimal places)}
+\end{aligned}
+\tag{8}\]</span></span></p>
+<p>so about 42% of the variation in yield is between batches.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The intraclass correlation is also the fraction of the total variance <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{} = \sigma_\alpha^2 + \sigma^2\)</span> that comes from the random effect.</p>
+</section><section id="variance-components" class="level1" data-number="3"><h1 data-number="3">
+<span class="header-section-number">3</span> Variance components</h1>
+<p>One way to estimate the variance components uses the mean squares from a one-way analysis of variance (ANOVA) table <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>. Write <span class="math inline">\(\bar{Y}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m Y_{ij}\)</span> for the mean of group <span class="math inline">\(i\)</span> and <span class="math inline">\(\bar{Y}_{\cdot\cdot} \stackrel{\text{def}}{=}\frac{1}{a}\sum_{i=1}^a \bar{Y}_{i\cdot}\)</span> for the overall mean. The <strong>between-group mean square</strong> and the <strong>within-group mean square</strong> are</p>
+<p><span id="eq-mean-squares"><span class="math display">\[
+\begin{aligned}
+\text{MSA} &amp;\stackrel{\text{def}}{=}\frac{m}{a-1}\sum_{i=1}^a \mathopen{}\left(\bar{Y}_{i\cdot} - \bar{Y}_{\cdot\cdot}\right)\mathclose{}^2,
+\\
+\text{MSE} &amp;\stackrel{\text{def}}{=}\frac{1}{a(m-1)}\sum_{i=1}^a\sum_{j=1}^m \mathopen{}\left(Y_{ij} - \bar{Y}_{i\cdot}\right)\mathclose{}^2.
+\end{aligned}
+\tag{9}\]</span></span></p>
+<div class="callout callout-style-simple callout-lem no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-ems-one-way" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Expected mean squares in the one-way random-effects model)</strong></span> Under <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>:</p>
+<p><span id="eq-ems-one-way"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} &amp;= \sigma^2
+\\
+\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{} &amp;= m\sigma_\alpha^2 + \sigma^2
+\end{aligned}
+\tag{10}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-proof callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Proof</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses the fact that the <a href="https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-variance">sample variance</a> of independent, identically distributed observations is unbiased for their variance, <a href="https://morrison-lab.github.io/pds/expectation.html#thm-lie">the law of iterated expectations</a>, and <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom">the variance of a linear combination</a>.</p>
+<p><strong>Within groups.</strong> Given <span class="math inline">\(\alpha_i\)</span>, the observations <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> are independent with common variance <span class="math inline">\(\sigma^2\)</span>, so their sample variance <span class="math inline">\(s_i^2 \stackrel{\text{def}}{=}\frac{1}{m-1}\sum_{j=1}^m (Y_{ij} - \bar{Y}_{i\cdot})^2\)</span> satisfies <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2 \mid \alpha_i\right]\mathclose{} = \sigma^2\)</span>. By the law of iterated expectations, <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2\right]\mathclose{} = \sigma^2\)</span>. Then</p>
+<p><span id="eq-ems-mse-proof"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\frac{1}{a}\sum_{i=1}^a s_i^2\right]\mathclose{}
+&amp;&amp; \text{(MSE is the average of the } s_i^2\text{)}
+\\
+&amp;= \frac{1}{a}\sum_{i=1}^a \operatorname{E}\mathopen{}\left[s_i^2\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \frac{1}{a}\sum_{i=1}^a \sigma^2
+&amp;&amp; \text{(each } s_i^2 \text{ is unbiased)}
+\\
+&amp;= \sigma^2
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\tag{11}\]</span></span></p>
+<p><strong>Between groups.</strong> Each group mean is <span class="math inline">\(\bar{Y}_{i\cdot} = \mu + \alpha_i + \bar{\epsilon}_{i\cdot}\)</span>, where <span class="math inline">\(\bar{\epsilon}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m \epsilon_{ij}\)</span>. The group means are independent and identically distributed across groups, with</p>
+<p><span id="eq-ems-var-group-mean"><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
+&amp;= \operatorname{Var}\mathopen{}\left(\alpha_i\right)\mathclose{} + \operatorname{Var}\mathopen{}\left(\bar{\epsilon}_{i\cdot}\right)\mathclose{}
+&amp;&amp; \text{(variance of a sum of independent terms)}
+\\
+&amp;= \sigma_\alpha^2 + \frac{1}{m^2}\sum_{j=1}^m \operatorname{Var}\mathopen{}\left(\epsilon_{ij}\right)\mathclose{}
+&amp;&amp; \text{(variance of a linear combination)}
+\\
+&amp;= \sigma_\alpha^2 + \frac{\sigma^2}{m}
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\tag{12}\]</span></span></p>
+<p><span class="math inline">\(\text{MSA}\)</span> is <span class="math inline">\(m\)</span> times the sample variance of <span class="math inline">\(\bar{Y}_{1\cdot}, \ldots, \bar{Y}_{a\cdot}\)</span>, so</p>
+<p><span id="eq-ems-msa-proof"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{}
+&amp;= m \cdot \operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
+&amp;&amp; \text{(sample variance is unbiased)}
+\\
+&amp;= m\mathopen{}\left(\sigma_\alpha^2 + \frac{\sigma^2}{m}\right)\mathclose{}
+&amp;&amp; \text{(substitute)}
+\\
+&amp;= m\sigma_\alpha^2 + \sigma^2
+&amp;&amp; \text{(distribute)}
+\end{aligned}
+\tag{13}\]</span></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-cor no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-mom-vc" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Method-of-moments estimators of the variance components)</strong></span> Under <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, <span class="math inline">\(\hat{\sigma}^2 \stackrel{\text{def}}{=}\text{MSE}\)</span> and <span id="eq-mom-vc"><span class="math display">\[
+\hat{\sigma}_\alpha^2 \stackrel{\text{def}}{=}\frac{\text{MSA} - \text{MSE}}{m}
+\tag{14}\]</span></span> are unbiased estimators of <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma_\alpha^2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-proof callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Proof</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
+<p><span id="eq-mom-vc-unbiased"><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\hat{\sigma}_\alpha^2\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\frac{\text{MSA} - \text{MSE}}{m}\right]\mathclose{}
+&amp;&amp; \text{(definition of the estimator)}
+\\
+&amp;= \frac{\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{} - \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{}}{m}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \frac{m\sigma_\alpha^2 + \sigma^2 - \sigma^2}{m}
+&amp;&amp; \text{(expected mean squares)}
+\\
+&amp;= \frac{m\sigma_\alpha^2}{m}
+&amp;&amp; \text{(cancel } \sigma^2\text{)}
+\\
+&amp;= \sigma_\alpha^2
+&amp;&amp; \text{(cancel } m\text{)}
+\end{aligned}
+\tag{15}\]</span></span></p>
+<p><span class="math inline">\(\operatorname{E}\mathopen{}\left[\hat{\sigma}^2\right]\mathclose{} = \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} = \sigma^2\)</span> directly from <a href="#thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-dyestuff-vc" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Variance components for the dyestuff batches)</strong></span> The ANOVA table for <a href="#exm-dyestuff" class="quarto-xref">Example&nbsp;2</a> gives the mean squares:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Yield</span> <span class="op">~</span> <span class="va">Batch</span>, data <span class="op">=</span> <span class="va">Dyestuff</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"56357.5","3":"11271.50","4":"4.59827","5":"0.00439753","_rn_":"Batch"},{"1":"24","2":"58830.0","3":"2451.25","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>By <a href="#cor-mom-vc" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(\hat{\sigma}^2 = 2451.3\)</span> and <span id="eq-dyestuff-mom-vc"><span class="math display">\[
+\begin{aligned}
+\hat{\sigma}_\alpha^2
+&amp;= \frac{11271.5 - 2451.3}{5}
+&amp;&amp; \text{(substitute the mean squares and } m = 5\text{)}
+\\
+&amp;= \frac{8820.2}{5}
+&amp;&amp; \text{(subtract)}
+\\
+&amp;= 1764.04
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 1764.0
+&amp;&amp; \text{(round to one decimal place)}
+\end{aligned}
+\tag{16}\]</span></span></p>
+<p>The <code>lmer()</code> function in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#ref-bates2015lme4" role="doc-biblioref">Bates et al. 2015</a>)</span> fits the same model by restricted maximum likelihood (REML); <code>(1 | Batch)</code> requests a random intercept for each batch:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dyestuff_lmer</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">Yield</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Batch</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">Dyestuff</span><span class="op">)</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">dyestuff_lmer</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Batch","2":"(Intercept)","3":"NA","4":"1764.05","5":"42.0006"},{"1":"Residual","2":"NA","3":"NA","4":"2451.25","5":"49.5101"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>In this balanced design with a positive moment estimate, the REML estimates match the method-of-moments estimates.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The method-of-moments estimate <span class="math inline">\(\hat{\sigma}_\alpha^2\)</span> is negative whenever <span class="math inline">\(\text{MSA} &lt; \text{MSE}\)</span>, which is impossible for a variance; likelihood-based methods such as REML constrain the estimate to be nonnegative, and they also handle unbalanced designs <span class="citation" data-cites="rocke2021epi204 bates2015lme4">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>; <a href="#ref-bates2015lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>.</p>
+</section><section id="nested-random-effects" class="level1" data-number="4"><h1 data-number="4">
+<span class="header-section-number">4</span> Nested random effects</h1>
+<p>A model can have more than one level of random effects. When each lower-level group belongs to exactly one higher-level group, the random effects are <strong>nested</strong> <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-nested-re" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Two-level nested random-effects model)</strong></span> Suppose <span class="math inline">\(a\)</span> laboratories each analyze <span class="math inline">\(b\)</span> batches, with <span class="math inline">\(r\)</span> replicate measurements per batch. The <strong>two-level nested random-effects model</strong> is</p>
+<p><span id="eq-nested-re"><span class="math display">\[
+Y_{ijk} \stackrel{\text{def}}{=}\mu + L_i + B_{ij} + \epsilon_{ijk},
+\tag{17}\]</span></span></p>
+<p>where <span class="math inline">\(L_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_L^2\right)\mathclose{}\)</span> is the effect of laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(B_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_B^2\right)\mathclose{}\)</span> is the effect of batch <span class="math inline">\(j\)</span> within laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(\epsilon_{ijk} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> is the replicate error, and all three sets of random variables are mutually independent.</p>
+</div>
+</div>
+</div>
+</div>
+<p>By the same argument as <a href="#thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>, the expected mean squares of the nested ANOVA are <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_L\right]\mathclose{} = br\sigma_L^2 + r\sigma_B^2 + \sigma^2\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_B\right]\mathclose{} = r\sigma_B^2 + \sigma^2\)</span>, and <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_E\right]\mathclose{} = \sigma^2\)</span> <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>. So the correct <span class="math inline">\(F\)</span> test for laboratories divides <span class="math inline">\(\text{MS}_L\)</span> by <span class="math inline">\(\text{MS}_B\)</span>, not by <span class="math inline">\(\text{MS}_E\)</span>.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-coop" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (A cooperative trial)</strong></span> The <code>coop</code> data in the <code>MASS</code> package <span class="citation" data-cites="venables2002modern">(<a href="#ref-venables2002modern" role="doc-biblioref">Venables and Ripley 2002</a>)</span> come from a cooperative trial in which <span class="math inline">\(a = 6\)</span> laboratories each analyzed <span class="math inline">\(b = 3\)</span> batches, a month apart, with <span class="math inline">\(r = 2\)</span> replicates per batch. We use the measurements of specimen <code>S1</code>:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coop2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/coop.html">coop</a></span>, <span class="va">Spc</span> <span class="op">==</span> <span class="st">"S1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Conc</span> <span class="op">~</span> <span class="va">Lab</span> <span class="op">+</span> <span class="va">Lab</span><span class="op">:</span><span class="va">Bat</span>, data <span class="op">=</span> <span class="va">coop2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"1.89021","3":"0.37804278","4":"60.0333","5":"1.35411e-10","_rn_":"Lab"},{"1":"12","2":"0.20440","3":"0.01703333","4":"2.7049","5":"2.76756e-02","_rn_":"Lab:Bat"},{"1":"18","2":"0.11335","3":"0.00629722","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The <code>Lab:Bat</code> term is the batch-within-laboratory effect. The <span class="math inline">\(F\)</span> statistic that <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> prints for <code>Lab</code> uses <span class="math inline">\(\text{MS}_E\)</span> as its denominator, which is wrong here; the correct statistic is <span class="math inline">\(F = 0.37804 / 0.01703 \approx 22.2\)</span> on <span class="math inline">\((5, 12)\)</span> degrees of freedom.</p>
+<p>The equivalent mixed model has a random intercept for each laboratory and for each batch within each laboratory:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coop_lmer</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">Conc</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Lab</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Lab</span><span class="op">:</span><span class="va">Bat</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">coop2</span><span class="op">)</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">coop_lmer</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Lab:Bat","2":"(Intercept)","3":"NA","4":"0.00536807","5":"0.0732671"},{"1":"Lab","2":"(Intercept)","3":"NA","4":"0.06016813","5":"0.2452919"},{"1":"Residual","2":"NA","3":"NA","4":"0.00629722","5":"0.0793550"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The estimated variance components are <span class="math inline">\(\hat{\sigma}^2 \approx 0.0063\)</span> (same-day replicates), <span class="math inline">\(\hat{\sigma}_B^2 \approx 0.0054\)</span> (batches a month apart), and <span class="math inline">\(\hat{\sigma}_L^2 \approx 0.0602\)</span> (laboratories). Most of the variation in the measurements comes from differences between laboratories.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Testing whether a variance component is zero is harder than testing a fixed effect, because <span class="math inline">\(\sigma^2 = 0\)</span> lies on the boundary of the parameter space: a variance cannot be negative, so the usual large-sample distribution of the likelihood ratio statistic does not apply <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+</section><section id="multilevel-models-complete-no-and-partial-pooling" class="level1" data-number="5"><h1 data-number="5">
+<span class="header-section-number">5</span> Multilevel models: complete, no, and partial pooling</h1>
+<p>A <strong>multilevel model</strong> is a regression model whose coefficients are allowed to vary by group, with the group-level coefficients themselves given a model <span class="citation" data-cites="gelman2006data">(<a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill 2007, chap. 12</a>)</span>. The random-effects models in <a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a> and <a href="#def-nested-re" class="quarto-xref">Definition&nbsp;3</a> are the simplest multilevel models.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-radon-data" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7 (Radon in Minnesota homes)</strong></span> <span class="citation" data-cites="gelman2006data">Gelman and Hill (<a href="#ref-gelman2006data" role="doc-biblioref">2007, chap. 12</a>)</span> analyze measurements of indoor radon, a radioactive gas that can cause lung cancer, from 919 houses in 85 Minnesota counties. We use the copy of these data distributed with the <code>rstanarm</code> R package <span class="citation" data-cites="goodrich2024rstanarm">(<a href="#ref-goodrich2024rstanarm" role="doc-biblioref">Goodrich et al. 2024</a>)</span>:</p>
+<ul>
+<li>
+<code>log_radon</code>: natural log of the radon measurement in the house;</li>
+<li>
+<code>floor</code>: <code>0</code> if the measurement was taken in the basement, <code>1</code> if on the first floor;</li>
+<li>
+<code>county</code>: the county the house is in;</li>
+<li>
+<code>log_uranium</code>: natural log of the county-level soil uranium measurement.</li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"inst/extdata/radon.rda"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">radon_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">radon</span><span class="op">$</span><span class="va">county</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">radon_n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span><span class="co">#&gt;     1.0     3.0     5.0    10.8    10.0   116.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The number of houses per county varies from 1 to 116.</p>
+</div>
+</div>
+</div>
+</div>
+<p>There are three ways to estimate the mean log radon level in each county <span class="citation" data-cites="gelman2006data">(<a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill 2007, chap. 12</a>)</span>:</p>
+<ul>
+<li>
+<strong>Complete pooling</strong> ignores the counties and estimates every county’s mean by the overall mean.</li>
+<li>
+<strong>No pooling</strong> estimates each county’s mean by its own sample mean <span class="math inline">\(\bar{y}_j\)</span>, which is very noisy for counties with only one or two houses.</li>
+<li>
+<strong>Partial pooling</strong> fits the random-intercept model <span class="math inline">\(Y_{ij} = \mu + \alpha_j + \epsilon_{ij}\)</span> for house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> (<a href="#def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, with the roles of the indices swapped and unequal group sizes <span class="math inline">\(n_j\)</span>) and estimates each county’s mean as a compromise between <span class="math inline">\(\bar{y}_j\)</span> and <span class="math inline">\(\mu\)</span>.</li>
+</ul>
+<div class="callout callout-style-simple callout-lem no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-partial-pooling" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Partial-pooling estimate of a group mean)</strong></span> In the random-intercept model with known <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma_\alpha^2\)</span>, and <span class="math inline">\(\sigma^2\)</span>, the predicted mean of group <span class="math inline">\(j\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\mu + \alpha_j \mid \text{data}\right]\mathclose{}\)</span>, is</p>
+<p><span id="eq-partial-pooling"><span class="math display">\[
+\hat{\mu}_j = w_j\bar{y}_j + (1 - w_j)\mu,
+\qquad
+w_j \stackrel{\text{def}}{=}\frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2},
+\tag{18}\]</span></span></p>
+<p>a weighted average of the group’s sample mean and the overall mean, with weights proportional to their precisions <span class="citation" data-cites="gelman2006data">(<a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill 2007, chap. 12</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The proof of <a href="#thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a> uses the conditional distribution of one normal variable given another, which is beyond the scope of this chapter. The weight <span class="math inline">\(w_j\)</span> increases with the group size <span class="math inline">\(n_j\)</span>: large groups keep estimates close to their own sample means, and small groups are pulled, or <strong>shrunk</strong>, toward the overall mean.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-radon-shrinkage" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8 (Shrinkage of county mean radon levels)</strong></span> We fit the random-intercept model to the radon data from <a href="#exm-radon-data" class="quarto-xref">Example&nbsp;7</a>:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">radon_lmer0</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">log_radon</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">county</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">radon</span><span class="op">)</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"county","2":"(Intercept)","3":"NA","4":"0.0886057","5":"0.297667"},{"1":"Residual","2":"NA","3":"NA","4":"0.5868626","5":"0.766070"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fixef</span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span></span>
+<span><span class="co">#&gt; (Intercept) </span></span>
+<span><span class="co">#&gt;     1.34983</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The estimates are <span class="math inline">\(\hat{\mu }\approx 1.350\)</span>, <span class="math inline">\(\hat{\sigma}_\alpha^2 \approx 0.0886\)</span>, and <span class="math inline">\(\hat{\sigma}^2 \approx 0.587\)</span>. Aitkin County has <span class="math inline">\(n_j = 4\)</span> houses with sample mean <span class="math inline">\(\bar{y}_j \approx 0.715\)</span>. Plugging these estimates into <a href="#thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a>:</p>
+<p><span id="eq-radon-shrinkage"><span class="math display">\[
+\begin{aligned}
+w_j
+&amp;= \frac{4 / 0.587}{4 / 0.587 + 1 / 0.0886}
+&amp;&amp; \text{(substitute the estimates)}
+\\
+&amp;\approx \frac{6.81}{6.81 + 11.29}
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 0.377
+&amp;&amp; \text{(divide)}
+\\
+\hat{\mu}_j
+&amp;\approx 0.377 \times 0.715 + 0.623 \times 1.350
+&amp;&amp; \text{(substitute into the weighted average)}
+\\
+&amp;\approx 1.111
+&amp;&amp; \text{(multiply and add)}
+\end{aligned}
+\tag{19}\]</span></span></p>
+<p>Aitkin County’s estimate moves most of the way from its own mean toward the overall mean. In contrast, Hennepin County has <span class="math inline">\(n_j = 105\)</span> houses, so its weight is about 0.94 and its estimate barely moves. The same calculation for every county reproduces the estimates that <code>lme4</code> reports:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">radon_vc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">vcov</span></span>
+<span><span class="va">radon_w</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">radon_n</span> <span class="op">/</span> <span class="va">radon_vc</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span></span>
+<span>  <span class="op">(</span><span class="va">radon_n</span> <span class="op">/</span> <span class="va">radon_vc</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">radon_vc</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">radon_ybar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">radon</span><span class="op">$</span><span class="va">log_radon</span>, <span class="va">radon</span><span class="op">$</span><span class="va">county</span>, <span class="va">mean</span><span class="op">)</span></span>
+<span><span class="va">radon_pp</span> <span class="op">&lt;-</span> <span class="va">radon_w</span> <span class="op">*</span> <span class="va">radon_ybar</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">radon_w</span><span class="op">)</span> <span class="op">*</span> <span class="fu">fixef</span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">radon_pp</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span><span class="op">$</span><span class="va">county</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3.77476e-15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">radon_n</span><span class="op">)</span>, <span class="va">radon_ybar</span>,</span>
+<span>  log <span class="op">=</span> <span class="st">"x"</span>, pch <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Houses sampled in county (log scale)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Estimated county mean log radon"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">radon_n</span><span class="op">)</span>, <span class="va">radon_pp</span>, pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu">fixef</span><span class="op">(</span><span class="va">radon_lmer0</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"topright"</span>,</span>
+<span>  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"No pooling"</span>, <span class="st">"Partial pooling"</span><span class="op">)</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">19</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-radon-shrinkage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate.
+</figcaption><div aria-describedby="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="intro-multilevel-models_files/figure-html/radon-shrinkage-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate."><img src="intro-multilevel-models_files/figure-html/radon-shrinkage-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section><section id="adding-predictors-to-a-multilevel-model" class="level1" data-number="6"><h1 data-number="6">
+<span class="header-section-number">6</span> Adding predictors to a multilevel model</h1>
+<p>Covariates enter a multilevel model as fixed effects, and their coefficients can also vary by group <span class="citation" data-cites="gelman2006data">(<a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill 2007, chap. 12</a>)</span>. For house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> with floor indicator <span class="math inline">\(x_{ij}\)</span>:</p>
+<ul>
+<li>the <strong>varying-intercept</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + \beta_1 x_{ij} + \epsilon_{ij}\)</span>;</li>
+<li>the <strong>varying-intercept, varying-slope</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + (\beta_1 + \gamma_j) x_{ij} + \epsilon_{ij}\)</span>, where each county’s pair <span class="math inline">\((\alpha_j, \gamma_j)\)</span> is bivariate normal with mean zero.</li>
+</ul>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-radon-floor" class="theorem example">
+<p><span class="theorem-title"><strong>Example 9 (Radon by floor of measurement)</strong></span> &nbsp;</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">radon_lmer1</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">log_radon</span> <span class="op">~</span> <span class="va">floor</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">county</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">radon</span><span class="op">)</span></span>
+<span><span class="va">radon_lmer2</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">log_radon</span> <span class="op">~</span> <span class="va">floor</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">floor</span> <span class="op">|</span> <span class="va">county</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">radon</span><span class="op">)</span></span>
+<span><span class="fu">fixef</span><span class="op">(</span><span class="va">radon_lmer1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; (Intercept)       floor </span></span>
+<span><span class="co">#&gt;    1.492393   -0.662889</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">radon_lmer2</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  Groups   Name        Std.Dev. Corr  </span></span>
+<span><span class="co">#&gt;  county   (Intercept) 0.3371         </span></span>
+<span><span class="co">#&gt;           floor       0.3285   -0.37 </span></span>
+<span><span class="co">#&gt;  Residual             0.7168</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>In the varying-intercept model, measurements on the first floor average about 0.66 lower on the log scale than basement measurements in the same county, a ratio of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{(\right\}\mathclose{}-0.66) \approx 0.52\)</span>. The varying-slope model lets that difference vary by county.</p>
+<p>To compare the two models, <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> refits both by maximum likelihood and computes a likelihood ratio test:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">radon_lmer1</span>, <span class="va">radon_lmer2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["-2*log(L)"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"4","2":"2097.71","3":"2117.00","4":"-1044.85","5":"2089.71","6":"NA","7":"NA","8":"NA","_rn_":"radon_lmer1"},{"1":"6","2":"2099.04","3":"2127.98","4":"-1043.52","5":"2087.04","6":"2.66412","7":"2","8":"0.263933","_rn_":"radon_lmer2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The varying-slope model adds two parameters (the slope variance and its correlation with the intercept), and the likelihood ratio test gives <span class="math inline">\(p \approx 0.26\)</span>. Because the null value of the slope variance, zero, is on the boundary of the parameter space, this <span class="math inline">\(p\)</span>-value is conservative <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>; AIC and BIC also favor the simpler model.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-radon-uranium" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10 (A county-level predictor)</strong></span> Soil uranium is measured once per county, so it is a <strong>group-level predictor</strong>. Adding it to the varying-intercept model:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">radon_lmer3</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span></span>
+<span>  <span class="va">log_radon</span> <span class="op">~</span> <span class="va">floor</span> <span class="op">+</span> <span class="va">log_uranium</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">county</span><span class="op">)</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">radon</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">fixef</span><span class="op">(</span><span class="va">radon_lmer3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; (Intercept)       floor log_uranium </span></span>
+<span><span class="co">#&gt;    1.496157   -0.638778    0.697499</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">radon_lmer3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"county","2":"(Intercept)","3":"NA","4":"0.0218053","5":"0.147666"},{"1":"Residual","2":"NA","3":"NA","4":"0.5306507","5":"0.728458"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The estimated between-county variance falls from about 0.099 without uranium to about 0.022 with it, while the within-county variance barely changes: county uranium explains most of the differences between counties.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="multilevel-logistic-regression" class="level1" data-number="7"><h1 data-number="7">
+<span class="header-section-number">7</span> Multilevel logistic regression</h1>
+<p>Random effects can be added to any generalized linear model. A <strong>generalized linear mixed model</strong> (GLMM) adds random effects to the linear predictor, so for a binary outcome with random intercepts,</p>
+<p><span id="eq-glmm"><span class="math display">\[
+\operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mathclose{} = {\tilde{x}_{ij}}^{\top}\tilde{\beta}+ \alpha_j,
+\qquad
+\alpha_j \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}
+\tag{20}\]</span></span></p>
+<p><span class="citation" data-cites="dobson4e gelman2006data">(<a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, chap. 11</a>; <a href="#ref-gelman2006data" role="doc-biblioref">Gelman and Hill 2007, chap. 14</a>)</span>. Each group’s odds are multiplied by <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\alpha_j\right\}\mathclose{}\)</span>, so about 95% of groups have odds within a factor of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\pm 2\sigma_\alpha\right\}\mathclose{}\)</span> of the odds for a typical group <span class="citation" data-cites="rocke2021epi204">(<a href="#ref-rocke2021epi204" role="doc-biblioref">Rocke 2021</a>)</span>.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-cbpp" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11 (Contagious bovine pleuropneumonia)</strong></span> The <code>cbpp</code> data in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#ref-bates2015lme4" role="doc-biblioref">Bates et al. 2015</a>)</span> record the number of new cases of contagious bovine pleuropneumonia in 15 herds of zebu cattle in Ethiopia, each observed in up to four periods. The herds are a sample of all herds, so we model herd as a random effect and period as a fixed effect:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cbpp_glmer</span> <span class="op">&lt;-</span> <span class="fu">glmer</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">incidence</span>, <span class="va">size</span> <span class="op">-</span> <span class="va">incidence</span><span class="op">)</span> <span class="op">~</span> <span class="va">period</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">herd</span><span class="op">)</span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">cbpp</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">cbpp_glmer</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span><span class="co">#&gt;              Estimate Std. Error  z value    Pr(&gt;|z|)</span></span>
+<span><span class="co">#&gt; (Intercept) -1.398343   0.231214 -6.04783 1.46810e-09</span></span>
+<span><span class="co">#&gt; period2     -0.991925   0.303151 -3.27205 1.06769e-03</span></span>
+<span><span class="co">#&gt; period3     -1.128216   0.322830 -3.49477 4.74473e-04</span></span>
+<span><span class="co">#&gt; period4     -1.579745   0.422049 -3.74304 1.81808e-04</span></span>
+<span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">cbpp_glmer</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  Groups Name        Std.Dev.</span></span>
+<span><span class="co">#&gt;  herd   (Intercept) 0.6421</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The estimated herd standard deviation is <span class="math inline">\(\hat{\sigma}_\alpha \approx 0.642\)</span>, so about 95% of herds have odds of a new case between <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-2 \times 0.642\right\}\mathclose{} \approx 0.28\)</span> and <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{2 \times 0.642\right\}\mathclose{} \approx 3.6\)</span> times those of a typical herd. Holding herd fixed, the odds of a new case in period 4 are <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-1.58\right\}\mathclose{} \approx 0.21\)</span> times the odds in period 1.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The fixed-effect coefficients in a GLMM are <strong>conditional</strong> on the random effect: they compare odds within the same group. Because the logit link is nonlinear, these coefficients are not the same as population-averaged odds ratios <span class="citation" data-cites="dobson4e">(<a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+</section><section id="further-reading" class="level1" data-number="8"><h1 data-number="8">
+<span class="header-section-number">8</span> Further reading</h1>
 <p>For more, see:</p>
 <ul>
-<li><a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s materials from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a>
+<li>
+<a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s materials from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a>
 <ul>
 <li>May 25 - June 1 lectures</li>
-</ul></li>
+</ul>
+</li>
 <li>Other UC Davis courses:
 <ul>
-<li><a href="https://catalog.ucdavis.edu/search/?q=EVE+225">EVE 225</a>: “Linear Mixed Modeling in Ecology &amp; Evolution”
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=EVE+225">EVE 225</a>: “Linear Mixed Modeling in Ecology &amp; Evolution”
 <ul>
-<li>usually taught every other winter or spring by <a href="https://eve.ucdavis.edu/people/kate-laskowski">Kate Laskowski</a></li>
-<li>materials, including syllabus and lecture videos: <a href="https://laskowskilab.faculty.ucdavis.edu/teaching-2/" class="uri">https://laskowskilab.faculty.ucdavis.edu/teaching-2/</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?P=BST%20224">STA/BST 224</a>: “Analysis of Longitudinal Data”
+<li>usually taught every other winter or spring by <a href="https://eve.ucdavis.edu/people/kate-laskowski">Kate Laskowski</a>
+</li>
+<li>materials, including syllabus and lecture videos: <a href="https://laskowskilab.faculty.ucdavis.edu/teaching-2/" class="uri">https://laskowskilab.faculty.ucdavis.edu/teaching-2/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?P=BST%20224">STA/BST 224</a>: “Analysis of Longitudinal Data”
 <ul>
-<li>usually taught every spring by <a href="https://shuaichen.weebly.com/">Shuai Chen</a></li>
+<li>usually taught every spring by <a href="https://shuaichen.weebly.com/">Shuai Chen</a>
+</li>
 <li>should be accessible after completing Epi 204</li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?P=EPI+226">EPI 226</a> “Methods for Longitudinal &amp; Repeated Measurement Data”
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?P=EPI+226">EPI 226</a> “Methods for Longitudinal &amp; Repeated Measurement Data”
 <ul>
-<li>usually taught by <a href="https://biostat.ucdavis.edu/people/heejung-bang">Heejung Bang</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PSC+205D">PSC 205D</a> “Multilevel Models”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PSC+205G">PSC 205G</a> “Applied Longitudinal Data Analysis”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=STA+101">STA 101</a> “Advanced Applied Statistics for the Biological Sciences”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=STA+207">STA 207</a> “Statistical Methods for Research II”</li>
-<li><a href="https://www.stat.ucdavis.edu/~jiang/sta232b.html">STA 232B</a> “Applied Statistics II”
+<li>usually taught by <a href="https://biostat.ucdavis.edu/people/heejung-bang">Heejung Bang</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PSC+205D">PSC 205D</a> “Multilevel Models”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PSC+205G">PSC 205G</a> “Applied Longitudinal Data Analysis”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=STA+101">STA 101</a> “Advanced Applied Statistics for the Biological Sciences”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=STA+207">STA 207</a> “Statistical Methods for Research II”</li>
+<li>
+<a href="https://www.stat.ucdavis.edu/~jiang/sta232b.html">STA 232B</a> “Applied Statistics II”
 <ul>
-<li>usually taught every winter by <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PLS+207">PLS 207</a>: “Applied Statistical Modeling for the Environmental Sciences”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=EDU+236">EDU 236</a>: “Application of Hierarchical Linear Models in Education Research”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=HDE+205">HDE 205</a>: “Longitudinal Data Analysis”</li>
-</ul></li>
+<li>usually taught every winter by <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PLS+207">PLS 207</a>: “Applied Statistical Modeling for the Environmental Sciences”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=EDU+236">EDU 236</a>: “Application of Hierarchical Linear Models in Education Research”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=HDE+205">HDE 205</a>: “Longitudinal Data Analysis”</li>
+</ul>
+</li>
 <li>Books:
 <ul>
-<li><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018</a>)</span> <a href="https://www.taylorfrancis.com/chapters/mono/10.1201/9781315182780-11/clustered-longitudinal-data-annette-dobson-adrian-barnett?context=ubx&amp;refId=95f6c50e-093a-4488-a042-92a9f151a4b5">Chapter 11</a></li>
-<li><span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#ref-vittinghoff2e" role="doc-biblioref">2012</a>)</span> <a href="https://link.springer.com/chapter/10.1007/978-1-4614-1353-0_7">Chapter 7</a></li>
+<li>
+<span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018</a>)</span> <a href="https://www.taylorfrancis.com/chapters/mono/10.1201/9781315182780-11/clustered-longitudinal-data-annette-dobson-adrian-barnett?context=ubx&amp;refId=95f6c50e-093a-4488-a042-92a9f151a4b5">Chapter 11</a>
+</li>
+<li>
+<span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#ref-vittinghoff2e" role="doc-biblioref">2012</a>)</span> <a href="https://link.springer.com/chapter/10.1007/978-1-4614-1353-0_7">Chapter 7</a>
+</li>
 <li><span class="citation" data-cites="gelman2006data">Gelman and Hill (<a href="#ref-gelman2006data" role="doc-biblioref">2007</a>)</span></li>
-<li><span class="citation" data-cites="jiming2021">Jiang and Nguyen (<a href="#ref-jiming2021" role="doc-biblioref">2021</a>)</span>
+<li>
+<span class="citation" data-cites="jiming2021">Jiang and Nguyen (<a href="#ref-jiming2021" role="doc-biblioref">2021</a>)</span>
 <ul>
-<li>by UC Davis Statistics Professor and GGE faculty member <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a></li>
-</ul></li>
+<li>by UC Davis Statistics Professor and GGE faculty member <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a>
+</li>
+</ul>
+</li>
 <li><span class="citation" data-cites="faraway2016extending">Faraway (<a href="#ref-faraway2016extending" role="doc-biblioref">2016</a>)</span></li>
 <li><span class="citation" data-cites="mcculloch2008generalized">McCulloch et al. (<a href="#ref-mcculloch2008generalized" role="doc-biblioref">2008</a>)</span></li>
 <li><span class="citation" data-cites="hedeker2006">Hedeker and Gibbons (<a href="#ref-hedeker2006" role="doc-biblioref">2006</a>)</span></li>
@@ -1074,16 +1912,19 @@ div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.cal
 <li><span class="citation" data-cites="congdon2020">Congdon (<a href="#ref-congdon2020" role="doc-biblioref">2020</a>)</span></li>
 <li><span class="citation" data-cites="molenberghs2005">Molenberghs and Verbeke (<a href="#ref-molenberghs2005" role="doc-biblioref">2005</a>)</span></li>
 <li><span class="citation" data-cites="VerbekeGeert2000LMMf">Verbeke and Molenberghs (<a href="#ref-VerbekeGeert2000LMMf" role="doc-biblioref">2000</a>)</span></li>
-<li><span class="citation" data-cites="jewell2016analysis">Jewell and Hubbard (<a href="#ref-jewell2016analysis" role="doc-biblioref">2016</a>)</span>
+<li>
+<span class="citation" data-cites="jewell2016analysis">Jewell and Hubbard (<a href="#ref-jewell2016analysis" role="doc-biblioref">2016</a>)</span>
 <ul>
 <li>by UC Berkeley professors</li>
-</ul></li>
-</ul></li>
 </ul>
-</section>
-<section id="references" class="level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+</li>
+</ul>
+</li>
+</ul></section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bates2015lme4" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
 <div id="ref-congdon2020" class="csl-entry" role="listitem">
 Congdon, Peter D. 2020. <em>Bayesian Hierarchical Models: With Applications Using <span>R</span>, Second Edition</em>. 2nd edition. CRC Press.
 </div>
@@ -1108,6 +1949,9 @@ Gałecki, Andrzej T., and Tomasz. Burzykowski. 2013. <em>Linear Mixed-Effects Mo
 <div id="ref-gelman2006data" class="csl-entry" role="listitem">
 Gelman, Andrew, and Jennifer Hill. 2007. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Analytical Methods for Social Research. Cambridge University Press.
 </div>
+<div id="ref-goodrich2024rstanarm" class="csl-entry" role="listitem">
+Goodrich, Ben, Jonah Gabry, Imad Ali, and Sam Brilleman. 2024. <em><span class="nocase">rstanarm</span>: <span>Bayesian</span> Applied Regression Modeling via <span>Stan</span></em>. <a href="https://mc-stan.org/rstanarm/">https://mc-stan.org/rstanarm/</a>.
+</div>
 <div id="ref-hedeker2006" class="csl-entry" role="listitem">
 Hedeker, Donald R., and Robert D. Gibbons. 2006. <em>Longitudinal Data Analysis</em>. Wiley Series in Probability and Statistics. Wiley-Interscience.
 </div>
@@ -1122,6 +1966,12 @@ McCulloch, Charles E, Searle Shayle R, and John M Neuhaus. 2008. <em>Generalized
 </div>
 <div id="ref-molenberghs2005" class="csl-entry" role="listitem">
 Molenberghs, Geert., and Geert. Verbeke. 2005. <em>Models for Discrete Longitudinal Data</em>. Springer Series in Statistics. Springer Science+Business Media, Inc. <a href="https://doi.org/10.1007/0-387-28980-1">https://doi.org/10.1007/0-387-28980-1</a>.
+</div>
+<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
+Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
+</div>
+<div id="ref-venables2002modern" class="csl-entry" role="listitem">
+Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with <span>S</span></em>. 4th ed. Springer. <a href="https://doi.org/10.1007/978-0-387-21706-2">https://doi.org/10.1007/978-0-387-21706-2</a>.
 </div>
 <div id="ref-VerbekeGeert2000LMMf" class="csl-entry" role="listitem">
 Verbeke, Geert, and Geert Molenberghs. 2000. <em>Linear Mixed Models for Longitudinal Data</em>. 1st ed. Springer Series in Statistics. SpringerLink (Online service); Springer. <a href="https://doi.org/10.1007/978-1-4419-0300-6">https://doi.org/10.1007/978-1-4419-0300-6</a>.
@@ -1391,12 +2241,7 @@ window.addEventListener("load", function () {
   revealEquationHashTarget();
 });
 window.addEventListener("hashchange", revealEquationHashTarget);
-</script>
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
-<script>
+</script></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script>
   // Mobile within-chapter table of contents.
   //
   // Quarto hides the right "On this page" TOC below its `md` breakpoint
@@ -1547,8 +2392,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       buildMobileToc();
     }
   })();
-</script>
-<script id="quarto-html-after-body" type="application/javascript">
+</script><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2013,9 +2857,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/predictor-selection.html" class="pagination-link" aria-label="Predictor Selection">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Predictor Selection</span>
       </a>          
@@ -2026,91 +2868,80 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Introduction to Multi-level Models"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html: default</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  revealjs:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-slides.html</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-handout.pdf</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  docx:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-handout.docx</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction to multi-level models for correlated data</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>For more, see:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="co">[</span><span class="ot">David Rocke</span><span class="co">](https://dmrocke.ucdavis.edu/)</span>'s materials from the </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">2021 edition of this course</span><span class="co">]</span>(</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html) </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>May 25 - June 1 lectures</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Other UC Davis courses:</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">EVE 225</span><span class="co">](https://catalog.ucdavis.edu/search/?q=EVE+225)</span>:</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>"Linear Mixed Modeling in Ecology &amp; Evolution"</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>usually taught every other winter or spring </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>     by <span class="co">[</span><span class="ot">Kate Laskowski</span><span class="co">](https://eve.ucdavis.edu/people/kate-laskowski)</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>materials, including syllabus and lecture videos: </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>     <span class="ot">&lt;https://laskowskilab.faculty.ucdavis.edu/teaching-2/&gt;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">STA/BST 224</span><span class="co">](https://catalog.ucdavis.edu/search/?P=BST%20224)</span>:</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  "Analysis of Longitudinal Data"</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>usually taught every spring by <span class="co">[</span><span class="ot">Shuai Chen</span><span class="co">](https://shuaichen.weebly.com/)</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>should be accessible after completing Epi 204</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">EPI 226</span><span class="co">](https://catalog.ucdavis.edu/search/?P=EPI+226)</span> "Methods for Longitudinal &amp; Repeated Measurement Data"</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>usually taught by <span class="co">[</span><span class="ot">Heejung Bang</span><span class="co">](https://biostat.ucdavis.edu/people/heejung-bang)</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">PSC 205D</span><span class="co">](https://catalog.ucdavis.edu/search/?q=PSC+205D)</span> "Multilevel Models"</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">PSC 205G</span><span class="co">](https://catalog.ucdavis.edu/search/?q=PSC+205G)</span> "Applied Longitudinal Data Analysis"</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">STA 101</span><span class="co">](https://catalog.ucdavis.edu/search/?q=STA+101)</span> "Advanced Applied Statistics for the Biological Sciences"</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">STA 207</span><span class="co">](https://catalog.ucdavis.edu/search/?q=STA+207)</span> "Statistical Methods for Research II"</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">STA 232B</span><span class="co">](https://www.stat.ucdavis.edu/~jiang/sta232b.html)</span> "Applied Statistics II"</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>usually taught every winter by <span class="co">[</span><span class="ot">Jiming Jiang</span><span class="co">](https://www.stat.ucdavis.edu/~jiang/)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">PLS 207</span><span class="co">](https://catalog.ucdavis.edu/search/?q=PLS+207)</span>: </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>"Applied Statistical Modeling for the Environmental Sciences"</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">EDU 236</span><span class="co">](https://catalog.ucdavis.edu/search/?q=EDU+236)</span>: </span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  "Application of Hierarchical Linear Models in Education Research"</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">HDE 205</span><span class="co">](https://catalog.ucdavis.edu/search/?q=HDE+205)</span>: "Longitudinal Data Analysis"</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Books:</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@dobson4e <span class="co">[</span><span class="ot">Chapter 11</span><span class="co">](https://www.taylorfrancis.com/chapters/mono/10.1201/9781315182780-11/clustered-longitudinal-data-annette-dobson-adrian-barnett?context=ubx&amp;refId=95f6c50e-093a-4488-a042-92a9f151a4b5)</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@vittinghoff2e <span class="co">[</span><span class="ot">Chapter 7</span><span class="co">](https://link.springer.com/chapter/10.1007/978-1-4614-1353-0_7)</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@gelman2006data</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@jiming2021</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>by UC Davis Statistics Professor and GGE faculty member <span class="co">[</span><span class="ot">Jiming Jiang</span><span class="co">](https://www.stat.ucdavis.edu/~jiang/)</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@faraway2016extending</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@mcculloch2008generalized</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@hedeker2006</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@wakefield2013</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@zuur2009</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@DigglePeter2013AoLD</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@fitzmaurice2012</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@fitzmaurice2009</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@galecki2013</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@congdon2020</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@molenberghs2005</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@VerbekeGeert2000LMMf</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>@jewell2016analysis</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">      - </span>by UC Berkeley professors</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Introduction to Multi-level Models"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html: default</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">  revealjs:</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-slides.html</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-handout.pdf</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">  docx:</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: intro-multilevel-models-handout.docx</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>{{&lt; include shared-config.qmd &gt;}}</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-multilevel</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>This chapter adapts</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">David Rocke</span><span class="co">](https://dmrocke.ucdavis.edu/)</span>'s</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>May 25 -- June 1 lectures from the</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">2021 edition of this course</span><span class="co">](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html)</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">@rocke2021epi204</span><span class="co">]</span>.</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="fu"># Correlated data</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-correlated-data.qmd &gt;}}</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># One-way random-effects models</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-one-way-re.qmd &gt;}}</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="fu"># Variance components</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-variance-components.qmd &gt;}}</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nested random effects</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-nested.qmd &gt;}}</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="fu"># Multilevel models: complete, no, and partial pooling</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-pooling.qmd &gt;}}</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># Adding predictors to a multilevel model</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-radon-covariates.qmd &gt;}}</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="fu"># Multilevel logistic regression</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-glmm.qmd &gt;}}</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="fu"># Further reading</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/intro-multilevel-models/_sec-further-reading.qmd &gt;}}</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item">
+<li class="nav-item">
  Copyright 2024-2026, Douglas Ezra Morrison
   </li>  
 </ul>
-    </div>   
+</div>   
     <div class="nav-footer-center">
 
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/intro-multilevel-models.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
@@ -2118,9 +2949,38 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       &nbsp;
     </div>
   </div>
-</footer>
-
-
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 </body></html>
