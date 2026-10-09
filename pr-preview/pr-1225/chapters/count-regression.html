@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Models for Count Outcomes – Regression Models for Epidemiology</title>
 <style>
@@ -86,6 +86,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/causal-inference.html" rel="next">
+<link href="../chapters/logistic-regression.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -94,14 +96,14 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-96a7cd1f18b334d4a85e34e1de5ca3d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-80c1efa60b6ee2d726f9f30525849012.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-96a7cd1f18b334d4a85e34e1de5ca3d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-aaecb91e40cc87e9caa896179b56e095.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2d6b09d7b3c07c1d492186ed5d884948.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
@@ -228,65 +230,15 @@ cookieconsent.run({
 })();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-div.callout-def.callout {
-  border-left-color: #1B5E20;
+div.callout-exr.callout {
+  border-left-color: #FFA500;
 }
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
 }
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cnj.callout {
-  border-left-color: #558B2F;
-}
-div.callout-cnj.callout-style-default .callout-header {
-  background-color: rgba(85, 139, 47, 0.13);
-}
-div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-prp.callout {
-  border-left-color: #827717;
-}
-div.callout-prp.callout-style-default .callout-header {
-  background-color: rgba(130, 119, 23, 0.13);
-}
-div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cor.callout {
-  border-left-color: #00838F;
-}
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
-}
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-remark.callout {
   border-left-color: #AD1457;
@@ -308,6 +260,36 @@ div.callout-proof .callout-toggle::before {  background-image: url('data:image/s
 div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
+div.callout-lem.callout {
+  border-left-color: #1565C0;
+}
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
+}
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
 div.callout-exm.callout {
   border-left-color: #6A1B9A;
 }
@@ -318,15 +300,35 @@ div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-exr.callout {
-  border-left-color: #FFA500;
+div.callout-cor.callout {
+  border-left-color: #00838F;
 }
-div.callout-exr.callout-style-default .callout-header {
-  background-color: rgba(255, 165, 0, 0.13);
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
 }
-div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
@@ -356,7 +358,7 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -628,60 +630,29 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-appendices">
 <li>
-    <a class="dropdown-item" href="../chapters/math-prereqs.html">
- <span class="dropdown-text">Math Prerequisites</span></a>
+    <a class="dropdown-item" href="../chapters/appendices-are-prereqs.html">
+ <span class="dropdown-text">Overview of Appendices</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/data.html">
- <span class="dropdown-text">Data</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/mds/">
+ <span class="dropdown-text">Mathematics for Data Science (mds)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/exploratory-descriptive.html">
- <span class="dropdown-text">Exploratory and Descriptive Methods</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/pds/">
+ <span class="dropdown-text">Probability for Data Science (pds)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/probability.html">
- <span class="dropdown-text">Probability</span></a>
+    <a class="dropdown-item" href="https://morrison-lab.github.io/sds/">
+ <span class="dropdown-text">Statistics for Data Science (sds)</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/basic-statistical-methods.html">
- <span class="dropdown-text">Basic Statistical Methods</span></a>
-  </li>  
+        <li><hr class="dropdown-divider"></li>
         <li>
     <a class="dropdown-item" href="../chapters/classification.html">
  <span class="dropdown-text">Classification</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../chapters/estimation.html">
- <span class="dropdown-text">Estimation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/nonparametric-models.html">
- <span class="dropdown-text">Nonparametric Models</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/inference.html">
- <span class="dropdown-text">Inference</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/intro-MLEs.html">
- <span class="dropdown-text">Introduction to MLEs</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/bayesian-inference.html">
- <span class="dropdown-text">Bayesian Inference</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../chapters/common-mistakes.html">
  <span class="dropdown-text">Common Mistakes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/notation.html">
- <span class="dropdown-text">Notation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../chapters/proof-writing.html">
- <span class="dropdown-text">Proof Writing</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../chapters/intro-to-R.html">
@@ -719,8 +690,198 @@ window.Quarto = {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/count-regression.html">Models for Count Outcomes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Logistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Chapters</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to GLMs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/glms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/Linear-models-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear (Gaussian) Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/binary-outcome-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measures of Association for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/logistic-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/count-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Models for Count Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/predictor-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predictor Selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-multilevel-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Multi-level Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time-to-event-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time to Event Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-survival-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Survival Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/proportional-hazards-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proportional Hazards Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/parametric-survival-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parametric Survival Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/midterm-2-review-session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm 2 Review Session</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/top-ten-concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary of Regression Modeling Concepts</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendices-are-prereqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of Appendices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/common-mistakes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Common Mistakes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro-to-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Computing in R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exam-formula-sheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam Formula Sheet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/package-versions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package Versions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/concept-map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concept Map: Definitions and Results</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
@@ -782,7 +943,7 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/count-regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/count-regression.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="count-regression-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="count-regression-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="count-regression-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/count-regression.html">Models for Count Outcomes</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Models for Count Outcomes</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Poisson regression and variations</p>
 </div>
@@ -795,7 +956,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-10-03: 7:54:02 (UTC)</p>
+      <p class="date">Last modified: 2026-10-09: 17:47:14 (UTC)</p>
     </div>
   </div>
   
@@ -878,7 +1039,7 @@ text-align: center;
 </style></section></section><section id="introduction" class="level1" data-number="1"><h1 data-number="1">
 <span class="header-section-number">1</span> Introduction</h1>
 <div class="notes">
-<p>This chapter presents models for <a href="../chapters/data.html#sec-count-vars">count data</a> outcomes. With covariates, the event rate <span class="math inline">\(\lambda\)</span> becomes a function of the covariate vector <span class="math inline">\(\tilde{X}= {(X_1, \dots, X_p)}^{\top} \in \mathbb{R}^p\)</span>. Typically, count data models use a <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\right\}\mathclose{}\)</span> link function, and thus an <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\right\}\mathclose{}\)</span> inverse-link function. Specifically, the model relates the expected outcome count to the event rate and linear predictor as:</p>
+<p>This chapter presents models for <a href="https://morrison-lab.github.io/sds/data.html#sec-count-vars">count data</a> outcomes. With covariates, the event rate <span class="math inline">\(\lambda\)</span> becomes a function of the covariate vector <span class="math inline">\(\tilde{X}= {(X_1, \dots, X_p)}^{\top} \in \mathbb{R}^p\)</span>. Typically, count data models use a <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\right\}\mathclose{}\)</span> link function, and thus an <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\right\}\mathclose{}\)</span> inverse-link function. Specifically, the model relates the expected outcome count to the event rate and linear predictor as:</p>
 </div>
 <p><span id="eq-mean-poisson"><span class="math display">\[
 \begin{aligned}
@@ -889,7 +1050,7 @@ text-align: center;
 \end{aligned}
 \tag{1}\]</span></span></p>
 <div class="notes">
-<p>The term <span class="math inline">\(T=t\)</span> represents the <a href="../chapters/probability.html#def-exposure">exposure magnitude</a> (such as person-years or observation time) and plays a structural role in scaling rates to expected counts.</p>
+<p>The term <span class="math inline">\(T=t\)</span> represents the <a href="https://morrison-lab.github.io/pds/distributions.html#def-exposure">exposure magnitude</a> (such as person-years or observation time) and plays a structural role in scaling rates to expected counts.</p>
 </div>
 <hr>
 <div class="callout callout-style-simple callout-exr no-icon">
@@ -945,7 +1106,7 @@ text-align: center;
 \end{aligned}
 \]</span></p>
 <div class="notes">
-<p>In contrast with the other covariates (represented by <span class="math inline">\(\tilde{X}\)</span>), <span class="math inline">\(t\)</span> enters this expression with a <span class="math inline">\(\log{}\)</span> transformation and without an estimated <span class="math inline">\(\beta\)</span> coefficient; in other words, <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> is an <a href="../chapters/probability.html#def-offset">offset term</a>.</p>
+<p>In contrast with the other covariates (represented by <span class="math inline">\(\tilde{X}\)</span>), <span class="math inline">\(t\)</span> enters this expression with a <span class="math inline">\(\log{}\)</span> transformation and without an estimated <span class="math inline">\(\beta\)</span> coefficient; in other words, <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> is an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset term</a>.</p>
 </div>
 <hr>
 <div class="callout callout-style-simple callout-exr no-icon">
@@ -1028,7 +1189,7 @@ text-align: center;
 <p>Differences on the log-rate scale become ratios on the rate scale, because exponentiating a difference yields a quotient:</p>
 </div>
 <p><span class="math display">\[\operatorname{exp}\mathopen{}\left\{a-b\right\}\mathclose{} = \frac{\operatorname{exp}\mathopen{}\left\{a\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{b\right\}\mathclose{}}\]</span></p>
-<p>(recall from <a href="../chapters/math-prereqs.html#cor-exp-sum">Algebra 2</a>)</p>
+<p>(recall from <a href="https://morrison-lab.github.io/mds/algebra.html#cor-exp-sum">Algebra 2</a>)</p>
 <p>Therefore, according to this model, <strong>a difference of <span class="math inline">\(\delta \stackrel{\text{def}}{=}a - b\)</span> between two values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> of covariate <span class="math inline">\(x_j\)</span> corresponds to a rate ratio of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j \cdot \delta\right\}\mathclose{}\)</span></strong>.</p>
 <p>Specifically, let <span class="math inline">\(\tilde{X}_{-j}\)</span> denote the vector of all covariates except <span class="math inline">\(X_j\)</span>, and abbreviate the two expected counts being compared as</p>
 <p><span class="math display">\[
@@ -1226,23 +1387,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="butmxgmdzg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#butmxgmdzg table {
+<div id="uyrllkcxsr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uyrllkcxsr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#butmxgmdzg thead, #butmxgmdzg tbody, #butmxgmdzg tfoot, #butmxgmdzg tr, #butmxgmdzg td, #butmxgmdzg th {
+#uyrllkcxsr thead, #uyrllkcxsr tbody, #uyrllkcxsr tfoot, #uyrllkcxsr tr, #uyrllkcxsr td, #uyrllkcxsr th {
   border-style: none;
 }
 
-#butmxgmdzg p {
+#uyrllkcxsr p {
   margin: 0;
   padding: 0;
 }
 
-#butmxgmdzg .gt_table {
+#uyrllkcxsr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1268,12 +1429,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_caption {
+#uyrllkcxsr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#butmxgmdzg .gt_title {
+#uyrllkcxsr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1285,7 +1446,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#butmxgmdzg .gt_subtitle {
+#uyrllkcxsr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1297,7 +1458,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#butmxgmdzg .gt_heading {
+#uyrllkcxsr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1309,13 +1470,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_bottom_border {
+#uyrllkcxsr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_col_headings {
+#uyrllkcxsr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1330,7 +1491,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_col_heading {
+#uyrllkcxsr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1350,7 +1511,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#butmxgmdzg .gt_column_spanner_outer {
+#uyrllkcxsr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1362,15 +1523,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#butmxgmdzg .gt_column_spanner_outer:first-child {
+#uyrllkcxsr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#butmxgmdzg .gt_column_spanner_outer:last-child {
+#uyrllkcxsr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#butmxgmdzg .gt_column_spanner {
+#uyrllkcxsr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1382,11 +1543,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#butmxgmdzg .gt_spanner_row {
+#uyrllkcxsr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#butmxgmdzg .gt_group_heading {
+#uyrllkcxsr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1412,7 +1573,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#butmxgmdzg .gt_empty_group_heading {
+#uyrllkcxsr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1427,15 +1588,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#butmxgmdzg .gt_from_md > :first-child {
+#uyrllkcxsr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#butmxgmdzg .gt_from_md > :last-child {
+#uyrllkcxsr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#butmxgmdzg .gt_row {
+#uyrllkcxsr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1454,7 +1615,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#butmxgmdzg .gt_stub {
+#uyrllkcxsr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1467,7 +1628,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#butmxgmdzg .gt_stub_row_group {
+#uyrllkcxsr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1481,15 +1642,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#butmxgmdzg .gt_row_group_first td {
+#uyrllkcxsr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#butmxgmdzg .gt_row_group_first th {
+#uyrllkcxsr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#butmxgmdzg .gt_summary_row {
+#uyrllkcxsr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1499,16 +1660,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#butmxgmdzg .gt_first_summary_row {
+#uyrllkcxsr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_first_summary_row.thick {
+#uyrllkcxsr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#butmxgmdzg .gt_last_summary_row {
+#uyrllkcxsr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1518,7 +1679,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_grand_summary_row {
+#uyrllkcxsr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1528,7 +1689,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#butmxgmdzg .gt_first_grand_summary_row {
+#uyrllkcxsr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1538,7 +1699,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_last_grand_summary_row_top {
+#uyrllkcxsr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1548,11 +1709,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_striped {
+#uyrllkcxsr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#butmxgmdzg .gt_table_body {
+#uyrllkcxsr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1561,7 +1722,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_footnotes {
+#uyrllkcxsr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1575,7 +1736,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_footnote {
+#uyrllkcxsr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1584,7 +1745,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#butmxgmdzg .gt_sourcenotes {
+#uyrllkcxsr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1598,7 +1759,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#butmxgmdzg .gt_sourcenote {
+#uyrllkcxsr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1606,72 +1767,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#butmxgmdzg .gt_left {
+#uyrllkcxsr .gt_left {
   text-align: left;
 }
 
-#butmxgmdzg .gt_center {
+#uyrllkcxsr .gt_center {
   text-align: center;
 }
 
-#butmxgmdzg .gt_right {
+#uyrllkcxsr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#butmxgmdzg .gt_font_normal {
+#uyrllkcxsr .gt_font_normal {
   font-weight: normal;
 }
 
-#butmxgmdzg .gt_font_bold {
+#uyrllkcxsr .gt_font_bold {
   font-weight: bold;
 }
 
-#butmxgmdzg .gt_font_italic {
+#uyrllkcxsr .gt_font_italic {
   font-style: italic;
 }
 
-#butmxgmdzg .gt_super {
+#uyrllkcxsr .gt_super {
   font-size: 65%;
 }
 
-#butmxgmdzg .gt_footnote_marks {
+#uyrllkcxsr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#butmxgmdzg .gt_asterisk {
+#uyrllkcxsr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#butmxgmdzg .gt_indent_1 {
+#uyrllkcxsr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#butmxgmdzg .gt_indent_2 {
+#uyrllkcxsr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#butmxgmdzg .gt_indent_3 {
+#uyrllkcxsr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#butmxgmdzg .gt_indent_4 {
+#uyrllkcxsr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#butmxgmdzg .gt_indent_5 {
+#uyrllkcxsr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#butmxgmdzg .katex-display {
+#uyrllkcxsr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#butmxgmdzg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uyrllkcxsr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2722,11 +2883,11 @@ Note
 <section id="negative-binomial-models" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="negative-binomial-models">
 <span class="header-section-number">8.1</span> Negative binomial models</h2>
 <div class="notes">
-<p>There are alternatives to the Poisson model when overdispersion is present. Most notably, the <a href="../chapters/probability.html#sec-nb-dist">negative binomial model</a>.</p>
+<p>There are alternatives to the Poisson model when overdispersion is present. Most notably, the <a href="https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist">negative binomial model</a>.</p>
 </div>
 <p>Diagnostics that reveal overdispersion are telling us that the data violate the standard Poisson assumption</p>
 <p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid \tilde{X}=\tilde{x}, T=t\right)\mathclose{} = \operatorname{E}\mathopen{}\left[Y \mid \tilde{X}=\tilde{x}, T=t\right]\mathclose{}\]</span></p>
-<p>Ignoring that violation leads to artificially narrow standard errors and inflated type I error rates. The <a href="../chapters/probability.html#sec-nb-dist">negative binomial distribution</a> serves as a natural generalization of the Poisson distribution for count outcomes. It introduces an overdispersion parameter <span class="math inline">\(\rho\)</span> that allows the conditional variance to exceed the mean (<span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \tilde{X}=\tilde{x}, T=t\right)\mathclose{} = \mu(\tilde{x}, t) + \mu(\tilde{x}, t)^2 / \rho\)</span>). We still model <span class="math inline">\(\mu(\tilde{x}, t) = t \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}\)</span> as before, preserving the rate-ratio interpretation for regression coefficients. Furthermore, negative binomial models can be combined with zero-inflation to account for both structural zeros and variance expansion in count data, with the negative binomial serving as the conditional distribution for the count component.</p>
+<p>Ignoring that violation leads to artificially narrow standard errors and inflated type I error rates. The <a href="https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist">negative binomial distribution</a> serves as a natural generalization of the Poisson distribution for count outcomes. It introduces an overdispersion parameter <span class="math inline">\(\rho\)</span> that allows the conditional variance to exceed the mean (<span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \tilde{X}=\tilde{x}, T=t\right)\mathclose{} = \mu(\tilde{x}, t) + \mu(\tilde{x}, t)^2 / \rho\)</span>). We still model <span class="math inline">\(\mu(\tilde{x}, t) = t \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}\)</span> as before, preserving the rate-ratio interpretation for regression coefficients. Furthermore, negative binomial models can be combined with zero-inflation to account for both structural zeros and variance expansion in count data, with the negative binomial serving as the conditional distribution for the count component.</p>
 <hr>
 <section id="example-needle-sharing-model-extensions" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="example-needle-sharing-model-extensions">
 <span class="header-section-number">8.1.1</span> Example: needle-sharing model extensions</h3>
@@ -3355,7 +3516,7 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <p><span class="theorem-title"><strong>Exercise 8 (Score equations for a Poisson GLM)</strong></span> (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018</a>)</span>, Chapter 4, and <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth (<a href="#ref-dunn2018generalized" role="doc-biblioref">2018</a>)</span>, Chapter 4)</p>
 <p>Consider the Poisson log-linear model <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \beta_0 + \beta_1 x_i\)</span>, with <span class="math inline">\(Y_i \mid x_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i)\)</span>.</p>
 <p><strong>(a)</strong> Write the log-likelihood <span class="math inline">\(\ell(\beta_0, \beta_1; \tilde{y}, \tilde{x})\)</span>.</p>
-<p><strong>(b)</strong> Derive the score equations <span class="math inline">\(\frac{\partial}{\partial \beta_0}\ell = 0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\ell = 0\)</span>.</p>
+<p><strong>(b)</strong> Derive the score equations <span class="math inline">\(\frac{\partial}{\partial \beta_0}\ell= 0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\ell= 0\)</span>.</p>
 <p><strong>(c)</strong> Interpret the score equations: what condition on the fitted values <span class="math inline">\(\hat{\mu}_i\)</span> do they imply?</p>
 </div>
 </div>
@@ -3394,10 +3555,10 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <p>Setting the score equations to zero:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{\partial}{\partial \beta_0}\ell = 0
+\frac{\partial}{\partial \beta_0}\ell= 0
 &amp;\;\Rightarrow\; \sum_{i=1}^n (y_i - \mu_i) = 0
 \\
-\frac{\partial}{\partial \beta_1}\ell = 0
+\frac{\partial}{\partial \beta_1}\ell= 0
 &amp;\;\Rightarrow\; \sum_{i=1}^n x_i(y_i - \mu_i) = 0
 \end{aligned}
 \]</span></p>
@@ -3405,7 +3566,7 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <p>These equations hold at the maximum likelihood estimate <span class="math inline">\(\hat{\tilde{\beta}}\)</span>, where <span class="math inline">\(\mu_i\)</span> takes its fitted value <span class="math inline">\(\hat{\mu}_i \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1 x_i\right\}\mathclose{}\)</span>.</p>
 <p>The first equation says <span class="math inline">\(\sum_i y_i = \sum_i \hat{\mu}_i\)</span>: the total fitted count equals the total observed count.</p>
 <p>The second equation says <span class="math inline">\(\sum_i x_i y_i = \sum_i x_i \hat{\mu}_i\)</span>: the fitted counts are balanced against observed counts, weighted by <span class="math inline">\(x_i\)</span>.</p>
-<p>More generally, these score equations say that the <strong>residuals <span class="math inline">\((y_i - \hat{\mu}_i)\)</span> are <a href="../chapters/math-prereqs.html#def-orthogonal-vectors">orthogonal</a> to each predictor column</strong>: for each predictor <span class="math inline">\(j\)</span>, the residual vector <span class="math inline">\((\tilde{y}- \hat{\tilde{\mu}})\)</span> satisfies <span class="math inline">\({\tilde{x}_{(j)}}^{\top}(\tilde{y}- \hat{\tilde{\mu}}) = 0\)</span>, where <span class="math inline">\(\tilde{x}_{(j)} \stackrel{\text{def}}{=}{(x_{1j}, \ldots, x_{nj})}^{\top} \in \mathbb{R}^n\)</span> is the column of <span class="math inline">\(j\)</span>-th predictor values across observations. This system of equations is the GLM analogue of the OLS normal equations.</p>
+<p>More generally, these score equations say that the <strong>residuals <span class="math inline">\((y_i - \hat{\mu}_i)\)</span> are <a href="https://morrison-lab.github.io/mds/linear-algebra.html#def-orthogonal-vectors">orthogonal</a> to each predictor column</strong>: for each predictor <span class="math inline">\(j\)</span>, the residual vector <span class="math inline">\((\tilde{y}- \hat{\tilde{\mu}})\)</span> satisfies <span class="math inline">\({\tilde{x}_{(j)}}^{\top}(\tilde{y}- \hat{\tilde{\mu}}) = 0\)</span>, where <span class="math inline">\(\tilde{x}_{(j)} \stackrel{\text{def}}{=}{(x_{1j}, \ldots, x_{nj})}^{\top} \in \mathbb{R}^n\)</span> is the column of <span class="math inline">\(j\)</span>-th predictor values across observations. This system of equations is the GLM analogue of the OLS normal equations.</p>
 </div>
 </div>
 </div>
@@ -4299,7 +4460,17 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/logistic-regression.html" class="pagination-link" aria-label="Models for Binary Outcomes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Models for Binary Outcomes</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/causal-inference.html" class="pagination-link" aria-label="Causal Inference">
+        <span class="nav-page-text">Causal Inference</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Models for Count Outcomes"</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Poisson regression and variations"</span></span>
@@ -4382,7 +4553,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 <span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>::: notes</span>
 <span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>There are alternatives to the Poisson model when overdispersion is present.</span>
 <span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>Most notably,</span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>the <span class="co">[</span><span class="ot">negative binomial model</span><span class="co">](probability.qmd#sec-nb-dist)</span>.</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>the <span class="co">[</span><span class="ot">negative binomial model</span><span class="co">](https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist)</span>.</span>
 <span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a>Diagnostics that reveal overdispersion are telling us</span>
@@ -4392,7 +4563,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 <span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>Ignoring that violation leads to artificially narrow standard errors</span>
 <span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a>and inflated type I error rates.</span>
-<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">negative binomial distribution</span><span class="co">](probability.qmd#sec-nb-dist)</span></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">negative binomial distribution</span><span class="co">](https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist)</span></span>
 <span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a>serves as a natural generalization of the Poisson distribution</span>
 <span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>for count outcomes.</span>
 <span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>It introduces an overdispersion parameter $\rho$</span>
