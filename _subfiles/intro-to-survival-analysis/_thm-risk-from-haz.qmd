@@ -1,0 +1,102 @@
+While anyone is still event-free,
+the risk can be recovered from the hazards,
+and @thm-risk-from-haz shows why it can never decrease.
+
+{{< slidebreak >}}
+
+:::{#thm-risk-from-haz}
+#### Risk in terms of discrete-time hazards
+
+Under @def-discrete-haz-risk,
+for each $k$ with $\Pr(T \ge k) > 0$,
+
+$$
+\risk(k) = 1 - \prod_{j=1}^{k} (1 - \haz_j).
+$$ {#eq-risk-from-haz}
+
+Since each factor $1 - \haz_j$ lies in $[0, 1]$,
+the product can only shrink as $k$ grows,
+so $\risk(k)$ never decreases as $k$ grows.
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This proof uses
+[the definition of conditional probability](probability.qmd#def-conditional-prob)
+and the [subset property](probability.qmd#thm-prob-subset).
+Because $T$ takes integer values, $\{T > j - 1\} = \{T \ge j\}$.
+For each $j \le k$,
+$\Pr(T \ge j) \ge \Pr(T \ge k) > 0$
+by the subset property,
+since $\{T \ge k\} \subseteq \{T \ge j\}$;
+so $\haz_j$ is defined
+and conditioning on $T > j - 1$ is allowed.
+For each such $j$:
+
+$$
+\ba
+\Pr(T > j)
+&= \Pr(T > j,\ T > j - 1)
+&& \text{(}\{T > j\} \subseteq \{T > j - 1\}\text{)}
+\\
+&= \Pr(T > j \mid T > j - 1)\Pr(T > j - 1)
+&& \text{(definition of conditional probability)}
+\\
+&= \Pr(T > j \mid T \ge j)\Pr(T > j - 1)
+&& \text{(}T \text{ is integer-valued)}
+\\
+&= \sb{1 - \Pr(T = j \mid T \ge j)}\Pr(T > j - 1)
+&& \text{(complement rule, given } T \ge j\text{)}
+\\
+&= (1 - \haz_j)\Pr(T > j - 1)
+&& \text{(definition of } \haz_j\text{)}
+\ea
+$$ {#eq-surv-recursion-haz}
+
+Applying this identity for $j = k, k - 1, \ldots, 1$,
+and using $\Pr(T > 0) = 1$:
+
+$$
+\ba
+\risk(k)
+&= 1 - \Pr(T > k)
+&& \text{(complement of } \risk(k) = \Pr(T \le k)\text{)}
+\\
+&= 1 - \prod_{j=1}^{k}(1 - \haz_j)\Pr(T > 0)
+&& \text{(apply the identity } k \text{ times)}
+\\
+&= 1 - \prod_{j=1}^{k}(1 - \haz_j)
+&& \text{(}\Pr(T > 0) = 1\text{)}
+\ea
+$$ {#eq-risk-from-haz-proof}
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-risk-from-haz}
+#### Recovering the risk from the hazards
+
+Using the hazards from @exm-haz-vs-risk,
+@thm-risk-from-haz gives the four-year risk:
+
+$$
+\ba
+\risk(4)
+&= 1 - (1 - 0.100)\paren{1 - \tfrac{50}{900}}\paren{1 - \tfrac{40}{850}}\paren{1 - \tfrac{60}{810}}
+&& \text{(substitute the hazards)}
+\\
+&= 1 - \tfrac{900}{1000} \cdot \tfrac{850}{900} \cdot \tfrac{810}{850} \cdot \tfrac{750}{810}
+&& \text{(subtract each hazard from 1)}
+\\
+&= 1 - \tfrac{750}{1000}
+&& \text{(cancel the telescoping terms)}
+\\
+&= 0.25
+&& \text{(arithmetic)}
+\ea
+$$ {#eq-risk-from-haz-example}
+
+which matches the 250 events out of 1000 people in @exm-haz-vs-risk.
+:::
