@@ -144,7 +144,7 @@ and $\veps$ is the $n \times 1$ error vector with components $\eps_i \eqdef y_i 
 :::{style="column-count: 2; column-gap: 2em;"}
 
 **Log-likelihood component** ([lem](logistic-regression.qmd#lem-logistic-loglik-component))
-$$\ell_i(\pi_i) = y_i \eta_i - \logf{1+\odds_i}$$
+$$\llik_i(\pi_i) = y_i \eta_i - \logf{1+\odds_i}$$
 
 **Score function as sum of components** ([lem](logistic-regression.qmd#lem-score-logistic), [thm](logistic-regression.qmd#thm-logistic-score-comp))
 $$\vec{\llik'}(\vb) = \sumin \vec{\llik'_i}(\vb),
@@ -265,12 +265,12 @@ $$\hodds(Event|Exposed) = \frac{a}{b},
 Details in [sec](logistic-regression.qmd#sec-gof);
 here $q$ is the number of distinct covariate patterns,
 $p$ is the number of $\b$ parameters,
-and $\ell_{\text{full}}$ is the saturated-model log-likelihood.
+and $\llik_{\text{full}}$ is the saturated-model log-likelihood.
 
 :::{style="column-count: 2; column-gap: 2em;"}
 
 **Deviance test** ([def](logistic-regression.qmd#def-deviance-test))
-$$D \eqdef 2(\ell_{\text{full}} - \ell(\hb; \mathbf x)),
+$$D \eqdef 2(\llik_{\text{full}} - \llik(\hb; \mathbf x)),
 \qquad D \dsim \chi^2(q - p)$$
 
 **Hosmer-Lemeshow test** ([def](logistic-regression.qmd#def-hosmer-lemeshow); $g$ groups by predicted probability)
@@ -282,13 +282,13 @@ $$X^2 = \sum_{k=1}^q X_k^2 \dsim \chi^2(q-p)$$
 **AIC and BIC** [lower is better]
 ([AIC](Linear-models-overview.qmd#def-aic) [@akaike1974new];
 [BIC](Linear-models-overview.qmd#def-bic) [@schwarz1978estimating])
-$$\text{AIC} = -2 \ell(\hth) + 2p,
-\qquad \text{BIC} = -2 \ell(\hth) + p \logf{n}$$
+$$\text{AIC} = -2 \llik(\hth) + 2p,
+\qquad \text{BIC} = -2 \llik(\hth) + p \logf{n}$$
 
 **Likelihood ratio test** ([def](logistic-regression.qmd#def-lrt); for nested models with $p_0 < p_1$ parameters —
-here $\ell_1$ and $\ell_0$ are the two fitted models' log-likelihoods,
+here $\llik_1$ and $\llik_0$ are the two fitted models' log-likelihoods,
 not the saturated model's)
-$$\Lambda \eqdef 2(\ell_1(\hth_1) - \ell_0(\hth_0)),
+$$\Lambda \eqdef 2(\llik_1(\hth_1) - \llik_0(\hth_0)),
 \qquad \Lambda \dsim \chi^2(p_1 - p_0) \text{ under } H_0$$
 by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 
@@ -309,7 +309,7 @@ $$X_k \eqdef \frac{\bar y_k - \hat\pi_k}{\sqrt{\hat \pi_k (1-\hat\pi_k)/n_k}},
 \qquad r_{P_k} \eqdef \frac{X_k}{\sqrt{1-h_k}}$$
 
 **Deviance residual (and standardized version)** ([def](logistic-regression.qmd#def-deviance-residual-logistic))
-$$d_k \eqdef \signt(y_k - n_k \hat \pi_k)\left\{\sqrt{2[\ell_{\text{full}}(x_k) - \ell(\hb; x_k)]}\right\},
+$$d_k \eqdef \signt(y_k - n_k \hat \pi_k)\left\{\sqrt{2[\llik_{\text{full}}(x_k) - \llik(\hb; x_k)]}\right\},
 \qquad r_{D_k} \eqdef \frac{d_k}{\sqrt{1-h_k}}$$
 
 **Cook's distance** ([def](logistic-regression.qmd#def-cooks-distance-glm))

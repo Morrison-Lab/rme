@@ -10,15 +10,15 @@ $$
 \quad x > 0, \quad \pmean > 0.
 $$
 
-**(a)** Write the log-likelihood $\ell(\pmean; \vx)$
+**(a)** Write the log-likelihood $\llik(\pmean; \vx)$
 for the observed data $\vx = (x_1, \ldots, x_n)$.
 
-**(b)** Derive the score function $\ell'(\pmean; \vx) = \deriv{\pmean}\ell(\pmean; \vx)$.
+**(b)** Derive the score function $\score(\pmean; \vx) = \deriv{\pmean}\llik(\pmean; \vx)$.
 
 **(c)** Set the score equal to zero and show that $\hat\pmean_{ML} = \bar{x}$.
 Compute the second derivative and verify this critical point is a maximum.
 
-**(d)** Derive the observed information $I(\pmean; \vx) = -\ell''(\pmean; \vx)$,
+**(d)** Derive the observed information $I(\pmean; \vx) = -\hess(\pmean; \vx)$,
 evaluate it at $\hat\pmean_{ML}$,
 and give an approximate 95% confidence interval for $\pmean$.
 :::
@@ -29,7 +29,7 @@ and give an approximate 95% confidence interval for $\pmean$.
 
 $$
 \ba
-\ell(\pmean; \vx)
+\llik(\pmean; \vx)
 &= \logf{\prod_{i=1}^n \frac{1}{\pmean} e^{-x_i/\pmean}}
 \\
 &= \sum_{i=1}^n \logf{\frac{1}{\pmean} e^{-x_i/\pmean}}
@@ -46,7 +46,7 @@ $$
 
 $$
 \ba
-\ell'(\pmean; \vx)
+\score(\pmean; \vx)
 &= \deriv{\pmean}\paren{-n\logf{\pmean} - \frac{n\bar{x}}{\pmean}}
 \\
 &= -\frac{n}{\pmean} + \frac{n\bar{x}}{\pmean^2}
@@ -57,7 +57,7 @@ $$
 
 **(c)**
 
-Setting $\ell'(\pmean; \vx) = 0$:
+Setting $\score(\pmean; \vx) = 0$:
 
 $$
 \ba
@@ -71,7 +71,7 @@ The second derivative is:
 
 $$
 \ba
-\ell''(\pmean; \vx)
+\hess(\pmean; \vx)
 &= \deriv{\pmean}\paren{-\frac{n}{\pmean} + \frac{n\bar{x}}{\pmean^2}}
 \\
 &= \frac{n}{\pmean^2} - \frac{2n\bar{x}}{\pmean^3}
@@ -81,7 +81,7 @@ $$
 Evaluated at $\hat\pmean_{ML} = \bar{x}$:
 
 $$
-\ell''(\bar{x}; \vx)
+\hess(\bar{x}; \vx)
 = \frac{n}{\bar{x}^2} - \frac{2n\bar{x}}{\bar{x}^3}
 = \frac{n}{\bar{x}^2} - \frac{2n}{\bar{x}^2}
 = -\frac{n}{\bar{x}^2} < 0
@@ -94,7 +94,7 @@ Since the second derivative is negative, $\hat\pmean_{ML} = \bar{x}$ is a maximu
 The observed information is:
 
 $$
-I(\pmean; \vx) = -\ell''(\pmean; \vx)
+I(\pmean; \vx) = -\hess(\pmean; \vx)
 = \frac{2n\bar{x}}{\pmean^3} - \frac{n}{\pmean^2}
 $$
 

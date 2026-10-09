@@ -9,7 +9,7 @@ $$
 &= \pdf(T=t)\\
 &\eqdef  \pdf_T(t)\\
 &= \haz_T(t)\surv_T(t)\\
-\ell(t)
+\llik(t)
 &\eqdef \logf{\Lik(t)}\\
 &= \logf{\haz_T(t) \surv_T(t)}\\
 &= \logf{\haz_T(t)} + \logf{\surv_T(t)}\\
@@ -28,7 +28,7 @@ $$
 \Lik(y)
 &=p_T(T>y)\\
 &\eqdef  \surv_T(y)\\
-\ell(y)
+\llik(y)
 &\eqdef \logf{\Lik(y)}\\
 &=\logf{\surv(y)}\\
 &=-\cuhaz(y)\\
@@ -96,7 +96,7 @@ The corresponding log-likelihood is:
 
 $$
 \begin{aligned}
-\ell(y,d)
+\llik(y,d)
 &= \logf{\Lik(y,d)}\\
 &= \logf{
 \paren{f_T(y)^d \cdot S_T(y)^{1-d}}
@@ -123,7 +123,7 @@ The corresponding score function is:
 
 $$
 \begin{aligned}
-\ell'(y,d)
+\score(y,d)
 &= \deriv{\theta}
 \sb{
 \logf{f_T(y)^d \cdot S_T(y)^{1-d}}
@@ -158,8 +158,8 @@ $\theta_T$ is:
 
 $$
 \begin{aligned}
-\ell'_{\theta_T}(y,d)
-&\eqdef  \deriv{\theta_T}\ell(y,d)\\
+\score_{\theta_T}(y,d)
+&\eqdef  \deriv{\theta_T}\llik(y,d)\\
 &=
 \left(
 \deriv{\theta_T}
@@ -225,7 +225,7 @@ The corresponding log-likelihood is:
 
 $$
 \begin{aligned}
-\ell(y,d)
+\llik(y,d)
 &=\text{log}\left\{\Lik(y,d)\right\}\\
 &= \text{log}\left\{S_T(y) \cdot h_T(y)^d\right\}\\
 &= \text{log}\left\{S_T(y)\right\} + \text{log}\left\{h_T(y)^d\right\}\\
