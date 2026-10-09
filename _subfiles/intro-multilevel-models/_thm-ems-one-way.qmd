@@ -1,0 +1,87 @@
+:::{#thm-ems-one-way}
+#### Expected mean squares in the one-way random-effects model
+
+Under @def-one-way-re:
+
+$$
+\ba
+\E{\text{MSE}} &= \sigma^2
+\\
+\E{\text{MSA}} &= m\sigma_\alpha^2 + \sigma^2
+\ea
+$$ {#eq-ems-one-way}
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This proof uses the fact that the
+[sample variance](basic-statistical-methods.qmd#def-sample-variance)
+of independent, identically distributed observations
+is unbiased for their variance,
+[the law of iterated expectations](probability.qmd#thm-lie),
+and [the variance of a linear combination](probability.qmd#thm-var-lincom).
+
+**Within groups.**
+Given $\alpha_i$, the observations $Y_{i1}, \ldots, Y_{im}$
+are independent with common variance $\sigma^2$,
+so their sample variance
+$s_i^2 \eqdef \frac{1}{m-1}\sum_{j=1}^m (Y_{ij} - \bar{Y}_{i\cdot})^2$
+satisfies $\E{s_i^2 \mid \alpha_i} = \sigma^2$.
+By the law of iterated expectations, $\E{s_i^2} = \sigma^2$.
+Then
+
+$$
+\ba
+\E{\text{MSE}}
+&= \E{\frac{1}{a}\sum_{i=1}^a s_i^2}
+&& \text{(MSE is the average of the } s_i^2\text{)}
+\\
+&= \frac{1}{a}\sum_{i=1}^a \E{s_i^2}
+&& \text{(linearity of expectation)}
+\\
+&= \frac{1}{a}\sum_{i=1}^a \sigma^2
+&& \text{(each } s_i^2 \text{ is unbiased)}
+\\
+&= \sigma^2
+&& \text{(simplify)}
+\ea
+$$ {#eq-ems-mse-proof}
+
+**Between groups.**
+Each group mean is $\bar{Y}_{i\cdot} = \mu + \alpha_i + \bar{\epsilon}_{i\cdot}$,
+where $\bar{\epsilon}_{i\cdot} \eqdef \frac{1}{m}\sum_{j=1}^m \epsilon_{ij}$.
+The group means are independent and identically distributed across groups, with
+
+$$
+\ba
+\Var{\bar{Y}_{i\cdot}}
+&= \Var{\alpha_i} + \Var{\bar{\epsilon}_{i\cdot}}
+&& \text{(variance of a sum of independent terms)}
+\\
+&= \sigma_\alpha^2 + \frac{1}{m^2}\sum_{j=1}^m \Var{\epsilon_{ij}}
+&& \text{(variance of a linear combination)}
+\\
+&= \sigma_\alpha^2 + \frac{\sigma^2}{m}
+&& \text{(simplify)}
+\ea
+$$ {#eq-ems-var-group-mean}
+
+$\text{MSA}$ is $m$ times the sample variance of $\bar{Y}_{1\cdot}, \ldots, \bar{Y}_{a\cdot}$,
+so
+
+$$
+\ba
+\E{\text{MSA}}
+&= m \cdot \Var{\bar{Y}_{i\cdot}}
+&& \text{(sample variance is unbiased)}
+\\
+&= m\paren{\sigma_\alpha^2 + \frac{\sigma^2}{m}}
+&& \text{(substitute)}
+\\
+&= m\sigma_\alpha^2 + \sigma^2
+&& \text{(distribute)}
+\ea
+$$ {#eq-ems-msa-proof}
+:::
