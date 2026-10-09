@@ -1,4 +1,5 @@
-The risk can always be recovered from the hazards,
+While anyone is still event-free,
+the risk can be recovered from the hazards,
 and @thm-risk-from-haz shows why it can never decrease.
 
 {{< slidebreak >}}
@@ -7,10 +8,11 @@ and @thm-risk-from-haz shows why it can never decrease.
 #### Risk in terms of discrete-time hazards
 
 Under @def-discrete-haz-risk,
+for each $k$ with $\Pr(T \ge k) > 0$,
 
 $$
 \risk(k) = 1 - \prod_{j=1}^{k} (1 - \haz_j).
-$$
+$$ {#eq-risk-from-haz}
 
 Since each factor $1 - \haz_j$ lies in $[0, 1]$,
 the product can only shrink as $k$ grows,
@@ -25,7 +27,13 @@ This proof uses
 [the definition of conditional probability](probability.qmd#def-conditional-prob)
 and the [subset property](probability.qmd#thm-prob-subset).
 Because $T$ takes integer values, $\{T > j - 1\} = \{T \ge j\}$.
-For each $j \ge 1$:
+For each $j \le k$,
+$\Pr(T \ge j) \ge \Pr(T \ge k) > 0$
+by the subset property,
+since $\{T \ge k\} \subseteq \{T \ge j\}$;
+so $\haz_j$ is defined
+and conditioning on $T > j - 1$ is allowed.
+For each such $j$:
 
 $$
 \ba
@@ -45,7 +53,7 @@ $$
 &= (1 - \haz_j)\Pr(T > j - 1)
 && \text{(definition of } \haz_j\text{)}
 \ea
-$$
+$$ {#eq-surv-recursion-haz}
 
 Applying this identity for $j = k, k - 1, \ldots, 1$,
 and using $\Pr(T > 0) = 1$:
@@ -62,7 +70,7 @@ $$
 &= 1 - \prod_{j=1}^{k}(1 - \haz_j)
 && \text{(}\Pr(T > 0) = 1\text{)}
 \ea
-$$
+$$ {#eq-risk-from-haz-proof}
 :::
 
 {{< slidebreak >}}
@@ -88,7 +96,7 @@ $$
 &= 0.25
 && \text{(arithmetic)}
 \ea
-$$
+$$ {#eq-risk-from-haz-example}
 
 which matches the 250 events out of 1000 people in @exm-haz-vs-risk.
 :::
