@@ -37,15 +37,17 @@ $$ {#eq-difference-of-log-hazards-between-1}
 
 {{< slidebreak >}}
 
+<!-- \mathord wraps \vxs so LuaTeX (PDF) does not report "Double superscript" when \tp adds ^{\top} to the starred vector. -->
+
 ::: proof
 
 $$
 \ba
 \diffloghaz(t|\vx : \vxs)
 &\eqdef \loghaz(t|\vx) - \loghaz(t|\vxs) && \text{(definition of log-hazard difference)} \\
-&= \sb{\loghaz_0(t) + \tp{\vx}\vb} - \sb{\loghaz_0(t) + \tp{\vxs}\vb} && \text{(substituting model definition)} \\
-&= \loghaz_0(t) + \tp{\vx}\vb - \loghaz_0(t) - \tp{\vxs}\vb && \text{(distributing the subtraction)} \\
-&= \tp{\vx}\vb - \tp{\vxs}\vb && \text{(canceling shared baseline log-hazard } \loghaz_0(t)\text{)} \\
+&= \sb{\loghaz_0(t) + \tp{\vx}\vb} - \sb{\loghaz_0(t) + \tp{\mathord{\vxs}}\vb} && \text{(substituting model definition)} \\
+&= \loghaz_0(t) + \tp{\vx}\vb - \loghaz_0(t) - \tp{\mathord{\vxs}}\vb && \text{(distributing the subtraction)} \\
+&= \tp{\vx}\vb - \tp{\mathord{\vxs}}\vb && \text{(canceling shared baseline log-hazard } \loghaz_0(t)\text{)} \\
 &= (\vx - \vxs) \cdot \vb && \text{(factoring out } \vb\text{)}
 \ea
 $$ {#eq-difference-of-log-hazards-between-2}
@@ -361,7 +363,7 @@ $$
 \\
 &= \eta(\vx) - \eta(\vxs) && \text{(linear predictor form)}
 \\
-&= \tp{\vx}\vb - \tp{\vxs}\vb && \text{(substituting linear predictors)}
+&= \tp{\vx}\vb - \tp{\mathord{\vxs}}\vb && \text{(substituting linear predictors)}
 \\
 &= \tp{(\vx - \vxs)}\vb && \text{(factoring out } \vb\text{)}
 \ea
