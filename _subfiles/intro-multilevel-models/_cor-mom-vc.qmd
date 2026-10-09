@@ -5,7 +5,7 @@ Under @def-one-way-re,
 $\est\sigma^2 \eqdef \text{MSE}$ and
 $$
 \est\sigma_\alpha^2 \eqdef \frac{\text{MSA} - \text{MSE}}{m}
-$$
+$$ {#eq-mom-vc}
 are unbiased estimators of $\sigma^2$ and $\sigma_\alpha^2$.
 :::
 
@@ -33,7 +33,7 @@ $$
 &= \sigma_\alpha^2
 && \text{(cancel } m\text{)}
 \ea
-$$
+$$ {#eq-mom-vc-unbiased}
 
 $\E{\est\sigma^2} = \E{\text{MSE}} = \sigma^2$ directly from @thm-ems-one-way.
 :::
@@ -54,8 +54,21 @@ anova(lm(Yield ~ Batch, data = Dyestuff))
 By @cor-mom-vc,
 $\est\sigma^2 = 2451.3$ and
 $$
-\est\sigma_\alpha^2 = \frac{11271.5 - 2451.3}{5} = \frac{8820.2}{5} \approx 1764.0.
-$$
+\ba
+\est\sigma_\alpha^2
+&= \frac{11271.5 - 2451.3}{5}
+&& \text{(substitute the mean squares and } m = 5\text{)}
+\\
+&= \frac{8820.2}{5}
+&& \text{(subtract)}
+\\
+&= 1764.04
+&& \text{(divide)}
+\\
+&\approx 1764.0
+&& \text{(round to one decimal place)}
+\ea
+$$ {#eq-dyestuff-mom-vc}
 
 The `lmer()` function in the `lme4` package [@bates2015lme4]
 fits the same model by restricted maximum likelihood (REML);
