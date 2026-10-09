@@ -1,0 +1,73 @@
+Covariates enter a multilevel model as fixed effects,
+and their coefficients can also vary by group
+[@gelman2006data, Chapter 12].
+For house $i$ in county $j$ with floor indicator $x_{ij}$:
+
+- the **varying-intercept** model is
+$Y_{ij} = \beta_0 + \alpha_j + \beta_1 x_{ij} + \epsilon_{ij}$;
+- the **varying-intercept, varying-slope** model is
+$Y_{ij} = \beta_0 + \alpha_j + (\beta_1 + \gamma_j) x_{ij} + \epsilon_{ij}$,
+where each county's pair $(\alpha_j, \gamma_j)$ is bivariate normal with mean zero.
+
+{{< slidebreak >}}
+
+:::{#exm-radon-floor}
+#### Radon by floor of measurement
+
+```{r}
+#| label: radon-floor
+#| code-fold: show
+radon_lmer1 <- lmer(log_radon ~ floor + (1 | county), data = radon)
+radon_lmer2 <- lmer(log_radon ~ floor + (1 + floor | county), data = radon)
+fixef(radon_lmer1)
+VarCorr(radon_lmer2)
+```
+
+In the varying-intercept model,
+measurements on the first floor average about 0.66 lower on the log scale than basement measurements in the same county,
+a ratio of $\exp(-0.66) \approx 0.52$.
+The varying-slope model lets that difference vary by county.
+
+To compare the two models, `anova()` refits both by maximum likelihood
+and computes a likelihood ratio test:
+
+```{r}
+#| label: radon-floor-lrt
+#| code-fold: show
+anova(radon_lmer1, radon_lmer2)
+```
+
+The varying-slope model adds two parameters
+(the slope variance and its correlation with the intercept),
+and the likelihood ratio test gives $p \approx 0.26$.
+Because the null value of the slope variance, zero, is on the boundary of the parameter space,
+this $p$-value is conservative
+[@rocke2021epi204];
+AIC and BIC also favor the simpler model.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-radon-uranium}
+#### A county-level predictor
+
+Soil uranium is measured once per county,
+so it is a **group-level predictor**.
+Adding it to the varying-intercept model:
+
+```{r}
+#| label: radon-uranium
+#| code-fold: show
+radon_lmer3 <- lmer(
+  log_radon ~ floor + log_uranium + (1 | county),
+  data = radon
+)
+fixef(radon_lmer3)
+VarCorr(radon_lmer3) |> as.data.frame()
+```
+
+The estimated between-county variance falls from about 0.099 without uranium
+to about 0.022 with it,
+while the within-county variance barely changes:
+county uranium explains most of the differences between counties.
+:::

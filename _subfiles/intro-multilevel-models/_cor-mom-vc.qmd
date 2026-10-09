@@ -1,0 +1,79 @@
+:::{#cor-mom-vc}
+#### Method-of-moments estimators of the variance components
+
+Under @def-one-way-re,
+$\est\sigma^2 \eqdef \text{MSE}$ and
+$$
+\est\sigma_\alpha^2 \eqdef \frac{\text{MSA} - \text{MSE}}{m}
+$$
+are unbiased estimators of $\sigma^2$ and $\sigma_\alpha^2$.
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This proof uses @thm-ems-one-way.
+
+$$
+\ba
+\E{\est\sigma_\alpha^2}
+&= \E{\frac{\text{MSA} - \text{MSE}}{m}}
+&& \text{(definition of the estimator)}
+\\
+&= \frac{\E{\text{MSA}} - \E{\text{MSE}}}{m}
+&& \text{(linearity of expectation)}
+\\
+&= \frac{m\sigma_\alpha^2 + \sigma^2 - \sigma^2}{m}
+&& \text{(expected mean squares)}
+\\
+&= \frac{m\sigma_\alpha^2}{m}
+&& \text{(cancel } \sigma^2\text{)}
+\\
+&= \sigma_\alpha^2
+&& \text{(cancel } m\text{)}
+\ea
+$$
+
+$\E{\est\sigma^2} = \E{\text{MSE}} = \sigma^2$ directly from @thm-ems-one-way.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-dyestuff-vc}
+#### Variance components for the dyestuff batches
+
+The ANOVA table for @exm-dyestuff gives the mean squares:
+
+```{r}
+#| label: dyestuff-anova
+#| code-fold: show
+anova(lm(Yield ~ Batch, data = Dyestuff))
+```
+
+By @cor-mom-vc,
+$\est\sigma^2 = 2451.3$ and
+$$
+\est\sigma_\alpha^2 = \frac{11271.5 - 2451.3}{5} = \frac{8820.2}{5} \approx 1764.0.
+$$
+
+The `lmer()` function in the `lme4` package [@bates2015lme4]
+fits the same model by restricted maximum likelihood (REML);
+`(1 | Batch)` requests a random intercept for each batch:
+
+```{r}
+#| label: dyestuff-lmer
+#| code-fold: show
+dyestuff_lmer <- lmer(Yield ~ 1 + (1 | Batch), data = Dyestuff)
+VarCorr(dyestuff_lmer) |> as.data.frame()
+```
+
+In this balanced design with a positive moment estimate,
+the REML estimates match the method-of-moments estimates.
+:::
+
+The method-of-moments estimate $\est\sigma_\alpha^2$ is negative whenever $\text{MSA} < \text{MSE}$,
+which is impossible for a variance;
+likelihood-based methods such as REML constrain the estimate to be nonnegative,
+and they also handle unbalanced designs
+[@rocke2021epi204; @bates2015lme4].
