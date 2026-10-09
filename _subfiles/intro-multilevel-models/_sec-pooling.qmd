@@ -1,0 +1,74 @@
+A **multilevel model** is a regression model
+whose coefficients are allowed to vary by group,
+with the group-level coefficients themselves given a model
+[@gelman2006data, Chapter 12].
+The random-effects models in @def-one-way-re and @def-nested-re
+are the simplest multilevel models.
+
+{{< slidebreak >}}
+
+:::{#exm-radon-data}
+#### Radon in Minnesota homes
+
+@gelman2006data [Chapter 12] analyze measurements of indoor radon,
+a radioactive gas that can cause lung cancer,
+from 919 houses in 85 Minnesota counties.
+We use the copy of these data distributed with the `rstanarm` R package
+[@goodrich2024rstanarm]:
+
+- `log_radon`: natural log of the radon measurement in the house;
+- `floor`: `0` if the measurement was taken in the basement, `1` if on the first floor;
+- `county`: the county the house is in;
+- `log_uranium`: natural log of the county-level soil uranium measurement.
+
+```{r}
+#| label: radon-data
+#| code-fold: show
+load(here::here("inst/extdata/radon.rda"))
+radon_n <- table(radon$county)
+summary(as.vector(radon_n))
+```
+
+The number of houses per county varies from 1 to 116.
+:::
+
+There are three ways to estimate the mean log radon level in each county
+[@gelman2006data, Chapter 12]:
+
+- **Complete pooling** ignores the counties
+and estimates every county's mean by the overall mean.
+- **No pooling** estimates each county's mean by its own sample mean $\bar{y}_j$,
+which is very noisy for counties with only one or two houses.
+- **Partial pooling** fits the random-intercept model
+$Y_{ij} = \mu + \alpha_j + \epsilon_{ij}$ for house $i$ in county $j$
+(@def-one-way-re, with the roles of the indices swapped and unequal group sizes $n_j$)
+and estimates each county's mean as a compromise between $\bar{y}_j$ and $\mu$.
+
+{{< slidebreak >}}
+
+:::{#thm-partial-pooling}
+#### Partial-pooling estimate of a group mean
+
+In the random-intercept model with known $\mu$, $\sigma_\alpha^2$, and $\sigma^2$,
+the predicted mean of group $j$, $\E{\mu + \alpha_j \mid \text{data}}$, is
+
+$$
+\est\mu_j = w_j\bar{y}_j + (1 - w_j)\mu,
+\qquad
+w_j \eqdef \frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2},
+$$ {#eq-partial-pooling}
+
+a weighted average of the group's sample mean and the overall mean,
+with weights proportional to their precisions
+[@gelman2006data, Chapter 12].
+:::
+
+The proof of @thm-partial-pooling uses the conditional distribution of one normal variable given another,
+which is beyond the scope of this chapter.
+The weight $w_j$ increases with the group size $n_j$:
+large groups keep estimates close to their own sample means,
+and small groups are pulled, or **shrunk**, toward the overall mean.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_exm-radon-shrinkage.qmd >}}

@@ -4,15 +4,53 @@
 
 #### Derivative of log-odds w.r.t. predictor
 
-By [the derivative of a linear combination](math-prereqs.qmd#thm-deriv-lincom):
+$$
+\ub{\derivf{\logodds}{\vx}}_{(p+1) \times 1}
+= \ub{\vb}_{(p+1) \times 1}
+$$ {#eq-d-logodds-d-x}
+
+:::
+
+::: proof
+Differentiating the linear predictor $\logodds(\vx) = \vx \cdot \vb$ with respect to the covariate vector $\vx$,
+using [the derivative of a linear combination](https://morrison-lab.github.io/mds/vector-calculus.html#thm-deriv-lincom):
 
 $$
 \ba
-\derivf{\logodds}{\vx} &= \deriv{\vx} \vx\cdot \vb
+\derivf{\logodds}{\vx} &= \deriv{\vx} (\vx \cdot \vb)
+&& \text{(logistic regression's linear-predictor assumption)}
 \\
 &= \vb
+&& \text{(derivative of a linear combination w.r.t. covariate vector)}
 \ea
+$$ {#eq-deriv-lincom-proof}
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-d-logodds-d-x}
+
+#### Evaluating the gradient of the log-odds
+
+Consider a logistic regression model with an intercept and one predictor,
+so $\vx = (1, x)'$,
+and coefficients $\vb = (-2, 0.5)'$.
+By @lem-d_logodds-d_x:
+
 $$
+\ba
+\derivf{\logodds}{\vx}
+&= \vb
+&& \text{(gradient of the log-odds w.r.t. the covariates)}
+\\
+&= \ub{\pmat{-2 \\ 0.5}}_{2 \times 1}
+&& \text{(substitute } \vb = (-2, 0.5)' \text{)}
+\ea
+$$ {#eq-d-logodds-d-x-example}
+
+The second entry says that increasing the predictor $x$ by one unit
+changes the log-odds by $0.5$,
+whatever the values of $x$ and the intercept term.
 :::
 
 {{< slidebreak >}}
@@ -41,7 +79,7 @@ $$\derivf{\pi}{x} = ?$$
 
 :::{#sol-logistic-slope}
 
-By @thm-d_prob-d_logodds, @lem-d_logodds-d_x, and the [chain rule](math-prereqs.qmd#thm-chain-rule):
+By @thm-d_prob-d_logodds, @lem-d_logodds-d_x, and the [chain rule](https://morrison-lab.github.io/mds/calculus.html#thm-chain-rule):
 
 $$
 \ba

@@ -1,0 +1,84 @@
+:::{#exm-radon-shrinkage}
+#### Shrinkage of county mean radon levels
+
+We fit the random-intercept model to the radon data from @exm-radon-data:
+
+```{r}
+#| label: radon-lmer0
+#| code-fold: show
+radon_lmer0 <- lmer(log_radon ~ 1 + (1 | county), data = radon)
+VarCorr(radon_lmer0) |> as.data.frame()
+fixef(radon_lmer0)
+```
+
+The estimates are
+$\est\mu \approx 1.350$,
+$\est\sigma_\alpha^2 \approx 0.0886$,
+and $\est\sigma^2 \approx 0.587$.
+Aitkin County has $n_j = 4$ houses with sample mean $\bar{y}_j \approx 0.715$.
+Plugging these estimates into @thm-partial-pooling:
+
+$$
+\ba
+w_j
+&= \frac{4 / 0.587}{4 / 0.587 + 1 / 0.0886}
+&& \text{(substitute the estimates)}
+\\
+&\approx \frac{6.81}{6.81 + 11.29}
+&& \text{(divide)}
+\\
+&\approx 0.377
+&& \text{(divide)}
+\\
+\est\mu_j
+&\approx 0.377 \times 0.715 + 0.623 \times 1.350
+&& \text{(substitute into the weighted average)}
+\\
+&\approx 1.111
+&& \text{(multiply and add)}
+\ea
+$$ {#eq-radon-shrinkage}
+
+Aitkin County's estimate moves most of the way from its own mean toward the overall mean.
+In contrast, Hennepin County has $n_j = 105$ houses,
+so its weight is about 0.94 and its estimate barely moves.
+The same calculation for every county
+reproduces the estimates that `lme4` reports:
+
+```{r}
+#| label: radon-shrinkage-check
+#| code-fold: show
+radon_vc <- as.data.frame(VarCorr(radon_lmer0))$vcov
+radon_w <- (radon_n / radon_vc[2]) /
+  (radon_n / radon_vc[2] + 1 / radon_vc[1])
+radon_ybar <- tapply(radon$log_radon, radon$county, mean)
+radon_pp <- radon_w * radon_ybar + (1 - radon_w) * fixef(radon_lmer0)
+max(abs(radon_pp - coef(radon_lmer0)$county[, 1]))
+```
+:::
+
+{{< slidebreak >}}
+
+:::{#fig-radon-shrinkage}
+
+```{r}
+#| label: radon-shrinkage-plot
+#| code-fold: true
+plot(
+  as.vector(radon_n), radon_ybar,
+  log = "x", pch = 1,
+  xlab = "Houses sampled in county (log scale)",
+  ylab = "Estimated county mean log radon"
+)
+points(as.vector(radon_n), radon_pp, pch = 19)
+abline(h = fixef(radon_lmer0), lty = 2)
+legend(
+  "topright",
+  legend = c("No pooling", "Partial pooling"),
+  pch = c(1, 19)
+)
+```
+
+No-pooling and partial-pooling estimates of the county mean log radon levels;
+the dashed line is the complete-pooling estimate.
+:::

@@ -158,7 +158,7 @@ $$\hat\Lambda(10) = \frac{1}{7} = 0.143,
 Contrast this with Kaplan-Meier, which multiplies conditional survival
 probabilities:
 
-$$\hskmf{t} = \prod_{j: t_j \le t}\left(1 - \frac{d_j}{n_j}\right),
+$$\hskmf{t} = \prod_{j: t_j \le t}\paren{1 - \frac{d_j}{n_j}},
 \qquad
 \hskmf{10} = 1 - \tfrac{1}{7} = 0.857$$
 
@@ -324,9 +324,9 @@ $$\Lik = \prod_{i=1}^n \Lik_i$$
 
 ***Non-informative censoring assumption*** (used so each contribution reduces to
 survival and hazard terms): $T_i \indpt C_i \mid \tilde X_i$, giving
-$$\Lik_i \propto \left[\f(y_i \mid \tilde x_i)\right]^{d_i}
-\left[\surv(y_i \mid \tilde x_i)\right]^{1 - d_i}
-= \surv(y_i \mid \tilde x_i)\cdot\left[\haz(y_i \mid \tilde x_i)\right]^{d_i}$$
+$$\Lik_i \propto \sb{\f(y_i \mid \tilde x_i)}^{d_i}
+\sb{\surv(y_i \mid \tilde x_i)}^{1 - d_i}
+= \surv(y_i \mid \tilde x_i)\cdot\sb{\haz(y_i \mid \tilde x_i)}^{d_i}$$
 
 **Distribution functions** (define each one):
 
@@ -418,7 +418,7 @@ table reporting the HR per **decade**), the errors were:
 On the **log** scale, the effect is linear: a change of $c$ units multiplies the
 log-hazard by $c \cdot \beta$. So the hazard ratio for a $c$-unit change is
 
-$$HR(c) = \exp{c\,\beta} = \left(\exp{\beta}\right)^c = HR^{\,c}$$
+$$HR(c) = \exp{c\,\beta} = \paren{\exp{\beta}}^c = HR^{\,c}$$
 
 A 7.5-year increase is $c = 0.75$ decades, and the per-decade
 $\widehat{HR} = 1.94$ (i.e. $\hat\beta_A = \log 1.94 = 0.66$):
@@ -519,7 +519,7 @@ symmetric normal approximation is applied to $\log(HR)$, and the endpoints are
 
 $$\text{log-scale CI:}\quad 0.42 \pm 1.96\times 0.160 = (0.106,\ 0.734)$$
 
-$$\text{HR CI:}\quad \left(e^{0.106},\ e^{0.734}\right) = (1.11,\ 2.08)$$
+$$\text{HR CI:}\quad \paren{e^{0.106},\ e^{0.734}} = (1.11,\ 2.08)$$
 
 ```{r}
 #| label: ci-hr

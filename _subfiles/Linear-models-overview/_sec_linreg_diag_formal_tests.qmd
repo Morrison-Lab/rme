@@ -3,7 +3,7 @@ Graphical diagnostics are usually the first step,
 but formal tests can provide numerical summaries.
 
 For linear regression residuals,
-three common tests are:
+four common tests are:
 
 - `fligner.test()` for equal variances across groups
   (the Fligner--Killeen test).
@@ -12,6 +12,8 @@ three common tests are:
   where standard Levene centers on group means,
   and Brown--Forsythe centers on group medians for more robustness;
   e.g., via `car::leveneTest(..., center = median)` or equivalent code).
+- `lmtest::bptest()` for error variance that changes with the covariates
+  (the Breusch--Pagan test).
 - `shapiro.test()` /
   [Shapiro--Wilk test](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test)
   for normality.
@@ -91,6 +93,12 @@ and $n_{1}, n_{2}$ are the two group sample sizes.
 Large $|t_{\text{BF}}|$
 indicates nonconstant residual variance.
 
+{{< slidebreak >}}
+
+#### Breusch--Pagan test (variance changing with covariates)
+
+{{< include _subfiles/Linear-models-overview/_sec_linreg_diag_breusch_pagan.qmd >}}
+
 ---
 
 #### Shapiro--Wilk test (normality of standardized residuals)
@@ -100,7 +108,7 @@ $r_{(1)} \le \cdots \le r_{(n)}$,
 the Shapiro--Wilk statistic is:
 $$
 W =
-\frac{\left(\sum_{i=1}^n a_i r_{(i)}\right)^2}
+\frac{\paren{\sum_{i=1}^n a_i r_{(i)}}^2}
 {\sum_{i=1}^n (r_i - \bar r)^2},
 $$
 where $a_i$ are constants from normal-order-statistic moments.
@@ -167,7 +175,7 @@ tibble(
 ```
 
 Interpretation rule:
-for all three tests,
+for all three tests in this table,
 a small p-value is evidence against the corresponding model assumption.
 
 Compared with visual diagnostics:

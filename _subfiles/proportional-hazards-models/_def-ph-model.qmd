@@ -17,7 +17,7 @@ or semi-parametric approaches.
 
 The **Cox proportional hazards** model [@cox1972regression] for a time-to-event outcome $T$ is a model where the difference in log-hazard from the baseline log-hazard is equal to a linear combination of the predictors:
 
-$$\diffloghaz(t|\vx) = \reglincomb$${#eq-ph-diffloghaz}
+$$\diffloghaz(t|\vx) \eqdef \reglincomb$${#eq-ph-diffloghaz}
 
 :::
 
@@ -31,13 +31,24 @@ Equivalently:
 
 In a proportional hazards model (that is, if @eq-ph-diffloghaz holds):
 
+$$\loghaz(t|\vx) = \loghaz_0(t) + \reglincomb$${#eq-ph-lincomp}
+
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This derivation uses @thm-loghaz-decomp and @eq-ph-diffloghaz.
+
 $$
 \ba
-\loghaz(t|\vx) &= \loghaz_0(t) + \reglincomb
-\\
-&= \loghaz_0(t) + \regbetasum
+\loghaz(t|\vx)
+&= \loghaz_0(t) + \diffloghaz(t|\vx) && \text{(log-hazard decomposition theorem)} \\
+&= \loghaz_0(t) + \reglincomb && \text{(substituting the PH model's log-hazard difference)} \\
+&= \loghaz_0(t) + \regbetasum && \text{(expanding dot product into summation)}
 \ea
-$${#eq-ph-lincomp}
+$$ {#eq-log-hazard-as-baseline-plus-1}
 
 :::
 

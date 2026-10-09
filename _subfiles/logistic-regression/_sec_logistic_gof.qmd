@@ -7,13 +7,13 @@
 #### Deviance goodness-of-fit test
 
 We can compare the maximized log-likelihood of our model,
-$\ell(\hat\beta; \mathbf x)$,
+$\llik(\hat\beta; \mathbf x)$,
 versus the log-likelihood of the full
-model (aka saturated model aka maximal model), $\ell_{\text{full}}$,
+model (aka saturated model aka maximal model), $\llik_{\text{full}}$,
 which has one parameter per covariate pattern.
 The **deviance** statistic is:
 
-$$D \eqdef 2(\ell_{\text{full}} - \ell(\hat\beta; \mathbf x))$$
+$$D \eqdef 2(\llik_{\text{full}} - \llik(\hat\beta; \mathbf x))$$
 
 With enough data,
 $D \dot \sim \chi^2(q - p)$,
@@ -80,7 +80,7 @@ min_exp_freq <- min(wcgs_gof_grouped$n * fitted(chd_glm_gof_grouped))
 ```
 
 The smallest expected event frequency across the covariate patterns is
-$\min_k \left\{ n_k \cdot \hat\pi(x_k) \right\} = `r round(min_exp_freq, 2)`$,
+$\min_k \set{ n_k \cdot \hat\pi(x_k) } = `r round(min_exp_freq, 2)`$,
 which is at least 1,
 so these grouped data meet
 the minimum-expected-frequency guideline from @dobson4e [Chapter 5]
@@ -265,10 +265,10 @@ To choose between two competing models,
 we can instead compare their fits against each other,
 using criteria that trade off fit against complexity:
 
--   AIC = $-2 * \ell(\hat\theta) + 2 * p$ \[lower is better\]
+-   AIC = $-2 * \llik(\hat\theta) + 2 * p$ \[lower is better\]
     [@akaike1974new]
     (see [the AIC definition](Linear-models-overview.qmd#def-aic))
--   BIC = $-2 * \ell(\hat\theta) + p * \text{log}(n)$ \[lower is
+-   BIC = $-2 * \llik(\hat\theta) + p * \text{log}(n)$ \[lower is
 better\]
     [@schwarz1978estimating]
     (see [the BIC definition](Linear-models-overview.qmd#def-bic))
@@ -294,14 +294,14 @@ is nested in a **full** model with $p_1 > p_0$ parameters;
 that is, the reduced model is a special case of the full model.
 The **likelihood ratio test statistic** is:
 
-$$\Lambda \eqdef 2(\ell_{\text{full}}(\hat\theta_1) - \ell_{\text{red}}(\hat\theta_0))$$
+$$\Lambda \eqdef 2(\llik_{\text{full}}(\hat\theta_1) - \llik_{\text{red}}(\hat\theta_0))$$
 
 where $\hat\theta_1$ and $\hat\theta_0$ are
 the maximum likelihood estimates
 of the full and reduced models, respectively.
 Under the null hypothesis that the reduced model is adequate,
 $\Lambda \dot \sim \chi^2(p_1 - p_0)$
-by [Wilks' theorem](intro-MLEs.qmd#thm-wilks).
+by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 The **likelihood ratio test (LRT)** rejects the reduced model
 when $\Lambda$ is large relative to that $\chi^2(p_1 - p_0)$ distribution.
 
@@ -353,7 +353,7 @@ Here the test statistic is:
 $$
 \ba
 \Lambda
-&\eqdef 2(\ell_{\text{full}}(\hat\theta_1) - \ell_{\text{red}}(\hat\theta_0))
+&\eqdef 2(\llik_{\text{full}}(\hat\theta_1) - \llik_{\text{red}}(\hat\theta_0))
 && \text{(definition of the LRT statistic)}
 \\ &= 2 \times (`r round(llik_full_chd, 2)` - (`r round(llik_red_chd, 2)`))
 && \text{(substituting the two maximized log-likelihoods)}

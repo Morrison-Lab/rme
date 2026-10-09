@@ -18,9 +18,9 @@ AIC and BIC can be used to compare both nested and non-nested models.
 :::{#def-aic}
 #### Akaike Information Criterion (AIC)
 
-$$\text{AIC} = -2 \ell(\hat\theta) + 2 p$$
+$$\text{AIC} = -2 \llik(\hat\theta) + 2 p$$
 
-where $\ell(\hat\theta)$ is the log-likelihood evaluated at the
+where $\llik(\hat\theta)$ is the log-likelihood evaluated at the
 maximum-likelihood estimates $\hat\theta$,
 $p$ is the number of estimated parameters
 (including $\hat\sigma^2$ for Gaussian models),
@@ -32,9 +32,9 @@ and $n$ is the number of observations.
 :::{#def-bic}
 #### Bayesian Information Criterion (BIC)
 
-$$\text{BIC} = -2 \ell(\hat\theta) + p \log(n)$$
+$$\text{BIC} = -2 \llik(\hat\theta) + p \log(n)$$
 
-where $\ell(\hat\theta)$, $p$, and $n$ are defined as in @def-aic.
+where $\llik(\hat\theta)$, $p$, and $n$ are defined as in @def-aic.
 :::
 
 ---
@@ -43,7 +43,7 @@ where $\ell(\hat\theta)$, $p$, and $n$ are defined as in @def-aic.
 
 Each criterion has two components:
 
--   **Fit term** ($-2\ell(\hat\theta)$):
+-   **Fit term** ($-2\llik(\hat\theta)$):
     measures lack of fit — lower is better.
     A model with more parameters will always achieve a higher (or equal)
     log-likelihood on the observed data.
@@ -309,11 +309,11 @@ lrtest(lm_max, bw_lm2)
 ```
 
 The likelihood ratio statistic for this test is 
-$$\lambda = 2 * (\ell_{\text{full}} - \ell) = `r 2 * (logLik(lm_max) - logLik(bw_lm2))`$$ 
+$$\lambda = 2 * (\llik_{\text{full}} - \llik) = `r 2 * (logLik(lm_max) - logLik(bw_lm2))`$$ 
 where:
 
--   $\ell_{\text{full}}$ is the log-likelihood of the full model: `r logLik(lm_max)`
--   $\ell$ is the log-likelihood of our comparison model (two slopes, two intercepts): `r logLik(bw_lm2)`
+-   $\llik_{\text{full}}$ is the log-likelihood of the full model: `r logLik(lm_max)`
+-   $\llik$ is the log-likelihood of our comparison model (two slopes, two intercepts): `r logLik(bw_lm2)`
 
 This statistic is called the **deviance** or **residual deviance** for our two-slopes and two-intercepts model; it tells us how much the likelihood of that model deviates from the likelihood of the maximal model.
 
@@ -374,10 +374,10 @@ And we can compare it to more complicated models using a likelihood ratio test:
 lrtest(bw_lm2, lm0)
 ```
 
-The likelihood ratio statistic for the test comparing the null model to the maximal model is $$\lambda = 2 * (\ell_{\text{full}} - \ell_{0}) = `r 2 * (logLik(lm_max) - logLik(lm0))`$$ where:
+The likelihood ratio statistic for the test comparing the null model to the maximal model is $$\lambda = 2 * (\llik_{\text{full}} - \llik_{0}) = `r 2 * (logLik(lm_max) - logLik(lm0))`$$ where:
 
--   $\ell_{\text{0}}$ is the log-likelihood of the null model: `r logLik(lm0)`
--   $\ell_{\text{full}}$ is the log-likelihood of the maximal model: `r logLik(lm_max)`
+-   $\llik_{\text{0}}$ is the log-likelihood of the null model: `r logLik(lm0)`
+-   $\llik_{\text{full}}$ is the log-likelihood of the maximal model: `r logLik(lm_max)`
 
 In R, this test is:
 

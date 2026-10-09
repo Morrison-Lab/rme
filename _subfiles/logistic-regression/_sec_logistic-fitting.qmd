@@ -364,7 +364,7 @@ Implement and graph the score function for the beetles data
 
 {{< slidebreak >}}
 
-Setting $\ell'(\vb; \vy) = 0$ gives us:
+Setting $\score(\vb; \vy) = 0$ gives us:
 
 
 $$\sumin \cb{\ub{\vx_i}_{(p+1) \times 1} \ub{\paren{y_i - \expitf{\tp{\vx_i}\vb}}}_{1 \times 1} } = \mathbf{0}_{(p+1) \times 1}$$ {#eq-score-logistic}
@@ -374,10 +374,10 @@ $$\sumin \cb{\ub{\vx_i}_{(p+1) \times 1} \ub{\paren{y_i - \expitf{\tp{\vx_i}\vb}
 
 ::: notes
 
-In general, the estimating equation $\ell'(\vb; \vy) = 0$ 
+In general, the estimating equation $\score(\vb; \vy) = 0$ 
 cannot be solved analytically.
 
-Instead, we can use the [Newton-Raphson method](intro-MLEs.qmd#sec-newton-raphson):
+Instead, we can use the [Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson):
 
 :::
 
@@ -412,7 +412,7 @@ beetles_glm_ungrouped <-
 ::: notes
 
 After each iteration of the fitting procedure, the deviance
-($2(\ell_{\text{full}} - \ell(\hat\beta))$ ) is printed. 
+($2(\llik_{\text{full}} - \llik(\hat\beta))$ ) is printed. 
 You can see that 
 the algorithm took 5 iterations to converge to a solution where
 the likelihood wasn't changing much anymore.

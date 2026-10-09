@@ -1,0 +1,79 @@
+:::{#def-icc}
+#### Intraclass correlation
+
+Under @def-one-way-re,
+the **intraclass correlation** is the correlation
+between two observations $j \neq k$ in the same group:
+
+$$
+\rho \eqdef \frac{\Cov{Y_{ij}, Y_{ik}}}{\sqrt{\Var{Y_{ij}}\Var{Y_{ik}}}}
+$$ {#eq-icc}
+:::
+
+{{< slidebreak >}}
+
+:::{#cor-icc}
+#### Intraclass correlation in terms of variance components
+
+Under @def-one-way-re,
+
+$$
+\rho = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}.
+$$ {#eq-icc-vc}
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This proof uses @thm-re-cov.
+
+$$
+\ba
+\rho
+&\eqdef \frac{\Cov{Y_{ij}, Y_{ik}}}{\sqrt{\Var{Y_{ij}}\Var{Y_{ik}}}}
+&& \text{(definition of intraclass correlation)}
+\\
+&= \frac{\sigma_\alpha^2}{\sqrt{\Var{Y_{ij}}\Var{Y_{ik}}}}
+&& \text{(covariance from the moments theorem)}
+\\
+&= \frac{\sigma_\alpha^2}{\sqrt{(\sigma_\alpha^2 + \sigma^2)(\sigma_\alpha^2 + \sigma^2)}}
+&& \text{(variances from the moments theorem)}
+\\
+&= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}
+&& \text{(square root of a square)}
+\ea
+$$ {#eq-icc-vc-proof}
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-dyestuff-icc}
+#### Intraclass correlation for the dyestuff batches
+
+With the variance components from @exm-dyestuff-cov,
+@cor-icc gives
+
+$$
+\ba
+\rho
+&= \frac{1764}{1764 + 2451}
+&& \text{(substitute the variance components)}
+\\
+&= \frac{1764}{4215}
+&& \text{(add)}
+\\
+&\approx 0.4185
+&& \text{(divide)}
+\\
+&\approx 0.42
+&& \text{(round to two decimal places)}
+\ea
+$$ {#eq-dyestuff-icc}
+
+so about 42% of the variation in yield is between batches.
+:::
+
+The intraclass correlation is also the fraction of the total variance
+$\Var{Y_{ij}} = \sigma_\alpha^2 + \sigma^2$
+that comes from the random effect.

@@ -1,0 +1,50 @@
+The simplest model with a random effect has one grouping factor and no covariates
+[@rocke2021epi204; @dobson4e, Chapter 11].
+
+{{< slidebreak >}}
+
+:::{#def-one-way-re}
+#### One-way random-effects model
+
+Suppose we observe $m$ outcomes $Y_{i1}, \ldots, Y_{im}$
+in each of $a$ groups $i = 1, \ldots, a$.
+The **one-way random-effects model** is
+$$
+Y_{ij} \eqdef \mu + \alpha_i + \epsilon_{ij},
+$$ {#eq-one-way-re}
+where:
+
+- $\mu$ is a fixed overall mean;
+- $\alpha_1, \ldots, \alpha_a \siid \ndist{0, \sigma_\alpha^2}$
+are the **random effects** of the groups;
+- $\epsilon_{ij} \siid \ndist{0, \sigma^2}$ are the within-group errors;
+- the $\alpha_i$s and the $\epsilon_{ij}$s are mutually independent.
+
+The variances $\sigma_\alpha^2$ and $\sigma^2$
+are called **variance components**.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-dyestuff}
+#### Batches of dyestuff
+
+The `Dyestuff` data in the `lme4` package [@bates2015lme4]
+record the yield of dyestuff (in grams of standard color)
+from $m = 5$ preparations in each of $a = 6$ batches of an intermediate product.
+The batches are a sample of all the batches the process could produce,
+so a one-way random-effects model treats
+$\alpha_i$ as the deviation of batch $i$'s mean yield from the overall mean $\mu$.
+
+```{r}
+#| label: dyestuff-data
+#| code-fold: show
+with(Dyestuff, tapply(Yield, Batch, mean))
+```
+:::
+
+{{< include _subfiles/intro-multilevel-models/_thm-re-cov.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_def-icc.qmd >}}

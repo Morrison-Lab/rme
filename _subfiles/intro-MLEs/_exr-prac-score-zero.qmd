@@ -5,9 +5,9 @@
 
 Let $X_1, \ldots, X_n \siid \Pois(\rate)$.
 
-**(a)** Write the log-likelihood $\ell(\rate; \vx)$.
+**(a)** Write the log-likelihood $\llik(\rate; \vx)$.
 
-**(b)** Derive the score function $\ell'(\rate; \vx)$.
+**(b)** Derive the score function $\score(\rate; \vx)$.
 
 **(c)** Show that $\hat\rate_{ML} = \bar{x}$,
 and verify that the score equals zero at the MLE.
@@ -22,7 +22,7 @@ why does the score being zero at $\hat\rate_{ML}$ make sense?
 
 $$
 \ba
-\ell(\rate; \vx)
+\llik(\rate; \vx)
 &= \logf{\prod_{i=1}^n \frac{\rate^{x_i} e^{-\rate}}{x_i!}}
 \\
 &= \sum_{i=1}^n \paren{x_i \logf{\rate} - \rate - \logf{x_i!}}
@@ -35,7 +35,7 @@ $$
 
 $$
 \ba
-\ell'(\rate; \vx)
+\score(\rate; \vx)
 &= \deriv{\rate}\sb{\paren{\sum_{i=1}^n x_i}\logf{\rate} - n\rate}
 \\
 &= \frac{\sum_{i=1}^n x_i}{\rate} - n
@@ -46,7 +46,7 @@ $$
 
 **(c)**
 
-Setting $\ell'(\rate; \vx) = 0$:
+Setting $\score(\rate; \vx) = 0$:
 
 $$
 \ba
@@ -63,7 +63,7 @@ then
 
 $$
 \ba
-\ell'(\bar{x}; \vx)
+\score(\bar{x}; \vx)
 &= \frac{n\bar{x}}{\bar{x}} - n
 \\
 &= n - n
@@ -76,10 +76,10 @@ If instead all $x_i = 0$,
 then $\bar{x} = 0$ and $\hat\rate_{ML} = 0$ is a boundary value.
 In that case,
 the score formula
-$\ell'(\rate; \vx) = \frac{n\bar{x}}{\rate} - n$
+$\score(\rate; \vx) = \frac{n\bar{x}}{\rate} - n$
 is not defined at $\rate = 0$,
 so the usual interior verification
-$\ell'(\hat\rate_{ML}; \vx) = 0$
+$\score(\hat\rate_{ML}; \vx) = 0$
 does not apply.
 
 **(d)**

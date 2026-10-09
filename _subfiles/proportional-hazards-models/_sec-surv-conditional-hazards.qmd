@@ -103,6 +103,20 @@ $$
 
 {{< slidebreak >}}
 
+::: proof
+
+$$
+\ba
+\expf{\loghaz(t|\vx)}
+&\eqdef \expf{\logf{\haz(t|\vx)}} && \text{(definition of log-hazard)} \\
+&= \haz(t|\vx) && \text{(the exponential function inverts the logarithm)}
+\ea
+$$ {#eq-hazard-from-log-hazard-1}
+
+:::
+
+{{< slidebreak >}}
+
 {{< include _subfiles/proportional-hazards-models/_def-diffloghaz.qmd >}}
 
 {{< slidebreak >}}
@@ -137,5 +151,22 @@ $$
 #### Difference of log-hazard from baseline equals log of the hazard factor
 
 $$\diffloghaz(t|\vx) = \logf{\hazfactor(t| \vx)}$$
+
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This derivation uses @thm-diff-loghaz.
+
+$$
+\ba
+\diffloghaz(t|\vx)
+&\eqdef \diffloghaz(t|\vx : \vzero) && \text{(definition of log-hazard difference from baseline)} \\
+&= \logf{\hr(t|\vx : \vzero)} && \text{(applying the log-hazard-difference theorem with } \vxs = \vzero\text{)} \\
+&\eqdef \logf{\hazfactor(t|\vx)} && \text{(definition of hazard factor } \hazfactor(t|\vx) \eqdef \hr(t|\vx : \vzero)\text{)}
+\ea
+$$ {#eq-difference-of-log-hazard-from-1}
 
 :::

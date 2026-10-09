@@ -1,0 +1,80 @@
+A model can have more than one level of random effects.
+When each lower-level group belongs to exactly one higher-level group,
+the random effects are **nested**
+[@rocke2021epi204].
+
+{{< slidebreak >}}
+
+:::{#def-nested-re}
+#### Two-level nested random-effects model
+
+Suppose $a$ laboratories each analyze $b$ batches,
+with $r$ replicate measurements per batch.
+The **two-level nested random-effects model** is
+
+$$
+Y_{ijk} \eqdef \mu + L_i + B_{ij} + \epsilon_{ijk},
+$$ {#eq-nested-re}
+
+where $L_i \siid \ndist{0, \sigma_L^2}$ is the effect of laboratory $i$,
+$B_{ij} \siid \ndist{0, \sigma_B^2}$ is the effect of batch $j$ within laboratory $i$,
+$\epsilon_{ijk} \siid \ndist{0, \sigma^2}$ is the replicate error,
+and all three sets of random variables are mutually independent.
+:::
+
+By the same argument as @thm-ems-one-way,
+the expected mean squares of the nested ANOVA are
+$\E{\text{MS}_L} = br\sigma_L^2 + r\sigma_B^2 + \sigma^2$,
+$\E{\text{MS}_B} = r\sigma_B^2 + \sigma^2$,
+and $\E{\text{MS}_E} = \sigma^2$
+[@rocke2021epi204].
+So the correct $F$ test for laboratories divides $\text{MS}_L$ by $\text{MS}_B$,
+not by $\text{MS}_E$.
+
+{{< slidebreak >}}
+
+:::{#exm-coop}
+#### A cooperative trial
+
+The `coop` data in the `MASS` package [@venables2002modern]
+come from a cooperative trial
+in which $a = 6$ laboratories each analyzed $b = 3$ batches,
+a month apart,
+with $r = 2$ replicates per batch.
+We use the measurements of specimen `S1`:
+
+```{r}
+#| label: coop-anova
+#| code-fold: show
+coop2 <- subset(MASS::coop, Spc == "S1")
+anova(lm(Conc ~ Lab + Lab:Bat, data = coop2))
+```
+
+The `Lab:Bat` term is the batch-within-laboratory effect.
+The $F$ statistic that `anova()` prints for `Lab` uses $\text{MS}_E$ as its denominator,
+which is wrong here;
+the correct statistic is
+$F = 0.37804 / 0.01703 \approx 22.2$ on $(5, 12)$ degrees of freedom.
+
+The equivalent mixed model has a random intercept for each laboratory
+and for each batch within each laboratory:
+
+```{r}
+#| label: coop-lmer
+#| code-fold: show
+coop_lmer <- lmer(Conc ~ 1 + (1 | Lab) + (1 | Lab:Bat), data = coop2)
+VarCorr(coop_lmer) |> as.data.frame()
+```
+
+The estimated variance components are
+$\est\sigma^2 \approx 0.0063$ (same-day replicates),
+$\est\sigma_B^2 \approx 0.0054$ (batches a month apart),
+and $\est\sigma_L^2 \approx 0.0602$ (laboratories).
+Most of the variation in the measurements comes from differences between laboratories.
+:::
+
+Testing whether a variance component is zero is harder than testing a fixed effect,
+because $\sigma^2 = 0$ lies on the boundary of the parameter space:
+a variance cannot be negative,
+so the usual large-sample distribution of the likelihood ratio statistic does not apply
+[@rocke2021epi204].

@@ -67,7 +67,7 @@ outcome (survival greater than $u_j$) so the log-likelihood is
 
 $$
 \ba
-\ell_j(\haz) &= \logf{\ef{-\haz u_j}}
+\llik_j(\haz) &= \logf{\ef{-\haz u_j}}
 \\ &= -\haz u_j
 \ea
 $$
@@ -90,9 +90,9 @@ $$ {#eq-mle-exp}
 
 $$
 \ba
-\ell(\haz) &= \sum_{i=1}^m(\logf{\haz}-\haz t_i) + \sum_{j=1}^k (-\haz u_j)\\
+\llik(\haz) &= \sum_{i=1}^m(\logf{\haz}-\haz t_i) + \sum_{j=1}^k (-\haz u_j)\\
 &= m \logf{\haz} -(T+U)\haz\\
-\ell'(\haz)
+\score(\haz)
 &=m\haz^{-1} -(T+U)\\
 \hat{\haz} &= \frac{m}{T+U}
 \ea
@@ -103,7 +103,7 @@ $$
 
 $$
 \ba
-\ell''&=-m/\haz^2\\
+\hess&=-m/\haz^2\\
 &< 0\\
 \hat E[T] &= \hat\haz^{-1}\\
 &= \frac{T+U}{m}
@@ -116,12 +116,12 @@ $$
 
 $$
 \ba
-\E{-\ell''}
+\E{-\hess}
 & = m/\haz^2\\
 \Varf{\hat\haz}
-&\approx \invf{\E{-\ell''}}\\
+&\approx \invf{\E{-\hess}}\\
 &=\haz^2/m\\
-\text{SE}\left(\hat\haz\right)
+\text{SE}\paren{\hat\haz}
 &= \sqrt{\Varf{\hat\haz}}\\
 &\approx \haz/\sqrt{m}
 \ea

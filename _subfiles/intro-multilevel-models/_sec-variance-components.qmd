@@ -1,0 +1,22 @@
+One way to estimate the variance components
+uses the mean squares from a one-way analysis of variance (ANOVA) table
+[@rocke2021epi204].
+Write $\bar{Y}_{i\cdot} \eqdef \frac{1}{m}\sum_{j=1}^m Y_{ij}$ for the mean of group $i$
+and $\bar{Y}_{\cdot\cdot} \eqdef \frac{1}{a}\sum_{i=1}^a \bar{Y}_{i\cdot}$ for the overall mean.
+The **between-group mean square** and the **within-group mean square** are
+
+$$
+\ba
+\text{MSA} &\eqdef \frac{m}{a-1}\sum_{i=1}^a \paren{\bar{Y}_{i\cdot} - \bar{Y}_{\cdot\cdot}}^2,
+\\
+\text{MSE} &\eqdef \frac{1}{a(m-1)}\sum_{i=1}^a\sum_{j=1}^m \paren{Y_{ij} - \bar{Y}_{i\cdot}}^2.
+\ea
+$$ {#eq-mean-squares}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_thm-ems-one-way.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_cor-mom-vc.qmd >}}

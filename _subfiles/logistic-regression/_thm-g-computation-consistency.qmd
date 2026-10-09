@@ -30,7 +30,7 @@ $$
 && \text{[definition of the estimator]}
 \\
 &= \frac{1}{n}\sumin \teal{\pi(a, z_i)}
-+ \frac{1}{n}\sumin \left(\hat\pi(a, z_i) - \teal{\pi(a, z_i)}\right)
++ \frac{1}{n}\sumin \paren{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
 && \text{[add and subtract the true risks]}
 \ea
 $$
@@ -47,14 +47,14 @@ Then
 
 $$
 \ba
-\left|\hat\pi(a, z_i) - \teal{\pi(a, z_i)}\right|
-&= \left|\expitf{x_{a,i}'\hat\beta} - \expitf{x_{a,i}'\beta^*}\right|
+\abs{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
+&= \abs{\expitf{x_{a,i}'\hat\beta} - \expitf{x_{a,i}'\beta^*}}
 && \text{[risk as logistic link of the linear predictor]}
 \\
-&\le \tfrac{1}{4}\left|x_{a,i}'\hat\beta - x_{a,i}'\beta^*\right|
+&\le \tfrac{1}{4}\abs{x_{a,i}'\hat\beta - x_{a,i}'\beta^*}
 && \text{[$\expit$ is $\tfrac{1}{4}$-Lipschitz, by the mean value theorem]}
 \\
-&= \tfrac{1}{4}\left|x_{a,i}'(\hat\beta - \beta^*)\right|
+&= \tfrac{1}{4}\abs{x_{a,i}'(\hat\beta - \beta^*)}
 && \text{[factor out $x_{a,i}'$]}
 \\
 &\le \tfrac{1}{4}\,\|x_{a,i}\|\,\|\hat\beta - \beta^*\|
@@ -68,7 +68,7 @@ $$
 uniformly in $i$, giving
 
 $$
-\frac{1}{n}\sumin \left|\hat\pi(a, z_i) - \teal{\pi(a, z_i)}\right|
+\frac{1}{n}\sumin \abs{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
 \le \tfrac{B}{4}\,\|\hat\beta - \beta^*\| \overset{p}{\to} 0
 $$
 
@@ -98,7 +98,7 @@ $$
 \ba
 \hat\pi_a
 &= \frac{1}{n}\sumin \teal{\pi(a, z_i)}
-+ \frac{1}{n}\sumin \left(\hat\pi(a, z_i) - \teal{\pi(a, z_i)}\right)
++ \frac{1}{n}\sumin \paren{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
 && \text{[add-and-subtract decomposition]}
 \\
 &\overset{p}{\to} \E{\teal{\pi(a, Z)}} + 0
