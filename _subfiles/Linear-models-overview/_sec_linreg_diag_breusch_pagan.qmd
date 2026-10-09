@@ -1,7 +1,7 @@
 The Fligner--Killeen and Levene tests compare residual variances
 across the levels of a grouping variable.
 The Breusch--Pagan test instead asks
-whether the residual variance changes
+whether the error variance changes
 with the covariates themselves,
 which can be continuous
 [@breusch1979simple].
@@ -39,7 +39,8 @@ the statistic is half of that regression's explained sum of squares.
 :::{#thm-breusch-pagan-null}
 #### Null distribution of the Breusch--Pagan statistic
 
-Under the null hypothesis that the residual variance does not depend on $z_i$,
+Under the null hypothesis that the error variance is constant,
+$\Var{Y_i \mid z_i} = \sigma^2$ for every $i$,
 both versions of the Breusch--Pagan statistic
 are approximately $\chi^2_q$ in large samples.
 The original version also assumes Gaussian errors
@@ -52,11 +53,16 @@ the studentized version does not
 The proof uses large-sample score-test theory,
 which is beyond the scope of these notes;
 see @breusch1979simple and @koenker1981note.
+
+The null hypothesis concerns the errors, not the residuals:
+even when the error variance is constant,
+the residual variances differ with leverage
+(@eq-var-resid-leverage).
 :::
 
 Large values of the statistic,
 and small p-values,
-suggest that the residual variance changes with $z_i$.
+suggest that the error variance changes with $z_i$.
 
 {{< slidebreak >}}
 
