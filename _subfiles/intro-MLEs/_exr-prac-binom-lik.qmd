@@ -13,14 +13,16 @@ $$
 
 Assume $0 < y < n$ so the MLE lies in the interior of $(0, 1)$.
 
-**(a)** Write the log-likelihood $\ell(\pi; y)$ for a single observation $y$.
+**(a)** Write the log-likelihood $\llik(\pi; y)$ for a single observation $y$.
 
-**(b)** Derive the score function $\ell'(\pi; y) \eqdef \deriv{\pi}\ell(\pi; y)$.
+**(b)** Derive the score function
+$\score(\pi; y) \eqdef \deriv{\pi}\llik(\pi; y)$.
 
 **(c)** Set the score equal to zero and solve for $\hat\pi_{ML}$.
 Confirm that $\hat\pi_{ML} = y/n$.
 
-**(d)** Compute the second derivative $\ell''(\pi; y)$ and verify that it is negative,
+**(d)** Compute the second derivative
+$\hess(\pi; y)$ and verify that it is negative,
 confirming a maximum.
 :::
 
@@ -30,7 +32,7 @@ confirming a maximum.
 
 $$
 \ba
-\ell(\pi; y)
+\llik(\pi; y)
 &= \logf{\binom{n}{y} \pi^y (1-\pi)^{n-y}}
 \\
 &= \logf{\binom{n}{y}} + y\logf{\pi} + (n-y)\logf{1-\pi}
@@ -43,7 +45,7 @@ $$
 
 $$
 \ba
-\ell'(\pi; y)
+\score(\pi; y)
 &= \deriv{\pi}\sb{y\logf{\pi} + (n-y)\logf{1-\pi}}
 \\
 &= \frac{y}{\pi} - \frac{n-y}{1-\pi}
@@ -56,7 +58,7 @@ $$
 
 **(c)**
 
-Setting $\ell'(\pi; y) = 0$:
+Setting $\score(\pi; y) = 0$:
 
 $$
 \ba
@@ -72,7 +74,7 @@ $$
 
 $$
 \ba
-\ell''(\pi; y)
+\hess(\pi; y)
 &= \deriv{\pi}\sb{\frac{y}{\pi} - \frac{n-y}{1-\pi}}
 \\
 &= -\frac{y}{\pi^2} - \frac{n-y}{(1-\pi)^2}
@@ -81,7 +83,7 @@ $$
 
 Since $y \geq 0$, $n - y \geq 0$, and $\pi \in (0,1)$,
 each term is non-positive,
-and $\ell''(\hat\pi_{ML}; y) < 0$ whenever $0 < y < n$,
+and $\hess(\hat\pi_{ML}; y) < 0$ whenever $0 < y < n$,
 confirming $\hat\pi_{ML} = y/n$ is a maximum.
 
 :::

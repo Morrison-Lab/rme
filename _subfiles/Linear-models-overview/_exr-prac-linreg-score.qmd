@@ -7,9 +7,9 @@
 Using the log-likelihood from @exr-prac-linreg-lik,
 derive the score equations for $\beta_0$ and $\beta_1$.
 Specifically, compute
-$\frac{\partial \ell}{\partial \beta_0} = 0$
+$\frac{\partial \llik}{\partial \beta_0} = 0$
 and
-$\frac{\partial \ell}{\partial \beta_1} = 0$,
+$\frac{\partial \llik}{\partial \beta_1} = 0$,
 and show they are equivalent to the normal equations:
 
 $$
@@ -26,7 +26,7 @@ $$
 From @exr-prac-linreg-lik:
 
 $$
-\ell = -\frac{n}{2}\logf{2\pi\sigma^2}
+\llik = -\frac{n}{2}\logf{2\pi\sigma^2}
        - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2
 $$
 
@@ -34,7 +34,7 @@ $$
 
 $$
 \ba
-\deriv{\beta_0}\ell
+\deriv{\beta_0}\llik
 &= -\frac{1}{2\sigma^2}\deriv{\beta_0}\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2
 \\
 &= -\frac{1}{2\sigma^2}\sum_{i=1}^n 2(y_i - \beta_0 - \beta_1 x_i)(-1)
@@ -57,7 +57,7 @@ $$
 
 $$
 \ba
-\deriv{\beta_1}\ell
+\deriv{\beta_1}\llik
 &= \frac{1}{\sigma^2}\sum_{i=1}^n x_i(y_i - \beta_0 - \beta_1 x_i)
 \ea
 $$
