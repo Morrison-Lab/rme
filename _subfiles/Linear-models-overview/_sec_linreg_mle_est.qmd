@@ -184,8 +184,8 @@ $$
 
 $$
 \ba
-\ell'_{\vb}
-&\eqdef \deriv{\vb}\ell
+\score_{\vb}
+&\eqdef \deriv{\vb}\llik
 && \text{(total log-likelihood score vector w.r.t. } \vb\text{)}
 \\
 &= \deriv{\vb} \sumin \llik_i
@@ -215,7 +215,7 @@ we set the score vector equal to the zero vector.
 The score equation for $\vb$ is:
 
 $$
-\ell'_{\vb} = \mathbf{0}_{(p+1) \times 1}
+\score_{\vb} = \mathbf{0}_{(p+1) \times 1}
 $$
 
 Since $\ss > 0$, multiplying by $\ss$ gives the equivalent condition:
@@ -299,7 +299,7 @@ $$
 &\eqdef \deriv{\tp{\vb}}\deriv{\vb} \llik
 && \text{(total Hessian matrix definition)}
 \\
-&= \deriv{\tp{\vb}} \ell'
+&= \deriv{\tp{\vb}} \score
 && \text{(derivative of total score vector)}
 \\
 &= \deriv{\tp{\vb}} \sumin \llik_i'
@@ -336,7 +336,7 @@ The total log-likelihood gradient with respect to $\vb$ is:
 
 $$
 \ba
-\ell'_{\vb}(\vy \mid \mx, \vb, \ss)
+\score_{\vb}(\vy \mid \mx, \vb, \ss)
 &\eqdef \deriv{\vb}\llik(\vy \mid \mx, \vb, \ss)
 && \text{(definition of score vector)}
 \\
@@ -406,11 +406,11 @@ $$
 \ea
 $${#eq-scorefun-linreg}
 
-Multiplying the sum-of-squared-residuals gradient by the scalar factor $-\frac{1}{2\ss}$ yields the full log-likelihood score vector $\ell'_{\vb}$:
+Multiplying the sum-of-squared-residuals gradient by the scalar factor $-\frac{1}{2\ss}$ yields the full log-likelihood score vector $\score_{\vb}$:
 
 $$
 \ba
-\ell'_{\vb}
+\score_{\vb}
 &= -\frac{1}{2\ss} \paren{-2\tp{\mX}\veps}
 && \text{(scale gradient by log-likelihood factor)}
 \\

@@ -8,12 +8,12 @@ Consider the Poisson log-linear model
 $\logf{\mu_i} = \beta_0 + \beta_1 x_i$,
 with $Y_i \mid x_i \simind \Pois(\mu_i)$.
 
-**(a)** Write the log-likelihood $\ell(\beta_0, \beta_1; \vy, \vx)$.
+**(a)** Write the log-likelihood $\llik(\beta_0, \beta_1; \vy, \vx)$.
 
 **(b)** Derive the score equations
-$\deriv{\beta_0}\ell = 0$
+$\deriv{\beta_0}\llik = 0$
 and
-$\deriv{\beta_1}\ell = 0$.
+$\deriv{\beta_1}\llik = 0$.
 
 **(c)** Interpret the score equations:
 what condition on the fitted values $\emu_i$ do they imply?
@@ -25,7 +25,7 @@ what condition on the fitted values $\emu_i$ do they imply?
 
 $$
 \ba
-\ell(\beta_0, \beta_1; \vy, \vx)
+\llik(\beta_0, \beta_1; \vy, \vx)
 &= \sum_{i=1}^n \paren{y_i \logf{\mu_i} - \mu_i - \logf{y_i!}}
 \\
 &\propto \sum_{i=1}^n \paren{y_i \logf{\mu_i} - \mu_i}
@@ -41,7 +41,7 @@ Using the chain rule with $\deriv{\beta_j}\mu_i = \mu_i x_{ij}$
 (where $x_{i0} = 1$ and $x_{i1} = x_i$):
 
 $$
-\deriv{\beta_j}\ell
+\deriv{\beta_j}\llik
 = \sum_{i=1}^n \paren{\frac{y_i}{\mu_i} - 1}\mu_i x_{ij}
 = \sum_{i=1}^n (y_i - \mu_i) x_{ij}
 $$
@@ -50,10 +50,10 @@ Setting the score equations to zero:
 
 $$
 \ba
-\deriv{\beta_0}\ell = 0
+\deriv{\beta_0}\llik = 0
 &\;\Rightarrow\; \sum_{i=1}^n (y_i - \mu_i) = 0
 \\
-\deriv{\beta_1}\ell = 0
+\deriv{\beta_1}\llik = 0
 &\;\Rightarrow\; \sum_{i=1}^n x_i(y_i - \mu_i) = 0
 \ea
 $$

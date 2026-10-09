@@ -188,7 +188,7 @@ First we find the log-likelihood:
 $$
 \begin{aligned}
 \mathcal{L}_{\mathbb{X}}(\pi) &= \pi^{\sum_{i=1}^n x_i} (1-\pi)^{n-\sum_{i=1}^n x_i}\\
-\ell(\pi) &= \log\mathcal{L}_{\mathbb{X}}(\pi)\\
+\llik(\pi) &= \log\mathcal{L}_{\mathbb{X}}(\pi)\\
 &= \log(\pi){\sum_{i=1}^n x_i} +  \log(1-\pi)\left(n-\sum_{i=1}^n x_i\right)\\
 \end{aligned}
 $$
@@ -197,7 +197,7 @@ $$
 Then we take the first derivative of the log-likelihood:
 $$
 \begin{aligned}
-\ell'(\pi) = \frac{\partial}{\partial\pi}\ell(\pi) &= \frac{1}{\pi}\left(\frac{\partial}{\partial\pi}\pi\right){\sum_{i=1}^n x_i} +   \frac{1}{(1-\pi)}\left(\frac{\partial}{\partial\pi}(1-\pi)\right)\left(n-\sum_{i=1}^n x_i\right)\\
+\score(\pi) = \frac{\partial}{\partial\pi}\llik(\pi) &= \frac{1}{\pi}\left(\frac{\partial}{\partial\pi}\pi\right){\sum_{i=1}^n x_i} +   \frac{1}{(1-\pi)}\left(\frac{\partial}{\partial\pi}(1-\pi)\right)\left(n-\sum_{i=1}^n x_i\right)\\
 &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\left(n-\sum_{i=1}^n x_i\right)\\
 \end{aligned}
 $$
@@ -205,7 +205,7 @@ $$
 Then we set the first derivative of the log-likelihood to 0 and solve for $\pi$.
 $$
 \begin{aligned}
-0 &= \ell'(\pi)\\
+0 &= \score(\pi)\\
 0  &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\left(n-\sum_{i=1}^n x_i\right)\\
 0  &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi} +\frac{1}{1-\pi} \sum_{i=1}^n x_i\\
 0  &= \left(\frac{1}{\pi}+\frac{1}{1-\pi}\right){\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
@@ -223,7 +223,7 @@ To ensure we have found a value that maximizes the likelihood, we check that the
 
 $$
 \begin{aligned}
-\ell''(\pi) &= \frac{\partial^2}{\partial\pi^2}\ell(\pi) = \frac{\partial}{\partial\pi}\ell'(\pi)\\
+\hess(\pi) &= \frac{\partial^2}{\partial\pi^2}\llik(\pi) = \frac{\partial}{\partial\pi}\score(\pi)\\
 &= \frac{-1}{\pi^2}\left(\frac{\partial}{\partial\pi}\pi\right){\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\left(\frac{\partial}{\partial\pi}(1-\pi)\right)\left(n-\sum_{i=1}^n x_i\right)\\
 &= \frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\\
 \end{aligned}
@@ -260,10 +260,12 @@ We can calculate the MLE of $\pi$ either by calculating the mean of the data $\b
 
 \  
 
-The asymptotic distribution of the MLE is given by $\hat{\pi}_{\text{ML}} \sim \mathcal{N}\left(\pi, \mathcal{I}^{-1}(\pi)\right)$ where $\mathcal{I}(\pi) = -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\ell_{\mathbb{X}}(\pi)\right]$ is the Fisher Information. We know the second derivative of the log-likelihood from a previous question.
+The asymptotic distribution of the MLE is given by $\hat{\pi}_{\text{ML}} \sim \mathcal{N}\left(\pi, \mathcal{I}^{-1}(\pi)\right)$
+where $\mathcal{I}(\pi) = -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)\right]$ is the Fisher Information.
+We know the second derivative of the log-likelihood from a previous question.
 $$
 \begin{aligned}
-\mathcal{I}(\pi) &= -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\ell_{\mathbb{X}}(\pi)\right]\\
+\mathcal{I}(\pi) &= -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)\right]\\
 &= -\text{E}\left[\frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\
 &= \text{E}\left[\frac{1}{\pi^2}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\
 &= \text{E}\left[\frac{1}{\pi^2}{\sum_{i=1}^n x_i}\right] + \text{E}\left[\frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\

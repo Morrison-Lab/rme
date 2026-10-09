@@ -4,10 +4,10 @@ The residual deviance is a general concept that applies to all GLMs,
 including Gaussian linear regression.
 For any GLM, the residual deviance is:
 
-$$D = 2(\ell_{\text{sat}} - \ell(\hat\beta))$$ {#eq-deviance-general}
+$$D = 2(\llik_{\text{sat}} - \llik(\hat\beta))$$ {#eq-deviance-general}
 
-where $\ell_{\text{sat}}$ is the log-likelihood of the saturated model
-and $\ell(\hat\beta)$ is the log-likelihood of the fitted model.
+where $\llik_{\text{sat}}$ is the log-likelihood of the saturated model
+and $\llik(\hat\beta)$ is the log-likelihood of the fitted model.
 However, this formula simplifies differently depending on the distribution family,
 and the resulting test statistics have different null distributions.
 
@@ -16,7 +16,7 @@ and the resulting test statistics have different null distributions.
 From @eq-linreg-loglik, the Gaussian log-likelihood is:
 
 $$
-\ell(\hat\beta, \hat\sigma^2)
+\llik(\hat\beta, \hat\sigma^2)
 = -\frac{n}{2}\log(2\pi\hat\sigma^2)
 - \frac{1}{2\hat\sigma^2}
   \sumin (y_i - \hat{y}_i)^2
@@ -27,14 +27,14 @@ When there are no replicates (each covariate pattern appears exactly once),
 it sets $\hat\mu_i = y_i$ for every observation,
 so its residual sum of squares is zero:
 
-$$\ell_{\text{sat}}(\hat\sigma^2) = -\frac{n}{2}\log(2\pi\hat\sigma^2)$$
+$$\llik_{\text{sat}}(\hat\sigma^2) = -\frac{n}{2}\log(2\pi\hat\sigma^2)$$
 
 Substituting into @eq-deviance-general, the Gaussian deviance simplifies to
 the **residual sum of squares** (RSS), scaled by $\hat\sigma^2$:
 
 $$
 D
-= 2(\ell_{\text{sat}} - \ell(\hat\beta))
+= 2(\llik_{\text{sat}} - \llik(\hat\beta))
 = \frac{\sumin (y_i - \hat{y}_i)^2}{\hat\sigma^2}
 = \frac{\text{RSS}}{\hat\sigma^2}
 $$
@@ -150,7 +150,7 @@ The Gaussian deviance relative to the saturated model is therefore:
 
 $$
 D
-= 2(\ell_{\text{sat}} - \ell(\hat\beta))
+= 2(\llik_{\text{sat}} - \llik(\hat\beta))
 = \frac{\text{RSS} - \text{RSS}_{\text{sat}}}{\hat\sigma^2}
 $$
 
@@ -183,7 +183,7 @@ pure measurement error within covariate patterns.
 For a Binomial GLM fit to data **grouped by covariate pattern**
 (with $y_k$ events and $n_k$ observations for pattern $k$),
 the saturated model sets $\hat\pi_k^{\text{sat}} = y_k / n_k$ for each pattern $k$.
-R's `deviance()` correctly computes $2(\ell_{\text{sat}} - \ell(\hat\beta))$
+R's `deviance()` correctly computes $2(\llik_{\text{sat}} - \llik(\hat\beta))$
 using this grouping:
 
 $$
@@ -204,8 +204,8 @@ R uses the **fully parametrized** model as its reference —
 assigning $\hat\pi_i = y_i \in \{0, 1\}$ to each individual observation.
 Since each predicted probability is exactly 0 or 1,
 every Bernoulli likelihood contribution equals 1,
-and hence $\ell_{\text{fp}} = 0$.
-Thus R's `deviance()` returns $-2\ell(\hat\beta)$.
+and hence $\llik_{\text{fp}} = 0$.
+Thus R's `deviance()` returns $-2\llik(\hat\beta)$.
 
 We can verify this directly:
 observations are ungrouped Bernoulli with repeated covariate patterns
@@ -222,7 +222,7 @@ deviance(fit_ug)                     # R's deviance
 ```
 
 ::: notes
-The two values are equal, confirming that R uses $\ell_{\text{fp}} = 0$ as its reference
+The two values are equal, confirming that R uses $\llik_{\text{fp}} = 0$ as its reference
 when data are ungrouped.
 :::
 
@@ -231,13 +231,13 @@ This reference model is the **fully parametrized** model (one parameter per obse
 not the **saturated** model (one parameter per distinct covariate pattern).
 They coincide only when there are no repeated covariate patterns ($q = n$).
 When patterns do repeat ($q < n$), the saturated model sets $\hat\pi_k = y_k/n_k$ per pattern,
-giving $\ell_{\text{sat}} < 0$.
+giving $\llik_{\text{sat}} < 0$.
 
 `deviance()` for ungrouped data **cannot** be used as a goodness-of-fit test
 against the $\chi^2$ distribution when $q < n$.
-The correct GOF statistic is $2(\ell_{\text{sat}} - \ell(\hat\beta))$,
-but R's `deviance()` for ungrouped data returns $-2\ell(\hat\beta)$ (using $\ell_{\text{fp}} = 0$).
-These two quantities differ by $-2\ell_{\text{sat}} > 0$ whenever $q < n$.
+The correct GOF statistic is $2(\llik_{\text{sat}} - \llik(\hat\beta))$,
+but R's `deviance()` for ungrouped data returns $-2\llik(\hat\beta)$ (using $\llik_{\text{fp}} = 0$).
+These two quantities differ by $-2\llik_{\text{sat}} > 0$ whenever $q < n$.
 Even if each covariate pattern has many replicates (large $n_k$),
 R's ungrouped deviance is the wrong statistic to compare against $\chi^2(q - p)$.
 To obtain a valid GOF test when patterns repeat,
@@ -252,8 +252,8 @@ For further discussion, see @dunn2018generalized [Chapter 9] and
 
 | Feature | Gaussian linear regression | Non-Gaussian GLMs (e.g., Poisson, Binomial) |
 |---|---|---|
-| Deviance formula | $(\text{RSS} - \text{RSS}_{\text{sat}})/\hat\sigma^2$ | $2(\ell_{\text{sat}} - \ell(\hat\beta))$ |
-| `deviance()` in R | Returns total RSS | Returns $2(\ell_{\text{sat}} - \ell(\hat\beta))$ |
+| Deviance formula | $(\text{RSS} - \text{RSS}_{\text{sat}})/\hat\sigma^2$ | $2(\llik_{\text{sat}} - \llik(\hat\beta))$ |
+| `deviance()` in R | Returns total RSS | Returns $2(\llik_{\text{sat}} - \llik(\hat\beta))$ |
 | Saturated model reference | Per covariate pattern | Per covariate pattern (grouped) or per observation (ungrouped) |
 | Dispersion $\phi$ | Unknown; estimated as $s^2 = \text{RSS}/(n-p)$ | Fixed ($\phi = 1$) |
 | Test for nested models | F-test (exact) | $\chi^2$-test (asymptotic) |
