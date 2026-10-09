@@ -28,10 +28,10 @@ $$
 \logf{\pdf(t)} &= \logf{\lambda} - \lambda t && \text{(taking natural logarithm of density)} \\
 \cdf(t) &\eqdef \int_{0}^{t} \pdf(u) du && \text{(cumulative distribution function definition)} \\
 &= \int_{0}^{t} \lambda \ef{-\lambda u} du && \text{(substituting probability density function)} \\
-&= \left[ -\ef{-\lambda u} \right]_{0}^{t} && \text{(evaluating antiderivative)} \\
+&= \sb{ -\ef{-\lambda u} }_{0}^{t} && \text{(evaluating antiderivative)} \\
 &= 1 - \ef{-\lambda t} && \text{(evaluating limits of integration)} \\
 \surv(t) &\eqdef 1 - \cdf(t) && \text{(survival function definition)} \\
-&= 1 - \left(1 - \ef{-\lambda t}\right) && \text{(substituting cumulative distribution function)} \\
+&= 1 - \paren{1 - \ef{-\lambda t}} && \text{(substituting cumulative distribution function)} \\
 &= \ef{-\lambda t} && \text{(simplifying terms)} \\
 \cuhaz(t) &\eqdef -\logf{\surv(t)} && \text{(cumulative hazard function definition)} \\
 &= -\logf{\ef{-\lambda t}} && \text{(substituting survival function)} \\
@@ -41,7 +41,7 @@ $$
 &= \lambda && \text{(differentiating linear term)} \\
 \E{T} &\eqdef \int_{0}^{\infty} \surv(t) dt && \text{(expectation formula for non-negative continuous random variable)} \\
 &= \int_{0}^{\infty} \ef{-\lambda t} dt && \text{(substituting survival function)} \\
-&= \left[ -\frac{1}{\lambda} \ef{-\lambda t} \right]_{0}^{\infty} && \text{(evaluating antiderivative)} \\
+&= \sb{ -\frac{1}{\lambda} \ef{-\lambda t} }_{0}^{\infty} && \text{(evaluating antiderivative)} \\
 &= \lambda^{-1} && \text{(evaluating limits of integration)}
 \ea
 $$
@@ -58,10 +58,10 @@ $$
 \pdf(t) &\eqdef \lambda p (\lambda t)^{p-1} \ef{-(\lambda t)^p} && \text{(probability density function for $t \ge 0$)} \\
 \cdf(t) &\eqdef \int_{0}^{t} \pdf(u) du && \text{(cumulative distribution function definition)} \\
 &= \int_{0}^{t} \lambda p (\lambda u)^{p-1} \ef{-(\lambda u)^p} du && \text{(substituting density function)} \\
-&= \left[ -\ef{-(\lambda u)^p} \right]_{0}^{t} && \text{(evaluating antiderivative via substitution $w = (\lambda u)^p$)} \\
+&= \sb{ -\ef{-(\lambda u)^p} }_{0}^{t} && \text{(evaluating antiderivative via substitution $w = (\lambda u)^p$)} \\
 &= 1 - \ef{-(\lambda t)^p} && \text{(evaluating limits of integration)} \\
 \surv(t) &\eqdef 1 - \cdf(t) && \text{(survival function definition)} \\
-&= 1 - \left(1 - \ef{-(\lambda t)^p}\right) && \text{(substituting cumulative distribution function)} \\
+&= 1 - \paren{1 - \ef{-(\lambda t)^p}} && \text{(substituting cumulative distribution function)} \\
 &= \ef{-(\lambda t)^p} && \text{(simplifying terms)} \\
 \cuhaz(t) &\eqdef -\logf{\surv(t)} && \text{(cumulative hazard function definition)} \\
 &= -\logf{\ef{-(\lambda t)^p}} && \text{(substituting survival function)} \\
@@ -70,13 +70,13 @@ $$
 &= p \logf{\lambda t} && \text{(applying exponent rule for logarithms)} \\
 &= p \logf{\lambda} + p \logf{t} && \text{(applying product rule for logarithms)} \\
 \haz(t) &\eqdef \deriv{t} \cuhaz(t) && \text{(hazard function definition)} \\
-&= \deriv{t} \left( (\lambda t)^p \right) && \text{(substituting cumulative hazard)} \\
+&= \deriv{t} \paren{ (\lambda t)^p } && \text{(substituting cumulative hazard)} \\
 &= p (\lambda t)^{p-1} \cdot \lambda && \text{(applying power and chain rules of differentiation)} \\
 &= \lambda p (\lambda t)^{p-1} && \text{(rearranging factors)} \\
 \E{T} &\eqdef \int_{0}^{\infty} \surv(t) dt && \text{(expectation formula for non-negative random variable)} \\
 &= \int_{0}^{\infty} \ef{-(\lambda t)^p} dt && \text{(substituting survival function)} \\
 &= \frac{1}{\lambda p} \int_{0}^{\infty} u^{\frac{1}{p}-1} \ef{-u} du && \text{(substituting $u = (\lambda t)^p \implies t = \lambda^{-1} u^{1/p}$)} \\
-&= \lambda^{-1} \cdot \Gamma\left(1 + \frac{1}{p}\right) && \text{(applying definition of Gamma function $\Gamma(z)$)}
+&= \lambda^{-1} \cdot \Gamma\paren{1 + \frac{1}{p}} && \text{(applying definition of Gamma function $\Gamma(z)$)}
 \ea
 $$
 
@@ -185,7 +185,7 @@ We prove each property of the Weibull hazard function $\haz(t) = \lambda p (\lam
    Differentiating $\haz(t) = \lambda^p p t^{p-1}$ with respect to $t$ gives:
    $$
    \ba
-   \haz'(t) &\eqdef \deriv{t} \left( \lambda^p p t^{p-1} \right) && \text{(definition of hazard derivative)} \\
+   \haz'(t) &\eqdef \deriv{t} \paren{ \lambda^p p t^{p-1} } && \text{(definition of hazard derivative)} \\
    &= \lambda^p p (p-1) t^{p-2} && \text{(applying power rule of differentiation)}
    \ea
    $$
@@ -389,8 +389,8 @@ $$
 &= \hazfactor(\vx) \cdot \cuhaz_0(t) && \text{(factoring constant hazard multiplier out of integral)} \\
 \surv(t \mid \vx) &\eqdef \expf{-\cuhaz(t \mid \vx)} && \text{(survival function in terms of cumulative hazard)} \\
 &= \expf{-\hazfactor(\vx) \cdot \cuhaz_0(t)} && \text{(substituting cumulative hazard)} \\
-&= \left[ \expf{-\cuhaz_0(t)} \right]^{\hazfactor(\vx)} && \text{(applying exponent laws)} \\
-&= \left[ \surv_0(t) \right]^{\hazfactor(\vx)} && \text{(substituting baseline survival function $\surv_0(t)$)}
+&= \sb{ \expf{-\cuhaz_0(t)} }^{\hazfactor(\vx)} && \text{(applying exponent laws)} \\
+&= \sb{ \surv_0(t) }^{\hazfactor(\vx)} && \text{(substituting baseline survival function $\surv_0(t)$)}
 \ea
 $$
 
@@ -398,7 +398,7 @@ An alternative modeling framework is the **Accelerated Failure Time (AFT)** mode
 Rather than multiplying the hazard rate, covariates accelerate or decelerate the progression of time itself:
 
 $$
-\surv(t \mid \vx) \eqdef \surv_0\left( t \cdot \hazfactor(\vx) \right)
+\surv(t \mid \vx) \eqdef \surv_0\paren{ t \cdot \hazfactor(\vx) }
 $$
 
 where $\hazfactor(\vx) \eqdef \expf{\eta(\vx)}$, $\eta(\vx) \eqdef \beta_1 x_1 + \dots + \beta_p x_p$, and $\surv_0(t) \eqdef \P(T \ge t \mid \vx = \vzero)$ is the baseline survival function.
@@ -408,7 +408,7 @@ We derive the expected survival time under the AFT model using change-of-variabl
 $$
 \ba
 \E{T \mid \vx} &\eqdef \int_{0}^{\infty} \surv(t \mid \vx) dt && \text{(expectation formula for non-negative random variable)} \\
-&= \int_{0}^{\infty} \surv_0\left( t \cdot \hazfactor(\vx) \right) dt && \text{(substituting AFT survival function)} \\
+&= \int_{0}^{\infty} \surv_0\paren{ t \cdot \hazfactor(\vx) } dt && \text{(substituting AFT survival function)} \\
 &= \int_{0}^{\infty} \surv_0(u) \cdot \frac{du}{\hazfactor(\vx)} && \text{(substituting $u = t \cdot \hazfactor(\vx) \implies dt = \frac{du}{\hazfactor(\vx)}$)} \\
 &= \hazfactor(\vx)^{-1} \cdot \int_{0}^{\infty} \surv_0(u) du && \text{(factoring constant $\hazfactor(\vx)^{-1}$ out of integral)} \\
 &= \hazfactor(\vx)^{-1} \cdot \E{T \mid \vx = \vzero} && \text{(substituting baseline expectation formula)}
@@ -422,13 +422,13 @@ We also derive the cumulative hazard and hazard rate functions under the AFT for
 $$
 \ba
 \cuhaz(t \mid \vx) &\eqdef -\logf{\surv(t \mid \vx)} && \text{(cumulative hazard function definition)} \\
-&= -\logf{\surv_0\left( t \cdot \hazfactor(\vx) \right)} && \text{(substituting AFT survival function)} \\
-&= \cuhaz_0\left( t \cdot \hazfactor(\vx) \right) && \text{(substituting baseline cumulative hazard)} \\
+&= -\logf{\surv_0\paren{ t \cdot \hazfactor(\vx) }} && \text{(substituting AFT survival function)} \\
+&= \cuhaz_0\paren{ t \cdot \hazfactor(\vx) } && \text{(substituting baseline cumulative hazard)} \\
 \haz(t \mid \vx) &\eqdef \deriv{t} \cuhaz(t \mid \vx) && \text{(hazard function definition)} \\
-&= \deriv{t} \left( \cuhaz_0\left( t \cdot \hazfactor(\vx) \right) \right) && \text{(substituting AFT cumulative hazard)} \\
-&= \cuhaz_0'\left( t \cdot \hazfactor(\vx) \right) \cdot \deriv{t} \left( t \cdot \hazfactor(\vx) \right) && \text{(applying chain rule of differentiation)} \\
-&= \haz_0\left( t \cdot \hazfactor(\vx) \right) \cdot \hazfactor(\vx) && \text{(since $\cuhaz_0'(u) = \haz_0(u)$)} \\
-&= \hazfactor(\vx) \cdot \haz_0\left( t \cdot \hazfactor(\vx) \right) && \text{(rearranging factors)}
+&= \deriv{t} \paren{ \cuhaz_0\paren{ t \cdot \hazfactor(\vx) } } && \text{(substituting AFT cumulative hazard)} \\
+&= \cuhaz_0'\paren{ t \cdot \hazfactor(\vx) } \cdot \deriv{t} \paren{ t \cdot \hazfactor(\vx) } && \text{(applying chain rule of differentiation)} \\
+&= \haz_0\paren{ t \cdot \hazfactor(\vx) } \cdot \hazfactor(\vx) && \text{(since $\cuhaz_0'(u) = \haz_0(u)$)} \\
+&= \hazfactor(\vx) \cdot \haz_0\paren{ t \cdot \hazfactor(\vx) } && \text{(rearranging factors)}
 \ea
 $$
 
@@ -439,8 +439,8 @@ If the baseline distribution is exponential with parameter $\lambda$, substituti
 $$
 \ba
 \surv(t \mid \vx) &= \expf{-\lambda \cdot t \cdot \hazfactor(\vx)} && \text{(substituting exponential baseline into AFT formula)} \\
-&= \left[ \expf{-\lambda t} \right]^{\hazfactor(\vx)} && \text{(applying exponent laws)} \\
-&= \left[ \surv_0(t) \right]^{\hazfactor(\vx)} && \text{(substituting exponential baseline survival function)}
+&= \sb{ \expf{-\lambda t} }^{\hazfactor(\vx)} && \text{(applying exponent laws)} \\
+&= \sb{ \surv_0(t) }^{\hazfactor(\vx)} && \text{(substituting exponential baseline survival function)}
 \ea
 $$
 
@@ -453,11 +453,11 @@ Defining an adjusted scale parameter $\lambda^* \eqdef \lambda \theta_i^{1/p}$, 
 $$
 \ba
 \surv^*(t) &\eqdef \expf{-(\lambda^* t)^p} && \text{(Weibull survival formula with scale parameter $\lambda^*$)} \\
-&= \expf{-\left(\lambda \theta_i^{1/p} t\right)^p} && \text{(substituting $\lambda^* = \lambda \theta_i^{1/p}$)} \\
-&= \expf{-(\lambda t)^p \cdot \theta_i} && \text{(simplifying exponent $\left(\theta_i^{1/p}\right)^p = \theta_i$)} \\
-&= \left[ \expf{-(\lambda t)^p} \right]^{\theta_i} && \text{(applying exponent laws)} \\
-&= \left[ \surv_0(t) \right]^{\theta_i} && \text{(substituting baseline Weibull survival function)} \\
-&= \surv_0\left( t \cdot \theta_i^{1/p} \right) && \text{(expressing as AFT model with acceleration factor $\theta_i^{1/p}$)}
+&= \expf{-\paren{\lambda \theta_i^{1/p} t}^p} && \text{(substituting $\lambda^* = \lambda \theta_i^{1/p}$)} \\
+&= \expf{-(\lambda t)^p \cdot \theta_i} && \text{(simplifying exponent $\paren{\theta_i^{1/p}}^p = \theta_i$)} \\
+&= \sb{ \expf{-(\lambda t)^p} }^{\theta_i} && \text{(applying exponent laws)} \\
+&= \sb{ \surv_0(t) }^{\theta_i} && \text{(substituting baseline Weibull survival function)} \\
+&= \surv_0\paren{ t \cdot \theta_i^{1/p} } && \text{(expressing as AFT model with acceleration factor $\theta_i^{1/p}$)}
 \ea
 $$
 
