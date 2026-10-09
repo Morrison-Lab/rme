@@ -1,0 +1,99 @@
+The shared random effect $\alpha_i$ is what makes observations in the same group correlated.
+
+{{< slidebreak >}}
+
+:::{#thm-re-cov}
+#### Moments of the one-way random-effects model
+
+Under @def-one-way-re, for any group $i$ and observations $j \neq k$:
+
+$$
+\ba
+\E{Y_{ij}} &= \mu
+\\
+\Var{Y_{ij}} &= \sigma_\alpha^2 + \sigma^2
+\\
+\Cov{Y_{ij}, Y_{ik}} &= \sigma_\alpha^2
+\ea
+$$
+
+and observations in different groups are independent.
+:::
+
+{{< slidebreak >}}
+
+::: proof
+
+This proof uses [the definition of covariance](probability.qmd#def-cov),
+[the covariance of a variable with itself](probability.qmd#lem-cov-xx),
+and linearity of expectation.
+
+Mean:
+
+$$
+\ba
+\E{Y_{ij}}
+&= \E{\mu + \alpha_i + \epsilon_{ij}}
+&& \text{(definition of the model)}
+\\
+&= \mu + \E{\alpha_i} + \E{\epsilon_{ij}}
+&& \text{(linearity of expectation)}
+\\
+&= \mu + 0 + 0
+&& \text{(both have mean zero)}
+\\
+&= \mu
+&& \text{(simplify)}
+\ea
+$$
+
+Covariance, for $j$ and $k$ equal or not:
+
+$$
+\ba
+\Cov{Y_{ij}, Y_{ik}}
+&\eqdef \E{(Y_{ij} - \mu)(Y_{ik} - \mu)}
+&& \text{(definition of covariance)}
+\\
+&= \E{(\alpha_i + \epsilon_{ij})(\alpha_i + \epsilon_{ik})}
+&& \text{(substitute the model)}
+\\
+&= \E{\alpha_i^2 + \alpha_i\epsilon_{ik} + \epsilon_{ij}\alpha_i + \epsilon_{ij}\epsilon_{ik}}
+&& \text{(distribute)}
+\\
+&= \E{\alpha_i^2} + \E{\alpha_i\epsilon_{ik}} + \E{\epsilon_{ij}\alpha_i} + \E{\epsilon_{ij}\epsilon_{ik}}
+&& \text{(linearity of expectation)}
+\\
+&= \sigma_\alpha^2 + \E{\alpha_i\epsilon_{ik}} + \E{\epsilon_{ij}\alpha_i} + \E{\epsilon_{ij}\epsilon_{ik}}
+&& \text{($\E{\alpha_i} = 0$, so $\E{\alpha_i^2} = \Var{\alpha_i}$)}
+\\
+&= \sigma_\alpha^2 + 0 + 0 + \E{\epsilon_{ij}\epsilon_{ik}}
+&& \text{(independent, mean-zero factors)}
+\ea
+$$
+
+If $j \neq k$, $\epsilon_{ij}$ and $\epsilon_{ik}$ are independent with mean zero,
+so $\E{\epsilon_{ij}\epsilon_{ik}} = 0$ and the covariance is $\sigma_\alpha^2$.
+If $j = k$, $\E{\epsilon_{ij}^2} = \sigma^2$,
+so the covariance of $Y_{ij}$ with itself,
+which is its variance,
+is $\sigma_\alpha^2 + \sigma^2$.
+
+Observations in different groups $i \neq i'$
+are functions of the disjoint sets of independent variables
+$\{\alpha_i, \epsilon_{ij}\}$ and $\{\alpha_{i'}, \epsilon_{i'k}\}$,
+so they are independent.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-dyestuff-cov}
+#### Covariance between two dyestuff preparations
+
+Suppose the batch-level variance in @exm-dyestuff is $\sigma_\alpha^2 = 1764$
+and the within-batch variance is $\sigma^2 = 2451$.
+Then by @thm-re-cov
+two preparations from the same batch would have covariance $1764$,
+and each preparation would have variance $1764 + 2451 = 4215$.
+Two preparations from different batches would have covariance $0$.
+:::
