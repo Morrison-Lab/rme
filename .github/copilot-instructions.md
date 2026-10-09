@@ -125,12 +125,12 @@ This follows the [Quarto website linking guidelines](https://quarto.org/docs/web
 
 **Correct** (link to source file):
 ```markdown
-[chain rule](math-prereqs.qmd#thm-chain-rule)
+[odds](binary-outcome-associations.qmd#def-odds)
 ```
 
 **Incorrect** (link to rendered HTML):
 ```markdown
-[chain rule](math-prereqs.html#thm-chain-rule)
+[odds](binary-outcome-associations.html#def-odds)
 ```
 
 This ensures links work correctly across all output formats and during local development.
