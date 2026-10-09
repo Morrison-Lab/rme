@@ -1,0 +1,48 @@
+:::{#exm-breusch-pagan-bw}
+#### Breusch--Pagan test for the `birthweight` interaction model
+
+For the `birthweight` interaction model (@eq-BW-lm-interact),
+$z_i$ holds sex, gestational age, and their interaction,
+so $q = 3$.
+We fit the auxiliary regression by hand
+and compare the result with `lmtest::bptest()`:
+
+```{r}
+bp_aux <-
+  bw |>
+  mutate(resid_sq = resid(bw_lm2)^2) |>
+  lm(resid_sq ~ sex + age + sex:age, data = _)
+
+bp_n <- nobs(bw_lm2)
+bp_r2 <- summary(bp_aux)$r.squared
+bp_stat <- bp_n * bp_r2
+bp_p <- pchisq(bp_stat, df = 3, lower.tail = FALSE)
+
+lmtest::bptest(bw_lm2)
+```
+
+By @def-breusch-pagan:
+
+$$
+\ba
+\text{BP}
+&= n R^2_{\text{aux}}
+&& \text{(studentized statistic)}
+\\
+&= `r bp_n` \times `r round(bp_r2, 4)`
+&& \text{(substitute } n \text{ and } R^2_{\text{aux}}\text{)}
+\\
+&\approx `r round(bp_stat, 3)`
+&& \text{(arithmetic)}
+\ea
+$$
+
+Comparing this value with a $\chi^2_3$ distribution
+(@thm-breusch-pagan-null)
+gives $p \approx `r round(bp_p, 2)`$,
+which matches `bptest()`.
+So the test gives no evidence
+that the residual variance changes with sex or gestational age.
+With only `r bp_n` babies, though,
+the test has little power to detect a moderate change.
+:::
