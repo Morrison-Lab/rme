@@ -11,16 +11,19 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
-
-  <title>Regression Models for Epidemiology – Introduction to Multi-level Models</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+<title>Regression Models for Epidemiology – Introduction to Multi-level Models</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+<style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
@@ -38,6 +41,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -58,18 +127,14 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script>
-
-  <script type="text/plain" cookie-consent="tracking">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
-  </script>
-  
-  <script type="text/javascript" charset="UTF-8">
+  </script><script type="text/javascript" charset="UTF-8">
   document.addEventListener('DOMContentLoaded', function () {
   cookieconsent.run({
     "notice_banner_type":"simple",
@@ -84,26 +149,21 @@
   "language":"en"
     });
   });
-  </script> 
-    
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <script type="application/json" class="js-hypothesis-config">
+  </script><link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<script type="application/json" class="js-hypothesis-config">
   {
     "theme": "clean",
     "openSidebar": false,
     "enableExperimentalNewNoteButton": true
   }
-  </script>
-  <script async="" src="https://hypothes.is/embed.js"></script>
-  <script>
+  </script><script async="" src="https://hypothes.is/embed.js"></script><script>
     window.document.addEventListener("DOMContentLoaded", function (_event) {
       document.body.classList.add('hypothesis-enabled');
     });
-  </script>
-  <style type="text/css">
+  </script><style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -191,7 +251,7 @@
       margin-right: 0; 
     }
   </style>
-  <script>
+<script>
   // Colour themes for the slide decks. Reads the choice the website's theme
   // dropdown saved ("mln-theme"); a deck with nothing saved stays dark.
   (function () {
@@ -226,8 +286,7 @@
       document.body.appendChild(sel);
     });
   })();
-  </script>
-  <style>
+  </script><style>
   .deck-theme-picker {
     position: fixed; top: 4px; left: 4px; z-index: 30;
     font: 12px sans-serif; padding: 2px 4px; opacity: 0.55;
@@ -235,68 +294,679 @@
   .deck-theme-picker:hover, .deck-theme-picker:focus { opacity: 1; }
   @media print { .deck-theme-picker { display: none; } }
   </style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction to Multi-level Models</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Introduction to Multi-level Models</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section>
-<section id="introduction-to-multi-level-models-for-correlated-data" class="title-slide slide level1 center" data-number="1">
-<h1><span class="header-section-number">1</span> Introduction to multi-level models for correlated data</h1>
+</section><section class="slide level2"><!-- ::: {.content-hidden when-format="revealjs"} --></section><section class="slide level2"><h3 class="unnumbered" id="configuring-r">Configuring R</h3>
+<p>Functions from these packages will be used throughout this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rmarkdown) <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(pander) <span class="co"># format tables for markdown</span></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(ggplot2) <span class="co"># graphics</span></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="fu">library</span>(ggfortify) <span class="co"># help with graphics</span></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="fu">library</span>(dplyr) <span class="co"># manipulate data</span></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="fu">library</span>(tibble) <span class="co"># `tibble`s extend `data.frame`s</span></span>
+<span id="cb1-9"><a aria-label="9"></a><span class="fu">library</span>(magrittr) <span class="co"># `%&gt;%` and other additional piping tools</span></span>
+<span id="cb1-10"><a aria-label="10"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="fu">library</span>(knitr) <span class="co"># format R output for markdown</span></span>
+<span id="cb1-12"><a aria-label="12"></a><span class="fu">library</span>(tidyr) <span class="co"># Tools to help to create tidy data</span></span>
+<span id="cb1-13"><a aria-label="13"></a><span class="fu">library</span>(plotly) <span class="co"># interactive graphics</span></span>
+<span id="cb1-14"><a aria-label="14"></a><span class="fu">library</span>(dobson) <span class="co"># datasets from Dobson and Barnett 2018</span></span>
+<span id="cb1-15"><a aria-label="15"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for markdown</span></span>
+<span id="cb1-16"><a aria-label="16"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-17"><a aria-label="17"></a><span class="fu">library</span>(latex2exp) <span class="co"># use LaTeX in R code (for figures and tables)</span></span>
+<span id="cb1-18"><a aria-label="18"></a><span class="fu">library</span>(fs) <span class="co"># filesystem path manipulations</span></span>
+<span id="cb1-19"><a aria-label="19"></a><span class="fu">library</span>(survival) <span class="co"># survival analysis</span></span>
+<span id="cb1-20"><a aria-label="20"></a><span class="fu">library</span>(survminer) <span class="co"># survival analysis graphics</span></span>
+<span id="cb1-21"><a aria-label="21"></a><span class="fu">library</span>(KMsurv) <span class="co"># datasets from Klein and Moeschberger</span></span>
+<span id="cb1-22"><a aria-label="22"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for</span></span>
+<span id="cb1-23"><a aria-label="23"></a><span class="fu">library</span>(webshot2) <span class="co"># convert interactive content to static for pdf</span></span>
+<span id="cb1-24"><a aria-label="24"></a><span class="fu">library</span>(forcats) <span class="co"># functions for categorical variables ("factors")</span></span>
+<span id="cb1-25"><a aria-label="25"></a><span class="fu">library</span>(stringr) <span class="co"># functions for dealing with strings</span></span>
+<span id="cb1-26"><a aria-label="26"></a><span class="fu">library</span>(lubridate) <span class="co"># functions for dealing with dates and times</span></span>
+<span id="cb1-27"><a aria-label="27"></a><span class="fu">library</span>(broom) <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom.helpers) <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Here are some R settings I use in this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># delete any data that's already loaded into R</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
+<span id="cb2-4"><a aria-label="4"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
+<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb2-6"><a aria-label="6"></a>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span id="cb2-7"><a aria-label="7"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb2-8"><a aria-label="8"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)))</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a><span class="fu">options</span>(<span class="st">'digits'</span> <span class="ot">=</span> <span class="dv">6</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a></span>
+<span id="cb2-14"><a aria-label="14"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb2-16"><a aria-label="16"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) <span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span id="cb2-18"><a aria-label="18"></a>legend_text_size <span class="ot">=</span> <span class="dv">9</span></span>
+<span id="cb2-19"><a aria-label="19"></a>run_graphs <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<!-- ::: -->
+<style>
+.quarto-figure-center > figure {
+text-align: center;
+}
+</style>
+<p>This chapter adapts <a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s May 25 – June 1 lectures from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section><section><section id="correlated-data" class="title-slide slide level1 center" data-number="1"><h1>
+<span class="header-section-number">1</span> Correlated data</h1>
 
-</section>
-<section class="slide level2">
-
-<p>For more, see:</p>
+</section><section class="slide level2"><p>The models in earlier chapters assumed that the outcomes <span class="math inline">\(Y_1, \ldots, Y_n\)</span> were mutually independent given the covariates. Many epidemiologic studies collect data in <strong>clusters</strong>: repeated measurements on the same person, patients treated at the same hospital, or houses in the same county <span class="citation" data-cites="dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>. Observations in the same cluster tend to resemble one another more than observations in different clusters, so the independence assumption fails. Ignoring that correlation usually makes standard errors too small, because the data carry less information than the same number of independent observations would <span class="citation" data-cites="dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+<p>Two kinds of model term describe clusters. A <strong>fixed effect</strong> is a parameter for a specific group whose particular value we want to estimate, such as the effect of a specific treatment. A <strong>random effect</strong> treats the groups in the data as a sample from a larger population of groups, and models each group’s effect as a random variable drawn from a distribution; the parameters of interest are then the parameters of that distribution, especially its variance <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section><section class="slide level2"><div id="exm-fixed-vs-random" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Fixed versus random effects)</strong></span> &nbsp;</p>
 <ul>
-<li><a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s materials from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a>
+<li>In a trial comparing a new drug with a placebo, the treatment groups are the only two groups of interest, so treatment is a fixed effect.</li>
+<li>In a study that measures each of 20 patients several times, the 20 patients are a sample from the population of all patients, and we want conclusions that apply to patients beyond these 20, so patient is a random effect.</li>
+</ul>
+</div>
+<p>Random effects can be <strong>nested</strong> or <strong>crossed</strong>. Effects are nested when each lower-level group belongs to exactly one higher-level group, such as batches within laboratories. Effects are crossed when every level of one factor can appear with every level of the other, such as patients and raters when every rater scores every patient <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>A model that contains both fixed and random effects is called a <strong>mixed model</strong>. The same ideas extend from linear models to logistic and Poisson regression <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section></section><section><section id="one-way-random-effects-models" class="title-slide slide level1 center" data-number="2"><h1>
+<span class="header-section-number">2</span> One-way random-effects models</h1>
+
+</section><section class="slide level2"><p>The simplest model with a random effect has one grouping factor and no covariates <span class="citation" data-cites="rocke2021epi204 dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+</section><section class="slide level2"><div id="def-one-way-re" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (One-way random-effects model)</strong></span> Suppose we observe <span class="math inline">\(m\)</span> outcomes <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> in each of <span class="math inline">\(a\)</span> groups <span class="math inline">\(i = 1, \ldots, a\)</span>. The <strong>one-way random-effects model</strong> is <span class="math display">\[
+Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
+\]</span> where:</p>
+<ul>
+<li>
+<span class="math inline">\(\mu\)</span> is a fixed overall mean;</li>
+<li>
+<span class="math inline">\(\alpha_1, \ldots, \alpha_a \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> are the <strong>random effects</strong> of the groups;</li>
+<li>
+<span class="math inline">\(\epsilon_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> are the within-group errors;</li>
+<li>the <span class="math inline">\(\alpha_i\)</span>s and the <span class="math inline">\(\epsilon_{ij}\)</span>s are mutually independent.</li>
+</ul>
+<p>The variances <span class="math inline">\(\sigma_\alpha^2\)</span> and <span class="math inline">\(\sigma^2\)</span> are called <strong>variance components</strong>.</p>
+</div>
+</section><section class="slide level2"><div id="exm-dyestuff" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (Batches of dyestuff)</strong></span> The <code>Dyestuff</code> data in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span> record the yield of dyestuff (in grams of standard color) from <span class="math inline">\(m = 5\)</span> preparations in each of <span class="math inline">\(a = 6\)</span> batches of an intermediate product. The batches are a sample of all the batches the process could produce, so a one-way random-effects model treats <span class="math inline">\(\alpha_i\)</span> as the deviation of batch <span class="math inline">\(i\)</span>’s mean yield from the overall mean <span class="math inline">\(\mu\)</span>.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-label="1"></a><span class="fu">with</span>(Dyestuff, <span class="fu">tapply</span>(Yield, Batch, mean))</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="co">#&gt;    A    B    C    D    E    F </span></span>
+<span id="cb3-3"><a aria-label="3"></a><span class="co">#&gt; 1505 1528 1564 1498 1600 1470</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+<p>The shared random effect <span class="math inline">\(\alpha_i\)</span> is what makes observations in the same group correlated.</p>
+</section><section class="slide level2"><div id="thm-re-cov" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Moments of the one-way random-effects model)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, for any group <span class="math inline">\(i\)</span> and observations <span class="math inline">\(j \neq k\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{} &amp;= \mu
+\\
+\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{} &amp;= \sigma_\alpha^2 + \sigma^2
+\\
+\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{} &amp;= \sigma_\alpha^2
+\end{aligned}
+\]</span></p>
+<p>and observations in different groups are independent.</p>
+</div>
+</section><section class="slide level2"><div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="../chapters/probability.html#def-cov">the definition of covariance</a>, <a href="../chapters/probability.html#lem-cov-xx">the covariance of a variable with itself</a>, and linearity of expectation.</p>
+<p>Mean:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\mu + \alpha_i + \epsilon_{ij}\right]\mathclose{}
+&amp;&amp; \text{(definition of the model)}
+\\
+&amp;= \mu + \operatorname{E}\mathopen{}\left[\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \mu + 0 + 0
+&amp;&amp; \text{(both have mean zero)}
+\\
+&amp;= \mu
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\]</span></p>
+<p>Covariance, for <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> equal or not:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[(Y_{ij} - \mu)(Y_{ik} - \mu)\right]\mathclose{}
+&amp;&amp; \text{(definition of covariance)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[(\alpha_i + \epsilon_{ij})(\alpha_i + \epsilon_{ik})\right]\mathclose{}
+&amp;&amp; \text{(substitute the model)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[\alpha_i^2 + \alpha_i\epsilon_{ik} + \epsilon_{ij}\alpha_i + \epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(distribute)}
+\\
+&amp;= \operatorname{E}\mathopen{}\left[\alpha_i^2\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\alpha_i\epsilon_{ik}\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \sigma_\alpha^2 + \operatorname{E}\mathopen{}\left[\alpha_i\epsilon_{ik}\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\alpha_i\right]\mathclose{} + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{($\operatorname{E}\mathopen{}\left[\alpha_i\right]\mathclose{} = 0$, so $\operatorname{E}\mathopen{}\left[\alpha_i^2\right]\mathclose{} = \operatorname{Var}\mathopen{}\left(\alpha_i\right)\mathclose{}$)}
+\\
+&amp;= \sigma_\alpha^2 + 0 + 0 + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
+&amp;&amp; \text{(independent, mean-zero factors)}
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(j \neq k\)</span>, <span class="math inline">\(\epsilon_{ij}\)</span> and <span class="math inline">\(\epsilon_{ik}\)</span> are independent with mean zero, so <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{} = 0\)</span> and the covariance is <span class="math inline">\(\sigma_\alpha^2\)</span>. If <span class="math inline">\(j = k\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}^2\right]\mathclose{} = \sigma^2\)</span>, so the covariance of <span class="math inline">\(Y_{ij}\)</span> with itself, which is its variance, is <span class="math inline">\(\sigma_\alpha^2 + \sigma^2\)</span>.</p>
+<p>Observations in different groups <span class="math inline">\(i \neq i'\)</span> are functions of the disjoint sets of independent variables <span class="math inline">\(\{\alpha_i, \epsilon_{ij}\}\)</span> and <span class="math inline">\(\{\alpha_{i'}, \epsilon_{i'k}\}\)</span>, so they are independent.</p>
+</div>
+</section><section class="slide level2"><div id="exm-dyestuff-cov" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (Covariance between two dyestuff preparations)</strong></span> Suppose the batch-level variance in <a href="#/exm-dyestuff" class="quarto-xref">Example&nbsp;2</a> is <span class="math inline">\(\sigma_\alpha^2 = 1764\)</span> and the within-batch variance is <span class="math inline">\(\sigma^2 = 2451\)</span>. Then by <a href="#/thm-re-cov" class="quarto-xref">Theorem&nbsp;1</a> two preparations from the same batch would have covariance <span class="math inline">\(1764\)</span>, and each preparation would have variance <span class="math inline">\(1764 + 2451 = 4215\)</span>. Two preparations from different batches would have covariance <span class="math inline">\(0\)</span>.</p>
+</div>
+</section><section class="slide level2"><div id="def-icc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Intraclass correlation)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, the <strong>intraclass correlation</strong> is the correlation between two observations <span class="math inline">\(j \neq k\)</span> in the same group:</p>
+<p><span class="math display">\[
+\rho \stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+\]</span></p>
+</div>
+</section><section class="slide level2"><div id="cor-icc" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Intraclass correlation in terms of variance components)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>,</p>
+<p><span class="math display">\[
+\rho = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}.
+\]</span></p>
+</div>
+</section><section class="slide level2"><div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#/thm-re-cov" class="quarto-xref">Theorem&nbsp;1</a>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\rho
+&amp;\stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+&amp;&amp; \text{(definition of intraclass correlation)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
+&amp;&amp; \text{(covariance from the moments theorem)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sqrt{(\sigma_\alpha^2 + \sigma^2)(\sigma_\alpha^2 + \sigma^2)}}
+&amp;&amp; \text{(variances from the moments theorem)}
+\\
+&amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}
+&amp;&amp; \text{(square root of a square)}
+\end{aligned}
+\]</span></p>
+</div>
+</section><section class="slide level2"><div id="exm-dyestuff-icc" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Intraclass correlation for the dyestuff batches)</strong></span> With the variance components from <a href="#/exm-dyestuff-cov" class="quarto-xref">Example&nbsp;3</a>, <a href="#/cor-icc" class="quarto-xref">Corollary&nbsp;1</a> gives</p>
+<p><span class="math display">\[
+\rho = \frac{1764}{1764 + 2451} = \frac{1764}{4215} \approx 0.42,
+\]</span></p>
+<p>so about 42% of the variation in yield is between batches.</p>
+</div>
+<p>The intraclass correlation is also the fraction of the total variance <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{} = \sigma_\alpha^2 + \sigma^2\)</span> that comes from the random effect.</p>
+</section></section><section><section id="variance-components" class="title-slide slide level1 center" data-number="3"><h1>
+<span class="header-section-number">3</span> Variance components</h1>
+
+</section><section class="slide level2"><p>One way to estimate the variance components uses the mean squares from a one-way analysis of variance (ANOVA) table <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>. Write <span class="math inline">\(\bar{Y}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m Y_{ij}\)</span> for the mean of group <span class="math inline">\(i\)</span> and <span class="math inline">\(\bar{Y}_{\cdot\cdot} \stackrel{\text{def}}{=}\frac{1}{a}\sum_{i=1}^a \bar{Y}_{i\cdot}\)</span> for the overall mean. The <strong>between-group mean square</strong> and the <strong>within-group mean square</strong> are</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{MSA} &amp;\stackrel{\text{def}}{=}\frac{m}{a-1}\sum_{i=1}^a \mathopen{}\left(\bar{Y}_{i\cdot} - \bar{Y}_{\cdot\cdot}\right)\mathclose{}^2,
+\\
+\text{MSE} &amp;\stackrel{\text{def}}{=}\frac{1}{a(m-1)}\sum_{i=1}^a\sum_{j=1}^m \mathopen{}\left(Y_{ij} - \bar{Y}_{i\cdot}\right)\mathclose{}^2.
+\end{aligned}
+\]</span></p>
+</section><section class="slide level2"><div id="thm-ems-one-way" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Expected mean squares in the one-way random-effects model)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} &amp;= \sigma^2
+\\
+\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{} &amp;= m\sigma_\alpha^2 + \sigma^2
+\end{aligned}
+\]</span></p>
+</div>
+</section><section class="slide level2"><div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses the fact that the <a href="../chapters/basic-statistical-methods.html#def-sample-variance">sample variance</a> of independent, identically distributed observations is unbiased for their variance, <a href="../chapters/probability.html#thm-lie">the law of iterated expectations</a>, and <a href="../chapters/probability.html#thm-var-lincom">the variance of a linear combination</a>.</p>
+<p><strong>Within groups.</strong> Given <span class="math inline">\(\alpha_i\)</span>, the observations <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> are independent with common variance <span class="math inline">\(\sigma^2\)</span>, so their sample variance <span class="math inline">\(s_i^2 \stackrel{\text{def}}{=}\frac{1}{m-1}\sum_{j=1}^m (Y_{ij} - \bar{Y}_{i\cdot})^2\)</span> satisfies <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2 \mid \alpha_i\right]\mathclose{} = \sigma^2\)</span>. By the law of iterated expectations, <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2\right]\mathclose{} = \sigma^2\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\frac{1}{a}\sum_{i=1}^a s_i^2\right]\mathclose{}
+&amp;&amp; \text{(MSE is the average of the } s_i^2\text{)}
+\\
+&amp;= \frac{1}{a}\sum_{i=1}^a \operatorname{E}\mathopen{}\left[s_i^2\right]\mathclose{}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \frac{1}{a}\sum_{i=1}^a \sigma^2
+&amp;&amp; \text{(each } s_i^2 \text{ is unbiased)}
+\\
+&amp;= \sigma^2
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\]</span></p>
+<p><strong>Between groups.</strong> Each group mean is <span class="math inline">\(\bar{Y}_{i\cdot} = \mu + \alpha_i + \bar{\epsilon}_{i\cdot}\)</span>, where <span class="math inline">\(\bar{\epsilon}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m \epsilon_{ij}\)</span>. The group means are independent and identically distributed across groups, with</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
+&amp;= \operatorname{Var}\mathopen{}\left(\alpha_i\right)\mathclose{} + \operatorname{Var}\mathopen{}\left(\bar{\epsilon}_{i\cdot}\right)\mathclose{}
+&amp;&amp; \text{(variance of a sum of independent terms)}
+\\
+&amp;= \sigma_\alpha^2 + \frac{1}{m^2}\sum_{j=1}^m \operatorname{Var}\mathopen{}\left(\epsilon_{ij}\right)\mathclose{}
+&amp;&amp; \text{(variance of a linear combination)}
+\\
+&amp;= \sigma_\alpha^2 + \frac{\sigma^2}{m}
+&amp;&amp; \text{(simplify)}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\text{MSA}\)</span> is <span class="math inline">\(m\)</span> times the sample variance of <span class="math inline">\(\bar{Y}_{1\cdot}, \ldots, \bar{Y}_{a\cdot}\)</span>, so</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{}
+&amp;= m \cdot \operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
+&amp;&amp; \text{(sample variance is unbiased)}
+\\
+&amp;= m\mathopen{}\left(\sigma_\alpha^2 + \frac{\sigma^2}{m}\right)\mathclose{}
+&amp;&amp; \text{(substitute)}
+\\
+&amp;= m\sigma_\alpha^2 + \sigma^2
+&amp;&amp; \text{(distribute)}
+\end{aligned}
+\]</span></p>
+</div>
+</section><section class="slide level2"><div id="cor-mom-vc" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Method-of-moments estimators of the variance components)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, <span class="math inline">\(\hat{\sigma}^2 \stackrel{\text{def}}{=}\text{MSE}\)</span> and <span class="math display">\[
+\hat{\sigma}_\alpha^2 \stackrel{\text{def}}{=}\frac{\text{MSA} - \text{MSE}}{m}
+\]</span> are unbiased estimators of <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma_\alpha^2\)</span>.</p>
+</div>
+</section><section class="slide level2"><div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{E}\mathopen{}\left[\hat{\sigma}_\alpha^2\right]\mathclose{}
+&amp;= \operatorname{E}\mathopen{}\left[\frac{\text{MSA} - \text{MSE}}{m}\right]\mathclose{}
+&amp;&amp; \text{(definition of the estimator)}
+\\
+&amp;= \frac{\operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{} - \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{}}{m}
+&amp;&amp; \text{(linearity of expectation)}
+\\
+&amp;= \frac{m\sigma_\alpha^2 + \sigma^2 - \sigma^2}{m}
+&amp;&amp; \text{(expected mean squares)}
+\\
+&amp;= \frac{m\sigma_\alpha^2}{m}
+&amp;&amp; \text{(cancel } \sigma^2\text{)}
+\\
+&amp;= \sigma_\alpha^2
+&amp;&amp; \text{(cancel } m\text{)}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\operatorname{E}\mathopen{}\left[\hat{\sigma}^2\right]\mathclose{} = \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} = \sigma^2\)</span> directly from <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
+</div>
+</section><section class="slide level2"><div id="exm-dyestuff-vc" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Variance components for the dyestuff batches)</strong></span> The ANOVA table for <a href="#/exm-dyestuff" class="quarto-xref">Example&nbsp;2</a> gives the mean squares:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">anova</span>(<span class="fu">lm</span>(Yield <span class="sc">~</span> Batch, <span class="at">data =</span> Dyestuff))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"56357.5","3":"11271.50","4":"4.59827","5":"0.00439753","_rn_":"Batch"},{"1":"24","2":"58830.0","3":"2451.25","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>By <a href="#/cor-mom-vc" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(\hat{\sigma}^2 = 2451.3\)</span> and <span class="math display">\[
+\hat{\sigma}_\alpha^2 = \frac{11271.5 - 2451.3}{5} = \frac{8820.2}{5} \approx 1764.0.
+\]</span></p>
+<p>The <code>lmer()</code> function in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span> fits the same model by restricted maximum likelihood (REML); <code>(1 | Batch)</code> requests a random intercept for each batch:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>dyestuff_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Batch), <span class="at">data =</span> Dyestuff)</span>
+<span id="cb5-2"><a aria-label="2"></a><span class="fu">VarCorr</span>(dyestuff_lmer) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Batch","2":"(Intercept)","3":"NA","4":"1764.05","5":"42.0006"},{"1":"Residual","2":"NA","3":"NA","4":"2451.25","5":"49.5101"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>In this balanced design with a positive moment estimate, the REML estimates match the method-of-moments estimates.</p>
+</div>
+<p>The method-of-moments estimate <span class="math inline">\(\hat{\sigma}_\alpha^2\)</span> is negative whenever <span class="math inline">\(\text{MSA} &lt; \text{MSE}\)</span>, which is impossible for a variance; likelihood-based methods such as REML constrain the estimate to be nonnegative, and they also handle unbalanced designs <span class="citation" data-cites="rocke2021epi204 bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span>.</p>
+</section></section><section><section id="nested-random-effects" class="title-slide slide level1 center" data-number="4"><h1>
+<span class="header-section-number">4</span> Nested random effects</h1>
+
+</section><section class="slide level2"><p>A model can have more than one level of random effects. When each lower-level group belongs to exactly one higher-level group, the random effects are <strong>nested</strong> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section><section class="slide level2"><div id="def-nested-re" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Two-level nested random-effects model)</strong></span> Suppose <span class="math inline">\(\ell\)</span> laboratories each analyze <span class="math inline">\(b\)</span> batches, with <span class="math inline">\(r\)</span> replicate measurements per batch. The <strong>two-level nested random-effects model</strong> is</p>
+<p><span class="math display">\[
+Y_{ijk} \stackrel{\text{def}}{=}\mu + L_i + B_{ij} + \epsilon_{ijk},
+\]</span></p>
+<p>where <span class="math inline">\(L_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_L^2\right)\mathclose{}\)</span> is the effect of laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(B_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_B^2\right)\mathclose{}\)</span> is the effect of batch <span class="math inline">\(j\)</span> within laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(\epsilon_{ijk} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> is the replicate error, and all three sets of random variables are mutually independent.</p>
+</div>
+<p>By the same argument as <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>, the expected mean squares of the nested ANOVA are <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_L\right]\mathclose{} = br\sigma_L^2 + r\sigma_B^2 + \sigma^2\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_B\right]\mathclose{} = r\sigma_B^2 + \sigma^2\)</span>, and <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_E\right]\mathclose{} = \sigma^2\)</span> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>. So the correct <span class="math inline">\(F\)</span> test for laboratories divides <span class="math inline">\(\text{MS}_L\)</span> by <span class="math inline">\(\text{MS}_B\)</span>, not by <span class="math inline">\(\text{MS}_E\)</span>.</p>
+</section><section class="slide level2"><div id="exm-coop" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (A cooperative trial)</strong></span> The <code>coop</code> data in the <code>MASS</code> package <span class="citation" data-cites="venables2002modern">(<a href="#/references" role="doc-biblioref" onclick="">Venables and Ripley 2002</a>)</span> come from a cooperative trial in which <span class="math inline">\(\ell = 6\)</span> laboratories each analyzed <span class="math inline">\(b = 3\)</span> batches, a month apart, with <span class="math inline">\(r = 2\)</span> replicates per batch. We use the measurements of specimen <code>S1</code>:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>coop2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(MASS<span class="sc">::</span>coop, Spc <span class="sc">==</span> <span class="st">"S1"</span>)</span>
+<span id="cb6-2"><a aria-label="2"></a><span class="fu">anova</span>(<span class="fu">lm</span>(Conc <span class="sc">~</span> Lab <span class="sc">+</span> Lab<span class="sc">:</span>Bat, <span class="at">data =</span> coop2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"1.89021","3":"0.37804278","4":"60.0333","5":"1.35411e-10","_rn_":"Lab"},{"1":"12","2":"0.20440","3":"0.01703333","4":"2.7049","5":"2.76756e-02","_rn_":"Lab:Bat"},{"1":"18","2":"0.11335","3":"0.00629722","4":"NA","5":"NA","_rn_":"Residuals"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The <code>Lab:Bat</code> term is the batch-within-laboratory effect. The <span class="math inline">\(F\)</span> statistic that <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> prints for <code>Lab</code> uses <span class="math inline">\(\text{MS}_E\)</span> as its denominator, which is wrong here; the correct statistic is <span class="math inline">\(F = 0.37804 / 0.01703 \approx 22.2\)</span> on <span class="math inline">\((5, 12)\)</span> degrees of freedom.</p>
+<p>The equivalent mixed model has a random intercept for each laboratory and for each batch within each laboratory:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>coop_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Conc <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Lab) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Lab<span class="sc">:</span>Bat), <span class="at">data =</span> coop2)</span>
+<span id="cb7-2"><a aria-label="2"></a><span class="fu">VarCorr</span>(coop_lmer) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Lab:Bat","2":"(Intercept)","3":"NA","4":"0.00536807","5":"0.0732671"},{"1":"Lab","2":"(Intercept)","3":"NA","4":"0.06016813","5":"0.2452919"},{"1":"Residual","2":"NA","3":"NA","4":"0.00629722","5":"0.0793550"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The estimated variance components are <span class="math inline">\(\hat{\sigma}^2 \approx 0.0063\)</span> (same-day replicates), <span class="math inline">\(\hat{\sigma}_B^2 \approx 0.0054\)</span> (batches a month apart), and <span class="math inline">\(\hat{\sigma}_L^2 \approx 0.0602\)</span> (laboratories). Most of the variation in the measurements comes from differences between laboratories.</p>
+</div>
+<p>Testing whether a variance component is zero is harder than testing a fixed effect, because <span class="math inline">\(\sigma^2 = 0\)</span> lies on the boundary of the parameter space: a variance cannot be negative, so the usual large-sample distribution of the likelihood ratio statistic does not apply <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section></section><section><section id="multilevel-models-complete-no-and-partial-pooling" class="title-slide slide level1 center" data-number="5"><h1>
+<span class="header-section-number">5</span> Multilevel models: complete, no, and partial pooling</h1>
+
+</section><section class="slide level2"><p>A <strong>multilevel model</strong> is a regression model whose coefficients are allowed to vary by group, with the group-level coefficients themselves given a model <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. The random-effects models in <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a> and <a href="#/def-nested-re" class="quarto-xref">Definition&nbsp;3</a> are the simplest multilevel models.</p>
+</section><section class="slide level2"><div id="exm-radon-data" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7 (Radon in Minnesota homes)</strong></span> <span class="citation" data-cites="gelman2006data">Gelman and Hill (<a href="#/references" role="doc-biblioref" onclick="">2007, chap. 12</a>)</span> analyze measurements of indoor radon, a radioactive gas that can cause lung cancer, from 919 houses in 85 Minnesota counties. We use the copy of these data distributed with the <code>rstanarm</code> R package <span class="citation" data-cites="goodrich2024rstanarm">(<a href="#/references" role="doc-biblioref" onclick="">Goodrich et al. 2024</a>)</span>:</p>
+<ul>
+<li>
+<code>log_radon</code>: natural log of the radon measurement in the house;</li>
+<li>
+<code>floor</code>: <code>0</code> if the measurement was taken in the basement, <code>1</code> if on the first floor;</li>
+<li>
+<code>county</code>: the county the house is in;</li>
+<li>
+<code>log_uranium</code>: natural log of the county-level soil uranium measurement.</li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-label="1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"inst/extdata/radon.rda"</span>))</span>
+<span id="cb8-2"><a aria-label="2"></a>radon_n <span class="ot">&lt;-</span> <span class="fu">table</span>(radon<span class="sc">$</span>county)</span>
+<span id="cb8-3"><a aria-label="3"></a><span class="fu">summary</span>(<span class="fu">as.vector</span>(radon_n))</span>
+<span id="cb8-4"><a aria-label="4"></a><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb8-5"><a aria-label="5"></a><span class="co">#&gt;     1.0     3.0     5.0    10.8    10.0   116.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The number of houses per county varies from 1 to 116.</p>
+</div>
+<p>There are three ways to estimate the mean log radon level in each county <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>:</p>
+<ul>
+<li>
+<strong>Complete pooling</strong> ignores the counties and estimates every county’s mean by the overall mean.</li>
+<li>
+<strong>No pooling</strong> estimates each county’s mean by its own sample mean <span class="math inline">\(\bar{y}_j\)</span>, which is very noisy for counties with only one or two houses.</li>
+<li>
+<strong>Partial pooling</strong> fits the random-intercept model <span class="math inline">\(Y_{ij} = \mu + \alpha_j + \epsilon_{ij}\)</span> for house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> (<a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, with the roles of the indices swapped and unequal group sizes <span class="math inline">\(n_j\)</span>) and estimates each county’s mean as a compromise between <span class="math inline">\(\bar{y}_j\)</span> and <span class="math inline">\(\mu\)</span>.</li>
+</ul></section><section class="slide level2"><div id="thm-partial-pooling" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Partial-pooling estimate of a group mean)</strong></span> In the random-intercept model with known <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma_\alpha^2\)</span>, and <span class="math inline">\(\sigma^2\)</span>, the predicted mean of group <span class="math inline">\(j\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\mu + \alpha_j \mid \text{data}\right]\mathclose{}\)</span>, is</p>
+<p><span class="math display">\[
+\hat{\mu}_j = w_j\bar{y}_j + (1 - w_j)\mu,
+\qquad
+w_j \stackrel{\text{def}}{=}\frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2},
+\]</span></p>
+<p>a weighted average of the group’s sample mean and the overall mean, with weights proportional to their precisions <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>.</p>
+</div>
+<p>The proof of <a href="#/thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a> uses the conditional distribution of one normal variable given another, which is beyond the scope of this chapter. The weight <span class="math inline">\(w_j\)</span> increases with the group size <span class="math inline">\(n_j\)</span>: large groups keep estimates close to their own sample means, and small groups are pulled, or <strong>shrunk</strong>, toward the overall mean.</p>
+</section><section class="slide level2"><div id="exm-radon-shrinkage" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8 (Shrinkage of county mean radon levels)</strong></span> We fit the random-intercept model to the radon data from <a href="#/exm-radon-data" class="quarto-xref">Example&nbsp;7</a>:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a>radon_lmer0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_radon <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> county), <span class="at">data =</span> radon)</span>
+<span id="cb9-2"><a aria-label="2"></a><span class="fu">VarCorr</span>(radon_lmer0) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"county","2":"(Intercept)","3":"NA","4":"0.0886057","5":"0.297667"},{"1":"Residual","2":"NA","3":"NA","4":"0.5868626","5":"0.766070"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a><span class="fu">fixef</span>(radon_lmer0)</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="co">#&gt; (Intercept) </span></span>
+<span id="cb10-3"><a aria-label="3"></a><span class="co">#&gt;     1.34983</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The estimates are <span class="math inline">\(\hat{\mu }\approx 1.350\)</span>, <span class="math inline">\(\hat{\sigma}_\alpha^2 \approx 0.0886\)</span>, and <span class="math inline">\(\hat{\sigma}^2 \approx 0.587\)</span>. Aitkin County has <span class="math inline">\(n_j = 4\)</span> houses with sample mean <span class="math inline">\(\bar{y}_j \approx 0.715\)</span>. Plugging these estimates into <a href="#/thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+w_j
+&amp;= \frac{4 / 0.587}{4 / 0.587 + 1 / 0.0886}
+&amp;&amp; \text{(substitute the estimates)}
+\\
+&amp;\approx \frac{6.81}{6.81 + 11.29}
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 0.377
+&amp;&amp; \text{(divide)}
+\\
+\hat{\mu}_j
+&amp;\approx 0.377 \times 0.715 + 0.623 \times 1.350
+&amp;&amp; \text{(substitute into the weighted average)}
+\\
+&amp;\approx 1.111
+&amp;&amp; \text{(multiply and add)}
+\end{aligned}
+\]</span></p>
+<p>Aitkin County’s estimate moves most of the way from its own mean toward the overall mean. In contrast, Hennepin County has <span class="math inline">\(n_j = 105\)</span> houses, so its weight is about 0.94 and its estimate barely moves. The same calculation for every county reproduces the estimates that <code>lme4</code> reports:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>radon_vc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(radon_lmer0))<span class="sc">$</span>vcov</span>
+<span id="cb11-2"><a aria-label="2"></a>radon_w <span class="ot">&lt;-</span> (radon_n <span class="sc">/</span> radon_vc[<span class="dv">2</span>]) <span class="sc">/</span></span>
+<span id="cb11-3"><a aria-label="3"></a>  (radon_n <span class="sc">/</span> radon_vc[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> radon_vc[<span class="dv">1</span>])</span>
+<span id="cb11-4"><a aria-label="4"></a>radon_ybar <span class="ot">&lt;-</span> <span class="fu">tapply</span>(radon<span class="sc">$</span>log_radon, radon<span class="sc">$</span>county, mean)</span>
+<span id="cb11-5"><a aria-label="5"></a>radon_pp <span class="ot">&lt;-</span> radon_w <span class="sc">*</span> radon_ybar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> radon_w) <span class="sc">*</span> <span class="fu">fixef</span>(radon_lmer0)</span>
+<span id="cb11-6"><a aria-label="6"></a><span class="fu">max</span>(<span class="fu">abs</span>(radon_pp <span class="sc">-</span> <span class="fu">coef</span>(radon_lmer0)<span class="sc">$</span>county[, <span class="dv">1</span>]))</span>
+<span id="cb11-7"><a aria-label="7"></a><span class="co">#&gt; [1] 3.77476e-15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</section><section class="slide level2"><details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="fu">plot</span>(</span>
+<span id="cb12-2"><a aria-label="2"></a>  <span class="fu">as.vector</span>(radon_n), radon_ybar,</span>
+<span id="cb12-3"><a aria-label="3"></a>  <span class="at">log =</span> <span class="st">"x"</span>, <span class="at">pch =</span> <span class="dv">1</span>,</span>
+<span id="cb12-4"><a aria-label="4"></a>  <span class="at">xlab =</span> <span class="st">"Houses sampled in county (log scale)"</span>,</span>
+<span id="cb12-5"><a aria-label="5"></a>  <span class="at">ylab =</span> <span class="st">"Estimated county mean log radon"</span></span>
+<span id="cb12-6"><a aria-label="6"></a>)</span>
+<span id="cb12-7"><a aria-label="7"></a><span class="fu">points</span>(<span class="fu">as.vector</span>(radon_n), radon_pp, <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb12-8"><a aria-label="8"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">fixef</span>(radon_lmer0), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb12-9"><a aria-label="9"></a><span class="fu">legend</span>(</span>
+<span id="cb12-10"><a aria-label="10"></a>  <span class="st">"topright"</span>,</span>
+<span id="cb12-11"><a aria-label="11"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"No pooling"</span>, <span class="st">"Partial pooling"</span>),</span>
+<span id="cb12-12"><a aria-label="12"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">19</span>)</span>
+<span id="cb12-13"><a aria-label="13"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-radon-shrinkage" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate.
+</figcaption><div aria-describedby="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><a href="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate."><img data-src="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</section></section><section><section id="adding-predictors-to-a-multilevel-model" class="title-slide slide level1 center" data-number="6"><h1>
+<span class="header-section-number">6</span> Adding predictors to a multilevel model</h1>
+
+</section><section class="slide level2"><p>Covariates enter a multilevel model as fixed effects, and their coefficients can also vary by group <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. For house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> with floor indicator <span class="math inline">\(x_{ij}\)</span>:</p>
+<ul>
+<li>the <strong>varying-intercept</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + \beta_1 x_{ij} + \epsilon_{ij}\)</span>;</li>
+<li>the <strong>varying-intercept, varying-slope</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + (\beta_1 + \gamma_j) x_{ij} + \epsilon_{ij}\)</span>, where each county’s pair <span class="math inline">\((\alpha_j, \gamma_j)\)</span> is bivariate normal with mean zero.</li>
+</ul></section><section class="slide level2"><div id="exm-radon-floor" class="theorem example">
+<p><span class="theorem-title"><strong>Example 9 (Radon by floor of measurement)</strong></span> &nbsp;</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a>radon_lmer1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_radon <span class="sc">~</span> floor <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> county), <span class="at">data =</span> radon)</span>
+<span id="cb13-2"><a aria-label="2"></a>radon_lmer2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_radon <span class="sc">~</span> floor <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> floor <span class="sc">|</span> county), <span class="at">data =</span> radon)</span>
+<span id="cb13-3"><a aria-label="3"></a><span class="fu">fixef</span>(radon_lmer1)</span>
+<span id="cb13-4"><a aria-label="4"></a><span class="co">#&gt; (Intercept)       floor </span></span>
+<span id="cb13-5"><a aria-label="5"></a><span class="co">#&gt;    1.492393   -0.662889</span></span>
+<span id="cb13-6"><a aria-label="6"></a><span class="fu">VarCorr</span>(radon_lmer2)</span>
+<span id="cb13-7"><a aria-label="7"></a><span class="co">#&gt;  Groups   Name        Std.Dev. Corr  </span></span>
+<span id="cb13-8"><a aria-label="8"></a><span class="co">#&gt;  county   (Intercept) 0.3371         </span></span>
+<span id="cb13-9"><a aria-label="9"></a><span class="co">#&gt;           floor       0.3285   -0.37 </span></span>
+<span id="cb13-10"><a aria-label="10"></a><span class="co">#&gt;  Residual             0.7168</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>In the varying-intercept model, measurements on the first floor average about 0.66 lower on the log scale than basement measurements in the same county, a ratio of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{(\right\}\mathclose{}-0.66) \approx 0.52\)</span>. The varying-slope model lets that difference vary by county.</p>
+<p>To compare the two models, <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> refits both by maximum likelihood and computes a likelihood ratio test:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a><span class="fu">anova</span>(radon_lmer1, radon_lmer2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["-2*log(L)"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"4","2":"2097.71","3":"2117.00","4":"-1044.85","5":"2089.71","6":"NA","7":"NA","8":"NA","_rn_":"radon_lmer1"},{"1":"6","2":"2099.04","3":"2127.98","4":"-1043.52","5":"2087.04","6":"2.66412","7":"2","8":"0.263933","_rn_":"radon_lmer2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The varying-slope model adds two parameters (the slope variance and its correlation with the intercept), and the likelihood ratio test gives <span class="math inline">\(p \approx 0.26\)</span>. Because the null value of the slope variance, zero, is on the boundary of the parameter space, this <span class="math inline">\(p\)</span>-value is conservative <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>; AIC and BIC also favor the simpler model.</p>
+</div>
+</section><section class="slide level2"><div id="exm-radon-uranium" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10 (A county-level predictor)</strong></span> Soil uranium is measured once per county, so it is a <strong>group-level predictor</strong>. Adding it to the varying-intercept model:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-label="1"></a>radon_lmer3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb15-2"><a aria-label="2"></a>  log_radon <span class="sc">~</span> floor <span class="sc">+</span> log_uranium <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> county),</span>
+<span id="cb15-3"><a aria-label="3"></a>  <span class="at">data =</span> radon</span>
+<span id="cb15-4"><a aria-label="4"></a>)</span>
+<span id="cb15-5"><a aria-label="5"></a><span class="fu">fixef</span>(radon_lmer3)</span>
+<span id="cb15-6"><a aria-label="6"></a><span class="co">#&gt; (Intercept)       floor log_uranium </span></span>
+<span id="cb15-7"><a aria-label="7"></a><span class="co">#&gt;    1.496157   -0.638778    0.697499</span></span>
+<span id="cb15-8"><a aria-label="8"></a><span class="fu">VarCorr</span>(radon_lmer3) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["grp"],"name":[1],"type":["chr"],"align":["left"]},{"label":["var1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["var2"],"name":[3],"type":["chr"],"align":["left"]},{"label":["vcov"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sdcor"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"county","2":"(Intercept)","3":"NA","4":"0.0218053","5":"0.147666"},{"1":"Residual","2":"NA","3":"NA","4":"0.5306507","5":"0.728458"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The estimated between-county variance falls from about 0.099 without uranium to about 0.022 with it, while the within-county variance barely changes: county uranium explains most of the differences between counties.</p>
+</div>
+</section></section><section><section id="multilevel-logistic-regression" class="title-slide slide level1 center" data-number="7"><h1>
+<span class="header-section-number">7</span> Multilevel logistic regression</h1>
+
+</section><section class="slide level2"><p>Random effects can be added to any generalized linear model. A <strong>generalized linear mixed model</strong> (GLMM) adds random effects to the linear predictor, so for a binary outcome with random intercepts,</p>
+<p><span class="math display">\[
+\operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mathclose{} = {\tilde{x}_{ij}}^{\top}\tilde{\beta}+ \alpha_j,
+\qquad
+\alpha_j \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}
+\]</span></p>
+<p><span class="citation" data-cites="dobson4e gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>; <a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 14</a>)</span>. Each group’s odds are multiplied by <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\alpha_j\right\}\mathclose{}\)</span>, so about 95% of groups have odds within a factor of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\pm 2\sigma_\alpha\right\}\mathclose{}\)</span> of the odds for a typical group <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</section><section class="slide level2"><div id="exm-cbpp" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11 (Contagious bovine pleuropneumonia)</strong></span> The <code>cbpp</code> data in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span> record the number of new cases of contagious bovine pleuropneumonia in 15 herds of zebu cattle in Ethiopia, each observed in up to four periods. The herds are a sample of all herds, so we model herd as a random effect and period as a fixed effect:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a>cbpp_glmer <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb16-2"><a aria-label="2"></a>  <span class="fu">cbind</span>(incidence, size <span class="sc">-</span> incidence) <span class="sc">~</span> period <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> herd),</span>
+<span id="cb16-3"><a aria-label="3"></a>  <span class="at">family =</span> binomial,</span>
+<span id="cb16-4"><a aria-label="4"></a>  <span class="at">data =</span> cbpp</span>
+<span id="cb16-5"><a aria-label="5"></a>)</span>
+<span id="cb16-6"><a aria-label="6"></a><span class="fu">summary</span>(cbpp_glmer)<span class="sc">$</span>coefficients</span>
+<span id="cb16-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error  z value    Pr(&gt;|z|)</span></span>
+<span id="cb16-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept) -1.398343   0.231214 -6.04783 1.46810e-09</span></span>
+<span id="cb16-9"><a aria-label="9"></a><span class="co">#&gt; period2     -0.991925   0.303151 -3.27205 1.06769e-03</span></span>
+<span id="cb16-10"><a aria-label="10"></a><span class="co">#&gt; period3     -1.128216   0.322830 -3.49477 4.74473e-04</span></span>
+<span id="cb16-11"><a aria-label="11"></a><span class="co">#&gt; period4     -1.579745   0.422049 -3.74304 1.81808e-04</span></span>
+<span id="cb16-12"><a aria-label="12"></a><span class="fu">VarCorr</span>(cbpp_glmer)</span>
+<span id="cb16-13"><a aria-label="13"></a><span class="co">#&gt;  Groups Name        Std.Dev.</span></span>
+<span id="cb16-14"><a aria-label="14"></a><span class="co">#&gt;  herd   (Intercept) 0.6421</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The estimated herd standard deviation is <span class="math inline">\(\hat{\sigma}_\alpha \approx 0.642\)</span>, so about 95% of herds have odds of a new case between <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-2 \times 0.642\right\}\mathclose{} \approx 0.28\)</span> and <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{2 \times 0.642\right\}\mathclose{} \approx 3.6\)</span> times those of a typical herd. Holding herd fixed, the odds of a new case in period 4 are <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-1.58\right\}\mathclose{} \approx 0.21\)</span> times the odds in period 1.</p>
+</div>
+<p>The fixed-effect coefficients in a GLMM are <strong>conditional</strong> on the random effect: they compare odds within the same group. Because the logit link is nonlinear, these coefficients are not the same as population-averaged odds ratios <span class="citation" data-cites="dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+</section></section><section><section id="further-reading" class="title-slide slide level1 center" data-number="8"><h1>
+<span class="header-section-number">8</span> Further reading</h1>
+
+</section><section class="slide level2"><p>For more, see:</p>
+<ul>
+<li>
+<a href="https://dmrocke.ucdavis.edu/">David Rocke</a>’s materials from the <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">2021 edition of this course</a>
 <ul>
 <li>May 25 - June 1 lectures</li>
-</ul></li>
+</ul>
+</li>
 <li>Other UC Davis courses:
 <ul>
-<li><a href="https://catalog.ucdavis.edu/search/?q=EVE+225">EVE 225</a>: “Linear Mixed Modeling in Ecology &amp; Evolution”
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=EVE+225">EVE 225</a>: “Linear Mixed Modeling in Ecology &amp; Evolution”
 <ul>
-<li>usually taught every other winter or spring by <a href="https://eve.ucdavis.edu/people/kate-laskowski">Kate Laskowski</a></li>
-<li>materials, including syllabus and lecture videos: <a href="https://laskowskilab.faculty.ucdavis.edu/teaching-2/" class="uri">https://laskowskilab.faculty.ucdavis.edu/teaching-2/</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?P=BST%20224">STA/BST 224</a>: “Analysis of Longitudinal Data”
+<li>usually taught every other winter or spring by <a href="https://eve.ucdavis.edu/people/kate-laskowski">Kate Laskowski</a>
+</li>
+<li>materials, including syllabus and lecture videos: <a href="https://laskowskilab.faculty.ucdavis.edu/teaching-2/" class="uri">https://laskowskilab.faculty.ucdavis.edu/teaching-2/</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?P=BST%20224">STA/BST 224</a>: “Analysis of Longitudinal Data”
 <ul>
-<li>usually taught every spring by <a href="https://shuaichen.weebly.com/">Shuai Chen</a></li>
+<li>usually taught every spring by <a href="https://shuaichen.weebly.com/">Shuai Chen</a>
+</li>
 <li>should be accessible after completing Epi 204</li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?P=EPI+226">EPI 226</a> “Methods for Longitudinal &amp; Repeated Measurement Data”
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?P=EPI+226">EPI 226</a> “Methods for Longitudinal &amp; Repeated Measurement Data”
 <ul>
-<li>usually taught by <a href="https://biostat.ucdavis.edu/people/heejung-bang">Heejung Bang</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PSC+205D">PSC 205D</a> “Multilevel Models”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PSC+205G">PSC 205G</a> “Applied Longitudinal Data Analysis”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=STA+101">STA 101</a> “Advanced Applied Statistics for the Biological Sciences”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=STA+207">STA 207</a> “Statistical Methods for Research II”</li>
-<li><a href="https://www.stat.ucdavis.edu/~jiang/sta232b.html">STA 232B</a> “Applied Statistics II”
+<li>usually taught by <a href="https://biostat.ucdavis.edu/people/heejung-bang">Heejung Bang</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PSC+205D">PSC 205D</a> “Multilevel Models”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PSC+205G">PSC 205G</a> “Applied Longitudinal Data Analysis”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=STA+101">STA 101</a> “Advanced Applied Statistics for the Biological Sciences”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=STA+207">STA 207</a> “Statistical Methods for Research II”</li>
+<li>
+<a href="https://www.stat.ucdavis.edu/~jiang/sta232b.html">STA 232B</a> “Applied Statistics II”
 <ul>
-<li>usually taught every winter by <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a></li>
-</ul></li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=PLS+207">PLS 207</a>: “Applied Statistical Modeling for the Environmental Sciences”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=EDU+236">EDU 236</a>: “Application of Hierarchical Linear Models in Education Research”</li>
-<li><a href="https://catalog.ucdavis.edu/search/?q=HDE+205">HDE 205</a>: “Longitudinal Data Analysis”</li>
-</ul></li>
+<li>usually taught every winter by <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=PLS+207">PLS 207</a>: “Applied Statistical Modeling for the Environmental Sciences”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=EDU+236">EDU 236</a>: “Application of Hierarchical Linear Models in Education Research”</li>
+<li>
+<a href="https://catalog.ucdavis.edu/search/?q=HDE+205">HDE 205</a>: “Longitudinal Data Analysis”</li>
+</ul>
+</li>
 <li>Books:
 <ul>
-<li><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> <a href="https://www.taylorfrancis.com/chapters/mono/10.1201/9781315182780-11/clustered-longitudinal-data-annette-dobson-adrian-barnett?context=ubx&amp;refId=95f6c50e-093a-4488-a042-92a9f151a4b5">Chapter 11</a></li>
-<li><span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> <a href="https://link.springer.com/chapter/10.1007/978-1-4614-1353-0_7">Chapter 7</a></li>
+<li>
+<span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> <a href="https://www.taylorfrancis.com/chapters/mono/10.1201/9781315182780-11/clustered-longitudinal-data-annette-dobson-adrian-barnett?context=ubx&amp;refId=95f6c50e-093a-4488-a042-92a9f151a4b5">Chapter 11</a>
+</li>
+<li>
+<span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> <a href="https://link.springer.com/chapter/10.1007/978-1-4614-1353-0_7">Chapter 7</a>
+</li>
 <li><span class="citation" data-cites="gelman2006data">Gelman and Hill (<a href="#/references" role="doc-biblioref" onclick="">2007</a>)</span></li>
-<li><span class="citation" data-cites="jiming2021">Jiang and Nguyen (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>
+<li>
+<span class="citation" data-cites="jiming2021">Jiang and Nguyen (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>
 <ul>
-<li>by UC Davis Statistics Professor and GGE faculty member <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a></li>
-</ul></li>
+<li>by UC Davis Statistics Professor and GGE faculty member <a href="https://www.stat.ucdavis.edu/~jiang/">Jiming Jiang</a>
+</li>
+</ul>
+</li>
 <li><span class="citation" data-cites="faraway2016extending">Faraway (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></li>
 <li><span class="citation" data-cites="mcculloch2008generalized">McCulloch et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span></li>
 <li><span class="citation" data-cites="hedeker2006">Hedeker and Gibbons (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span></li>
@@ -309,21 +979,20 @@
 <li><span class="citation" data-cites="congdon2020">Congdon (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></li>
 <li><span class="citation" data-cites="molenberghs2005">Molenberghs and Verbeke (<a href="#/references" role="doc-biblioref" onclick="">2005</a>)</span></li>
 <li><span class="citation" data-cites="VerbekeGeert2000LMMf">Verbeke and Molenberghs (<a href="#/references" role="doc-biblioref" onclick="">2000</a>)</span></li>
-<li><span class="citation" data-cites="jewell2016analysis">Jewell and Hubbard (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span>
+<li>
+<span class="citation" data-cites="jewell2016analysis">Jewell and Hubbard (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span>
 <ul>
 <li>by UC Berkeley professors</li>
-</ul></li>
-</ul></li>
 </ul>
-</section></section>
-<section>
-<section id="references" class="title-slide slide level1 unnumbered center">
-<h1>References</h1>
+</li>
+</ul>
+</li>
+</ul></section></section><section><section id="references" class="title-slide slide level1 unnumbered center"><h1>References</h1>
 
-</section>
-<section class="slide level2 smaller scrollable" id="references">
-
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bates2015lme4" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <span>“Fitting Linear Mixed-Effects Models Using <span class="nocase">lme4</span>.”</span> <em>Journal of Statistical Software</em> 67 (1): 1–48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
 <div id="ref-congdon2020" class="csl-entry" role="listitem">
 Congdon, Peter D. 2020. <em>Bayesian Hierarchical Models: With Applications Using <span>R</span>, Second Edition</em>. 2nd edition. CRC Press.
 </div>
@@ -348,6 +1017,9 @@ Gałecki, Andrzej T., and Tomasz. Burzykowski. 2013. <em>Linear Mixed-Effects Mo
 <div id="ref-gelman2006data" class="csl-entry" role="listitem">
 Gelman, Andrew, and Jennifer Hill. 2007. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Analytical Methods for Social Research. Cambridge University Press.
 </div>
+<div id="ref-goodrich2024rstanarm" class="csl-entry" role="listitem">
+Goodrich, Ben, Jonah Gabry, Imad Ali, and Sam Brilleman. 2024. <em><span class="nocase">rstanarm</span>: <span>Bayesian</span> Applied Regression Modeling via <span>Stan</span></em>. <a href="https://mc-stan.org/rstanarm/">https://mc-stan.org/rstanarm/</a>.
+</div>
 <div id="ref-hedeker2006" class="csl-entry" role="listitem">
 Hedeker, Donald R., and Robert D. Gibbons. 2006. <em>Longitudinal Data Analysis</em>. Wiley Series in Probability and Statistics. Wiley-Interscience.
 </div>
@@ -362,6 +1034,12 @@ McCulloch, Charles E, Searle Shayle R, and John M Neuhaus. 2008. <em>Generalized
 </div>
 <div id="ref-molenberghs2005" class="csl-entry" role="listitem">
 Molenberghs, Geert., and Geert. Verbeke. 2005. <em>Models for Discrete Longitudinal Data</em>. Springer Series in Statistics. Springer Science+Business Media, Inc. <a href="https://doi.org/10.1007/0-387-28980-1">https://doi.org/10.1007/0-387-28980-1</a>.
+</div>
+<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
+Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
+</div>
+<div id="ref-venables2002modern" class="csl-entry" role="listitem">
+Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with <span>S</span></em>. 4th ed. Springer. <a href="https://doi.org/10.1007/978-0-387-21706-2">https://doi.org/10.1007/978-0-387-21706-2</a>.
 </div>
 <div id="ref-VerbekeGeert2000LMMf" class="csl-entry" role="listitem">
 Verbeke, Geert, and Geert Molenberghs. 2000. <em>Linear Mixed Models for Longitudinal Data</em>. 1st ed. Springer Series in Statistics. SpringerLink (Online service); Springer. <a href="https://doi.org/10.1007/978-1-4419-0300-6">https://doi.org/10.1007/978-1-4419-0300-6</a>.
@@ -629,9 +1307,7 @@ window.addEventListener("load", function () {
   revealEquationHashTarget();
 });
 window.addEventListener("hashchange", revealEquationHashTarget);
-</script>
-
-<script>
+</script><script>
 (function () {
   var css = [
     "#revealjs-html-link {",
@@ -745,33 +1421,15 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     initRevealJsHtmlLink();
   }
 })();
-</script>
-
-</section></section>
-    </div>
+</script></section></section>
+</div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -962,8 +1620,42 @@ window.addEventListener("hashchange", revealEquationHashTarget);
           RevealZoom
         ]
       });
-    </script>
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
         tabsets.forEach(function(tabset) {
@@ -1130,7 +1822,38 @@ window.addEventListener("hashchange", revealEquationHashTarget);
           }
         }
       });
-      </script>
-    
+      </script><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+
 
 </body></html>
