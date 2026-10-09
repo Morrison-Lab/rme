@@ -303,7 +303,7 @@ This derivation uses @thm-ph-haz-decomp.
 $$
 \ba
 \hr(\vx, \vxs)
-&= \frac{\haz(t|\vx)}{\haz(t|\vxs)} && \text{(definition of hazard ratio)} \\
+&\eqdef \frac{\haz(t|\vx)}{\haz(t|\vxs)} && \text{(definition of hazard ratio)} \\
 &= \frac{\haz_0(t)\hazfactor(\vx)}{\haz_0(t)\hazfactor(\vxs)} && \text{(applying the PH hazard decomposition)} \\
 &= \frac{\hazfactor(\vx)}{\hazfactor(\vxs)} && \text{(canceling baseline hazard } \haz_0(t)\text{)}
 \ea
@@ -501,7 +501,7 @@ This derivation uses @thm-ph-cuhaz.
 $$
 \ba
 \surv(t|\vx)
-&= \expf{-\cuhaz(t|\vx)} && \text{(definition of survival function in terms of cumulative hazard)} \\
+&= \expf{-\cuhaz(t|\vx)} && \text{(survival function in terms of cumulative hazard)} \\
 &= \expf{-\hazfactor(\vx)\cdot \cuhaz_0(t)} && \text{(applying the PH cumulative-hazard theorem)} \\
 &= \paren{\expf{- \cuhaz_0(t)}}^{\hazfactor(\vx)} && \text{(power rule for exponents } e^{ab} = (e^a)^b\text{)} \\
 &= \sb{\surv_0(t)}^{\hazfactor(\vx)} && \text{(survival in terms of cumulative hazard at } \vx = \vzero\text{: } \surv_0(t) = \expf{-\cuhaz_0(t)}\text{)}
