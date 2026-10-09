@@ -1,0 +1,69 @@
+The Fligner--Killeen and Levene tests compare residual variances
+across the levels of a grouping variable.
+The Breusch--Pagan test instead asks
+whether the error variance changes
+with the covariates themselves,
+which can be continuous
+[@breusch1979simple].
+
+{{< slidebreak >}}
+
+:::{#def-breusch-pagan}
+#### Breusch--Pagan statistic
+
+Let $\resid_1, \ldots, \resid_n$ be the residuals
+from a fitted linear regression model,
+and let $z_i$ be a vector of $q$ covariates for observation $i$
+(by default, the model's own predictors, without the intercept).
+
+The **auxiliary regression** is the ordinary least-squares regression
+of the squared residuals $\resid_i^2$ on $z_i$, with an intercept;
+let $R^2_{\text{aux}}$ be its coefficient of determination.
+
+The **studentized Breusch--Pagan statistic**
+[@koenker1981note] is:
+
+$$
+\text{BP} \eqdef n R^2_{\text{aux}}
+$$ {#eq-breusch-pagan-stat}
+
+The **original Breusch--Pagan statistic**
+[@breusch1979simple]
+uses $\esig^2 \eqdef \frac{1}{n}\sumin \resid_i^2$
+and regresses $g_i \eqdef \resid_i^2 / \esig^2$ on $z_i$;
+the statistic is half of that regression's explained sum of squares.
+:::
+
+{{< slidebreak >}}
+
+:::{#thm-breusch-pagan-null}
+#### Null distribution of the Breusch--Pagan statistic
+
+Under the null hypothesis that the error variance is constant,
+$\Var{Y_i \mid z_i} = \sigma^2$ for every $i$,
+both versions of the Breusch--Pagan statistic
+are approximately $\chi^2_q$ in large samples.
+The original version also assumes Gaussian errors
+[@breusch1979simple];
+the studentized version does not
+[@koenker1981note].
+:::
+
+::: notes
+The proof uses large-sample score-test theory,
+which is beyond the scope of these notes;
+see @breusch1979simple and @koenker1981note.
+
+The null hypothesis concerns the errors, not the residuals:
+even when the error variance is constant,
+the residual variances differ with leverage
+(@eq-var-resid-leverage).
+:::
+
+Large values of the statistic,
+and small p-values,
+suggest that the error variance changes with $z_i$.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Linear-models-overview/_exm-breusch-pagan-bw.qmd >}}
