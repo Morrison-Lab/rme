@@ -189,7 +189,7 @@ $$
 \begin{aligned}
 \mathcal{L}_{\mathbb{X}}(\pi) &= \pi^{\sum_{i=1}^n x_i} (1-\pi)^{n-\sum_{i=1}^n x_i}\\
 \llik(\pi) &= \log\mathcal{L}_{\mathbb{X}}(\pi)\\
-&= \log(\pi){\sum_{i=1}^n x_i} +  \log(1-\pi)\left(n-\sum_{i=1}^n x_i\right)\\
+&= \log(\pi){\sum_{i=1}^n x_i} +  \log(1-\pi)\paren{n-\sum_{i=1}^n x_i}\\
 \end{aligned}
 $$
 
@@ -197,8 +197,8 @@ $$
 Then we take the first derivative of the log-likelihood:
 $$
 \begin{aligned}
-\score(\pi) = \frac{\partial}{\partial\pi}\llik(\pi) &= \frac{1}{\pi}\left(\frac{\partial}{\partial\pi}\pi\right){\sum_{i=1}^n x_i} +   \frac{1}{(1-\pi)}\left(\frac{\partial}{\partial\pi}(1-\pi)\right)\left(n-\sum_{i=1}^n x_i\right)\\
-&= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\left(n-\sum_{i=1}^n x_i\right)\\
+\score(\pi) = \frac{\partial}{\partial\pi}\llik(\pi) &= \frac{1}{\pi}\paren{\frac{\partial}{\partial\pi}\pi}{\sum_{i=1}^n x_i} +   \frac{1}{(1-\pi)}\paren{\frac{\partial}{\partial\pi}(1-\pi)}\paren{n-\sum_{i=1}^n x_i}\\
+&= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\paren{n-\sum_{i=1}^n x_i}\\
 \end{aligned}
 $$
 
@@ -206,11 +206,11 @@ Then we set the first derivative of the log-likelihood to 0 and solve for $\pi$.
 $$
 \begin{aligned}
 0 &= \score(\pi)\\
-0  &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\left(n-\sum_{i=1}^n x_i\right)\\
+0  &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{1}{1-\pi}\paren{n-\sum_{i=1}^n x_i}\\
 0  &= \frac{1}{\pi}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi} +\frac{1}{1-\pi} \sum_{i=1}^n x_i\\
-0  &= \left(\frac{1}{\pi}+\frac{1}{1-\pi}\right){\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
-0  &= \left(\frac{1-\pi}{\pi(1-\pi)} + \frac{ \pi}{\pi(1-\pi)}\right){\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
-0  &= \left(\frac{1-\pi + \pi}{\pi(1-\pi)}\right){\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
+0  &= \paren{\frac{1}{\pi}+\frac{1}{1-\pi}}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
+0  &= \paren{\frac{1-\pi}{\pi(1-\pi)} + \frac{ \pi}{\pi(1-\pi)}}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
+0  &= \paren{\frac{1-\pi + \pi}{\pi(1-\pi)}}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
 0  &= \frac{1}{\pi(1-\pi)}{\sum_{i=1}^n x_i} - \frac{n}{1-\pi}\\
 \frac{n}{1-\pi}  &= \frac{1}{\pi(1-\pi)}{\sum_{i=1}^n x_i}\\
 \frac{n\pi(1-\pi)}{1-\pi}  &= {\sum_{i=1}^n x_i}\\
@@ -224,16 +224,16 @@ To ensure we have found a value that maximizes the likelihood, we check that the
 $$
 \begin{aligned}
 \hess(\pi) &= \frac{\partial^2}{\partial\pi^2}\llik(\pi) = \frac{\partial}{\partial\pi}\score(\pi)\\
-&= \frac{-1}{\pi^2}\left(\frac{\partial}{\partial\pi}\pi\right){\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\left(\frac{\partial}{\partial\pi}(1-\pi)\right)\left(n-\sum_{i=1}^n x_i\right)\\
-&= \frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\\
+&= \frac{-1}{\pi^2}\paren{\frac{\partial}{\partial\pi}\pi}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\paren{\frac{\partial}{\partial\pi}(1-\pi)}\paren{n-\sum_{i=1}^n x_i}\\
+&= \frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}\\
 \end{aligned}
 $$
 Then check for negativity of the second derivative
 
 $$
 \begin{aligned}
-0 &\geq \frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\\
-0 &\leq \frac{1}{\pi^2}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\\
+0 &\geq \frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}\\
+0 &\leq \frac{1}{\pi^2}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}\\
 \end{aligned}
 $$
 Looking at this expression element-wise:
@@ -260,24 +260,24 @@ We can calculate the MLE of $\pi$ either by calculating the mean of the data $\b
 
 \  
 
-The asymptotic distribution of the MLE is given by $\hat{\pi}_{\text{ML}} \sim \mathcal{N}\left(\pi, \mathcal{I}^{-1}(\pi)\right)$
-where $\mathcal{I}(\pi) = -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)\right]$ is the Fisher Information.
+The asymptotic distribution of the MLE is given by $\hat{\pi}_{\text{ML}} \sim \mathcal{N}\paren{\pi, \mathcal{I}^{-1}(\pi)}$
+where $\mathcal{I}(\pi) = -\text{E}\sb{\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)}$ is the Fisher Information.
 We know the second derivative of the log-likelihood from a previous question.
 $$
 \begin{aligned}
-\mathcal{I}(\pi) &= -\text{E}\left[\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)\right]\\
-&= -\text{E}\left[\frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\
-&= \text{E}\left[\frac{1}{\pi^2}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\
-&= \text{E}\left[\frac{1}{\pi^2}{\sum_{i=1}^n x_i}\right] + \text{E}\left[\frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n x_i\right)\right]\\
-&= \frac{1}{\pi^2}\text{E}\left[{\sum_{i=1}^n x_i}\right] + \frac{1}{(1-\pi)^2}\text{E}\left[n-\sum_{i=1}^n x_i\right]\\
-&= \frac{1}{\pi^2}\sum_{i=1}^n \text{E}[x_i] + \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n \text{E}[x_i]\right)\\
-&= \frac{1}{\pi^2}\sum_{i=1}^n \pi + \frac{1}{(1-\pi)^2}\left(n-\sum_{i=1}^n \pi\right)\\
+\mathcal{I}(\pi) &= -\text{E}\sb{\frac{\partial^2}{\partial\pi^2}\llik_{\mathbb{X}}(\pi)}\\
+&= -\text{E}\sb{\frac{-1}{\pi^2}{\sum_{i=1}^n x_i} - \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}}\\
+&= \text{E}\sb{\frac{1}{\pi^2}{\sum_{i=1}^n x_i} + \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}}\\
+&= \text{E}\sb{\frac{1}{\pi^2}{\sum_{i=1}^n x_i}} + \text{E}\sb{\frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n x_i}}\\
+&= \frac{1}{\pi^2}\text{E}\sb{{\sum_{i=1}^n x_i}} + \frac{1}{(1-\pi)^2}\text{E}\sb{n-\sum_{i=1}^n x_i}\\
+&= \frac{1}{\pi^2}\sum_{i=1}^n \text{E}[x_i] + \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n \text{E}[x_i]}\\
+&= \frac{1}{\pi^2}\sum_{i=1}^n \pi + \frac{1}{(1-\pi)^2}\paren{n-\sum_{i=1}^n \pi}\\
 &= \frac{1}{\pi^2}n\pi + \frac{1}{(1-\pi)^2}(n-n \pi)\\
 &= \frac{1}{\pi^2}n\pi + \frac{1}{(1-\pi)^2}n(1 - \pi)\\
-&= n\left(\frac{1}{\pi^2}\pi + \frac{1}{(1-\pi)^2}(1 - \pi)\right)\\
-&= n\left(\frac{1}{\pi} + \frac{1}{1-\pi}\right)\\
-&= n\left(\frac{1-\pi}{\pi(1-\pi)} + \frac{\pi}{\pi(1-\pi)}\right)\\
-&= n\left(\frac{1-\pi+\pi}{\pi(1-\pi)}\right)\\
+&= n\paren{\frac{1}{\pi^2}\pi + \frac{1}{(1-\pi)^2}(1 - \pi)}\\
+&= n\paren{\frac{1}{\pi} + \frac{1}{1-\pi}}\\
+&= n\paren{\frac{1-\pi}{\pi(1-\pi)} + \frac{\pi}{\pi(1-\pi)}}\\
+&= n\paren{\frac{1-\pi+\pi}{\pi(1-\pi)}}\\
 &= \frac{n}{\pi(1-\pi)}\\
 \end{aligned}
 $$
@@ -389,13 +389,13 @@ Using the normal approximation to the binomial,
 $$
 \begin{aligned}
 P(\sum_{i=1}^n X_i \leq a) = P(\sum_{i=1}^n X_i \geq b) &= 0.025\\
-P\left(\frac{\frac{1}{n}\sum_{i=1}^n X_i - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}} \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) = P\left(\frac{\frac{1}{n}\sum_{i=1}^n X_i - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}} \geq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) &= 0.025\\
-P\left(Z \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) = P\left(Z \geq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) &= 0.025\\
-P\left(Z \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) = 1- P\left(Z \leq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}\right) &= 0.025\\
+P\paren{\frac{\frac{1}{n}\sum_{i=1}^n X_i - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}} \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} = P\paren{\frac{\frac{1}{n}\sum_{i=1}^n X_i - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}} \geq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} &= 0.025\\
+P\paren{Z \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} = P\paren{Z \geq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} &= 0.025\\
+P\paren{Z \leq \frac{\frac{1}{n}a - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} = 1- P\paren{Z \leq \frac{\frac{1}{n}b - \pi_0}{\sqrt{\frac{\pi_0(1-\pi_0)}{n}}}} &= 0.025\\
 \end{aligned}
 $$
 
-The lower bound of this interval is $a = \left(\Phi^{-1}(0.025)\sqrt{\frac{0.5*0.5}{100}}+0.5\right)\times100 = `r (qnorm(0.025)*sqrt(0.5*0.5/100)+0.5)*100`$, and the upper bound is $b = \left(\Phi^{-1}(0.975)\sqrt{\frac{0.5*0.5}{100}}+0.5\right)\times100 = `r (qnorm(0.975)*sqrt(0.5*0.5/100)+0.5)*100`$.
+The lower bound of this interval is $a = \paren{\Phi^{-1}(0.025)\sqrt{\frac{0.5*0.5}{100}}+0.5}\times100 = `r (qnorm(0.025)*sqrt(0.5*0.5/100)+0.5)*100`$, and the upper bound is $b = \paren{\Phi^{-1}(0.975)\sqrt{\frac{0.5*0.5}{100}}+0.5}\times100 = `r (qnorm(0.975)*sqrt(0.5*0.5/100)+0.5)*100`$.
 We will reject for any values of $\sum_{i=1}^n X_i$ less than or equal to 40 or greater than or equal to 60.
 
 We can double-check this using the `stats::prop.test()` function:
@@ -416,10 +416,10 @@ $$
 \begin{aligned}
 \text{Power} &= 1- \beta\\
 &= 1 - P(40 \leq Y \leq 60|\pi=0.68)\\
-&= 1 - \left(P(Y \leq 60|\pi=0.68) - P(Y \leq 40|\pi=0.68)\right)\\
-&= 1 - \left( \sum_{y = 0}^{60} {100 \choose y}0.68^y(1-0.68)^{100-y} - \sum_{y = 0}^{40} {100 \choose y}0.68^y(1-0.68)^{100-y}\right)\\
-&= 1 - \left( `r pbinom(60,100,0.68)` - `r pbinom(40,100,0.68)` \right)\\
-&= 1 - \left( `r pbinom(60,100,0.68) - pbinom(40,100,0.68)` \right)\\
+&= 1 - \paren{P(Y \leq 60|\pi=0.68) - P(Y \leq 40|\pi=0.68)}\\
+&= 1 - \paren{ \sum_{y = 0}^{60} {100 \choose y}0.68^y(1-0.68)^{100-y} - \sum_{y = 0}^{40} {100 \choose y}0.68^y(1-0.68)^{100-y}}\\
+&= 1 - \paren{ `r pbinom(60,100,0.68)` - `r pbinom(40,100,0.68)` }\\
+&= 1 - \paren{ `r pbinom(60,100,0.68) - pbinom(40,100,0.68)` }\\
 &= `r 1 -  (pbinom(60,100,0.68) - pbinom(40,100,0.68))` \\
 \end{aligned}
 $$
