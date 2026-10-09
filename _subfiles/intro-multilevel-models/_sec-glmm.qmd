@@ -1,0 +1,55 @@
+Random effects can be added to any generalized linear model.
+A **generalized linear mixed model** (GLMM)
+adds random effects to the linear predictor,
+so for a binary outcome with random intercepts,
+
+$$
+\logf{\frac{\pi_{ij}}{1 - \pi_{ij}}} = \tp{\vx_{ij}}\vb + \alpha_j,
+\qquad
+\alpha_j \siid \ndist{0, \sigma_\alpha^2}
+$$
+
+[@dobson4e, Chapter 11; @gelman2006data, Chapter 14].
+Each group's odds are multiplied by $\expf{\alpha_j}$,
+so about 95% of groups have odds within a factor of
+$\expf{\pm 2\sigma_\alpha}$ of the odds for a typical group
+[@rocke2021epi204].
+
+{{< slidebreak >}}
+
+:::{#exm-cbpp}
+#### Contagious bovine pleuropneumonia
+
+The `cbpp` data in the `lme4` package [@bates2015lme4]
+record the number of new cases of contagious bovine pleuropneumonia
+in 15 herds of zebu cattle in Ethiopia,
+each observed in up to four periods.
+The herds are a sample of all herds,
+so we model herd as a random effect and period as a fixed effect:
+
+```{r}
+#| label: cbpp-glmer
+#| code-fold: show
+cbpp_glmer <- glmer(
+  cbind(incidence, size - incidence) ~ period + (1 | herd),
+  family = binomial,
+  data = cbpp
+)
+summary(cbpp_glmer)$coefficients
+VarCorr(cbpp_glmer)
+```
+
+The estimated herd standard deviation is $\est\sigma_\alpha \approx 0.642$,
+so about 95% of herds have odds of a new case between
+$\expf{-2 \times 0.642} \approx 0.28$ and $\expf{2 \times 0.642} \approx 3.6$
+times those of a typical herd.
+Holding herd fixed,
+the odds of a new case in period 4 are
+$\expf{-1.58} \approx 0.21$ times the odds in period 1.
+:::
+
+The fixed-effect coefficients in a GLMM are **conditional** on the random effect:
+they compare odds within the same group.
+Because the logit link is nonlinear,
+these coefficients are not the same as population-averaged odds ratios
+[@dobson4e, Chapter 11].
