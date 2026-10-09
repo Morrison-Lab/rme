@@ -5,9 +5,10 @@
 
 Let $X_1, \ldots, X_n \siid \Pois(\rate)$.
 
-**(a)** Derive the Hessian $\ell''(\rate; \vx) = \deriv[2]{\rate}\ell(\rate;\vx)$.
+**(a)** Derive the Hessian
+$\hess(\rate; \vx) = \deriv[2]{\rate}\llik(\rate;\vx)$.
 
-**(b)** Derive the observed information $I(\rate; \vx) = -\ell''(\rate; \vx)$.
+**(b)** Derive the observed information $I(\rate; \vx) = -\hess(\rate; \vx)$.
 
 **(c)** Evaluate $I(\hat\rate_{ML}; \vx)$.
 
@@ -19,11 +20,11 @@ using the asymptotic normal distribution of the MLE.
 
 **(a)**
 
-From @exr-prac-score-zero, $\ell'(\rate; \vx) = \frac{n\bar{x}}{\rate} - n$.
+From @exr-prac-score-zero, $\score(\rate; \vx) = \frac{n\bar{x}}{\rate} - n$.
 
 $$
 \ba
-\ell''(\rate; \vx)
+\hess(\rate; \vx)
 &= \deriv{\rate}\sb{\frac{n\bar{x}}{\rate} - n}
 \\
 &= -\frac{n\bar{x}}{\rate^2}
@@ -33,7 +34,7 @@ $$
 **(b)**
 
 $$
-I(\rate; \vx) = -\ell''(\rate; \vx) = \frac{n\bar{x}}{\rate^2}
+I(\rate; \vx) = -\hess(\rate; \vx) = \frac{n\bar{x}}{\rate^2}
 $$
 
 **(c)**

@@ -132,11 +132,11 @@ When comparing non-nested models,
 we can use information criteria:
 
 - **AIC** (Akaike Information Criterion):
-$$\text{AIC} = -2\,\hat\ell + 2p$$
+$$\text{AIC} = -2\,\est{\llik} + 2p$$
 - **BIC** (Bayesian Information Criterion):
-$$\text{BIC} = -2\,\hat\ell + p\log n$$
+$$\text{BIC} = -2\,\est{\llik} + p\log n$$
 
-where $\hat\ell$ is the maximized log-likelihood,
+where $\est{\llik}$ is the maximized log-likelihood,
 $p$ is the number of model parameters,
 and $n$ is the sample size.
 
@@ -195,10 +195,10 @@ by shrinking small coefficients toward zero.
 ## The LASSO
 
 The **LASSO** (Least Absolute Shrinkage and Selection Operator)
-adds an $\ell_1$ penalty to the log-likelihood:
+adds an $\lpnorm{1}$ penalty to the log-likelihood:
 
 $$\hat\beta_\lambda = \arg\max_\beta \left\{
-\hat\ell(\beta) - \lambda \sum_{j=1}^p |\beta_j|
+\est{\llik}(\beta) - \lambda \sum_{j=1}^p |\beta_j|
 \right\}$$
 
 The tuning parameter $\lambda$ controls the strength of the penalty:

@@ -12,15 +12,15 @@ Find the log-likelihood function for the general logistic regression model.
 
 $$
 \ba
-\ell(\vb, \vy)
+\llik(\vb, \vy)
    &\eqdef \logf{\Lik(\vb, \vec y) }
 && \text{(definition of log-likelihood)}
 \\ &= \logf{\prodin \Lik_i(\vb, y_i)}
 && \text{(likelihood factors, by independence)}
 \\ &= \sumin \logf{\Lik_i(\vb, y_i)}
 && \text{(log of a product is the sum of the logs)}
-\\ &= \sumin \red{\ell_i}(\pi(\vx_i))
-&& \text{(definition: } \red{\ell_i} \eqdef \logf{\Lik_i} \text{)}
+\\ &= \sumin \red{\llik_i}(\pi(\vx_i))
+&& \text{(definition: } \red{\llik_i} \eqdef \logf{\Lik_i} \text{)}
 \ea
 $$ {#eq-loglik-bernoulli-iid}
 
@@ -28,7 +28,7 @@ Using [log-odds as a function of probability](binary-outcome-associations.qmd#th
 
 $$
 \ba
-\red{\ell_i}(\pi_i)
+\red{\llik_i}(\pi_i)
    &= y_i \logf{\pi_i} + (1 - y_i) \logf{1-\pi_i}
 && \text{(log of the Bernoulli likelihood } \pi_i^{y_i}(1-\pi_i)^{1-y_i} \text{)}
 \\ &= y_i \logf{\pi_i} + 1 \cd \logf{1-\pi_i} - y_i \cd \logf{1-\pi_i}
@@ -58,6 +58,6 @@ $$
 
 #### Per-observation log-likelihood component
 
-$$\ell_i(\pi_i) = y_i \eta_i - \logf{1+\odds_i}$$
+$$\llik_i(\pi_i) = y_i \eta_i - \logf{1+\odds_i}$$
 
 :::

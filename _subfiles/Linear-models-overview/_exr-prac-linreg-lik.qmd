@@ -10,18 +10,18 @@ where $\mu_i = \beta_0 + \beta_1 x_i$.
 **(a)** Write the likelihood $\Lik(\beta_0, \beta_1, \sigma^2; \vy, \vx)$
 for observed data $(y_i, x_i)$, $i = 1, \ldots, n$.
 
-**(b)** Write the log-likelihood $\ell(\beta_0, \beta_1, \sigma^2; \vy, \vx)$
+**(b)** Write the log-likelihood $\llik(\beta_0, \beta_1, \sigma^2; \vy, \vx)$
 and show it simplifies to
 
 $$
-\ell
+\llik
 = -\frac{n}{2}\logf{2\pi\sigma^2}
   - \frac{1}{2\sigma^2}\text{RSS},
 $$
 
 where $\text{RSS} = \sum_{i=1}^n (y_i - \mu_i)^2$.
 
-**(c)** Explain why maximizing $\ell$ over $(\beta_0, \beta_1)$
+**(c)** Explain why maximizing $\llik$ over $(\beta_0, \beta_1)$
 is equivalent to minimizing $\text{RSS}$.
 :::
 
@@ -41,7 +41,7 @@ where $\mu_i = \beta_0 + \beta_1 x_i$.
 
 $$
 \ba
-\ell
+\llik
 &= \sum_{i=1}^n \logf{(2\pi\sigma^2)^{-1/2}\expf{-\frac{(y_i-\mu_i)^2}{2\sigma^2}}}
 \\
 &= -\frac{n}{2}\logf{2\pi\sigma^2}
@@ -56,7 +56,7 @@ $$
 
 Since $-\frac{n}{2}\logf{2\pi\sigma^2}$ does not depend on $\beta_0$ or $\beta_1$,
 and $\sigma^2 > 0$,
-maximizing $\ell$ over $(\beta_0, \beta_1)$
+maximizing $\llik$ over $(\beta_0, \beta_1)$
 is equivalent to maximizing $-\frac{\text{RSS}}{2\sigma^2}$,
 which is equivalent to minimizing $\text{RSS}$.
 
