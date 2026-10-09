@@ -46,7 +46,7 @@ $$
 &\approx `r round(bp_stat, 3)`
 && \text{(arithmetic)}
 \ea
-$$
+$$ {#eq-breusch-pagan-bw-studentized}
 
 and the original statistic is:
 
@@ -62,7 +62,7 @@ $$
 &\approx `r round(bp_orig, 3)`
 && \text{(arithmetic)}
 \ea
-$$
+$$ {#eq-breusch-pagan-bw-original}
 
 Comparing each value with a $\chi^2_3$ distribution
 (@thm-breusch-pagan-null)
@@ -77,7 +77,8 @@ The two statistics differ noticeably.
 The original statistic divides the explained sum of squares by 2,
 the variance that $g_i$ would have if the errors were Gaussian;
 the studentized statistic equals the same explained sum of squares
-divided by the sample variance of the $g_i$ values instead,
+divided by the mean squared deviation of the $g_i$ values
+(their variance with divisor $n$) instead,
 which here is about
 `r round(mean((bp_data$g - mean(bp_data$g))^2), 2)`.
 A non-significant result from only `r bp_n` babies
