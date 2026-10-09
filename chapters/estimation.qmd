@@ -252,24 +252,23 @@ $$\bias{\hth} \eqdef \E{\erf{\hth}}$$ {#eq-bias-def}
 ::: {#thm-bias-exprs}
 #### Bias equals Expectation minus Truth
 
-$$\bias{\hth} = \E{\hth} - \theta$$
+$$\bias{\hth} =\E{\hth} - \theta$$
 
 :::
 
 :::: proof
 
-This proof uses the definitions of bias (@def-bias)
-and estimation error (@def-estimation-error).
-
 $$
-\ba
-\bias{\hth}
-&\eqdef \E{\erf{\hth}} && \text{(definition of bias)} \\
-&= \E{\hth - \theta} && \text{(definition of estimation error)} \\
-&= \E{\hth} - \E{\theta} && \text{(by linearity of expectation)} \\
-&= \E{\hth} - \theta && \text{(since $\theta$ is constant)}
-\ea
-$$ {#eq-bias-equals-expectation-minus-truth-1}
+\begin{aligned}
+\bias{\hth} 
+&\eqdef \E{\erf{\hth}}\\
+&= \E{\hth - \theta}\\
+&=\E{\hth} - \E{\theta}\\
+&=\E{\hth} - \theta
+\end{aligned}
+$$
+
+The third equality is by the linearity of expectation.
 
 ::::
 
@@ -399,7 +398,7 @@ $$\SE{\hth} = \SD{\erf{\hth}}$$
 
 #### Standard error squared equals MSE minus squared bias
   
-Standard error is what is left over of MSE after bias is removed:
+standard error is what is left over of MSE after bias is removed:
 
 $$\sqf{\SE{\hth}} = \mselr{\hth} - \sqf{\bias{\hth}}$$
 
@@ -425,7 +424,7 @@ If $\E{\erf{\hth}} = 0$, then:
 
 $$\SE{\hth} = \sqrt{\mselr{\hth}}$$
 
-(this equality is equivalent to @eq-unbiased-mse)
+(this result is equivalent to @eq-unbiased-mse)
 :::
 
 ---
