@@ -1,7 +1,7 @@
 :::{#thm-d_odds_d_beta}
 #### Gradient of odds w.r.t. coefficients
 
-$$\derivf{\odds}{\vb} = \vx \cdot \odds$$ {#eq-gradient-of-odds-w-r-1}
+$$\derivf{\odds}{\vb} = \vx \cdot \odds$$ {#eq-d-odds-d-beta}
 
 :::
 
@@ -41,13 +41,13 @@ $$
 &= \vx \cdot \odds
 && \text{(gradient of odds w.r.t. coefficients)}
 \\
-&= \pmat{1 \\ 2} \cdot 1
+&= \underbrace{\pmat{1 \\ 2}}_{2 \times 1} \cdot 1
 && \text{(substitute } \vx = (1,2)' \text{ and } \odds = 1 \text{)}
 \\
-&= \pmat{1 \\ 2}
+&= \underbrace{\pmat{1 \\ 2}}_{2 \times 1}
 && \text{(scalar multiplication)}
 \ea
-$$ {#eq-evaluating-gradient-of-odds-w-1}
+$$ {#eq-d-odds-d-beta-example}
 
 The gradient vector indicates that increasing $\beta_0$ or $\beta_1$ increases the odds at rates 1 and 2, respectively.
 :::
@@ -58,7 +58,7 @@ The gradient vector indicates that increasing $\beta_0$ or $\beta_1$ increases t
 
 #### Gradient of odds w.r.t. coefficients in terms of probability
 
-$$\derivf{\odds}{\vb} = \vx \cdot \frac{\pi}{1-\pi}$$ {#eq-gradient-of-odds-w-r-2}
+$$\derivf{\odds}{\vb} = \vx \cdot \frac{\pi}{1-\pi}$$ {#eq-d-odds-d-beta-prob}
 
 :::
 
@@ -93,14 +93,14 @@ $$
 &= \vx \cdot \frac{\pi}{1-\pi}
 && \text{(gradient of odds in terms of probability)}
 \\
-&= \pmat{1 \\ 3} \cdot \frac{0.5}{1-0.5}
+&= \underbrace{\pmat{1 \\ 3}}_{2 \times 1} \cdot \frac{0.5}{1-0.5}
 && \text{(substitute } \vx = (1,3)' \text{ and } \pi = 0.5 \text{)}
 \\
-&= \pmat{1 \\ 3} \cdot 1
+&= \underbrace{\pmat{1 \\ 3}}_{2 \times 1} \cdot 1
 && \text{(simplify the fraction)}
 \\
-&= \pmat{1 \\ 3}
+&= \underbrace{\pmat{1 \\ 3}}_{2 \times 1}
 && \text{(scalar multiplication)}
 \ea
-$$ {#eq-gradient-of-odds-in-terms-1}
+$$ {#eq-d-odds-d-beta-prob-example}
 :::
