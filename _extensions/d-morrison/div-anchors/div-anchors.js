@@ -29,6 +29,8 @@
     ".proof[id]",
     ".remark[id]",
     ".solution[id]",
+    /* Quarto cross-reference id prefixes, for theorem-type and
+       proof-type divs that carry neither class above. */
     "div[id^='thm-']",
     "div[id^='lem-']",
     "div[id^='cor-']",
@@ -38,7 +40,8 @@
     "div[id^='exm-']",
     "div[id^='exr-']",
     "div[id^='rem-']",
-    "div[id^='sol-']"
+    "div[id^='sol-']",
+    "div[id^='alg-']",
   ].join(", ");
 
   /**
@@ -50,7 +53,7 @@
     var a = document.createElement("a");
     a.href = "#" + id;
     a.className = "div-anchor";
-    a.setAttribute("aria-label", "Anchor");
+    a.setAttribute("aria-label", "Permalink to this block");
     var icon = document.createElement("span");
     icon.setAttribute("aria-hidden", "true");
     icon.textContent = "\u00A7";
@@ -69,7 +72,8 @@
         return;
       }
 
-      // Avoid duplicate anchor if already present
+      // A div can match more than one selector, and the script can run
+      // twice; never add a second anchor.
       if (div.querySelector("a.div-anchor")) {
         return;
       }
@@ -79,24 +83,28 @@
       var anchor = createAnchor(id);
 
       if (titleSpan) {
-        // If the title ends with whitespace (e.g. Quarto's proof-title ending in ". "),
-        // trim the trailing whitespace so the anchor stays attached to the title,
-        // and ensure a trailing space separates the anchor from following content.
-        var lastTextNode = titleSpan.lastChild;
-        while (lastTextNode && lastTextNode.nodeType !== Node.TEXT_NODE && lastTextNode.lastChild) {
-          lastTextNode = lastTextNode.lastChild;
+        // Proof-type titles end in ". "; move that trailing whitespace
+        // after the anchor, so the anchor sits right after the title
+        // and a space still separates it from the body text.
+        var lastText = titleSpan.lastChild;
+        while (lastText && lastText.nodeType !== Node.TEXT_NODE &&
+               lastText.lastChild) {
+          lastText = lastText.lastChild;
         }
-        var hadTrailingWhitespace = false;
-        if (lastTextNode && lastTextNode.nodeType === Node.TEXT_NODE && /\s+$/.test(lastTextNode.textContent)) {
-          lastTextNode.textContent = lastTextNode.textContent.replace(/\s+$/, "");
-          hadTrailingWhitespace = true;
+        var hadTrailingSpace = false;
+        if (lastText && lastText.nodeType === Node.TEXT_NODE &&
+            /\s+$/.test(lastText.textContent)) {
+          lastText.textContent = lastText.textContent.replace(/\s+$/, "");
+          hadTrailingSpace = true;
         }
 
         // Insert anchor immediately after the title span
         titleSpan.insertAdjacentElement("afterend", anchor);
 
-        if (hadTrailingWhitespace && anchor.nextSibling &&
-            !(anchor.nextSibling.nodeType === Node.TEXT_NODE && /^\s/.test(anchor.nextSibling.textContent))) {
+        var next = anchor.nextSibling;
+        if (hadTrailingSpace &&
+            !(next && next.nodeType === Node.TEXT_NODE &&
+              /^\s/.test(next.textContent))) {
           anchor.after(" ");
         }
       } else {
