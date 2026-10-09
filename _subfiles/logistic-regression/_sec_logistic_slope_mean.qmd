@@ -28,6 +28,33 @@ $$ {#eq-deriv-lincom-proof}
 
 {{< slidebreak >}}
 
+:::{#exm-d-logodds-d-x}
+
+#### Evaluating the gradient of the log-odds
+
+Consider a logistic regression model with an intercept and one predictor,
+so $\vx = (1, x)'$,
+and coefficients $\vb = (-2, 0.5)'$.
+By @lem-d_logodds-d_x:
+
+$$
+\ba
+\derivf{\logodds}{\vx}
+&= \vb
+&& \text{(gradient of the log-odds w.r.t. the covariates)}
+\\
+&= \ub{\pmat{-2 \\ 0.5}}_{2 \times 1}
+&& \text{(substitute } \vb = (-2, 0.5)' \text{)}
+\ea
+$$ {#eq-d-logodds-d-x-example}
+
+The second entry says that increasing the predictor $x$ by one unit
+changes the log-odds by $0.5$,
+whatever the values of $x$ and the intercept term.
+:::
+
+{{< slidebreak >}}
+
 
 :::{#exr-logistic-slope}
 Consider a logistic regression model with a single predictor, $X$:
