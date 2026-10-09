@@ -176,13 +176,16 @@ $$\haz(t|\vx) = \haz_0(t)\hazfactor(\vx)$$
 
 ::: proof
 
+This proof uses @thm-hazard-ratio-vs-baseline-ph.
+
 $$
 \ba
 \haz(t|\vx)
 &= \expf{\loghaz(t|\vx)} && \text{(relationship between hazard and log-hazard)} \\
 &= \expf{\loghaz_0(t) + \reglincomb} && \text{(substituting proportional hazards model)} \\
 &= \expf{\loghaz_0(t)} \cdot \expf{\reglincomb} && \text{(exponent rule for sums)} \\
-&= \haz_0(t) \hazfactor(\vx) && \text{(definitions of baseline hazard } \haz_0(t) \text{ and hazard factor } \hazfactor(\vx)\text{)}
+&= \haz_0(t) \cdot \expf{\reglincomb} && \text{(exponentiating the baseline log-hazard gives the baseline hazard)} \\
+&= \haz_0(t) \hazfactor(\vx) && \text{(hazard factor under proportional hazards)}
 \ea
 $$ {#eq-proportional-hazards-decomposition-of-the-1}
 
@@ -325,14 +328,15 @@ $$ {#eq-relating-the-hazard-ratio-and-2}
 {{< slidebreak >}}
 
 The proportional hazards model also has additional notable properties,
-which follow from @thm-ph-haz-decomp:
+which follow from @thm-ph-haz-decomp
+and @thm-hazard-ratio-vs-baseline-ph:
 
 $$
 \ba
 \frac{\haz(t|\vx_1)}{\haz(t|\vx_2)}
 &=\frac{\haz_0(t)\hazfactor(\vx_1)}{\haz_0(t)\hazfactor(\vx_2)} && \text{(applying the PH hazard decomposition)} \\
 &=\frac{\hazfactor(\vx_1)}{\hazfactor(\vx_2)} && \text{(canceling baseline hazard } \haz_0(t)\text{)} \\
-&=\frac{\expf{\eta(\vx_1)}}{\expf{\eta(\vx_2)}} && \text{(substituting hazard factor definition)} \\
+&=\frac{\expf{\eta(\vx_1)}}{\expf{\eta(\vx_2)}} && \text{(hazard factor under proportional hazards)} \\
 &=\expf{\eta(\vx_1)-\eta(\vx_2)} && \text{(quotient rule for exponentials)} \\
 &=\expf{\tp{\vx_1}\vb-\tp{\vx_2}\vb} && \text{(substituting linear predictors)} \\
 &=\expf{\tp{(\vx_1 - \vx_2)}\vb} && \text{(factoring out } \vb\text{)}
@@ -440,14 +444,15 @@ $$
 
 ::: proof
 
-This derivation uses @thm-ph-cuhaz.
+This derivation uses @thm-ph-cuhaz
+and @thm-hazard-ratio-vs-baseline-ph.
 
 $$
 \ba
 \logf{\cuhaz(t|\vx)}
 &= \logf{\hazfactor(\vx)\cuhaz_0(t)} && \text{(applying the PH cumulative-hazard theorem)} \\
 &= \logf{\cuhaz_0(t)} + \logf{\hazfactor(\vx)} && \text{(logarithm of product rule)} \\
-&= \logf{\cuhaz_0(t)} + \logf{\expf{\reglincomb}} && \text{(substituting definition of } \hazfactor(\vx)\text{)} \\
+&= \logf{\cuhaz_0(t)} + \logf{\expf{\reglincomb}} && \text{(hazard factor under proportional hazards)} \\
 &= \logf{\cuhaz_0(t)} + \reglincomb && \text{(simplifying } \log(\exp(\cdot))\text{)}
 \ea
 $$ {#eq-the-logarithms-of-cumulative-hazard-1}
