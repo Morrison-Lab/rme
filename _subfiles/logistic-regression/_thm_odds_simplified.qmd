@@ -6,6 +6,8 @@
 Two equivalent expressions for the odds function are:
 :::
 
+For $0 < \pi < 1$,
+
 $$
 \ba
 \oddsf{\pi} &= \frac{1}{\pi^{-1}-1}
@@ -24,22 +26,76 @@ Prove @thm-odds-simplified.
 {{< slidebreak >}}
 
 :::{#sol-odds2}
+Let $0 < \pi < 1$, so that $\pi^{-1}$ exists.
 Starting from @def-odds-fn:
 
 $$
 \ba
-\oddsf{\pi} &= \frac{\pi}{1-\pi}
+\oddsf{\pi} &\eqdef \frac{\pi}{1-\pi}
+&& \text{(definition of the odds function)}
 \\
-&= \frac{\pi}{1-\pi}\frac{\pi^{-1}}{\pi^{-1}}
+&= \frac{\pi}{1-\pi}\cdot\frac{\pi^{-1}}{\pi^{-1}}
+&& \text{(multiply numerator and denominator by } \pi^{-1} \text{)}
 \\
 &= \frac{\pi\pi^{-1}}{(1-\pi)\pi^{-1}}
+&& \text{(distribute multiplication across fraction)}
 \\
-&= \frac{1}{(\pi^{-1}-\pi\pi^{-1})}
+&= \frac{1}{(1-\pi)\pi^{-1}}
+&& \text{(simplify numerator: } \pi\pi^{-1}=1 \text{)}
 \\
-&= \frac{1}{(\pi^{-1}-1)}
+&= \frac{1}{\pi^{-1}-\pi\pi^{-1}}
+&& \text{(distribute } \pi^{-1} \text{ in denominator)}
+\\
+&= \frac{1}{\pi^{-1}-1}
+&& \text{(simplify } \pi\pi^{-1}=1 \text{ in denominator)}
 \\
 &= \invf{\pi^{-1}-1}
+&& \text{(notation for reciprocal function)}
 \ea
-$$
+$$ {#eq-odds-simplified-proof}
 
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-odds-simplified}
+
+#### Computing odds using the simplified expression
+
+Suppose an event has probability $\pi = 0.25$.
+
+Using the simplified expression from @thm-odds-simplified:
+
+$$
+\ba
+\oddsf{0.25} &= \invf{0.25^{-1} - 1}
+&& \text{(simplified odds expression)}
+\\
+&= \invf{4 - 1}
+&& \text{(reciprocal: } 0.25^{-1} = 4 \text{)}
+\\
+&= \invf{3}
+&& \text{(subtraction)}
+\\
+&= \frac{1}{3}
+&& \text{(reciprocal)}
+\ea
+$$ {#eq-odds-simplified-example}
+
+Checking against the standard odds definition:
+
+$$
+\ba
+\oddsf{0.25} &= \frac{0.25}{1 - 0.25}
+&& \text{(definition of the odds function)}
+\\
+&= \frac{0.25}{0.75}
+&& \text{(subtraction)}
+\\
+&= \frac{1}{3}
+&& \text{(divide numerator and denominator by 0.25)}
+\ea
+$$ {#eq-odds-simplified-check}
+
+Both formulas yield identical odds of $1/3$.
 :::
