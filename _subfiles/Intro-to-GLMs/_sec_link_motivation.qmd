@@ -23,7 +23,9 @@ but that is hard to get right.
 
 The link function offers a simpler route.
 We add all the covariate terms together first, to get the linear predictor $\eta(\vx)$,
-and then transform once, with the inverse link $g^{-1}$:
+and then transform once, with the inverse link $g^{-1}$.
+By definition of the link, $g\paren{\mu(\vx)} = \eta(\vx)$.
+Applying $g^{-1}$ to both sides gives:
 
 $$\mu(\vx) = g^{-1}\paren{\eta(\vx)}$$
 
@@ -54,7 +56,8 @@ because $g^{-1}$ is not linear.
 ::: {#exm-link-slope-numeric}
 #### A logistic model with no interaction
 
-Suppose $\logit(\pi) = -2 + 1 \cdot x + 1.5 \cdot z$, with $z \in \{0, 1\}$.
+Suppose the mean $\mu$ of a binary outcome, which is its probability,
+satisfies $\logit(\mu) = -2 + 1 \cdot x + 1.5 \cdot z$, with $z \in \{0, 1\}$.
 The coefficient of $x$ is the same at both values of $z$,
 so the odds ratio for a one-unit increase in $x$ is $e^1$ at both values of $z$.
 The code below computes the change in probability for the same increase in $x$, from $x = 0$ to $x = 1$.
