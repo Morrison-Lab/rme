@@ -521,7 +521,38 @@ per unit difference in its corresponding variable,
 when all interacting variables are set to 0.
 :::
 
----
+{{< slidebreak >}}
+
+::: {#rem-interaction-restrictions}
+#### Interactions and the number of subgroups
+
+Every subgroup that we let have its own line costs data:
+the more subgroups we compare, the fewer observations each one has.
+When there are too many subgroups, we restrict how they may differ.
+The parallel-lines model without an interaction (@eq-BW-lm-interact with $\beta_{AM} = 0$)
+is one such restriction:
+the subgroups share one slope, and only their intercepts differ.
+Adding the interaction term relaxes the restriction,
+so that the slopes can also differ.
+
+This relaxation is symmetric.
+If the slope of birthweight with respect to age differs by sex,
+then the difference in mean birthweight between the sexes differs by age,
+which is visible in @fig-bw-interaction as vertical gaps
+that are narrower at some ages than at others.
+
+The same idea applies to two numeric covariates.
+The slope of the outcome with respect to one numeric covariate $A$
+may depend on the value of another numeric covariate $Z$.
+Then each value of $Z$ defines its own subgroup and its own slope,
+so there are as many subgroups as there are distinct values of $Z$,
+and most of them contain no observations at all.
+To make progress, we have to assume a restrictive shape for how the slope changes with $Z$;
+a product term $\beta_{AZ}\, a \cdot z$ assumes that
+the slope changes linearly with $Z$.
+:::
+
+{{< slidebreak >}}
 
 ::: notes
 To learn what this model is assuming, let's plug in a few values.
