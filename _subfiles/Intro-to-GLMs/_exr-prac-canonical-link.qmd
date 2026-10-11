@@ -2,12 +2,13 @@
 
 ::: {#exr-prac-canonical-link}
 #### Canonical link functions
-(adapted from @dobson4e, Chapter 3, and @dunn2018generalized, Chapter 3)
+(adapted from @dobson4e, Chapter 3, and @dunn2018generalized, Chapter 5)
 
 The *canonical link* for a distribution in the exponential family
 is the link $g(\cdot)$ such that
 $g(\mu) = \theta$,
-where $\theta$ is the natural parameter.
+where $\theta$ is the natural parameter
+(see [Canonical links](Intro-to-GLMs.qmd#sec-canonical-link)).
 
 For each listed distribution,
 state the canonical link function
@@ -20,7 +21,8 @@ where $\Varf{Y} = \phi\, V(\mu)$ and $\phi$ is the dispersion parameter:
 
 **(c)** $Y \sim \Normal(\mu, \sigma^2)$
 
-**(d)** $Y \sim \text{Gamma}(\mu, \phi)$
+**(d)** $Y \sim \text{Gamma}(\mu, \phi)$,
+with mean $\mu$ and shape $1/\phi$
 :::
 
 ::: {.solution}
@@ -48,7 +50,12 @@ Notes:
 - For the Gamma distribution,
   the coefficient of variation $\SD{Y}/\E{Y}$ is constant.
 
-The log link (not the inverse link) is more commonly used for Gamma regression in practice,
+- The sign of the Gamma canonical link is a convention:
+  $\theta = -1/\mu$ in the density's natural parameterization,
+  while R's `Gamma()` family uses $1/\mu$ as its default inverse link.
+  Either way, the linear predictor can produce a negative $\mu$.
+
+The log link (not the canonical inverse link) is often used for Gamma regression in practice,
 because it ensures $\mu > 0$ and gives interpretable multiplicative effects.
 
 :::
