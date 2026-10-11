@@ -379,10 +379,10 @@ text-align: center;
 \operatorname{log}\mathopen{}\left\{\operatorname{f}(t)\right\}\mathclose{} &amp;= \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} - \lambda t &amp;&amp; \text{(taking natural logarithm of density)} \\
 \operatorname{F}(t) &amp;\stackrel{\text{def}}{=}\int_{0}^{t} \operatorname{f}(u) du &amp;&amp; \text{(cumulative distribution function definition)} \\
 &amp;= \int_{0}^{t} \lambda \text{e}^{-\lambda u} du &amp;&amp; \text{(substituting probability density function)} \\
-&amp;= \left[ -\text{e}^{-\lambda u} \right]_{0}^{t} &amp;&amp; \text{(evaluating antiderivative)} \\
+&amp;= \mathopen{}\left[ -\text{e}^{-\lambda u} \right]\mathclose{}_{0}^{t} &amp;&amp; \text{(evaluating antiderivative)} \\
 &amp;= 1 - \text{e}^{-\lambda t} &amp;&amp; \text{(evaluating limits of integration)} \\
 \operatorname{S}(t) &amp;\stackrel{\text{def}}{=}1 - \operatorname{F}(t) &amp;&amp; \text{(survival function definition)} \\
-&amp;= 1 - \left(1 - \text{e}^{-\lambda t}\right) &amp;&amp; \text{(substituting cumulative distribution function)} \\
+&amp;= 1 - \mathopen{}\left(1 - \text{e}^{-\lambda t}\right)\mathclose{} &amp;&amp; \text{(substituting cumulative distribution function)} \\
 &amp;= \text{e}^{-\lambda t} &amp;&amp; \text{(simplifying terms)} \\
 {\Lambda}(t) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
 &amp;= -\operatorname{log}\mathopen{}\left\{\text{e}^{-\lambda t}\right\}\mathclose{} &amp;&amp; \text{(substituting survival function)} \\
@@ -392,7 +392,7 @@ text-align: center;
 &amp;= \lambda &amp;&amp; \text{(differentiating linear term)} \\
 \operatorname{E}\mathopen{}\left[T\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative continuous random variable)} \\
 &amp;= \int_{0}^{\infty} \text{e}^{-\lambda t} dt &amp;&amp; \text{(substituting survival function)} \\
-&amp;= \left[ -\frac{1}{\lambda} \text{e}^{-\lambda t} \right]_{0}^{\infty} &amp;&amp; \text{(evaluating antiderivative)} \\
+&amp;= \mathopen{}\left[ -\frac{1}{\lambda} \text{e}^{-\lambda t} \right]\mathclose{}_{0}^{\infty} &amp;&amp; \text{(evaluating antiderivative)} \\
 &amp;= \lambda^{-1} &amp;&amp; \text{(evaluating limits of integration)}
 \end{aligned}
 \]</span></p>
@@ -405,10 +405,10 @@ text-align: center;
 \operatorname{f}(t) &amp;\stackrel{\text{def}}{=}\lambda p (\lambda t)^{p-1} \text{e}^{-(\lambda t)^p} &amp;&amp; \text{(probability density function for $t \ge 0$)} \\
 \operatorname{F}(t) &amp;\stackrel{\text{def}}{=}\int_{0}^{t} \operatorname{f}(u) du &amp;&amp; \text{(cumulative distribution function definition)} \\
 &amp;= \int_{0}^{t} \lambda p (\lambda u)^{p-1} \text{e}^{-(\lambda u)^p} du &amp;&amp; \text{(substituting density function)} \\
-&amp;= \left[ -\text{e}^{-(\lambda u)^p} \right]_{0}^{t} &amp;&amp; \text{(evaluating antiderivative via substitution $w = (\lambda u)^p$)} \\
+&amp;= \mathopen{}\left[ -\text{e}^{-(\lambda u)^p} \right]\mathclose{}_{0}^{t} &amp;&amp; \text{(evaluating antiderivative via substitution $w = (\lambda u)^p$)} \\
 &amp;= 1 - \text{e}^{-(\lambda t)^p} &amp;&amp; \text{(evaluating limits of integration)} \\
 \operatorname{S}(t) &amp;\stackrel{\text{def}}{=}1 - \operatorname{F}(t) &amp;&amp; \text{(survival function definition)} \\
-&amp;= 1 - \left(1 - \text{e}^{-(\lambda t)^p}\right) &amp;&amp; \text{(substituting cumulative distribution function)} \\
+&amp;= 1 - \mathopen{}\left(1 - \text{e}^{-(\lambda t)^p}\right)\mathclose{} &amp;&amp; \text{(substituting cumulative distribution function)} \\
 &amp;= \text{e}^{-(\lambda t)^p} &amp;&amp; \text{(simplifying terms)} \\
 {\Lambda}(t) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
 &amp;= -\operatorname{log}\mathopen{}\left\{\text{e}^{-(\lambda t)^p}\right\}\mathclose{} &amp;&amp; \text{(substituting survival function)} \\
@@ -417,13 +417,13 @@ text-align: center;
 &amp;= p \operatorname{log}\mathopen{}\left\{\lambda t\right\}\mathclose{} &amp;&amp; \text{(applying exponent rule for logarithms)} \\
 &amp;= p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} + p \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} &amp;&amp; \text{(applying product rule for logarithms)} \\
 {\lambda}(t) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} {\Lambda}(t) &amp;&amp; \text{(hazard function definition)} \\
-&amp;= \frac{\partial}{\partial t} \left( (\lambda t)^p \right) &amp;&amp; \text{(substituting cumulative hazard)} \\
+&amp;= \frac{\partial}{\partial t} \mathopen{}\left( (\lambda t)^p \right)\mathclose{} &amp;&amp; \text{(substituting cumulative hazard)} \\
 &amp;= p (\lambda t)^{p-1} \cdot \lambda &amp;&amp; \text{(applying power and chain rules of differentiation)} \\
 &amp;= \lambda p (\lambda t)^{p-1} &amp;&amp; \text{(rearranging factors)} \\
 \operatorname{E}\mathopen{}\left[T\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
 &amp;= \int_{0}^{\infty} \text{e}^{-(\lambda t)^p} dt &amp;&amp; \text{(substituting survival function)} \\
 &amp;= \frac{1}{\lambda p} \int_{0}^{\infty} u^{\frac{1}{p}-1} \text{e}^{-u} du &amp;&amp; \text{(substituting $u = (\lambda t)^p \implies t = \lambda^{-1} u^{1/p}$)} \\
-&amp;= \lambda^{-1} \cdot \Gamma\left(1 + \frac{1}{p}\right) &amp;&amp; \text{(applying definition of Gamma function $\Gamma(z)$)}
+&amp;= \lambda^{-1} \cdot \Gamma\mathopen{}\left(1 + \frac{1}{p}\right)\mathclose{} &amp;&amp; \text{(applying definition of Gamma function $\Gamma(z)$)}
 \end{aligned}
 \]</span></p>
 <div class="callout callout-note callout-titled callout-style-default">
@@ -523,7 +523,7 @@ text-align: center;
 \]</span> This constant value is the hazard function of the exponential distribution with parameter <span class="math inline">\(\lambda\)</span>.</p></li>
 <li><p><strong>Increasing hazard when <span class="math inline">\(p &gt; 1\)</span></strong>: Differentiating <span class="math inline">\({\lambda}(t) = \lambda^p p t^{p-1}\)</span> with respect to <span class="math inline">\(t\)</span> gives: <span class="math display">\[
 \begin{aligned}
-{\lambda}'(t) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} \left( \lambda^p p t^{p-1} \right) &amp;&amp; \text{(definition of hazard derivative)} \\
+{\lambda}'(t) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} \mathopen{}\left( \lambda^p p t^{p-1} \right)\mathclose{} &amp;&amp; \text{(definition of hazard derivative)} \\
 &amp;= \lambda^p p (p-1) t^{p-2} &amp;&amp; \text{(applying power rule of differentiation)}
 \end{aligned}
 \]</span> Since <span class="math inline">\(\lambda &gt; 0\)</span>, <span class="math inline">\(p &gt; 0\)</span>, and <span class="math inline">\(t &gt; 0\)</span>, the sign of <span class="math inline">\({\lambda}'(t)\)</span> depends entirely on the factor <span class="math inline">\((p-1)\)</span>. When <span class="math inline">\(p &gt; 1\)</span>, <span class="math inline">\((p-1) &gt; 0\)</span>, so <span class="math inline">\({\lambda}'(t) &gt; 0\)</span> for all <span class="math inline">\(t &gt; 0\)</span>, meaning the hazard function is strictly increasing over time.</p></li>
@@ -694,7 +694,7 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p>When there are no additional predictors (<span class="math inline">\(\tilde{x}= \tilde{0}\)</span>), the baseline hazard is constant: <span class="math inline">\(\lambda = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>. This model uses a log link as in a generalized linear model for Poisson or rate outcomes. Because the hazard rate does not depend on time <span class="math inline">\(t\)</span>, the hazard ratio comparing two covariate vectors <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\({\tilde{x}^*}\)</span> is constant over time:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\theta_{{\lambda}}(t \mid \tilde{x}: {\tilde{x}^*}) &amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t \mid \tilde{x})}{{\lambda}(t \mid {\tilde{x}^*})} &amp;&amp; \text{(hazard ratio definition)} \\
+\text{ϙ}_{{\lambda}}(t \mid \tilde{x}: {\tilde{x}^*}) &amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t \mid \tilde{x})}{{\lambda}(t \mid {\tilde{x}^*})} &amp;&amp; \text{(hazard ratio definition)} \\
 &amp;= \frac{\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta({\tilde{x}^*})\right\}\mathclose{}} &amp;&amp; \text{(substituting exponential regression hazard rates)} \\
 &amp;= \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}) - \eta({\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(applying quotient rule for exponentials)} \\
 &amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}\right\}\mathclose{} &amp;&amp; \text{(expressing difference in linear predictors)}
@@ -712,20 +712,20 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 &amp;= \theta_{{\lambda}}(\tilde{x}) \cdot {\Lambda}_0(t) &amp;&amp; \text{(factoring constant hazard multiplier out of integral)} \\
 \operatorname{S}(t \mid \tilde{x}) &amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \tilde{x})\right\}\mathclose{} &amp;&amp; \text{(survival function in terms of cumulative hazard)} \\
 &amp;= \operatorname{exp}\mathopen{}\left\{-\theta_{{\lambda}}(\tilde{x}) \cdot {\Lambda}_0(t)\right\}\mathclose{} &amp;&amp; \text{(substituting cumulative hazard)} \\
-&amp;= \left[ \operatorname{exp}\mathopen{}\left\{-{\Lambda}_0(t)\right\}\mathclose{} \right]^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(applying exponent laws)} \\
-&amp;= \left[ \operatorname{S}_0(t) \right]^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(substituting baseline survival function $\operatorname{S}_0(t)$)}
+&amp;= \mathopen{}\left[ \operatorname{exp}\mathopen{}\left\{-{\Lambda}_0(t)\right\}\mathclose{} \right]\mathclose{}^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(applying exponent laws)} \\
+&amp;= \mathopen{}\left[ \operatorname{S}_0(t) \right]\mathclose{}^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(substituting baseline survival function $\operatorname{S}_0(t)$)}
 \end{aligned}
 \]</span></p>
 <p>An alternative modeling framework is the <strong>Accelerated Failure Time (AFT)</strong> model. Rather than multiplying the hazard rate, covariates accelerate or decelerate the progression of time itself:</p>
 <p><span class="math display">\[
-\operatorname{S}(t \mid \tilde{x}) \stackrel{\text{def}}{=}\operatorname{S}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)
+\operatorname{S}(t \mid \tilde{x}) \stackrel{\text{def}}{=}\operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{}
 \]</span></p>
 <p>where <span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}\)</span>, <span class="math inline">\(\eta(\tilde{x}) \stackrel{\text{def}}{=}\beta_1 x_1 + \dots + \beta_p x_p\)</span>, and <span class="math inline">\(\operatorname{S}_0(t) \stackrel{\text{def}}{=}\operatorname{P}(T \ge t \mid \tilde{x}= \tilde{0})\)</span> is the baseline survival function.</p>
 <p>We derive the expected survival time under the AFT model using change-of-variables integration:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[T \mid \tilde{x}\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t \mid \tilde{x}) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
-&amp;= \int_{0}^{\infty} \operatorname{S}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) dt &amp;&amp; \text{(substituting AFT survival function)} \\
+&amp;= \int_{0}^{\infty} \operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} dt &amp;&amp; \text{(substituting AFT survival function)} \\
 &amp;= \int_{0}^{\infty} \operatorname{S}_0(u) \cdot \frac{du}{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(substituting $u = t \cdot \theta_{{\lambda}}(\tilde{x}) \implies dt = \frac{du}{\theta_{{\lambda}}(\tilde{x})}$)} \\
 &amp;= \theta_{{\lambda}}(\tilde{x})^{-1} \cdot \int_{0}^{\infty} \operatorname{S}_0(u) du &amp;&amp; \text{(factoring constant $\theta_{{\lambda}}(\tilde{x})^{-1}$ out of integral)} \\
 &amp;= \theta_{{\lambda}}(\tilde{x})^{-1} \cdot \operatorname{E}\mathopen{}\left[T \mid \tilde{x}= \tilde{0}\right]\mathclose{} &amp;&amp; \text{(substituting baseline expectation formula)}
@@ -736,13 +736,13 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p><span class="math display">\[
 \begin{aligned}
 {\Lambda}(t \mid \tilde{x}) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t \mid \tilde{x})\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
-&amp;= -\operatorname{log}\mathopen{}\left\{\operatorname{S}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\right\}\mathclose{} &amp;&amp; \text{(substituting AFT survival function)} \\
-&amp;= {\Lambda}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) &amp;&amp; \text{(substituting baseline cumulative hazard)} \\
+&amp;= -\operatorname{log}\mathopen{}\left\{\operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{}\right\}\mathclose{} &amp;&amp; \text{(substituting AFT survival function)} \\
+&amp;= {\Lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} &amp;&amp; \text{(substituting baseline cumulative hazard)} \\
 {\lambda}(t \mid \tilde{x}) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} {\Lambda}(t \mid \tilde{x}) &amp;&amp; \text{(hazard function definition)} \\
-&amp;= \frac{\partial}{\partial t} \left( {\Lambda}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) \right) &amp;&amp; \text{(substituting AFT cumulative hazard)} \\
-&amp;= {\Lambda}_0'\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) \cdot \frac{\partial}{\partial t} \left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) &amp;&amp; \text{(applying chain rule of differentiation)} \\
-&amp;= {\lambda}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) \cdot \theta_{{\lambda}}(\tilde{x}) &amp;&amp; \text{(since ${\Lambda}_0'(u) = {\lambda}_0(u)$)} \\
-&amp;= \theta_{{\lambda}}(\tilde{x}) \cdot {\lambda}_0\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right) &amp;&amp; \text{(rearranging factors)}
+&amp;= \frac{\partial}{\partial t} \mathopen{}\left( {\Lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} \right)\mathclose{} &amp;&amp; \text{(substituting AFT cumulative hazard)} \\
+&amp;= {\Lambda}_0'\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} \cdot \frac{\partial}{\partial t} \mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} &amp;&amp; \text{(applying chain rule of differentiation)} \\
+&amp;= {\lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} \cdot \theta_{{\lambda}}(\tilde{x}) &amp;&amp; \text{(since ${\Lambda}_0'(u) = {\lambda}_0(u)$)} \\
+&amp;= \theta_{{\lambda}}(\tilde{x}) \cdot {\lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\tilde{x}) \right)\mathclose{} &amp;&amp; \text{(rearranging factors)}
 \end{aligned}
 \]</span></p>
 <h3 id="relationship-between-ph-and-aft-models">Relationship between PH and AFT models</h3>
@@ -750,8 +750,8 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{S}(t \mid \tilde{x}) &amp;= \operatorname{exp}\mathopen{}\left\{-\lambda \cdot t \cdot \theta_{{\lambda}}(\tilde{x})\right\}\mathclose{} &amp;&amp; \text{(substituting exponential baseline into AFT formula)} \\
-&amp;= \left[ \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{} \right]^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(applying exponent laws)} \\
-&amp;= \left[ \operatorname{S}_0(t) \right]^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(substituting exponential baseline survival function)}
+&amp;= \mathopen{}\left[ \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{} \right]\mathclose{}^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(applying exponent laws)} \\
+&amp;= \mathopen{}\left[ \operatorname{S}_0(t) \right]\mathclose{}^{\theta_{{\lambda}}(\tilde{x})} &amp;&amp; \text{(substituting exponential baseline survival function)}
 \end{aligned}
 \]</span></p>
 <p>This derivation demonstrates that the exponential AFT model is mathematically identical to the exponential PH model.</p>
@@ -759,11 +759,11 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{S}^*(t) &amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{-(\lambda^* t)^p\right\}\mathclose{} &amp;&amp; \text{(Weibull survival formula with scale parameter $\lambda^*$)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\left(\lambda \theta_i^{1/p} t\right)^p\right\}\mathclose{} &amp;&amp; \text{(substituting $\lambda^* = \lambda \theta_i^{1/p}$)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-(\lambda t)^p \cdot \theta_i\right\}\mathclose{} &amp;&amp; \text{(simplifying exponent $\left(\theta_i^{1/p}\right)^p = \theta_i$)} \\
-&amp;= \left[ \operatorname{exp}\mathopen{}\left\{-(\lambda t)^p\right\}\mathclose{} \right]^{\theta_i} &amp;&amp; \text{(applying exponent laws)} \\
-&amp;= \left[ \operatorname{S}_0(t) \right]^{\theta_i} &amp;&amp; \text{(substituting baseline Weibull survival function)} \\
-&amp;= \operatorname{S}_0\left( t \cdot \theta_i^{1/p} \right) &amp;&amp; \text{(expressing as AFT model with acceleration factor $\theta_i^{1/p}$)}
+&amp;= \operatorname{exp}\mathopen{}\left\{-\mathopen{}\left(\lambda \theta_i^{1/p} t\right)\mathclose{}^p\right\}\mathclose{} &amp;&amp; \text{(substituting $\lambda^* = \lambda \theta_i^{1/p}$)} \\
+&amp;= \operatorname{exp}\mathopen{}\left\{-(\lambda t)^p \cdot \theta_i\right\}\mathclose{} &amp;&amp; \text{(simplifying exponent $\mathopen{}\left(\theta_i^{1/p}\right)\mathclose{}^p = \theta_i$)} \\
+&amp;= \mathopen{}\left[ \operatorname{exp}\mathopen{}\left\{-(\lambda t)^p\right\}\mathclose{} \right]\mathclose{}^{\theta_i} &amp;&amp; \text{(applying exponent laws)} \\
+&amp;= \mathopen{}\left[ \operatorname{S}_0(t) \right]\mathclose{}^{\theta_i} &amp;&amp; \text{(substituting baseline Weibull survival function)} \\
+&amp;= \operatorname{S}_0\mathopen{}\left( t \cdot \theta_i^{1/p} \right)\mathclose{} &amp;&amp; \text{(expressing as AFT model with acceleration factor $\theta_i^{1/p}$)}
 \end{aligned}
 \]</span></p>
 <p>This derivation proves that the Weibull model is simultaneously a proportional hazards model and an accelerated failure time model.</p>
@@ -1340,7 +1340,7 @@ Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of 
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,

@@ -576,7 +576,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 \qquad
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(10\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-0.143\right\}\mathclose{} = 0.867\]</span></p>
 <p>Contrast this with Kaplan-Meier, which multiplies conditional survival probabilities:</p>
-<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} = \prod_{j: t_j \le t}\left(1 - \frac{d_j}{n_j}\right),
+<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} = \prod_{j: t_j \le t}\mathopen{}\left(1 - \frac{d_j}{n_j}\right)\mathclose{},
 \qquad
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(10\right)\mathclose{} = 1 - \tfrac{1}{7} = 0.857\]</span></p>
 <p>The two estimators are close but <strong>not</strong> identical, and <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} \ge \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> always. Reporting the same numbers for both, or reporting <span class="math inline">\(\hat\Lambda\)</span> where <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\)</span> was asked for, loses credit.</p>
@@ -770,9 +770,9 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><strong>Joint likelihood of the data set:</strong> <span class="math display">\[\mathcal{L}\stackrel{\text{def}}{=}\operatorname{p}(\tilde Y = \tilde y, \tilde D = \tilde d \mid \mathbf X = \mathbf x)\]</span></p>
 <p><strong>Marginal likelihood contribution of observation <span class="math inline">\(i\)</span>:</strong> <span class="math display">\[\mathcal{L}_i \stackrel{\text{def}}{=}\operatorname{p}(Y_i = y_i, D_i = d_i \mid \tilde X_i = \tilde x_i)\]</span></p>
 <p><strong><em>Independent-observations assumption</em></strong> (used to factor the likelihood): <span class="math display">\[\mathcal{L}= \prod_{i=1}^n \mathcal{L}_i\]</span></p>
-<p><strong><em>Non-informative censoring assumption</em></strong> (used so each contribution reduces to survival and hazard terms): <span class="math inline">\(T_i \perp\!\!\!\perp C_i \mid \tilde X_i\)</span>, giving <span class="math display">\[\mathcal{L}_i \propto \left[\operatorname{f}(y_i \mid \tilde x_i)\right]^{d_i}
-\left[\operatorname{S}(y_i \mid \tilde x_i)\right]^{1 - d_i}
-= \operatorname{S}(y_i \mid \tilde x_i)\cdot\left[{\lambda}(y_i \mid \tilde x_i)\right]^{d_i}\]</span></p>
+<p><strong><em>Non-informative censoring assumption</em></strong> (used so each contribution reduces to survival and hazard terms): <span class="math inline">\(T_i \perp\!\!\!\perp C_i \mid \tilde X_i\)</span>, giving <span class="math display">\[\mathcal{L}_i \propto \mathopen{}\left[\operatorname{f}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}
+\mathopen{}\left[\operatorname{S}(y_i \mid \tilde x_i)\right]\mathclose{}^{1 - d_i}
+= \operatorname{S}(y_i \mid \tilde x_i)\cdot\mathopen{}\left[{\lambda}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}\]</span></p>
 <p><strong>Distribution functions</strong> (define each one):</p>
 <p><span class="math display">\[\operatorname{S}(t \mid \tilde x) \stackrel{\text{def}}{=}\operatorname{P}(T &gt; t \mid \tilde X = \tilde x) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \tilde x)\right\}\mathclose{}\]</span></p>
 <p><span class="math display">\[\operatorname{f}(t \mid \tilde x) \stackrel{\text{def}}{=}{\lambda}(t \mid \tilde x)\,\operatorname{S}(t \mid \tilde x)\]</span></p>
@@ -838,7 +838,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 </div>
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>On the <strong>log</strong> scale, the effect is linear: a change of <span class="math inline">\(c\)</span> units multiplies the log-hazard by <span class="math inline">\(c \cdot \beta\)</span>. So the hazard ratio for a <span class="math inline">\(c\)</span>-unit change is</p>
-<p><span class="math display">\[HR(c) = \operatorname{exp}\mathopen{}\left\{c\,\beta\right\}\mathclose{} = \left(\operatorname{exp}\mathopen{}\left\{\beta\right\}\mathclose{}\right)^c = HR^{\,c}\]</span></p>
+<p><span class="math display">\[HR(c) = \operatorname{exp}\mathopen{}\left\{c\,\beta\right\}\mathclose{} = \mathopen{}\left(\operatorname{exp}\mathopen{}\left\{\beta\right\}\mathclose{}\right)\mathclose{}^c = HR^{\,c}\]</span></p>
 <p>A 7.5-year increase is <span class="math inline">\(c = 0.75\)</span> decades, and the per-decade <span class="math inline">\(\widehat{HR} = 1.94\)</span> (i.e.&nbsp;<span class="math inline">\(\hat\beta_A = \log 1.94 = 0.66\)</span>):</p>
 <p><span class="math display">\[\widehat{HR}(0.75) = 1.94^{\,0.75} = \operatorname{exp}\mathopen{}\left\{0.75 \times 0.66\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{0.495\right\}\mathclose{} = 1.64\]</span></p>
 <p>So a 7.5-year-older man has about <strong>64% higher</strong> estimated hazard of CHD, all else equal. The operation is <strong>exponentiation</strong> (<span class="math inline">\(HR^{0.75}\)</span>), not multiplication.</p>
@@ -929,7 +929,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>A hazard ratio is positive and its sampling distribution is skewed, so the symmetric normal approximation is applied to <span class="math inline">\(\log(HR)\)</span>, and the endpoints are <strong>then</strong> exponentiated. For the heavy-vs-light comparison (<span class="math inline">\(\widehat\Delta = 0.42\)</span>, <span class="math inline">\(\text{SE} = 0.160\)</span>):</p>
 <p><span class="math display">\[\text{log-scale CI:}\quad 0.42 \pm 1.96\times 0.160 = (0.106,\ 0.734)\]</span></p>
-<p><span class="math display">\[\text{HR CI:}\quad \left(e^{0.106},\ e^{0.734}\right) = (1.11,\ 2.08)\]</span></p>
+<p><span class="math display">\[\text{HR CI:}\quad \mathopen{}\left(e^{0.106},\ e^{0.734}\right)\mathclose{} = (1.11,\ 2.08)\]</span></p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-label="1"></a>est <span class="ot">&lt;-</span> <span class="fl">0.42</span></span>
 <span id="cb7-2"><a aria-label="2"></a>se  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">0.021905</span> <span class="sc">+</span> <span class="fl">0.024840</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fl">0.010504</span>)</span>
@@ -1408,7 +1408,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,

@@ -440,7 +440,7 @@ text-align: center;
 
 </section><section class="slide level2"></section><section id="the-probability-density-function-pdf" class="slide level2 smaller" data-number="4.1"><h2>
 <span class="header-section-number">4.1</span> The Probability Density Function (PDF)</h2>
-<p>For a time-to-event variable <span class="math inline">\(T\)</span> with a continuous distribution, the <strong>probability density function</strong> is defined as usual (see <a href="../chapters/probability.html#sec-prob-dens">probability density function</a>).</p>
+<p>For a time-to-event variable <span class="math inline">\(T\)</span> with a continuous distribution, the <strong>probability density function</strong> is defined as usual (see <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">probability density function</a>).</p>
 <aside class="notes"><p>In most time-to-event models, this density is assumed to be 0 for all <span class="math inline">\(t&lt;0\)</span>; that is, <span class="math inline">\(f(t) = 0, \forall t&lt;0\)</span>. In other words, the support of <span class="math inline">\(T\)</span> is typically <span class="math inline">\([0,\infty)\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -678,7 +678,7 @@ Figure&nbsp;2: The same triangular region in the <span class="math inline">\((t,
 </div>
 </figure>
 </div>
-<p><a href="#/fig-surv-and-mean-integration-bounds" class="quarto-xref">Figure&nbsp;2</a> shows the same integration region under the two equivalent orderings. Since <span class="math inline">\(\operatorname{f}(u) \ge 0\)</span>, the third equality step swaps the order of integration by Tonelli’s theorem (see the Fubini–Tonelli proof of the <a href="../chapters/probability.html#thm-surv-mean">survival-function mean theorem</a> in the probability chapter for the formal argument):</p>
+<p><a href="#/fig-surv-and-mean-integration-bounds" class="quarto-xref">Figure&nbsp;2</a> shows the same integration region under the two equivalent orderings. Since <span class="math inline">\(\operatorname{f}(u) \ge 0\)</span>, the third equality step swaps the order of integration by Tonelli’s theorem (see the Fubini–Tonelli proof of the <a href="https://morrison-lab.github.io/pds/expectation.html#thm-surv-mean">survival-function mean theorem</a> in the probability chapter for the formal argument):</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[T\right]\mathclose{}
@@ -848,7 +848,7 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 </div>
 </div>
 </section><section class="slide level2"><div id="thm-inv-surv-is-quantile" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Inverse survival function is the quantile function)</strong></span> The inverse survival function equals the <span class="math inline">\((1-p)\)</span>th <a href="../chapters/probability.html#def-quantile-function">population quantile</a> of <span class="math inline">\(T\)</span>:</p>
+<p><span class="theorem-title"><strong>Theorem 4 (Inverse survival function is the quantile function)</strong></span> The inverse survival function equals the <span class="math inline">\((1-p)\)</span>th <a href="https://morrison-lab.github.io/pds/random-variables.html#def-quantile-function">population quantile</a> of <span class="math inline">\(T\)</span>:</p>
 <p><span class="math display">\[\operatorname{S}^{-1}(p) = Q(1 - p),\]</span></p>
 <p>where <span class="math inline">\(Q(u) = \inf\mathopen{}\left\{t : \operatorname{F}(t) \ge u\right\}\mathclose{}\)</span> is the quantile function of <span class="math inline">\(T\)</span>.</p>
 </div>
@@ -879,7 +879,7 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 <p>Another important quantity is the <strong>hazard function</strong>:</p>
 <div id="def-hazard" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6 (Hazard function, hazard rate, hazard rate function)</strong></span> &nbsp;</p>
-<aside class="notes"><p>The <strong>hazard function</strong>, <strong>hazard rate</strong>, <strong>hazard rate function</strong>, for a random variable <span class="math inline">\(T\)</span> at value <span class="math inline">\(t\)</span>, typically denoted as <span class="math inline">\(\text{h}(t)\)</span> <sup>1</sup> or <span class="math inline">\(\lambda(t)\)</span>, <sup>2</sup> is the conditional <a href="../chapters/probability.html#def-pdf">density</a> of <span class="math inline">\(T\)</span> at <span class="math inline">\(t\)</span>, given <span class="math inline">\(T \ge t\)</span>. Specifically, the hazard function is defined as:</p>
+<aside class="notes"><p>The <strong>hazard function</strong>, <strong>hazard rate</strong>, <strong>hazard rate function</strong>, for a random variable <span class="math inline">\(T\)</span> at value <span class="math inline">\(t\)</span>, typically denoted as <span class="math inline">\(\text{h}(t)\)</span> <sup>1</sup> or <span class="math inline">\(\lambda(t)\)</span>, <sup>2</sup> is the conditional <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density</a> of <span class="math inline">\(T\)</span> at <span class="math inline">\(t\)</span>, given <span class="math inline">\(T \ge t\)</span>. Specifically, the hazard function is defined as:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -923,6 +923,42 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 <p><span class="theorem-title"><strong>Theorem 5 (Incidence rate in a homogenous population)</strong></span> If a population of individuals indexed by <span class="math inline">\(i\)</span> all have identical hazard rates <span class="math inline">\({\lambda}_i(t) = {\lambda}(t)\)</span>, then the <strong>incidence rate</strong> for that population is equal to the hazard rate:</p>
 <p><span class="math display">\[\bar{{\lambda}}(t) = {\lambda}(t)\]</span></p>
 </div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#/def-incidence-rate" class="quarto-xref">Definition&nbsp;7</a>, the incidence rate is:</p>
+<p><span id="eq-homogenous-incidence-proof"><span class="math display">\[
+\begin{aligned}
+\bar{{\lambda}}(t)
+&amp;\stackrel{\text{def}}{=}\frac{1}{N}\sum_{i=1}^N{\lambda}_i(t) &amp;&amp; \text{(definition of incidence rate)} \\
+&amp;= \frac{1}{N}\sum_{i=1}^N{\lambda}(t) &amp;&amp; \text{(since } {\lambda}_i(t) = {\lambda}(t) \text{ for all } i \text{)} \\
+&amp;= \frac{1}{N} \cdot N {\lambda}(t) &amp;&amp; \text{(summing } N \text{ identical terms)} \\
+&amp;= {\lambda}(t) &amp;&amp; \text{(simplifying)}
+\end{aligned}
+\tag{1}\]</span></span></p>
+</div>
+</section><section class="slide level2"><div id="exm-homogenous-incidence" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Incidence rate in a homogenous population)</strong></span> Suppose a population has <span class="math inline">\(N = 3\)</span> individuals, each with hazard rate <span class="math inline">\({\lambda}_i(t) = 0.02\)</span> events per person-year. By <a href="#/def-incidence-rate" class="quarto-xref">Definition&nbsp;7</a>:</p>
+<p><span id="eq-homogenous-incidence-example"><span class="math display">\[
+\begin{aligned}
+\bar{{\lambda}}(t)
+&amp;= \frac{1}{3}\mathopen{}\left(0.02 + 0.02 + 0.02\right)\mathclose{} &amp;&amp; \text{(definition of incidence rate)} \\
+&amp;= \frac{1}{3} \cdot 0.06 &amp;&amp; \text{(add)} \\
+&amp;= 0.02 &amp;&amp; \text{(divide)}
+\end{aligned}
+\tag{2}\]</span></span></p>
+<p>which equals the common hazard rate, as <a href="#/thm-homogenous-incidence" class="quarto-xref">Theorem&nbsp;5</a> says.</p>
+</div>
+</section><section class="slide level2"><div id="exm-heterogeneous-incidence" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (Incidence rate in a heterogeneous population)</strong></span> If instead the three individuals have hazard rates <span class="math inline">\(0.01\)</span>, <span class="math inline">\(0.02\)</span>, and <span class="math inline">\(0.06\)</span> events per person-year, then:</p>
+<p><span id="eq-heterogeneous-incidence-example"><span class="math display">\[
+\begin{aligned}
+\bar{{\lambda}}(t)
+&amp;= \frac{1}{3}\mathopen{}\left(0.01 + 0.02 + 0.06\right)\mathclose{} &amp;&amp; \text{(definition of incidence rate)} \\
+&amp;= \frac{1}{3} \cdot 0.09 &amp;&amp; \text{(add)} \\
+&amp;= 0.03 &amp;&amp; \text{(divide)}
+\end{aligned}
+\tag{3}\]</span></span></p>
+<p>which differs from every individual’s hazard rate, so the conclusion of <a href="#/thm-homogenous-incidence" class="quarto-xref">Theorem&nbsp;5</a> needs its assumption of identical hazards.</p>
+</div>
 </section><section class="slide level2"><aside class="notes"><p>The hazard function has an important relationship to the density and survival functions, which we can use to derive the hazard function for a given probability distribution (<a href="#/thm-hazard-dens-surv" class="quarto-xref">Theorem&nbsp;6</a>).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -937,7 +973,7 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
       }</style></aside><div id="lem-joint-prob-same-var" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 1 (Joint probability of a variable with itself)</strong></span> <span class="math display">\[p(T=t, T\ge t) = p(T=t)\]</span></p>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="../chapters/probability.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\(\Pr(A \cap B) = \Pr(A)\)</span>. In particular, <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>, so <span class="math inline">\(p(T=t, T\ge t) = p(T=t)\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\(\Pr(A \cap B) = \Pr(A)\)</span>. In particular, <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>, so <span class="math inline">\(p(T=t, T\ge t) = p(T=t)\)</span>.</p>
 </div>
 </div>
 </section><section class="slide level2"><div id="thm-hazard-dens-surv" class="theorem">
@@ -954,7 +990,7 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-exp-haz" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5 (exponential distribution)</strong></span> The hazard function of the exponential distribution family of models is:</p>
+<p><span class="theorem-title"><strong>Example 7 (exponential distribution)</strong></span> The hazard function of the exponential distribution family of models is:</p>
 <p><span class="math display">\[
 \begin{aligned}
 P(T=t|T \ge t)
@@ -993,7 +1029,7 @@ Figure&nbsp;5: Examples of hazard functions for exponential distributions
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="def-hazard-ratio" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (hazard ratio)</strong></span> <span class="math display">\[\theta_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\]</span></p>
+<p><span class="theorem-title"><strong>Definition 8 (hazard ratio)</strong></span> <span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="def-kappa" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 9 (Conditional survival probability at an event time)</strong></span> At event time <span class="math inline">\(t_i\)</span>, the <strong>conditional survival probability</strong> is</p>
@@ -1014,7 +1050,7 @@ Figure&nbsp;5: Examples of hazard functions for exponential distributions
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-us-time-to-death-2004" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6 (Time to death in the US in 2004)</strong></span> The first day is the most dangerous:</p>
+<p><span class="theorem-title"><strong>Example 8 (Time to death in the US in 2004)</strong></span> The first day is the most dangerous:</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-label="1"></a><span class="co"># survexp.rda is stored locally in Data/survexp.rda</span></span>
 <span id="cb9-2"><a aria-label="2"></a><span class="co"># newer versions of survival dropped the first-year age breakdown</span></span>
 <span id="cb9-3"><a aria-label="3"></a></span>
@@ -1126,9 +1162,9 @@ Figure&nbsp;8: Survival Curve in 2004 for US Females
 <span class="header-section-number">4.6</span> The Cumulative Hazard Function</h2>
 <p>Since <span class="math inline">\({\lambda}(t) = \frac{\partial}{\partial t}\mathopen{}\left\{-\log{\operatorname{S}(t)}\right\}\mathclose{}\)</span> (see <a href="#/thm-h-logS" class="quarto-xref">Theorem&nbsp;7</a>), we also have:</p>
 <div id="cor-surv-int-haz" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Survival function from the cumulative hazard)</strong></span> <span id="eq-surv-int-haz"><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\int_{u=0}^t {\lambda}(u)du\right\}\mathclose{} \tag{1}\]</span></span></p>
+<p><span class="theorem-title"><strong>Corollary 1 (Survival function from the cumulative hazard)</strong></span> <span id="eq-surv-int-haz"><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\int_{u=0}^t {\lambda}(u)du\right\}\mathclose{} \tag{4}\]</span></span></p>
 </div>
-</section><section class="slide level2"><aside class="notes"><p>The integral in <a href="#/eq-surv-int-haz" class="quarto-xref">Equation&nbsp;1</a> is important enough to have its own name: <strong>cumulative hazard</strong>.</p>
+</section><section class="slide level2"><aside class="notes"><p>The integral in <a href="#/eq-surv-int-haz" class="quarto-xref">Equation&nbsp;4</a> is important enough to have its own name: <strong>cumulative hazard</strong>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1145,7 +1181,7 @@ Figure&nbsp;8: Survival Curve in 2004 for US Females
 </div>
 <p>As shown in <a href="#/sec-nelson-aalen" class="quarto-xref">Section&nbsp;10</a>, <span class="math inline">\({\Lambda}(t)\)</span> is tractable to estimate, and we can then derive an estimate of the hazard function using an approximate derivative of the estimated cumulative hazard.</p>
 </section><section class="slide level2"><div id="exm-exp-cumhaz" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7</strong></span> The cumulative hazard function for the exponential distribution with rate parameter <span class="math inline">\({\lambda}\)</span> is:</p>
+<p><span class="theorem-title"><strong>Example 9</strong></span> The cumulative hazard function for the exponential distribution with rate parameter <span class="math inline">\({\lambda}\)</span> is:</p>
 <p><span class="math display">\[
 {\Lambda}(t) = \mathbb{1}_{t \ge 0}\cdot {\lambda}t
 \]</span></p>
@@ -1232,8 +1268,145 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 \]</span></p>
 </section><section class="slide level2"><p>Corollary:</p>
 <p><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\]</span></p>
-</section><section id="sec-likelihood-with-censoring" class="slide level2" data-number="4.8"><h2>
-<span class="header-section-number">4.8</span> Likelihood with censoring</h2>
+</section><section id="hazard-versus-risk" class="slide level2" data-number="4.8"><h2>
+<span class="header-section-number">4.8</span> Hazard versus risk</h2>
+<p>In discrete time, where follow-up is split into intervals, the hazard and the risk are easy to confuse, because both are probabilities of an event during follow-up. The risk is cumulative from baseline, while the discrete-time hazard concerns a single interval (unlike the continuous-time hazard, which is a rate, not a probability). They answer different questions <span class="citation" data-cites="hernan2020causal">(<a href="#/references" role="doc-biblioref" onclick="">Hernán and Robins 2020, chap. 17</a>, Section 17.2)</span>:</p>
+<blockquote>
+<p>The risk and the hazard are different measures. The denominator of the risk—the number of individuals at baseline—is constant across times <span class="math inline">\(k\)</span> and its numerator—all events between baseline and <span class="math inline">\(k\)</span>—is cumulative. That is, the risk will stay flat or increase as <span class="math inline">\(k\)</span> increases. On the other hand, the denominator of the hazard—the number of individuals alive at <span class="math inline">\(k\)</span>—varies over time <span class="math inline">\(t\)</span> and its numerator includes only recent events—those during interval <span class="math inline">\(k\)</span>. That is, the hazard may increase or decrease over time.</p>
+</blockquote>
+<p>To make that comparison precise, consider an event time <span class="math inline">\(T\)</span> that takes values in <span class="math inline">\(\{1, 2, 3, \ldots\}\)</span>, such as the follow-up interval in which an event occurs.</p>
+</section><section class="slide level2"><div id="def-discrete-haz-risk" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 11 (Discrete-time hazard and risk)</strong></span> For <span class="math inline">\(k = 1, 2, \ldots\)</span>:</p>
+<ul>
+<li>the <strong>risk</strong> by <span class="math inline">\(k\)</span> is <span class="math inline">\(\pi(k) \stackrel{\text{def}}{=}\Pr(T \le k)\)</span>, the probability of an event in any interval up to and including <span class="math inline">\(k\)</span> among everyone at baseline;</li>
+<li>for each <span class="math inline">\(k\)</span> with <span class="math inline">\(\Pr(T \ge k) &gt; 0\)</span>, so that someone is still event-free at the start of interval <span class="math inline">\(k\)</span>, the <strong>discrete-time hazard</strong> at <span class="math inline">\(k\)</span> is <span class="math inline">\({\lambda}_k \stackrel{\text{def}}{=}\Pr(T = k \mid T \ge k)\)</span>, the probability of an event in interval <span class="math inline">\(k\)</span> among those still event-free at the start of interval <span class="math inline">\(k\)</span>.</li>
+</ul>
+</div>
+</section><section class="slide level2"><div id="exm-haz-vs-risk" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10 (Hazard versus risk in a cohort)</strong></span> Suppose 1000 people are followed for four years with no censoring, and 100, 50, 40, and 60 of them have the event in years 1 through 4. The hazard divides each year’s events by the number still event-free at the start of that year; the risk divides the running total of events by the 1000 people at baseline:</p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: right;">Year <span class="math inline">\(k\)</span>
+</th>
+<th style="text-align: right;">Events</th>
+<th style="text-align: right;">Event-free at start of <span class="math inline">\(k\)</span>
+</th>
+<th style="text-align: right;"><span class="math inline">\({\lambda}_k\)</span></th>
+<th style="text-align: right;">Total events by <span class="math inline">\(k\)</span>
+</th>
+<th style="text-align: right;"><span class="math inline">\(\pi(k)\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;"><span class="math inline">\(100/1000 = 0.100\)</span></td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;"><span class="math inline">\(0.10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">900</td>
+<td style="text-align: right;"><span class="math inline">\(50/900 \approx 0.056\)</span></td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;"><span class="math inline">\(0.15\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">850</td>
+<td style="text-align: right;"><span class="math inline">\(40/850 \approx 0.047\)</span></td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;"><span class="math inline">\(0.19\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">810</td>
+<td style="text-align: right;"><span class="math inline">\(60/810 \approx 0.074\)</span></td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;"><span class="math inline">\(0.25\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The hazard falls and then rises, while the risk increases every year.</p>
+</div>
+<p>While anyone is still event-free, the risk can be recovered from the hazards, and <a href="#/thm-risk-from-haz" class="quarto-xref">Theorem&nbsp;9</a> shows why it can never decrease.</p>
+</section><section class="slide level2"><div id="thm-risk-from-haz" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9 (Risk in terms of discrete-time hazards)</strong></span> Under <a href="#/def-discrete-haz-risk" class="quarto-xref">Definition&nbsp;11</a>, for each <span class="math inline">\(k\)</span> with <span class="math inline">\(\Pr(T \ge k) &gt; 0\)</span>,</p>
+<p><span id="eq-risk-from-haz"><span class="math display">\[
+\pi(k) = 1 - \prod_{j=1}^{k} (1 - {\lambda}_j).
+\tag{5}\]</span></span></p>
+<p>Since each factor <span class="math inline">\(1 - {\lambda}_j\)</span> lies in <span class="math inline">\([0, 1]\)</span>, the product can only shrink as <span class="math inline">\(k\)</span> grows, so <span class="math inline">\(\pi(k)\)</span> never decreases as <span class="math inline">\(k\)</span> grows.</p>
+</div>
+</section><section class="slide level2"><div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob">the definition of conditional probability</a> and the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>. Because <span class="math inline">\(T\)</span> takes integer values, <span class="math inline">\(\{T &gt; j - 1\} = \{T \ge j\}\)</span>. For each <span class="math inline">\(j \le k\)</span>, <span class="math inline">\(\Pr(T \ge j) \ge \Pr(T \ge k) &gt; 0\)</span> by the subset property, since <span class="math inline">\(\{T \ge k\} \subseteq \{T \ge j\}\)</span>; so <span class="math inline">\({\lambda}_j\)</span> is defined and conditioning on <span class="math inline">\(T &gt; j - 1\)</span> is allowed. For each such <span class="math inline">\(j\)</span>:</p>
+<p><span id="eq-surv-recursion-haz"><span class="math display">\[
+\begin{aligned}
+\Pr(T &gt; j)
+&amp;= \Pr(T &gt; j,\ T &gt; j - 1)
+&amp;&amp; \text{(}\{T &gt; j\} \subseteq \{T &gt; j - 1\}\text{)}
+\\
+&amp;= \Pr(T &gt; j \mid T &gt; j - 1)\Pr(T &gt; j - 1)
+&amp;&amp; \text{(definition of conditional probability)}
+\\
+&amp;= \Pr(T &gt; j \mid T \ge j)\Pr(T &gt; j - 1)
+&amp;&amp; \text{(}T \text{ is integer-valued)}
+\\
+&amp;= \mathopen{}\left[1 - \Pr(T = j \mid T \ge j)\right]\mathclose{}\Pr(T &gt; j - 1)
+&amp;&amp; \text{(complement rule, given } T \ge j\text{)}
+\\
+&amp;= (1 - {\lambda}_j)\Pr(T &gt; j - 1)
+&amp;&amp; \text{(definition of } {\lambda}_j\text{)}
+\end{aligned}
+\tag{6}\]</span></span></p>
+<p>Applying this identity for <span class="math inline">\(j = k, k - 1, \ldots, 1\)</span>, and using <span class="math inline">\(\Pr(T &gt; 0) = 1\)</span>:</p>
+<p><span id="eq-risk-from-haz-proof"><span class="math display">\[
+\begin{aligned}
+\pi(k)
+&amp;= 1 - \Pr(T &gt; k)
+&amp;&amp; \text{(complement of } \pi(k) = \Pr(T \le k)\text{)}
+\\
+&amp;= 1 - \prod_{j=1}^{k}(1 - {\lambda}_j)\Pr(T &gt; 0)
+&amp;&amp; \text{(apply the identity } k \text{ times)}
+\\
+&amp;= 1 - \prod_{j=1}^{k}(1 - {\lambda}_j)
+&amp;&amp; \text{(}\Pr(T &gt; 0) = 1\text{)}
+\end{aligned}
+\tag{7}\]</span></span></p>
+</div>
+</section><section class="slide level2"><div id="exm-risk-from-haz" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11 (Recovering the risk from the hazards)</strong></span> Using the hazards from <a href="#/exm-haz-vs-risk" class="quarto-xref">Example&nbsp;10</a>, <a href="#/thm-risk-from-haz" class="quarto-xref">Theorem&nbsp;9</a> gives the four-year risk:</p>
+<p><span id="eq-risk-from-haz-example"><span class="math display">\[
+\begin{aligned}
+\pi(4)
+&amp;= 1 - (1 - 0.100)\mathopen{}\left(1 - \tfrac{50}{900}\right)\mathclose{}\mathopen{}\left(1 - \tfrac{40}{850}\right)\mathclose{}\mathopen{}\left(1 - \tfrac{60}{810}\right)\mathclose{}
+&amp;&amp; \text{(substitute the hazards)}
+\\
+&amp;= 1 - \tfrac{900}{1000} \cdot \tfrac{850}{900} \cdot \tfrac{810}{850} \cdot \tfrac{750}{810}
+&amp;&amp; \text{(subtract each hazard from 1)}
+\\
+&amp;= 1 - \tfrac{750}{1000}
+&amp;&amp; \text{(cancel the telescoping terms)}
+\\
+&amp;= 0.25
+&amp;&amp; \text{(arithmetic)}
+\end{aligned}
+\tag{8}\]</span></span></p>
+<p>which matches the 250 events out of 1000 people in <a href="#/exm-haz-vs-risk" class="quarto-xref">Example&nbsp;10</a>.</p>
+</div>
+</section><section id="sec-likelihood-with-censoring" class="slide level2" data-number="4.9"><h2>
+<span class="header-section-number">4.9</span> Likelihood with censoring</h2>
 <p>If an event time <span class="math inline">\(T\)</span> is observed exactly as <span class="math inline">\(T=t\)</span>, then the likelihood of that observation is just its probability density function:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1261,7 +1434,7 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><aside class="notes"><p>The simplified likelihood formulation is incomplete because it omits the censoring mechanism. We also observed whether or not the observation was censored. Let <span class="math inline">\(C\)</span> denote the time when censoring would occur (if the event did not occur first); let <span class="math inline">\(f_C(y)\)</span> and <span class="math inline">\(S_C(y)\)</span> be the corresponding density and survival functions for the censoring event.</p>
-<p>Let <span class="math inline">\(Y\)</span> denote the time when observation ended (either by censoring or by the event of interest occurring), and let <span class="math inline">\(D\)</span> be an indicator variable for the event occurring at <span class="math inline">\(Y\)</span> (so <span class="math inline">\(D=0\)</span> represents a censored observation and <span class="math inline">\(D=1\)</span> represents an uncensored observation). In other words, let <span class="math inline">\(Y \stackrel{\text{def}}{=}\min(T,C)\)</span> and <span class="math inline">\(D \stackrel{\text{def}}{=}\mathbb 1{\{T&lt;=C\}}\)</span>.</p>
+<p>Let <span class="math inline">\(Y\)</span> denote the time when observation ended (either by censoring or by the event of interest occurring), and let <span class="math inline">\(D\)</span> be an indicator variable for the event occurring at <span class="math inline">\(Y\)</span> (so <span class="math inline">\(D=0\)</span> represents a censored observation and <span class="math inline">\(D=1\)</span> represents an uncensored observation). In other words, let <span class="math inline">\(Y \stackrel{\text{def}}{=}\min(T,C)\)</span> and <span class="math inline">\(D \stackrel{\text{def}}{=}\mathbb{1}\mathopen{}\left\{T \le C\right\}\mathclose{}\)</span>.</p>
 <p>Then the complete likelihood of the observed data <span class="math inline">\((Y,D)\)</span> is:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1393,31 +1566,31 @@ f_C(y)^{1-d} \cdot S_C(y)^{d}
 \ell'_{\theta_T}(y,d)
 &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial \theta_T}\ell(y,d)\\
 &amp;=
-\left(
+\mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\left\{
+\text{log}\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}
-\right)
+\right\}\mathclose{}
+\right)\mathclose{}
 +
-\left(
+\mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\left\{
+\text{log}\mathopen{}\left\{
 f_C(y)^{1-d} \cdot S_C(y)^{d}
-\right\}
-\right)\\
+\right\}\mathclose{}
+\right)\mathclose{}\\
 &amp;=
-\left(
+\mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\left\{
+\text{log}\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}
-\right) + 0\\
+\right\}\mathclose{}
+\right)\mathclose{} + 0\\
 &amp;=
 \frac{\partial}{\partial \theta_T}
-\text{log}\left\{
+\text{log}\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}\\
+\right\}\mathclose{}\\
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><aside class="notes"><p>Thus, the MLE for <span class="math inline">\(\theta_T\)</span> won’t depend on <span class="math inline">\(\theta_C\)</span>, and we can ignore the distribution of <span class="math inline">\(C\)</span> when estimating the parameters of <span class="math inline">\(f_T(t)=p(T=t)\)</span>.</p>
@@ -1436,7 +1609,7 @@ f_T(y)^d \cdot S_T(y)^{1-d}
 \begin{aligned}
 \mathcal{L}(y,d)
 &amp;= f_T(y)^d \cdot S_T(y)^{1-d}\\
-&amp;= \left(h_T(y)^d  S_T(y)^d\right) \cdot S_T(y)^{1-d}\\
+&amp;= \mathopen{}\left(h_T(y)^d  S_T(y)^d\right)\mathclose{} \cdot S_T(y)^{1-d}\\
 &amp;= h_T(y)^d  \cdot S_T(y)^d \cdot S_T(y)^{1-d}\\
 &amp;= h_T(y)^d \cdot S_T(y)\\
 &amp;= S_T(y) \cdot h_T(y)^d \\
@@ -1467,11 +1640,11 @@ f_T(y)^d \cdot S_T(y)^{1-d}
       }</style></aside><p><span class="math display">\[
 \begin{aligned}
 \ell(y,d)
-&amp;=\text{log}\left\{\mathcal{L}(y,d)\right\}\\
-&amp;= \text{log}\left\{S_T(y) \cdot h_T(y)^d\right\}\\
-&amp;= \text{log}\left\{S_T(y)\right\} + \text{log}\left\{h_T(y)^d\right\}\\
-&amp;= \text{log}\left\{S_T(y)\right\} + d\cdot \text{log}\left\{h_T(y)\right\}\\
-&amp;= -H_T(y) + d\cdot \text{log}\left\{h_T(y)\right\}\\
+&amp;=\text{log}\mathopen{}\left\{\mathcal{L}(y,d)\right\}\mathclose{}\\
+&amp;= \text{log}\mathopen{}\left\{S_T(y) \cdot h_T(y)^d\right\}\mathclose{}\\
+&amp;= \text{log}\mathopen{}\left\{S_T(y)\right\}\mathclose{} + \text{log}\mathopen{}\left\{h_T(y)^d\right\}\mathclose{}\\
+&amp;= \text{log}\mathopen{}\left\{S_T(y)\right\}\mathclose{} + d\cdot \text{log}\mathopen{}\left\{h_T(y)\right\}\mathclose{}\\
+&amp;= -H_T(y) + d\cdot \text{log}\mathopen{}\left\{h_T(y)\right\}\mathclose{}\\
 \end{aligned}
 \]</span></p>
 <aside class="notes"><p>In other words, the log-likelihood contribution from a single observation <span class="math inline">\((Y,D) = (y,d)\)</span> is equal to the negative cumulative hazard at <span class="math inline">\(y\)</span>, plus the log of the hazard at <span class="math inline">\(y\)</span> if the event occurred at time <span class="math inline">\(y\)</span>.</p>
@@ -1586,10 +1759,10 @@ Var(t) &amp;= {\lambda}^{-2}
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><div id="thm-mle-exp" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 9 (MLE of the exponential rate parameter)</strong></span> Let <span class="math inline">\(T=\sum t_i\)</span> and <span class="math inline">\(U=\sum u_j\)</span>. Then:</p>
+<p><span class="theorem-title"><strong>Theorem 10 (MLE of the exponential rate parameter)</strong></span> Let <span class="math inline">\(T=\sum t_i\)</span> and <span class="math inline">\(U=\sum u_j\)</span>. Then:</p>
 <p><span id="eq-mle-exp"><span class="math display">\[
 \hat{{\lambda}}_{ML} = \frac{m}{T+U}
-\tag{2}\]</span></span></p>
+\tag{9}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
@@ -1618,7 +1791,7 @@ Var(t) &amp;= {\lambda}^{-2}
 \operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}
 &amp;\approx \mathopen{}\left(\operatorname{E}\mathopen{}\left[-\ell''\right]\mathclose{}\right)^{-1}\mathclose{}\\
 &amp;={\lambda}^2/m\\
-\text{SE}\left(\hat{\lambda}\right)
+\text{SE}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}
 &amp;= \sqrt{\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}}\\
 &amp;\approx {\lambda}/\sqrt{m}
 \end{aligned}
@@ -1638,7 +1811,7 @@ Var(t) &amp;= {\lambda}^{-2}
 <span class="header-section-number">5.2</span> Other Parametric Survival Distributions</h2>
 <ul>
 <li>Any density on <span class="math inline">\([0,\infty)\)</span> can be a survival distribution, but the most useful ones are all skew right.</li>
-<li>The most frequently used generalization of the exponential is the <a href="../chapters/probability.html#sec-weibull">Weibull</a>.</li>
+<li>The most frequently used generalization of the exponential is the <a href="https://morrison-lab.github.io/pds/distributions.html#sec-weibull">Weibull</a>.</li>
 <li>Other common choices are the gamma, log-normal, log-logistic, Gompertz, inverse Gaussian, and Pareto.</li>
 <li>Most of what we do going forward is non-parametric or semi-parametric, but sometimes these parametric distributions provide a useful approach.</li>
 </ul></section></section><section><section id="nonparametric-survival-analysis" class="title-slide slide level1 center" data-number="6"><h1>
@@ -1652,7 +1825,7 @@ Var(t) &amp;= {\lambda}^{-2}
 <li><p>For example one patient may have relapsed at 10 months. Another might have been followed for 32 months without a relapse having occurred (censored).</p></li>
 <li><p>The minimum information we need for each patient is a time and a censoring variable which is 1 if the event occurred at the indicated time and 0 if this recorded time is a censoring time.</p></li>
 </ul></section><section class="slide level2"><div id="exm-6mp-leukemia" class="theorem example">
-<p><span class="theorem-title"><strong>Example 8 (Clinical Trial for Pediatric Acute Leukemia)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Example 12 (Clinical Trial for Pediatric Acute Leukemia)</strong></span> &nbsp;</p>
 <h5 class="smaller" id="overview-of-study">Overview of study</h5>
 <p>This dataset originates from a clinical trial in 1963 for 6-MP treatment vs.&nbsp;placebo for acute leukemia in 42 children <span class="citation" data-cites="freireich1963effect">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Freireich et al.</span> 1963</a>)</span>.</p>
 <ul>
@@ -1739,7 +1912,7 @@ Table&nbsp;2: Summary statistics for <code>drug6mp</code> data
           display:block!important;
       }</style></aside><h5 id="exponential-model">Exponential model</h5>
 <aside class="notes"><ul>
-<li>We <em>can</em> compute the hazard rate, assuming an exponential model: number of relapses divided by the sum of the exit times (<a href="#/eq-mle-exp" class="quarto-xref">Equation&nbsp;2</a>).</li>
+<li>We <em>can</em> compute the hazard rate, assuming an exponential model: number of relapses divided by the sum of the exit times (<a href="#/eq-mle-exp" class="quarto-xref">Equation&nbsp;9</a>).</li>
 </ul><style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1806,7 +1979,7 @@ Table&nbsp;2: Summary statistics for <code>drug6mp</code> data
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-interval-fail-prob" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 11 (Interval failure probability)</strong></span> Fix an interval width <span class="math inline">\(\Delta t\)</span> and grid points <span class="math inline">\(\tau\)</span>. For subject <span class="math inline">\(j\)</span>, the <strong>interval failure probability</strong> at <span class="math inline">\(\tau\)</span> is the conditional probability that <span class="math inline">\(j\)</span> fails during <span class="math inline">\([\tau, \tau + \Delta t)\)</span>, given that <span class="math inline">\(j\)</span> is still at risk at <span class="math inline">\(\tau\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 12 (Interval failure probability)</strong></span> Fix an interval width <span class="math inline">\(\Delta t\)</span> and grid points <span class="math inline">\(\tau\)</span>. For subject <span class="math inline">\(j\)</span>, the <strong>interval failure probability</strong> at <span class="math inline">\(\tau\)</span> is the conditional probability that <span class="math inline">\(j\)</span> fails during <span class="math inline">\([\tau, \tau + \Delta t)\)</span>, given that <span class="math inline">\(j\)</span> is still at risk at <span class="math inline">\(\tau\)</span>:</p>
 <p><span class="math display">\[
 q_j(\tau) \stackrel{\text{def}}{=}\Pr\mathopen{}\left[j \text{ fails in } [\tau,\, \tau + \Delta t) \mid j \text{ at risk at } \tau\right]\mathclose{}.
 \]</span></p>
@@ -1815,10 +1988,10 @@ q_j(\tau) \stackrel{\text{def}}{=}\Pr\mathopen{}\left[j \text{ fails in } [\tau,
 <p><span class="theorem-title"><strong>Lemma 2 (Conditional survival as a ratio)</strong></span> For <span class="math inline">\(\tau_1 &lt; \tau_2\)</span>, the conditional probability of surviving past <span class="math inline">\(\tau_2\)</span> given survival past <span class="math inline">\(\tau_1\)</span> is the ratio of survival function values:</p>
 <p><span id="eq-cond-surv-ratio"><span class="math display">\[
 \Pr(T &gt; \tau_2 \mid T &gt; \tau_1) = \frac{\operatorname{S}(\tau_2)}{\operatorname{S}(\tau_1)}.
-\tag{3}\]</span></span></p>
+\tag{10}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(\tau_2 &gt; \tau_1\)</span>, the event <span class="math inline">\(\{T &gt; \tau_2\}\)</span> is a subset of <span class="math inline">\(\{T &gt; \tau_1\}\)</span>, so their intersection is just <span class="math inline">\(\{T &gt; \tau_2\}\)</span> (<a href="../chapters/probability.html#thm-prob-subset">subset property</a>). By the <a href="../chapters/probability.html#def-conditional-prob">definition of conditional probability</a>,</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(\tau_2 &gt; \tau_1\)</span>, the event <span class="math inline">\(\{T &gt; \tau_2\}\)</span> is a subset of <span class="math inline">\(\{T &gt; \tau_1\}\)</span>, so their intersection is just <span class="math inline">\(\{T &gt; \tau_2\}\)</span> (<a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>). By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob">definition of conditional probability</a>,</p>
 <p><span class="math display">\[
 \begin{aligned}
 \Pr(T &gt; \tau_2 \mid T &gt; \tau_1)
@@ -1834,7 +2007,7 @@ q_j(\tau) \stackrel{\text{def}}{=}\Pr\mathopen{}\left[j \text{ fails in } [\tau,
 \]</span></p>
 </div>
 <div id="exm-cond-surv-ratio" class="theorem example">
-<p><span class="theorem-title"><strong>Example 9 (Conditional survival ratio for an exponential lifetime)</strong></span> Let <span class="math inline">\(T \sim \mathrm{Exponential}(\lambda)\)</span>, so <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}\)</span>. The probability of surviving past <span class="math inline">\(\tau_2\)</span> given survival past <span class="math inline">\(\tau_1 &lt; \tau_2\)</span> is</p>
+<p><span class="theorem-title"><strong>Example 13 (Conditional survival ratio for an exponential lifetime)</strong></span> Let <span class="math inline">\(T \sim \mathrm{Exponential}(\lambda)\)</span>, so <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}\)</span>. The probability of surviving past <span class="math inline">\(\tau_2\)</span> given survival past <span class="math inline">\(\tau_1 &lt; \tau_2\)</span> is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \Pr(T &gt; \tau_2 \mid T &gt; \tau_1)
@@ -1851,7 +2024,7 @@ q_j(\tau) \stackrel{\text{def}}{=}\Pr\mathopen{}\left[j \text{ fails in } [\tau,
 <p>which depends only on the elapsed time <span class="math inline">\(\tau_2 - \tau_1\)</span>, not on <span class="math inline">\(\tau_1\)</span> itself — the memoryless property of the exponential distribution.</p>
 </div>
 <div id="exm-interval-fail-prob" class="theorem example">
-<p><span class="theorem-title"><strong>Example 10 (Interval failure probability: exact value)</strong></span> Suppose subject <span class="math inline">\(j\)</span> has constant hazard <span class="math inline">\({\lambda}(t) = 0.1\)</span> per year, and consider the half-year interval <span class="math inline">\([4.0,\, 4.5)\)</span>, so <span class="math inline">\(\Delta t = 0.5\)</span> years. By <a href="#/lem-cond-surv-ratio" class="quarto-xref">Lemma&nbsp;2</a> and the survival/cumulative-hazard relationship (<a href="#/cor-surv-int-haz" class="quarto-xref">Corollary&nbsp;1</a>), the exact probability that <span class="math inline">\(j\)</span> fails in this interval, given survival to year <span class="math inline">\(4\)</span>, is</p>
+<p><span class="theorem-title"><strong>Example 14 (Interval failure probability: exact value)</strong></span> Suppose subject <span class="math inline">\(j\)</span> has constant hazard <span class="math inline">\({\lambda}(t) = 0.1\)</span> per year, and consider the half-year interval <span class="math inline">\([4.0,\, 4.5)\)</span>, so <span class="math inline">\(\Delta t = 0.5\)</span> years. By <a href="#/lem-cond-surv-ratio" class="quarto-xref">Lemma&nbsp;2</a> and the survival/cumulative-hazard relationship (<a href="#/cor-surv-int-haz" class="quarto-xref">Corollary&nbsp;1</a>), the exact probability that <span class="math inline">\(j\)</span> fails in this interval, given survival to year <span class="math inline">\(4\)</span>, is</p>
 <p><span class="math display">\[
 \begin{aligned}
 q_j(4.0)
@@ -1899,7 +2072,7 @@ q_j(4.0)
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-emp-surv-no-cens" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 12 (Empirical survival function without censoring)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition 13 (Empirical survival function without censoring)</strong></span> &nbsp;</p>
 <aside class="notes"><p>Given event times <span class="math inline">\(Y_1, \dots, Y_n\)</span> with no censoring, the <strong>empirical survival function</strong> <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> is the fraction of observed event times greater than <span class="math inline">\(t\)</span>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1914,8 +2087,8 @@ q_j(4.0)
       }</style></aside><p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits(t) \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n\mathbb{1}\mathopen{}\left(Y_i &gt; t\right)\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-emp-surv-cdf" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 10 (Empirical survival function and empirical CDF)</strong></span> Without censoring, the empirical survival function equals one minus the <a href="../chapters/nonparametric-models.html#def-empirical-cdf">empirical CDF</a> <span class="math inline">\(\mathop{\hat{\operatorname{F}}}\nolimits(t)\)</span> of the event times:</p>
-<p><span id="eq-emp-surv-no-cens"><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits(t) = 1 - \mathop{\hat{\operatorname{F}}}\nolimits(t) \tag{4}\]</span></span></p>
+<p><span class="theorem-title"><strong>Theorem 11 (Empirical survival function and empirical CDF)</strong></span> Without censoring, the empirical survival function equals one minus the <a href="https://morrison-lab.github.io/sds/nonparametric-models.html#def-empirical-cdf">empirical CDF</a> <span class="math inline">\(\mathop{\hat{\operatorname{F}}}\nolimits(t)\)</span> of the event times:</p>
+<p><span id="eq-emp-surv-no-cens"><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits(t) = 1 - \mathop{\hat{\operatorname{F}}}\nolimits(t) \tag{11}\]</span></span></p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
@@ -1929,7 +2102,7 @@ q_j(4.0)
 \end{aligned}
 \]</span></p>
 </div>
-<aside class="notes"><p><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> is a right-continuous step function that starts at <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(0) = 1\)</span> and drops by <span class="math inline">\(d_j/n\)</span> at each distinct event time <span class="math inline">\(t_j\)</span>, where <span class="math inline">\(d_j\)</span> is the number of events at <span class="math inline">\(t_j\)</span>. Without censoring, <a href="#/eq-emp-surv-no-cens" class="quarto-xref">Equation&nbsp;4</a> matches the Kaplan-Meier estimator, as we prove later in <a href="#/thm-KM-est-no-cens" class="quarto-xref">Theorem&nbsp;12</a>.</p>
+<aside class="notes"><p><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> is a right-continuous step function that starts at <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(0) = 1\)</span> and drops by <span class="math inline">\(d_j/n\)</span> at each distinct event time <span class="math inline">\(t_j\)</span>, where <span class="math inline">\(d_j\)</span> is the number of events at <span class="math inline">\(t_j\)</span>. Without censoring, <a href="#/eq-emp-surv-no-cens" class="quarto-xref">Equation&nbsp;11</a> matches the Kaplan-Meier estimator, as we prove later in <a href="#/thm-KM-est-no-cens" class="quarto-xref">Theorem&nbsp;13</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1941,8 +2114,8 @@ q_j(4.0)
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="exm-surv-6mp-placebo" class="theorem example">
-<p><span class="theorem-title"><strong>Example 11 (Estimated survival function for placebo arm of 6-MP study)</strong></span> &nbsp;</p>
-<aside class="notes"><p>In the <code>drug6mp</code> dataset (<a href="#/exm-6mp-leukemia" class="quarto-xref">Example&nbsp;8</a>), all of the placebo patients (<span class="math inline">\(n = 21\)</span>) relapsed (exit times <code>t1</code>, no censoring), so we can estimate their survival function using <a href="#/def-emp-surv-no-cens" class="quarto-xref">Definition&nbsp;12</a>:</p>
+<p><span class="theorem-title"><strong>Example 15 (Estimated survival function for placebo arm of 6-MP study)</strong></span> &nbsp;</p>
+<aside class="notes"><p>In the <code>drug6mp</code> dataset (<a href="#/exm-6mp-leukemia" class="quarto-xref">Example&nbsp;12</a>), all of the placebo patients (<span class="math inline">\(n = 21\)</span>) relapsed (exit times <code>t1</code>, no censoring), so we can estimate their survival function using <a href="#/def-emp-surv-no-cens" class="quarto-xref">Definition&nbsp;13</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2121,23 +2294,23 @@ Figure&nbsp;11: Cartoon risk-set view showing individual follow-up lines. Filled
 </figure>
 </div>
 </section><section class="slide level2"><div id="def-risk-set" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 13 (Risk Set)</strong></span> For a survival study with <span class="math inline">\(n\)</span> subjects, let <span class="math inline">\(T_i\)</span> denote the true event time and <span class="math inline">\(C_i\)</span> the censoring time for subject <span class="math inline">\(i\)</span>, and let <span class="math inline">\(\tilde{T}_i \stackrel{\text{def}}{=}\min(T_i, C_i)\)</span> be the observed follow-up time. The <strong>risk set at time <span class="math inline">\(t\)</span></strong> is</p>
-<p><span class="math display">\[\mathcal{R}(t) \;\stackrel{\text{def}}{=}\; \bigl\{i \in \{1, \ldots, n\} : \tilde{T}_i \geq t\bigr\},\]</span></p>
+<p><span class="theorem-title"><strong>Definition 14 (Risk Set)</strong></span> For a survival study with <span class="math inline">\(n\)</span> subjects, let <span class="math inline">\(T_i\)</span> denote the true event time and <span class="math inline">\(C_i\)</span> the censoring time for subject <span class="math inline">\(i\)</span>, and let <span class="math inline">\(\tilde{T}_i \stackrel{\text{def}}{=}\min(T_i, C_i)\)</span> be the observed follow-up time. The <strong>risk set at time <span class="math inline">\(t\)</span></strong> is</p>
+<p><span class="math display">\[\mathcal{R}(t) \;\stackrel{\text{def}}{=}\; \mathopen{}\left\{i \in \{1, \ldots, n\} : \tilde{T}_i \geq t\right\}\mathclose{},\]</span></p>
 <p>the set of subjects still under observation (neither having experienced the event nor been censored) immediately before time <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="exm-risk-set-cartoon" class="theorem example">
-<p><span class="theorem-title"><strong>Example 12</strong></span> In <a href="#/fig-risk-set-dropout-cartoon" class="quarto-xref">Figure&nbsp;11</a>, the 8-person study has <span class="math inline">\(\tilde{T}_i \in \{2, 3, 4, 5, 6, 6, 7, 8\}\)</span>. At time <span class="math inline">\(t = 4\)</span>, subjects 3, 4, 5, 6, 7, and 8 still have <span class="math inline">\(\tilde{T}_i \geq 4\)</span>, so <span class="math inline">\(\mathcal{R}(4) = \{3, 4, 5, 6, 7, 8\}\)</span>.</p>
+<p><span class="theorem-title"><strong>Example 16</strong></span> In <a href="#/fig-risk-set-dropout-cartoon" class="quarto-xref">Figure&nbsp;11</a>, the 8-person study has <span class="math inline">\(\tilde{T}_i \in \{2, 3, 4, 5, 6, 6, 7, 8\}\)</span>. At time <span class="math inline">\(t = 4\)</span>, subjects 3, 4, 5, 6, 7, and 8 still have <span class="math inline">\(\tilde{T}_i \geq 4\)</span>, so <span class="math inline">\(\mathcal{R}(4) = \{3, 4, 5, 6, 7, 8\}\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="def-number-at-risk" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14 (Number at Risk)</strong></span> The <strong>number at risk at time <span class="math inline">\(t\)</span></strong> is</p>
+<p><span class="theorem-title"><strong>Definition 15 (Number at Risk)</strong></span> The <strong>number at risk at time <span class="math inline">\(t\)</span></strong> is</p>
 <p><span class="math display">\[r(t) \;\stackrel{\text{def}}{=}\; \lvert \mathcal{R}(t) \rvert,\]</span></p>
-<p>the size of the risk set <span class="math inline">\(\mathcal{R}(t)\)</span> (<a href="#/def-risk-set" class="quarto-xref">Definition&nbsp;13</a>). At each ordered event time <span class="math inline">\(t_i\)</span>, this count is written <span class="math inline">\(r_i \stackrel{\text{def}}{=}r(t_i)\)</span>.</p>
+<p>the size of the risk set <span class="math inline">\(\mathcal{R}(t)\)</span> (<a href="#/def-risk-set" class="quarto-xref">Definition&nbsp;14</a>). At each ordered event time <span class="math inline">\(t_i\)</span>, this count is written <span class="math inline">\(r_i \stackrel{\text{def}}{=}r(t_i)\)</span>.</p>
 </div>
 <div id="exm-number-at-risk-cartoon" class="theorem example">
-<p><span class="theorem-title"><strong>Example 13</strong></span> Continuing <a href="#/exm-risk-set-cartoon" class="quarto-xref">Example&nbsp;12</a>, at time <span class="math inline">\(t = 4\)</span> the risk set is <span class="math inline">\(\mathcal{R}(4) = \{3, 4, 5, 6, 7, 8\}\)</span>, so the number at risk is <span class="math inline">\(r(4) = \lvert \mathcal{R}(4) \rvert = 6\)</span>.</p>
+<p><span class="theorem-title"><strong>Example 17</strong></span> Continuing <a href="#/exm-risk-set-cartoon" class="quarto-xref">Example&nbsp;16</a>, at time <span class="math inline">\(t = 4\)</span> the risk set is <span class="math inline">\(\mathcal{R}(4) = \{3, 4, 5, 6, 7, 8\}\)</span>, so the number at risk is <span class="math inline">\(r(4) = \lvert \mathcal{R}(4) \rvert = 6\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="def-KM-estimator" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 15 (Kaplan-Meier Product-Limit Estimator of Survival Function)</strong></span> If a time-to-event data set contains <span class="math inline">\(k\)</span> event times <span class="math inline">\(t_i\)</span>, (<span class="math inline">\(i \in {1:k}\)</span>), where <span class="math inline">\(r_i\)</span> is the number of individuals at risk at time <span class="math inline">\(t_i\)</span> and <span class="math inline">\(d_i\)</span> is the number of events at time <span class="math inline">\(t_i\)</span>, then the <strong>Kaplan-Meier Product-Limit Estimator</strong> of the survival function is:</p>
+<p><span class="theorem-title"><strong>Definition 16 (Kaplan-Meier Product-Limit Estimator of Survival Function)</strong></span> If a time-to-event data set contains <span class="math inline">\(k\)</span> event times <span class="math inline">\(t_i\)</span>, (<span class="math inline">\(i \in {1:k}\)</span>), where <span class="math inline">\(r_i\)</span> is the number of individuals at risk at time <span class="math inline">\(t_i\)</span> and <span class="math inline">\(d_i\)</span> is the number of events at time <span class="math inline">\(t_i\)</span>, then the <strong>Kaplan-Meier Product-Limit Estimator</strong> of the survival function is:</p>
 <p><span class="math display">\[\hat{{\lambda}}_i = \frac{d_i}{r_i}\]</span></p>
 <p><span class="math display">\[\hat{\kappa}_i = 1 - \hat{{\lambda}}_i = \frac{r_i - d_i}{r_i}\]</span></p>
 <p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} \stackrel{\text{def}}{=}\prod_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}} \hat{\kappa}_i\]</span></p>
@@ -2149,7 +2322,7 @@ Figure&nbsp;11: Cartoon risk-set view showing individual follow-up lines. Filled
 \]</span></p>
 <p>Then the event <span class="math inline">\(\{Y \geq y_j\}\)</span> is contained in the event <span class="math inline">\(\{Y &gt; y_{j-1}\}\)</span>, because <span class="math inline">\(y_j &gt; y_{j-1}\)</span>. Therefore intersecting <span class="math inline">\(\{Y \geq y_j\}\)</span> with <span class="math inline">\(\{Y &gt; y_{j-1}\}\)</span> does not change the event:</p>
 <div id="thm-km-gaps" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 11 (Consecutive Exit-Time Identity)</strong></span> If <span class="math inline">\(\Pr(Y \geq y_j \mid Y &gt; y_{j-1}) = 1\)</span>, then:</p>
+<p><span class="theorem-title"><strong>Theorem 12 (Consecutive Exit-Time Identity)</strong></span> If <span class="math inline">\(\Pr(Y \geq y_j \mid Y &gt; y_{j-1}) = 1\)</span>, then:</p>
 <p><span class="math display">\[\Pr(Y \geq y_j) = \Pr(Y &gt; y_{j-1})\]</span></p>
 </div>
 <div class="proof">
@@ -2167,8 +2340,8 @@ Figure&nbsp;11: Cartoon risk-set view showing individual follow-up lines. Filled
 \end{aligned}
 \]</span></p>
 </div>
-<p>The first equality uses the containment <span class="math inline">\(\{Y \geq y_j\} \subseteq \{Y &gt; y_{j-1}\}\)</span> (<a href="../chapters/probability.html#thm-prob-subset">subset property</a>). The second equality uses the multiplication rule for probabilities, and the third equality uses the between-exit-time survival assumption.</p>
-<p>Let <span class="math inline">\(\kappa(y_j) = \Pr(Y &gt; y_j \mid Y \geq y_j)\)</span> denote the conditional probability of surviving past the exit time <span class="math inline">\(y_j\)</span>, given survival up to <span class="math inline">\(y_j\)</span>. By <a href="#/thm-km-gaps" class="quarto-xref">Theorem&nbsp;11</a>, the conditioning event <span class="math inline">\(\{Y \geq y_j\}\)</span> has the same probability as <span class="math inline">\(\{Y &gt; y_{j-1}\}\)</span>, so <span class="math inline">\(\kappa(y_j)\)</span> is really a conditional survival probability spanning the previous exit time to this one; applying <a href="#/lem-cond-surv-ratio" class="quarto-xref">Lemma&nbsp;2</a> to that pair of times gives:</p>
+<p>The first equality uses the containment <span class="math inline">\(\{Y \geq y_j\} \subseteq \{Y &gt; y_{j-1}\}\)</span> (<a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>). The second equality uses the multiplication rule for probabilities, and the third equality uses the between-exit-time survival assumption.</p>
+<p>Let <span class="math inline">\(\kappa(y_j) = \Pr(Y &gt; y_j \mid Y \geq y_j)\)</span> denote the conditional probability of surviving past the exit time <span class="math inline">\(y_j\)</span>, given survival up to <span class="math inline">\(y_j\)</span>. By <a href="#/thm-km-gaps" class="quarto-xref">Theorem&nbsp;12</a>, the conditioning event <span class="math inline">\(\{Y \geq y_j\}\)</span> has the same probability as <span class="math inline">\(\{Y &gt; y_{j-1}\}\)</span>, so <span class="math inline">\(\kappa(y_j)\)</span> is really a conditional survival probability spanning the previous exit time to this one; applying <a href="#/lem-cond-surv-ratio" class="quarto-xref">Lemma&nbsp;2</a> to that pair of times gives:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \kappa(y_j)
@@ -2616,7 +2789,7 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 </div>
 </div>
 <div id="thm-KM-est-no-cens" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 12 (Kaplan-Meier Estimate with No Censored Observations)</strong></span> If there are no censored data, and there are <span class="math inline">\(n\)</span> data points, then just after (say) the third event time</p>
+<p><span class="theorem-title"><strong>Theorem 13 (Kaplan-Meier Estimate with No Censored Observations)</strong></span> If there are no censored data, and there are <span class="math inline">\(n\)</span> data points, then just after (say) the third event time</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mathop{\hat{\operatorname{S}}}\nolimits(t)
@@ -2633,12 +2806,12 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 <span class="header-section-number">7.3</span> Variance of the Kaplan-Meier estimator</h2>
 <p>The estimated variance of <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> at a single time point <span class="math inline">\(t\)</span> is given by <strong>Greenwood’s formula</strong>:</p>
 <div id="thm-greenwood" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 13 (Greenwood’s estimator for variance of Kaplan-Meier survival estimator)</strong></span> <span id="eq-var-est-surv"><span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 14 (Greenwood’s estimator for variance of Kaplan-Meier survival estimator)</strong></span> <span id="eq-var-est-surv"><span class="math display">\[
 \mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
-\tag{5}\]</span></span></p>
+\tag{12}\]</span></span></p>
 <p><span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 4.2</a>, eq. (4.2.2))</span></p>
 </div>
-<p>We can use <a href="#/eq-var-est-surv" class="quarto-xref">Equation&nbsp;5</a> for confidence intervals for a survival function or a difference of survival functions.</p>
+<p>We can use <a href="#/eq-var-est-surv" class="quarto-xref">Equation&nbsp;12</a> for confidence intervals for a survival function or a difference of survival functions.</p>
 </section><section class="slide level2"><h3 id="understanding-greenwoods-formula-optional">Understanding Greenwood’s formula (optional)</h3>
 <aside class="notes"><p>To see where Greenwood’s formula comes from, let <span class="math inline">\(x_i = r_i - d_i\)</span>. We approximate the solution treating each time as independent, with <span class="math inline">\(r_i\)</span> fixed and ignore randomness in times of failure and we treat <span class="math inline">\(x_i\)</span> as independent binomials <span class="math inline">\(\text{Bin}(r_i,p_i)\)</span>. Letting <span class="math inline">\(\operatorname{S}(t)\)</span> be the “true” survival function</p>
 <style type="text/css">
@@ -2680,7 +2853,7 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><div id="exm-KM-drug6mp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 14 (Kaplan-Meier curve for <code>drug6mp</code> data)</strong></span> Here is the Kaplan-Meier estimated survival curve for the patients who received 6-MP in the <code>drug6mp</code> dataset (we will see code to produce figures like this one shortly):</p>
+<p><span class="theorem-title"><strong>Example 18 (Kaplan-Meier curve for <code>drug6mp</code> data)</strong></span> Here is the Kaplan-Meier estimated survival curve for the patients who received 6-MP in the <code>drug6mp</code> dataset (we will see code to produce figures like this one shortly):</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a><span class="fu">library</span>(KMsurv)</span>
 <span id="cb24-2"><a aria-label="2"></a><span class="fu">data</span>(drug6mp)</span>
 <span id="cb24-3"><a aria-label="3"></a><span class="fu">library</span>(dplyr)</span>
@@ -3106,7 +3279,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 <span class="header-section-number">8.1</span> The <code>Surv</code> function</h2>
 <p>To use the <code>survival</code> package, the first step is telling R how to combine the exit time and exit reason (censoring versus event) columns. The <code>Surv()</code> function accomplishes this task.</p>
 <div id="exm-surv-drug6mp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 15 (<code>Surv()</code> with <code>drug6mp</code> data)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Example 19 (<code>Surv()</code> with <code>drug6mp</code> data)</strong></span> &nbsp;</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27" data-code-line-numbers="5-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb27-2"><a aria-label="2"></a>data_v3 <span class="ot">&lt;-</span></span>
@@ -3158,7 +3331,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </div>
 </div>
 </section><section class="slide level2"><div id="exm-survfit-drug6mp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 16 (<code>survfit()</code> with <code>drug6mp</code> data)</strong></span> Here we use <code>survfit()</code> to create a <code>survfit</code> object, which contains the Kaplan-Meier estimate:</p>
+<p><span class="theorem-title"><strong>Example 20 (<code>survfit()</code> with <code>drug6mp</code> data)</strong></span> Here we use <code>survfit()</code> to create a <code>survfit</code> object, which contains the Kaplan-Meier estimate:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-label="1"></a>km_model <span class="ot">&lt;-</span> <span class="fu">survfit</span>(</span>
 <span id="cb28-2"><a aria-label="2"></a>  <span class="at">formula =</span> surv2 <span class="sc">~</span> <span class="dv">1</span>,</span>
@@ -3300,7 +3473,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 <h4 id="ggfortify">ggfortify</h4>
 <p><strong><a href="https://cran.r-project.org/web/packages/ggfortify/index.html"><code>ggfortify</code></a></strong> extends ggplot2 with automatic plotting capabilities.</p>
 <ul>
-<li>Provides <code>autoplot()</code> method for <code>survfit</code> objects (demonstrated in <a href="#/exm-survfit-drug6mp" class="quarto-xref">Example&nbsp;16</a>)</li>
+<li>Provides <code>autoplot()</code> method for <code>survfit</code> objects (demonstrated in <a href="#/exm-survfit-drug6mp" class="quarto-xref">Example&nbsp;20</a>)</li>
 <li>One-line code to create survival curves with confidence intervals</li>
 <li>Automatically handles grouping variables and creates legends</li>
 <li>Shows censoring marks on plots by default</li>
@@ -3434,29 +3607,29 @@ e_{gi}
 \;=\; r_{gi}\,\hat{{\lambda}}_i
 \;=\; \underbrace{\frac{r_{gi}}{r_i}}_{\text{fraction at risk}}\;\cdot\;
       \underbrace{d_i}_{\text{total failures}}
-\tag{6}\]</span></span></p>
+\tag{13}\]</span></span></p>
 <p>The <strong>summed observed minus expected score</strong> for group <span class="math inline">\(g\)</span> over all failure times is:</p>
 <p><span class="math display">\[O_g - E_g \;\stackrel{\text{def}}{=}\; \sum_{i=1}^{k} \mathopen{}\left(d_{gi} - e_{gi}\right)\mathclose{}.\]</span></p>
 </section><section id="log-rank-statistic-two-groups" class="slide level2" data-number="9.3"><h2>
 <span class="header-section-number">9.3</span> Log-rank statistic (two groups)</h2>
 <p>For two groups (<span class="math inline">\(G = 2\)</span>), the observed-minus-expected scores satisfy <span class="math inline">\(O_1 - E_1 = -(O_2 - E_2)\)</span> (the total failures at each <span class="math inline">\(t_i\)</span> are by definition partitioned across the two groups), so it does not matter which group we use to form the test statistic.</p>
 <div id="thm-logrank-two-group" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 14 (Log-rank statistic, two groups)</strong></span> For either <span class="math inline">\(g \in \{1, 2\}\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 15 (Log-rank statistic, two groups)</strong></span> For either <span class="math inline">\(g \in \{1, 2\}\)</span>,</p>
 <p><span id="eq-logrank-stat-2grp"><span class="math display">\[
 \chi^2_{\text{LR}}
 \;=\; \frac{(O_g - E_g)^2}{\widehat{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}}
 \;\stackrel{H_0}{\sim}\; \chi^2_1
-\tag{7}\]</span></span></p>
+\tag{14}\]</span></span></p>
 <p>where <span class="math inline">\(r_{1i}\)</span> and <span class="math inline">\(r_{2i}\)</span> are the at-risk counts for groups 1 and 2 at time <span class="math inline">\(t_i\)</span> (i.e., <span class="math inline">\(r_{gi}\)</span> from <a href="#/sec-logrank-notation" class="quarto-xref">Section&nbsp;9.1</a> for <span class="math inline">\(g = 1, 2\)</span>), and the variance estimate is</p>
 <p><span id="eq-logrank-var-2grp"><span class="math display">\[
 \widehat{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}
 \;=\; \sum_{i=1}^{k}
    \frac{r_{1i}\, r_{2i}\, d_i\, (r_i - d_i)}{r_i^2\,(r_i - 1)}.
-\tag{8}\]</span></span></p>
+\tag{15}\]</span></span></p>
 <p>For two groups, the variance is the same whether computed for group 1 or group 2.</p>
 <p><span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, 69–70</a>, two-group variance formula)</span></p>
 </div>
-<aside class="notes"><p><a href="#/eq-logrank-var-2grp" class="quarto-xref">Equation&nbsp;8</a> is the hypergeometric variance for the count of failures from group 1 at <span class="math inline">\(t_i\)</span> conditional on <span class="math inline">\((d_i, r_{1i}, r_{2i})\)</span>, summed over failure times. Each summand has the form <span class="math inline">\(r_{1i} r_{2i} d_i (r_i - d_i) / [r_i^2 (r_i - 1)]\)</span>.</p>
+<aside class="notes"><p><a href="#/eq-logrank-var-2grp" class="quarto-xref">Equation&nbsp;15</a> is the hypergeometric variance for the count of failures from group 1 at <span class="math inline">\(t_i\)</span> conditional on <span class="math inline">\((d_i, r_{1i}, r_{2i})\)</span>, summed over failure times. Each summand has the form <span class="math inline">\(r_{1i} r_{2i} d_i (r_i - d_i) / [r_i^2 (r_i - 1)]\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3501,7 +3674,7 @@ e_{gi}
 </details>
 </div>
 <div id="exm-survdiff-drug6mp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 17 (<code>survdiff()</code> with <code>drug6mp</code> data)</strong></span> Now we are going to compare the placebo and 6-MP data. We need to reshape the data to make it usable with the standard <code>survival</code> workflow:</p>
+<p><span class="theorem-title"><strong>Example 21 (<code>survdiff()</code> with <code>drug6mp</code> data)</strong></span> Now we are going to compare the placebo and 6-MP data. We need to reshape the data to make it usable with the standard <code>survival</code> workflow:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb36-2"><a aria-label="2"></a><span class="fu">library</span>(tidyr)</span>
@@ -3554,7 +3727,7 @@ e_{gi}
 </div>
 </div>
 <hr>
-<p>We can also perform something like a t-test, where the null hypothesis is that the curves are the same. <a href="#/tbl-logrank-6mp" class="quarto-xref">Table&nbsp;6</a> shows the per-time <span class="math inline">\((d_{gi}, r_{gi})\)</span> counts and the expected counts <span class="math inline">\(e_{gi}\)</span> from <a href="#/eq-logrank-expected" class="quarto-xref">Equation&nbsp;6</a>:</p>
+<p>We can also perform something like a t-test, where the null hypothesis is that the curves are the same. <a href="#/tbl-logrank-6mp" class="quarto-xref">Table&nbsp;6</a> shows the per-time <span class="math inline">\((d_{gi}, r_{gi})\)</span> counts and the expected counts <span class="math inline">\(e_{gi}\)</span> from <a href="#/eq-logrank-expected" class="quarto-xref">Equation&nbsp;13</a>:</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-label="1"></a>o_e <span class="ot">&lt;-</span> data_v4 <span class="sc">|&gt;</span></span>
 <span id="cb39-2"><a aria-label="2"></a>  <span class="fu">arrange</span>(exit_time) <span class="sc">|&gt;</span></span>
 <span id="cb39-3"><a aria-label="3"></a>  <span class="fu">mutate</span>(</span>
@@ -3591,7 +3764,7 @@ e_{gi}
 <span id="cb39-34"><a aria-label="34"></a>o_e</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-logrank-6mp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-logrank-6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6: Observed and expected event counts for the 6-MP data, for the log-rank test. Columns: <code>exit_time</code> is <span class="math inline">\(t_i\)</span>; <code>n_at_risk_placebo</code>/<code>n_at_risk_6-MP</code> are <span class="math inline">\(r_{gi}\)</span>; <code>n_events_placebo</code>/<code>n_events_6-MP</code> are <span class="math inline">\(d_{gi}\)</span>; <code>n_at_risk</code>/<code>n_events</code> are pooled <span class="math inline">\(r_i\)</span>, <span class="math inline">\(d_i\)</span>; <code>marginal_hazard</code> is <span class="math inline">\(\hat{{\lambda}}_i = d_i / r_i\)</span>; <code>expected_*</code> are <span class="math inline">\(e_{gi}\)</span> from <a href="#/eq-logrank-expected" class="quarto-xref">Equation&nbsp;6</a>; <code>diff_*</code> are the per-time contributions <span class="math inline">\(d_{gi} - e_{gi}\)</span> to <span class="math inline">\(O_g - E_g\)</span>.
+Table&nbsp;6: Observed and expected event counts for the 6-MP data, for the log-rank test. Columns: <code>exit_time</code> is <span class="math inline">\(t_i\)</span>; <code>n_at_risk_placebo</code>/<code>n_at_risk_6-MP</code> are <span class="math inline">\(r_{gi}\)</span>; <code>n_events_placebo</code>/<code>n_events_6-MP</code> are <span class="math inline">\(d_{gi}\)</span>; <code>n_at_risk</code>/<code>n_events</code> are pooled <span class="math inline">\(r_i\)</span>, <span class="math inline">\(d_i\)</span>; <code>marginal_hazard</code> is <span class="math inline">\(\hat{{\lambda}}_i = d_i / r_i\)</span>; <code>expected_*</code> are <span class="math inline">\(e_{gi}\)</span> from <a href="#/eq-logrank-expected" class="quarto-xref">Equation&nbsp;13</a>; <code>diff_*</code> are the per-time contributions <span class="math inline">\(d_{gi} - e_{gi}\)</span> to <span class="math inline">\(O_g - E_g\)</span>.
 </figcaption><div aria-describedby="tbl-logrank-6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
@@ -3644,7 +3817,7 @@ Table&nbsp;7: Sums of observed and expected events for the 6-MP data.
 </figure>
 </div>
 <hr>
-<p>The Pearson-style approximation to <a href="#/eq-logrank-stat-2grp" class="quarto-xref">Equation&nbsp;7</a> is</p>
+<p>The Pearson-style approximation to <a href="#/eq-logrank-stat-2grp" class="quarto-xref">Equation&nbsp;14</a> is</p>
 <p><span class="math display">\[X^2 \;\approx\; \sum_{g} \frac{(O_g - E_g)^2}{E_g}\]</span></p>
 <p>which we compute directly from <a href="#/tbl-sum-obs-exp" class="quarto-xref">Table&nbsp;7</a>:</p>
 <div class="cell">
@@ -3736,7 +3909,7 @@ Table&nbsp;7: Sums of observed and expected events for the 6-MP data.
       }</style></aside>
 </div>
 </section><section class="slide level2"><div id="exm-bmt" class="theorem example">
-<p><span class="theorem-title"><strong>Example 18 (Bone Marrow Transplant Data)</strong></span> Data from <span class="citation" data-cites="copelan1991treatment">Copelan et al. (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></p>
+<p><span class="theorem-title"><strong>Example 22 (Bone Marrow Transplant Data)</strong></span> Data from <span class="citation" data-cites="copelan1991treatment">Copelan et al. (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></p>
 <div id="fig-bmt-mst" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-bmt-mst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;14: Recovery process from a bone marrow transplant (Fig. 1.1 from <span class="citation" data-cites="klein2003survival">Klein and Moeschberger (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span>)
@@ -3873,7 +4046,7 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 <span class="header-section-number">10</span> Nelson-Aalen Estimates of Cumulative Hazard and Survival</h1>
 
 </section><section class="slide level2"><div id="def-na-cuhaz-est" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 16 (Nelson-Aalen Cumulative Hazard Estimator)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition 17 (Nelson-Aalen Cumulative Hazard Estimator)</strong></span> &nbsp;</p>
 <aside class="notes"><p>The point hazard at time <span class="math inline">\(t_i\)</span> can be estimated by <span class="math inline">\(d_i/r_i\)</span>, which leads to the <strong>Nelson-Aalen estimator of the cumulative hazard</strong>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3888,7 +4061,7 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
       }</style></aside><p><span class="math display">\[\hat{{\Lambda}}_{NA}(t) \stackrel{\text{def}}{=}\sum_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}}\hat{{\lambda}}_i\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-var-NA-est" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 15 (Variance of Nelson-Aalen estimator)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Theorem 16 (Variance of Nelson-Aalen estimator)</strong></span> &nbsp;</p>
 <aside class="notes"><p>The variance of this estimator is approximately:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3902,11 +4075,11 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
           display:block!important;
       }</style></aside><p><span id="eq-var-NA-cuhaz-est"><span class="math display">\[
 \begin{aligned}
-\hat{\text{Var}}\left(\hat{{\Lambda}}_{NA} (t)\right)
+\hat{\text{Var}}\mathopen{}\left(\hat{{\Lambda}}_{NA} (t)\right)\mathclose{}
 &amp;= \sum_{t_i \le t}\frac{(d_i/r_i)(1-d_i/r_i)}{r_i}\\
 &amp;\approx \sum_{t_i \le t}\frac{d_i}{r_i^2}
 \end{aligned}
-\tag{9}\]</span></span></p>
+\tag{16}\]</span></span></p>
 </div>
 </section><section class="slide level2"><p>Since <span class="math inline">\(\operatorname{S}(t)=\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span>, the Nelson-Aalen cumulative hazard estimate can be converted into an alternate estimate of the survival function:</p>
 <p><span class="math display">\[
@@ -4296,23 +4469,23 @@ Table&nbsp;8: Nelson-Aalen survival curve calculations
 <span class="header-section-number">11</span> Empirical Inverse Survival Function</h1>
 
 </section><section class="slide level2"><div id="def-emp-inv-surv-fn" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 17 (Empirical inverse survival function)</strong></span> Given a time-to-event dataset, the <strong>empirical inverse survival function</strong> (empirical ISF), also called the <strong>empirical survival quantile function</strong> (empirical SQF), <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> replaces the population survival function <span class="math inline">\(\operatorname{S}(t)\)</span> with an estimated survival function <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 18 (Empirical inverse survival function)</strong></span> Given a time-to-event dataset, the <strong>empirical inverse survival function</strong> (empirical ISF), also called the <strong>empirical survival quantile function</strong> (empirical SQF), <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> replaces the population survival function <span class="math inline">\(\operatorname{S}(t)\)</span> with an estimated survival function <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span>:</p>
 <p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p) \stackrel{\text{def}}{=}\inf\mathopen{}\left\{t \ge 0 : \mathop{\hat{\operatorname{S}}}\nolimits(t) \le p\right\}\mathclose{}, \quad 0 &lt; p &lt; 1.\]</span></p>
 </div>
 </section><section class="slide level2"><p>Since <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> is a non-increasing step function, <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> equals the smallest observed event time at which the estimated survival probability has dropped to or below <span class="math inline">\(p\)</span>.</p>
-<p><strong>From the Kaplan-Meier estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> from <a href="#/def-KM-estimator" class="quarto-xref">Definition&nbsp;15</a>:</p>
+<p><strong>From the Kaplan-Meier estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> from <a href="#/def-KM-estimator" class="quarto-xref">Definition&nbsp;16</a>:</p>
 <p><span class="math display">\[
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}^{-1}(p)
 = \inf\mathopen{}\left\{t \ge 0 : \prod_{t_i \le t}\mathopen{}\left[1 - \frac{d_i}{r_i}\right]\mathclose{} \le p\right\}\mathclose{}.
 \]</span></p>
-<p><strong>From the Nelson-Aalen estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}\)</span> from <a href="#/def-na-cuhaz-est" class="quarto-xref">Definition&nbsp;16</a>:</p>
+<p><strong>From the Nelson-Aalen estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}\)</span> from <a href="#/def-na-cuhaz-est" class="quarto-xref">Definition&nbsp;17</a>:</p>
 <p><span class="math display">\[
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}^{-1}(p)
 = \inf\mathopen{}\left\{t \ge 0 : \operatorname{exp}\mathopen{}\left\{-\sum_{t_i \le t}\frac{d_i}{r_i}\right\}\mathclose{} \le p\right\}\mathclose{}.
 \]</span></p>
 <p>In R, both estimators are computed from a <code>survfit()</code> object using <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code>.</p>
 </section><section class="slide level2"><div id="exm-emp-isf-drug6mp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 19 (Empirical ISF for 6-MP patients)</strong></span> Using the <code>drug6mp</code> dataset, we compute the empirical ISF for the 6-MP patients. The KM and Nelson-Aalen survival estimates at each event time are:</p>
+<p><span class="theorem-title"><strong>Example 23 (Empirical ISF for 6-MP patients)</strong></span> Using the <code>drug6mp</code> dataset, we compute the empirical ISF for the 6-MP patients. The KM and Nelson-Aalen survival estimates at each event time are:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a aria-label="1"></a><span class="fu">library</span>(KMsurv)</span>
 <span id="cb55-2"><a aria-label="2"></a><span class="fu">library</span>(dplyr)</span>
@@ -4591,7 +4764,7 @@ Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(
 </section><section id="what-is-interval-censoring" class="slide level2" data-number="12.1"><h2>
 <span class="header-section-number">12.1</span> What is Interval Censoring?</h2>
 <div id="def-interval-censoring" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 18 (Interval Censoring)</strong></span> <strong>Interval censoring</strong> occurs when the exact time of an event is not known, but we know it occurred within a specific time interval.</p>
+<p><span class="theorem-title"><strong>Definition 19 (Interval Censoring)</strong></span> <strong>Interval censoring</strong> occurs when the exact time of an event is not known, but we know it occurred within a specific time interval.</p>
 </div>
 </section><section id="common-examples" class="slide level2 scrollable" data-number="12.2"><h2>
 <span class="header-section-number">12.2</span> Common Examples</h2>
@@ -4772,7 +4945,7 @@ Table&nbsp;9: HSV-2 test results for three example participants in the MIRA stud
 <span class="header-section-number">13.1</span> Choosing the Time Origin</h2>
 <p>Survival times are measured from some initial time, with more than one possible choice of origin.</p>
 <div id="exm-pbc-time-origin" class="theorem example">
-<p><span class="theorem-title"><strong>Example 20 (Time origin choice in the PBC study)</strong></span> In the <span class="citation" data-cites="dickson1989prognosis">Dickson et al. (<a href="#/references" role="doc-biblioref" onclick="">1989</a>)</span> Primary Biliary Cholangitis (PBC) study, survival time could be measured from:</p>
+<p><span class="theorem-title"><strong>Example 24 (Time origin choice in the PBC study)</strong></span> In the <span class="citation" data-cites="dickson1989prognosis">Dickson et al. (<a href="#/references" role="doc-biblioref" onclick="">1989</a>)</span> Primary Biliary Cholangitis (PBC) study, survival time could be measured from:</p>
 <ul>
 <li>
 <strong>Cohort enrollment</strong>: time from when the patient entered the study</li>
@@ -4785,7 +4958,7 @@ Table&nbsp;9: HSV-2 test results for three example participants in the MIRA stud
 <span class="header-section-number">13.2</span> What is Left-Truncation?</h2>
 <p><strong>Left-truncation</strong> occurs when some survival times are not observed because the sampling scheme tends to miss short survival times.</p>
 <div id="def-left-truncation" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 19 (Left-Truncation)</strong></span> <strong>Left-truncated</strong> data arise when individuals can only enter the study if they survive beyond a certain time point. Those who experience the event before that time point are never observed.</p>
+<p><span class="theorem-title"><strong>Definition 20 (Left-Truncation)</strong></span> <strong>Left-truncated</strong> data arise when individuals can only enter the study if they survive beyond a certain time point. Those who experience the event before that time point are never observed.</p>
 </div>
 <p><strong>Key feature:</strong> There must be a time delay between:</p>
 <ol type="1">
@@ -4996,6 +5169,9 @@ Dobson, Annette J, and Adrian G Barnett. 2018. <em>An Introduction to Generalize
 </div>
 <div id="ref-freireich1963effect" class="csl-entry" role="listitem">
 <span class="nocase">Freireich, Emil J. et al.</span> 1963. <span>“The Effect of 6-Mercaptopurine on the Duration of Steroid-Induced Remissions in Acute Leukemia.”</span> <em>Blood</em> 21: 699–716.
+</div>
+<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
+Hernán, Miguel A., and James M. Robins. 2020. <em>Causal Inference: What If</em>. Chapman &amp; Hall/CRC. <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/</a>.
 </div>
 <div id="ref-kalbfleisch2011statistical" class="csl-entry" role="listitem">
 Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. John Wiley &amp; Sons.
@@ -5404,7 +5580,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,

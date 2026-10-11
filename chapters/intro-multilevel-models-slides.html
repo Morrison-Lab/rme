@@ -388,9 +388,9 @@ text-align: center;
 
 </section><section class="slide level2"><p>The simplest model with a random effect has one grouping factor and no covariates <span class="citation" data-cites="rocke2021epi204 dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
 </section><section class="slide level2"><div id="def-one-way-re" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (One-way random-effects model)</strong></span> Suppose we observe <span class="math inline">\(m\)</span> outcomes <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> in each of <span class="math inline">\(a\)</span> groups <span class="math inline">\(i = 1, \ldots, a\)</span>. The <strong>one-way random-effects model</strong> is <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 1 (One-way random-effects model)</strong></span> Suppose we observe <span class="math inline">\(m\)</span> outcomes <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> in each of <span class="math inline">\(a\)</span> groups <span class="math inline">\(i = 1, \ldots, a\)</span>. The <strong>one-way random-effects model</strong> is <span id="eq-one-way-re"><span class="math display">\[
 Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
-\]</span> where:</p>
+\tag{1}\]</span></span> where:</p>
 <ul>
 <li>
 <span class="math inline">\(\mu\)</span> is a fixed overall mean;</li>
@@ -414,7 +414,7 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 <p>The shared random effect <span class="math inline">\(\alpha_i\)</span> is what makes observations in the same group correlated.</p>
 </section><section class="slide level2"><div id="thm-re-cov" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Moments of the one-way random-effects model)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, for any group <span class="math inline">\(i\)</span> and observations <span class="math inline">\(j \neq k\)</span>:</p>
-<p><span class="math display">\[
+<p><span id="eq-re-cov"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{} &amp;= \mu
 \\
@@ -422,13 +422,13 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 \\
 \operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{} &amp;= \sigma_\alpha^2
 \end{aligned}
-\]</span></p>
+\tag{2}\]</span></span></p>
 <p>and observations in different groups are independent.</p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="../chapters/probability.html#def-cov">the definition of covariance</a>, <a href="../chapters/probability.html#lem-cov-xx">the covariance of a variable with itself</a>, and linearity of expectation.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cov">the definition of covariance</a>, <a href="https://morrison-lab.github.io/pds/variance-covariance.html#lem-cov-xx">the covariance of a variable with itself</a>, and linearity of expectation.</p>
 <p>Mean:</p>
-<p><span class="math display">\[
+<p><span id="eq-re-cov-proof-1"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y_{ij}\right]\mathclose{}
 &amp;= \operatorname{E}\mathopen{}\left[\mu + \alpha_i + \epsilon_{ij}\right]\mathclose{}
@@ -443,9 +443,9 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \mu
 &amp;&amp; \text{(simplify)}
 \end{aligned}
-\]</span></p>
+\tag{3}\]</span></span></p>
 <p>Covariance, for <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span> equal or not:</p>
-<p><span class="math display">\[
+<p><span id="eq-re-cov-proof-2"><span class="math display">\[
 \begin{aligned}
 \operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}
 &amp;\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[(Y_{ij} - \mu)(Y_{ik} - \mu)\right]\mathclose{}
@@ -466,7 +466,7 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \sigma_\alpha^2 + 0 + 0 + \operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{}
 &amp;&amp; \text{(independent, mean-zero factors)}
 \end{aligned}
-\]</span></p>
+\tag{4}\]</span></span></p>
 <p>If <span class="math inline">\(j \neq k\)</span>, <span class="math inline">\(\epsilon_{ij}\)</span> and <span class="math inline">\(\epsilon_{ik}\)</span> are independent with mean zero, so <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}\epsilon_{ik}\right]\mathclose{} = 0\)</span> and the covariance is <span class="math inline">\(\sigma_\alpha^2\)</span>. If <span class="math inline">\(j = k\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\epsilon_{ij}^2\right]\mathclose{} = \sigma^2\)</span>, so the covariance of <span class="math inline">\(Y_{ij}\)</span> with itself, which is its variance, is <span class="math inline">\(\sigma_\alpha^2 + \sigma^2\)</span>.</p>
 <p>Observations in different groups <span class="math inline">\(i \neq i'\)</span> are functions of the disjoint sets of independent variables <span class="math inline">\(\{\alpha_i, \epsilon_{ij}\}\)</span> and <span class="math inline">\(\{\alpha_{i'}, \epsilon_{i'k}\}\)</span>, so they are independent.</p>
 </div>
@@ -475,19 +475,19 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 </div>
 </section><section class="slide level2"><div id="def-icc" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (Intraclass correlation)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, the <strong>intraclass correlation</strong> is the correlation between two observations <span class="math inline">\(j \neq k\)</span> in the same group:</p>
-<p><span class="math display">\[
+<p><span id="eq-icc"><span class="math display">\[
 \rho \stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
-\]</span></p>
+\tag{5}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="cor-icc" class="theorem corollary">
 <p><span class="theorem-title"><strong>Corollary 1 (Intraclass correlation in terms of variance components)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>,</p>
-<p><span class="math display">\[
+<p><span id="eq-icc-vc"><span class="math display">\[
 \rho = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}.
-\]</span></p>
+\tag{6}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#/thm-re-cov" class="quarto-xref">Theorem&nbsp;1</a>.</p>
-<p><span class="math display">\[
+<p><span id="eq-icc-vc-proof"><span class="math display">\[
 \begin{aligned}
 \rho
 &amp;\stackrel{\text{def}}{=}\frac{\operatorname{Cov}\mathopen{}\left(Y_{ij}, Y_{ik}\right)\mathclose{}}{\sqrt{\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{}\operatorname{Var}\mathopen{}\left(Y_{ik}\right)\mathclose{}}}
@@ -502,13 +502,26 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2}
 &amp;&amp; \text{(square root of a square)}
 \end{aligned}
-\]</span></p>
+\tag{7}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="exm-dyestuff-icc" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4 (Intraclass correlation for the dyestuff batches)</strong></span> With the variance components from <a href="#/exm-dyestuff-cov" class="quarto-xref">Example&nbsp;3</a>, <a href="#/cor-icc" class="quarto-xref">Corollary&nbsp;1</a> gives</p>
-<p><span class="math display">\[
-\rho = \frac{1764}{1764 + 2451} = \frac{1764}{4215} \approx 0.42,
-\]</span></p>
+<p><span id="eq-dyestuff-icc"><span class="math display">\[
+\begin{aligned}
+\rho
+&amp;= \frac{1764}{1764 + 2451}
+&amp;&amp; \text{(substitute the variance components)}
+\\
+&amp;= \frac{1764}{4215}
+&amp;&amp; \text{(add)}
+\\
+&amp;\approx 0.4185
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 0.42
+&amp;&amp; \text{(round to two decimal places)}
+\end{aligned}
+\tag{8}\]</span></span></p>
 <p>so about 42% of the variation in yield is between batches.</p>
 </div>
 <p>The intraclass correlation is also the fraction of the total variance <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y_{ij}\right)\mathclose{} = \sigma_\alpha^2 + \sigma^2\)</span> that comes from the random effect.</p>
@@ -516,27 +529,27 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 <span class="header-section-number">3</span> Variance components</h1>
 
 </section><section class="slide level2"><p>One way to estimate the variance components uses the mean squares from a one-way analysis of variance (ANOVA) table <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>. Write <span class="math inline">\(\bar{Y}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m Y_{ij}\)</span> for the mean of group <span class="math inline">\(i\)</span> and <span class="math inline">\(\bar{Y}_{\cdot\cdot} \stackrel{\text{def}}{=}\frac{1}{a}\sum_{i=1}^a \bar{Y}_{i\cdot}\)</span> for the overall mean. The <strong>between-group mean square</strong> and the <strong>within-group mean square</strong> are</p>
-<p><span class="math display">\[
+<p><span id="eq-mean-squares"><span class="math display">\[
 \begin{aligned}
 \text{MSA} &amp;\stackrel{\text{def}}{=}\frac{m}{a-1}\sum_{i=1}^a \mathopen{}\left(\bar{Y}_{i\cdot} - \bar{Y}_{\cdot\cdot}\right)\mathclose{}^2,
 \\
 \text{MSE} &amp;\stackrel{\text{def}}{=}\frac{1}{a(m-1)}\sum_{i=1}^a\sum_{j=1}^m \mathopen{}\left(Y_{ij} - \bar{Y}_{i\cdot}\right)\mathclose{}^2.
 \end{aligned}
-\]</span></p>
+\tag{9}\]</span></span></p>
 </section><section class="slide level2"><div id="thm-ems-one-way" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2 (Expected mean squares in the one-way random-effects model)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>:</p>
-<p><span class="math display">\[
+<p><span id="eq-ems-one-way"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} &amp;= \sigma^2
 \\
 \operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{} &amp;= m\sigma_\alpha^2 + \sigma^2
 \end{aligned}
-\]</span></p>
+\tag{10}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>This proof uses the fact that the <a href="../chapters/basic-statistical-methods.html#def-sample-variance">sample variance</a> of independent, identically distributed observations is unbiased for their variance, <a href="../chapters/probability.html#thm-lie">the law of iterated expectations</a>, and <a href="../chapters/probability.html#thm-var-lincom">the variance of a linear combination</a>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>This proof uses the fact that the <a href="https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-variance">sample variance</a> of independent, identically distributed observations is unbiased for their variance, <a href="https://morrison-lab.github.io/pds/expectation.html#thm-lie">the law of iterated expectations</a>, and <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom">the variance of a linear combination</a>.</p>
 <p><strong>Within groups.</strong> Given <span class="math inline">\(\alpha_i\)</span>, the observations <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> are independent with common variance <span class="math inline">\(\sigma^2\)</span>, so their sample variance <span class="math inline">\(s_i^2 \stackrel{\text{def}}{=}\frac{1}{m-1}\sum_{j=1}^m (Y_{ij} - \bar{Y}_{i\cdot})^2\)</span> satisfies <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2 \mid \alpha_i\right]\mathclose{} = \sigma^2\)</span>. By the law of iterated expectations, <span class="math inline">\(\operatorname{E}\mathopen{}\left[s_i^2\right]\mathclose{} = \sigma^2\)</span>. Then</p>
-<p><span class="math display">\[
+<p><span id="eq-ems-mse-proof"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{}
 &amp;= \operatorname{E}\mathopen{}\left[\frac{1}{a}\sum_{i=1}^a s_i^2\right]\mathclose{}
@@ -551,9 +564,9 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \sigma^2
 &amp;&amp; \text{(simplify)}
 \end{aligned}
-\]</span></p>
+\tag{11}\]</span></span></p>
 <p><strong>Between groups.</strong> Each group mean is <span class="math inline">\(\bar{Y}_{i\cdot} = \mu + \alpha_i + \bar{\epsilon}_{i\cdot}\)</span>, where <span class="math inline">\(\bar{\epsilon}_{i\cdot} \stackrel{\text{def}}{=}\frac{1}{m}\sum_{j=1}^m \epsilon_{ij}\)</span>. The group means are independent and identically distributed across groups, with</p>
-<p><span class="math display">\[
+<p><span id="eq-ems-var-group-mean"><span class="math display">\[
 \begin{aligned}
 \operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
 &amp;= \operatorname{Var}\mathopen{}\left(\alpha_i\right)\mathclose{} + \operatorname{Var}\mathopen{}\left(\bar{\epsilon}_{i\cdot}\right)\mathclose{}
@@ -565,9 +578,9 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \sigma_\alpha^2 + \frac{\sigma^2}{m}
 &amp;&amp; \text{(simplify)}
 \end{aligned}
-\]</span></p>
+\tag{12}\]</span></span></p>
 <p><span class="math inline">\(\text{MSA}\)</span> is <span class="math inline">\(m\)</span> times the sample variance of <span class="math inline">\(\bar{Y}_{1\cdot}, \ldots, \bar{Y}_{a\cdot}\)</span>, so</p>
-<p><span class="math display">\[
+<p><span id="eq-ems-msa-proof"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[\text{MSA}\right]\mathclose{}
 &amp;= m \cdot \operatorname{Var}\mathopen{}\left(\bar{Y}_{i\cdot}\right)\mathclose{}
@@ -579,16 +592,16 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= m\sigma_\alpha^2 + \sigma^2
 &amp;&amp; \text{(distribute)}
 \end{aligned}
-\]</span></p>
+\tag{13}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="cor-mom-vc" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 2 (Method-of-moments estimators of the variance components)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, <span class="math inline">\(\hat{\sigma}^2 \stackrel{\text{def}}{=}\text{MSE}\)</span> and <span class="math display">\[
+<p><span class="theorem-title"><strong>Corollary 2 (Method-of-moments estimators of the variance components)</strong></span> Under <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, <span class="math inline">\(\hat{\sigma}^2 \stackrel{\text{def}}{=}\text{MSE}\)</span> and <span id="eq-mom-vc"><span class="math display">\[
 \hat{\sigma}_\alpha^2 \stackrel{\text{def}}{=}\frac{\text{MSA} - \text{MSE}}{m}
-\]</span> are unbiased estimators of <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma_\alpha^2\)</span>.</p>
+\tag{14}\]</span></span> are unbiased estimators of <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma_\alpha^2\)</span>.</p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>This proof uses <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
-<p><span class="math display">\[
+<p><span id="eq-mom-vc-unbiased"><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[\hat{\sigma}_\alpha^2\right]\mathclose{}
 &amp;= \operatorname{E}\mathopen{}\left[\frac{\text{MSA} - \text{MSE}}{m}\right]\mathclose{}
@@ -606,7 +619,7 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 &amp;= \sigma_\alpha^2
 &amp;&amp; \text{(cancel } m\text{)}
 \end{aligned}
-\]</span></p>
+\tag{15}\]</span></span></p>
 <p><span class="math inline">\(\operatorname{E}\mathopen{}\left[\hat{\sigma}^2\right]\mathclose{} = \operatorname{E}\mathopen{}\left[\text{MSE}\right]\mathclose{} = \sigma^2\)</span> directly from <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-dyestuff-vc" class="theorem example">
@@ -621,9 +634,22 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 </div>
 </div>
 </div>
-<p>By <a href="#/cor-mom-vc" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(\hat{\sigma}^2 = 2451.3\)</span> and <span class="math display">\[
-\hat{\sigma}_\alpha^2 = \frac{11271.5 - 2451.3}{5} = \frac{8820.2}{5} \approx 1764.0.
-\]</span></p>
+<p>By <a href="#/cor-mom-vc" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(\hat{\sigma}^2 = 2451.3\)</span> and <span id="eq-dyestuff-mom-vc"><span class="math display">\[
+\begin{aligned}
+\hat{\sigma}_\alpha^2
+&amp;= \frac{11271.5 - 2451.3}{5}
+&amp;&amp; \text{(substitute the mean squares and } m = 5\text{)}
+\\
+&amp;= \frac{8820.2}{5}
+&amp;&amp; \text{(subtract)}
+\\
+&amp;= 1764.04
+&amp;&amp; \text{(divide)}
+\\
+&amp;\approx 1764.0
+&amp;&amp; \text{(round to one decimal place)}
+\end{aligned}
+\tag{16}\]</span></span></p>
 <p>The <code>lmer()</code> function in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span> fits the same model by restricted maximum likelihood (REML); <code>(1 | Batch)</code> requests a random intercept for each batch:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>dyestuff_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Yield <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Batch), <span class="at">data =</span> Dyestuff)</span>
@@ -644,15 +670,15 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 
 </section><section class="slide level2"><p>A model can have more than one level of random effects. When each lower-level group belongs to exactly one higher-level group, the random effects are <strong>nested</strong> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
 </section><section class="slide level2"><div id="def-nested-re" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Two-level nested random-effects model)</strong></span> Suppose <span class="math inline">\(\ell\)</span> laboratories each analyze <span class="math inline">\(b\)</span> batches, with <span class="math inline">\(r\)</span> replicate measurements per batch. The <strong>two-level nested random-effects model</strong> is</p>
-<p><span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3 (Two-level nested random-effects model)</strong></span> Suppose <span class="math inline">\(a\)</span> laboratories each analyze <span class="math inline">\(b\)</span> batches, with <span class="math inline">\(r\)</span> replicate measurements per batch. The <strong>two-level nested random-effects model</strong> is</p>
+<p><span id="eq-nested-re"><span class="math display">\[
 Y_{ijk} \stackrel{\text{def}}{=}\mu + L_i + B_{ij} + \epsilon_{ijk},
-\]</span></p>
+\tag{17}\]</span></span></p>
 <p>where <span class="math inline">\(L_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_L^2\right)\mathclose{}\)</span> is the effect of laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(B_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_B^2\right)\mathclose{}\)</span> is the effect of batch <span class="math inline">\(j\)</span> within laboratory <span class="math inline">\(i\)</span>, <span class="math inline">\(\epsilon_{ijk} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> is the replicate error, and all three sets of random variables are mutually independent.</p>
 </div>
 <p>By the same argument as <a href="#/thm-ems-one-way" class="quarto-xref">Theorem&nbsp;2</a>, the expected mean squares of the nested ANOVA are <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_L\right]\mathclose{} = br\sigma_L^2 + r\sigma_B^2 + \sigma^2\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_B\right]\mathclose{} = r\sigma_B^2 + \sigma^2\)</span>, and <span class="math inline">\(\operatorname{E}\mathopen{}\left[\text{MS}_E\right]\mathclose{} = \sigma^2\)</span> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>. So the correct <span class="math inline">\(F\)</span> test for laboratories divides <span class="math inline">\(\text{MS}_L\)</span> by <span class="math inline">\(\text{MS}_B\)</span>, not by <span class="math inline">\(\text{MS}_E\)</span>.</p>
 </section><section class="slide level2"><div id="exm-coop" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6 (A cooperative trial)</strong></span> The <code>coop</code> data in the <code>MASS</code> package <span class="citation" data-cites="venables2002modern">(<a href="#/references" role="doc-biblioref" onclick="">Venables and Ripley 2002</a>)</span> come from a cooperative trial in which <span class="math inline">\(\ell = 6\)</span> laboratories each analyzed <span class="math inline">\(b = 3\)</span> batches, a month apart, with <span class="math inline">\(r = 2\)</span> replicates per batch. We use the measurements of specimen <code>S1</code>:</p>
+<p><span class="theorem-title"><strong>Example 6 (A cooperative trial)</strong></span> The <code>coop</code> data in the <code>MASS</code> package <span class="citation" data-cites="venables2002modern">(<a href="#/references" role="doc-biblioref" onclick="">Venables and Ripley 2002</a>)</span> come from a cooperative trial in which <span class="math inline">\(a = 6\)</span> laboratories each analyzed <span class="math inline">\(b = 3\)</span> batches, a month apart, with <span class="math inline">\(r = 2\)</span> replicates per batch. We use the measurements of specimen <code>S1</code>:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-label="1"></a>coop2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(MASS<span class="sc">::</span>coop, Spc <span class="sc">==</span> <span class="st">"S1"</span>)</span>
 <span id="cb6-2"><a aria-label="2"></a><span class="fu">anova</span>(<span class="fu">lm</span>(Conc <span class="sc">~</span> Lab <span class="sc">+</span> Lab<span class="sc">:</span>Bat, <span class="at">data =</span> coop2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -716,11 +742,11 @@ Y_{ijk} \stackrel{\text{def}}{=}\mu + L_i + B_{ij} + \epsilon_{ijk},
 <strong>Partial pooling</strong> fits the random-intercept model <span class="math inline">\(Y_{ij} = \mu + \alpha_j + \epsilon_{ij}\)</span> for house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> (<a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a>, with the roles of the indices swapped and unequal group sizes <span class="math inline">\(n_j\)</span>) and estimates each county’s mean as a compromise between <span class="math inline">\(\bar{y}_j\)</span> and <span class="math inline">\(\mu\)</span>.</li>
 </ul></section><section class="slide level2"><div id="thm-partial-pooling" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3 (Partial-pooling estimate of a group mean)</strong></span> In the random-intercept model with known <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma_\alpha^2\)</span>, and <span class="math inline">\(\sigma^2\)</span>, the predicted mean of group <span class="math inline">\(j\)</span>, <span class="math inline">\(\operatorname{E}\mathopen{}\left[\mu + \alpha_j \mid \text{data}\right]\mathclose{}\)</span>, is</p>
-<p><span class="math display">\[
+<p><span id="eq-partial-pooling"><span class="math display">\[
 \hat{\mu}_j = w_j\bar{y}_j + (1 - w_j)\mu,
 \qquad
 w_j \stackrel{\text{def}}{=}\frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2},
-\]</span></p>
+\tag{18}\]</span></span></p>
 <p>a weighted average of the group’s sample mean and the overall mean, with weights proportional to their precisions <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>.</p>
 </div>
 <p>The proof of <a href="#/thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a> uses the conditional distribution of one normal variable given another, which is beyond the scope of this chapter. The weight <span class="math inline">\(w_j\)</span> increases with the group size <span class="math inline">\(n_j\)</span>: large groups keep estimates close to their own sample means, and small groups are pulled, or <strong>shrunk</strong>, toward the overall mean.</p>
@@ -742,7 +768,7 @@ w_j \stackrel{\text{def}}{=}\frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\a
 </details>
 </div>
 <p>The estimates are <span class="math inline">\(\hat{\mu }\approx 1.350\)</span>, <span class="math inline">\(\hat{\sigma}_\alpha^2 \approx 0.0886\)</span>, and <span class="math inline">\(\hat{\sigma}^2 \approx 0.587\)</span>. Aitkin County has <span class="math inline">\(n_j = 4\)</span> houses with sample mean <span class="math inline">\(\bar{y}_j \approx 0.715\)</span>. Plugging these estimates into <a href="#/thm-partial-pooling" class="quarto-xref">Theorem&nbsp;3</a>:</p>
-<p><span class="math display">\[
+<p><span id="eq-radon-shrinkage"><span class="math display">\[
 \begin{aligned}
 w_j
 &amp;= \frac{4 / 0.587}{4 / 0.587 + 1 / 0.0886}
@@ -761,7 +787,7 @@ w_j
 &amp;\approx 1.111
 &amp;&amp; \text{(multiply and add)}
 \end{aligned}
-\]</span></p>
+\tag{19}\]</span></span></p>
 <p>Aitkin County’s estimate moves most of the way from its own mean toward the overall mean. In contrast, Hennepin County has <span class="math inline">\(n_j = 105\)</span> houses, so its weight is about 0.94 and its estimate barely moves. The same calculation for every county reproduces the estimates that <code>lme4</code> reports:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-label="1"></a>radon_vc <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(radon_lmer0))<span class="sc">$</span>vcov</span>
@@ -863,11 +889,11 @@ Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log r
 <span class="header-section-number">7</span> Multilevel logistic regression</h1>
 
 </section><section class="slide level2"><p>Random effects can be added to any generalized linear model. A <strong>generalized linear mixed model</strong> (GLMM) adds random effects to the linear predictor, so for a binary outcome with random intercepts,</p>
-<p><span class="math display">\[
+<p><span id="eq-glmm"><span class="math display">\[
 \operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mathclose{} = {\tilde{x}_{ij}}^{\top}\tilde{\beta}+ \alpha_j,
 \qquad
 \alpha_j \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}
-\]</span></p>
+\tag{20}\]</span></span></p>
 <p><span class="citation" data-cites="dobson4e gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>; <a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 14</a>)</span>. Each group’s odds are multiplied by <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\alpha_j\right\}\mathclose{}\)</span>, so about 95% of groups have odds within a factor of <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\pm 2\sigma_\alpha\right\}\mathclose{}\)</span> of the odds for a typical group <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
 </section><section class="slide level2"><div id="exm-cbpp" class="theorem example">
 <p><span class="theorem-title"><strong>Example 11 (Contagious bovine pleuropneumonia)</strong></span> The <code>cbpp</code> data in the <code>lme4</code> package <span class="citation" data-cites="bates2015lme4">(<a href="#/references" role="doc-biblioref" onclick="">Bates et al. 2015</a>)</span> record the number of new cases of contagious bovine pleuropneumonia in 15 herds of zebu cattle in Ethiopia, each observed in up to four periods. The herds are a sample of all herds, so we model herd as a random effect and period as a fixed effect:</p>
@@ -1442,7 +1468,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,

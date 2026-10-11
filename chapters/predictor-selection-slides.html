@@ -557,8 +557,8 @@ Table&nbsp;1: Numerical example showing overfitting: lower training error but wo
 <p>For <strong>continuous outcomes</strong>:</p>
 <ul>
 <li><p><strong>Adjusted <span class="math inline">\(R^2\)</span></strong> penalizes the number of predictors: <span class="math display">\[\bar R^2 = 1 - \frac{n-1}{n-p-1}(1 - R^2)\]</span> Adding a variable increases <span class="math inline">\(\bar R^2\)</span> only if it reduces the residual variance more than the penalty.</p></li>
-<li><p><strong>AIC</strong> and <strong>BIC</strong> impose steeper penalties: <span class="math display">\[\text{AIC} = -2\hat\ell + 2p, \quad
-\text{BIC} = -2\hat\ell + p\log n\]</span> (see <a href="#/sec-pred-sel-aic-bic" class="quarto-xref">Section&nbsp;8</a>).</p></li>
+<li><p><strong>AIC</strong> and <strong>BIC</strong> impose steeper penalties: <span class="math display">\[\text{AIC} = -2\hat{\ell} + 2p, \quad
+\text{BIC} = -2\hat{\ell} + p\log n\]</span> (see <a href="#/sec-pred-sel-aic-bic" class="quarto-xref">Section&nbsp;8</a>).</p></li>
 </ul>
 <p>For <strong>binary outcomes</strong>, common measures include <strong>balanced accuracy</strong> and the <strong>C-statistic</strong>.</p>
 <p><strong>Balanced accuracy</strong>: <span class="math display">\[\text{BA} = \frac{\text{Sensitivity} + \text{Specificity}}{2}\]</span> where <span class="math display">\[\text{Sensitivity} = \Pr(\hat Y = 1 \mid Y = 1), \quad
@@ -573,10 +573,10 @@ C \stackrel{\text{def}}{=}{} &amp; \Pr(\hat{\pi}_i &gt; \hat{\pi}_j \mid Y_i = 1
 = \frac{1}{n_1 n_0}
 \sum_{i:Y_i=1}
 \sum_{j:Y_j=0}
-\left[
+\mathopen{}\left[
 I(\hat{\pi}_i &gt; \hat{\pi}_j)
 + \frac{1}{2}I(\hat{\pi}_i = \hat{\pi}_j)
-\right].
+\right]\mathclose{}.
 \]</span> It measures discrimination: the model’s ability to rank events above non-events.</p>
 <p>For <strong>survival outcomes</strong>, the analogous measure is the <strong>C-index</strong>, defined as <span class="math display">\[
 \hat C_{\text{index}}
@@ -707,7 +707,7 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
 <p>An alternative retention criterion is the <strong>10% change-in-estimate rule</strong> <span class="citation" data-cites="kleinbaum2010logistic vittinghoff2e MickeyGreenland1989 Greenland1989Modeling">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2010, chap. 8</a>, pp.&nbsp;194–212; <a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 10</a>, pp.&nbsp;257–275; <a href="#/references" role="doc-biblioref" onclick="">Mickey and Greenland 1989, 125</a>; <a href="#/references" role="doc-biblioref" onclick="">Greenland 1989, 340</a>)</span>:</p>
 <p>Retain a candidate confounder <span class="math inline">\(C\)</span> in the model if dropping it changes the estimated coefficient for the primary predictor by more than 10–15%.</p>
 <p>More precisely, let <span class="math inline">\(\hat\beta\)</span> be the estimated coefficient for the exposure from the <strong>full model</strong> (including <span class="math inline">\(C\)</span>), and let <span class="math inline">\(\hat\beta_0\)</span> be the estimate from the <strong>reduced model</strong> (dropping <span class="math inline">\(C\)</span>). Then <span class="math inline">\(C\)</span> is judged a meaningful confounder if:</p>
-<p><span class="math display">\[\left| \frac{\hat\beta - \hat\beta_0}{\hat\beta} \right| &gt; 0.10\]</span></p>
+<p><span class="math display">\[\mathopen{}\left| \frac{\hat\beta - \hat\beta_0}{\hat\beta} \right|\mathclose{} &gt; 0.10\]</span></p>
 <p>The threshold is often taken as 10–20%, depending on the context. A smaller threshold (e.g., 10%) retains more variables; a larger threshold (e.g., 20%) allows more aggressive pruning.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -1270,13 +1270,13 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 <p>When comparing non-nested models, we can use information criteria:</p>
 <ul>
 <li>
-<strong>AIC</strong> (Akaike Information Criterion): <span class="math display">\[\text{AIC} = -2\,\hat\ell + 2p\]</span>
+<strong>AIC</strong> (Akaike Information Criterion): <span class="math display">\[\text{AIC} = -2\,\hat{\ell} + 2p\]</span>
 </li>
 <li>
-<strong>BIC</strong> (Bayesian Information Criterion): <span class="math display">\[\text{BIC} = -2\,\hat\ell + p\log n\]</span>
+<strong>BIC</strong> (Bayesian Information Criterion): <span class="math display">\[\text{BIC} = -2\,\hat{\ell} + p\log n\]</span>
 </li>
 </ul>
-<p>where <span class="math inline">\(\hat\ell\)</span> is the maximized log-likelihood, <span class="math inline">\(p\)</span> is the number of model parameters, and <span class="math inline">\(n\)</span> is the sample size.</p>
+<p>where <span class="math inline">\(\hat{\ell}\)</span> is the maximized log-likelihood, <span class="math inline">\(p\)</span> is the number of model parameters, and <span class="math inline">\(n\)</span> is the sample size.</p>
 <p>Lower values of AIC or BIC indicate a better model. BIC applies a larger penalty for model complexity, especially for large <span class="math inline">\(n\)</span>.</p>
 </section><section id="comparing-models-for-ldl" class="slide level2" data-number="8.2"><h2>
 <span class="header-section-number">8.2</span> Comparing models for LDL</h2>
@@ -1338,10 +1338,10 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
           display:block!important;
       }</style></aside></section><section id="the-lasso" class="slide level2" data-number="9.1"><h2>
 <span class="header-section-number">9.1</span> The LASSO</h2>
-<p>The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) adds an <span class="math inline">\(\ell_1\)</span> penalty to the log-likelihood:</p>
-<p><span class="math display">\[\hat\beta_\lambda = \arg\max_\beta \left\{
-\hat\ell(\beta) - \lambda \sum_{j=1}^p |\beta_j|
-\right\}\]</span></p>
+<p>The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) adds an <span class="math inline">\(\ell_{1}\)</span> penalty to the log-likelihood:</p>
+<p><span class="math display">\[\hat\beta_\lambda = \arg\max_\beta \mathopen{}\left\{
+\hat{\ell}(\beta) - \lambda \sum_{j=1}^p |\beta_j|
+\right\}\mathclose{}\]</span></p>
 <p>The tuning parameter <span class="math inline">\(\lambda\)</span> controls the strength of the penalty:</p>
 <ul>
 <li>
@@ -2042,7 +2042,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,
