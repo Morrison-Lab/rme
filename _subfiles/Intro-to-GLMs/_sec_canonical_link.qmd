@@ -1,0 +1,105 @@
+The link functions listed in the structure of a GLM are not all on the same footing.
+For each outcome distribution, the form of its density singles out one link.
+To say which, we need the density's *natural parameter*.
+
+{{< slidebreak >}}
+
+::: {#def-natural-parameter}
+#### Exponential dispersion family, natural parameter, and canonical link
+
+A distribution belongs to the **exponential dispersion family**
+if its density (or probability mass function) can be written as
+
+$$
+f(y; \theta, \phi)
+= \expf{\frac{y\,\theta - b(\theta)}{\phi} + c(y, \phi)}
+$$
+
+for some functions $b(\cdot)$ and $c(\cdot, \cdot)$.
+The parameter $\theta$ is the **natural parameter**,
+and $\phi > 0$ is the **dispersion parameter**.
+Then
+
+$$
+\begin{aligned}
+\E{Y} &= b'(\theta) \eqdef \mu \\
+\Varf{Y} &= \phi\, b''(\theta) = \phi\, V(\mu),
+\end{aligned}
+$$
+
+where $V(\mu) \eqdef b''(\theta)$,
+written as a function of $\mu$,
+is the **variance function**.
+The **canonical link** is the link function $g(\cdot)$
+that sets the linear predictor equal to the natural parameter:
+$g(\mu) = \theta$
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
+:::
+
+{{< slidebreak >}}
+
+::: {#exm-canonical-link-numeric}
+#### Natural parameters of a Poisson and a Bernoulli outcome
+
+For a Poisson outcome with mean $\mu$,
+
+$$
+f(y; \mu)
+= \frac{\mu^y e^{-\mu}}{y!}
+= \expf{y \logf{\mu} - \mu - \logf{y!}},
+$$
+
+so $\theta = \logf{\mu}$, $b(\theta) = e^\theta$, and $\phi = 1$.
+For a Bernoulli outcome with success probability $\pi$,
+
+$$
+f(y; \pi)
+= \pi^y (1 - \pi)^{1 - y}
+= \expf{y \logf{\frac{\pi}{1 - \pi}} + \logf{1 - \pi}},
+$$
+
+so $\theta = \logit(\pi)$, $b(\theta) = \logf{1 + e^\theta}$, and $\phi = 1$.
+
+The code below checks both forms against R's built-in densities,
+at $\mu = 3$, $y = 2$ and at $\pi = 0.25$, $y = 1$,
+and computes $b'(\theta)$ and $b''(\theta)$ for the Bernoulli case.
+
+```{r}
+#| code-fold: true
+mu <- 3
+theta_pois <- log(mu)
+y_pois <- 2
+pois_exp_form <- exp(y_pois * theta_pois - exp(theta_pois) - lgamma(y_pois + 1))
+pois_check <- isTRUE(all.equal(pois_exp_form, dpois(y_pois, mu)))
+
+pi_bern <- 0.25
+theta_bern <- qlogis(pi_bern)
+y_bern <- 1
+bern_exp_form <- exp(y_bern * theta_bern - log1p(exp(theta_bern)))
+bern_check <- isTRUE(all.equal(bern_exp_form, dbinom(y_bern, 1, pi_bern)))
+
+b1_bern <- plogis(theta_bern)
+b2_bern <- b1_bern * (1 - b1_bern)
+```
+
+- For the Poisson distribution with $\mu = 3$,
+  the natural parameter is $\theta = \log(3) =$ `r round(theta_pois, 4)`,
+  and the exponential-family form gives
+  $f(2) =$ `r round(pois_exp_form, 4)`,
+  which matches `dpois(2, 3)`: `r pois_check`.
+  Here $b'(\theta) = b''(\theta) = e^\theta =$ `r round(exp(theta_pois), 4)`,
+  so $V(\mu) = \mu$.
+
+- For the Bernoulli distribution with $\pi = 0.25$,
+  the natural parameter is $\theta = \logit(0.25) =$ `r round(theta_bern, 4)`,
+  and the exponential-family form gives
+  $f(1) =$ `r round(bern_exp_form, 4)`,
+  which matches `dbinom(1, 1, 0.25)`: `r bern_check`.
+  Here $b'(\theta) = \expit(\theta) =$ `r round(b1_bern, 4)`,
+  which is $\pi$,
+  and $b''(\theta) = \pi (1 - \pi) =$ `r round(b2_bern, 4)`,
+  so $V(\pi) = \pi(1 - \pi)$.
+
+Consequently, the canonical link for the Poisson distribution is the log link,
+and the canonical link for the Bernoulli distribution is the logit link.
+:::
