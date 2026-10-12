@@ -5,7 +5,7 @@ and interpretation of the results.
 By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle),
 in large samples $\eb$ is approximately Gaussian,
 with covariance matrix approximated by the inverse of the observed information
-$-\llik''(\eb)$.
+$-\hessf{\eb}$.
 A 95% Wald confidence interval for $\beta_j$ is then
 $\eb_j \pm 1.96 \cdot \eSEf{\eb_j}$,
 and the Wald statistic $z_j \eqdef \eb_j / \eSEf{\eb_j}$
@@ -22,12 +22,12 @@ for the town women
 and
 $\sum_{i:\, x_i = 1} \est{\mu}_i = n_{\text{country}} \bar{y}_{\text{country}} = 21$
 for the country women.
-Substituting into the Hessian from @exm-chronic-mle,
+Substituting into the Hessian from @exm-chronic-concavity,
 the observed information matrix is
 
 $$
 \ba
-\underbrace{-\llik''(\eb)}_{2 \times 2}
+\underbrace{-\hessf{\eb}}_{2 \times 2}
 &= \sum_{i=1}^{49} \est{\mu}_i \pmat{1 & x_i \\ x_i & x_i^2}
 && \text{(Hessian of the log-likelihood)}
 \\
@@ -47,7 +47,7 @@ so its inverse is
 
 $$
 \ba
-\underbrace{\sb{-\llik''(\eb)}^{-1}}_{2 \times 2}
+\underbrace{\sb{-\hessf{\eb}}^{-1}}_{2 \times 2}
 &= \frac{1}{777} \pmat{21 & -21 \\ -21 & 58}
 && \text{(inverse of a } 2 \times 2 \text{ matrix)}
 \ea
