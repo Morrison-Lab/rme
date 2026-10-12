@@ -18,11 +18,25 @@ which we can use to derive the hazard function for a given probability distribut
 
 #### Joint probability of a variable with itself
 
-$$p(T=t, T\ge t) = p(T=t)$$
+$$\p(T=t, T\ge t) = \p(T=t)$$
 
 ::::::{.proof}
-By the [subset property](https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset), if $A\subseteq B$ then $\Pr(A \cap B) = \Pr(A)$.
-In particular, $\{T=t\} \subseteq \{T\geq t\}$, so $p(T=t, T\ge t) = p(T=t)$.
+By the [subset property](https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset), if $A\subseteq B$ then $\Prf{A \cap B} = \Prf{A}$.
+In this chapter, the comma notation $\p(A, B)$ means the joint probability $\Prf{A \cap B}$,
+and $\p(A)$ means $\Prf{A}$.
+Since $\{T=t\} \subseteq \{T\geq t\}$:
+
+$$
+\ba
+\p(T=t, T\ge t)
+&\eqdef \Prf{\{T=t\} \cap \{T\ge t\}}
+&& \text{(comma notation for joint probability)}
+\\ &= \Prf{\{T=t\}}
+&& \text{(subset property, since } \{T=t\} \subseteq \{T\ge t\} \text{)}
+\\ &\eqdef \p(T=t)
+&& \text{(notation for } \Pr \text{)}
+\ea
+$$
 ::::::
 :::::
 
