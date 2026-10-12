@@ -1,0 +1,64 @@
+A small $p$-value says that an estimated slope is distinguishable from zero.
+It does not say that the slope is large enough to matter.
+With enough data,
+the standard error of $\hat\beta_1$ shrinks toward zero,
+so even a tiny true slope becomes statistically significant.
+
+{{< slidebreak >}}
+
+::: {#exm-tiny-slope}
+#### A statistically significant but negligible slope
+
+We simulate $n = 10^6$ observations with
+
+$$
+\begin{aligned}
+X_i &\sim \Normal(0, 1) \\
+Y_i \mid X_i &\sim \Normal(0.01\, X_i,\ 1),
+\end{aligned}
+$$
+
+so the true slope is $\beta_1 = 0.01$:
+a one-unit increase in $X$, which is one standard deviation of $X$,
+changes the mean of $Y$ by 0.01 standard deviations of $Y$'s noise.
+
+```{r}
+#| label: tiny-slope-sim
+set.seed(571)
+n_sim <- 1e6
+beta1_true <- 0.01
+x_sim <- rnorm(n_sim)
+y_sim <- rnorm(n_sim, mean = beta1_true * x_sim, sd = 1)
+lm_tiny <- lm(y_sim ~ x_sim)
+tiny_coef <- summary(lm_tiny)$coefficients["x_sim", ]
+tiny_ci <- confint(lm_tiny)["x_sim", ]
+tiny_r2 <- summary(lm_tiny)$r.squared
+```
+
+The estimated slope is `r signif(tiny_coef["Estimate"], 3)`
+(standard error `r signif(tiny_coef["Std. Error"], 2)`),
+with a 95% confidence interval of
+(`r signif(tiny_ci[1], 3)`, `r signif(tiny_ci[2], 3)`)
+and $p =$ `r format.pval(tiny_coef["Pr(>|t|)"], digits = 2)`.
+The test of $H_0: \beta_1 = 0$ is rejected,
+yet the model explains `r signif(100 * tiny_r2, 2)`% of the variance of $Y$.
+The confidence interval tells the same story:
+it excludes zero, and every value in it is tiny.
+:::
+
+{{< slidebreak >}}
+
+::: {#rem-signif-vs-size}
+#### Significance is not importance
+
+Statistical significance depends on the sample size
+as well as on the size of the effect.
+When we report a slope,
+we should report the estimate and its confidence interval,
+and judge whether the values in the interval are large enough to matter
+in the scientific setting,
+not only whether the interval excludes zero.
+With $n = 10^4$ in place of $n = 10^6$,
+the standard error of the same slope would be about 0.01,
+so the same true slope would usually not be significant at all.
+:::
