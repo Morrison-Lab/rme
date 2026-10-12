@@ -370,6 +370,21 @@ text-align: center;
 </style></section><section><section id="parametric-survival-models" class="title-slide slide level1 center" data-number="1"><h1>
 <span class="header-section-number">1</span> Parametric Survival Models</h1>
 
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-20.mp4"><em>Parametric Survival Regression</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture%20Parametric%20Survival%20Models.pdf">slides</a>) covers exponential and Weibull models, accelerated failure time models, the <code>survreg()</code> function, and complementary log-log plots, using the <code>anderson</code> data <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section id="exponential-distribution" class="slide level2" data-number="1.1"><h2>
 <span class="header-section-number">1.1</span> Exponential Distribution</h2>
 <p>The exponential distribution is the baseline parametric model in survival analysis. It assumes a constant hazard rate <span class="math inline">\(\lambda &gt; 0\)</span> over time. This constant hazard implies that the event probability in any short interval depends only on the interval duration and not on elapsed time (the memoryless property).</p>
@@ -691,13 +706,13 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 &amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} &amp;&amp; \text{(simplifying exponent)}
 \end{aligned}
 \]</span></p>
-<p>When there are no additional predictors (<span class="math inline">\(\tilde{x}= \tilde{0}\)</span>), the baseline hazard is constant: <span class="math inline">\(\lambda = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>. This model uses a log link as in a generalized linear model for Poisson or rate outcomes. Because the hazard rate does not depend on time <span class="math inline">\(t\)</span>, the hazard ratio comparing two covariate vectors <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\({\tilde{x}^*}\)</span> is constant over time:</p>
+<p>When there are no additional predictors (<span class="math inline">\(\tilde{x}= \tilde{0}\)</span>), the baseline hazard is constant: <span class="math inline">\(\lambda = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>. This model uses a log link as in a generalized linear model for Poisson or rate outcomes. Because the hazard rate does not depend on time <span class="math inline">\(t\)</span>, the hazard ratio comparing two covariate vectors <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> is constant over time:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{ϙ}_{{\lambda}}(t \mid \tilde{x}: {\tilde{x}^*}) &amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t \mid \tilde{x})}{{\lambda}(t \mid {\tilde{x}^*})} &amp;&amp; \text{(hazard ratio definition)} \\
-&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta({\tilde{x}^*})\right\}\mathclose{}} &amp;&amp; \text{(substituting exponential regression hazard rates)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}) - \eta({\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(applying quotient rule for exponentials)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}\right\}\mathclose{} &amp;&amp; \text{(expressing difference in linear predictors)}
+\text{ϙ}_{{\lambda}}(t \mid \tilde{x}: \mathord{{\tilde{x}^*}}) &amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t \mid \tilde{x})}{{\lambda}(t \mid \mathord{{\tilde{x}^*}})} &amp;&amp; \text{(hazard ratio definition)} \\
+&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x})\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{{\tilde{x}^*}})\right\}\mathclose{}} &amp;&amp; \text{(substituting exponential regression hazard rates)} \\
+&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}) - \eta(\mathord{{\tilde{x}^*}})\right\}\mathclose{} &amp;&amp; \text{(applying quotient rule for exponentials)} \\
+&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}\right\}\mathclose{} &amp;&amp; \text{(expressing difference in linear predictors)}
 \end{aligned}
 \]</span></p>
 <p>Thus, exponential regression models possess proportional hazards trivially.</p>
@@ -1317,6 +1332,9 @@ Fay, Michael P., and Pamela A. Shaw. 2010. <span>“Exact and Asymptotic Weighte
 </div>
 <div id="ref-kalbfleisch2011statistical" class="csl-entry" role="listitem">
 Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
+Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
 </div>
 </div>
 </section></section>

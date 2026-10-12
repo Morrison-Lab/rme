@@ -405,7 +405,23 @@ text-align: center;
 </section></section><section><section id="understanding-proportional-hazards-models" class="title-slide slide level1 center" data-number="2"><h1>
 <span class="header-section-number">2</span> Understanding proportional hazards models</h1>
 
-</section><section class="slide level2"><!-- {{< include _subfiles/misc/_sec_cox-bio.qmd >}} --></section><section class="slide level2"><aside class="notes"><p>Let’s make two generalizations. First, we let the hazard depend on some covariates <span class="math inline">\(x_1,x_2, \dots, x_p\)</span>; we will indicate this dependence by extending our notation for hazard:</p>
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-04.mp4"><em>Survival Regression with the Cox Model I</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture10ProportionalHazardsModel.pdf">slides</a>) builds from Kaplan-Meier and Nelson-Aalen estimates for the <code>bmt</code> data to the Cox proportional hazards model and its partial likelihood <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- {{< include _subfiles/misc/_sec_cox-bio.qmd >}} -->
+</section><section class="slide level2"><aside class="notes"><p>Let’s make two generalizations. First, we let the hazard depend on some covariates <span class="math inline">\(x_1,x_2, \dots, x_p\)</span>; we will indicate this dependence by extending our notation for hazard:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -571,38 +587,38 @@ text-align: center;
 \tag{4}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="def-diffloghaz" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (difference in log-hazards)</strong></span> The <strong>difference in log-hazards</strong> between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\({\tilde{x}^*}\)</span> at time <span class="math inline">\(t\)</span> is:</p>
-<p><span class="math display">\[\Delta\eta(t|\tilde{x}: {\tilde{x}^*}) \stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|{\tilde{x}^*})\]</span></p>
+<p><span class="theorem-title"><strong>Definition 8 (difference in log-hazards)</strong></span> The <strong>difference in log-hazards</strong> between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> at time <span class="math inline">\(t\)</span> is:</p>
+<p><span class="math display">\[\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}})\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-diff-loghaz" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Difference of log-hazards vs hazard ratio)</strong></span> If <span class="math inline">\(\Delta\eta(t|\tilde{x}: {\tilde{x}^*})\)</span> is the difference in log-hazard between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\({\tilde{x}^*}\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})\)</span> is corresponding hazard ratio, then:</p>
-<p><span class="math display">\[\Delta\eta(t|\tilde{x}: {\tilde{x}^*})= \operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})\right\}\mathclose{}\]</span></p>
+<p><span class="theorem-title"><strong>Theorem 2 (Difference of log-hazards vs hazard ratio)</strong></span> If <span class="math inline">\(\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is the difference in log-hazard between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is corresponding hazard ratio, then:</p>
+<p><span class="math display">\[\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})= \operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Using the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio definition</a>:</p>
 <p><span id="eq-hazard-ratio-1"><span class="math display">\[
 \begin{aligned}
-\Delta\eta(t|\tilde{x}: {\tilde{x}^*})
-&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|{\tilde{x}^*}) &amp;&amp; \text{(definition of log-hazard difference)}
+\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(definition of log-hazard difference)}
 \\
-&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{{\lambda}(t|\tilde{x})\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{{\lambda}(t|{\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(definition of log-hazard)}
+&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{{\lambda}(t|\tilde{x})\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{{\lambda}(t|\mathord{{\tilde{x}^*}})\right\}\mathclose{} &amp;&amp; \text{(definition of log-hazard)}
 \\
-&amp;= \operatorname{log}\mathopen{}\left\{\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\right\}\mathclose{} &amp;&amp; \text{(difference of logarithms rule)}
+&amp;= \operatorname{log}\mathopen{}\left\{\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\right\}\mathclose{} &amp;&amp; \text{(difference of logarithms rule)}
 \\
-&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(definition of hazard ratio)}
+&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{} &amp;&amp; \text{(definition of hazard ratio)}
 \end{aligned}
 \tag{5}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="cor-hazard-ratio-diffloghaz" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Hazard ratio vs difference of log-hazards)</strong></span> <span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: {\tilde{x}^*})\right\}\mathclose{}\]</span></p>
+<p><span class="theorem-title"><strong>Corollary 1 (Hazard ratio vs difference of log-hazards)</strong></span> <span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>This derivation uses <a href="#/thm-diff-loghaz" class="quarto-xref">Theorem&nbsp;2</a>.</p>
 <p><span id="eq-hazard-ratio-vs-difference-of-1"><span class="math display">\[
 \begin{aligned}
-\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})
-&amp;= \operatorname{exp}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})\right\}\mathclose{}\right\}\mathclose{} &amp;&amp; \text{(inverse relationship between exponential and logarithm)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: {\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(applying the log-hazard-difference theorem)}
+\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;= \operatorname{exp}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}\right\}\mathclose{} &amp;&amp; \text{(inverse relationship between exponential and logarithm)} \\
+&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{} &amp;&amp; \text{(applying the log-hazard-difference theorem)}
 \end{aligned}
 \tag{6}\]</span></span></p>
 </div>
@@ -657,7 +673,7 @@ text-align: center;
 \theta_{{\lambda}}(t|\tilde{x})
 &amp;\stackrel{\text{def}}{=}\text{ϙ}_{{\lambda}}(t| \tilde{x}: \tilde{0}) &amp;&amp; \text{(definition of hazard factor)}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \tilde{0})\right\}\mathclose{} &amp;&amp; \text{(applying the hazard-ratio corollary with } {\tilde{x}^*}= \tilde{0}\text{)}
+&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \tilde{0})\right\}\mathclose{} &amp;&amp; \text{(applying the hazard-ratio corollary with } \mathord{{\tilde{x}^*}}= \tilde{0}\text{)}
 \\
 &amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x})\right\}\mathclose{} &amp;&amp; \text{(shorthand notation for log-hazard difference from baseline)}
 \end{aligned}
@@ -672,7 +688,7 @@ text-align: center;
 \begin{aligned}
 \Delta\eta(t|\tilde{x})
 &amp;\stackrel{\text{def}}{=}\Delta\eta(t|\tilde{x}: \tilde{0}) &amp;&amp; \text{(definition of log-hazard difference from baseline)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t|\tilde{x}: \tilde{0})\right\}\mathclose{} &amp;&amp; \text{(applying the log-hazard-difference theorem with } {\tilde{x}^*}= \tilde{0}\text{)} \\
+&amp;= \operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t|\tilde{x}: \tilde{0})\right\}\mathclose{} &amp;&amp; \text{(applying the log-hazard-difference theorem with } \mathord{{\tilde{x}^*}}= \tilde{0}\text{)} \\
 &amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\theta_{{\lambda}}(t|\tilde{x})\right\}\mathclose{} &amp;&amp; \text{(definition of hazard factor } \theta_{{\lambda}}(t|\tilde{x}) \stackrel{\text{def}}{=}\text{ϙ}_{{\lambda}}(t|\tilde{x}: \tilde{0})\text{)}
 \end{aligned}
 \tag{10}\]</span></span></p>
@@ -723,20 +739,20 @@ text-align: center;
 <p><span class="theorem-title"><strong>Lemma 2 (Difference of log-hazards between two covariate patterns)</strong></span> If <span class="math inline">\(\eta(t|\tilde{x}) = \eta_0(t) + \tilde{x}\cdot \tilde{\beta}\)</span>, then:</p>
 <p><span id="eq-difference-of-log-hazards-between-1"><span class="math display">\[
 \begin{aligned}
-\Delta\eta(t|\tilde{x}: {\tilde{x}^*})
-&amp;= (\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}
+\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;= (\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}
 \end{aligned}
 \tag{14}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span id="eq-difference-of-log-hazards-between-2"><span class="math display">\[
 \begin{aligned}
-\Delta\eta(t|\tilde{x}: {\tilde{x}^*})
-&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|{\tilde{x}^*}) &amp;&amp; \text{(definition of log-hazard difference)} \\
-&amp;= \mathopen{}\left[\eta_0(t) + \tilde{x} \cdot \tilde{\beta}\right]\mathclose{} - \mathopen{}\left[\eta_0(t) + {\tilde{x}^*} \cdot \tilde{\beta}\right]\mathclose{} &amp;&amp; \text{(substituting model definition)} \\
-&amp;= \eta_0(t) + \tilde{x} \cdot \tilde{\beta} - \eta_0(t) - {\tilde{x}^*} \cdot \tilde{\beta} &amp;&amp; \text{(distributing the subtraction)} \\
-&amp;= \tilde{x} \cdot \tilde{\beta} - {\tilde{x}^*} \cdot \tilde{\beta} &amp;&amp; \text{(canceling shared baseline log-hazard } \eta_0(t)\text{)} \\
-&amp;= (\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}&amp;&amp; \text{(factoring out } \tilde{\beta}\text{)}
+\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(definition of log-hazard difference)} \\
+&amp;= \mathopen{}\left[\eta_0(t) + \tilde{x} \cdot \tilde{\beta}\right]\mathclose{} - \mathopen{}\left[\eta_0(t) + \mathord{{\tilde{x}^*}} \cdot \tilde{\beta}\right]\mathclose{} &amp;&amp; \text{(substituting model definition)} \\
+&amp;= \eta_0(t) + \tilde{x} \cdot \tilde{\beta} - \eta_0(t) - \mathord{{\tilde{x}^*}} \cdot \tilde{\beta} &amp;&amp; \text{(distributing the subtraction)} \\
+&amp;= \tilde{x} \cdot \tilde{\beta} - \mathord{{\tilde{x}^*}} \cdot \tilde{\beta} &amp;&amp; \text{(canceling shared baseline log-hazard } \eta_0(t)\text{)} \\
+&amp;= (\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}&amp;&amp; \text{(factoring out } \tilde{\beta}\text{)}
 \end{aligned}
 \tag{15}\]</span></span></p>
 </div>
@@ -744,35 +760,35 @@ text-align: center;
 <p><span class="theorem-title"><strong>Theorem 4 (Hazard ratio under proportional hazards)</strong></span> If <span class="math inline">\(\eta(t|\tilde{x}) = \eta_0(t) + \tilde{x}\cdot \tilde{\beta}\)</span>, then:</p>
 <p><span id="eq-hazard-ratio-under-proportional-hazards-1"><span class="math display">\[
 \begin{aligned}
-\text{ϙ}_{{\lambda}}(t|\tilde{x}: {\tilde{x}^*})
-&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: {\tilde{x}^*})\right\}\mathclose{}
+\text{ϙ}_{{\lambda}}(t|\tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}\right\}\mathclose{}
+&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}\right\}\mathclose{}
 \\
 &amp;= \operatorname{exp}\mathopen{}\left\{\Delta\tilde{x}\cdot \tilde{\beta}\right\}\mathclose{}
 \end{aligned}
 \tag{16}\]</span></span></p>
-<p>where <span class="math inline">\(\Delta\tilde{x}\stackrel{\text{def}}{=}\tilde{x}- {\tilde{x}^*}\)</span> is the difference in covariate vectors.</p>
+<p>where <span class="math inline">\(\Delta\tilde{x}\stackrel{\text{def}}{=}\tilde{x}- \mathord{{\tilde{x}^*}}\)</span> is the difference in covariate vectors.</p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span id="eq-hazard-ratio-under-proportional-hazards-2"><span class="math display">\[
 \begin{aligned}
-\text{ϙ}_{{\lambda}}(t|\tilde{x}: {\tilde{x}^*})
-&amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}
+\text{ϙ}_{{\lambda}}(t|\tilde{x}: \mathord{{\tilde{x}^*}})
+&amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(t|\tilde{x}) - \eta(t|{\tilde{x}^*})\right\}\mathclose{}
+&amp;= \operatorname{exp}\mathopen{}\left\{\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}})\right\}\mathclose{}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: {\tilde{x}^*})\right\}\mathclose{}
+&amp;= \operatorname{exp}\mathopen{}\left\{\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta}\right\}\mathclose{}
+&amp;= \operatorname{exp}\mathopen{}\left\{(\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}\right\}\mathclose{}
 \\
 &amp;= \operatorname{exp}\mathopen{}\left\{\Delta\tilde{x}\cdot \tilde{\beta}\right\}\mathclose{}
 \end{aligned}
 \tag{17}\]</span></span></p>
-<p>Expanding the definition of <span class="math inline">\(\text{ϙ}_{{\lambda}}\)</span>, the first equality writes the ratio as the exponential of a difference of logarithms; the second applies the definition of <span class="math inline">\(\Delta\eta\)</span> as that difference; the third is <a href="#/lem-diffloghaz-ph" class="quarto-xref">Lemma&nbsp;2</a>; and the last substitutes <span class="math inline">\(\Delta\tilde{x}\)</span> for <span class="math inline">\(\tilde{x}- {\tilde{x}^*}\)</span>.</p>
+<p>Expanding the definition of <span class="math inline">\(\text{ϙ}_{{\lambda}}\)</span>, the first equality writes the ratio as the exponential of a difference of logarithms; the second applies the definition of <span class="math inline">\(\Delta\eta\)</span> as that difference; the third is <a href="#/lem-diffloghaz-ph" class="quarto-xref">Lemma&nbsp;2</a>; and the last substitutes <span class="math inline">\(\Delta\tilde{x}\)</span> for <span class="math inline">\(\tilde{x}- \mathord{{\tilde{x}^*}}\)</span>.</p>
 </div>
 </section><section class="slide level2"><p>So for proportional hazards models, we can write the hazard ratio using a shorthand notation:</p>
-<p><span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*})  = \text{ϙ}_{{\lambda}}(\tilde{x}: {\tilde{x}^*})\]</span></p>
+<p><span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})  = \text{ϙ}_{{\lambda}}(\tilde{x}: \mathord{{\tilde{x}^*}})\]</span></p>
 </section><section class="slide level2"><div id="lem-ph-diffloghaz-0" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 3 (Difference of log-hazard from baseline)</strong></span> <span id="eq-diffloghaz-0-ph"><span class="math display">\[\Delta\eta(t|\tilde{x})= \tilde{x}\cdot \tilde{\beta} \tag{18}\]</span></span></p>
 </div>
@@ -782,7 +798,7 @@ text-align: center;
 \begin{aligned}
 \Delta\eta(t|\tilde{x})
 &amp;\stackrel{\text{def}}{=}\Delta\eta(t|\tilde{x}: \tilde{0}) &amp;&amp; \text{(definition of difference from baseline)} \\
-&amp;= (\tilde{x}- \tilde{0}) \cdot \tilde{\beta}&amp;&amp; \text{(applying the PH log-hazard-difference lemma with } {\tilde{x}^*}= \tilde{0}\text{)} \\
+&amp;= (\tilde{x}- \tilde{0}) \cdot \tilde{\beta}&amp;&amp; \text{(applying the PH log-hazard-difference lemma with } \mathord{{\tilde{x}^*}}= \tilde{0}\text{)} \\
 &amp;= \tilde{x}\cdot \tilde{\beta}&amp;&amp; \text{(evaluating vector difference)}
 \end{aligned}
 \tag{19}\]</span></span></p>
@@ -913,7 +929,7 @@ text-align: center;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="thm-haz-ratio-notations" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 8 (Relating the hazard-ratio and hazard-factor notations)</strong></span> &nbsp;</p>
-<aside class="notes"><p>We are using two similar notations, <span class="math inline">\(\text{ϙ}_{{\lambda}}(\tilde{x},{\tilde{x}^*})\)</span> and <span class="math inline">\(\theta_{{\lambda}}(\tilde{x})\)</span>. We can link these notations: <span class="math display">\[\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\text{ϙ}_{{\lambda}}(\tilde{x}, \tilde{0})\]</span></p>
+<aside class="notes"><p>We are using two similar notations, <span class="math inline">\(\text{ϙ}_{{\lambda}}(\tilde{x},\mathord{{\tilde{x}^*}})\)</span> and <span class="math inline">\(\theta_{{\lambda}}(\tilde{x})\)</span>. We can link these notations: <span class="math display">\[\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\text{ϙ}_{{\lambda}}(\tilde{x}, \tilde{0})\]</span></p>
 <p>Then:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -925,16 +941,16 @@ text-align: center;
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside><p><span class="math display">\[\text{ϙ}_{{\lambda}}(\tilde{x}, {\tilde{x}^*}) = \frac{\theta_{{\lambda}}(\tilde{x})}{\theta_{{\lambda}}({\tilde{x}^*})}\]</span> <span class="math display">\[\theta_{{\lambda}}(\tilde{0}) = \text{ϙ}_{{\lambda}}(\tilde{0}, \tilde{0}) = 1\]</span></p>
+      }</style></aside><p><span class="math display">\[\text{ϙ}_{{\lambda}}(\tilde{x}, \mathord{{\tilde{x}^*}}) = \frac{\theta_{{\lambda}}(\tilde{x})}{\theta_{{\lambda}}(\mathord{{\tilde{x}^*}})}\]</span> <span class="math display">\[\theta_{{\lambda}}(\tilde{0}) = \text{ϙ}_{{\lambda}}(\tilde{0}, \tilde{0}) = 1\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>This derivation uses <a href="#/thm-ph-haz-decomp" class="quarto-xref">Theorem&nbsp;6</a>.</p>
 <p><span id="eq-relating-the-hazard-ratio-and-1"><span class="math display">\[
 \begin{aligned}
-\text{ϙ}_{{\lambda}}(\tilde{x}, {\tilde{x}^*})
-&amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})} &amp;&amp; \text{(definition of hazard ratio)} \\
-&amp;= \frac{{\lambda}_0(t)\theta_{{\lambda}}(\tilde{x})}{{\lambda}_0(t)\theta_{{\lambda}}({\tilde{x}^*})} &amp;&amp; \text{(applying the PH hazard decomposition)} \\
-&amp;= \frac{\theta_{{\lambda}}(\tilde{x})}{\theta_{{\lambda}}({\tilde{x}^*})} &amp;&amp; \text{(canceling baseline hazard } {\lambda}_0(t)\text{)}
+\text{ϙ}_{{\lambda}}(\tilde{x}, \mathord{{\tilde{x}^*}})
+&amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})} &amp;&amp; \text{(definition of hazard ratio)} \\
+&amp;= \frac{{\lambda}_0(t)\theta_{{\lambda}}(\tilde{x})}{{\lambda}_0(t)\theta_{{\lambda}}(\mathord{{\tilde{x}^*}})} &amp;&amp; \text{(applying the PH hazard decomposition)} \\
+&amp;= \frac{\theta_{{\lambda}}(\tilde{x})}{\theta_{{\lambda}}(\mathord{{\tilde{x}^*}})} &amp;&amp; \text{(canceling baseline hazard } {\lambda}_0(t)\text{)}
 \end{aligned}
 \tag{23}\]</span></span></p>
 <p>Setting <span class="math inline">\(\tilde{x}= \tilde{0}\)</span> in <a href="#/thm-hazard-ratio-vs-baseline-ph" class="quarto-xref">Theorem&nbsp;5</a> yields:</p>
@@ -963,18 +979,18 @@ text-align: center;
 <div id="thm-diff-loghaz-lincom" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 9 (Difference of log-hazards is a linear combination)</strong></span> <span id="eq-difference-of-log-hazards-is-1"><span class="math display">\[
 \begin{aligned}
-\operatorname{log}\mathopen{}\left\{\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\right\}\mathclose{}
-&amp;= \operatorname{log}\mathopen{}\left\{{\lambda}(t|\tilde{x})\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{{\lambda}(t|{\tilde{x}^*})\right\}\mathclose{} &amp;&amp; \text{(logarithm of quotient rule)}
+\operatorname{log}\mathopen{}\left\{\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\right\}\mathclose{}
+&amp;= \operatorname{log}\mathopen{}\left\{{\lambda}(t|\tilde{x})\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{{\lambda}(t|\mathord{{\tilde{x}^*}})\right\}\mathclose{} &amp;&amp; \text{(logarithm of quotient rule)}
 \\
-&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|{\tilde{x}^*}) &amp;&amp; \text{(definition of log-hazards)}
+&amp;\stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(definition of log-hazards)}
 \\
-&amp;\stackrel{\text{def}}{=}\Delta\eta(t|\tilde{x}: {\tilde{x}^*}) &amp;&amp; \text{(definition of log-hazard difference)}
+&amp;\stackrel{\text{def}}{=}\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}}) &amp;&amp; \text{(definition of log-hazard difference)}
 \\
-&amp;= \eta(\tilde{x}) - \eta({\tilde{x}^*}) &amp;&amp; \text{(linear predictor form)}
+&amp;= \eta(\tilde{x}) - \eta(\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(linear predictor form)}
 \\
-&amp;= \tilde{x} \cdot \tilde{\beta} - {\tilde{x}^*} \cdot \tilde{\beta} &amp;&amp; \text{(substituting linear predictors)}
+&amp;= \tilde{x} \cdot \tilde{\beta} - \mathord{{\tilde{x}^*}} \cdot \tilde{\beta} &amp;&amp; \text{(substituting linear predictors)}
 \\
-&amp;= (\tilde{x}- {\tilde{x}^*}) \cdot \tilde{\beta} &amp;&amp; \text{(factoring out } \tilde{\beta}\text{)}
+&amp;= (\tilde{x}- \mathord{{\tilde{x}^*}}) \cdot \tilde{\beta} &amp;&amp; \text{(factoring out } \tilde{\beta}\text{)}
 \end{aligned}
 \tag{26}\]</span></span></p>
 </div>
@@ -1096,7 +1112,7 @@ text-align: center;
 <p><strong>Probability density function</strong>: <span class="math inline">\(\operatorname{f}(t| \tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|\tilde{X}= \tilde{x}) = -\operatorname{S}'(t|\tilde{x}) = {\lambda}(t| \tilde{x}) \operatorname{S}(t | \tilde{x})\)</span></p>
 <p><strong>Cumulative hazard function</strong>: <span class="math inline">\({\Lambda}(t | \tilde{x}) \stackrel{\text{def}}{=}\int_{u=0}^t {\lambda}(u|\tilde{x})du = -\operatorname{log}\mathopen{}\left\{\operatorname{S}(t|\tilde{x})\right\}\mathclose{}\)</span></p>
 <p><strong>Hazard function</strong>: <span class="math inline">\({\lambda}(t |\tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t,\tilde{X}= \tilde{x}) = {\Lambda}'(t|\tilde{x}) = \frac{\operatorname{f}(t|\tilde{x})}{\operatorname{S}(t|\tilde{x})}\)</span></p>
-<p><strong>Hazard ratio</strong>: <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: {\tilde{x}^*}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|{\tilde{x}^*})}\)</span></p>
+<p><strong>Hazard ratio</strong>: <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\)</span></p>
 <p><strong>Log-Hazard function</strong>: <span class="math inline">\(\eta(t|\tilde{x}) \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\lambda(t|\tilde{x})\right\}\mathclose{} = \eta_0(t) + \Delta\eta(t|\tilde{x})\)</span></p>
 <p><em>Proportional Hazards Assumption:</em></p>
 <p><span class="math display">\[
@@ -1309,7 +1325,22 @@ Figure&nbsp;5: Smoothed Hazard Rate Estimates by Disease Group
       }</style></aside></section></section><section><section id="fitting-proportional-hazards-models-to-data" class="title-slide slide level1 center" data-number="4"><h1>
 <span class="header-section-number">4</span> Fitting proportional hazards models to data</h1>
 
-</section><section class="slide level2"></section><section class="slide level2 scrollable"><aside class="notes"><p>Fitting a proportional hazards model means estimating two pieces: the coefficients <span class="math inline">\(\tilde{\beta}= (\beta_1, \ldots, \beta_p)\)</span> that govern the covariate effects, and the baseline hazard <span class="math inline">\({\lambda}_0(t)\)</span>. We estimate them in two stages:</p>
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-06.mp4"><em>Survival Regression with the Cox Model II</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture11SurvivalRegression.pdf">slides</a>) covers partial likelihood estimation, adjustment for ties, the <code>coxph()</code> function, inference for hazard ratios, and predicted survival curves, using the <code>bmt</code> data <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section class="slide level2 scrollable"><aside class="notes"><p>Fitting a proportional hazards model means estimating two pieces: the coefficients <span class="math inline">\(\tilde{\beta}= (\beta_1, \ldots, \beta_p)\)</span> that govern the covariate effects, and the baseline hazard <span class="math inline">\({\lambda}_0(t)\)</span>. We estimate them in two stages:</p>
 <ol type="1">
 <li>estimate <span class="math inline">\(\tilde{\beta}\)</span> by maximizing a <em>partial likelihood</em> in which the unknown baseline <span class="math inline">\({\lambda}_0(t)\)</span> cancels out, so the covariate effects can be fit without committing to a shape for the baseline;</li>
 <li>then, with <span class="math inline">\(\hat{\tilde{\beta}}\)</span> in hand, estimate the baseline cumulative hazard <span class="math inline">\({\Lambda}_0(t)\)</span> by the Breslow estimator.</li>
@@ -2414,7 +2445,22 @@ L(\beta|T) &amp;=
 </section></section><section><section id="building-cox-proportional-hazards-models" class="title-slide slide level1 center" data-number="7"><h1>
 <span class="header-section-number">7</span> Building Cox Proportional Hazards Models</h1>
 
-</section><section class="slide level2"></section><section id="hodg-lymphoma-data-set-from-kmsurv" class="slide level2" data-number="7.1"><h2>
+</section><section class="slide level2"><div title="Video lectures">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lectures</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s two Epi 204 lectures on <em>Model Building and Checking for Cox Models</em> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-11.mp4">part 1</a>, <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-13.mp4">part 2</a>; <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture12SurvivalAnalysisModelBuilding.pdf">slides</a>) use the <code>hodg</code> lymphoma data to cover Schoenfeld residuals and <code>cox.zph()</code>, Cox-Snell and martingale residuals, influence diagnostics, and stratification <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="hodg-lymphoma-data-set-from-kmsurv" class="slide level2" data-number="7.1"><h2>
 <span class="header-section-number">7.1</span> <code>hodg</code> Lymphoma Data Set from <code>KMsurv</code>
 </h2>
 <h3 id="participants">Participants</h3>
@@ -2820,7 +2866,7 @@ y_i &amp;\sim N(\eta_i,\sigma^2)
 </ul>
 <div id="def-estimated-risk-score" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 20 (Estimated Risk Score)</strong></span> The risk score <span class="math inline">\(\theta_{{\lambda}}\mathopen{}\left(\tilde{x}\right)\mathclose{}\)</span> (<a href="#/def-risk-score" class="quarto-xref">Definition&nbsp;12</a>) depends on the true, unknown coefficient vector <span class="math inline">\(\tilde{\beta}\)</span>. After fitting the model, we estimate it by the <strong>estimated risk score</strong>, which substitutes the fitted coefficients <span class="math inline">\(\hat{\tilde{\beta}}\)</span> for <span class="math inline">\(\tilde{\beta}\)</span>:</p>
-<p><span class="math display">\[\hat{\theta_{{\lambda}}}\mathopen{}\left(\tilde{x}\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\tilde{x} \cdot \hat{\tilde{\beta}}\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\hat{\theta}_{{\lambda}}\mathopen{}\left(\tilde{x}\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\tilde{x} \cdot \hat{\tilde{\beta}}\right\}\mathclose{}\]</span></p>
 </div>
 <h3 id="schoenfeld-residuals">Schoenfeld residuals</h3>
 <div id="def-schoenfeld-residual" class="theorem definition">
@@ -3763,6 +3809,21 @@ Table&nbsp;3: Comparison of unstratified and stratified Cox PH models
           display:block!important;
       }</style></aside></section><section id="stratified-survival-models" class="slide level2" data-number="7.9"><h2>
 <span class="header-section-number">7.9</span> Stratified survival models</h2>
+<div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-18.mp4"><em>Stratified Cox Models</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture13StratifiedCoxModels.pdf">slides</a>) covers the stratified Cox model for the <code>anderson</code> leukemia data, where the proportional hazards assumption fails for sex <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <h3 id="revisiting-the-leukemia-dataset-anderson">Revisiting the leukemia dataset (<code>anderson</code>)</h3>
 <p>We will analyze remission survival times on 42 leukemia patients, half on new treatment, half on standard treatment.</p>
 <p>This dataset is the same data as the <code>drug6mp</code> data from <code>KMsurv</code>, but with two other variables and without the pairing. This version comes from <span class="citation" data-cites="kleinbaum2012survival">Kleinbaum and Klein (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> (e.g., p281):</p>
@@ -4106,6 +4167,21 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 </div>
 </section><section id="time-varying-covariates" class="slide level2" data-number="7.10"><h2>
 <span class="header-section-number">7.10</span> Time-varying covariates</h2>
+<div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-18.mp4"><em>Time-Dependent Covariates and Multiple Events</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture14TimeDepVars.pdf">slides</a>) covers time-dependent covariates in the <code>bmt</code> data with the counting-process formulation, and recurrent events in the bladder cancer data with robust variance estimates <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <p>(adapted from <span class="citation" data-cites="klein2003survival">Klein and Moeschberger (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span>, §9.2)</p>
 <h3 id="motivating-example-back-to-the-leukemia-dataset">Motivating example: back to the leukemia dataset</h3>
 <div class="cell">
@@ -5070,6 +5146,9 @@ Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learn
 </div>
 <div id="ref-orwoll2005design" class="csl-entry" role="listitem">
 <span class="nocase">Orwoll, Eric, Judith B. Blank, Elizabeth Barrett-Connor, et al.</span> 2005. <span>“Design and Baseline Characteristics of the Osteoporotic Fractures in Men (<span>MrOS</span>) Study – a Large Observational Study of the Determinants of Fracture in Older Men.”</span> <em>Contemporary Clinical Trials</em> 26 (5): 569–85. <a href="https://doi.org/10.1016/j.cct.2005.04.005">https://doi.org/10.1016/j.cct.2005.04.005</a>.
+</div>
+<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
+Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
 </div>
 <div id="ref-vittinghoff2e" class="csl-entry" role="listitem">
 Vittinghoff, Eric, David V Glidden, Stephen C Shiboski, and Charles E McCulloch. 2012. <em>Regression Methods in Biostatistics: Linear, Logistic, Survival, and Repeated Measures Models</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>.

@@ -386,7 +386,22 @@ text-align: center;
 </section></section><section><section id="one-way-random-effects-models" class="title-slide slide level1 center" data-number="2"><h1>
 <span class="header-section-number">2</span> One-way random-effects models</h1>
 
-</section><section class="slide level2"><p>The simplest model with a random effect has one grouping factor and no covariates <span class="citation" data-cites="rocke2021epi204 dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-25.mp4"><em>Introduction to Random Effects and Mixed Models</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture15RandomEffectsMixedModels.pdf">slides</a>) covers fixed versus random effects, one-way random-effects ANOVA, variance components and their method-of-moments estimates, and nested random effects <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The simplest model with a random effect has one grouping factor and no covariates <span class="citation" data-cites="rocke2021epi204 dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 11</a>)</span>.</p>
 </section><section class="slide level2"><div id="def-one-way-re" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (One-way random-effects model)</strong></span> Suppose we observe <span class="math inline">\(m\)</span> outcomes <span class="math inline">\(Y_{i1}, \ldots, Y_{im}\)</span> in each of <span class="math inline">\(a\)</span> groups <span class="math inline">\(i = 1, \ldots, a\)</span>. The <strong>one-way random-effects model</strong> is <span id="eq-one-way-re"><span class="math display">\[
 Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
@@ -709,7 +724,22 @@ Y_{ijk} \stackrel{\text{def}}{=}\mu + L_i + B_{ij} + \epsilon_{ijk},
 </section></section><section><section id="multilevel-models-complete-no-and-partial-pooling" class="title-slide slide level1 center" data-number="5"><h1>
 <span class="header-section-number">5</span> Multilevel models: complete, no, and partial pooling</h1>
 
-</section><section class="slide level2"><p>A <strong>multilevel model</strong> is a regression model whose coefficients are allowed to vary by group, with the group-level coefficients themselves given a model <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. The random-effects models in <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a> and <a href="#/def-nested-re" class="quarto-xref">Definition&nbsp;3</a> are the simplest multilevel models.</p>
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-27.mp4"><em>Multilevel Models</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture16MultilevelModels.pdf">slides</a>) covers complete, no, and partial pooling of the Minnesota radon data, random intercepts and slopes with <code>lmer()</code>, and shrinkage <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>A <strong>multilevel model</strong> is a regression model whose coefficients are allowed to vary by group, with the group-level coefficients themselves given a model <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. The random-effects models in <a href="#/def-one-way-re" class="quarto-xref">Definition&nbsp;1</a> and <a href="#/def-nested-re" class="quarto-xref">Definition&nbsp;3</a> are the simplest multilevel models.</p>
 </section><section class="slide level2"><div id="exm-radon-data" class="theorem example">
 <p><span class="theorem-title"><strong>Example 7 (Radon in Minnesota homes)</strong></span> <span class="citation" data-cites="gelman2006data">Gelman and Hill (<a href="#/references" role="doc-biblioref" onclick="">2007, chap. 12</a>)</span> analyze measurements of indoor radon, a radioactive gas that can cause lung cancer, from 919 houses in 85 Minnesota counties. We use the copy of these data distributed with the <code>rstanarm</code> R package <span class="citation" data-cites="goodrich2024rstanarm">(<a href="#/references" role="doc-biblioref" onclick="">Goodrich et al. 2024</a>)</span>:</p>
 <ul>
@@ -831,7 +861,22 @@ Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log r
 </section></section><section><section id="adding-predictors-to-a-multilevel-model" class="title-slide slide level1 center" data-number="6"><h1>
 <span class="header-section-number">6</span> Adding predictors to a multilevel model</h1>
 
-</section><section class="slide level2"><p>Covariates enter a multilevel model as fixed effects, and their coefficients can also vary by group <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. For house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> with floor indicator <span class="math inline">\(x_{ij}\)</span>:</p>
+</section><section class="slide level2"><div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-06-01.mp4"><em>Multilevel Models II</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture17MultilevelModelsII.pdf">slides</a>) covers adding county-level uranium as a group-level predictor for the radon data, and multilevel logistic regression with <code>glmer()</code> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Covariates enter a multilevel model as fixed effects, and their coefficients can also vary by group <span class="citation" data-cites="gelman2006data">(<a href="#/references" role="doc-biblioref" onclick="">Gelman and Hill 2007, chap. 12</a>)</span>. For house <span class="math inline">\(i\)</span> in county <span class="math inline">\(j\)</span> with floor indicator <span class="math inline">\(x_{ij}\)</span>:</p>
 <ul>
 <li>the <strong>varying-intercept</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + \beta_1 x_{ij} + \epsilon_{ij}\)</span>;</li>
 <li>the <strong>varying-intercept, varying-slope</strong> model is <span class="math inline">\(Y_{ij} = \beta_0 + \alpha_j + (\beta_1 + \gamma_j) x_{ij} + \epsilon_{ij}\)</span>, where each county’s pair <span class="math inline">\((\alpha_j, \gamma_j)\)</span> is bivariate normal with mean zero.</li>
