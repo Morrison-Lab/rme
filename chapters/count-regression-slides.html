@@ -394,6 +394,21 @@ text-align: center;
 </div>
 </div>
 </div>
+<div title="Video lecture">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Video lecture</strong></p>
+</div>
+<div class="callout-content">
+<p>Richard McElreath’s <a href="https://www.youtube.com/watch?v=RuBUVQELw-c"><em>Modeling Events</em></a> (Statistical Rethinking 2026, Lecture A09) accompanies Chapters 10 and 11 of <span class="citation" data-cites="statrethink2e">McElreath (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, which cover generalized linear models for binary and count outcomes, including Poisson regression. The lecture fits these models using Bayesian inference rather than the maximum likelihood estimation used in this chapter <span class="citation" data-cites="mcelreath2026rethinking">(<a href="#/references" role="doc-biblioref" onclick="">McElreath 2026</a>)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes"><p>This chapter presents models for <a href="https://morrison-lab.github.io/sds/data.html#sec-count-vars">count data</a> outcomes. With covariates, the event rate <span class="math inline">\(\lambda\)</span> becomes a function of the covariate vector <span class="math inline">\(\tilde{X}= {(X_1, \dots, X_p)}^{\top} \in \mathbb{R}^p\)</span>. Typically, count data models use a <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\right\}\mathclose{}\)</span> link function, and thus an <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\right\}\mathclose{}\)</span> inverse-link function. Specifically, the model relates the expected outcome count to the event rate and linear predictor as:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -704,23 +719,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="lbfrjtbfhw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lbfrjtbfhw table {
+<div id="lzgefbpskn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lzgefbpskn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lbfrjtbfhw thead, #lbfrjtbfhw tbody, #lbfrjtbfhw tfoot, #lbfrjtbfhw tr, #lbfrjtbfhw td, #lbfrjtbfhw th {
+#lzgefbpskn thead, #lzgefbpskn tbody, #lzgefbpskn tfoot, #lzgefbpskn tr, #lzgefbpskn td, #lzgefbpskn th {
   border-style: none;
 }
 
-#lbfrjtbfhw p {
+#lzgefbpskn p {
   margin: 0;
   padding: 0;
 }
 
-#lbfrjtbfhw .gt_table {
+#lzgefbpskn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -746,12 +761,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_caption {
+#lzgefbpskn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lbfrjtbfhw .gt_title {
+#lzgefbpskn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -763,7 +778,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#lbfrjtbfhw .gt_subtitle {
+#lzgefbpskn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -775,7 +790,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#lbfrjtbfhw .gt_heading {
+#lzgefbpskn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -787,13 +802,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_bottom_border {
+#lzgefbpskn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_col_headings {
+#lzgefbpskn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -808,7 +823,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_col_heading {
+#lzgefbpskn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -828,7 +843,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#lbfrjtbfhw .gt_column_spanner_outer {
+#lzgefbpskn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -840,15 +855,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#lbfrjtbfhw .gt_column_spanner_outer:first-child {
+#lzgefbpskn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lbfrjtbfhw .gt_column_spanner_outer:last-child {
+#lzgefbpskn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lbfrjtbfhw .gt_column_spanner {
+#lzgefbpskn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -860,11 +875,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#lbfrjtbfhw .gt_spanner_row {
+#lzgefbpskn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lbfrjtbfhw .gt_group_heading {
+#lzgefbpskn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -890,7 +905,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#lbfrjtbfhw .gt_empty_group_heading {
+#lzgefbpskn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -905,15 +920,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#lbfrjtbfhw .gt_from_md > :first-child {
+#lzgefbpskn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lbfrjtbfhw .gt_from_md > :last-child {
+#lzgefbpskn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lbfrjtbfhw .gt_row {
+#lzgefbpskn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -932,7 +947,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#lbfrjtbfhw .gt_stub {
+#lzgefbpskn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -945,7 +960,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#lbfrjtbfhw .gt_stub_row_group {
+#lzgefbpskn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -959,15 +974,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#lbfrjtbfhw .gt_row_group_first td {
+#lzgefbpskn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lbfrjtbfhw .gt_row_group_first th {
+#lzgefbpskn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lbfrjtbfhw .gt_summary_row {
+#lzgefbpskn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -977,16 +992,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#lbfrjtbfhw .gt_first_summary_row {
+#lzgefbpskn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_first_summary_row.thick {
+#lzgefbpskn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lbfrjtbfhw .gt_last_summary_row {
+#lzgefbpskn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -996,7 +1011,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_grand_summary_row {
+#lzgefbpskn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1006,7 +1021,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#lbfrjtbfhw .gt_first_grand_summary_row {
+#lzgefbpskn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1016,7 +1031,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_last_grand_summary_row_top {
+#lzgefbpskn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1026,11 +1041,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_striped {
+#lzgefbpskn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lbfrjtbfhw .gt_table_body {
+#lzgefbpskn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1039,7 +1054,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_footnotes {
+#lzgefbpskn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1053,7 +1068,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_footnote {
+#lzgefbpskn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1062,7 +1077,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#lbfrjtbfhw .gt_sourcenotes {
+#lzgefbpskn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1076,7 +1091,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#lbfrjtbfhw .gt_sourcenote {
+#lzgefbpskn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1084,72 +1099,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#lbfrjtbfhw .gt_left {
+#lzgefbpskn .gt_left {
   text-align: left;
 }
 
-#lbfrjtbfhw .gt_center {
+#lzgefbpskn .gt_center {
   text-align: center;
 }
 
-#lbfrjtbfhw .gt_right {
+#lzgefbpskn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lbfrjtbfhw .gt_font_normal {
+#lzgefbpskn .gt_font_normal {
   font-weight: normal;
 }
 
-#lbfrjtbfhw .gt_font_bold {
+#lzgefbpskn .gt_font_bold {
   font-weight: bold;
 }
 
-#lbfrjtbfhw .gt_font_italic {
+#lzgefbpskn .gt_font_italic {
   font-style: italic;
 }
 
-#lbfrjtbfhw .gt_super {
+#lzgefbpskn .gt_super {
   font-size: 65%;
 }
 
-#lbfrjtbfhw .gt_footnote_marks {
+#lzgefbpskn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lbfrjtbfhw .gt_asterisk {
+#lzgefbpskn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lbfrjtbfhw .gt_indent_1 {
+#lzgefbpskn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lbfrjtbfhw .gt_indent_2 {
+#lzgefbpskn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lbfrjtbfhw .gt_indent_3 {
+#lzgefbpskn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lbfrjtbfhw .gt_indent_4 {
+#lzgefbpskn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lbfrjtbfhw .gt_indent_5 {
+#lzgefbpskn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lbfrjtbfhw .katex-display {
+#lzgefbpskn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lbfrjtbfhw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lzgefbpskn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2809,6 +2824,12 @@ Dobson, Annette J, and Adrian G Barnett. 2018. <em>An Introduction to Generalize
 </div>
 <div id="ref-dunn2018generalized" class="csl-entry" role="listitem">
 Dunn, Peter K, and Gordon K Smyth. 2018. <em>Generalized Linear Models with Examples in <span>R</span></em>. Vol. 53. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-0118-7">https://link.springer.com/book/10.1007/978-1-4419-0118-7</a>.
+</div>
+<div id="ref-statrethink2e" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking : A <span>Bayesian</span> Course with Examples in <span>R</span> and <span>Stan</span></em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. CRC Press.
+</div>
+<div id="ref-mcelreath2026rethinking" class="csl-entry" role="listitem">
+McElreath, Richard. 2026. <em>Statistical Rethinking 2026</em>. Lecture videos, YouTube. <a href="https://github.com/rmcelreath/stat_rethinking_2026">https://github.com/rmcelreath/stat_rethinking_2026</a>.
 </div>
 <div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
 Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.

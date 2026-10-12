@@ -986,9 +986,20 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="lem-joint-prob-same-var" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Joint probability of a variable with itself)</strong></span> <span class="math display">\[p(T=t, T\ge t) = p(T=t)\]</span></p>
+<p><span class="theorem-title"><strong>Lemma 1 (Joint probability of a variable with itself)</strong></span> <span class="math display">\[\operatorname{p}(T=t, T\ge t) = \operatorname{p}(T=t)\]</span></p>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\(\Pr(A \cap B) = \Pr(A)\)</span>. In particular, <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>, so <span class="math inline">\(p(T=t, T\ge t) = p(T=t)\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\(\Pr\mathopen{}\left(A \cap B\right)\mathclose{} = \Pr\mathopen{}\left(A\right)\mathclose{}\)</span>. In this chapter, the comma notation <span class="math inline">\(\operatorname{p}(A, B)\)</span> means the joint probability <span class="math inline">\(\Pr\mathopen{}\left(A \cap B\right)\mathclose{}\)</span>, and <span class="math inline">\(\operatorname{p}(A)\)</span> means <span class="math inline">\(\Pr\mathopen{}\left(A\right)\mathclose{}\)</span>. Since <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{p}(T=t, T\ge t)
+&amp;\stackrel{\text{def}}{=}\Pr\mathopen{}\left(\{T=t\} \cap \{T\ge t\}\right)\mathclose{}
+&amp;&amp; \text{(comma notation for joint probability)}
+\\ &amp;= \Pr\mathopen{}\left(\{T=t\}\right)\mathclose{}
+&amp;&amp; \text{(subset property, since } \{T=t\} \subseteq \{T\ge t\} \text{)}
+\\ &amp;\stackrel{\text{def}}{=}\operatorname{p}(T=t)
+&amp;&amp; \text{(notation for } \Pr \text{)}
+\end{aligned}
+\]</span></p>
 </div>
 </div>
 </section><section class="slide level2"><div id="thm-hazard-dens-surv" class="theorem">

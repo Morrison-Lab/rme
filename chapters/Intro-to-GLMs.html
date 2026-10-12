@@ -86,7 +86,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/glms.html" rel="next">
+<link href="../chapters/Linear-models-overview.html" rel="next">
 <link href="../chapters/schedule.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
@@ -230,15 +230,45 @@ cookieconsent.run({
 })();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
-div.callout-def.callout {
-  border-left-color: #1B5E20;
+div.callout-proof.callout {
+  border-left-color: #37474F;
 }
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
 }
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-remark.callout {
+  border-left-color: #AD1457;
+}
+div.callout-remark.callout-style-default .callout-header {
+  background-color: rgba(173, 20, 87, 0.13);
+}
+div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-prp.callout {
   border-left-color: #827717;
@@ -249,26 +279,6 @@ div.callout-prp.callout-style-default .callout-header {
 div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-lem.callout {
-  border-left-color: #1565C0;
-}
-div.callout-lem.callout-style-default .callout-header {
-  background-color: rgba(21, 101, 192, 0.13);
-}
-div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-proof.callout {
-  border-left-color: #37474F;
-}
-div.callout-proof.callout-style-default .callout-header {
-  background-color: rgba(55, 71, 79, 0.13);
-}
-div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 div.callout-exr.callout {
   border-left-color: #FFA500;
@@ -290,16 +300,6 @@ div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-cor.callout {
-  border-left-color: #00838F;
-}
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
-}
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
 div.callout-exm.callout {
   border-left-color: #6A1B9A;
 }
@@ -310,25 +310,25 @@ div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg
 div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-remark.callout {
-  border-left-color: #AD1457;
+div.callout-lem.callout {
+  border-left-color: #1565C0;
 }
-div.callout-remark.callout-style-default .callout-header {
-  background-color: rgba(173, 20, 87, 0.13);
+div.callout-lem.callout-style-default .callout-header {
+  background-color: rgba(21, 101, 192, 0.13);
 }
-div.callout-remark .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-lem .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-lem.callout-style-default .callout-icon::before, div.callout-lem.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231565C0" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-solution.callout {
-  border-left-color: #4E342E;
+div.callout-def.callout {
+  border-left-color: #1B5E20;
 }
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
 }
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
@@ -565,10 +565,6 @@ window.Quarto = {
   </li>  
         <li><hr class="dropdown-divider"></li>
         <li>
-    <a class="dropdown-item" href="../chapters/glms.html">
- <span class="dropdown-text">Generalized Linear Models</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="../chapters/Linear-models-overview.html">
  <span class="dropdown-text">Linear Models Overview</span></a>
   </li>  
@@ -734,12 +730,6 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to GLMs</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/glms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Generalized Linear Models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -918,6 +908,17 @@ window.Quarto = {
   <li><a href="#structure-of-regression-models" id="toc-structure-of-regression-models" class="nav-link" data-scroll-target="#structure-of-regression-models"><span class="header-section-number">7</span> Structure of regression models</a></li>
   <li><a href="#sec-why-link" id="toc-sec-why-link" class="nav-link" data-scroll-target="#sec-why-link"><span class="header-section-number">8</span> Why link functions?</a></li>
   <li><a href="#sec-canonical-link" id="toc-sec-canonical-link" class="nav-link" data-scroll-target="#sec-canonical-link"><span class="header-section-number">9</span> Canonical links</a></li>
+  <li>
+<a href="#sec-glm-fitting" id="toc-sec-glm-fitting" class="nav-link" data-scroll-target="#sec-glm-fitting"><span class="header-section-number">10</span> The model fitting process</a>
+  <ul class="collapse">
+<li><a href="#step-0-exploratory-data-analysis" id="toc-step-0-exploratory-data-analysis" class="nav-link" data-scroll-target="#step-0-exploratory-data-analysis"><span class="header-section-number">10.1</span> Step 0: Exploratory data analysis</a></li>
+  <li><a href="#step-1-model-specification" id="toc-step-1-model-specification" class="nav-link" data-scroll-target="#step-1-model-specification"><span class="header-section-number">10.2</span> Step 1: Model specification</a></li>
+  <li><a href="#step-2-parameter-estimation" id="toc-step-2-parameter-estimation" class="nav-link" data-scroll-target="#step-2-parameter-estimation"><span class="header-section-number">10.3</span> Step 2: Parameter estimation</a></li>
+  <li><a href="#step-3-checking-model-adequacy" id="toc-step-3-checking-model-adequacy" class="nav-link" data-scroll-target="#step-3-checking-model-adequacy"><span class="header-section-number">10.4</span> Step 3: Checking model adequacy</a></li>
+  <li><a href="#step-4-inference" id="toc-step-4-inference" class="nav-link" data-scroll-target="#step-4-inference"><span class="header-section-number">10.5</span> Step 4: Inference</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-choosing-glm" id="toc-sec-choosing-glm" class="nav-link" data-scroll-target="#sec-choosing-glm"><span class="header-section-number">11</span> Choosing a model</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/Intro-to-GLMs.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/Intro-to-GLMs.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Intro-to-GLMs-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="Intro-to-GLMs-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="Intro-to-GLMs-handout.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
@@ -935,7 +936,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-10-12: 7:34:33 (UTC)</p>
+      <p class="date">Last modified: 2026-10-12: 21:38:12 (UTC)</p>
     </div>
   </div>
   
@@ -1965,6 +1966,691 @@ f(y; \pi)
 </div>
 </div>
 </div>
+</section><section id="sec-glm-fitting" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> The model fitting process</h1>
+<p>The rest of this chapter is adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, chap. 2</a>)</span>.</p>
+<p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.1</a>)</span> describes the model fitting process as follows:</p>
+<blockquote class="blockquote">
+<p>The model fitting process described in this book involves four steps:</p>
+<ol type="1">
+<li><p>Model specification—a model is specified in two parts: an equation linking the response and explanatory variables and the probability distribution of the response variable.</p></li>
+<li><p>Estimation of the parameters of the model.</p></li>
+<li><p>Checking the adequacy of the model—how well it fits or summarizes the data.</p></li>
+<li><p>Inference—for classical or frequentist inference this involves calculating confidence intervals, testing hypotheses about the parameters in the model and interpreting the results.</p></li>
+</ol>
+</blockquote>
+<p>Note that <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018</a>)</span> omits exploratory data analysis (EDA) from this initial list, but describes it later as an important preliminary step (<span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.1</a>)</span>). We will treat EDA as a “step 0” that precedes these four steps.</p>
+<section id="step-0-exploratory-data-analysis" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="step-0-exploratory-data-analysis">
+<span class="header-section-number">10.1</span> Step 0: Exploratory data analysis</h2>
+<p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.1</a>)</span>:</p>
+<blockquote class="blockquote">
+<p>Any analysis of data should begin with a consideration of each variable separately, both to check on data quality (for example, are the values plausible?) and to help with model formulation.</p>
+<ol type="1">
+<li><p>What is the scale of measurement? Is it continuous or categorical? If it is categorical, how many categories does it have and are they nominal or ordinal?</p></li>
+<li><p>What is the shape of the distribution? This shape can be examined using frequency tables, dot plots, histograms and other graphical methods.</p></li>
+<li><p>How is it associated with other variables? Cross tabulations for categorical variables, scatter plots for continuous variables, side-by-side boxplots for continuous scale measurements grouped according to the factor levels of a categorical variable, and other such summaries can help to identify patterns of association. For example, do the points on a scatter plot suggest linear or non-linear associations? Do the group means increase or decrease consistently with an ordinal variable defining the groups?</p></li>
+</ol>
+</blockquote>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-eda" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (Exploring the chronic medical conditions data)</strong></span> <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.2.1</a>, Table 2.1)</span> reports the number of chronic medical conditions for 26 women living in a town and 23 women living in the country, all attending general practitioners. We will carry this dataset through all four steps of the model fitting process.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 23%">
+<col style="width: 55%">
+</colgroup>
+<thead><tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Column in <code><a href="https://rdrr.io/pkg/dobson/man/chronic.html">dobson::chronic</a></code>
+</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Y_i\)</span></td>
+<td>number of chronic medical conditions reported by woman <span class="math inline">\(i\)</span>
+</td>
+<td>
+<code>number</code> (copied to <code>conditions</code>)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_i\)</span></td>
+<td>indicator that woman <span class="math inline">\(i\)</span> lives in the country (<span class="math inline">\(1\)</span>) rather than the town (<span class="math inline">\(0\)</span>)</td>
+<td>derived from <code>place</code> (stored as <code>country</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">chronic</span>, package <span class="op">=</span> <span class="st">"dobson"</span><span class="op">)</span></span>
+<span><span class="va">chronic</span><span class="op">$</span><span class="va">conditions</span> <span class="op">&lt;-</span> <span class="va">chronic</span><span class="op">$</span><span class="va">number</span></span>
+<span><span class="va">chronic</span><span class="op">$</span><span class="va">country</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">chronic</span><span class="op">$</span><span class="va">place</span> <span class="op">==</span> <span class="st">"country"</span><span class="op">)</span></span>
+<span><span class="va">chronic</span><span class="op">$</span><span class="va">residence</span> <span class="op">&lt;-</span> <span class="va">chronic</span><span class="op">$</span><span class="va">place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Following the three questions of <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.1</a>)</span>:</p>
+<ol type="1">
+<li><p>The outcome <span class="math inline">\(Y\)</span> is a count, so its scale of measurement is discrete and non-negative; the predictor <span class="math inline">\(x\)</span> is a binary (nominal) indicator.</p></li>
+<li><p><a href="#tbl-chronic-counts" class="quarto-xref">Table&nbsp;4</a> shows the frequency distribution of <span class="math inline">\(Y\)</span> within each group. Both distributions are right-skewed, with most women reporting zero, one, or two conditions.</p></li>
+<li><p>The town women report more conditions on average (sample mean 1.423) than the country women (sample mean 0.913), so residence might be associated with the outcome.</p></li>
+</ol>
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span></span>
+<span>  residence <span class="op">=</span> <span class="va">chronic</span><span class="op">$</span><span class="va">residence</span>,</span>
+<span>  conditions <span class="op">=</span> <span class="va">chronic</span><span class="op">$</span><span class="va">conditions</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt;          conditions</span></span>
+<span><span class="co">#&gt; residence  0  1  2  3  4</span></span>
+<span><span class="co">#&gt;   town     6 10  4  5  1</span></span>
+<span><span class="co">#&gt;   country  9  8  5  1  0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="tbl-chronic-counts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-chronic-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Frequency distribution of the number of chronic medical conditions, by residence <span class="citation" data-cites="dobson4e">(<a href="#ref-dobson4e" role="doc-biblioref">Dobson and Barnett 2018, sec. 2.2.1</a>, Table 2.1)</span>
+</figcaption><div aria-describedby="tbl-chronic-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="step-1-model-specification" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="step-1-model-specification">
+<span class="header-section-number">10.2</span> Step 1: Model specification</h2>
+<p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.2</a>)</span> describes model specification as choosing two parts: an equation linking the expected outcome to the explanatory variables, and a probability distribution for the outcome. For a generalized linear model, those two parts are the three components in the solution to <a href="#exr-glm-structure" class="quarto-xref">Exercise&nbsp;4</a>: an outcome distribution, a linear predictor <span class="math inline">\(\eta \stackrel{\text{def}}{=}\tilde{x}\cdot \tilde{\beta}\)</span>, and a link function <span class="math inline">\(g(\cdot)\)</span> with <span class="math inline">\(g(\mu) = \eta\)</span>.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-spec" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7 (Specifying a model for the chronic medical conditions data)</strong></span> The outcome in <a href="#exm-chronic-eda" class="quarto-xref">Example&nbsp;6</a> is a count with no fixed upper limit, so a Poisson distribution is a natural first choice. Since a Poisson mean must be positive, we pair the Poisson distribution with the log link (which is also its canonical link; see <a href="#sec-canonical-link" class="quarto-xref">Section&nbsp;9</a>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i \mid x_i &amp;\ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i), \quad i = 1, \ldots, 49
+\\
+\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} &amp;= \eta_i
+\\
+\eta_i &amp;\stackrel{\text{def}}{=}\beta_0 + \beta_1 x_i
+\end{aligned}
+\]</span></p>
+<p>Under this model, <span class="math inline">\(\mu_{\text{town}} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span> is the mean number of conditions for town women, and <span class="math inline">\(\mu_{\text{country}} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}\)</span> is the mean for country women, so the ratio of the two group means is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\mu_{\text{country}}}{\mu_{\text{town}}}
+&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
+&amp;&amp; \text{(definitions of the two group means)}
+\\
+&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} \operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
+&amp;&amp; \text{(}e^{a + b} = e^a e^b\text{)}
+\\
+&amp;= \operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}
+&amp;&amp; \text{(cancel } \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\text{)}
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="step-2-parameter-estimation" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="step-2-parameter-estimation">
+<span class="header-section-number">10.3</span> Step 2: Parameter estimation</h2>
+<p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.3</a>)</span> describes the next step as estimating the model’s parameters, for example by maximum likelihood or by least squares. The model structure from Step 1 does not dictate the estimation method; in this chapter we use maximum likelihood, which chooses the parameter values that make the observed data most probable.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-mle" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8 (Maximum likelihood estimates for the chronic medical conditions model)</strong></span> Write <span class="math inline">\(n_{\text{town}} \stackrel{\text{def}}{=}26\)</span> and <span class="math inline">\(n_{\text{country}} \stackrel{\text{def}}{=}23\)</span> for the group sizes, and <span class="math inline">\(\bar{y}_{\text{town}}\)</span> and <span class="math inline">\(\bar{y}_{\text{country}}\)</span> for the group sample means. For the model in <a href="#exm-chronic-spec" class="quarto-xref">Example&nbsp;7</a>, the log-likelihood is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell\mathopen{}\left(\beta_0, \beta_1\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\sum_{i=1}^{49} \operatorname{log}\mathopen{}\left\{\frac{\mu_i^{y_i} e^{-\mu_i}}{y_i!}\right\}\mathclose{}
+&amp;&amp; \text{(independent Poisson outcomes)}
+\\
+&amp;= \sum_{i=1}^{49} \mathopen{}\left[y_i \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right]\mathclose{}
+&amp;&amp; \text{(log of a product and a quotient)}
+\\
+&amp;= \sum_{i=1}^{49} \mathopen{}\left[y_i \eta_i - e^{\eta_i} - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right]\mathclose{}
+&amp;&amp; \text{(log link: } \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \eta_i \text{)}
+\\
+&amp;= \sum_{i=1}^{49} \mathopen{}\left[y_i (\beta_0 + \beta_1 x_i) - e^{\beta_0 + \beta_1 x_i} - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right]\mathclose{}
+&amp;&amp; \text{(definition of } \eta_i \text{)}
+\end{aligned}
+\]</span></p>
+<p>Differentiating term by term gives the two components of the score function:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial \ell}{\partial \beta_0}
+&amp;= \sum_{i=1}^{49} \mathopen{}\left[y_i - e^{\beta_0 + \beta_1 x_i}\right]\mathclose{}
+&amp;&amp; \text{(} \partial \eta_i / \partial \beta_0 = 1 \text{)}
+\\
+&amp;= \sum_{i=1}^{49} (y_i - \mu_i)
+&amp;&amp; \text{(} \mu_i = e^{\eta_i} \text{)}
+\\
+\frac{\partial \ell}{\partial \beta_1}
+&amp;= \sum_{i=1}^{49} x_i \mathopen{}\left[y_i - e^{\beta_0 + \beta_1 x_i}\right]\mathclose{}
+&amp;&amp; \text{(} \partial \eta_i / \partial \beta_1 = x_i \text{)}
+\\
+&amp;= \sum_{i=1}^{49} x_i (y_i - \mu_i)
+&amp;&amp; \text{(} \mu_i = e^{\eta_i} \text{)}
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(x_i = 1\)</span> for country women and <span class="math inline">\(x_i = 0\)</span> for town women, setting <span class="math inline">\(\partial \ell/ \partial \beta_1 = 0\)</span> gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+0 &amp;= \sum_{i:\, x_i = 1} \mathopen{}\left(y_i - e^{\beta_0 + \beta_1}\right)\mathclose{}
+&amp;&amp; \text{(drop the terms with } x_i = 0 \text{)}
+\\
+&amp;= n_{\text{country}} \bar{y}_{\text{country}} - n_{\text{country}} e^{\beta_0 + \beta_1}
+&amp;&amp; \text{(sum of } n_{\text{country}} \text{ terms)}
+\\
+e^{\beta_0 + \beta_1} &amp;= \bar{y}_{\text{country}}
+&amp;&amp; \text{(rearrange and divide by } n_{\text{country}} \text{)}
+\end{aligned}
+\]</span></p>
+<p>Subtracting the second score equation from the first leaves only the town women, since <span class="math inline">\(1 - x_i = 1\)</span> exactly when woman <span class="math inline">\(i\)</span> lives in the town:</p>
+<p><span class="math display">\[
+\begin{aligned}
+0 &amp;= \sum_{i=1}^{49} (1 - x_i)(y_i - \mu_i)
+&amp;&amp; \text{(difference of the two score equations)}
+\\
+&amp;= \sum_{i:\, x_i = 0} \mathopen{}\left(y_i - e^{\beta_0}\right)\mathclose{}
+&amp;&amp; \text{(drop the terms with } x_i = 1 \text{)}
+\\
+&amp;= n_{\text{town}} \bar{y}_{\text{town}} - n_{\text{town}} e^{\beta_0}
+&amp;&amp; \text{(sum of } n_{\text{town}} \text{ terms)}
+\\
+e^{\beta_0} &amp;= \bar{y}_{\text{town}}
+&amp;&amp; \text{(rearrange and divide by } n_{\text{town}} \text{)}
+\end{aligned}
+\]</span></p>
+<p>Taking logs of both solutions gives the maximum likelihood estimates:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\beta}_0 &amp;= \operatorname{log}\mathopen{}\left\{\bar{y}_{\text{town}}\right\}\mathclose{}
+\\
+\hat{\beta}_1 &amp;= \operatorname{log}\mathopen{}\left\{\bar{y}_{\text{country}}\right\}\mathclose{} - \hat{\beta}_0
+&amp;&amp; \text{(log of } e^{\beta_0 + \beta_1} = \bar{y}_{\text{country}} \text{)}
+\\
+&amp;= \operatorname{log}\mathopen{}\left\{\bar{y}_{\text{country}}\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{\bar{y}_{\text{town}}\right\}\mathclose{}
+&amp;&amp; \text{(substitute } \hat{\beta}_0 \text{)}
+\\
+&amp;= \operatorname{log}\mathopen{}\left\{\frac{\bar{y}_{\text{country}}}{\bar{y}_{\text{town}}}\right\}\mathclose{}
+&amp;&amp; \text{(difference of logs)}
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ybar_town</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">chronic</span><span class="op">$</span><span class="va">conditions</span><span class="op">[</span><span class="va">chronic</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">ybar_country</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">chronic</span><span class="op">$</span><span class="va">conditions</span><span class="op">[</span><span class="va">chronic</span><span class="op">$</span><span class="va">country</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">b0_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">ybar_town</span><span class="op">)</span></span>
+<span><span class="va">b1_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">ybar_country</span> <span class="op">/</span> <span class="va">ybar_town</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">chronic_glm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span></span>
+<span>  <span class="va">conditions</span> <span class="op">~</span> <span class="va">country</span>,</span>
+<span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">chronic</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">chronic_glm</span><span class="op">)</span></span>
+<span><span class="co">#&gt; (Intercept)     country </span></span>
+<span><span class="co">#&gt;    0.352821   -0.443793</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>With <span class="math inline">\(\bar{y}_{\text{town}} = 37/26 \approx\)</span> 1.4231 and <span class="math inline">\(\bar{y}_{\text{country}} = 21/23 \approx\)</span> 0.9130, the closed-form estimates are <span class="math inline">\(\hat{\beta}_0 \approx\)</span> 0.3528 and <span class="math inline">\(\hat{\beta}_1 \approx\)</span> -0.4438, matching the coefficients that <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> finds numerically. The fitted means are the group sample means: <span class="math inline">\(\hat{\mu}_i = \bar{y}_{\text{town}}\)</span> for town women and <span class="math inline">\(\hat{\mu}_i = \bar{y}_{\text{country}}\)</span> for country women.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-concavity" class="theorem example">
+<p><span class="theorem-title"><strong>Example 9 (Checking that the chronic medical conditions estimates are a maximum)</strong></span> To confirm that the estimates in <a href="#exm-chronic-mle" class="quarto-xref">Example&nbsp;8</a> maximize the log-likelihood, differentiate the score components once more, using <span class="math inline">\(\partial \mu_i / \partial \beta_0 = \mu_i\)</span> and <span class="math inline">\(\partial \mu_i / \partial \beta_1 = x_i \mu_i\)</span> (chain rule applied to <span class="math inline">\(\mu_i = e^{\beta_0 + \beta_1 x_i}\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial^2 \ell}{\partial \beta_0^2}
+&amp;= -\sum_{i=1}^{49} \mu_i
+\\
+\frac{\partial^2 \ell}{\partial \beta_0 \, \partial \beta_1}
+&amp;= -\sum_{i=1}^{49} x_i \mu_i
+\\
+\frac{\partial^2 \ell}{\partial \beta_1^2}
+&amp;= -\sum_{i=1}^{49} x_i^2 \mu_i
+\end{aligned}
+\]</span></p>
+<p>Writing <span class="math inline">\(\tilde{x}_i \stackrel{\text{def}}{=}{(1, x_i)}^{\top}\)</span> and <span class="math inline">\(\tilde{\beta}\stackrel{\text{def}}{=}{(\beta_0, \beta_1)}^{\top}\)</span>, these three second derivatives are the entries of the Hessian matrix</p>
+<p><span class="math display">\[
+\underbrace{\ell''\mathopen{}\left(\tilde{\beta}\right)\mathclose{}}_{2 \times 2}
+= -\sum_{i=1}^{49} \mu_i
+\underbrace{\tilde{x}_i}_{2 \times 1}
+\underbrace{{\tilde{x}_i}^{\top}}_{1 \times 2},
+\quad \text{since} \quad
+\underbrace{\tilde{x}_i}_{2 \times 1}
+\underbrace{{\tilde{x}_i}^{\top}}_{1 \times 2}
+= \underbrace{\begin{pmatrix}1 &amp; x_i \\ x_i &amp; x_i^2\end{pmatrix}}_{2 \times 2}.
+\]</span></p>
+<p>For any nonzero vector <span class="math inline">\(\underbrace{\tilde{a}}_{2 \times 1}\)</span>, <span class="math inline">\({\tilde{a}}^{\top} \ell''\mathopen{}\left(\tilde{\beta}\right)\mathclose{} \tilde{a} = -\sum_{i=1}^{49} \mu_i \mathopen{}\left({\tilde{a}}^{\top} \tilde{x}_i\right)\mathclose{}^2 &lt; 0\)</span>, because every <span class="math inline">\(\mu_i &gt; 0\)</span> and both groups contain women (so <span class="math inline">\({\tilde{a}}^{\top} \tilde{x}_i \neq 0\)</span> for some <span class="math inline">\(i\)</span>). The log-likelihood is therefore strictly concave, and the stationary point we found is its unique maximum.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="step-3-checking-model-adequacy" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="step-3-checking-model-adequacy">
+<span class="header-section-number">10.4</span> Step 3: Checking model adequacy</h2>
+<p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.4</a>)</span> describes checking a fitted model’s adequacy by examining residuals: summaries of how far each observation falls from its fitted value. In a generalized linear model the outcome variance usually changes with the mean, so raw differences <span class="math inline">\(y_i - \hat{\mu}_i\)</span> are not on a common scale; dividing by an estimated standard deviation puts them on one.</p>
+<div class="callout callout-style-simple callout-def no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="def-pearson-residual-glm" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (Pearson residual and Pearson chi-squared statistic)</strong></span> For a generalized linear model with variance function <span class="math inline">\(V(\mu)\)</span> (<a href="#def-natural-parameter" class="quarto-xref">Definition&nbsp;4</a>) and dispersion parameter <span class="math inline">\(\phi = 1\)</span>, the <strong>Pearson residual</strong> for observation <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[
+r_i \stackrel{\text{def}}{=}\frac{y_i - \hat{\mu}_i}{\sqrt{V(\hat{\mu}_i)}},
+\]</span></p>
+<p>and the <strong>Pearson chi-squared statistic</strong> is <span class="math inline">\(X^2 \stackrel{\text{def}}{=}\sum_{i=1}^n r_i^2\)</span> <span class="citation" data-cites="dunn2018generalized">(<a href="#ref-dunn2018generalized" role="doc-biblioref">Dunn and Smyth 2018, chap. 7</a> and 8)</span>. For a Poisson outcome, <span class="math inline">\(V(\mu) = \mu\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>If the model is adequate and the fitted means are not too small, <span class="math inline">\(X^2\)</span> is approximately chi-squared distributed with <span class="math inline">\(n - p\)</span> degrees of freedom, where <span class="math inline">\(p\)</span> is the number of regression coefficients, so <span class="math inline">\(X^2 / (n - p)\)</span> should be close to 1; a ratio well above 1 suggests overdispersion <span class="citation" data-cites="dunn2018generalized">(<a href="#ref-dunn2018generalized" role="doc-biblioref">Dunn and Smyth 2018, chap. 7</a>)</span>. The <a href="../chapters/count-regression.html">count regression chapter</a> returns to overdispersion.</p>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-pearson" class="theorem example">
+<p><span class="theorem-title"><strong>Example 10 (Pearson residuals for the chronic medical conditions model)</strong></span> The town woman who reports 4 conditions has fitted mean <span class="math inline">\(\hat{\mu}_i = \bar{y}_{\text{town}} = 37/26\)</span> (<a href="#exm-chronic-mle" class="quarto-xref">Example&nbsp;8</a>), so her Pearson residual is</p>
+<p><span class="math display">\[
+\begin{aligned}
+r_i
+&amp;= \frac{4 - 37/26}{\sqrt{37/26}}
+&amp;&amp; \text{(Pearson residual with } V(\mu) = \mu \text{)}
+\\
+&amp;\approx \frac{4 - 1.4231}{1.1929}
+&amp;&amp; \text{(evaluate } 37/26 \text{ and its square root)}
+\\
+&amp;\approx \frac{2.5769}{1.1929}
+&amp;&amp; \text{(subtract)}
+\\
+&amp;\approx 2.160
+&amp;&amp; \text{(divide)}
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r_pearson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">chronic_glm</span>, type <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
+<span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">r_pearson</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">df_resid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/df.residual.html">df.residual</a></span><span class="op">(</span><span class="va">chronic_glm</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><a href="#fig-chronic-pearson" class="quarto-xref">Figure&nbsp;10</a> plots all 49 Pearson residuals. The largest residual in absolute value is 2.184, and the Pearson chi-squared statistic is <span class="math inline">\(X^2 \approx\)</span> 43.66 on <span class="math inline">\(49 - 2 =\)</span> 47 residual degrees of freedom, so <span class="math inline">\(X^2 / 47 \approx\)</span> 0.929. No residual is extreme, and the ratio is below 1, so the data show no sign of more variability than the Poisson model allows.</p>
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">chronic</span><span class="op">$</span><span class="va">pearson</span> <span class="op">&lt;-</span> <span class="va">r_pearson</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">chronic</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">residence</span>, y <span class="op">=</span> <span class="va">pearson</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, height <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Residence"</span>, y <span class="op">=</span> <span class="st">"Pearson residual"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div id="fig-chronic-pearson" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-chronic-pearson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Pearson residuals from the Poisson model for the chronic medical conditions data, by residence
+</figcaption><div aria-describedby="fig-chronic-pearson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: Pearson residuals from the Poisson model for the chronic medical conditions data, by residence"><img src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="step-4-inference" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="step-4-inference">
+<span class="header-section-number">10.5</span> Step 4: Inference</h2>
+<p>The final step is inference: <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#ref-dobson4e" role="doc-biblioref">2018, sec. 2.3.5</a>)</span> lists confidence intervals, hypothesis tests about the parameters, and interpretation of the results. By <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle">the central limit theorem for MLEs</a>, in large samples <span class="math inline">\(\hat{\beta}\)</span> is approximately Gaussian, with covariance matrix approximated by the inverse of the observed information <span class="math inline">\(-\ell''\mathopen{}\left(\hat{\beta}\right)\mathclose{}\)</span>. A 95% Wald confidence interval for <span class="math inline">\(\beta_j\)</span> is then <span class="math inline">\(\hat{\beta}_j \pm 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}\)</span>, and the Wald statistic <span class="math inline">\(z_j \stackrel{\text{def}}{=}\hat{\beta}_j / \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}\)</span> tests <span class="math inline">\(H_0: \beta_j = 0\)</span>.</p>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-chronic-inference" class="theorem example">
+<p><span class="theorem-title"><strong>Example 11 (Comparing town and country women)</strong></span> In <a href="#exm-chronic-mle" class="quarto-xref">Example&nbsp;8</a>, the fitted means sum to <span class="math inline">\(\sum_{i:\, x_i = 0} \hat{\mu}_i = n_{\text{town}} \bar{y}_{\text{town}} = 37\)</span> for the town women and <span class="math inline">\(\sum_{i:\, x_i = 1} \hat{\mu}_i = n_{\text{country}} \bar{y}_{\text{country}} = 21\)</span> for the country women. Substituting into the Hessian from <a href="#exm-chronic-concavity" class="quarto-xref">Example&nbsp;9</a>, the observed information matrix is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\underbrace{-\ell''\mathopen{}\left(\hat{\beta}\right)\mathclose{}}_{2 \times 2}
+&amp;= \sum_{i=1}^{49} \hat{\mu}_i \begin{pmatrix}1 &amp; x_i \\ x_i &amp; x_i^2\end{pmatrix}
+&amp;&amp; \text{(Hessian of the log-likelihood)}
+\\
+&amp;= \begin{pmatrix}
+  \sum_{i} \hat{\mu}_i &amp; \sum_{i:\, x_i = 1} \hat{\mu}_i \\
+  \sum_{i:\, x_i = 1} \hat{\mu}_i &amp; \sum_{i:\, x_i = 1} \hat{\mu}_i
+\end{pmatrix}
+&amp;&amp; \text{(} x_i \in \{0, 1\} \text{, so } x_i^2 = x_i \text{)}
+\\
+&amp;= \underbrace{\begin{pmatrix}58 &amp; 21 \\ 21 &amp; 21\end{pmatrix}}_{2 \times 2}
+&amp;&amp; \text{(} 37 + 21 = 58 \text{)}
+\end{aligned}
+\]</span></p>
+<p>Its determinant is <span class="math inline">\(58 \cdot 21 - 21 \cdot 21 = 21 \cdot 37 = 777\)</span>, so its inverse is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\underbrace{\mathopen{}\left[-\ell''\mathopen{}\left(\hat{\beta}\right)\mathclose{}\right]\mathclose{}^{-1}}_{2 \times 2}
+&amp;= \frac{1}{777} \begin{pmatrix}21 &amp; -21 \\ -21 &amp; 58\end{pmatrix}
+&amp;&amp; \text{(inverse of a } 2 \times 2 \text{ matrix)}
+\end{aligned}
+\]</span></p>
+<p>The lower-right entry is the estimated variance of <span class="math inline">\(\hat{\beta}_1\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}
+&amp;= \frac{58}{777}
+\\
+&amp;= \frac{37 + 21}{37 \cdot 21}
+&amp;&amp; \text{(} 58 = 37 + 21 \text{, } 777 = 37 \cdot 21 \text{)}
+\\
+&amp;= \frac{1}{21} + \frac{1}{37}
+&amp;&amp; \text{(split the fraction)}
+\\
+&amp;\approx 0.0746
+\end{aligned}
+\]</span></p>
+<p>so <span class="math inline">\(\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{} \approx \sqrt{0.0746} \approx 0.2732\)</span>.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show R code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">se_b1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fl">21</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">37</span><span class="op">)</span></span>
+<span><span class="va">ci_b1</span> <span class="op">&lt;-</span> <span class="va">b1_hat</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span> <span class="op">*</span> <span class="va">se_b1</span></span>
+<span><span class="va">z_b1</span> <span class="op">&lt;-</span> <span class="va">b1_hat</span> <span class="op">/</span> <span class="va">se_b1</span></span>
+<span><span class="va">p_b1</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_b1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">chronic_glm</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span><span class="co">#&gt;              Estimate Std. Error  z value  Pr(&gt;|z|)</span></span>
+<span><span class="co">#&gt; (Intercept)  0.352821   0.164399  2.14613 0.0318627</span></span>
+<span><span class="co">#&gt; country     -0.443793   0.273214 -1.62434 0.1043026</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<ul>
+<li>The 95% Wald confidence interval for <span class="math inline">\(\beta_1\)</span> is from -0.979 to 0.092.</li>
+<li>Exponentiating the estimate and the interval endpoints, the estimated ratio of the country mean to the town mean is <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{} \approx\)</span> 0.642, with 95% confidence interval from 0.376 to 1.096.</li>
+<li>The Wald statistic is <span class="math inline">\(z \approx\)</span> -1.624, with two-sided <span class="math inline">\(p \approx\)</span> 0.104.</li>
+</ul>
+<p>These hand calculations match the standard error, <span class="math inline">\(z\)</span> value, and <span class="math inline">\(p\)</span>-value that <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> reports for <code>country</code>. On average, country women in this sample reported 36% fewer chronic conditions than town women, but the confidence interval for the ratio includes 1, so these data are also consistent with no difference in the mean number of conditions.</p>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="sec-choosing-glm" class="level1" data-number="11"><h1 data-number="11">
+<span class="header-section-number">11</span> Choosing a model</h1>
+<p>The choice of statistical model depends on several considerations, primary among which is the type of response variable.</p>
+<ul>
+<li><p>Measured continuous values such as protein level, age, or weight can usually be modeled using linear regression, possibly after applying a logarithmic transformation.</p></li>
+<li><p>Patient survival times, which may be right-censored, call for time-to-event methods such as Kaplan-Meier estimation or Cox proportional hazards regression.</p></li>
+<li><p>If the outcome is binary (0/1), we can use logistic regression models.</p></li>
+<li><p>If the outcome is a count, we can use Poisson regression.</p></li>
+<li><p>If count data exhibit greater variance than assumed under the Poisson model, we can use negative binomial regression or overdispersed Poisson models.</p></li>
+<li><p>Other outcome structures correspond to other families within the generalized linear model framework.</p></li>
+</ul>
+<p>In generalized linear modeling, we specify a linear predictor <span class="math inline">\(\eta \stackrel{\text{def}}{=}\tilde{x}\cdot \tilde{\beta}\)</span> of the same form as in linear regression. In principle, a linear predictor can yield any real value, whether positive, negative, or zero.</p>
+<p>We then select an appropriate outcome distribution matched to the data type (for example, Gaussian for unbounded continuous values, gamma for positive continuous quantities, binomial for binary outcomes, and Poisson for counts).</p>
+<p>Finally, we specify a link function <span class="math inline">\(g(\cdot)\)</span> that maps the expected outcome <span class="math inline">\(\mu \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y \mid \tilde{X}= \tilde{x}\right]\mathclose{}\)</span> onto the real line <span class="math inline">\((-\infty, \infty)\)</span> of the linear predictor. The inverse link function <span class="math inline">\(g^{-1}(\cdot)\)</span> transforms the linear predictor back to the scale of the expected outcome.</p>
+<ul>
+<li><p>Standard linear regression uses the identity link function <span class="math inline">\(g(\mu) \stackrel{\text{def}}{=}\mu\)</span> and assumes a Gaussian response distribution.</p></li>
+<li><p>When predicting an inherently positive outcome, a log link function <span class="math inline">\(g(\mu) \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span> is often appropriate, since <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{} &gt; 0\)</span> for all real <span class="math inline">\(\eta\)</span>.</p></li>
+<li><p>An alternative to fitting a generalized linear model with a log link is to apply a log transformation directly to the outcome. While log-transforming the outcome works well for positive continuous measurements, it cannot be applied directly to binary outcomes or to count outcomes that can equal zero.</p></li>
+</ul>
+<p><a href="#tbl-glm-families" class="quarto-xref">Table&nbsp;5</a> lists the outcome families available in R’s <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function, together with the link functions each family accepts (the default link for each family is in bold), and <a href="#tbl-glm-links" class="quarto-xref">Table&nbsp;6</a> defines each link function.</p>
+<div id="tbl-glm-families" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-glm-families-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Families and link functions available in R’s <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>
+</figcaption><div aria-describedby="tbl-glm-families-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr class="header">
+<th>Family</th>
+<th>Links</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>gaussian</td>
+<td>
+<strong>identity</strong>, log, inverse</td>
+</tr>
+<tr class="even">
+<td>binomial</td>
+<td>
+<strong>logit</strong>, probit, cauchit, log, cloglog</td>
+</tr>
+<tr class="odd">
+<td>gamma</td>
+<td>
+<strong>inverse</strong>, identity, log</td>
+</tr>
+<tr class="even">
+<td>inverse.gaussian</td>
+<td>
+<strong>1/mu^2</strong>, inverse, identity, log</td>
+</tr>
+<tr class="odd">
+<td>Poisson</td>
+<td>
+<strong>log</strong>, identity, sqrt</td>
+</tr>
+<tr class="even">
+<td>quasi</td>
+<td>
+<strong>identity</strong>, logit, probit, cloglog, inverse, log, 1/mu^2 and sqrt</td>
+</tr>
+<tr class="odd">
+<td>quasibinomial</td>
+<td>
+<strong>logit</strong>, probit, identity, cloglog, inverse, log, 1/mu^2 and sqrt</td>
+</tr>
+<tr class="even">
+<td>quasipoisson</td>
+<td>
+<strong>log</strong>, identity, logit, probit, cloglog, inverse, 1/mu^2 and sqrt</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-glm-links" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-glm-links-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Link functions available in R’s <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, where <span class="math inline">\(\eta \stackrel{\text{def}}{=}\tilde{x}\cdot \tilde{\beta}= g(\mu)\)</span>
+</figcaption><div aria-describedby="tbl-glm-links-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 25%">
+<col style="width: 30%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Domain</th>
+<th>Range</th>
+<th>Link Function</th>
+<th>Inverse Link Function</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>identity</td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = \mu\)</span></td>
+<td><span class="math inline">\(\mu = \eta\)</span></td>
+</tr>
+<tr class="even">
+<td>log</td>
+<td><span class="math inline">\((0,\infty)\)</span></td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span></td>
+<td><span class="math inline">\(\mu = \operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}\)</span></td>
+</tr>
+<tr class="odd">
+<td>inverse</td>
+<td><span class="math inline">\((0, \infty)\)</span></td>
+<td><span class="math inline">\((0,\infty)\)</span></td>
+<td><span class="math inline">\(\eta = 1/\mu\)</span></td>
+<td><span class="math inline">\(\mu = 1/\eta\)</span></td>
+</tr>
+<tr class="even">
+<td>logit</td>
+<td><span class="math inline">\((0,1)\)</span></td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = \operatorname{log}\mathopen{}\left\{\mu/(1-\mu)\right\}\mathclose{}\)</span></td>
+<td><span class="math inline">\(\mu = \operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}/(1+\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{})\)</span></td>
+</tr>
+<tr class="odd">
+<td>probit</td>
+<td><span class="math inline">\((0,1)\)</span></td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = \Phi^{-1}(\mu)\)</span></td>
+<td><span class="math inline">\(\mu = \Phi(\eta)\)</span></td>
+</tr>
+<tr class="even">
+<td>cloglog</td>
+<td><span class="math inline">\((0,1)\)</span></td>
+<td><span class="math inline">\((-\infty, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = \operatorname{log}\mathopen{}\left\{-\operatorname{log}\mathopen{}\left\{1-\mu\right\}\mathclose{}\right\}\mathclose{}\)</span></td>
+<td><span class="math inline">\(\mu = {1-\operatorname{exp}\mathopen{}\left\{-\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}\right\}\mathclose{}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>1/mu^2</td>
+<td><span class="math inline">\((0,\infty)\)</span></td>
+<td><span class="math inline">\((0, \infty)\)</span></td>
+<td><span class="math inline">\(\eta = 1/\mu^2\)</span></td>
+<td><span class="math inline">\(\mu = 1/\sqrt{\eta}\)</span></td>
+</tr>
+<tr class="even">
+<td>sqrt</td>
+<td><span class="math inline">\((0,\infty)\)</span></td>
+<td><span class="math inline">\((0,\infty)\)</span></td>
+<td><span class="math inline">\(\eta = \sqrt{\mu}\)</span></td>
+<td><span class="math inline">\(\mu = \eta^2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-exm no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="exm-choose-family" class="theorem example">
+<p><span class="theorem-title"><strong>Example 12 (Matching outcomes to families and links)</strong></span> Each of the following outcomes calls for a different choice of family and link:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 32%">
+<col style="width: 23%">
+<col style="width: 17%">
+</colgroup>
+<thead><tr class="header">
+<th>Outcome</th>
+<th>Data type</th>
+<th>Family</th>
+<th>Link</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>systolic blood pressure (mmHg)</td>
+<td>continuous, unbounded in practice</td>
+<td>Gaussian</td>
+<td>identity</td>
+</tr>
+<tr class="even">
+<td>whether a participant develops diabetes during follow-up</td>
+<td>binary</td>
+<td>binomial</td>
+<td>logit</td>
+</tr>
+<tr class="odd">
+<td>number of chronic medical conditions (<a href="#exm-chronic-spec" class="quarto-xref">Example&nbsp;7</a>)</td>
+<td>count</td>
+<td>Poisson</td>
+<td>log</td>
+</tr>
+<tr class="even">
+<td>hospital length of stay (days), measured continuously</td>
+<td>positive and right-skewed</td>
+<td>gamma</td>
+<td>log</td>
+</tr>
+</tbody>
+</table>
+<p>For the last outcome, the canonical inverse link of the gamma family would also be allowed, but the log link keeps the fitted means positive for every value of the linear predictor and makes <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> a ratio of means, just as in <a href="#exm-chronic-spec" class="quarto-xref">Example&nbsp;7</a>.</p>
+</div>
+</div>
+</div>
+</div>
 <hr></section><section id="exercises" class="level1 unnumbered"><h1 class="unnumbered">Exercises</h1>
 <div class="callout callout-style-simple callout-exr no-icon">
 <div class="callout-body d-flex">
@@ -1983,7 +2669,7 @@ f(y; \pi)
 </div>
 </div>
 <div class="callout callout-style-default callout-solution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1992,7 +2678,7 @@ f(y; \pi)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong> Logistic regression:</p>
@@ -2057,7 +2743,7 @@ f(y; \pi)
 </div>
 </div>
 <div class="callout callout-style-default callout-solution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -2066,7 +2752,7 @@ f(y; \pi)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span></p>
@@ -3079,328 +3765,361 @@ window.addEventListener("hashchange", revealEquationHashTarget);
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/glms.html" class="pagination-link" aria-label="Generalized Linear Models">
-        <span class="nav-page-text">Generalized Linear Models</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/Linear-models-overview.html" class="pagination-link" aria-label="Linear (Gaussian) Models">
+        <span class="nav-page-text">Linear (Gaussian) Models</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Introduction to GLMs"</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html: default</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">  revealjs:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-slides.html</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-handout.pdf</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">  docx:</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-handout.docx</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>{{&lt; include shared-config.qmd &gt;}}</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># Welcome</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>Welcome to Epidemiology 204: Quantitative Epidemiology III (Statistical Models).</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>Epi 204 is a course on **regression modeling**. </span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># What you should already know {.scrollable}</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>{{&lt; include prereq-knowledge.qmd &gt;}}</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># What we will cover in this course</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Linear (Gaussian) regression models (review and more details)</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Regression models for non-Gaussian outcomes</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>binary</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>count</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>time to event</span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Statistical analysis using R</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>We will start where Epi 203 left off: with linear regression models.</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_outcome_types.qmd &gt;}}</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="fu"># The scientific method and models</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_scientific_method.qmd &gt;}}</span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="fu"># Motivations for regression models</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>:::{#exr-why-regression}</span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>Why do we need regression models?</span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>::: {#sol-why-regression .incremental}</span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>when there's not enough data to analyze every subgroup of interest </span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>individually</span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>especially when subgroups are defined using continuous predictors</span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_regression_uses.qmd &gt;}}</span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: Adelie penguins</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-1</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins</span></span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="ot">&lt;-</span></span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span></span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g) <span class="sc">+</span></span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ggpenguins)</span>
-<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear regression</span></span>
-<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-2</span></span>
-<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins with linear regression fit</span></span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="ot">&lt;-</span></span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>  ggpenguins <span class="sc">+</span></span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
-<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
-<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curved regression lines</span></span>
-<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-3</span></span>
-<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins - curved regression lines</span></span>
-<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="ot">&lt;-</span> ggpenguins <span class="sc">+</span></span>
-<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
-<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">log</span>(x),</span>
-<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
-<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
-<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>ggpenguins2</span>
-<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple regression</span></span>
-<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-4</span></span>
-<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Palmer penguins - multiple groups"</span></span>
-<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="ot">&lt;-</span></span>
-<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span></span>
-<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> bill_length_mm,</span>
-<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> body_mass_g,</span>
-<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> species</span>
-<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
-<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
-<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
-<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
-<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
-<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
-<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modeling non-Gaussian outcomes</span></span>
-<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>::: {#fig-beetles_1a}</span>
-<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmx)</span>
-<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BeetleMortality)</span>
-<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>beetles <span class="ot">&lt;-</span> BeetleMortality <span class="sc">|&gt;</span></span>
-<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct =</span> died <span class="sc">/</span> n,</span>
-<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a>    <span class="at">survived =</span> n <span class="sc">-</span> died</span>
-<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span></span>
-<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a>  beetles <span class="sc">|&gt;</span></span>
-<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> pct)) <span class="sc">+</span></span>
-<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n)) <span class="sc">+</span></span>
-<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Dose (log mg/L)"</span>) <span class="sc">+</span></span>
-<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mortality rate (%)"</span>) <span class="sc">+</span></span>
-<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlab(bquote(log[10]), bquote(CS[2])) +</span></span>
-<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot1)</span>
-<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
-<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why don't we use linear regression?</span></span>
-<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles-plot1}</span>
-<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a>beetles_long <span class="ot">&lt;-</span></span>
-<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a>  beetles <span class="sc">|&gt;</span></span>
-<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="fu">everything</span>(),</span>
-<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">c</span>(</span>
-<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">times =</span> died),</span>
-<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> survived)</span>
-<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span></span>
-<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a>  beetles_long <span class="sc">|&gt;</span></span>
-<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
-<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> outcome <span class="sc">~</span> dose,</span>
-<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> _</span>
-<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a>range1 <span class="ot">&lt;-</span> <span class="fu">range</span>(beetles<span class="sc">$</span>dose) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">2</span>, .<span class="dv">2</span>)</span>
-<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a>f_linear <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
-<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span></span>
-<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>  plot1 <span class="sc">+</span></span>
-<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linear, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Straight line"</span>)) <span class="sc">+</span></span>
-<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Model"</span>, <span class="at">size =</span> <span class="st">""</span>)</span>
-<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot2)</span>
-<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to </span>
-<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a>gaseous carbon disulphide (Bliss 1935)</span>
-<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zoom out</span></span>
-<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles2}</span>
-<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot2 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span>
-<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to </span>
-<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a>gaseous carbon disulphide (Bliss 1935)</span>
-<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## log transformation of dose?</span></span>
-<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles3}</span>
-<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span></span>
-<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a>  beetles_long <span class="sc">|&gt;</span></span>
-<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> outcome <span class="sc">~</span> <span class="fu">log</span>(dose), <span class="at">data =</span> _)</span>
-<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a>f_linearlog <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
-<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> plot2 <span class="sc">+</span></span>
-<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linearlog, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Log-transform dose"</span>))</span>
-<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot3 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span>
-<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
-<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a><span class="fu">## Logistic regression</span></span>
-<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles4b}</span>
-<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> beetles <span class="sc">|&gt;</span></span>
-<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(<span class="at">formula =</span> <span class="fu">cbind</span>(died, survived) <span class="sc">~</span> dose, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a>  glm1 <span class="sc">|&gt;</span> </span>
-<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x), <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> plot3 <span class="sc">+</span> <span class="fu">geom_function</span>(<span class="at">fun =</span> f, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Logistic regression"</span>))</span>
-<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot4)</span>
-<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles </span>
-<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a>after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
-<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a><span class="fu"># Structure of regression models</span></span>
-<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_regression_defs.qmd &gt;}}</span>
-<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
-<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>:::{#exr-glm-structure}</span>
-<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a>What is the general structure of a generalized linear model?</span>
-<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
-<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a>:::{#sol-glm-structure}</span>
-<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_glm_structure.qmd &gt;}}</span>
-<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a><span class="fu"># Why link functions? {#sec-why-link}</span></span>
-<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_link_motivation.qmd &gt;}}</span>
-<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a><span class="fu"># Canonical links {#sec-canonical-link}</span></span>
-<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_canonical_link.qmd &gt;}}</span>
-<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercises {.unnumbered}</span></span>
-<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_exr-prac-glm-components.qmd &gt;}}</span>
-<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
-<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_exr-prac-canonical-link.qmd &gt;}}</span>
-<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
-<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a>:::</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Introduction to GLMs"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">aliases:</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - glms.html</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html: default</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">  revealjs:</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-slides.html</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-handout.pdf</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">  docx:</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: Intro-to-GLMs-handout.docx</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>{{&lt; include shared-config.qmd &gt;}}</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Welcome</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>Welcome to Epidemiology 204: Quantitative Epidemiology III (Statistical Models).</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>Epi 204 is a course on **regression modeling**. </span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># What you should already know {.scrollable}</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>{{&lt; include prereq-knowledge.qmd &gt;}}</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="fu"># What we will cover in this course</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Linear (Gaussian) regression models (review and more details)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Regression models for non-Gaussian outcomes</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>binary</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>count</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="ss">    +   </span>time to event</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Statistical analysis using R</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>We will start where Epi 203 left off: with linear regression models.</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_outcome_types.qmd &gt;}}</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># The scientific method and models</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_scientific_method.qmd &gt;}}</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Motivations for regression models</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>:::{#exr-why-regression}</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>Why do we need regression models?</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>::: {#sol-why-regression .incremental}</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>when there's not enough data to analyze every subgroup of interest </span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>individually</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>especially when subgroups are defined using continuous predictors</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_regression_uses.qmd &gt;}}</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: Adelie penguins</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-1</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="ot">&lt;-</span></span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> body_mass_g) <span class="sc">+</span></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ggpenguins)</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Linear regression</span></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-2</span></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins with linear regression fit</span></span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="ot">&lt;-</span></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>  ggpenguins <span class="sc">+</span></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curved regression lines</span></span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-3</span></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Palmer penguins - curved regression lines</span></span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>ggpenguins2 <span class="ot">&lt;-</span> ggpenguins <span class="sc">+</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">log</span>(x),</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>ggpenguins2</span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple regression</span></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-palmer-4</span></span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Palmer penguins - multiple groups"</span></span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="ot">&lt;-</span></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>  palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> bill_length_mm,</span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> body_mass_g,</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> species</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"smooth"</span></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length (mm)"</span>) <span class="sc">+</span></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Body mass (g)"</span>)</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>ggpenguins <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modeling non-Gaussian outcomes</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>::: {#fig-beetles_1a}</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmx)</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BeetleMortality)</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a>beetles <span class="ot">&lt;-</span> BeetleMortality <span class="sc">|&gt;</span></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct =</span> died <span class="sc">/</span> n,</span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">survived =</span> n <span class="sc">-</span> died</span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>  beetles <span class="sc">|&gt;</span></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> pct)) <span class="sc">+</span></span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n)) <span class="sc">+</span></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Dose (log mg/L)"</span>) <span class="sc">+</span></span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mortality rate (%)"</span>) <span class="sc">+</span></span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>  <span class="co"># xlab(bquote(log[10]), bquote(CS[2])) +</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot1)</span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why don't we use linear regression?</span></span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles-plot1}</span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a>beetles_long <span class="ot">&lt;-</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>  beetles <span class="sc">|&gt;</span></span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="fu">everything</span>(),</span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="fu">c</span>(</span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">times =</span> died),</span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> survived)</span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a>  beetles_long <span class="sc">|&gt;</span></span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> outcome <span class="sc">~</span> dose,</span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> _</span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>range1 <span class="ot">&lt;-</span> <span class="fu">range</span>(beetles<span class="sc">$</span>dose) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">2</span>, .<span class="dv">2</span>)</span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a>f_linear <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>  plot1 <span class="sc">+</span></span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linear, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Straight line"</span>)) <span class="sc">+</span></span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Model"</span>, <span class="at">size =</span> <span class="st">""</span>)</span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot2)</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to </span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>gaseous carbon disulphide (Bliss 1935)</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zoom out</span></span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles2}</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot2 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to </span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>gaseous carbon disulphide (Bliss 1935)</span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## log transformation of dose?</span></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles3}</span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>  beetles_long <span class="sc">|&gt;</span></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> outcome <span class="sc">~</span> <span class="fu">log</span>(dose), <span class="at">data =</span> _)</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>f_linearlog <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> plot2 <span class="sc">+</span></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linearlog, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Log-transform dose"</span>))</span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot3 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Logistic regression</span></span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>:::{#fig-beetles4b}</span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> beetles <span class="sc">|&gt;</span></span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(<span class="at">formula =</span> <span class="fu">cbind</span>(died, survived) <span class="sc">~</span> dose, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>  glm1 <span class="sc">|&gt;</span> </span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> plot3 <span class="sc">+</span> <span class="fu">geom_function</span>(<span class="at">fun =</span> f, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Logistic regression"</span>))</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(plot4)</span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>Mortality rates of adult flour beetles </span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>after five hours' exposure to gaseous carbon disulphide (Bliss 1935)</span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="fu"># Structure of regression models</span></span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_regression_defs.qmd &gt;}}</span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>:::{#exr-glm-structure}</span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>What is the general structure of a generalized linear model?</span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>:::{#sol-glm-structure}</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_glm_structure.qmd &gt;}}</span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a><span class="fu"># Why link functions? {#sec-why-link}</span></span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_link_motivation.qmd &gt;}}</span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a><span class="fu"># Canonical links {#sec-canonical-link}</span></span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_sec_canonical_link.qmd &gt;}}</span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a><span class="fu"># The model fitting process {#sec-glm-fitting}</span></span>
+<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a>The rest of this chapter is adapted from</span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a>@dobson4e <span class="co">[</span><span class="ot">Chapter 2</span><span class="co">]</span>.</span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_model_fitting_process.qmd &gt;}}</span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
+<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_exm_chronic_eda.qmd &gt;}}</span>
+<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 1: Model specification</span></span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_specification.qmd &gt;}}</span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Parameter estimation</span></span>
+<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_estimation.qmd &gt;}}</span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 3: Checking model adequacy</span></span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_checking.qmd &gt;}}</span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 4: Inference</span></span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_inference.qmd &gt;}}</span>
+<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a><span class="fu"># Choosing a model {#sec-choosing-glm}</span></span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/glms/_sec_choosing_model.qmd &gt;}}</span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercises {.unnumbered}</span></span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_exr-prac-glm-components.qmd &gt;}}</span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>{{&lt; slidebreak &gt;}}</span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subfiles/Intro-to-GLMs/_exr-prac-canonical-link.qmd &gt;}}</span>
+<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
+<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
