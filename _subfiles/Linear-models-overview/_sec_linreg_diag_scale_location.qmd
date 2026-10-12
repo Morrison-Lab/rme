@@ -1,0 +1,93 @@
+:::{#def-scale-location-plot}
+#### Scale-location plot
+
+A **scale-location plot** graphs
+$\sqrt{\abs{\stdresid_i}}$,
+the square root of the absolute value of each standardized residual,
+against the corresponding fitted value $\hat y_i$.
+:::
+
+::: notes
+Taking the absolute value folds the negative residuals onto the positive ones,
+so the height of the cloud of points tracks the spread of the residuals
+instead of their sign.
+Taking the square root then shrinks the large values of $\abs{\stdresid_i}$,
+which makes the cloud less skewed.
+:::
+
+{{< slidebreak >}}
+
+::::{#exm-bw-scale-loc}
+#### Scale-location plot for the `birthweight` model
+
+@fig-bw-scale-loc shows the scale-location plot
+for the `birthweight` model with interactions (@eq-BW-lm-interact).
+
+:::{#fig-bw-scale-loc}
+
+```{r}
+#| code-fold: true
+autoplot(bw_lm2, which = 3, ncol = 1) |> print()
+```
+
+Scale-location plot of `birthweight` data
+
+:::
+
+The blue trend line is roughly flat,
+so this plot shows no clear sign that the residual variance changes with the fitted value.
+::::
+
+{{< slidebreak >}}
+
+Unlike the residuals-versus-fitted plot (@fig-bw_lm2-resid-vs-fitted),
+the blue line in a scale-location plot doesn't need to be near 0,
+but it should be flat.
+If the standardized residuals have a standard Gaussian distribution,
+the line should sit near $\E{\sqrt{\abs{Z}}} \approx 0.82$,
+where $Z \sim \ndist{0,1}$:
+
+```{r}
+#| code-fold: false
+gamma(3 / 4) * 2^(1 / 4) / sqrt(pi)
+```
+
+If the line trends upward or downward,
+the residual variance $\sigma^2$ might not be constant.
+In a residuals-versus-fitted plot,
+the same problem shows up as a funnel shape;
+transforming the outcome $Y$
+(for example, with $\log{Y}$ or $\sqrt{Y}$)
+or using a model that allows non-constant variance
+can help [@james2021islr2e, Section 3.3.3].
+
+{{< slidebreak >}}
+
+::::{#exm-scale-loc-hetero}
+#### Scale-location plot when the variance is not constant
+
+@fig-scale-loc-hetero shows a scale-location plot
+for simulated data
+whose residual standard deviation grows in proportion to the mean.
+The blue line slopes clearly upward,
+which is the pattern that signals non-constant variance.
+
+:::{#fig-scale-loc-hetero}
+
+```{r}
+#| code-fold: true
+set.seed(1)
+sim_hetero <- tibble::tibble(
+  x = runif(200, min = 1, max = 10),
+  y = rnorm(200, mean = 2 * x, sd = 0.5 * x)
+)
+lm(y ~ x, data = sim_hetero) |>
+  autoplot(which = 3, ncol = 1) |>
+  print()
+```
+
+Scale-location plot for simulated data with non-constant variance
+
+:::
+
+::::
