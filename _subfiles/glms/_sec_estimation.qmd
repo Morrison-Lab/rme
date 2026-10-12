@@ -1,0 +1,172 @@
+@dobson4e [§2.3.3] describes the next step as estimating the model's parameters,
+for example by maximum likelihood or by least squares.
+The model structure from Step 1
+does not dictate the estimation method;
+in this chapter we use maximum likelihood,
+which chooses the parameter values that make the observed data most probable.
+
+{{< slidebreak >}}
+
+::: {#exm-chronic-mle}
+#### Maximum likelihood estimates for the chronic medical conditions model
+
+Write $n_{\text{town}} \eqdef 26$ and $n_{\text{country}} \eqdef 23$ for the group sizes,
+and $\bar{y}_{\text{town}}$ and $\bar{y}_{\text{country}}$ for the group sample means.
+For the model in @exm-chronic-spec,
+the log-likelihood is
+
+$$
+\ba
+\llikf{\beta_0, \beta_1}
+&\eqdef \sum_{i=1}^{49} \logf{\frac{\mu_i^{y_i} e^{-\mu_i}}{y_i!}}
+&& \text{(independent Poisson outcomes)}
+\\
+&= \sum_{i=1}^{49} \sb{y_i \logf{\mu_i} - \mu_i - \logf{y_i!}}
+&& \text{(log of a product and a quotient)}
+\\
+&= \sum_{i=1}^{49} \sb{y_i \eta_i - e^{\eta_i} - \logf{y_i!}}
+&& \text{(log link: } \logf{\mu_i} = \eta_i \text{)}
+\\
+&= \sum_{i=1}^{49} \sb{y_i (\beta_0 + \beta_1 x_i) - e^{\beta_0 + \beta_1 x_i} - \logf{y_i!}}
+&& \text{(definition of } \eta_i \text{)}
+\ea
+$$
+
+Differentiating term by term gives the two components of the score function:
+
+$$
+\ba
+\frac{\partial \llik}{\partial \beta_0}
+&= \sum_{i=1}^{49} \sb{y_i - e^{\beta_0 + \beta_1 x_i}}
+&& \text{(} \partial \eta_i / \partial \beta_0 = 1 \text{)}
+\\
+&= \sum_{i=1}^{49} (y_i - \mu_i)
+&& \text{(} \mu_i = e^{\eta_i} \text{)}
+\\
+\frac{\partial \llik}{\partial \beta_1}
+&= \sum_{i=1}^{49} x_i \sb{y_i - e^{\beta_0 + \beta_1 x_i}}
+&& \text{(} \partial \eta_i / \partial \beta_1 = x_i \text{)}
+\\
+&= \sum_{i=1}^{49} x_i (y_i - \mu_i)
+&& \text{(} \mu_i = e^{\eta_i} \text{)}
+\ea
+$$
+
+Since $x_i = 1$ for country women and $x_i = 0$ for town women,
+setting $\partial \llik / \partial \beta_1 = 0$ gives
+
+$$
+\ba
+0 &= \sum_{i:\, x_i = 1} \paren{y_i - e^{\beta_0 + \beta_1}}
+&& \text{(drop the terms with } x_i = 0 \text{)}
+\\
+&= n_{\text{country}} \bar{y}_{\text{country}} - n_{\text{country}} e^{\beta_0 + \beta_1}
+&& \text{(sum of } n_{\text{country}} \text{ terms)}
+\\
+e^{\beta_0 + \beta_1} &= \bar{y}_{\text{country}}
+&& \text{(rearrange and divide by } n_{\text{country}} \text{)}
+\ea
+$$
+
+Subtracting the second score equation from the first leaves only the town women,
+since $1 - x_i = 1$ exactly when woman $i$ lives in the town:
+
+$$
+\ba
+0 &= \sum_{i=1}^{49} (1 - x_i)(y_i - \mu_i)
+&& \text{(difference of the two score equations)}
+\\
+&= \sum_{i:\, x_i = 0} \paren{y_i - e^{\beta_0}}
+&& \text{(drop the terms with } x_i = 1 \text{)}
+\\
+&= n_{\text{town}} \bar{y}_{\text{town}} - n_{\text{town}} e^{\beta_0}
+&& \text{(sum of } n_{\text{town}} \text{ terms)}
+\\
+e^{\beta_0} &= \bar{y}_{\text{town}}
+&& \text{(rearrange and divide by } n_{\text{town}} \text{)}
+\ea
+$$
+
+Taking logs of both solutions gives the maximum likelihood estimates:
+
+$$
+\ba
+\eb_0 &= \logf{\bar{y}_{\text{town}}}
+\\
+\eb_1 &= \logf{\bar{y}_{\text{country}}} - \eb_0
+&& \text{(log of } e^{\beta_0 + \beta_1} = \bar{y}_{\text{country}} \text{)}
+\\
+&= \logf{\bar{y}_{\text{country}}} - \logf{\bar{y}_{\text{town}}}
+&& \text{(substitute } \eb_0 \text{)}
+\\
+&= \logf{\frac{\bar{y}_{\text{country}}}{\bar{y}_{\text{town}}}}
+&& \text{(difference of logs)}
+\ea
+$$
+
+```{r}
+#| label: chronic-mle
+ybar_town <- mean(chronic$conditions[chronic$country == 0])
+ybar_country <- mean(chronic$conditions[chronic$country == 1])
+b0_hat <- log(ybar_town)
+b1_hat <- log(ybar_country / ybar_town)
+
+chronic_glm <- glm(
+  conditions ~ country,
+  family = poisson(link = "log"),
+  data = chronic
+)
+coef(chronic_glm)
+```
+
+With $\bar{y}_{\text{town}} = 37/26 \approx$ `r sprintf("%.4f", ybar_town)`
+and $\bar{y}_{\text{country}} = 21/23 \approx$ `r sprintf("%.4f", ybar_country)`,
+the closed-form estimates are
+$\eb_0 \approx$ `r sprintf("%.4f", b0_hat)`
+and $\eb_1 \approx$ `r sprintf("%.4f", b1_hat)`,
+matching the coefficients that `glm()` finds numerically.
+The fitted means are the group sample means:
+$\est{\mu}_i = \bar{y}_{\text{town}}$ for town women
+and $\est{\mu}_i = \bar{y}_{\text{country}}$ for country women.
+
+To confirm that these estimates maximize the log-likelihood,
+differentiate the score components once more,
+using $\partial \mu_i / \partial \beta_0 = \mu_i$
+and $\partial \mu_i / \partial \beta_1 = x_i \mu_i$
+(chain rule applied to $\mu_i = e^{\beta_0 + \beta_1 x_i}$):
+
+$$
+\ba
+\frac{\partial^2 \llik}{\partial \beta_0^2}
+&= -\sum_{i=1}^{49} \mu_i
+\\
+\frac{\partial^2 \llik}{\partial \beta_0 \, \partial \beta_1}
+&= -\sum_{i=1}^{49} x_i \mu_i
+\\
+\frac{\partial^2 \llik}{\partial \beta_1^2}
+&= -\sum_{i=1}^{49} x_i^2 \mu_i
+\ea
+$$
+
+Writing $\vx_i \eqdef \tp{(1, x_i)}$ and $\vb \eqdef \tp{(\beta_0, \beta_1)}$,
+these three second derivatives are the entries of the Hessian matrix
+
+$$
+\underbrace{\llik''(\vb)}_{2 \times 2}
+= -\sum_{i=1}^{49} \mu_i
+\underbrace{\vx_i}_{2 \times 1}
+\underbrace{\tp{\vx_i}}_{1 \times 2},
+\quad \text{since} \quad
+\underbrace{\vx_i}_{2 \times 1}
+\underbrace{\tp{\vx_i}}_{1 \times 2}
+= \underbrace{\pmat{1 & x_i \\ x_i & x_i^2}}_{2 \times 2}.
+$$
+
+For any nonzero vector $\underbrace{\vec{a}}_{2 \times 1}$,
+$\tp{\vec{a}} \llik''(\vb) \vec{a} = -\sum_{i=1}^{49} \mu_i \paren{\tp{\vec{a}} \vx_i}^2 < 0$,
+because every $\mu_i > 0$
+and both groups contain women
+(so $\tp{\vec{a}} \vx_i \neq 0$ for some $i$).
+The log-likelihood is therefore strictly concave,
+and the stationary point we found is its unique maximum.
+:::

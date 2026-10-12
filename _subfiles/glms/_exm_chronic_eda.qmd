@@ -1,0 +1,68 @@
+::: {#exm-chronic-eda}
+#### Exploring the chronic medical conditions data
+
+@dobson4e [§2.2.1, Table 2.1] reports the number of chronic medical conditions
+for 26 women living in a town
+and 23 women living in the country,
+all attending general practitioners.
+We will carry this dataset through all four steps of the model fitting process.
+
+| Symbol | Meaning | Column in `chronic` |
+|--------|---------|---------------------|
+| $Y_i$ | number of chronic medical conditions reported by woman $i$ | `conditions` |
+| $x_i$ | indicator that woman $i$ lives in the country ($1$) rather than the town ($0$) | `country` |
+
+```{r}
+#| label: chronic-data
+town <- c(
+  0, 1, 1, 0, 2, 3, 0, 1, 1, 1, 1, 2, 0,
+  1, 3, 0, 1, 2, 1, 3, 3, 4, 1, 3, 2, 0
+)
+country <- c(
+  2, 0, 3, 0, 0, 1, 1, 1, 1, 0, 0, 2,
+  2, 0, 1, 2, 0, 0, 1, 1, 1, 0, 2
+)
+chronic <- data.frame(
+  conditions = c(town, country),
+  country = rep(c(0, 1), times = c(length(town), length(country)))
+)
+chronic$residence <- factor(
+  chronic$country,
+  levels = c(0, 1),
+  labels = c("town", "country")
+)
+```
+
+Following the three questions of @dobson4e [§2.3.1]:
+
+1. The outcome $Y$ is a count,
+   so its scale of measurement is discrete and non-negative;
+   the predictor $x$ is a binary (nominal) indicator.
+
+2. @tbl-chronic-counts shows the frequency distribution of $Y$ within each group.
+   Both distributions are right-skewed,
+   with most women reporting zero, one, or two conditions.
+
+3. The town women report more conditions on average
+   (sample mean `r round(mean(chronic$conditions[chronic$country == 0]), 3)`)
+   than the country women
+   (sample mean `r round(mean(chronic$conditions[chronic$country == 1]), 3)`),
+   so residence might be associated with the outcome.
+
+::: {#tbl-chronic-counts}
+
+```{r}
+#| code-fold: true
+table(
+  residence = chronic$residence,
+  conditions = chronic$conditions
+)
+```
+
+Frequency distribution of the number of chronic medical conditions,
+by residence
+[@dobson4e, §2.2.1, Table 2.1]
+
+:::
+
+:::
