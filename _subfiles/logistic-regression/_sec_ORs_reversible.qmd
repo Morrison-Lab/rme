@@ -53,15 +53,16 @@ ror_OC_given_MI <- odds_OC_MI / odds_OC_nMI # nolint: object_name_linter
 ```
 
 The **disease** odds ratio
-(the odds of MI, comparing OC users to non-users) is:
+(the odds of MI, comparing OC users to non-users) is,
+using @def-OR and @thm-est-odds:
 
 $$
 \ba
 \eror(MI|OC)
 &\eqdef \frac{\eodds(MI|OC)}{\eodds(MI|\neg OC)}
-&& \text{(@def-OR, applied to the estimated odds)}
+&& \text{(definition of odds ratio, applied to the estimated odds)}
 \\ &= \frac{13/4987}{7/9993}
-&& \text{(@thm-est-odds: estimated odds = events/non-events; counts from @exm-oc-mi)}
+&& \text{(one-sample MLE for odds: events/non-events)}
 \\ &= \frac{`r odds_MI_OC`}{`r odds_MI_nOC`}
 && \text{(dividing within each OC-use group)}
 \\ &= `r ror_MI_given_OC`
@@ -70,15 +71,16 @@ $$
 $$
 
 The **exposure** odds ratio
-(the odds of OC use, comparing MI cases to non-cases) is:
+(the odds of OC use, comparing MI cases to non-cases) is,
+using @def-OR and @thm-est-odds:
 
 $$
 \ba
 \eror(OC|MI)
 &\eqdef \frac{\eodds(OC|MI)}{\eodds(OC|\neg MI)}
-&& \text{(@def-OR, applied to the estimated odds)}
+&& \text{(definition of odds ratio, applied to the estimated odds)}
 \\ &= \frac{13/7}{4987/9993}
-&& \text{(@thm-est-odds: estimated odds = events/non-events; counts from @exm-oc-mi)}
+&& \text{(one-sample MLE for odds: events/non-events)}
 \\ &= \frac{`r odds_OC_MI`}{`r odds_OC_nMI`}
 && \text{(dividing within each MI-status group)}
 \\ &= `r ror_OC_given_MI`
