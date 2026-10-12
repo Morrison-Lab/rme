@@ -1,30 +1,3 @@
----
-title: "Generalized Linear Models"
-format:
-  html: default
-  revealjs:
-    output-file: glms-slides.html
-  pdf:
-    output-file: glms-handout.pdf
-  docx:
-    output-file: glms-handout.docx
-
----
-
-
-{{< include latex-macros/macros.qmd >}}
-
-This section is primarily adapted starting from the textbook "An Introduction to Generalized Linear Models" (4th edition, 2018)
-by Annette J. Dobson and Adrian G. Barnett:
-
-<https://doi.org/10.1201/9781315182780>
-
-# The model fitting process
-
-{{< include _subfiles/glms/_sec_model_fitting_process.qmd >}}
-
-# Choosing a model
-
 The choice of statistical model depends on several considerations,
 primary among which is the type of response variable.
 
@@ -73,8 +46,17 @@ is to apply a log transformation directly to the outcome.
 While log-transforming the outcome works well for positive continuous measurements,
 it cannot be applied directly to binary outcomes or to count outcomes that can equal zero.
 
+{{< slidebreak >}}
+
+@tbl-glm-families lists the outcome families available in R's `glm()` function,
+together with the link functions each family accepts
+(the default link for each family is in bold),
+and @tbl-glm-links defines each link function.
+
+::: {#tbl-glm-families}
+
 Family | Links
------- | ------ 
+------ | ------
 gaussian | **identity**, log, inverse
 binomial | **logit**, probit, cauchit, log, cloglog
 gamma | **inverse**, identity, log
@@ -84,23 +66,46 @@ quasi | **identity**, logit, probit, cloglog, inverse, log, 1/mu^2 and sqrt
 quasibinomial | **logit**, probit, identity, cloglog, inverse, log, 1/mu^2 and sqrt
 quasipoisson | **log**, identity, logit, probit, cloglog, inverse, 1/mu^2 and sqrt
 
-: R glm() Families
+Families and link functions available in R's `glm()`
+
+:::
+
+{{< slidebreak >}}
+
+::: {#tbl-glm-links}
 
 Name     | Domain              | Range               | Link Function               | Inverse Link Function
 ---------| ------------------- | ------------------- | --------------------------- | --------------------------------
-identity | $(-\infty, \infty)$ | $(-\infty, \infty)$ | $\eta = \mu$.               | $\mu = \eta$
-log      | $(0,\infty)$        | $(-\infty, \infty)$ | $\eta = \log{\mu}$          | $\mu = \exp{\eta}$
+identity | $(-\infty, \infty)$ | $(-\infty, \infty)$ | $\eta = \mu$                | $\mu = \eta$
+log      | $(0,\infty)$        | $(-\infty, \infty)$ | $\eta = \logf{\mu}$          | $\mu = \exp{\eta}$
 inverse  | $(0, \infty)$       | $(0,\infty)$        | $\eta = 1/\mu$              | $\mu = 1/\eta$
-logit    | $(0,1)$             | $(-\infty, \infty)$ | $\eta = \log{\mu/(1-\mu)}$  | $\mu = \exp{\eta}/(1+\exp{\eta})$
+logit    | $(0,1)$             | $(-\infty, \infty)$ | $\eta = \logf{\mu/(1-\mu)}$ | $\mu = \exp{\eta}/(1+\exp{\eta})$
 probit   | $(0,1)$             | $(-\infty, \infty)$ | $\eta = \Phi^{-1}(\mu)$     | $\mu = \Phi(\eta)$
-cloglog  | $(0,1)$             | $(-\infty, \infty)$ | $\eta = \log{-\log{1-\mu}}$ | $\mu = {1-\exp{-\exp{\eta}}}$
+cloglog  | $(0,1)$             | $(-\infty, \infty)$ | $\eta = \logf{-\logf{1-\mu}}$ | $\mu = {1-\exp{-\exp{\eta}}}$
 1/mu^2   | $(0,\infty)$        | $(0, \infty)$       | $\eta = 1/\mu^2$            | $\mu = 1/\sqrt{\eta}$
 sqrt     | $(0,\infty)$        | $(0,\infty)$        | $\eta = \sqrt{\mu}$         | $\mu = \eta^2$
 
+Link functions available in R's `glm()`, where $\eta \eqdef \reglincomb = g(\mu)$
 
-: R `glm()` Link Functions; $\eta = X\beta = g(\mu)$
+:::
 
-# References {.unnumbered}
+{{< slidebreak >}}
 
-::: {#refs}
+::: {#exm-choose-family}
+#### Matching outcomes to families and links
+
+Each of the following outcomes calls for a different choice of family and link:
+
+| Outcome | Data type | Family | Link |
+|---------|-----------|--------|------|
+| systolic blood pressure (mmHg) | continuous, unbounded in practice | Gaussian | identity |
+| whether a participant develops diabetes during follow-up | binary | binomial | logit |
+| number of chronic medical conditions (@exm-chronic-spec) | count | Poisson | log |
+| hospital length of stay (days), measured continuously | positive and right-skewed | gamma | log |
+
+For the last outcome,
+the canonical inverse link of the gamma family would also be allowed,
+but the log link keeps the fitted means positive for every value of the linear predictor
+and makes $\expf{\beta_j}$ a ratio of means,
+just as in @exm-chronic-spec.
 :::

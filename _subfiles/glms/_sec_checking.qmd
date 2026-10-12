@@ -1,0 +1,101 @@
+@dobson4e [§2.3.4] describes checking a fitted model's adequacy
+by examining residuals:
+summaries of how far each observation falls from its fitted value.
+In a generalized linear model the outcome variance usually changes with the mean,
+so raw differences $y_i - \est{\mu}_i$ are not on a common scale;
+dividing by an estimated standard deviation puts them on one.
+
+{{< slidebreak >}}
+
+::: {#def-pearson-residual-glm}
+#### Pearson residual and Pearson chi-squared statistic
+
+For a generalized linear model with variance function $V(\mu)$
+(@def-natural-parameter)
+and dispersion parameter $\phi = 1$,
+the **Pearson residual** for observation $i$ is
+
+$$
+r_i \eqdef \frac{y_i - \est{\mu}_i}{\sqrt{V(\est{\mu}_i)}},
+$$
+
+and the **Pearson chi-squared statistic** is
+$X^2 \eqdef \sum_{i=1}^n r_i^2$
+[@dunn2018generalized, Chapters 7 and 8].
+For a Poisson outcome, $V(\mu) = \mu$.
+:::
+
+::: notes
+If the model is adequate and the fitted means are not too small,
+$X^2$ is approximately chi-squared distributed with $n - p$ degrees of freedom,
+where $p$ is the number of regression coefficients,
+so $X^2 / (n - p)$ should be close to 1;
+a ratio well above 1 suggests overdispersion
+[@dunn2018generalized, Chapter 7].
+The [count regression chapter](count-regression.qmd) returns to overdispersion.
+:::
+
+{{< slidebreak >}}
+
+::: {#exm-chronic-pearson}
+#### Pearson residuals for the chronic medical conditions model
+
+The town woman who reports 4 conditions has fitted mean
+$\est{\mu}_i = \bar{y}_{\text{town}} = 37/26$
+(@exm-chronic-mle),
+so her Pearson residual is
+
+$$
+\ba
+r_i
+&= \frac{4 - 37/26}{\sqrt{37/26}}
+&& \text{(Pearson residual with } V(\mu) = \mu \text{)}
+\\
+&\approx \frac{4 - 1.4231}{1.1929}
+&& \text{(evaluate } 37/26 \text{ and its square root)}
+\\
+&\approx \frac{2.5769}{1.1929}
+&& \text{(subtract)}
+\\
+&\approx 2.160
+&& \text{(divide)}
+\ea
+$$
+
+```{r}
+#| label: chronic-pearson
+r_pearson <- residuals(chronic_glm, type = "pearson")
+x2 <- sum(r_pearson^2)
+df_resid <- df.residual(chronic_glm)
+```
+
+@fig-chronic-pearson plots all 49 Pearson residuals.
+The largest residual in absolute value is
+`r round(max(abs(r_pearson)), 3)`,
+and the Pearson chi-squared statistic is
+$X^2 \approx$ `r round(x2, 2)`
+on $49 - 2 =$ `r df_resid` residual degrees of freedom,
+so $X^2 / 47 \approx$ `r round(x2 / df_resid, 3)`.
+No residual is extreme,
+and the ratio is below 1,
+so the data show no sign of more variability than the Poisson model allows.
+
+::: {#fig-chronic-pearson}
+
+```{r}
+#| code-fold: true
+library(ggplot2)
+chronic$pearson <- r_pearson
+ggplot(chronic, aes(x = residence, y = pearson)) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  geom_jitter(width = 0.1, height = 0) +
+  labs(x = "Residence", y = "Pearson residual") +
+  theme_bw()
+```
+
+Pearson residuals from the Poisson model for the chronic medical conditions data,
+by residence
+
+:::
+
+:::

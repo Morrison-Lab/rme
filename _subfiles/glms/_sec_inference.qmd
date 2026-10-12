@@ -1,0 +1,102 @@
+The final step is inference:
+@dobson4e [§2.3.5] lists confidence intervals,
+hypothesis tests about the parameters,
+and interpretation of the results.
+By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle),
+in large samples $\eb$ is approximately Gaussian,
+with covariance matrix approximated by the inverse of the observed information
+$-\hessf{\eb}$.
+A 95% Wald confidence interval for $\beta_j$ is then
+$\eb_j \pm 1.96 \cdot \eSEf{\eb_j}$,
+and the Wald statistic $z_j \eqdef \eb_j / \eSEf{\eb_j}$
+tests $H_0: \beta_j = 0$.
+
+{{< slidebreak >}}
+
+::: {#exm-chronic-inference}
+#### Comparing town and country women
+
+In @exm-chronic-mle, the fitted means sum to
+$\sum_{i:\, x_i = 0} \est{\mu}_i = n_{\text{town}} \bar{y}_{\text{town}} = 37$
+for the town women
+and
+$\sum_{i:\, x_i = 1} \est{\mu}_i = n_{\text{country}} \bar{y}_{\text{country}} = 21$
+for the country women.
+Substituting into the Hessian from @exm-chronic-concavity,
+the observed information matrix is
+
+$$
+\ba
+\underbrace{-\hessf{\eb}}_{2 \times 2}
+&= \sum_{i=1}^{49} \est{\mu}_i \pmat{1 & x_i \\ x_i & x_i^2}
+&& \text{(Hessian of the log-likelihood)}
+\\
+&= \pmat{
+  \sum_{i} \est{\mu}_i & \sum_{i:\, x_i = 1} \est{\mu}_i \\
+  \sum_{i:\, x_i = 1} \est{\mu}_i & \sum_{i:\, x_i = 1} \est{\mu}_i
+}
+&& \text{(} x_i \in \{0, 1\} \text{, so } x_i^2 = x_i \text{)}
+\\
+&= \underbrace{\pmat{58 & 21 \\ 21 & 21}}_{2 \times 2}
+&& \text{(} 37 + 21 = 58 \text{)}
+\ea
+$$
+
+Its determinant is $58 \cdot 21 - 21 \cdot 21 = 21 \cdot 37 = 777$,
+so its inverse is
+
+$$
+\ba
+\underbrace{\sb{-\hessf{\eb}}^{-1}}_{2 \times 2}
+&= \frac{1}{777} \pmat{21 & -21 \\ -21 & 58}
+&& \text{(inverse of a } 2 \times 2 \text{ matrix)}
+\ea
+$$
+
+The lower-right entry is the estimated variance of $\eb_1$:
+
+$$
+\ba
+\eVar{\eb_1}
+&= \frac{58}{777}
+\\
+&= \frac{37 + 21}{37 \cdot 21}
+&& \text{(} 58 = 37 + 21 \text{, } 777 = 37 \cdot 21 \text{)}
+\\
+&= \frac{1}{21} + \frac{1}{37}
+&& \text{(split the fraction)}
+\\
+&\approx 0.0746
+\ea
+$$
+
+so $\eSEf{\eb_1} \approx \sqrt{0.0746} \approx 0.2732$.
+
+```{r}
+#| label: chronic-inference
+se_b1 <- sqrt(1 / 21 + 1 / 37)
+ci_b1 <- b1_hat + c(-1, 1) * qnorm(0.975) * se_b1
+z_b1 <- b1_hat / se_b1
+p_b1 <- 2 * pnorm(-abs(z_b1))
+summary(chronic_glm)$coefficients
+```
+
+- The 95% Wald confidence interval for $\beta_1$ is
+  from `r round(ci_b1[1], 3)` to `r round(ci_b1[2], 3)`.
+- Exponentiating the estimate and the interval endpoints,
+  the estimated ratio of the country mean to the town mean is
+  $\expf{\eb_1} \approx$ `r round(exp(b1_hat), 3)`,
+  with 95% confidence interval
+  from `r round(exp(ci_b1[1]), 3)` to `r round(exp(ci_b1[2]), 3)`.
+- The Wald statistic is
+  $z \approx$ `r round(z_b1, 3)`,
+  with two-sided $p \approx$ `r round(p_b1, 3)`.
+
+These hand calculations match the standard error, $z$ value, and $p$-value
+that `summary()` reports for `country`.
+On average, country women in this sample reported
+`r round(100 * (1 - exp(b1_hat)))`% fewer chronic conditions
+than town women,
+but the confidence interval for the ratio includes 1,
+so these data are also consistent with no difference in the mean number of conditions.
+:::

@@ -1,0 +1,51 @@
+@dobson4e [§2.3.2] describes model specification
+as choosing two parts:
+an equation linking the expected outcome to the explanatory variables,
+and a probability distribution for the outcome.
+For a generalized linear model,
+those two parts are the three components in the solution to @exr-glm-structure:
+an outcome distribution,
+a linear predictor $\eta \eqdef \reglincomb$,
+and a link function $g(\cdot)$ with $g(\mu) = \eta$.
+
+{{< slidebreak >}}
+
+::: {#exm-chronic-spec}
+#### Specifying a model for the chronic medical conditions data
+
+The outcome in @exm-chronic-eda is a count with no fixed upper limit,
+so a Poisson distribution is a natural first choice.
+Since a Poisson mean must be positive,
+we pair the Poisson distribution with the log link
+(which is also its canonical link;
+see @sec-canonical-link):
+
+$$
+\ba
+Y_i \mid x_i &\simind \Pois(\mu_i), \quad i = 1, \ldots, 49
+\\
+\logf{\mu_i} &= \eta_i
+\\
+\eta_i &\eqdef \beta_0 + \beta_1 x_i
+\ea
+$$
+
+Under this model,
+$\mu_{\text{town}} \eqdef \expf{\beta_0}$ is the mean number of conditions for town women,
+and $\mu_{\text{country}} \eqdef \expf{\beta_0 + \beta_1}$ is the mean for country women,
+so the ratio of the two group means is
+
+$$
+\ba
+\frac{\mu_{\text{country}}}{\mu_{\text{town}}}
+&= \frac{\expf{\beta_0 + \beta_1}}{\expf{\beta_0}}
+&& \text{(definitions of the two group means)}
+\\
+&= \frac{\expf{\beta_0} \expf{\beta_1}}{\expf{\beta_0}}
+&& \text{(}e^{a + b} = e^a e^b\text{)}
+\\
+&= \expf{\beta_1}
+&& \text{(cancel } \expf{\beta_0}\text{)}
+\ea
+$$
+:::
