@@ -17,6 +17,9 @@ Let:
 - $\hat{\haz}(y) = \frac{d(y)}{r(y)}$: Nelson-Aalen hazard increment;
 - $\hat{\cs}(y) = \expf{-\hat{\haz}(y)}$: Nelson-Aalen conditional survival factor;
 - $\hat{\cuhaz}_{NA}(y) = \sum_{k:\, y_k \leq y} \hat{\haz}(y_k)$: Nelson-Aalen cumulative hazard estimate;
+  at each exit time $y_k$, update the previous estimate:
+  $\hat{\cuhaz}_{NA}(y_k) = \hat{\cuhaz}_{NA}(y_{k-1}) + \hat{\haz}(y_k)$,
+  with $\hat{\cuhaz}_{NA}(y_0) \eqdef 0$;
 - $\hsnaaf{y} = \expf{-\hat{\cuhaz}_{NA}(y)} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Nelson-Aalen survival estimate.
 
 :::{#tbl-na-curve}
@@ -51,11 +54,15 @@ na_curve |>
       round(na_surv_curve, 4),
       "$"
     ),
+    # update from the previous row's estimate,
+    # instead of re-adding every increment so far:
+    cusum_prev = dplyr::lag(cusum_hazard_round),
     cusum_hazard = paste0(
       "$",
-      purrr::map_chr(
-        row_number(),
-        \(i) paste(hazard_math[seq_len(i)], collapse = " + ")
+      dplyr::if_else(
+        is.na(cusum_prev),
+        hazard_math,
+        paste0(cusum_prev, " + ", hazard_math)
       ),
       " = ",
       cusum_hazard_round,
@@ -70,7 +77,7 @@ na_curve |>
       round(hazard, 4), "$"
     )
   ) |>
-  select(-hazard_math, -cusum_hazard_round) |>
+  select(-hazard_math, -cusum_hazard_round, -cusum_prev) |>
   rename(
     `$y$`                                  = Y,
     `$d(y)$`                               = events,
