@@ -20,13 +20,15 @@ $$
 {{< slidebreak >}}
 
 ::: proof
+This proof uses @def-OR and @thm-prob-to-odds:
+
 $$
 \ba
 \ratio(\odds_1, \odds_2)
 &\eqdef \frac{\odds_1}{\odds_2}
-&& \text{(@def-OR)}
+&& \text{(definition of odds ratio)}
 \\ &= \frac{\paren{\frac{\pi_1}{1-\pi_1}}}{\paren{\frac{\pi_2}{1-\pi_2}}}
-&& \text{(@thm-prob-to-odds, applied to each odds)}
+&& \text{(odds as a function of probability, applied to each odds)}
 \ea
 $$
 :::
@@ -41,7 +43,8 @@ Using the MI risk estimates from @sol-compute-probs,
 $\hat\pi(OC) = 13/5000$ and $\hat\pi(\neg OC) = 7/10000$,
 @thm-or-ratio-ratio expresses the odds ratio
 as a ratio of the two odds,
-each of which is itself a ratio of probabilities:
+each of which is itself a ratio of probabilities.
+The steps use @def-OR and @thm-prob-to-odds:
 
 ```{r}
 #| label: or-ratio-ratio-numeric
@@ -57,9 +60,9 @@ $$
 \ba
 \ratio(\odds(OC), \odds(\neg OC))
 &\eqdef \frac{\odds(OC)}{\odds(\neg OC)}
-&& \text{(@def-OR)}
+&& \text{(definition of odds ratio)}
 \\ &= \frac{\paren{\frac{\pi(OC)}{1-\pi(OC)}}}{\paren{\frac{\pi(\neg OC)}{1-\pi(\neg OC)}}}
-&& \text{(@thm-prob-to-odds, applied to each odds)}
+&& \text{(odds as a function of probability, applied to each odds)}
 \\ &= \frac{\paren{\frac{13/5000}{1 - 13/5000}}}{\paren{\frac{7/10000}{1 - 7/10000}}}
 && \text{(substituting the risk estimates)}
 \\ &= \frac{`r odds_oc`}{`r odds_noc`}

@@ -73,6 +73,18 @@ if (run_graphs) {
       showscale = FALSE,
       name = "Odds Ratio"
     ) |>
+    # highlight the x = y line, where the two probabilities are equal:
+    # there, the risk difference is 0 and the risk and odds ratios are 1
+    plotly::add_trace(
+      type = "scatter3d",
+      mode = "lines",
+      x = c(probs, NA, probs),
+      y = c(probs, NA, probs),
+      z = c(rep(0, n_ticks), NA, rep(1, n_ticks)),
+      line = list(color = "black", width = 8),
+      name = "equal probabilities (x = y)",
+      inherit = FALSE
+    ) |>
     plotly::layout(
       scene = list(
         xaxis = list(
@@ -95,6 +107,10 @@ if (run_graphs) {
 }
 ```
 
-Graph of risk difference, risk ratio, and odds ratio
+Graph of risk difference, risk ratio, and odds ratio.
+The black lines mark where the two probabilities are equal
+(the $x = y$ line):
+there, the risk difference is 0
+and the risk ratio and odds ratio are both 1.
 
 :::

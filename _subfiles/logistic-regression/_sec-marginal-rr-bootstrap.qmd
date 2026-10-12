@@ -1,0 +1,75 @@
+The point estimates in @exm-observed-marginal-rr and @exm-causal-marginal-rr
+use the same fitted model as @exm-causal-marginal-rd.
+To quantify their uncertainty, we bootstrap the marginal risk ratio,
+modifying the statistic function to compute ratios instead of differences:
+
+```{r}
+#| label: marginal-rr-example
+#| code-fold: show
+#| eval: false
+
+library(boot)
+
+compute_marginal_rr <- function(model,
+                                data,
+                                exposure_var,
+                                exposed_level,
+                                unexposed_level) {
+  counterfactual_data <- make_counterfactual_datasets(
+    data = data,
+    exposure_var = exposure_var,
+    exposed_level = exposed_level,
+    unexposed_level = unexposed_level
+  )
+  data_exposed <- counterfactual_data$data_exposed
+  data_unexposed <- counterfactual_data$data_unexposed
+
+  risk_exposed <- predict(
+    model,
+    newdata = data_exposed,
+    type = "response"
+  )
+
+  risk_unexposed <- predict(
+    model,
+    newdata = data_unexposed,
+    type = "response"
+  )
+
+  mean(risk_exposed) / mean(risk_unexposed)
+}
+
+statistic_fn_rr <- function(data, indices) {
+  boot_data <- data[indices, ]
+  boot_fit <- glm(
+    chd69_binary ~ dibpat + age,
+    data = boot_data,
+    family = binomial(link = "logit")
+  )
+  compute_marginal_rr(
+    model = boot_fit,
+    data = boot_data,
+    exposure_var = "dibpat",
+    exposed_level = "Type A",
+    unexposed_level = "Type B"
+  )
+}
+
+set.seed(20260512)
+boot_results_rr <- boot(
+  data = wcgs_clean,
+  statistic = statistic_fn_rr,
+  # Keep the rendered example fast; increase to 2000+ for final analyses.
+  R = 300
+)
+
+# BCa intervals can be unstable at this small R;
+# increase to R = 2000+ before relying on bca results.
+boot_ci_rr <- boot.ci(boot_results_rr, type = c("perc", "bca"))
+
+cat("Marginal Risk Ratio (Type A vs Type B):",
+    round(boot_results_rr$t0, 3), "\n")
+cat("95% Percentile CI: (",
+    round(boot_ci_rr$percent[4], 3), ",",
+    round(boot_ci_rr$percent[5], 3), ")\n")
+```
