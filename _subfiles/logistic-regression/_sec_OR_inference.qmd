@@ -2,10 +2,10 @@
 
 :::{#exr-ci-OR}
 Given
-a maximum likelihood estimate $\hb$
+a maximum likelihood estimate $\eb$
 and
 a corresponding estimated covariance matrix 
-$\hS \eqdef \widehat{\Covt}(\hb)$, 
+$\eS \eqdef \widehat{\Covt}(\eb)$, 
 calculate a 95% confidence interval for the odds ratio 
 comparing covariate patterns $\vx$ and $\vxs$, $\ror(\vx,\vxs)$.
 :::
@@ -57,7 +57,7 @@ By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro
 a 95% confidence interval for $\difflogodds$
 can be constructed as:
 
-$$\hdifflogodds \pm 1.96 * \teal{\HSE{\hdifflogodds}}$$
+$$\edifflogodds \pm 1.96 * \teal{\HSE{\edifflogodds}}$$
 
 :::
 
@@ -67,10 +67,10 @@ $$\hdifflogodds \pm 1.96 * \teal{\HSE{\hdifflogodds}}$$
 
 ::: notes
 How can we estimate the standard error of
-$\hdifflogodds$?
+$\edifflogodds$?
 :::
 
-$$\teal{\HSE{\hdifflogodds}} = \teal{?}$$
+$$\teal{\HSE{\edifflogodds}} = \teal{?}$$
 
 :::
 
@@ -79,24 +79,24 @@ $$\teal{\HSE{\hdifflogodds}} = \teal{?}$$
 :::{#sol-se-diff-logodds}
 
 $$
-\green{\SE{\hdifflogodds}} = 
-\sqrt{\red{\Var{\hdifflogodds}}}
+\green{\SE{\edifflogodds}} = 
+\sqrt{\red{\Var{\edifflogodds}}}
 $${#eq-se-sqrt-var}
 
 By @lem-diff-logodds and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
 
 $$
 \ba
-\red{\Var{\hdifflogodds}}
-&= \Var{(\diffvx) \cdot \hb}
+\red{\Var{\edifflogodds}}
+&= \Var{(\diffvx) \cdot \eb}
 \\
-&= \pt{\diffvx}\Cov{\hb}(\diffvx)
+&= \pt{\diffvx}\Cov{\eb}(\diffvx)
 \\
 &= \red{\pt{\diffvx}\Sigma(\diffvx)}
 \ea
 $${#eq-var-diff-logodds}
 
-where $\Sigma \eqdef \Covt(\hb)$.
+where $\Sigma \eqdef \Covt(\eb)$.
 
 {{< slidebreak >}}
 
@@ -111,7 +111,7 @@ $$
 \\
 &= \sumip\sumjp (\Delta x_i) \Sigma_{ij} (\Delta x_j)
 \\
-&= \red{\sumip\sumjp (x_i - x^*_i) \Covt(\hb_i,\hb_j) (x_j - x^*_j)}
+&= \red{\sumip\sumjp (x_i - x^*_i) \Covt(\eb_i,\eb_j) (x_j - x^*_j)}
 \ea
 $$
 
@@ -127,21 +127,21 @@ gives an estimator for the variance and standard error:
 #### Estimated variance and standard error of difference in log-odds
 
 $$
-\orange{\hVar{\Delta{\hat\logodds}}} = \orange{\tp{\diffvx}\hS(\diffvx)}
+\orange{\eVar{\Delta{\hat\logodds}}} = \orange{\tp{\diffvx}\eS(\diffvx)}
 $${#eq-est-var-difflogodds}
 
 $$
 \teal{\HSE{\Delta{\hat\logodds}}} =
-\teal{\sqrt{\tp{\diffvx}\hS(\diffvx)}}
+\teal{\sqrt{\tp{\diffvx}\eS(\diffvx)}}
 $${#eq-est-se-diff-logodds}
 
 :::
 
 ::: proof
 By @sol-se-diff-logodds,
-$\Var{\hdifflogodds} = \tp{\diffvx}\Sigma(\diffvx)$ (@eq-var-diff-logodds).
+$\Var{\edifflogodds} = \tp{\diffvx}\Sigma(\diffvx)$ (@eq-var-diff-logodds).
 By the invariance property of MLEs,
-we estimate $\Sigma$ with $\hS \eqdef \widehat{\Covt}(\hb)$,
+we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,
 which yields @eq-est-var-difflogodds;
 taking the square root gives @eq-est-se-diff-logodds.
 :::
@@ -181,9 +181,9 @@ ci_diff <- diff_logodds_hat + c(-1, 1) * 1.96 * se_diff
 
 By @eq-est-se-diff-logodds,
 the estimated standard error of the difference in log-odds is
-$\HSE{\Delta\hat\logodds} = \sqrt{\tp{\diffvx}\hS(\diffvx)} = `r se_diff`$,
+$\HSE{\Delta\hat\logodds} = \sqrt{\tp{\diffvx}\eS(\diffvx)} = `r se_diff`$,
 and the estimated difference in log-odds is
-$\Delta\hat\logodds = (\diffvx)\cdot\hb = `r diff_logodds_hat`$.
+$\Delta\hat\logodds = (\diffvx)\cdot\eb = `r diff_logodds_hat`$.
 
 The resulting 95% confidence interval for $\difflogodds$ is
 $(`r ci_diff[1]`, `r ci_diff[2]`)$,

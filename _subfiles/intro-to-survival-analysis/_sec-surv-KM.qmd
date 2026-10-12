@@ -14,11 +14,11 @@ so for any time $t$ we simply count the fraction of patients whose event time is
 
 :::: notes
 Given event times $Y_1, \dots, Y_n$ with no censoring,
-the **empirical survival function** $\hsurv(t)$
+the **empirical survival function** $\esurv(t)$
 is the fraction of observed event times greater than $t$:
 ::::
 
-$$\hsurv(t) \eqdef \frac{1}{n}\sumin \indicp{Y_i > t}$$
+$$\esurv(t) \eqdef \frac{1}{n}\sumin \indicp{Y_i > t}$$
 
 :::
 
@@ -29,28 +29,28 @@ $$\hsurv(t) \eqdef \frac{1}{n}\sumin \indicp{Y_i > t}$$
 #### Empirical survival function and empirical CDF
 
 Without censoring,
-the empirical survival function equals one minus the [empirical CDF](https://morrison-lab.github.io/sds/nonparametric-models.html#def-empirical-cdf) $\hcdf(t)$ of the event times:
+the empirical survival function equals one minus the [empirical CDF](https://morrison-lab.github.io/sds/nonparametric-models.html#def-empirical-cdf) $\ecdf(t)$ of the event times:
 
-$$\hsurv(t) = 1 - \hcdf(t)$$ {#eq-emp-surv-no-cens}
+$$\esurv(t) = 1 - \ecdf(t)$$ {#eq-emp-surv-no-cens}
 
 :::
 
 ::: proof
 $$
 \begin{aligned}
-\hsurv(t)
+\esurv(t)
 &\eqdef \frac{1}{n}\sumin \indicp{Y_i > t}
 \\ &= \frac{1}{n}\sumin \sb{1 - \indicp{Y_i \le t}}
 \\ &= \frac{1}{n}\sumin 1 - \frac{1}{n}\sumin \indicp{Y_i \le t}
 \\ &= 1 - \frac{1}{n}\sumin \indicp{Y_i \le t}
-\\ &= 1 - \hcdf(t)
+\\ &= 1 - \ecdf(t)
 \end{aligned}
 $$
 :::
 
 ::: notes
-$\hsurv(t)$ is a right-continuous step function
-that starts at $\hsurv(0) = 1$
+$\esurv(t)$ is a right-continuous step function
+that starts at $\esurv(0) = 1$
 and drops by $d_j/n$ at each distinct event time $t_j$,
 where $d_j$ is the number of events at $t_j$.
 Without censoring,
@@ -92,7 +92,7 @@ placebo_surv <-
 placebo_surv
 ```
 
-Empirical survival function $\hsurv(t)$ for the placebo arm of `drug6mp`
+Empirical survival function $\esurv(t)$ for the placebo arm of `drug6mp`
 :::
 
 ::: {#fig-surv-placebo-no-cens}
@@ -116,7 +116,7 @@ ggplot(placebo_surv_plot) +
   theme_bw()
 ```
 
-Empirical survival curve $\hsurv(t)$ for the placebo arm of `drug6mp`
+Empirical survival curve $\esurv(t)$ for the placebo arm of `drug6mp`
 :::
 
 :::
@@ -149,16 +149,16 @@ after (say) the third event time
 
 $$
 \begin{aligned}
-\hsurv(t)
+\esurv(t)
 &= \prod_{t_i \le t}\sb{1-\frac{d_i}{r_i}}
 \\ &= \sb{\frac{n-d_1}{n}} \sb{\frac{n-d_1-d_2}{n-d_1}} \sb{\frac{n-d_1-d_2-d_3}{n-d_1-d_2}}
 \\ &= \frac{n-d_1-d_2-d_3}{n}
 \\ &=1-\frac{d_1+d_2+d_3}{n}
-\\ &=1-\hcdf(t)
+\\ &=1-\ecdf(t)
 \end{aligned}
 $$
 
-where $\hcdf(t)$ is the usual empirical CDF estimate.
+where $\ecdf(t)$ is the usual empirical CDF estimate.
 
 :::
 

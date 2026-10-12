@@ -17,7 +17,7 @@ Let:
 - $\hat{\haz}(y) = \frac{d(y)}{r(y)}$: Nelson-Aalen hazard increment;
 - $\hat{\cs}(y) = \expf{-\hat{\haz}(y)}$: Nelson-Aalen conditional survival factor;
 - $\hat{\cuhaz}_{NA}(y) = \sum_{k:\, y_k \leq y} \hat{\haz}(y_k)$: Nelson-Aalen cumulative hazard estimate;
-- $\hsnaaf{y} = \expf{-\hat{\cuhaz}_{NA}(y)} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Nelson-Aalen survival estimate.
+- $\esnaaf{y} = \expf{-\hat{\cuhaz}_{NA}(y)} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Nelson-Aalen survival estimate.
 
 :::{#tbl-na-curve}
 ```{r}
@@ -82,7 +82,7 @@ na_curve |>
     `$\\hat{\\haz}(y)$`                    = hazard,
     `$\\hat{\\cs}(y)$`                     = kappa,
     `$\\hat{\\cuhaz}_{NA}(y)$`             = cusum_hazard,
-    `$\\hsnaaf{y}$`                     = na_surv_curve
+    `$\\esnaaf{y}$`                     = na_surv_curve
   ) |>
   pander()
 ```
