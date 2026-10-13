@@ -1,0 +1,22 @@
+<script>
+// A link to #target scrolls the browser to the target before MathJax and the
+// images have set their final heights. Equations above the target then grow
+// and push it up out of view. Scroll to the target again once the page has
+// settled, so the CSS scroll-margin-top in custom.scss places it mid-view.
+(function () {
+  function land() {
+    var id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+    var el = id && document.getElementById(id);
+    if (el) el.scrollIntoView();
+  }
+  if (!location.hash) return;
+  function afterMath() {
+    var mj = window.MathJax;
+    var ready = mj && mj.startup && mj.startup.promise;
+    (ready || Promise.resolve()).then(land, land);
+  }
+  if (document.readyState === "complete") afterMath();
+  else window.addEventListener("load", afterMath);
+})();
+</script>
