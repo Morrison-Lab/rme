@@ -295,9 +295,9 @@ is larger than chance alone would produce:
 
 {{< slidebreak >}}
 
-:::{#def-lrt}
+:::{#def-lrt-statistic}
 
-#### Likelihood ratio test (LRT)
+#### Likelihood ratio test statistic
 
 Suppose a **reduced** model with $p_0$ parameters
 is nested in a **full** model with $p_1 > p_0$ parameters;
@@ -309,12 +309,20 @@ $$\Lambda \eqdef 2(\llik_{\text{full}}(\hat\theta_1) - \llik_{\text{red}}(\hat\t
 where $\hat\theta_1$ and $\hat\theta_0$ are
 the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
 of the full and reduced models, respectively.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-lrt}
+
+#### Likelihood ratio test (LRT)
+
 Under the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) that the reduced model is adequate,
+the likelihood ratio test statistic $\Lambda$ (@def-lrt-statistic) satisfies
 $\Lambda \dot \sim \chi^2(p_1 - p_0)$
 by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 The **likelihood ratio test (LRT)** rejects the reduced model
 when $\Lambda$ is large relative to that $\chi^2(p_1 - p_0)$ distribution.
-
 :::
 
 ::: notes

@@ -367,9 +367,9 @@ evidence of a lack of fit at the 0.05 level.
 
 {{< slidebreak >}}
 
-:::{#def-leverage-glm}
+:::{#def-weighted-hat-matrix-glm}
 
-#### Leverage for a GLM
+#### Weighted hat matrix for a GLM
 
 For a logistic (or other) generalized linear model
 fit to $q$ covariate patterns with $p$ parameters,
@@ -387,9 +387,25 @@ $$
 
 where
 $\underbrace{\matr{W}}_{q \times q} \eqdef \text{diag}\paren{n_k \, \hat\pi_k \, (1 - \hat\pi_k)}$
-is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) of binomial weights,
-and the **leverage** $h_k$ of covariate pattern $k$
+is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) of binomial weights.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-leverage-glm}
+
+#### Leverage for a GLM
+
+Let $\matr{H}$ be the weighted hat matrix (@def-weighted-hat-matrix-glm).
+The **leverage** $h_k$ of covariate pattern $k$
 is the $k$-th diagonal element of $\matr{H}$.
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-weighted-hat-matrix-glm-analog}
+
+#### The weighted hat matrix as the GLM analog of the linear-model hat matrix
 
 This weighted hat matrix is the GLM analog
 of [the linear-model hat matrix](Linear-models-overview.qmd#def-hat-matrix);
