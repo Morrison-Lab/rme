@@ -244,6 +244,14 @@ Saturated model for the `birthweight` data
 
 We call this model the **full**, **maximal**, or **saturated** model for this dataset.
 
+{{< slidebreak >}}
+
+{{< include _subfiles/Linear-models-overview/_def-saturated-model.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Linear-models-overview/_exm-saturated-model.qmd >}}
+
 ---
 
 ```{r}
@@ -357,6 +365,14 @@ This statistic is called the **deviance** or **residual deviance** for our two-s
 
 The corresponding p-value tells us whether there we have enough evidence to detect that our two-slopes, two-intercepts model is a worse fit for the data than the maximal model; in other words, it tells us if there's evidence that we missed any important patterns. (Remember, a nonsignificant p-value could mean that we didn't miss anything and a more complicated model is unnecessary, or it could mean we just don't have enough data to tell the difference between these models.)
 
+{{< slidebreak >}}
+
+{{< include _subfiles/Linear-models-overview/_def-deviance.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Linear-models-overview/_exm-deviance.qmd >}}
+
 ### Null Deviance
 
 Similarly, the *least* complicated model we could fit would have only one mean parameter, an intercept:
@@ -423,7 +439,8 @@ In R, this test is:
 lrtest(lm_max, lm0)
 ```
 
-This log-likelihood ratio statistic is called the **null deviance**. It tells us whether we have enough data to detect a difference between the null and full models.
+This log-likelihood ratio statistic is called the **null deviance** (@def-deviance).
+It tells us whether we have enough data to detect a difference between the null and full models.
 
 ---
 

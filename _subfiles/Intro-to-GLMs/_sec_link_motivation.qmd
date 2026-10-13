@@ -18,7 +18,7 @@ Why not model the mean $\mu(\vx)$ as a linear function of the covariates, as in 
 A straight line for $\mu(\vx)$ can leave the range of the outcome:
 it can predict a negative count, or a probability below 0 or above 1.
 We could try to repair this by transforming each covariate separately
-and adding interaction terms until the fitted curve stays in range,
+and adding interaction terms (@def-interaction) until the fitted curve stays in range,
 but that is hard to get right.
 
 The link function offers a simpler route.
@@ -45,7 +45,7 @@ Choosing the inverse link guarantees the model structure we want:
 With a non-identity link, interpreting a slope gets harder.
 A coefficient $\beta_j$ is the change in $g(\mu)$ per unit change in $x_j$,
 not the change in $\mu$.
-Even without any interaction terms,
+Even without any interaction terms (@def-interaction),
 the change in $\mu$ per unit change in $x_j$
 depends on the values of the other covariates,
 because $g^{-1}$ is not linear.
