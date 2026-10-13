@@ -41,10 +41,10 @@ Let:
 - $r^*(y) = r(y) - e(y)$: number at risk after $y$;
 - $\hat{\cs}(y) = \hat{\Pr}(T > y \mid T \geq y) = [r(y) - d(y)]/r(y)$: conditional survival factor;
 - $\hat{\haz}(y) = \hat{\Pr}(T = y \mid T \geq y) = \frac{d(y)}{r(y)} = 1 - \hat{\cs}(y)$: estimated [discrete hazard](#def-discrete-haz-risk);
-- $\hskmf{y} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Kaplan-Meier survival estimate.
+- $\eskmf{y} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Kaplan-Meier survival estimate.
   At each exit time $y_k$, update the previous estimate:
-  $\hskmf{y_k} = \hskmf{y_{k-1}} \cdot \hat{\cs}(y_k)$,
-  with $\hskmf{y_0} \eqdef 1$.
+  $\eskmf{y_k} = \eskmf{y_{k-1}} \cdot \hat{\cs}(y_k)$,
+  with $\eskmf{y_0} \eqdef 1$.
 
 :::{#tbl-km-curve}
 ```{r}
@@ -107,7 +107,7 @@ km_curve |>
     `$r^*(y)$`                   = r_star,
     `$\\hat{\\cs}(y)$`         = km_factor,
     `$\\hat{\\haz}(y)$`          = hazard,
-    `$\\hskmf{y}$`            = km_surv_curve
+    `$\\eskmf{y}$`            = km_surv_curve
   ) |>
   pander()
 ```

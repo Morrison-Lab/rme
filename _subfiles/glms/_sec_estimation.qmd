@@ -1,5 +1,6 @@
 @dobson4e [§2.3.3] describes the next step as estimating the model's parameters,
-for example by maximum likelihood or by least squares.
+for example by [maximum likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-intro-MLEs)
+or by [least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols).
 The model structure from Step 1
 does not dictate the estimation method;
 in this chapter we use maximum likelihood,
@@ -13,7 +14,7 @@ which chooses the parameter values that make the observed data most probable.
 Write $n_{\text{town}} \eqdef 26$ and $n_{\text{country}} \eqdef 23$ for the group sizes,
 and $\bar{y}_{\text{town}}$ and $\bar{y}_{\text{country}}$ for the group sample means.
 For the model in @exm-chronic-spec,
-the log-likelihood is
+the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is
 
 $$
 \ba
@@ -32,7 +33,7 @@ $$
 \ea
 $$
 
-Differentiating term by term gives the two components of the score function:
+Differentiating term by term gives the two components of the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score):
 
 $$
 \ba
@@ -68,7 +69,7 @@ e^{\beta_0 + \beta_1} &= \bar{y}_{\text{country}}
 \ea
 $$
 
-Subtracting the second score equation from the first leaves only the town women,
+Subtracting the second [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) from the first leaves only the town women,
 since $1 - x_i = 1$ exactly when woman $i$ lives in the town:
 
 $$
@@ -87,7 +88,7 @@ e^{\beta_0} &= \bar{y}_{\text{town}}
 \ea
 $$
 
-Taking logs of both solutions gives the maximum likelihood estimates:
+Taking logs of both solutions gives the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle):
 
 $$
 \ba
@@ -125,7 +126,7 @@ the closed-form estimates are
 $\eb_0 \approx$ `r sprintf("%.4f", b0_hat)`
 and $\eb_1 \approx$ `r sprintf("%.4f", b1_hat)`,
 matching the coefficients that `glm()` finds numerically.
-The fitted means are the group sample means:
+The [fitted means](Linear-models-overview.qmd#def-fitted-value) are the group [sample means](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-mean):
 $\est{\mu}_i = \bar{y}_{\text{town}}$ for town women
 and $\est{\mu}_i = \bar{y}_{\text{country}}$ for country women.
 :::
