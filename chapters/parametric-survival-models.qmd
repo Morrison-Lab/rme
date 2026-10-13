@@ -30,8 +30,8 @@ using the `anderson` data
 
 ## Exponential Distribution
 
-The exponential distribution is the baseline parametric model in survival analysis.
-It assumes a constant hazard rate $\lambda > 0$ over time.
+The [exponential distribution](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) is the baseline parametric model in survival analysis.
+It assumes a constant [hazard rate](intro-to-survival-analysis.qmd#def-hazard) $\lambda > 0$ over time.
 This constant hazard implies that the event probability in any short interval depends only on the interval duration and not on elapsed time (the memoryless property).
 
 $$
@@ -60,7 +60,7 @@ $$
 
 ## Weibull Distribution
 
-The Weibull distribution generalizes the exponential distribution by introducing a shape parameter $p > 0$ alongside the scale parameter $\lambda > 0$ [@kalbfleisch2011statistical].
+The [Weibull distribution](https://morrison-lab.github.io/pds/distributions.html#def-weibull) generalizes the exponential distribution by introducing a shape parameter $p > 0$ alongside the scale parameter $\lambda > 0$ [@kalbfleisch2011statistical].
 This flexibility allows the hazard rate to change monotonically over time, accommodating situations where risk increases or decreases as time elapses.
 
 Using the parameterization of @kalbfleisch2011statistical:
@@ -116,7 +116,7 @@ ggplot() +
 ```
 :::
 
-Here are some Weibull density functions, with $\lambda = 1$ and $p$
+Here are some Weibull [density functions](https://morrison-lab.github.io/pds/random-variables.html#def-pdf), with $\lambda = 1$ and $p$
 varying:
 
 ```{r}
@@ -191,7 +191,7 @@ We prove each property of the Weibull hazard function $\haz(t) = \lambda p (\lam
    &= \lambda && \text{(since $(\lambda t)^0 = 1$ for $t > 0$)}
    \ea
    $$
-   This constant value is the hazard function of the exponential distribution with parameter $\lambda$.
+   This constant value is the [hazard function](intro-to-survival-analysis.qmd#def-hazard) of the exponential distribution with parameter $\lambda$.
 
 2. **Increasing hazard when $p > 1$**:
    Differentiating $\haz(t) = \lambda^p p t^{p-1}$ with respect to $t$ gives:
@@ -209,7 +209,7 @@ We prove each property of the Weibull hazard function $\haz(t) = \lambda p (\lam
    When $p < 1$, $(p-1) < 0$, so $\haz'(t) < 0$ for all $t > 0$, meaning the hazard function is strictly decreasing over time.
 
 4. **Linear relationship between $\log \cuhaz(t)$ and $\log t$**:
-   Taking the natural logarithm of the cumulative hazard function $\cuhaz(t) = (\lambda t)^p$:
+   Taking the [natural logarithm](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of the [cumulative hazard function](intro-to-survival-analysis.qmd#def-cuhaz) $\cuhaz(t) = (\lambda t)^p$:
    $$
    \ba
    \logf{\cuhaz(t)} &\eqdef \logf{(\lambda t)^p} && \text{(substituting Weibull cumulative hazard)} \\
@@ -362,7 +362,7 @@ ggplot() +
 ## Exponential Regression
 
 For each subject $i$, define a linear predictor $\eta(\vx) \eqdef \beta_0 + (\beta_1 x_1 + \dots + \beta_p x_p) = \vx \cdot \vb$.
-Exponential regression models the hazard rate using a log link function:
+Exponential regression models the [hazard rate](intro-to-survival-analysis.qmd#def-hazard) using a log link function:
 
 $$
 \ba
@@ -374,9 +374,9 @@ $$
 \ea
 $$
 
-When there are no additional predictors ($\vx = \vzero$), the baseline hazard is constant: $\lambda = \expf{\beta_0}$.
-This model uses a log link as in a generalized linear model for Poisson or rate outcomes.
-Because the hazard rate does not depend on time $t$, the hazard ratio comparing two covariate vectors $\vx$ and $\vxs$ is constant over time:
+When there are no additional [predictors](Intro-to-GLMs.qmd#def-predictors) ($\vx = \vzero$), the [baseline hazard](proportional-hazards-models.qmd#def-base-hazard) is constant: $\lambda = \expf{\beta_0}$.
+This model uses a log link as in a generalized linear model for [Poisson](https://morrison-lab.github.io/pds/distributions.html#def-poisson) or rate outcomes.
+Because the hazard rate does not depend on time $t$, the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) comparing two covariate vectors $\vx$ and $\vxs$ is constant over time:
 
 $$
 \ba
@@ -387,11 +387,11 @@ $$
 \ea
 $$
 
-Thus, exponential regression models possess proportional hazards trivially.
+Thus, exponential regression models possess [proportional hazards](proportional-hazards-models.qmd#def-pha) trivially.
 
 ## Accelerated Failure Time
 
-In a proportional hazards (PH) model, covariates act multiplicatively on the baseline hazard function:
+In a [proportional hazards (PH) model](proportional-hazards-models.qmd#def-ph-model), covariates act multiplicatively on the [baseline hazard function](proportional-hazards-models.qmd#def-base-hazard):
 
 $$
 \ba
@@ -413,7 +413,7 @@ $$
 \surv(t \mid \vx) \eqdef \surv_0\paren{ t \cdot \hazfactor(\vx) }
 $$
 
-where $\hazfactor(\vx) \eqdef \expf{\eta(\vx)}$, $\eta(\vx) \eqdef \beta_1 x_1 + \dots + \beta_p x_p$, and $\surv_0(t) \eqdef \P(T \ge t \mid \vx = \vzero)$ is the baseline survival function.
+where $\hazfactor(\vx) \eqdef \expf{\eta(\vx)}$, $\eta(\vx) \eqdef \beta_1 x_1 + \dots + \beta_p x_p$, and $\surv_0(t) \eqdef \P(T \ge t \mid \vx = \vzero)$ is the [baseline survival function](proportional-hazards-models.qmd#def-baseline-surv).
 
 We derive the expected survival time under the AFT model using change-of-variables integration:
 
@@ -577,7 +577,7 @@ print(anderson)
 
 ### Cox semi-parametric model
 
-We fit a Cox proportional hazards model comparing standard therapy to new therapy:
+We fit a [Cox proportional hazards model](proportional-hazards-models.qmd#def-ph-model) comparing standard therapy to new therapy:
 
 ```{r}
 anderson_cox0 <- coxph(
@@ -587,7 +587,7 @@ anderson_cox0 <- coxph(
 summary(anderson_cox0)
 ```
 
-The estimated log hazard ratio $\eb_{\text{PH}}$ for standard treatment relative to new treatment is positive, indicating that standard therapy is associated with a higher hazard of relapse (shorter remission duration).
+The estimated log [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) $\eb_{\text{PH}}$ for standard treatment relative to new treatment is positive, indicating that standard therapy is associated with a higher hazard of relapse (shorter remission duration).
 
 ### Weibull parametric model
 
@@ -623,7 +623,7 @@ In the exponential model, $\eb_{\text{AFT}} = -\eb_{\text{PH}}$, so the AFT coef
 
 ### Diagnostic: complementary log-log survival plot
 
-To check whether a Weibull proportional hazards assumption is reasonable, we inspect the complementary log-log transformation of the Kaplan-Meier survival curves, $\log(-\log \esurv(t)) = p \log \lambda + p \log t$:
+To check whether a Weibull [proportional hazards assumption](proportional-hazards-models.qmd#def-pha) is reasonable, we inspect the complementary log-log transformation of the [Kaplan-Meier survival curves](intro-to-survival-analysis.qmd#def-KM-estimator), $\log(-\log \esurv(t)) = p \log \lambda + p \log t$:
 
 ```{r}
 #| fig-cap: "Complementary log-log survival curves by treatment group"
@@ -639,8 +639,8 @@ If the complementary log-log curves are approximately linear and parallel across
 
 # Combining left-truncation and interval-censoring
 
-In observational studies and clinical trials, complex observation schemes can introduce both **left-truncation** (delayed entry) and **interval-censoring**.
-Left-truncation occurs when subjects enter the risk set only after surviving past an entry time $L_{\text{entry}} > 0$.
+In observational studies and clinical trials, complex observation schemes can introduce both **[left-truncation](intro-to-survival-analysis.qmd#def-left-truncation)** (delayed entry) and **[interval-censoring](intro-to-survival-analysis.qmd#def-interval-censoring)**.
+Left-truncation occurs when subjects enter the [risk set](intro-to-survival-analysis.qmd#def-risk-set) only after surviving past an entry time $L_{\text{entry}} > 0$.
 Interval-censoring occurs when the exact event time $T_i$ is unknown, but is known to fall within an interval $(L_i, R_i]$.
 
 Standard software tools in R make distinct trade-offs between these two observation mechanisms:
@@ -652,9 +652,9 @@ Standard software tools in R make distinct trade-offs between these two observat
 > [R-help, August 31, 2015](https://stat.ethz.ch/pipermail/r-help/2015-August/431733.html)
 
 In particular, `coxph()` constructs risk sets dynamically at each observed failure time $t_j$ using counting process format (`time1 = entry`, `time2 = exit`), enabling seamless handling of left-truncation.
-However, because partial likelihood relies on ordered exact failure times, standard Cox models cannot easily accommodate interval-censored data.
+However, because [partial likelihood](proportional-hazards-models.qmd#def-ph-partial-lik) relies on ordered exact failure times, standard Cox models cannot easily accommodate interval-censored data.
 
-Conversely, `survreg()` accommodates interval-censored outcomes via `Surv(time1 = L, time2 = R, type = "interval")` by maximizing the interval parametric likelihood $\P(L_i < T_i \le R_i) = \cdf_0(R_i) - \cdf_0(L_i)$.
+Conversely, `survreg()` accommodates interval-censored outcomes via `Surv(time1 = L, time2 = R, type = "interval")` by maximizing the interval parametric [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) $\P(L_i < T_i \le R_i) = \cdf_0(R_i) - \cdf_0(L_i)$.
 However, standard `survreg()` assumes all subjects enter observation at time 0, and does not condition likelihood terms on surviving past a delayed entry time $L_{\text{entry}}$.
 
 When a study contains both delayed entry and interval-censored event times,
