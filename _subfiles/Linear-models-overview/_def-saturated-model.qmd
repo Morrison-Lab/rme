@@ -1,0 +1,29 @@
+:::{#def-saturated-model}
+#### Saturated model
+
+Consider a dataset with $q$ distinct covariate patterns $\vx_1, \ldots, \vx_q$,
+and an outcome distribution family
+(for example, Gaussian, Bernoulli, or Poisson).
+The **saturated model** for that dataset and family
+(also called the **full** or **maximal** model)
+gives each distinct covariate pattern its own free mean parameter:
+
+$$
+\E{Y \mid \vX = \vx_k} \eqdef \mu_k,
+\quad k = 1, \ldots, q,
+$$
+
+plus any dispersion parameter of the family
+(such as $\sigma^2$ for the Gaussian family),
+shared by all patterns.
+
+:::
+
+::: notes
+@def-saturated-model describes a model structure.
+When the saturated model is fit by maximum likelihood
+in the Gaussian, Bernoulli, or Poisson family,
+the estimate $\est{\mu}_k$ is the sample mean of the outcomes
+among the observations with pattern $\vx_k$,
+so the saturated model reproduces every observed pattern mean exactly.
+:::
