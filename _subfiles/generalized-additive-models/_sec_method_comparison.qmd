@@ -1,0 +1,244 @@
+::: notes
+This section illustrates the methods of @sec-polynomial-regression
+through @sec-local-regression on a shared synthetic dataset, so
+the strengths and failure modes can be compared side-by-side.
+:::
+
+```{r}
+#| label: method-comparison-setup
+#| include: false
+set.seed(204)
+library(ggplot2)
+
+n <- 200
+x_lim <- c(0, 2 * pi)
+truth <- function(x) sin(x) + 0.3 * sin(3 * x)
+demo_data <- data.frame(
+  x = runif(n, x_lim[1], x_lim[2])
+)
+demo_data$y <- truth(demo_data$x) + rnorm(n, sd = 0.4)
+
+grid <- data.frame(x = seq(x_lim[1], x_lim[2], length.out = 400))
+grid$truth <- truth(grid$x)
+
+predict_with <- function(model) {
+  predict(model, newdata = grid)
+}
+
+theme_set(theme_minimal())
+```
+
+We generate $n = `r n`$ noisy observations from a smooth nonlinear
+function
+
+$$f(x) = \sin(x) + 0.3 \sin(3 x), \quad x \in [0, 2\pi],$$
+
+with additive Gaussian noise ($\s = 0.4$). The truth is bumpy
+enough to expose differences between the methods but not so wild
+that any one of them obviously breaks.
+
+```{r}
+#| label: method-comparison-data-fits
+#| include: false
+# Fit each method on the same demo_data; predictions on `grid` for
+# overlay. Comments on each fit explain the design choice.
+
+# (1) Linear baseline.
+fit_lin <- lm(y ~ x, data = demo_data)
+grid$linear <- predict_with(fit_lin)
+
+# (2) Quadratic polynomial.
+fit_poly2 <- lm(y ~ poly(x, 2), data = demo_data)
+grid$poly2 <- predict_with(fit_poly2)
+
+# (3) Degree-12 polynomial — deliberately high degree to surface
+# Runge-style boundary swinging.
+fit_poly12 <- lm(y ~ poly(x, 12), data = demo_data)
+grid$poly12 <- predict_with(fit_poly12)
+
+# (4) Step function with 5 bins on equal-quantile cuts. Pin the
+# outer breakpoints to x_lim so the grid endpoints don't fall
+# outside breaks[1] / breaks[length(breaks)] — otherwise cut()
+# returns NA at the boundaries, leaving the step line truncated.
+breaks <- quantile(demo_data$x, probs = seq(0, 1, length.out = 6))
+breaks[c(1L, length(breaks))] <- x_lim
+demo_data$bin <- cut(demo_data$x, breaks = breaks,
+                     include.lowest = TRUE)
+grid$bin <- cut(grid$x, breaks = breaks, include.lowest = TRUE)
+fit_step <- lm(y ~ bin, data = demo_data)
+grid$step <- predict_with(fit_step)
+
+# (5) Natural cubic spline, 6 df (knots at internal quantiles).
+fit_ns <- lm(y ~ splines::ns(x, df = 6), data = demo_data)
+grid$ns <- predict_with(fit_ns)
+
+# (6) Smoothing spline via mgcv::gam, REML smoothness selection.
+fit_gam <- mgcv::gam(
+  y ~ s(x, bs = "tp", k = 20),
+  data = demo_data,
+  method = "REML"
+)
+grid$gam <- predict_with(fit_gam)
+
+# (7) LOESS, default span.
+fit_loess <- loess(y ~ x, data = demo_data, span = 0.5)
+grid$loess <- predict_with(fit_loess)
+```
+
+The fitted curves are shown in @fig-method-comparison-overlay.
+
+::::{#fig-method-comparison-overlay layout-ncol="2"}
+
+:::{#fig-method-comparison-poly}
+
+```{r}
+#| label: method-comparison-poly-plot
+#| code-fold: true
+ggplot(grid, aes(x = x)) +
+  geom_point(
+    data = demo_data, aes(y = y),
+    alpha = 0.3, size = 0.8
+  ) +
+  geom_line(aes(y = truth, color = "Truth"), linewidth = 0.9) +
+  geom_line(aes(y = linear, color = "Linear"),
+            linewidth = 0.7, linetype = "longdash") +
+  geom_line(aes(y = poly2, color = "Quadratic"), linewidth = 0.7) +
+  geom_line(aes(y = poly12, color = "Degree 12"),
+            linewidth = 0.7) +
+  scale_color_manual(
+    name = NULL,
+    values = c("Truth" = "black", "Linear" = "grey50",
+               "Quadratic" = "tomato", "Degree 12" = "steelblue")
+  ) +
+  labs(x = "x", y = "y") +
+  theme(legend.position = "bottom")
+```
+
+Polynomial fits. Quadratic underfits the central inflection; the
+degree-12 polynomial chases the noise and swings wildly near the
+boundaries (Runge's phenomenon).
+:::
+
+:::{#fig-method-comparison-step}
+
+```{r}
+#| label: method-comparison-step-plot
+#| code-fold: true
+ggplot(grid, aes(x = x)) +
+  geom_point(
+    data = demo_data, aes(y = y),
+    alpha = 0.3, size = 0.8
+  ) +
+  geom_line(aes(y = truth, color = "Truth"), linewidth = 0.9) +
+  geom_step(aes(y = step, color = "Step (5 bins)"),
+            linewidth = 0.7) +
+  scale_color_manual(
+    name = NULL,
+    values = c("Truth" = "black", "Step (5 bins)" = "tomato")
+  ) +
+  labs(x = "x", y = "y") +
+  theme(legend.position = "bottom")
+```
+
+Step function with 5 quantile-spaced bins. Captures the broad shape
+but is discontinuous at each cutpoint — almost never the right
+model for a continuous exposure.
+:::
+
+:::{#fig-method-comparison-splines}
+
+```{r}
+#| label: method-comparison-splines-plot
+#| code-fold: true
+ggplot(grid, aes(x = x)) +
+  geom_point(
+    data = demo_data, aes(y = y),
+    alpha = 0.3, size = 0.8
+  ) +
+  geom_line(aes(y = truth, color = "Truth"), linewidth = 0.9) +
+  geom_line(
+    aes(y = ns, color = "Natural cubic spline (df = 6)"),
+    linewidth = 0.7
+  ) +
+  geom_line(
+    aes(y = gam, color = "Smoothing spline (REML, k = 20)"),
+    linewidth = 0.7
+  ) +
+  scale_color_manual(
+    name = NULL,
+    values = c(
+      "Truth" = "black",
+      "Natural cubic spline (df = 6)" = "tomato",
+      "Smoothing spline (REML, k = 20)" = "steelblue"
+    )
+  ) +
+  labs(x = "x", y = "y") +
+  theme(legend.position = "bottom")
+```
+
+Splines. Both spline fits track the truth closely without the
+boundary swings of the degree-12 polynomial. The smoothing spline
+(REML-selected $\l$) has slightly less peak-to-peak amplitude
+because the penalty shrinks toward a straight line.
+:::
+
+:::{#fig-method-comparison-loess}
+
+```{r}
+#| label: method-comparison-loess-plot
+#| code-fold: true
+ggplot(grid, aes(x = x)) +
+  geom_point(
+    data = demo_data, aes(y = y),
+    alpha = 0.3, size = 0.8
+  ) +
+  geom_line(aes(y = truth, color = "Truth"), linewidth = 0.9) +
+  geom_line(aes(y = loess, color = "LOESS (span = 0.5)"),
+            linewidth = 0.7) +
+  scale_color_manual(
+    name = NULL,
+    values = c("Truth" = "black", "LOESS (span = 0.5)" = "tomato")
+  ) +
+  labs(x = "x", y = "y") +
+  theme(legend.position = "bottom")
+```
+
+LOESS with the default 50% span. Similar shape to the splines but
+without a global closed-form parametric representation — the curve
+is computed on demand at any evaluation point rather than stored as
+a parametric formula.
+:::
+
+Comparison of nonlinear regression methods on synthetic data
+$y = \sin(x) + 0.3\sin(3x) + \eps$, $\eps \sim \ndist{0, 0.4^2}$,
+$n = `r n`$. Splines (both regression and smoothing) and LOESS
+track the truth closely; quadratic polynomial underfits the multi-
+modal structure; degree-12 polynomial overfits and swings at
+boundaries.
+::::
+
+## Takeaways
+
+- **Polynomials beyond degree 3–4 are usually a bad idea.** The
+  degree-12 fit is a clean illustration: it's interpolating noise in
+  the middle of the data and swinging beyond the data range. With 13
+  parameters (intercept + 12 polynomial terms) it has more flexibility
+  than the natural cubic spline (`df = 6`), yet uses that flexibility
+  on noise rather than on the curve's shape — a reminder that global
+  polynomials concentrate their degrees of freedom in the wrong
+  places.
+- **Splines and LOESS are essentially indistinguishable on this
+  example.** Both produce smooth curves close to the truth. The
+  practical differences are in how easily they extend to multi-
+  predictor settings (splines do, LOESS doesn't beyond 2-D) and in
+  how inference works (splines have full Wald/Bayesian machinery,
+  LOESS doesn't).
+- **REML-selected smoothing spline doesn't require a degrees-of-
+  freedom choice.** The `df = 6` for the natural cubic spline was a
+  modeler choice; the REML smoothing spline picked its own
+  smoothness from the data.
+- **Step functions are for categorization, not smoothing.** The 5-
+  bin step function is the worst fit on a smooth-truth dataset, but
+  on real epidemiologic data where bins have substantive meaning
+  (clinical BMI categories, age groups), the interpretability
+  benefit can outweigh the within-bin information loss.

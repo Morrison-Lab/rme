@@ -1,0 +1,377 @@
+::: notes
+Lab adapted from @james2021islr2e [§7.8] and @james2023islp [§7.8].
+:::
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-setup-r
+#| eval: false
+#| message: false
+library(ISLR2)
+library(splines)
+library(mgcv)
+library(ggplot2)
+library(boot)
+data(Wage)
+head(Wage[, c("age", "wage", "education", "year")])
+```
+
+#### Python
+The smoothing-spline and GAM sections also require `pygam`, which is
+not part of the standard ISLP/sklearn ecosystem — install with
+`pip install pygam` before running those blocks.
+
+```{python}
+#| eval: false
+#| python.reticulate: false
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from ISLP import load_data
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression, LogisticRegression
+import statsmodels.api as sm
+from patsy import dmatrix
+Wage = load_data("Wage")
+print(Wage[["age","wage","education","year"]].head())
+```
+:::
+
+## Polynomial regression {.unnumbered}
+
+Fit degree-1 through degree-5 polynomials, then use ANOVA to select degree [@james2021islr2e, §7.1].
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-poly-r
+#| eval: false
+#| code-fold: true
+fit1 <- lm(wage ~ poly(age, 1), data = Wage)
+fit2 <- lm(wage ~ poly(age, 2), data = Wage)
+fit3 <- lm(wage ~ poly(age, 3), data = Wage)
+fit4 <- lm(wage ~ poly(age, 4), data = Wage)
+fit5 <- lm(wage ~ poly(age, 5), data = Wage)
+anova(fit1, fit2, fit3, fit4, fit5)
+```
+
+The ANOVA p-values suggest degree 3 or 4 is adequate.
+
+```{r}
+#| label: lab-poly-plot-r
+#| eval: false
+#| code-fold: true
+age_grid <- seq(min(Wage$age), max(Wage$age), length.out = 200)
+pred <- predict(fit4, newdata = data.frame(age = age_grid), se.fit = TRUE)
+df_pred <- data.frame(
+  age = age_grid,
+  fit = pred$fit,
+  lo  = pred$fit - 2 * pred$se.fit,
+  hi  = pred$fit + 2 * pred$se.fit
+)
+ggplot(Wage, aes(age, wage)) +
+  geom_point(alpha = 0.2, size = 0.8) +
+  geom_ribbon(data = df_pred, aes(y = fit, ymin = lo, ymax = hi),
+              alpha = 0.3, fill = "steelblue") +
+  geom_line(data = df_pred, aes(y = fit), colour = "steelblue", linewidth = 1) +
+  labs(title = "Degree-4 polynomial fit", x = "Age", y = "Wage")
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+from scipy import stats
+results = {}
+for deg in range(1, 6):
+    X = np.column_stack([Wage["age"] ** k for k in range(1, deg + 1)])
+    X = sm.add_constant(X)
+    results[deg] = sm.OLS(Wage["wage"], X).fit()
+
+# F-tests between consecutive nested models. compare_f_test() is
+# called on the *unrestricted* (more flexible) model and given the
+# restricted model as the argument.
+for d in range(1, 5):
+    f, p, df_diff = results[d + 1].compare_f_test(results[d])
+    print(f"Degree {d} vs {d+1}: F={f:.3f}, p={p:.4f}")
+```
+
+```{python}
+#| eval: false
+#| python.reticulate: false
+age_grid = np.linspace(Wage["age"].min(), Wage["age"].max(), 200)
+X_grid = sm.add_constant(np.column_stack([age_grid ** k for k in range(1, 5)]))
+pred4 = results[4].get_prediction(X_grid)
+pred_df = pred4.summary_frame(alpha=0.05)
+
+plt.figure(figsize=(7, 4))
+plt.scatter(Wage["age"], Wage["wage"], alpha=0.15, s=8)
+plt.plot(age_grid, pred_df["mean"], color="steelblue", linewidth=2)
+plt.fill_between(age_grid, pred_df["mean_ci_lower"], pred_df["mean_ci_upper"],
+                 alpha=0.3, color="steelblue")
+plt.title("Degree-4 polynomial fit"); plt.xlabel("Age"); plt.ylabel("Wage")
+plt.tight_layout(); plt.show()
+```
+:::
+
+## Step functions {.unnumbered}
+
+Cut `age` into four intervals and fit a piecewise-constant model [@james2021islr2e, §7.2].
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-step-r
+#| eval: false
+#| code-fold: true
+Wage$age_cut <- cut(Wage$age, 4)
+fit_step <- lm(wage ~ age_cut, data = Wage)
+summary(fit_step)$coef
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+Wage["age_cut"] = pd.cut(Wage["age"], bins=4)
+step_dummies = pd.get_dummies(Wage["age_cut"], drop_first=True).astype(float)
+X_step = sm.add_constant(step_dummies)
+fit_step = sm.OLS(Wage["wage"], X_step).fit()
+print(fit_step.summary().tables[1])
+```
+:::
+
+## Regression splines {.unnumbered}
+
+Fit a cubic B-spline with knots at ages 25, 40, and 60, and a natural cubic spline with the same knots [@james2021islr2e, §7.4].
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-splines-r
+#| eval: false
+#| code-fold: true
+# Redefine age_grid so the splines section runs in isolation
+# (it's also defined in the poly-plot chunk above).
+age_grid <- seq(min(Wage$age), max(Wage$age), length.out = 200)
+knots <- c(25, 40, 60)
+fit_bs <- lm(wage ~ bs(age, knots = knots), data = Wage)
+fit_ns <- lm(wage ~ ns(age, knots = knots), data = Wage)
+
+pred_bs <- predict(fit_bs, newdata = data.frame(age = age_grid), se.fit = TRUE)
+pred_ns <- predict(fit_ns, newdata = data.frame(age = age_grid), se.fit = TRUE)
+
+df_sp <- data.frame(
+  age = rep(age_grid, 2),
+  fit = c(pred_bs$fit, pred_ns$fit),
+  lo  = c(pred_bs$fit - 2*pred_bs$se.fit, pred_ns$fit - 2*pred_ns$se.fit),
+  hi  = c(pred_bs$fit + 2*pred_bs$se.fit, pred_ns$fit + 2*pred_ns$se.fit),
+  type = rep(c("B-spline", "Natural spline"), each = 200)
+)
+ggplot(Wage, aes(age, wage)) +
+  geom_point(alpha = 0.15, size = 0.6) +
+  geom_ribbon(data = df_sp, aes(y = fit, ymin = lo, ymax = hi, fill = type), alpha = 0.25) +
+  geom_line(data = df_sp, aes(y = fit, colour = type), linewidth = 1) +
+  labs(x = "Age", y = "Wage", colour = NULL, fill = NULL)
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+bs_mat = dmatrix("bs(age, knots=(25,40,60), include_intercept=False)",
+                 {"age": Wage["age"]}, return_type="dataframe")
+ns_mat = dmatrix("cr(age, knots=(25,40,60))",
+                 {"age": Wage["age"]}, return_type="dataframe")
+
+fit_bs_py = sm.OLS(Wage["wage"], bs_mat).fit()
+fit_ns_py = sm.OLS(Wage["wage"], ns_mat).fit()
+
+bs_grid = dmatrix("bs(age, knots=(25,40,60), include_intercept=False)",
+                  {"age": age_grid}, return_type="dataframe")
+ns_grid = dmatrix("cr(age, knots=(25,40,60))",
+                  {"age": age_grid}, return_type="dataframe")
+
+plt.figure(figsize=(7, 4))
+plt.scatter(Wage["age"], Wage["wage"], alpha=0.15, s=6)
+plt.plot(age_grid, fit_bs_py.predict(bs_grid), label="B-spline", linewidth=2)
+plt.plot(age_grid, fit_ns_py.predict(ns_grid), label="Natural spline", linewidth=2)
+plt.legend(); plt.xlabel("Age"); plt.ylabel("Wage")
+plt.tight_layout(); plt.show()
+```
+:::
+
+## Smoothing splines and local regression {.unnumbered}
+
+A smoothing spline selects the penalty parameter $\l$ by generalized cross-validation (GCV); LOESS uses a local polynomial fit [@james2021islr2e, §7.5–7.6].
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-smooth-r
+#| eval: false
+#| code-fold: true
+fit_ss_16 <- smooth.spline(Wage$age, Wage$wage, df = 16)
+fit_ss_gcv <- smooth.spline(Wage$age, Wage$wage, cv = FALSE)  # GCV
+fit_lo    <- loess(wage ~ age, data = Wage, span = 0.2)
+
+age_seq <- seq(min(Wage$age), max(Wage$age), length.out = 200)
+df_sm <- data.frame(
+  age  = rep(age_seq, 3),
+  fit  = c(predict(fit_ss_16, age_seq)$y,
+           predict(fit_ss_gcv, age_seq)$y,
+           predict(fit_lo, data.frame(age = age_seq))),
+  type = rep(c("Smooth spline df=16",
+               paste0("Smooth spline GCV (df=",
+                      round(fit_ss_gcv$df, 1), ")"),
+               "LOESS span=0.2"),
+             each = 200)
+)
+ggplot(Wage, aes(age, wage)) +
+  geom_point(alpha = 0.15, size = 0.6) +
+  geom_line(data = df_sm, aes(y = fit, colour = type), linewidth = 1) +
+  labs(x = "Age", y = "Wage", colour = NULL)
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+from pygam import LinearGAM, s as gam_s
+from statsmodels.nonparametric.smoothers_lowess import lowess
+
+# Smoothing spline via pyGAM
+gam_smooth = LinearGAM(gam_s(0, n_splines=25)).gridsearch(
+    Wage[["age"]].values, Wage["wage"].values)
+XX = gam_smooth.generate_X_grid(term=0, n=200)
+pdep, confi = gam_smooth.partial_dependence(term=0, X=XX, width=0.95)
+
+# LOESS
+lo_fit = lowess(Wage["wage"], Wage["age"], frac=0.2)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+axes[0].scatter(Wage["age"], Wage["wage"], alpha=0.15, s=6)
+axes[0].plot(XX.ravel(), pdep, color="steelblue", linewidth=2, label="Smoothing spline (GCV)")
+axes[0].fill_between(XX.ravel(), confi[:,0], confi[:,1], alpha=0.3)
+axes[0].set_xlabel("Age"); axes[0].set_ylabel("Wage"); axes[0].legend()
+
+axes[1].scatter(Wage["age"], Wage["wage"], alpha=0.15, s=6)
+axes[1].plot(lo_fit[:,0], lo_fit[:,1], color="tomato", linewidth=2, label="LOESS span=0.2")
+axes[1].set_xlabel("Age"); axes[1].set_ylabel("Wage"); axes[1].legend()
+plt.tight_layout(); plt.show()
+```
+:::
+
+## GAMs: continuous outcome {.unnumbered}
+
+Fit three nested GAMs for `wage` on the `Wage` data and compare with AIC [@james2021islr2e, §7.7].
+This lab follows the ISLRv2 code, which uses the `mgcv` default
+`method = "GCV.Cp"` for smoothness selection; for new analyses prefer
+`method = "REML"` (see @sec-smoothing-splines and @sec-gam-fitting).
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-gam-r
+#| eval: false
+#| code-fold: true
+gam1 <- gam(wage ~ s(year, k = 4) + s(age, k = 5) + education,
+            data = Wage)
+gam2 <- gam(wage ~ year + s(age, k = 5) + education,
+            data = Wage)
+gam3 <- gam(wage ~ s(year, k = 4) + poly(age, 4) + education,
+            data = Wage)
+
+AIC(gam1, gam2, gam3)
+
+par(mfrow = c(1, 3))
+plot(gam1, shade = TRUE, seWithMean = TRUE,
+     main = "GAM1: s(year) + s(age) + education")
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+from pygam import LinearGAM, s as gam_s, f as gam_f
+
+edu_codes = Wage["education"].cat.codes.values
+X_gam = np.column_stack([Wage["year"].values,
+                         Wage["age"].values,
+                         edu_codes])
+y_gam = Wage["wage"].values
+
+gam_py = LinearGAM(
+    gam_s(0, n_splines=4) + gam_s(1, n_splines=5) + gam_f(2)
+).gridsearch(X_gam, y_gam)
+
+print("AIC:", gam_py.statistics_["AIC"])
+
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+titles = ["year", "age", "education"]
+for i, ax in enumerate(axes):
+    XX = gam_py.generate_X_grid(term=i)
+    pdep, confi = gam_py.partial_dependence(term=i, X=XX, width=0.95)
+    ax.plot(XX[:, i], pdep, linewidth=2)
+    ax.fill_between(XX[:, i], confi[:,0], confi[:,1], alpha=0.3)
+    ax.set_xlabel(titles[i]); ax.set_ylabel("Partial effect")
+plt.tight_layout(); plt.show()
+```
+:::
+
+## GAMs: binary outcome {.unnumbered}
+
+Predict whether a worker earns more than \$250k using a logistic GAM. We subset to workers
+with at least some college education, following @james2021islr2e [§7.7].
+
+:::{.panel-tabset}
+#### R
+```{r}
+#| label: lab-gam-logistic-r
+#| eval: false
+#| code-fold: true
+Wage$high <- factor(ifelse(Wage$wage > 250, "High", "Low"),
+                    levels = c("Low", "High"))
+
+fit_logit_gam <- gam(
+  high ~ s(year, k = 4) + s(age, k = 5) + education,
+  family = binomial,
+  data = Wage,
+  subset = (education != "1. < HS Grad")
+)
+summary(fit_logit_gam)
+
+par(mfrow = c(1, 3))
+plot(fit_logit_gam, shade = TRUE, seWithMean = TRUE,
+     trans = plogis,
+     main = "Logistic GAM (P(wage > 250k))")
+```
+#### Python
+```{python}
+#| eval: false
+#| python.reticulate: false
+from pygam import LogisticGAM, s as gam_s, f as gam_f
+
+mask = Wage["education"] != "1. < HS Grad"
+W2 = Wage[mask].copy()
+W2["high"] = (W2["wage"] > 250).astype(int)
+edu2 = W2["education"].cat.codes.values
+
+X_log = np.column_stack([W2["year"].values,
+                          W2["age"].values,
+                          edu2])
+y_log = W2["high"].values
+
+gam_log = LogisticGAM(
+    gam_s(0, n_splines=4) + gam_s(1, n_splines=5) + gam_f(2)
+).gridsearch(X_log, y_log)
+
+print("Training accuracy:", (gam_log.predict(X_log) == y_log).mean())
+
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+titles = ["year", "age", "education"]
+for i, ax in enumerate(axes):
+    XX = gam_log.generate_X_grid(term=i)
+    pdep, confi = gam_log.partial_dependence(term=i, X=XX, width=0.95)
+    ax.plot(XX[:, i], pdep, linewidth=2)
+    ax.fill_between(XX[:, i], confi[:,0], confi[:,1], alpha=0.3)
+    ax.set_xlabel(titles[i]); ax.set_ylabel("Partial effect (log-odds)")
+plt.tight_layout(); plt.show()
+```
+:::

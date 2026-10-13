@@ -1,0 +1,122 @@
+::: notes
+Adapted from @wood2017generalized [§6].
+:::
+
+The standard tool for fitting GAMs in R is the `mgcv` package
+[@wood2017generalized]. We'll use `mgcv::gam()`, which fits GAMs by
+**penalized likelihood** with automatic smoothness selection via
+REML or GCV.
+
+## The `gam()` call
+
+The basic syntax mirrors `lm()`/`glm()`, with smoothers introduced by
+`s()`:
+
+```{r}
+#| eval: false
+library(mgcv)
+
+m <- gam(
+  y ~ s(age) + s(bmi) + sex + s(year, k = 10),
+  data = d,
+  family = binomial(),
+  method = "REML"
+)
+```
+
+Reading the formula:
+
+- `s(age)`, `s(bmi)`, `s(year, k = 10)` are **smooth terms**. Each
+  introduces a basis expansion plus a smoothness penalty. The
+  default basis (`bs = "tp"`, thin-plate regression spline) is
+  almost always a good choice. `k = 10` requests a basis of
+  dimension up to 10 — large enough that the smoothness penalty,
+  not the basis, controls flexibility.
+- `sex` is a **parametric term**, treated exactly as in a GLM.
+
+You can mix smooth and parametric terms freely. Parametric terms
+contribute conventional regression coefficients (with $t$/$z$
+statistics in the model summary); smooth terms contribute fitted
+curves with effective-degrees-of-freedom summaries.
+
+## Useful `s()` arguments
+
+| Argument | What it controls | When to change from default |
+|:--|:--|:--|
+| `bs` | basis type (`"tp"`, `"cr"`, `"ps"`, ...) | rarely; `"tp"` is the default and the safe choice |
+| `k` | basis dimension (max EDF + 1) | when `gam.check()` flags `k-index < 1` |
+| `by` | factor for per-level smooths | predictor-by-factor interactions |
+| `id` | label for sharing smoothness across smooths | when two or more smooths should share a single $\l$, e.g. `s(x1, id = 1) + s(x2, id = 1)` |
+| `m` | order of the penalty derivative | rarely; default penalizes 2nd derivative |
+| `pc` | constraint point | when you need the smooth to pass through 0 at a chosen $x$ |
+
+## Smoothness selection: REML vs GCV
+
+`mgcv::gam()` picks the smoothness parameter(s) $\l$ automatically by
+optimizing one of:
+
+- **REML** (restricted maximum likelihood). Treats the penalty as
+  arising from a normal prior on the spline coefficients and selects
+  $\l$ by the marginal likelihood. **Not the default** — `gam()`
+  defaults to `method = "GCV.Cp"`, so you have to pass
+  `method = "REML"` explicitly (as in the examples in this
+  section). Generally **more stable** than GCV, less prone to
+  undersmoothing.
+- **ML** (marginal likelihood). Similar to REML but with a slightly
+  different effective sample size adjustment.
+- **GCV** (generalized cross-validation). The default. Computes
+  faster than REML but can occasionally select a much wigglier
+  smooth than is justified by the data, especially when $n$ is
+  small or signal is weak.
+
+**Recommendation: use `method = "REML"`** for routine work. If
+you're comparing GAMs to GLMs via AIC, also set `select = TRUE` to
+turn on smoothness selection at the term level. `select = TRUE`
+adds an extra null-space penalty to each smooth (separate from the
+wiggliness penalty) that can shrink an *entire* smooth term to zero
+— effectively functioning as variable selection
+[@wood2017generalized, §5.4]. Without it, the ordinary wiggliness
+penalty can only shrink a smooth down to a straight line, never to
+identically zero; `select = TRUE` extends that floor all the way
+down. This makes AIC comparisons more honest because the GAM is
+then allowed to "discover" that a predictor's smooth shouldn't be
+there at all.
+
+## Checking the fit
+
+After fitting, run `gam.check()` to verify:
+
+```{r}
+#| eval: false
+gam.check(m)
+```
+
+Output includes:
+
+- A **convergence diagnostic** (REML/GCV optimization should converge
+  to a stationary point — usually it does without intervention).
+- **Basis-dimension check** (`k'`, `edf`, `k-index`, `p-value`) for
+  each smooth. If `edf` is close to `k'`, the smooth is hitting
+  its maximum allowed flexibility — bump `k` up and refit. If
+  `k-index < 1` with a small p-value, the basis may be too small.
+- **Residual diagnostics**: QQ plot, residuals vs. linear predictor,
+  histogram of residuals, observed vs. fitted. Same intuition as for
+  a GLM.
+
+## Plotting smooths
+
+```{r}
+#| eval: false
+plot(m, pages = 1, shade = TRUE)
+```
+
+produces a panel of partial-effect plots — one per smooth term —
+with a 2-SE pointwise confidence band. The y-axis is on the **linear
+predictor scale** by default, centered to mean zero (the smooth's
+contribution to $g(\E{Y})$ above its mean), not on the response
+scale.
+
+For a publication-quality plot on the response scale, use
+`predict(m, type = "response", se.fit = TRUE)` on a grid of
+$X$ values with the other predictors held at typical values.
+

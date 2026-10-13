@@ -1,0 +1,92 @@
+::: notes
+Exercises adapted from @james2021islr2e [§7.9] and @hastie2009esl2e [§9.1].
+:::
+
+{{< slidebreak >}}
+
+### Piecewise polynomial continuity (ISLRv2 Conceptual 1) {#sec-exr-continuity}
+
+<!-- Reviewer note (intentional, do not re-flag): no slidebreak between this
+heading and the div below. The preceding slidebreak already opens a fresh
+slide; the heading and this div intentionally share that slide to avoid a
+title-only slide. -->
+::::{#exr-spline-continuity}
+
+A cubic polynomial with one interior knot at $\xi$ uses the truncated power basis:
+
+$$f(X) = \b_0 + \b_1 X + \b_2 X^2 + \b_3 X^3 + \b_4 (X-\xi)_+^3$$
+
+where $(u)_+ = \max(u,0)$.
+
+**(a)** Write $f(X)$ as two cubics: $f_1(X)$ for $X < \xi$ and $f_2(X)$ for $X \ge \xi$.
+
+**(b)** Show $f_1(\xi) = f_2(\xi)$ (continuity).
+
+**(c)** Show the first derivatives match at $\xi$.
+
+**(d)** Show the second derivatives match at $\xi$.
+
+**(e)** Do the third derivatives match? What order of smoothness does this cubic spline achieve?
+
+::::
+
+
+{{< slidebreak >}}
+
+::::{#sol-spline-continuity}
+
+**(a)** For $X < \xi$: $(X-\xi)_+ = 0$, giving $f_1(X) = \b_0 + \b_1 X + \b_2 X^2 + \b_3 X^3$.
+For $X \ge \xi$: $f_2(X) = f_1(X) + \b_4(X-\xi)^3$.
+
+**(b)** At $X=\xi$: $(X-\xi)_+^3 = 0$, so $f_2(\xi) = f_1(\xi)$. $\checkmark$
+
+**(c)** $f_2^{\prime}(X) = f_1^{\prime}(X) + 3\b_4(X-\xi)_+^2$.
+At $X=\xi$: $(X-\xi)_+^2 = 0$, so the derivatives agree. $\checkmark$
+
+**(d)** $f_2^{\prime\prime}(X) = f_1^{\prime\prime}(X) + 6\b_4(X-\xi)_+$.
+At $X=\xi$: $(X-\xi)_+ = 0$. $\checkmark$
+
+**(e)** $f_1^{\prime\prime\prime} = 6\b_3$ and $f_2^{\prime\prime\prime} = 6\b_3 + 6\b_4$ for $X > \xi$.
+These differ (unless $\b_4=0$). The truncated power basis gives a **cubic spline**:
+continuous with continuous 1st and 2nd derivatives, but a jump in the 3rd derivative at each knot.
+
+::::
+
+
+{{< slidebreak >}}
+
+### Smoothing spline penalty behavior (ISLRv2 Conceptual 2) {#sec-exr-smoothing-penalty}
+
+<!-- Reviewer note (intentional, do not re-flag): no slidebreak between this
+heading and the div below. The preceding slidebreak already opens a fresh
+slide; the heading and this div intentionally share that slide to avoid a
+title-only slide. -->
+::::{#exr-smoothing-penalty}
+
+The smoothing spline minimizes
+
+$$\hat{g} = \arg\min_g \left\{ \sum_{i=1}^n (y_i - g(x_i))^2 + \l \int g^{\prime\prime}(t)^2 \, dt \right\}.$$
+
+**(a)** What is the limiting form of $\hat{g}$ as $\l \to \infty$?
+
+**(b)** What is the limiting form as $\l \to 0$?
+
+**(c)** For $\l \to 0$, is the training RSS equal to zero?
+
+::::
+
+
+{{< slidebreak >}}
+
+::::{#sol-smoothing-penalty}
+
+**(a)** As $\l \to \infty$ the roughness penalty dominates. The only $g$ with
+$\int g^{\prime\prime}(t)^2\,dt = 0$ is a linear function $g(x) = a + bx$.
+So $\hat{g}$ converges to the ordinary least-squares line.
+
+**(b)** As $\l \to 0$ there is no penalty; the minimizer interpolates every
+training point: $g(x_i) = y_i$ for all $i$.
+
+**(c)** Yes. Interpolation means training RSS $= 0$ -- the overfit extreme.
+
+::::

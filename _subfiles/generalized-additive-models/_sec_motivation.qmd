@@ -1,0 +1,89 @@
+::: notes
+Adapted from @james2021islr2e [§7] and @wood2017generalized [§1].
+:::
+
+So far the regression models in this book have assumed that each
+continuous predictor enters the linear predictor through a single
+coefficient:
+
+$$g(\E{Y \mid X = x}) = \b_0 + \b_1 x_1 + \b_2 x_2 + \cdots + \b_p x_p$$
+
+This forces the effect of every predictor to be **monotone**: if
+$\b_j > 0$, raising $x_j$ always increases the predicted response on
+the link scale; if $\b_j < 0$, it always decreases it. Many real
+epidemiologic exposures don't behave that way.
+
+{{< slidebreak >}}
+
+::::{#exm-age-mortality}
+#### Age and all-cause mortality
+
+All-cause mortality is **U-shaped** in age: high in infancy, low through
+young adulthood, then rising steeply in old age [@me4]. A linear model in
+$\text{age}$ would average those regimes into a single slope, badly
+misrepresenting risk at both ends.
+::::
+
+{{< slidebreak >}}
+
+::::{#exm-bmi-mortality}
+#### BMI and mortality
+
+BMI–mortality curves are **J-** or **U-shaped**: very low and very high
+BMI both carry excess risk, with the minimum somewhere in the 22–25
+kg/m² range [@aune2016bmi].
+A linear or even quadratic fit misses the asymmetry between the
+underweight and obese tails.
+::::
+
+{{< slidebreak >}}
+
+::::{#exm-temperature-mortality}
+#### Outdoor temperature and daily mortality
+
+Time-series studies of mortality and daily temperature consistently
+show a **smooth nonlinear "bathtub"** relationship: both very cold
+and very hot days raise short-term mortality risk, with a
+location-specific optimum in between [@gasparrini2015mortality]. The
+optimum and the steepness of the cold/heat slopes vary by city,
+season, and population — features that no single linear term can
+capture.
+::::
+
+The pattern in @exm-age-mortality, @exm-bmi-mortality, and
+@exm-temperature-mortality is general: many epidemiologic exposures
+have an effect on outcome that is **smooth but not monotone**. We need
+a regression framework that lets the response depend on a continuous
+predictor through an arbitrary smooth function, while keeping the
+GLM machinery (link function, likelihood, inference) we have already
+built up.
+
+**Generalized additive models** (GAMs) provide exactly this. A GAM
+replaces the linear predictor
+
+$$g(\E{Y \mid X = x}) = \b_0 + \sum_{j=1}^p \b_j x_j$$
+
+with an **additive** sum of smooth functions
+
+$$g(\E{Y \mid X = x}) = \b_0 + \sum_{j=1}^p f_j(x_j),$$
+
+where each $f_j$ is estimated nonparametrically from the data. The
+linear predictor remains additive across predictors (so each
+predictor's contribution is still interpretable on its own), but the
+shape of each $f_j$ is no longer constrained to be linear.
+
+The rest of this chapter builds up to GAMs in stages:
+
+1. **Polynomial regression** and **step functions** — the simplest
+   ways to introduce nonlinearity, useful but limited.
+2. **Basis functions** — the general framework that polynomial and
+   step expansions both fit into, and the route to splines.
+3. **Regression splines** and **smoothing splines** — the smoothers
+   most commonly used inside GAMs.
+4. **Local regression (LOESS)** — an alternative smoother family.
+5. **GAMs** — additive combinations of any of the above smoothers,
+   fit via penalized likelihood with automatic smoothness selection.
+
+We'll fit GAMs in R using the `mgcv` package [@wood2017generalized],
+which implements the modern penalized-regression approach with
+automatic smoothness selection via REML or GCV.

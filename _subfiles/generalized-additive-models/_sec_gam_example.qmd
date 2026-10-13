@@ -1,0 +1,209 @@
+We'll fit a logistic GAM to the Western Collaborative Group Study (WCGS)
+data [@rosenman1975coronary],
+the coronary-heart-disease cohort introduced in the
+[logistic regression chapter](logistic-regression.qmd).
+The outcome is incident coronary heart disease (`chd69`);
+the continuous risk factors we smooth are
+age (`age`),
+body mass index (`bmi`),
+serum cholesterol (`chol`),
+and systolic blood pressure (`sbp`) —
+predictors whose effect on CHD risk need not be linear on the log-odds scale.
+
+## Setup {.unnumbered}
+
+```{r}
+#| eval: false
+library(mgcv)        # gam(), s()
+library(ggplot2)
+library(gratia)      # tidy plots for gam fits (optional)
+
+# WCGS ships with this package:
+wcgs <- readRDS(system.file("extdata", "wcgs.rds", package = "rme"))
+
+# Binary 0/1 outcome, and drop the one known cholesterol outlier (645):
+wcgs <- subset(wcgs, !is.na(chol) & chol < 645)
+wcgs$chd <- as.integer(wcgs$chd69 == "Yes")
+```
+
+## Linear baseline {.unnumbered}
+
+Start with an ordinary logistic GLM as a baseline:
+
+```{r}
+#| eval: false
+m_lin <- glm(
+  chd ~ age + bmi + chol + sbp,
+  family = binomial(), data = wcgs
+)
+summary(m_lin)
+```
+
+Each coefficient is a single log-odds increment per unit of the
+predictor — one slope for the entire range of age, BMI, cholesterol,
+and blood pressure. That's a strong assumption: it forces risk to
+climb at a constant rate across the whole range of each exposure.
+
+## GAM with smooth terms {.unnumbered}
+
+Now refit with a smooth on each continuous predictor:
+
+```{r}
+#| eval: false
+m_gam <- gam(
+  chd ~ s(age) + s(bmi) + s(chol) + s(sbp),
+  family = binomial(),
+  data = wcgs,
+  method = "REML"
+)
+summary(m_gam)
+```
+
+The summary reports an effective degrees of freedom (EDF) for each
+smooth. A smooth whose EDF stays close to 1 has collapsed to a
+straight line — the data give no evidence of curvature for that
+predictor — while an EDF meaningfully above 1 signals a nonlinear
+effect. In this dataset most of the smooths sit near 1 (the linear
+baseline already captures them well), with cholesterol the predictor
+most likely to show curvature; treat the actual EDFs from your run,
+not these expectations, as the evidence.
+
+## Reading the EDFs {.unnumbered}
+
+For each smooth, ask:
+
+- **EDF $\approx 1$**: the smooth has collapsed to a straight line.
+  No evidence the relationship is nonlinear. You can drop the
+  smoother and use a linear term without loss.
+- **EDF in 2–5**: meaningfully nonlinear. The fitted curve is more
+  than just a line but doesn't have lots of bumps.
+- **EDF $> 5$**: substantially nonlinear, possibly with multiple
+  inflections. Check whether the data actually support that wiggle
+  (look at the plot; check `gam.check()`'s `k-index`).
+
+If `gam.check(m_gam)` flags any smooth as having `edf` close to
+`k'`, bump `k` up:
+
+```{r}
+#| eval: false
+m_gam2 <- gam(
+  chd ~ s(age) + s(bmi) + s(chol, k = 20) + s(sbp),
+  family = binomial(),
+  data = wcgs,
+  method = "REML"
+)
+```
+
+## Plotting partial-effect curves {.unnumbered}
+
+```{r}
+#| eval: false
+plot(m_gam, pages = 1, shade = TRUE, seWithMean = TRUE)
+```
+
+produces one panel per smooth, each showing the partial effect on
+the log-odds scale with a 2-SE band. `seWithMean = TRUE` adds the
+variance of the smooth's overall level (its centering offset) to
+the pointwise standard errors. Without it, the band is the variance
+of the *deviation* of the smooth around its mean; with it, the band
+is the variance of the smooth itself — the right interpretation when
+comparing partial-effect curves across predictors on a publication
+figure.
+
+For a cleaner ggplot rendering, `gratia::draw()` is a one-line
+alternative:
+
+```{r}
+#| eval: false
+gratia::draw(m_gam)
+```
+
+## Translating to the response scale {.unnumbered}
+
+Partial-effect plots are on the **link scale** (log-odds for
+binary). To plot predicted probability against a single predictor —
+here cholesterol, the predictor with the clearest curvature — hold
+the others at typical values, build the Wald CI on the **link** scale,
+then back-transform with `plogis()`:
+
+```{r}
+#| eval: false
+grid <- data.frame(
+  chol = seq(min(wcgs$chol), max(wcgs$chol), length.out = 200),
+  age  = median(wcgs$age),
+  bmi  = median(wcgs$bmi),
+  sbp  = median(wcgs$sbp)
+)
+pred <- predict(m_gam, newdata = grid,
+                type = "link", se.fit = TRUE)
+grid$prob  <- plogis(pred$fit)
+grid$lower <- plogis(pred$fit - 1.96 * pred$se.fit)
+grid$upper <- plogis(pred$fit + 1.96 * pred$se.fit)
+
+ggplot(grid, aes(x = chol, y = prob)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
+  geom_line() +
+  labs(x = "Serum cholesterol (mg/dL)",
+       y = "Predicted probability of CHD",
+       caption = "Other predictors held at sample medians") +
+  theme_minimal()
+```
+
+We compute the CI on the link scale and back-transform because the
+delta-method SE on `type = "response"` doesn't respect the [0, 1]
+boundary — Wald intervals built from it can extend outside (0, 1)
+near the tails of the curve and have non-symmetric coverage. Working
+on the link scale and applying the monotone `plogis()` transformation
+keeps the interval inside (0, 1) by construction and preserves
+asymmetry around the boundaries (wider near 0 and 1, narrower near
+the middle), which is the right qualitative shape for a probability.
+
+## Comparing GLM and GAM {.unnumbered}
+
+```{r}
+#| eval: false
+# Refit the GAM with method = "ML" for AIC comparison.
+# REML and ML likelihoods are on different scales; comparing AIC
+# from glm() (always ML) with a REML-fitted gam() mixes criteria.
+# Use select = TRUE to enable term-level smoothness selection (the
+# null-space penalty), so a smooth that's really just a line — or
+# zero — isn't penalized as more complex than the linear baseline.
+m_gam_ml <- gam(
+  chd ~ s(age) + s(bmi) + s(chol) + s(sbp),
+  family = binomial(),
+  data = wcgs,
+  method = "ML",
+  select = TRUE
+)
+AIC(m_lin, m_gam_ml)
+```
+
+Compare the two fits on AIC. When most smooths sit at EDF near 1 —
+as several do here — the GLM is the parsimonious choice and the AIC
+gap will be small or may even favor the GLM. The GAM earns its extra
+complexity only when one or more smooths show clear curvature and
+the curve plots reveal a substantively interesting shape; if they
+do, the GAM is the better report.
+
+The refit with `method = "ML"` is required only for the AIC
+comparison; the REML fit `m_gam` above remains the preferred fit for
+final inference and plotting [@wood2017generalized, §6.2].
+
+## Reporting in a manuscript {.unnumbered}
+
+A typical methods-section sentence is:
+
+> Continuous predictors were modeled using thin-plate regression
+> splines (the default basis for `mgcv::s()`) via penalized restricted
+> maximum likelihood (`mgcv` *version*, R *version*;
+> @wood2017generalized). The number of basis functions per predictor
+> was set to 10 and reduced by penalization to the effective degrees
+> of freedom shown in Table X.
+
+Replace *version* with the actual versions you used — these can
+drift between drafts.
+
+Pair this with a table giving each smooth's EDF and approximate
+p-value, plus a figure of the partial-effect curves on the
+link scale (with the response-scale plot of the predictor of
+primary interest as a supplementary figure).

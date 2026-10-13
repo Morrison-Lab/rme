@@ -1,0 +1,122 @@
+::: notes
+Adapted from @wood2017generalized [§6.10–6.12].
+:::
+
+GAM output from `summary()` looks similar to GLM output but has a
+few quirks driven by the penalized fit. Here's what to read off it.
+
+## Reading `summary(gam_fit)`
+
+A `summary.gam` object splits the report into two sections:
+
+### Parametric coefficients
+
+These are the non-smooth terms in the formula — intercept,
+categorical predictors, terms entered as `x` rather than `s(x)`.
+Their output is identical to a GLM:
+
+```
+Parametric coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -2.143      0.087  -24.63  < 2e-16 ***
+sexFemale     0.342      0.061    5.61  2.0e-08 ***
+```
+
+Read these exactly as you would GLM coefficients.
+
+### Smooth terms
+
+```
+Approximate significance of smooth terms:
+        edf  Ref.df  Chi.sq  p-value
+s(age)  4.82   5.93   76.2   3.6e-14 ***
+s(bmi)  2.13   2.78   18.4   2.4e-04 ***
+```
+
+Each column reports:
+
+- **`edf`** — effective degrees of freedom of the smooth, as defined
+  in @def-effective-degrees-of-freedom. An EDF of 1.0 means the smooth
+  has been penalized down to a straight line; higher values mean more
+  wiggliness.
+- **`Ref.df`** — a reference degrees of freedom used in constructing
+  the p-value (slightly larger than EDF; the difference accounts for
+  the penalized-fit uncertainty in selecting $\l$).
+- **`Chi.sq`** — the test statistic for "is this smooth different
+  from zero?".
+- **`p-value`** — an *approximate* p-value for that null. The standard
+  caveat applies: the smoothing parameter was selected from the
+  data, so the test statistic doesn't have an exact $\chi^2$
+  distribution — `mgcv` uses a careful approximation accounting for
+  the selection, but it's still an approximation [@wood2013pvalues].
+
+### Adjusted $R^2$ and deviance explained
+
+For Gaussian GAMs, the summary reports an adjusted $R^2$; for GLM
+families, **deviance explained** (the GLM analog of $R^2$). Same
+interpretation as in the GLM chapters.
+
+## Confidence bands for smooth terms
+
+The pointwise CIs that `plot.gam()` draws come from the Bayesian
+posterior distribution of the spline coefficients
+[@wood2017generalized, §6.10]. They have the property:
+
+- They are **roughly the right Bayesian credible intervals** for the
+  smooth at each point.
+- They are **roughly the right frequentist confidence bands**
+  "across the function" — i.e. averaged over $x$, the band has
+  approximately 95% coverage of the true $f(x)$.
+- They **are not** pointwise frequentist CIs in the strict sense;
+  at any single $x$, coverage can be a few percentage points off.
+
+For routine plotting and reporting in epidemiology, these bands are
+the right thing to display. If you need something stricter (e.g.
+simultaneous bands valid across the entire $x$-range), posterior
+simulation from the spline coefficients gives the right answer:
+`gratia::smooth_samples()` (gratia >= 0.9) returns draws of the smooth
+from the posterior on the spline coefficients (equivalently, you can
+roll your own via `mgcv::rmvn()` with the fitted `Vp`). See
+[@wood2017generalized, §6.10] for the underlying theory.
+Note that `simulate(m_gam)` is a *different* tool — it returns
+response-scale draws (posterior predictive samples of new
+observations), not smooth-coefficient draws, so it's appropriate for
+predictive checks but not for constructing simultaneous bands on the
+smooth.
+
+## Comparing models
+
+Two GAMs can be compared in the usual ways:
+
+- **AIC**: `AIC(m1, m2)`. Lower is better. `mgcv` reports the AIC
+  with an effective-degrees-of-freedom correction that's
+  appropriate for the penalized fit.
+- **Likelihood-ratio test**: `anova(m1, m2, test = "Chisq")`. Same
+  caveat as the smooth-term p-values — the smoothing parameter was
+  data-chosen, so the LRT is approximate. Use with the same care.
+- **`gratia::compare_smooths()`** (from the companion `gratia`
+  package) — a more comprehensive comparison framework, including
+  visual overlays of smooths and difference plots.
+
+## When to prefer a GLM over a GAM
+
+GAMs are strictly more flexible than GLMs, but that flexibility costs
+something:
+
+- **Communication.** A linear effect is easier to describe in a
+  table of coefficients than a curve.
+- **Power.** With small $n$ and a smooth that's truly linear, the
+  GAM wastes degrees of freedom on penalty selection. The EDF will
+  drop toward 1, but the inference loses a little efficiency.
+- **Reporting standards.** Some epidemiology journals still require
+  linear or quadratic exposure terms.
+
+A reasonable workflow:
+
+1. Plot the data + a LOESS smoother for an initial scatterplot
+   diagnostic.
+2. Fit a GAM with `s(x)` for every continuous predictor where
+   nonlinearity is plausible.
+3. Read the EDF: if EDF $\approx 1$, the linear form is fine — drop
+   `s()` and refit as a GLM for parsimony.
+4. If EDF $> 1$, report the GAM with a curve plot.

@@ -1,0 +1,188 @@
+::: notes
+Adapted from @james2021islr2e [§7.5] and @wood2017generalized [§5–6].
+:::
+
+Regression splines force the modeler to make several choices —
+basis type, number of knots, knot locations — that affect the
+result. **Smoothing splines** sidestep that decision tree by taking
+a different route: they place a knot at every data point and then
+**penalize wiggliness** to control overfitting.
+
+{{< slidebreak >}}
+
+## The penalized fit
+
+<!-- Reviewer note (intentional, do not re-flag): no slidebreak between this
+heading and the div below. The preceding slidebreak already opens a fresh
+slide; the heading and this div intentionally share that slide to avoid a
+title-only slide. -->
+::::{#def-smoothing-spline}
+#### Smoothing spline (penalized least squares)
+
+Among all twice-differentiable functions $g$, the **smoothing
+spline with smoothing parameter $\l \ge 0$** is the minimizer of
+
+$$\underbrace{\sum_{i=1}^n (y_i - g(x_i))^2}_{\text{fit to data}}
++ \l \underbrace{\int g''(t)^2 \, dt}_{\text{penalty on wiggliness}}.$$
+
+The first term rewards close fit to the data; the second term
+penalizes large second derivatives, i.e. fast changes in slope.
+The trade-off is controlled by $\l$:
+
+- $\l \to 0$: the function passes through every data point
+  ($g(x_i) = y_i$). No penalty for wiggling — pure interpolation,
+  badly overfits.
+- $\l \to \infty$: the integrated squared second derivative is
+  forced to zero, so $g$ is a straight line. Maximum smoothness —
+  reduces to ordinary linear regression.
+- Intermediate $\l$: a smooth nonparametric fit.
+
+A foundational result is that the minimizer is always a **natural
+cubic spline with knots at every unique $x_i$**
+[@wood2017generalized, §5.1; @james2021islr2e, §7.5]. So even though
+the problem is defined over all twice-differentiable functions, the
+answer lives in a finite-dimensional space we can compute with.
+::::
+
+{{< slidebreak >}}
+
+::::{#exm-smoothing-spline}
+#### Effect of the smoothing parameter on a fitted curve
+
+Consider fitting a smoothing spline to a scatterplot of 200
+observations from a U-shaped exposure--outcome relationship.
+
+- With $\l$ very small (near zero), the fitted curve passes through
+  every point --- it wiggles through the noise and overfits.
+- With $\l$ very large, the fitted curve is a straight line ---
+  it misses the U-shape entirely.
+- At the GCV/REML-optimal $\hat\l$, the effective degrees of freedom
+  lies somewhere between 2 (linear) and $n$ (interpolation),
+  capturing the U-shape without chasing individual data points.
+
+The optimal $\hat\l$ is selected automatically by
+`smooth.spline(x, y)` (the default `cv = FALSE` uses GCV; pass
+`cv = TRUE` to switch to exact leave-one-out CV) or by
+`mgcv::gam(y ~ s(x), method = "REML")`.
+::::
+
+## Effective degrees of freedom
+
+The smoothing spline fit can be written as
+$\hat{\mat{y}} = \mat{S}_\l \mat{y}$
+for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the
+$x_i$ values. Because the function is penalized rather than
+projected onto a low-dimensional subspace, the usual "number of
+parameters" count doesn't apply.
+
+The standard replacement is the **effective degrees of freedom**
+(EDF):
+
+{{< slidebreak >}}
+
+::::{#def-effective-degrees-of-freedom}
+#### Effective degrees of freedom
+
+$$\text{EDF}(\l) = \text{tr}(\mat{S}_\l)
+= \sum_{i=1}^n \frac{\partial \hat y_i}{\partial y_i}.$$
+
+The EDF interpolates smoothly between two endpoints. For the **full
+smoothing-spline model** (intercept + smooth term), EDF ranges from:
+
+- $\text{EDF} \approx 2$ when $\l$ is large (model is essentially linear,
+  i.e. 2 parameters: intercept + slope).
+- $\text{EDF} \approx n$ when $\l \to 0$ (model interpolates every data
+  point).
+
+When reading `mgcv::summary.gam()` output later in this chapter, the
+column labeled `edf` reports a **per-smooth EDF that excludes the
+global model intercept**, so a smooth that has been penalized down
+to a straight line shows up as EDF $\approx 1$ — *not* 2. The two
+conventions are consistent (the intercept is counted once, outside
+the per-smooth column); they just split the parameter count
+differently. An EDF of 1 in `summary()` output therefore means
+"this smooth has collapsed to a line"; 5–8 means a moderately
+wiggly curve; larger EDFs indicate more local features.
+::::
+
+## Choosing $\l$ automatically
+
+We don't pick $\l$ by hand — we pick it from the data using one
+of:
+
+- **Cross-validation** (typically leave-one-out for smoothing splines,
+  which has a closed-form formula avoiding an actual leave-one-out
+  loop).
+- **Generalized cross-validation** (GCV), a fast computational
+  approximation to LOO-CV.
+- **REML** (restricted maximum likelihood), which treats the
+  penalty as arising from a normal-prior random effect and selects
+  $\l$ by likelihood. REML is not the default in `mgcv::gam()`
+  (which uses `method = "GCV.Cp"`), but it is generally preferred for
+  its better statistical properties
+  [@wood2017generalized, §6.2]; pass `method = "REML"` explicitly.
+
+The user typically specifies a maximum dimension for the basis
+(`k = ...` in `mgcv::s()`) and lets the software select the
+effective smoothness automatically.
+
+## Smoothing splines vs regression splines
+
+| Aspect | Regression spline | Smoothing spline |
+|:--|:--|:--|
+| Knot count | Modeler picks $K$ (small) | One per data point ($\sim n$) |
+| Knot placement | Modeler or quantile rule | All $x_i$ values |
+| Smoothness control | Number of knots | Penalty parameter $\l$ |
+| Overfitting risk | Choose $K$ too large | Choose $\l$ too small |
+| Inference | Standard linear-model output | Bayesian / EDF-based |
+| Software default | `splines::ns(df = ...)` | `mgcv::s(...)`, `smooth.spline()` |
+
+The "inference" row reflects the typical software pairings shown in
+the last row, not a fundamental property of the bases. Regression
+splines fit via `splines::ns()` + `lm()` / `glm()` use the usual
+linear-model machinery; smoothing splines fit via `mgcv::s()` +
+`mgcv::gam()` use Bayesian posterior intervals. A regression spline
+fit through `mgcv::gam()` with a fixed penalty (`sp = 0`) gets the
+Bayesian intervals too — the table is about software defaults, not
+the underlying bases.
+
+The two approaches **span the same function space** (piecewise
+cubic polynomials with continuity constraints) and often produce
+very similar fitted curves. The practical difference is who picks
+the smoothness:
+
+- **Regression splines**: the modeler picks `df` (or `k`), then OLS
+  picks the best fit at that complexity.
+- **Smoothing splines**: the basis is intentionally over-large, and
+  the smoothness parameter is data-adaptive.
+
+For routine work, **smoothing splines via `mgcv::s()` are the
+default recommendation**: REML smoothness selection just works,
+and the EDF in the model summary gives an honest answer to "how
+wiggly is my smooth".
+
+## Smoothing splines in R
+
+Base R has `smooth.spline()`, but for any nontrivial use we'll go
+through `mgcv`:
+
+```{r}
+#| eval: false
+library(mgcv)
+
+# Univariate smoother, REML smoothness selection
+m_ss <- gam(y ~ s(x, k = 20, bs = "tp"),
+            data = d, method = "REML")
+
+# Same idea inside a GLM
+m_ss_logistic <- gam(y ~ s(x, k = 20, bs = "tp"),
+                     data = d, family = binomial(),
+                     method = "REML")
+
+summary(m_ss)  # reports EDF of the s(x) term
+plot(m_ss)     # plots the fitted smooth with CI band
+```
+
+We'll return to `mgcv::s()` in the GAM-fitting section below — the
+same `s()` syntax extends to multi-predictor additive models with
+no additional machinery.
