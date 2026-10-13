@@ -3,11 +3,11 @@
 #### Estimated observed marginal risks (WCGS)
 
 Continuing the WCGS example (@exm-wcgs-causal-marginal-risks),
-the **observed marginal risks**
+the **[observed marginal risks](#def-observed-marginal-risk)**
 $\pi(a) = \Pr(Y=1 \mid A=a)$
 can be estimated in two equivalent ways.
 
-Directly, as the sample proportion of events within each exposure group:
+Directly, as the [sample proportion](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-proportion) of events within each exposure group:
 
 ```{r}
 #| label: wcgs-obs-marginal-risks-direct
@@ -39,7 +39,7 @@ $$
 The two estimates agree exactly (to displayed precision),
 as @lem-subgroup-pm-proportion guarantees:
 because the model includes `dibpat` as a covariate,
-the exposed-subgroup predictive margin reproduces
+the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) reproduces
 the raw event proportion in each `dibpat` group.
 
 Note that $\hat\pi(1) \neq \hat\pi_1$ and $\hat\pi(0) \neq \hat\pi_0$
@@ -47,6 +47,6 @@ Note that $\hat\pi(1) \neq \hat\pi_1$ and $\hat\pi(0) \neq \hat\pi_0$
 because age is associated with behavioral pattern (Type A and Type B men
 have different age distributions), the observed marginal and causal marginal
 risks differ.
-Standardization via g-computation adjusts for this difference.
+Standardization via [g-computation](#def-g-computation) adjusts for this difference.
 
 :::

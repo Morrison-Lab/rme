@@ -85,7 +85,7 @@ $$
 $${#eq-logistic-hess}
 
 where $\matr{D} \eqdef \text{diag}(\Varf{Y_i|\vX_i=\vx_i})$
-is the diagonal matrix whose $i^{th}$ diagonal element is $\Varf{Y_i|\vX_i=\vx_i}$.
+is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) whose $i^{th}$ diagonal element is $\Varf{Y_i|\vX_i=\vx_i}$.
 
 {{< slidebreak >}}
 
@@ -93,7 +93,7 @@ is the diagonal matrix whose $i^{th}$ diagonal element is $\Varf{Y_i|\vX_i=\vx_i
 
 #### The logistic log-likelihood is concave
 
-The Hessian $\llik''(\vb) = -\mX\'\matr{D}\mX$ (@eq-logistic-hess)
+The [Hessian](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) $\llik''(\vb) = -\mX\'\matr{D}\mX$ (@eq-logistic-hess)
 is negative semi-definite for every $\vb$,
 because the diagonal entries of $\matr{D}$ are
 $\Varf{Y_i|\vX_i=\vx_i} = \pi_i(1-\pi_i) \geq 0$.
@@ -121,9 +121,9 @@ A twice-differentiable function
 whose Hessian is negative semi-definite everywhere is
 [concave](https://en.wikipedia.org/wiki/Concave_function)
 [@boyd2004convex, §3.1.4],
-so the log-likelihood $\llik(\vb)$ is concave,
-and every stationary point
-(every solution of the score equation $\vec{\llik'}(\vb) = \mathbf{0}_{(p+1) \times 1}$)
+so the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) $\llik(\vb)$ is [concave](https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex),
+and every [stationary point](https://morrison-lab.github.io/mds/optimization.html#def-stationary-point)
+(every solution of the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) $\vec{\llik'}(\vb) = \mathbf{0}_{(p+1) \times 1}$)
 is a [global maximum](https://en.wikipedia.org/wiki/Concave_function#Properties)
 [@boyd2004convex, §4.2.2].
 In fact, since $\pi_i = \expitf{\vx_i \cdot \vb} \in (0,1)$ strictly,
@@ -134,7 +134,7 @@ the Hessian is negative definite,
 the log-likelihood is strictly concave,
 and the maximum is unique.
 Consequently, when the [Newton-Raphson algorithm](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson) converges,
-it converges to the unique global maximum likelihood estimate,
+it converges to the unique global [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 not merely to a local optimum.
 
 :::
@@ -154,7 +154,7 @@ $${#eq-linear-hess}
 
 :::{#exr-hess-logistic}
 
-Determine the elements of the Hessian matrix for logistic regression.
+Determine the elements of the Hessian matrix for [logistic regression](#def-logistic-regression).
 
 :::
 

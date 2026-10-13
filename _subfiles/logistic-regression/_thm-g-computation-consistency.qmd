@@ -4,16 +4,17 @@
 
 Suppose:
 
-- the data $(Y_i, A_i, Z_i)$, $i = 1, \dots, n$, are i.i.d. draws from the population;
+- the data $(Y_i, A_i, Z_i)$, $i = 1, \dots, n$, are [i.i.d.](https://morrison-lab.github.io/pds/independence.html#def-iid) draws from the population;
 - the outcome regression is correctly specified,
   so the fitted coefficients are consistent,
   $\hat\beta \overset{p}{\to} \beta^*$
-  (standard MLE consistency for a correctly specified GLM; see @agresti2015foundations, Chapter 4);
+  (standard [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) consistency for a correctly specified GLM;
+  see @agresti2015foundations, Chapter 4);
 - the identification assumptions of @thm-causal-marginal-risk hold;
 - the predictor vectors are uniformly bounded,
   $\|x_{a,i}\| \le B < \infty$ (as holds when covariates are bounded).
 
-Then the g-computation estimator (@def-g-computation)
+Then the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) (@def-g-computation)
 is consistent for the causal marginal risk $\pi_a$ (@def-causal-marginal-risk):
 
 $$\hat\pi_a \overset{p}{\to} \pi_a$$
@@ -42,7 +43,7 @@ Write the fitted and true risks as the logistic link of the linear predictor,
 $\hat\pi(a, z_i) \eqdef \expitf{x_{a,i}'\hat\beta}$
 and $\teal{\pi(a, z_i)} \eqdef \expitf{x_{a,i}'\beta^*}$,
 and recall that $\expit$ is Lipschitz with constant $\tfrac{1}{4}$
-(its derivative $\expitf{u}\,(1 - \expitf{u})$ is at most $\tfrac{1}{4}$).
+(its [derivative](https://morrison-lab.github.io/mds/calculus-derivatives.html#def-derivative) $\expitf{u}\,(1 - \expitf{u})$ is at most $\tfrac{1}{4}$).
 Then
 
 $$
@@ -75,7 +76,7 @@ $$
 (a uniform bound that pointwise convergence of the individual terms,
 correlated through the shared $\hat\beta$, would not provide on its own).
 The remaining term averages the true risks over an i.i.d. sample
-$z_1, \dots, z_n$ from the marginal distribution $f_Z$,
+$z_1, \dots, z_n$ from the [marginal distribution](https://morrison-lab.github.io/pds/random-variables.html#def-marginal) $f_Z$,
 so the weak law of large numbers gives
 
 $$
@@ -84,8 +85,8 @@ $$
 \qquad \text{[weak law of large numbers]}
 $$
 
-Finally, @thm-causal-marginal-risk identifies this expectation
-with the causal marginal risk:
+Finally, @thm-causal-marginal-risk identifies this [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation)
+with the [causal marginal risk](#def-causal-marginal-risk):
 
 $$
 \E{\teal{\pi(a, Z)}} = \pi_a.
