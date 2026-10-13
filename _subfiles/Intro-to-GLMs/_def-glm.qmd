@@ -1,0 +1,50 @@
+:::{#def-glm}
+#### Generalized linear model
+
+A **generalized linear model (GLM)** is a regression model (@def-regression-model)
+for an outcome $Y$ given covariates $\vX = \vx$
+with three components
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5]:
+
+1.  an **outcome distribution** family (the **random component**):
+given $\vX = \vx$, $Y$ follows a specified distribution family,
+such as Gaussian, Bernoulli, or Poisson,
+with conditional mean $\mu(\vx) \eqdef \E{Y|\vX=\vx}$,
+and observations are independent given their covariates;
+
+2.  a **linear predictor** $\eta(\vx) = \tp{\vx}\vb$ (@def-linear-predictor);
+
+3.  a **link function** $g$ connecting the two,
+$g\paren{\mu(\vx)} = \eta(\vx)$ (@def-link-function).
+:::
+
+::: notes
+A GLM specifies model structure only:
+its coefficients $\vb$ can be estimated by maximum likelihood,
+by Bayesian methods, or by other inference methods.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-glm}
+#### Logistic and linear regression as GLMs
+
+Let $Y \in \{0, 1\}$ indicate death of a beetle exposed to dose $x$.
+The model with
+
+1.  outcome distribution $Y|X=x \sim \Bernoulli\paren{\mu(x)}$,
+2.  linear predictor $\eta(x) = \b_0 + \b_1 x$,
+3.  logit link $\logit\paren{\mu(x)} = \eta(x)$
+
+is a GLM: logistic regression.
+With $\b_0 = -60$ and $\b_1 = 34$,
+@exm-linear-predictor and @exm-link-function give
+$\eta(1.8) = 1.2$ and $\P(Y=1|X=1.8) = \mu(1.8) \approx 0.7685$.
+
+The Gaussian linear regression model
+$Y|X=x \sim \ndist{\b_0 + \b_1 x, \sigma^2}$
+is also a GLM,
+with a Gaussian outcome distribution
+and the identity link $g(\mu) = \mu$,
+so that $\mu(x) = \eta(x)$.
+:::
