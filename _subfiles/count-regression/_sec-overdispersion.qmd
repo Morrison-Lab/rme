@@ -2,8 +2,8 @@
 
 ::: notes
 
-The Poisson distribution model **forces** the conditional variance
-to equal the conditional mean
+The [Poisson distribution](https://morrison-lab.github.io/pds/distributions.html#def-poisson) model **forces** the [conditional variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance)
+to equal the [conditional mean](https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation)
 ($\Var{Y \mid \vX=\vx, T=t} = \E{Y \mid \vX=\vx, T=t}$).
 In practice, observational count data frequently exhibit variance
 substantially larger than the mean
@@ -48,17 +48,17 @@ the model is failing the correct-mean requirement @def-overdispersion imposes,
 which is a different problem requiring a different remedy.
 When overdispersion is present but ignored,
 the point estimates $\evb$ remain consistent,
-but the standard errors produced by standard maximum likelihood estimation
+but the [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) produced by standard [maximum likelihood estimation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
 are severely underestimated.
-This underestimation leads to overly narrow confidence intervals
+This underestimation leads to overly narrow [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval)
 and inflated false-positive (type I error) rates during hypothesis testing.
 
 When overdispersion is detected via residual diagnostics
-(such as the deviance or Pearson $\chi^2$ statistic,
+(such as the deviance or [Pearson $\chi^2$ statistic](Intro-to-GLMs.qmd#def-pearson-residual-glm),
 divided by its residual degrees of freedom,
 substantially exceeding 1),
 practitioners can address it by incorporating missing predictors,
-using quasipoisson estimation, or fitting a negative binomial regression model.
+using quasipoisson estimation, or fitting a [negative binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) regression model.
 
 ::: notes
 

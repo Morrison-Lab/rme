@@ -4,11 +4,11 @@
 This chapter presents models for
 [count data](https://morrison-lab.github.io/sds/data.html#sec-count-vars) outcomes.
 With covariates,
-the event rate $\lambda$
+the [event rate](https://morrison-lab.github.io/pds/distributions.html#def-event-rate) $\lambda$
 becomes a function of the covariate vector
 $\vX = \tp{(X_1, \dots, X_p)} \in \reals^p$.
 Typically, count data models use
-a $\logf{}$ link function,
+a $\logf{}$ [link function](Intro-to-GLMs.qmd#sec-why-link),
 and thus an $\exp{}$ inverse-link function.
 Specifically, the model relates the expected outcome count
 to the event rate and linear predictor as:
@@ -25,7 +25,7 @@ $${#eq-mean-poisson}
 
 ::: notes
 The term $T=t$ represents the [exposure magnitude](https://morrison-lab.github.io/pds/distributions.html#def-exposure)
-(such as person-years or observation time)
+(such as [person-years](https://morrison-lab.github.io/mds/algebra-sums.html#def-person-years) or observation time)
 and plays a structural role in scaling rates to expected counts.
 :::
 
@@ -90,7 +90,7 @@ What are the units of $\mu$ in @eq-mean-poisson?
 
 :::{#sol-eq-mean-poisson}
 
-$\mu$ is the expected value of $Y$.
+$\mu$ is the [expected value](https://morrison-lab.github.io/pds/expectation.html#def-expectation) of $Y$.
 Because $Y$ represents a count of events,
 $\mu$ is expressed in units of event counts;
 for example:

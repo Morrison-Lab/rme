@@ -1,7 +1,7 @@
 Random effects can be added to any generalized linear model.
 A **generalized linear mixed model** (GLMM)
 adds random effects to the linear predictor,
-so for a binary outcome with random intercepts,
+so for a [binary outcome](https://morrison-lab.github.io/sds/data.html#def-binary) with random intercepts,
 
 $$
 \logf{\frac{\pi_{ij}}{1 - \pi_{ij}}} = \tp{\vx_{ij}}\vb + \alpha_j,
@@ -10,7 +10,7 @@ $$
 $$ {#eq-glmm}
 
 [@dobson4e, Chapter 11; @gelman2006data, Chapter 14].
-Each group's odds are multiplied by $\expf{\alpha_j}$,
+Each group's [odds](binary-outcome-associations.qmd#def-odds) are multiplied by $\expf{\alpha_j}$,
 so about 95% of groups have odds within a factor of
 $\expf{\pm 2\sigma_\alpha}$ of the odds for a typical group
 [@rocke2021epi204].
@@ -39,7 +39,7 @@ summary(cbpp_glmer)$coefficients
 VarCorr(cbpp_glmer)
 ```
 
-The estimated herd standard deviation is $\est\sigma_\alpha \approx 0.642$,
+The estimated herd [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) is $\est\sigma_\alpha \approx 0.642$,
 so about 95% of herds have odds of a new case between
 $\expf{-2 \times 0.642} \approx 0.28$ and $\expf{2 \times 0.642} \approx 3.6$
 times those of a typical herd.
@@ -50,6 +50,6 @@ $\expf{-1.58} \approx 0.21$ times the odds in period 1.
 
 The fixed-effect coefficients in a GLMM are **conditional** on the random effect:
 they compare odds within the same group.
-Because the logit link is nonlinear,
-these coefficients are not the same as population-averaged odds ratios
+Because the [logit](binary-outcome-associations.qmd#def-logit-fn) link is nonlinear,
+these coefficients are not the same as population-averaged [odds ratios](binary-outcome-associations.qmd#def-OR)
 [@dobson4e, Chapter 11].

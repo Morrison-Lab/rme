@@ -62,8 +62,8 @@ hers_ldl <-
 David Rocke's Epi 204 lecture
 [*Prediction and Classification*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-20.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-6%20Measures%20of%20Classification%20Success.pdf))
-covers sensitivity, specificity, predictive values, and ROC curves
-for classifying outcomes with a fitted logistic model
+covers sensitivity, [specificity](https://morrison-lab.github.io/sds/classification.html#def-specificity), predictive values, and ROC curves
+for classifying outcomes with a fitted [logistic model](logistic-regression.qmd#def-logistic-regression)
 [@rocke2021epi204].
 :::
 
@@ -83,16 +83,16 @@ for classifying outcomes with a fitted logistic model
 David Rocke's Epi 204 lecture
 [*Variable Selection and Model Choice*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-08.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-4%20Variable%20Selection%20and%20Model%20Choice.pdf))
-covers comparing logistic models with `drop1()`, `add1()`, AIC, and BIC,
+covers comparing logistic models with `drop1()`, `add1()`, [AIC](Linear-models-overview.qmd#def-aic), and [BIC](Linear-models-overview.qmd#def-bic),
 stepwise selection with `step()`,
-and how heavy variable selection produces spurious findings and overfitting
+and how heavy variable selection produces spurious findings and [overfitting](#def-overfitting)
 [@rocke2021epi204].
 :::
 
 ::: notes
 
 Testing-based selection methods use statistical tests
-(such as F-tests or likelihood ratio tests)
+(such as [F-tests](Linear-models-overview.qmd#sec-partial-F-test) or [likelihood ratio tests](logistic-regression.qmd#def-lrt))
 to decide which predictors to include in a model.
 
 :::
@@ -104,13 +104,13 @@ to decide which predictors to include in a model.
 
 Stepwise regression has well-known problems:
 
-- It tends to select too many variables (overfitting).
-- P-values and confidence intervals are biased after selection.
+- It tends to select too many variables ([overfitting](#def-overfitting)).
+- [P-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) are [biased](https://morrison-lab.github.io/sds/estimation.html#def-bias) after selection.
 - It ignores model uncertainty.
 - Results can be unstable across different samples.
 
-Consider using subject-matter knowledge (DAGs),
-cross-validation, or penalized methods (such as LASSO) instead.
+Consider using subject-matter knowledge ([DAGs](causal-inference.qmd#sec-pred-sel-dag)),
+[cross-validation](#def-kfold), or penalized methods (such as [LASSO](#sec-pred-sel-lasso)) instead.
 See @heinze2018variable for a thorough review.
 :::
 
@@ -150,12 +150,12 @@ summary(step_model_ldl)
 When comparing non-nested models,
 we can use information criteria:
 
-- **AIC** (Akaike Information Criterion):
+- **AIC** ([Akaike Information Criterion](Linear-models-overview.qmd#def-aic)):
 $$\text{AIC} = -2\,\est{\llik} + 2p$$
-- **BIC** (Bayesian Information Criterion):
+- **BIC** ([Bayesian Information Criterion](Linear-models-overview.qmd#def-bic)):
 $$\text{BIC} = -2\,\est{\llik} + p\log n$$
 
-where $\est{\llik}$ is the maximized log-likelihood,
+where $\est{\llik}$ is the maximized [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik),
 $p$ is the number of model parameters,
 and $n$ is the sample size.
 
@@ -214,22 +214,22 @@ by shrinking small coefficients toward zero.
 ## The LASSO
 
 The **LASSO** (Least Absolute Shrinkage and Selection Operator)
-adds an $\lpnorm{1}$ penalty to the log-likelihood:
+adds an $\lpnorm{1}$ penalty to the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik):
 
 $$\hat\beta_\lambda = \arg\max_\beta \set{
 \est{\llik}(\beta) - \lambda \sum_{j=1}^p |\beta_j|
 }$$
 
-The tuning parameter $\lambda$ controls the strength of the penalty:
+The [tuning parameter](https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter) $\lambda$ controls the strength of the penalty:
 
-- $\lambda = 0$: no penalty (ordinary least squares).
+- $\lambda = 0$: no penalty ([ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols)).
 - $\lambda \to \infty$: all coefficients shrink to zero.
 
 For intermediate values of $\lambda$,
 some coefficients are exactly zero (excluded),
 while others are shrunk but non-zero.
 
-The optimal $\lambda$ is usually chosen by cross-validation.
+The optimal $\lambda$ is usually chosen by [cross-validation](#def-kfold).
 
 ## Example: LASSO for LDL
 
@@ -329,14 +329,14 @@ The right approach depends on the **inferential goal**:
 **For prediction** (Goal 1):
 
 - Pre-specify well-motivated candidate predictors.
-- Use cross-validation of a target PE measure
-  to select among models without overfitting.
-- Shrinkage methods (LASSO, ridge) are effective
+- Use [cross-validation](#def-kfold) of a target PE measure
+  to select among models without [overfitting](#def-overfitting).
+- Shrinkage methods ([LASSO](#sec-pred-sel-lasso), ridge) are effective
   when there are many candidates.
 
 **For evaluating a predictor of primary interest** (Goal 2):
 
-- Use a DAG to identify confounders, mediators, and colliders.
+- Use a DAG to identify [confounders](causal-inference.qmd#def-confounder), [mediators](causal-inference.qmd#def-mediator), and [colliders](causal-inference.qmd#def-collider).
 - Include all well-established confounders for face validity.
 - Use backward selection with a liberal criterion ($p < 0.2$)
   to remove apparent non-confounders.
@@ -354,12 +354,12 @@ The right approach depends on the **inferential goal**:
 
 **Across all goals**:
 
-- Collinearity between a primary predictor and a confounder
-  can inflate standard errors; between adjustment variables, it does not.
+- [Collinearity](#def-collinearity) between a primary predictor and a confounder
+  can inflate [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE); between adjustment variables, it does not.
 - The EPV rule (10 events per predictor) flags potential problems
   but is not a hard limit.
 - Model selection complicates inference:
-  nominal p-values and confidence intervals are anticonservative
+  nominal [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) are anticonservative
   when predictors have been selected from the data.
 
 # Learning Objectives {#sec-pred-sel-objectives .unnumbered}
