@@ -1,8 +1,8 @@
 
--   The exponential distribution is the base distribution for survival
+-   The [exponential distribution](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) is the base distribution for survival
     analysis.
--   The distribution has a constant hazard $\haz$
--   The mean survival time is $\haz^{-1}$
+-   The distribution has a constant [hazard](#def-hazard) $\haz$
+-   The [mean](https://morrison-lab.github.io/pds/expectation.html#def-expectation) survival time is $\haz^{-1}$
 
 ---
 
@@ -45,7 +45,7 @@ $$
 #### Estimating $\haz$ {.smaller}
 
 -   Suppose we have $m$ exponential survival times of
-    $t_1, t_2,\ldots,t_m$ and $k$ right-censored values at
+    $t_1, t_2,\ldots,t_m$ and $k$ [right-censored](#def-right-censor) values at
     $u_1,u_2,\ldots,u_k$.
 
 -   A survival time of $t_i=10$ means that subject $i$ died at time 10.
@@ -57,12 +57,13 @@ $$
     $\haz$.
 
 We have $m$ exponential survival times of $t_1, t_2,\ldots,t_m$ and $k$
-right-censored values at $u_1,u_2,\ldots,u_k$. The log-likelihood of an
+right-censored values at $u_1,u_2,\ldots,u_k$.
+The [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) of an
 observed survival time $t_i$ is
 $$
 \logf{\haz \ef{-\haz t_i}} =
 \logf{\haz}-\haz t_i
-$$ and the likelihood of a censored value is the probability of that
+$$ and the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik-obs) of a censored value is the probability of that
 outcome (survival greater than $u_j$) so the log-likelihood is
 
 $$

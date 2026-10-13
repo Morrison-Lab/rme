@@ -4,7 +4,7 @@
 #### Coefficient of determination
 (adapted from @kleinbaum2014applied, Chapter 7)
 
-In the simple linear regression of $Y$ on $X$,
+In the [simple linear regression](https://morrison-lab.github.io/sds/correlation-regression.html#def-slr) of $Y$ on $X$,
 define:
 
 $$
@@ -25,9 +25,9 @@ Briefly explain.
 
 **(a)**
 
-- $\text{TSS}$ (total sum of squares): the total variability in $Y$ around its mean $\bar{y}$,
+- $\text{TSS}$ ([total sum of squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-tss)): the total variability in $Y$ around its mean $\bar{y}$,
   ignoring the predictor $X$.
-- $\text{RSS}$ (residual sum of squares): the residual variability in $Y$ remaining
+- $\text{RSS}$ ([residual sum of squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-rss)): the residual variability in $Y$ remaining
   after accounting for the linear regression on $X$.
   Smaller values indicate a better-fitting model.
 - $R^2$: the proportion of the total variability in $Y$ explained by
@@ -44,15 +44,15 @@ $$
 **(c)**
 
 No.
-A high $R^2$ indicates good fit in terms of variance explained,
+A high $R^2$ indicates good fit in terms of [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) explained,
 but does not guarantee the model is correctly specified.
 For example:
 
 - The true relationship may be nonlinear,
   and a high $R^2$ can still be achieved with a linear model over a limited range.
-- Important confounders or interaction terms may be omitted.
-- The residuals may violate the model assumptions
-  (non-normality, heteroscedasticity, dependence),
+- Important [confounders](causal-inference.qmd#def-confounder) or interaction terms may be omitted.
+- The [residuals](Linear-models-overview.qmd#def-resid-fitted) may violate the model assumptions
+  (non-normality, [heteroscedasticity](https://morrison-lab.github.io/pds/variance-covariance.html#def-heterosked), dependence),
   which would invalidate inference even with high $R^2$.
 
 :::

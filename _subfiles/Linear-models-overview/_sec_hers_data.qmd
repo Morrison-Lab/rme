@@ -143,7 +143,7 @@ hers |>
 ```
 
 Key variables in `hers` data: outcome (LDL),
-treatment (HT), and covariates (BMI, statins, age)
+treatment (HT), and [covariates](Intro-to-GLMs.qmd#def-predictors) (BMI, statins, age)
 
 :::
 
@@ -160,7 +160,7 @@ Let's define some notation to represent this data:
 -   $B$: BMI (kg/m²)
 -   $T$: hormone therapy treatment assignment
     ("placebo" or "hormone therapy")
--   $H$: indicator variable for $T$ = "hormone therapy"
+-   $H$: [indicator variable](https://morrison-lab.github.io/sds/data.html#def-indicator-variable) for $T$ = "hormone therapy"
     -   $H = 0$ if $T$ = "placebo"
     -   $H = 1$ if $T$ = "hormone therapy"
 -   $U$: statin use ("no" or "yes")
@@ -169,12 +169,12 @@ Let's define some notation to represent this data:
     -   $V = 1$ if $U$ = "yes"
 
 ::: notes
-"Placebo" is the **reference level** for the categorical variable $T$,
+"Placebo" is the **[reference level](https://morrison-lab.github.io/sds/data.html#def-reference-level)** for the [categorical variable](https://morrison-lab.github.io/sds/data.html#def-categorical-var) $T$,
 and "no" is the **reference level** for statin use $U$.
 The choice of reference level is arbitrary;
 it only affects the interpretation of the intercept and corresponding indicator coefficients.
 
 Since LDL is measured at **baseline** (before the hormone therapy was administered),
-$H$ is not included as a predictor in our regression models for LDL.
+$H$ is not included as a predictor in our [regression models](Intro-to-GLMs.qmd#def-regression-model) for LDL.
 We instead focus on statin use $U$ (and its indicator $V$) as the key grouping variable.
 :::

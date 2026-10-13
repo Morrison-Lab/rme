@@ -1,12 +1,12 @@
 
 ::: notes
-When the outcome is rare (i.e., its probability is small) for both groups being compared in an odds ratio, the odds of the outcome will be similar to the probability of the outcome, and thus the risk ratio will be similar to the odds ratio.
+When the outcome is rare (i.e., its probability is small) for both groups being compared in an [odds ratio](#def-OR), the [odds](#def-odds) of the outcome will be similar to the probability of the outcome, and thus the [risk ratio](#def-RR) will be similar to the odds ratio.
 :::
 
 ##### Case 1: rare events
 
-For rare events, odds ratios and probability (a.k.a. risk, a.k.a.
-prevalence) ratios will be close:
+For rare events, [odds ratios](#def-OR) and probability (a.k.a. risk, a.k.a.
+[prevalence](https://morrison-lab.github.io/sds/classification.html#def-prevalence)) ratios will be close:
 
 $$\pi_1 = .01$$
 $$\pi_2 = .02$$
@@ -22,7 +22,7 @@ odds(pi2) / odds(pi1)
 {{< slidebreak >}}
 
 :::{#exm-or-rr-OC-MI}
-In @exm-oc-mi, the outcome is rare for both OC and non-OC participants, so the odds for both groups are similar to the corresponding probabilities, and the odds ratio is similar the risk ratio.
+In @exm-oc-mi, the outcome is rare for both OC and non-OC participants, so the [odds](#def-odds) for both groups are similar to the corresponding probabilities, and the odds ratio is similar the [risk ratio](#def-RR).
 :::
 
 {{< slidebreak >}}
@@ -56,7 +56,7 @@ is captured by a simple algebraic identity:
 #### Odds ratio as risk ratio times a correction factor
 
 For two probabilities $\pi_1$ and $\pi_2$,
-the odds ratio equals the risk ratio
+the [odds ratio](#def-OR) equals the [risk ratio](#def-RR)
 times a correction factor:
 
 $$\ratio(\odds_1, \odds_2)
@@ -112,7 +112,7 @@ corr_freq <- (1 - 0.4) / (1 - 0.5)
 In **Case 1** (rare events),
 take $\pi_1 = 0.02$ and $\pi_2 = 0.01$.
 The correction factor $\frac{1-\pi_2}{1-\pi_1} = `r corr_rare`$ is close to 1,
-so the odds ratio (`r or_rare`) is close to the risk ratio (`r rr_rare`).
+so the [odds ratio](#def-OR) (`r or_rare`) is close to the [risk ratio](#def-RR) (`r rr_rare`).
 
 In **Case 2** (frequent events),
 take $\pi_1 = 0.5$ and $\pi_2 = 0.4$.
@@ -130,10 +130,10 @@ so the odds ratio (`r or_freq`) and risk ratio (`r rr_freq`) diverge.
 Testing whether an odds ratio = 1 is equivalent to
 testing whether the corresponding risk ratio = 1,
 and also equivalent to
-testing whether the risk difference = 0.
+testing whether the [risk difference](#def-RD) = 0.
 Therefore,
 in **hypothesis testing**,
-if the null hypothesis is no effect,
+if the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) is no effect,
 then we can shift between RD, RR, and OR.
 But when we're talking about **point estimates** and **CIs**,
 we need to limit our conclusions to the effect measure(s) that we actually estimated,

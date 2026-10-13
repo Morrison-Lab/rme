@@ -11,7 +11,7 @@ and no tied event times.
 Let $t_1 < \cdots < t_K$ be the distinct observed failure times,
 and let $(i)$ be the subject who fails at $t_i$ (unique under the no-ties assumption).
 
-By @lem-lik-by-interval, the likelihood factors over intervals,
+By @lem-lik-by-interval, the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) factors over intervals,
 $\Lik \approx \prod_\tau \Lik_\tau$.
 Separate the $K$ intervals that contain a failure from the rest.
 A no-failure interval contributes
@@ -69,9 +69,9 @@ the factors are not formally independent
 (the risk set $R(t_{i+1})$ depends on who failed and was censored before $t_{i+1}$,
 and the discretization is exact only in the $\Delta t \to 0$ limit),
 but Cox showed that treating $\Lik^*(\vb)$ as a likelihood — i.e.,
-maximizing it as a function of $\vb$ — yields estimators with the
+maximizing it as a function of $\vb$ — yields [estimators](https://morrison-lab.github.io/sds/estimation.html#def-estimator) with the
 usual large-sample properties
-(consistency, asymptotic normality, the standard score and information identities;
+(consistency, [asymptotic normality](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle), the standard [score](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) and [information](https://morrison-lab.github.io/sds/intro-MLEs.html#def-einf) identities;
 see also [@klein2003survival, §8.3, Theoretical Note 1]).
 Under noninformative censoring, each kept factor depends on the observed history
 only through $R(t_i)$ and $\set{\vx_j}_{j \in R(t_i)}$,

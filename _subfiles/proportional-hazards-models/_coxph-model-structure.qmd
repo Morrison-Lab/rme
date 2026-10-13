@@ -1,12 +1,12 @@
 {{< include latex-macros/macros.qmd >}}
 
-**Joint likelihood of data set**:
+**Joint [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) of data set**:
 $\Lik \eqdef \p(\vY= \vy, \vD = \vd | \mX = \mx)$
 
 **Marginal likelihood contribution of obs. *i* **: 
 $\Lik_i \eqdef \p(Y_i= y_i, D_i = d_i | \vX_i = \vx_i)$
 
-*Independent Observations Assumption:*
+*[Independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) Observations Assumption:*
 $\Lik = \prod_{i=1}^n \Lik_i$
 
 *Non-Informative Censoring Assumption:* 
@@ -17,25 +17,25 @@ $$
 = \surv_T(y_i|\vx_i) \cdot [\haz_T(y_i|\vx_i)]^{d_i}
 $$
 
-**Survival function**:
+**[Survival function](intro-to-survival-analysis.qmd#def-surv-fn)**:
 $\surv(t | \vx) \eqdef \P(T > t|\vX = \vx) = \int_{u=t}^{\infty} \pdf(u|\vx)du = \expf{-\cuhaz(t|\vx)}$
 
-**Probability density function**:
+**[Probability density function](https://morrison-lab.github.io/pds/random-variables.html#def-pdf)**:
 $\pdf(t| \vx) \eqdef \p(T=t|\vX = \vx) = -\surv'(t|\vx) = \haz(t| \vx) \surv(t | \vx)$
 
-**Cumulative hazard function**:
+**[Cumulative hazard function](intro-to-survival-analysis.qmd#def-cuhaz)**:
 $\cuhaz(t | \vx) \eqdef \int_{u=0}^t \haz(u|\vx)du = -\logf{\surv(t|\vx)}$
 
-**Hazard function**: 
+**[Hazard function](intro-to-survival-analysis.qmd#def-hazard)**: 
 $\haz(t |\vx) \eqdef \p(T=t|T\ge t,\vX = \vx) = \cuhaz'(t|\vx) = \frac{\pdf(t|\vx)}{\surv(t|\vx)}$
 
-**Hazard ratio**:
+**[Hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio)**:
 $\defHR$
 
-**Log-Hazard function**: 
+**[Log-Hazard function](#def-loghaz)**: 
 $\loghaz(t|\vx) \eqdef \logf{\lambda(t|\vx)} = \loghaz_0(t) + \diffloghaz(t|\vx)$
 
-*Proportional Hazards Assumption:*
+*[Proportional Hazards Assumption](#def-pha):*
 
 $$
 \ba

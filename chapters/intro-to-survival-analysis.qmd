@@ -21,8 +21,8 @@ David Rocke's Epi 204 lecture
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture9IntroductionSurvivalAnalysis.pdf))
 covers censoring,
 survival, density, and hazard functions,
-the exponential model and its maximum likelihood estimate,
-the Kaplan-Meier estimator,
+the exponential model and its [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
+the [Kaplan-Meier estimator](#def-KM-estimator),
 and the log-rank test
 [@rocke2021epi204].
 :::
@@ -30,12 +30,12 @@ and the log-rank test
 This chapter introduces **survival analysis** (also known as *time-to-event analysis*):
 
 - Survival outcomes and censoring mechanisms
-- Key distribution functions: PDF, CDF, survival function, inverse survival (quantile) function, hazard, and cumulative hazard
-- Parametric models for survival data (exponential, Weibull)
+- Key distribution functions: [PDF](https://morrison-lab.github.io/pds/random-variables.html#def-pdf), [CDF](https://morrison-lab.github.io/pds/random-variables.html#def-cdf), [survival function](#def-surv-fn), [inverse survival (quantile) function](#def-inv-surv-fn), [hazard](#def-hazard), and [cumulative hazard](#def-cuhaz)
+- Parametric models for survival data ([exponential](https://morrison-lab.github.io/pds/random-variables.html#def-exponential), [Weibull](https://morrison-lab.github.io/pds/distributions.html#def-weibull))
 - Nonparametric estimation: the Kaplan-Meier product-limit estimator
 - The log-rank test for comparing survival curves
-- The Nelson-Aalen cumulative hazard estimator
-- The empirical inverse survival function
+- The [Nelson-Aalen cumulative hazard estimator](#def-na-cuhaz-est)
+- The [empirical inverse survival function](#def-emp-inv-surv-fn)
 
 # Time-to-event outcomes {.smaller}
 
@@ -49,7 +49,9 @@ failure of a device or system.
 event is death.
 
 :::{.callout-note}
-The term *survival analysis* is a bit misleading. Survival outcomes can sometimes be analyzed using binomial models (logistic regression). *Time-to-event models* or *survival time analysis* might be a better name.
+The term *survival analysis* is a bit misleading.
+Survival outcomes can sometimes be analyzed using binomial models ([logistic regression](logistic-regression.qmd#def-logistic-regression)).
+*Time-to-event models* or *survival time analysis* might be a better name.
 :::
 
 # Time-to-event outcome distributions
@@ -84,9 +86,9 @@ The term *survival analysis* is a bit misleading. Survival outcomes can sometime
 ::: notes
 Before deriving the estimator, we establish two general probability facts
 its derivation relies on:
-the interval failure probability $q_j(\tau)$,
-and a lemma expressing a conditional survival probability as a ratio of
-survival function values.
+the [interval failure probability](#def-interval-fail-prob) $q_j(\tau)$,
+and [a lemma](#lem-cond-surv-ratio) expressing a conditional survival probability as a ratio of
+[survival function](#def-surv-fn) values.
 :::
 
 {{< include _subfiles/intro-to-survival-analysis/_def-interval-fail-prob.qmd >}}
@@ -122,9 +124,9 @@ survival function values.
 David Rocke's Epi 204 lecture
 [*Survival Regression with the Cox Model I*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-04.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture10ProportionalHazardsModel.pdf))
-covers Greenwood's variance for the Kaplan-Meier estimator,
-the cumulative hazard,
-and the Nelson-Aalen estimator,
+covers [Greenwood's variance](#thm-greenwood) for the [Kaplan-Meier estimator](#def-KM-estimator),
+the [cumulative hazard](#def-cuhaz),
+and the [Nelson-Aalen estimator](#def-na-cuhaz-est),
 using the `bmt` data
 [@rocke2021epi204].
 :::

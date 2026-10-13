@@ -1,0 +1,82 @@
+::: notes
+Adapted from @james2021islr2e [§7.2].
+:::
+
+**Step functions** are the opposite extreme from polynomials: instead of letting the response depend smoothly on $X$, they cut the range of $X$ into bins and fit a separate constant within each bin.
+The fit is piecewise-constant — a staircase rather than a curve.
+
+{{< slidebreak >}}
+
+::::{#def-step-function-regression}
+#### Step-function regression
+
+Choose **cutpoints** $c_1 < c_2 < \cdots < c_K$ on the support of $X$,
+producing $K+1$ bins:
+$(-\infty, c_1]$, $(c_1, c_2]$, ..., $(c_K, \infty)$.
+Using the conventions $c_0 = -\infty$ and $c_{K+1} = \infty$, define indicator
+variables
+
+$$C_k(X) \eqdef \indicp{c_{k-1} < X \le c_k}, \quad k = 1, \ldots, K+1.$$
+
+Because $\sum_{k=1}^{K+1} C_k(X) = 1$ for every $X$ (exactly one indicator is "on"), the full set of $K+1$ indicators plus an intercept is linearly dependent.
+One bin is therefore dropped as the **reference category**.
+Taking bin $1$ as the reference and using $C_2, \ldots, C_{K+1}$, the identified step-function regression model is
+
+$$y_i = \b_0 + \b_2 C_2(x_i) + \b_3 C_3(x_i) + \cdots + \b_{K+1} C_{K+1}(x_i) + \eps_i,$$
+
+with $K$ free slope parameters (one per non-reference bin) plus the
+intercept. $\b_0$ is the expected response in the reference bin and
+$\b_k$ ($k \ge 2$) is the contrast in mean response between bin $k$
+and the reference bin.
+::::
+
+{{< slidebreak >}}
+
+::::{#exm-step-function-regression}
+#### BMI categories as a step function
+
+Step-function regression is the regression-modeling equivalent of categorizing a continuous predictor.
+The familiar "age groups" or "BMI categories" used in many epidemiology tables are exactly this: cut the continuous predictor into bins, then enter the bin indicators as regressors.
+For example, WHO BMI categories --- underweight ($< 18.5$), normal weight ($18.5$--$24.9$), overweight ($25$--$29.9$), and obese ($\ge 30$) --- use $K = 3$ cutpoints producing four bin indicators, with three slope parameters estimating the mean response contrast between each non-reference category and the reference (here, normal weight).
+::::
+
+## Strengths
+
+- **Interpretable on the original scale.**
+  Each $\b_k$ is just "mean response in bin $k$ minus mean response in the reference bin," with the same units as the outcome (or on the link scale for a GLM).
+  Easy to put in a table.
+- **No assumption about within-bin shape.**
+  Step functions don't impose linearity, monotonicity, or any other within-bin relationship — they just average.
+- **Robust to outliers in $X$.**
+  Extreme $X$ values pull only the outermost bin's mean.
+
+## Limitations
+
+- **Discontinuous fit.**
+  Step functions can't represent a smooth relationship: the fitted curve jumps at each cutpoint, which is almost never the right scientific model for a continuous exposure.
+- **Bin choice is arbitrary.**
+  Different cutpoint sets produce different fits, and there is no statistically principled way to pick cutpoints from the data without invalidating inference.
+- **Power loss.**
+  Within each bin, all variation in $X$ is treated as noise.
+  Compared with a smooth fit that exploits the continuous structure, step functions waste information about where in the bin each observation falls.
+- **Effective parameter count.**
+  A step function with $K$ cutpoints uses $K$ parameters beyond the intercept.
+  For a meaningful fit, $K$ has to be large enough to resolve the underlying shape — but every extra cutpoint costs a degree of freedom.
+
+Step functions are most useful when bin boundaries are **substantively meaningful** (e.g. clinical BMI categories) and the goal is to communicate effects in those familiar categories rather than to estimate a smooth dose-response curve.
+For pure curve estimation, splines almost always do better.
+
+## Step functions in R
+
+The base-R function `cut()` produces a factor coding the bins:
+
+```{r}
+# Clinical (WHO) BMI categories.
+wcgs$bmi_cat <- cut(wcgs$bmi, breaks = c(-Inf, 18.5, 25, 30, Inf),
+                    labels = c("underweight", "normal", "overweight", "obese"))
+table(wcgs$bmi_cat)
+lm(chol ~ bmi_cat, data = wcgs)
+```
+
+The factor is automatically expanded into $K$ contrast indicators by `model.matrix`, with the first level as the reference.
+The fitted coefficients are the contrasts relative to that reference category.

@@ -2,15 +2,15 @@
 This section is adapted from @dobson4e [§6.3].
 :::
 
-Residuals and leverage each capture one aspect of an observation's influence on the model fit.
-Cook's distance [@cook1977detection] combines them into a single diagnostic.
+[Residuals](#def-resid-fitted) and [leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage) each capture one aspect of an observation's influence on the model fit.
+[Cook's distance](#def-cooks-distance) [@cook1977detection] combines them into a single diagnostic.
 
 {{< slidebreak >}}
 
 :::{#def-cooks-distance}
 #### Cook's distance
 
-For ordinary least squares with $p$ parameters,
+For [ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) with $p$ parameters,
 the **Cook's distance** for observation $i$ is
 
 $$
@@ -33,8 +33,8 @@ $$
 D_i = \frac{(\stdresid_i)^2}{p} \cdot \frac{h_{ii}}{1-h_{ii}}
 $$ {#eq-cooks-distance-formula}
 
-where $\stdresid_i$ is the standardized residual (@def-stred)
-and $h_{ii}$ is the leverage (diagonal of the hat matrix, @def-hat-matrix).
+where $\stdresid_i$ is the [standardized residual](#def-stred) (@def-stred)
+and $h_{ii}$ is the leverage (diagonal of the [hat matrix](#def-hat-matrix), @def-hat-matrix).
 
 {{< slidebreak >}}
 

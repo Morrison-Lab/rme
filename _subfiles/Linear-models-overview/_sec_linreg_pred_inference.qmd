@@ -3,11 +3,11 @@
 :::{#exr-ci-mean}
 
 Given
-a maximum likelihood estimate $\evb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$
 and
-a corresponding estimated covariance matrix
+a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
 $\eS \eqdef \widehat{\Covt}(\evb)$,
-calculate a 95% confidence interval for the predicted mean
+calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the predicted mean
 $\mu(\vx) = \E{Y|\vX=\vx}$.
 
 :::
@@ -19,7 +19,7 @@ $\mu(\vx) = \E{Y|\vX=\vx}$.
 ::: notes
 
 By [the Gauss-Markov theorem](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem),
-the OLS estimate $\evb$ is the best linear unbiased estimator of $\vb$.
+the [OLS](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) estimate $\evb$ is the best linear [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimator of $\vb$.
 A 95% confidence interval for $\mu(\vx)$
 can be constructed directly on the original scale:
 
@@ -43,7 +43,7 @@ $$\mu(\vx) \in \paren{\hat\mu(\vx) \pm t_{n-p}(0.975) \cdot \HSE{\hat\mu(\vx)}}$
 
 ::: notes
 
-How can we estimate the standard error of
+How can we estimate the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of
 $\hat\mu(\vx)$?
 
 :::
@@ -182,7 +182,7 @@ bw_lm2 |>
   theme(legend.position = "bottom")
 ```
 
-Predicted values and confidence bands for the `birthweight` model with interaction term
+[Predicted values](#def-predicted-value) and confidence bands for the `birthweight` model with interaction term
 :::
 
 ### Why are confidence bands narrower near the center of the data? {#sec-why-ci-narrower}
@@ -190,10 +190,10 @@ Predicted values and confidence bands for the `birthweight` model with interacti
 The confidence bands in @fig-pred-int are visibly narrower
 near the center of the gestational age range.
 To understand why,
-consider a simple linear regression with one predictor $a$ (gestational age)
+consider a [simple linear regression](https://morrison-lab.github.io/sds/correlation-regression.html#def-slr) with one predictor $a$ (gestational age)
 and an intercept.
 The covariate vector for a new observation at age $a$ is $\vx = \tp{(1, a)}$,
-and the general variance formula for the predicted mean specializes to:
+and the general [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) formula for the predicted mean specializes to:
 
 $$
 \ba
@@ -207,7 +207,7 @@ where $\bar{a} = \frac{1}{n}\sumin a_i$ is the mean gestational age
 and $S_{AA} = \sumin (a_i - \bar{a})^2$ is the total variation in gestational age.
 
 To derive @eq-var-fitted-slr,
-first note that for $n$ observations with design matrix rows $(1, a_i)$:
+first note that for $n$ observations with [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) rows $(1, a_i)$:
 
 $$
 \tp{\mX}\mX
@@ -233,7 +233,7 @@ $$
   \begin{pmatrix} \sumin a_i^2 & -n\bar{a} \\ -n\bar{a} & n \end{pmatrix}
 $$
 
-Substituting $\vx = \tp{(1, a)}$ into the quadratic form:
+Substituting $\vx = \tp{(1, a)}$ into the [quadratic form](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-quadratic-form):
 
 $$
 \ba
@@ -264,7 +264,7 @@ and widen toward the extremes of the gestational age range.
 
 Intuitively, the fitted line is "anchored" at the center of the data:
 in simple linear regression with an intercept,
-the OLS fitted line passes exactly through the sample mean point $(\bar{a}, \bar{y})$,
+the OLS fitted line passes exactly through the [sample mean](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-mean) point $(\bar{a}, \bar{y})$,
 so the estimated mean at $\bar{a}$ is relatively stable across different samples.
 Moving away from $\bar{a}$,
 small changes in the estimated slope

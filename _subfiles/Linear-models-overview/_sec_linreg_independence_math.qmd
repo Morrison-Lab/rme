@@ -2,12 +2,12 @@
 
 Suppose the observations have a meaningful order,
 indexed by $t = 1, \ldots, n$.
-Let $e_t$ denote the OLS residual from a fitted regression model.
+Let $e_t$ denote the [OLS](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) residual from a fitted [regression model](Intro-to-GLMs.qmd#def-regression-model).
 
 :::{#def-durbin-watson-diagnostic}
 #### Durbin-Watson diagnostic
 
-The test statistic is
+The [test statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) is
 $$
 \ba
 d
@@ -35,7 +35,7 @@ The null is $H_0: \rho = 0$,
 and alternatives can be one-sided or two-sided,
 depending on whether we suspect positive,
 negative,
-or any serial correlation
+or any serial [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation)
 [@kutner2005applied, Chapter 12].
 :::
 
@@ -43,7 +43,7 @@ or any serial correlation
 #### Breusch-Godfrey diagnostic
 
 For a test of order $p$,
-we run an auxiliary regression of residuals on:
+we run an auxiliary regression of [residuals](#def-resid-fitted) on:
 the original regressors,
 and lagged residuals $e_{t-1}, \ldots, e_{t-p}$.
 If $R^2_{\text{aux}}$ is from that auxiliary model,

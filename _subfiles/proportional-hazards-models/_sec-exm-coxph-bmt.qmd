@@ -9,12 +9,12 @@ bmt.cox <- coxph(Surv(t2, d3) ~ group, data = bmt)
 summary(bmt.cox)
 ```
 
-The table provides hypothesis tests comparing groups 2 and 3 to group 1.
-Group 3 has the highest hazard, so the most significant comparison is
+The table provides [hypothesis tests](https://morrison-lab.github.io/sds/inference.html#sec-hypothesis-tests) comparing groups 2 and 3 to group 1.
+Group 3 has the highest [hazard](intro-to-survival-analysis.qmd#def-hazard), so the most [significant](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant) comparison is
 not directly shown.
 
 The coefficient `r round(coef(bmt.cox)["groupHigh Risk AML"], 4)` is on the log-hazard-ratio scale.
-The next column gives the hazard ratio `r round(exp(coef(bmt.cox)["groupHigh Risk AML"]), 4)`, and a hypothesis (Wald) test.
+The next column gives the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) `r round(exp(coef(bmt.cox)["groupHigh Risk AML"]), 4)`, and a hypothesis ([Wald](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test)) test.
 
 The (not shown) group 3 vs. group 2 log hazard ratio is
 `r round(coef(bmt.cox)["groupHigh Risk AML"], 4)` − (`r round(coef(bmt.cox)["groupLow Risk AML"], 4)`) =
@@ -22,7 +22,7 @@ The (not shown) group 3 vs. group 2 log hazard ratio is
 The hazard ratio is `r round(exp(coef(bmt.cox)["groupHigh Risk AML"] - coef(bmt.cox)["groupLow Risk AML"]), 3)`.
 
 Inference on all coefficients and combinations can be constructed using
-`coef(bmt.cox)` and `vcov(bmt.cox)` as with logistic and poisson
+`coef(bmt.cox)` and `vcov(bmt.cox)` as with [logistic](logistic-regression.qmd#def-logistic-regression) and poisson
 regression.
 
 **Concordance** is agreement of first failure between pairs of subjects
@@ -37,12 +37,12 @@ useful.
 `summary()` prints three tests for whether the model with the group
 covariate is better than the one without
 
--   `Likelihood ratio test` (chi-squared)
+-   `Likelihood ratio test` ([chi-squared](https://morrison-lab.github.io/sds/inference.html#def-chi-square-dist))
 -   `Wald test` (also chi-squared), obtained by adding the squares of the z-scores
--   `Score` = log-rank test, as with comparison of survival functions.
+-   `Score` = [log-rank test](intro-to-survival-analysis.qmd#thm-logrank-two-group), as with comparison of [survival functions](intro-to-survival-analysis.qmd#def-surv-fn).
 
-The likelihood ratio test is probably best in smaller samples, followed
-by the Wald test.
+The [likelihood ratio test](logistic-regression.qmd#def-lrt) is probably best in smaller samples, followed
+by the [Wald test](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test).
 
 ### Survival Curves from the Cox Model
 
@@ -80,9 +80,9 @@ list(KM = km_fit, Cox = cox_fit) |>
 Survival Functions for Three Groups by KM and Cox Model
 :::
 
-When we use `survfit()` with a Cox model,
+When we use `survfit()` with a [Cox model](#def-ph-model),
 we have to specify the covariate levels we are interested in;
-the argument `newdata` should include a `data.frame` with the same named columns as the predictors in the Cox model and one or more levels of each.
+the argument `newdata` should include a `data.frame` with the same named columns as the [predictors](Intro-to-GLMs.qmd#def-predictors) in the Cox model and one or more levels of each.
 
 {{< slidebreak >}}
 

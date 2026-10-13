@@ -35,7 +35,7 @@ print this vector:
 -   observations where the event was observed are printed as the event
 time (for example, `surv2 = 10` on line 1)
 
--   observations where the event was right-censored are printed as the
+-   observations where the event was [right-censored](#def-right-censor) are printed as the
 censoring time with a plus sign (`+`; for example, `surv2 = 32+` on
 line 3).
 
@@ -44,7 +44,7 @@ line 3).
 ## The `survfit` function
 
 Once we have constructed our `Surv` variable, we can calculate the
-Kaplan-Meier estimate of the survival curve using the `survfit()`
+[Kaplan-Meier estimate](#def-KM-estimator) of the [survival curve](#def-surv-fn) using the `survfit()`
 function.
 
 ::: callout-note
@@ -125,7 +125,7 @@ autoplot(km_model)
 
 ### quantiles of survival curve
 
-We can extract quantiles with `quantile()`:
+We can extract [quantiles](https://morrison-lab.github.io/pds/random-variables.html#def-quantile-function) with `quantile()`:
 
 ```{r}
 #| code-line-numbers: "2"

@@ -53,21 +53,21 @@ tibble::tibble(
 ```
 
 The marginal risk difference equals the weighted average
-of the conditional risk differences exactly, as @thm-collapsibility guarantees.
+of the [conditional risk differences](#def-cond-rd) exactly, as @thm-collapsibility guarantees.
 The marginal risk ratio and marginal odds ratio both differ
 from the weighted average of their conditional counterparts --
-though the risk ratio's discrepancy only shows up in the fourth decimal place here,
-because the conditional risk ratios happen to be nearly homogeneous
+though the [risk ratio](binary-outcome-associations.qmd#def-RR)'s discrepancy only shows up in the fourth decimal place here,
+because the [conditional risk ratios](#def-cond-rrr) happen to be nearly homogeneous
 across the two age strata
 ($`r sprintf("%.3f", strata$RR[1])`$ vs. $`r sprintf("%.3f", strata$RR[2])`$).
 
 Non-collapsibility is distinct from effect-measure modification.
-The conditional odds ratios vary more across strata
+The [conditional odds ratios](binary-outcome-associations.qmd#def-OR) vary more across strata
 ($`r sprintf("%.3f", strata$OR[1])`$ vs. $`r sprintf("%.3f", strata$OR[2])`$),
 and for the risk ratio, that near-homogeneity is exactly what keeps its discrepancy small here:
 if the conditional risk ratio were instead **constant** across strata,
 the marginal risk ratio would reproduce it exactly,
-just like the risk difference.
+just like the [risk difference](binary-outcome-associations.qmd#def-RD).
 The odds ratio's discrepancy is different in kind:
 even if the conditional odds ratio were held *constant* across strata,
 the marginal odds ratio would generally still differ from it

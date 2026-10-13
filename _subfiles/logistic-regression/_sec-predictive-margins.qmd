@@ -13,7 +13,7 @@ $$
 
 using the shorthand $\hat\pi_{a,i} = \hat\pi(a, z_i)$ from @def-g-computation,
 where $|S|$ is the number of observations in $S$.
-The choice of the averaging set $S$ determines which estimand the margin targets;
+The choice of the averaging set $S$ determines which [estimand](https://morrison-lab.github.io/sds/estimation.html#def-estimand) the margin targets;
 the two standard choices each have their own name.
 The term "predictive margins" is commonly used in social science
 and in Stata's `margins` command.
@@ -42,15 +42,15 @@ $$
 #### Illustration: full-sample predictive margin
 
 In the WCGS example (@exm-wcgs-causal-marginal-risks),
-the g-computation estimate $\hat\pi_1$ is simultaneously
+the [g-computation](#def-g-computation) estimate $\hat\pi_1$ is simultaneously
 the full-sample predictive margin $\widehat{\text{PM}}(1)$:
 both are the same average $\frac{1}{n}\sumin \hat\pi_{1,i}$
 of the fitted Type A risks over the whole sample.
 
 :::
 
-Because the full-sample predictive margin is defined identically
-to the g-computation estimator (@exm-full-sample-pm),
+Because the [full-sample predictive margin](#def-full-sample-predictive-margin) is defined identically
+to the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) (@exm-full-sample-pm),
 it inherits the same consistency guarantee:
 
 {{< slidebreak >}}
@@ -59,21 +59,21 @@ it inherits the same consistency guarantee:
 
 #### Full-sample predictive margin estimates the causal marginal risk
 
-The full-sample predictive margin is consistent
+The [full-sample predictive margin](#def-full-sample-predictive-margin) is consistent
 for the causal marginal risk $\pi_a$ (@def-causal-marginal-risk):
 
 $$\widehat{\text{PM}}(a) = \hat\pi_a \overset{p}{\to} \pi_a$$
 
 ::: {.proof}
 The full-sample predictive margin $\frac{1}{n}\sumin \hat\pi_{a,i}$
-is, term for term, the g-computation estimator $\hat\pi_a$ of @def-g-computation,
+is, term for term, the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) $\hat\pi_a$ of @def-g-computation,
 so its consistency for $\pi_a$ is exactly @thm-g-computation-consistency.
 :::
 
 :::
 
-The WCGS predictive margin computed in @exm-full-sample-pm
-is therefore consistent for the causal marginal risk $\pi_1$
+The WCGS [predictive margin](#def-predictive-margins) computed in @exm-full-sample-pm
+is therefore consistent for the [causal marginal risk](#def-causal-marginal-risk) $\pi_1$
 by @cor-full-sample-pm.
 
 {{< slidebreak >}}
@@ -117,9 +117,9 @@ $$
 = `r round((1 - p_z1_a1) * pi1_z0 + p_z1_a1 * pi1_z1, 3)`,
 $$
 
-which coincides with the observed marginal risk
+which coincides with the [observed marginal risk](#def-observed-marginal-risk)
 $\pi(1) = `r round(pi1_direct, 3)`$ (@exm-observed-marginal-risk),
-not the causal marginal risk
+not the [causal marginal risk](#def-causal-marginal-risk)
 $\pi_1 = `r round((1 - p_z1_pop) * pi1_z0 + p_z1_pop * pi1_z1, 3)`$
 (@exm-causal-marginal-risk);
 @thm-subgroup-pm shows this agreement is no coincidence.
@@ -132,18 +132,18 @@ $\pi_1 = `r round((1 - p_z1_pop) * pi1_z0 + p_z1_pop * pi1_z1, 3)`$
 
 #### Exposed-subgroup predictive margin estimates the observed marginal risk
 
-With the data $(Y_i, A_i, Z_i)$, $i = 1, \dots, n$, drawn i.i.d. from the population,
+With the data $(Y_i, A_i, Z_i)$, $i = 1, \dots, n$, drawn [i.i.d.](https://morrison-lab.github.io/pds/independence.html#def-iid) from the population,
 under correct model specification,
 and with the predictor vectors uniformly bounded
 ($\|x_{a,i}\| \le B < \infty$, as in @thm-g-computation-consistency),
-the exposed-subgroup predictive margin is consistent
+the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) is consistent
 for the observed marginal risk $\pi(a)$ (@def-observed-marginal-risk):
 
 $$\hat\pi_a(a) \overset{p}{\to} \pi(a)$$
 
 ::: {.proof}
 
-Split the estimator into the average of the **true** conditional risks
+Split the [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) into the average of the **true** conditional risks
 over the exposed subgroup plus an estimation-error term:
 
 $$
@@ -172,8 +172,8 @@ $$
 \qquad \text{[weak law of large numbers]}
 $$
 
-Finally, @thm-observed-marginal-risk identifies this conditional expectation
-with the observed marginal risk:
+Finally, @thm-observed-marginal-risk identifies this [conditional expectation](https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation)
+with the [observed marginal risk](#def-observed-marginal-risk):
 
 $$
 \E{\teal{\pi(a, Z)} \mid A = a} = \pi(a).
@@ -196,8 +196,8 @@ by @thm-subgroup-pm.
 
 #### Exposed-subgroup predictive margin reproduces the observed proportion
 
-If the fitted model includes the exposure $A$ as a categorical covariate,
-the exposed-subgroup predictive margin equals
+If the fitted model includes the exposure $A$ as a [categorical covariate](https://morrison-lab.github.io/sds/data.html#def-categorical-var),
+the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) equals
 the observed event proportion in that subgroup **exactly**,
 in any finite sample:
 
@@ -208,7 +208,7 @@ $$
 
 ::: {.proof}
 
-The maximum-likelihood score equations for a logistic GLM
+The maximum-likelihood [score equations](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) for a logistic GLM
 set $\sum_{i} x_{ij} (Y_i - \hat\mu_i) = 0$ for each covariate column $x_{\cdot j}$,
 where $\hat\mu_i = \hat\pi(A_i, z_i)$ is observation $i$'s fitted risk.
 Because $A$ enters as a categorical covariate,
@@ -220,7 +220,7 @@ $$
 \sum_{i : A_i = a} \hat\mu_i = \sum_{i : A_i = a} Y_i.
 $$
 
-(For the reference level, which has no indicator column of its own,
+(For the [reference level](https://morrison-lab.github.io/sds/data.html#def-reference-level), which has no indicator column of its own,
 the same identity follows by subtracting the non-reference indicator
 score equations from the intercept score equation
 $\sum_{i=1}^n (Y_i - \hat\mu_i) = 0$.)
@@ -234,7 +234,7 @@ $\hat\pi_a(a) = \frac{1}{n_a}\sum_{i : A_i = a}\hat\pi(a, z_i)
 
 :::
 
-The following example applies these predictive margins to the same WCGS data.
+The following example applies these [predictive margins](#def-predictive-margins) to the same WCGS data.
 
 {{< slidebreak >}}
 
