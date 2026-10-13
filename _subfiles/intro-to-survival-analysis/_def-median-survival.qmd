@@ -1,0 +1,21 @@
+:::{#def-median-survival}
+#### Median survival time
+
+Given a random time-to-event variable $T$ with
+survival function $\surv(t)$ (@def-surv-fn)
+and inverse survival function $\surv^{-1}(p)$ (@def-inv-surv-fn),
+the **median survival time** $t_{\text{med}}$
+is the earliest time by which the survival probability
+has fallen to or below one half:
+
+$$t_{\text{med}} \eqdef \surv^{-1}(0.5) = \inf\cb{t \ge 0 : \surv(t) \le 0.5}.$$
+
+[@klein2003survival, Chapter 2]
+:::
+
+::: notes
+When $\surv(t)$ is continuous and strictly decreasing,
+$t_{\text{med}}$ is the unique time at which $\surv(t_{\text{med}}) = 0.5$:
+half of the population has experienced the event by $t_{\text{med}}$,
+and half has not.
+:::

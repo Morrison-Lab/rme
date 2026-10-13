@@ -1,0 +1,29 @@
+:::{#exm-median-survival-cure}
+#### A survival function with no finite median (counterexample)
+
+Suppose 60% of patients are cured and never experience the event,
+while the other 40% have exponentially distributed event times with rate $\haz = 1$ per year,
+so that
+$\surv(t) = 0.6 + 0.4\,\ef{-t}$.
+To find $t_{\text{med}}$ (@def-median-survival),
+we look for times $t$ with $\surv(t) \le 0.5$:
+
+$$
+\ba
+\surv(t) \le 0.5
+&\iff 0.6 + 0.4\,\ef{-t} \le 0.5
+&& \text{(substitute $\surv(t)$)}
+\\
+&\iff 0.4\,\ef{-t} \le -0.1
+&& \text{(subtract 0.6 from both sides)}
+\\
+&\iff \ef{-t} \le -0.25
+&& \text{(divide both sides by $0.4 > 0$)}
+\ea
+$$
+
+No $t$ satisfies $\ef{-t} \le -0.25$, because $\ef{-t} > 0$ for every $t$.
+The set $\cb{t \ge 0 : \surv(t) \le 0.5}$ is empty,
+so this population has no finite median survival time
+(by the convention $\inf \emptyset = \infty$, $t_{\text{med}} = \infty$).
+:::

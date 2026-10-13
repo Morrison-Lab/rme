@@ -1,0 +1,25 @@
+:::{#def-noninformative-censoring}
+#### Non-informative censoring
+
+Let $T$ be the event time and $C$ the censoring time for a participant,
+let $\theta_T$ denote the parameters of the distribution of $T$,
+and let $\theta_C$ denote the parameters of the distribution of $C$.
+Censoring is **non-informative** if both of these conditions hold:
+
+1. $T$ and $C$ are independent, $T \ind C$,
+so that
+$\p(T > t, C > c) = \surv_T(t)\,\surv_C(c)$ for all $t, c \ge 0$;
+2. $\theta_T$ and $\theta_C$ share no parameters,
+so that the distribution of $C$ carries no information about $\theta_T$.
+
+[@klein2003survival, Chapter 3]
+:::
+
+::: notes
+Terminology varies across textbooks:
+some authors call condition 1 *independent censoring*
+and reserve *non-informative censoring* for condition 2
+[@kleinbaum2012survival, Chapter 1].
+In this chapter, "non-informative censoring" means both conditions together,
+since the likelihood factorization in this section uses both.
+:::
