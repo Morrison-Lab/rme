@@ -1,0 +1,176 @@
+::: notes
+Applied exercises adapted from @james2021islr2e [§7.9] and
+@hastie2009esl2e [§9.1].
+:::
+
+{{< slidebreak >}}
+
+### Polynomial regression and step functions (ISLRv2 Applied 6) {#sec-exr-wage-poly}
+
+<!-- No slidebreak between this
+heading and the div that follows. The preceding slidebreak already opens a fresh
+slide; the heading and this div intentionally share that slide to avoid a
+title-only slide. -->
+::::{#exr-wage-polynomial-cv}
+
+Using the `Wage` dataset from the `ISLR2` package [@james2021islr2e]:
+
+**(a)** Use 10-fold cross-validation to choose the polynomial degree $d^*$ for predicting `wage` from `age`.
+Plot the CV errors for degrees 1 through 10.
+
+**(b)** Fit the degree-$d^*$ polynomial and plot it with a 95% confidence band.
+
+**(c)** Separately, choose the number of cut-points $K^*$ for a step-function model using cross-validation.
+Plot the chosen step-function fit.
+
+::::
+
+
+{{< slidebreak >}}
+
+::::{#sol-wage-polynomial-cv}
+
+::: {.panel-tabset}
+
+#### R
+
+```{r}
+#| code-fold: true
+library(ISLR2)
+library(boot)
+library(ggplot2)
+set.seed(1)
+cv_poly <- vapply(1:10, function(d) {
+  cv.glm(Wage, glm(wage ~ poly(age, d), data = Wage), K = 10)$delta[1]
+}, numeric(1))
+best_d <- which.min(cv_poly)
+cat("CV-selected degree:", best_d, "\n")
+plot(1:10, cv_poly, type = "b", xlab = "Degree", ylab = "CV MSE",
+     main = "Polynomial degree selection")
+points(best_d, cv_poly[best_d], col = "red", pch = 19)
+```
+
+#### Python
+
+```{python}
+#| eval: false
+#| python.reticulate: false
+# Not run: the rme render has no Python environment.
+import numpy as np
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import cross_val_score
+from ISLP import load_data
+Wage = load_data("Wage")
+X = Wage["age"].values.reshape(-1, 1)
+y = Wage["wage"].values
+cv_errs = [-cross_val_score(
+    Pipeline([("poly", PolynomialFeatures(d, include_bias=False)),
+              ("reg", LinearRegression())]),
+    X, y, cv=10, scoring="neg_mean_squared_error").mean() for d in range(1, 11)]
+best_d = int(np.argmin(cv_errs)) + 1
+print(f"CV-selected degree: {best_d}")
+```
+
+:::
+
+::::
+
+
+{{< slidebreak >}}
+
+### Backfitting algorithm (ESL §9.1.1 / ISLRv2 Applied 11) {#sec-exr-backfitting}
+
+<!-- No slidebreak between this
+heading and the div that follows. The preceding slidebreak already opens a fresh
+slide; the heading and this div intentionally share that slide to avoid a
+title-only slide. -->
+::::{#exr-backfitting}
+
+The **backfitting algorithm** [@hastie2009esl2e, §9.1.1] fits an additive model
+$Y = \a + \sum_j f_j(X_j) + \eps$ by iteratively smoothing partial residuals.
+
+For $p=2$ predictors with linear component smoothers $\est{f_j}(X_j) = \eb_j X_j$:
+
+1. Initialise: $\est{\a} = \bar{y}$, $\est{f_1} = \est{f_2} = 0$.
+2. Repeat until convergence (Gauss–Seidel order — re-centre each
+   $\est{f_j}$ immediately, so the centred $\est{f_1}$ is used when
+   computing $r_2$):
+   a. $r_1 \leftarrow y - \est{\a} - \est{f_2}(x_2)$; regress $r_1$ on
+      $x_1$ to update $\est{f_1}$; $\est{f_1} \leftarrow \est{f_1} -
+      \overline{\est{f_1}}$.
+   b. $r_2 \leftarrow y - \est{\a} - \est{f_1}(x_1)$; regress $r_2$ on
+      $x_2$ to update $\est{f_2}$; $\est{f_2} \leftarrow \est{f_2} -
+      \overline{\est{f_2}}$.
+
+**(a)** Implement this on simulated data with known true coefficients.
+
+**(b)** Verify the coefficients match `lm(y ~ x1 + x2)`.
+
+::::
+
+
+{{< slidebreak >}}
+
+::::{#sol-backfitting}
+
+::: {.panel-tabset}
+
+#### R
+
+```{r}
+#| code-fold: true
+set.seed(1)
+n <- 100
+x1 <- rnorm(n)
+x2 <- rnorm(n)
+y <- 2 + 3 * x1 - 1.5 * x2 + rnorm(n, sd = 0.5)
+alpha_hat <- mean(y)
+f1 <- f2 <- rep(0, n)
+for (iter in seq_len(500)) {
+  r1 <- y - alpha_hat - f2
+  b1 <- coef(lm(r1 ~ x1))[2]
+  f1 <- b1 * x1
+  f1 <- f1 - mean(f1)
+  r2 <- y - alpha_hat - f1
+  b2 <- coef(lm(r2 ~ x2))[2]
+  f2 <- b2 * x2
+  f2 <- f2 - mean(f2)
+}
+lm_fit <- lm(y ~ x1 + x2)
+cat(sprintf("Backfitting: b1=%.4f, b2=%.4f\n", b1, b2))
+cat(sprintf("lm():        b1=%.4f, b2=%.4f\n",
+            coef(lm_fit)[2], coef(lm_fit)[3]))
+```
+
+#### Python
+
+```{python}
+#| eval: false
+#| python.reticulate: false
+# Not run: the rme render has no Python environment.
+import numpy as np
+rng = np.random.default_rng(1)
+n = 100; x1 = rng.standard_normal(n); x2 = rng.standard_normal(n)
+y = 2 + 3*x1 - 1.5*x2 + rng.normal(0, 0.5, n)
+alpha_hat = y.mean(); f1 = np.zeros(n); f2 = np.zeros(n)
+for _ in range(500):
+    r1 = y - alpha_hat - f2
+    b1 = float(np.cov(x1, r1)[0, 1] / np.var(x1, ddof=1))
+    f1 = b1*x1 - (b1*x1).mean()
+    r2 = y - alpha_hat - f1
+    b2 = float(np.cov(x2, r2)[0, 1] / np.var(x2, ddof=1))
+    f2 = b2*x2 - (b2*x2).mean()
+X_ols = np.column_stack([np.ones(n), x1, x2])
+b_ols = np.linalg.lstsq(X_ols, y, rcond=None)[0]
+print(f"Backfitting: b1={b1:.4f}, b2={b2:.4f}")
+print(f"OLS:         b1={b_ols[1]:.4f}, b2={b_ols[2]:.4f}")
+```
+
+:::
+
+The coefficients agree, confirming backfitting converges to OLS when
+all component smoothers are linear [@hastie2009esl2e, §9.1.1].
+
+::::
