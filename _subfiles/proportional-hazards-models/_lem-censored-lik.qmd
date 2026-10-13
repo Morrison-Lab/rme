@@ -2,8 +2,8 @@
 #### Censored-data likelihood
 
 Under noninformative censoring
-(conditional on $\vx$, censoring times are independent of event times),
-the likelihood of the observed data $\set{(Y_j, D_j, \vx_j)}_{j=1}^n$ is
+(conditional on $\vx$, censoring times are [independent](https://morrison-lab.github.io/pds/independence.html#def-cind) of event times),
+the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) of the observed data $\set{(Y_j, D_j, \vx_j)}_{j=1}^n$ is
 
 $$
 \Lik
@@ -19,9 +19,9 @@ and $D_j = \1{T_j \le C_j}$ the event indicator.
 {{< slidebreak >}}
 
 ::: proof
-A subject observed to fail ($D_j = 1$) contributes the event-time density
+A subject observed to fail ($D_j = 1$) contributes the event-time [density](https://morrison-lab.github.io/pds/random-variables.html#def-pdf)
 $\haz(Y_j \mid \vx_j)\,\surv(Y_j \mid \vx_j)$,
-while a subject still censored ($D_j = 0$) contributes the survival probability
+while a subject still [censored](intro-to-survival-analysis.qmd#def-right-censor) ($D_j = 0$) contributes the survival probability
 $\surv(Y_j \mid \vx_j)$.
 Under noninformative censoring the two cases combine into the single contribution
 $\surv(Y_j \mid \vx_j)\,\haz(Y_j \mid \vx_j)^{D_j}$

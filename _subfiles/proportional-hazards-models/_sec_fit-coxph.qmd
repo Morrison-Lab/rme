@@ -3,18 +3,18 @@
 {{< slidebreak >}}
 
 ::: notes
-Fitting a proportional hazards model means estimating two pieces:
+Fitting a [proportional hazards model](#def-ph-model) means estimating two pieces:
 the coefficients $\vb = (\beta_1, \ldots, \beta_p)$ that govern the covariate effects,
-and the baseline hazard $\haz_0(t)$.
+and the [baseline hazard](#def-base-hazard) $\haz_0(t)$.
 We estimate them in two stages:
 
-1. estimate $\vb$ by maximizing a *partial likelihood* in which the unknown baseline $\haz_0(t)$ cancels out,
+1. estimate $\vb$ by maximizing a [*partial likelihood*](#def-ph-partial-lik) in which the unknown baseline $\haz_0(t)$ cancels out,
    so the covariate effects can be fit without committing to a shape for the baseline;
-2. then, with $\hvb$ in hand, estimate the baseline cumulative hazard $\cuhaz_0(t)$ by the Breslow estimator.
+2. then, with $\hvb$ in hand, estimate the [baseline cumulative hazard](#def-base-cuhaz) $\cuhaz_0(t)$ by the [Breslow estimator](#def-breslow-baseline-cuhaz-est).
 
 Throughout, assume for simplicity that there are no tied event times;
 let $t_1 < t_2 < \cdots < t_K$ be the distinct event times for the whole data set,
-let $R(t_i)$ be the risk set at time $t_i$,
+let $R(t_i)$ be the [risk set](intro-to-survival-analysis.qmd#def-risk-set) at time $t_i$,
 and let $(i)$ denote the subject who fails at $t_i$ (unique under the no-ties assumption).
 Recall the model:
 :::
@@ -71,11 +71,11 @@ One piece carries over from that chapter:
 the [interval failure probability](intro-to-survival-analysis.qmd#def-interval-fail-prob) $q_j(\tau)$
 (introduced ahead of that chapter's Kaplan-Meier section, since the
 Kaplan-Meier derivation also relies on it).
-From it we build its first-order approximation,
-the censored-data likelihood,
-the exact discretized survival factor,
-the per-interval likelihood factor,
-and the likelihood regrouped by interval:
+From it we build its [first-order approximation](#def-first-order-interval-fail-prob),
+the [censored-data likelihood](#lem-censored-lik),
+the [exact discretized survival factor](#lem-surv-discretized),
+the [per-interval likelihood factor](#def-interval-lik-factor),
+and the [likelihood regrouped by interval](#lem-lik-by-interval):
 :::
 
 {{< include _subfiles/proportional-hazards-models/_def-first-order-interval-fail-prob.qmd >}}
@@ -100,15 +100,15 @@ and the likelihood regrouped by interval:
 
 ::: notes
 Under the proportional-hazards model, the first-order interval failure probability
-splits into a shared baseline factor and a subject-specific hazard ratio:
+splits into a shared baseline factor and a subject-specific [hazard ratio](#def-hr-vs-baseline):
 :::
 
 {{< include _subfiles/proportional-hazards-models/_def-ph-first-order-interval-fail-prob.qmd >}}
 
 ::: notes
 We then build up to the partial likelihood through a chain of proportional-hazards lemmas:
-the single-subject failure probability and the two factors of each event
-(*whether* a failure occurs and *which* subject it is),
+the [single-subject failure probability](#lem-ph-single-subj-fail) and the two factors of each event
+([*whether*](#lem-ph-whether-failure) a failure occurs and [*which*](#lem-ph-which-subject) subject it is),
 and finally the assembly that cancels the baseline hazard.
 :::
 
@@ -148,9 +148,9 @@ the baseline cumulative hazard is estimated by the Breslow estimator:
 {{< include _subfiles/proportional-hazards-models/_def-breslow-baseline-cuhaz-est.qmd >}}
 
 ::: notes
-This estimator reduces to the Nelson-Aalen estimator when there are no covariates;
+This estimator reduces to the [Nelson-Aalen estimator](intro-to-survival-analysis.qmd#def-na-cuhaz-est) when there are no covariates;
 several other estimators have also been proposed.
-To derive it as a profile likelihood, substitute the proportional-hazards
+To derive it as a [profile likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-profile-loglik), substitute the proportional-hazards
 decomposition into the full censored-data likelihood
 (@lem-censored-lik):
 :::
@@ -163,7 +163,7 @@ $$
 $$ {#eq-ph-breslow-full-lik}
 
 ::: notes
-where $\delta_j$ is the event indicator and $\tilde{T}_j$ the observed time for subject $j$
+where $\delta_j$ is the event [indicator](https://morrison-lab.github.io/sds/data.html#def-indicator-variable) and $\tilde{T}_j$ the observed time for subject $j$
 — the same quantities denoted $D_j$ and $Y_j$ in the censored-data likelihood lemma,
 so $\tilde{T}_j = Y_j = \min(T_j, C_j)$ and $\delta_j = D_j$ —
 using $\haz(t \mid \vx) = \blue{\haz_0(t)}\,\red{\hazfactor(\vx)}$ (@thm-ph-haz-decomp)
@@ -172,8 +172,8 @@ and $\surv(t \mid \vx) = \expf{-\blue{\cuhaz_0(t)}\,\red{\hazfactor(\vx)}}$
 [survival/cumulative hazard relationship](intro-to-survival-analysis.qmd#cor-surv-int-haz)).
 Fix $\vb$ and maximize over $\haz_0(\cdot)$.
 We build up to the Breslow estimator's profile-likelihood justification through a chain of lemmas:
-the point-mass form of the maximizing hazard, the resulting profile likelihood,
-the maximizer of each point mass, and the assembly that recovers the partial likelihood.
+the [point-mass form](#lem-ph-breslow-point-mass) of the maximizing hazard, the [resulting profile likelihood](#lem-ph-breslow-profile-lik),
+the [maximizer of each point mass](#lem-ph-breslow-mle), and the [assembly that recovers the partial likelihood](#lem-ph-breslow-closes-loop).
 :::
 
 {{< slidebreak >}}

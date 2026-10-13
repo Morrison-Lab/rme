@@ -14,7 +14,7 @@
    -   allogeneic: from HLA-matched sibling
    -   autologous: from self (prior to chemo)
 -   `time`: time to study exit
--   `delta`: study exit reason (death/relapse vs censored)
+-   `delta`: study exit reason (death/relapse vs [censored](intro-to-survival-analysis.qmd#def-right-censor))
 -   `wtime`: waiting time to transplant (in months)
 -   `score`: Karnofsky score:
    -   80--100: Able to carry on normal activity and to work; no special
@@ -78,7 +78,7 @@ summary(hodg_cox1)
 
 ### Analysis plan
 
--   **survival function** for the four combinations of disease type and
+-   **[survival function](intro-to-survival-analysis.qmd#def-surv-fn)** for the four combinations of disease type and
     graft type.
 -   **observed (nonparametric) vs. expected (semiparametric) survival**
     functions.
@@ -339,7 +339,7 @@ cox_model |>
   )
 ```
 
-Now let's overlay these cumulative hazard curves:
+Now let's overlay these [cumulative hazard](intro-to-survival-analysis.qmd#def-cuhaz) curves:
 
 ```{r}
 #| label: fig-bmt-cumhaz
@@ -385,7 +385,7 @@ na_and_cph |>
 
 ### Review: Predictions in Linear Regression
 
--   In linear regression, we have a linear predictor for each data point
+-   In [linear regression](Linear-models-overview.qmd#def-lm-general-form), we have a linear predictor for each data point
     $i$
 
 $$
@@ -396,22 +396,23 @@ y_i &\sim N(\eta_i,\sigma^2)
 \end{aligned}
 $$
 
--   $\hat y_i$ estimates the conditional mean of $y_i$ given the
-    covariate values $\vx_i$. This together with the prediction
-    error says that we are predicting the distribution of values of $y$.
+-   $\hat y_i$ estimates the [conditional mean](https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation) of $y_i$ given the
+    covariate values $\vx_i$.
+    This together with the [prediction
+    error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error) says that we are predicting the distribution of values of $y$.
 
 ### Review: Residuals in Linear Regression
 
--   The usual residual is $r_i=y_i-\hat y_i$, the difference between the
+-   The usual [residual](Linear-models-overview.qmd#def-resid-fitted) is $r_i=y_i-\hat y_i$, the difference between the
     actual value of $y$ and a prediction of its mean.
 -   The residuals are also the quantities the sum of whose squares is
-    being minimized by the least squares/MLE estimation.
+    being minimized by the [least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols)/[MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) estimation.
 
 ### Predictions and Residuals in survival models
 
 -   In survival analysis, the equivalent of $y_i$ is the event time
-    $t_i$, which is unknown for the censored observations.
--   The expected event time can be tricky to calculate:
+    $t_i$, which is unknown for the [censored](intro-to-survival-analysis.qmd#def-right-censor) observations.
+-   The [expected](https://morrison-lab.github.io/pds/expectation.html#def-expectation) event time can be tricky to calculate:
 
 $$
 \hat{\text{E}}[T|X=x] = \int_{t=0}^{\infty} \hsurv(t)dt
@@ -419,13 +420,13 @@ $$
 
 ### Wide prediction intervals
 
-The nature of time-to-event data results in very wide prediction
-intervals:
+The nature of time-to-event data results in very wide [prediction
+intervals](https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval):
 
 -   Suppose a cancer patient is predicted to have a mean lifetime of 5
-    years after diagnosis and suppose the distribution is exponential.
+    years after diagnosis and suppose the distribution is [exponential](https://morrison-lab.github.io/pds/random-variables.html#def-exponential).
 -   If we want a 95% interval for survival, the lower end is at the
-    0.025 percentage point of the exponential which is
+    0.025 [percentage point](https://morrison-lab.github.io/pds/random-variables.html#def-quantile-function) of the exponential which is
     `qexp(.025, rate = 1/5)` = `r qexp(.025, rate = 1/5)` years, or 1/40
     of the mean lifetime.
 -   The upper end is at the 0.975 point which is
@@ -445,10 +446,10 @@ intervals:
     the process can reveal much.
 -   Some diagnostic tests are based on residuals as with other
     regression methods:
-    -   **Schoenfeld residuals** (via `cox.zph`) for proportionality
-    -   **Cox-Snell residuals** for goodness of fit (@sec-cox-snell)
-    -   **martingale residuals** for non-linearity
-    -   **dfbeta** for influence.
+    -   **[Schoenfeld residuals](#def-schoenfeld-residual)** (via `cox.zph`) for proportionality
+    -   **[Cox-Snell residuals](#def-CS-resid)** for goodness of fit (@sec-cox-snell)
+    -   **[martingale residuals](#def-martingale-residual)** for non-linearity
+    -   **[dfbeta](#def-dfbeta)** for influence.
 
 ::: content-hidden
 ### Martingale and deviance residuals
@@ -494,7 +495,7 @@ vector: $\score(\beta;y_i)$
 #### Schoenfeld Residual
 
 For each subject $i$ who experienced an event (not censored)
-and for each predictor $k$,
+and for each [predictor](Intro-to-GLMs.qmd#def-predictors) $k$,
 the **Schoenfeld residual** is defined as [@grambsch1994proportional]:
 
 $$
@@ -512,7 +513,7 @@ and $\hth\paren{\vx_j}$ is the estimated risk score (@def-estimated-risk-score) 
 Intuitively,
 $r^S_{ik}$ measures how unusual subject $i$'s covariate value is,
 relative to the risk-weighted average among those at risk when subject $i$ failed.
-If the proportional hazards assumption holds,
+If the [proportional hazards assumption](#def-pha) holds,
 these residuals should show no systematic trend over time.
 A trend signals non-proportionality.
 :::
@@ -521,8 +522,8 @@ A trend signals non-proportionality.
 
 ::: notes
 We can test for such a trend
-with the correlation between Schoenfeld residuals and a function of time.
-The default in `cox.zph()` uses the KM survival curve as a transform,
+with the [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) between Schoenfeld residuals and a function of time.
+The default in `cox.zph()` uses the [KM survival curve](intro-to-survival-analysis.qmd#def-KM-estimator) as a transform,
 which handles censoring better than raw ranks.
 The `cox.zph()` function implements a score test proposed in @grambsch1994proportional.
 :::
@@ -565,8 +566,8 @@ ggcoxzph(hodg_zph, var = "gtype:dtype")
 #### Conclusions
 
 -   From the correlation test, the Karnofsky score and the interaction
-    with graft type disease type induce modest but statistically
-    significant non-proportionality.
+    with graft type disease type induce modest but [statistically
+    significant](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant) non-proportionality.
 -   The sample size here is relatively small (26 events in 43 subjects).
     If the sample size is large, very small amounts of
     non-proportionality can induce a significant result.
@@ -581,9 +582,10 @@ ggcoxzph(hodg_zph, var = "gtype:dtype")
 ---
 
 ::: notes
-Suppose that an individual has a survival time $T$ which has survival
-function $\surv(t)$, meaning that $\Pr(T> t) = \surv(t)$. Then $S(T)$ has a
-uniform distribution on $(0,1)$:
+Suppose that an individual has a survival time $T$ which has [survival
+function](intro-to-survival-analysis.qmd#def-surv-fn) $\surv(t)$, meaning that $\Pr(T> t) = \surv(t)$.
+Then $S(T)$ has a
+[uniform distribution](https://morrison-lab.github.io/pds/random-variables.html#def-uniform) on $(0,1)$:
 :::
 
 $$
@@ -612,7 +614,7 @@ $$
 $$
 
 ::: notes
-which is the CDF of an exponential distribution with parameter
+which is the [CDF](https://morrison-lab.github.io/pds/random-variables.html#def-cdf) of an [exponential distribution](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) with parameter
 $\lambda=1$.
 :::
 
@@ -687,7 +689,7 @@ but unbounded below
 This asymmetry makes it harder to spot unexpectedly early deaths,
 motivating the deviance residual.
 
-We will use martingale residuals to examine the functional forms of continuous covariates.
+We will use martingale residuals to examine the functional forms of [continuous](https://morrison-lab.github.io/sds/data.html#def-continuous-var) covariates.
 :::
 
 ::: {.callout-note}
@@ -708,11 +710,11 @@ kind of the opposite of a lottery.
 
 martingale
 
-:   In probability, a **martingale** is a sequence of random variables
-    such that the expected value of the next event at any time is the present observed value,
+:   In probability, a **martingale** is a sequence of [random variables](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable)
+    such that the [expected value](https://morrison-lab.github.io/pds/expectation.html#def-expectation) of the next event at any time is the present observed value,
     and that no better predictor can be derived even with all past values of the series available.
     At least to a close approximation, the stock market is a martingale.
-    Under the assumptions of the proportional hazards model,
+    Under the assumptions of the [proportional hazards model](#def-ph-model),
     the martingale residuals ordered in time form a martingale.
 
 :::
@@ -818,17 +820,19 @@ hodg_cox1 |> drop1(test = "Chisq")
 hodg_cox2 |> drop1(test = "Chisq")
 ```
 
-The new model has better (lower) AIC.
+The new model has better (lower) [AIC](Linear-models-overview.qmd#def-aic).
 
 ## Checking for Outliers and Influential Observations
 
-We will check for outliers using the deviance residuals. The martingale
+We will check for outliers using the [deviance residuals](#def-deviance-residual).
+The martingale
 residuals show excess events or the opposite, but highly skewed, with
 the maximum possible value being 1, but the smallest value can be very
 large negative. Martingale residuals can detect unexpectedly long-lived
 patients, but patients who die unexpectedly early show up only in the
-deviance residual. Influence will be examined using dfbeta in a similar
-way to linear regression, logistic regression, or Poisson regression.
+deviance residual.
+Influence will be examined using [dfbeta](#def-dfbeta) in a similar
+way to [linear regression](Linear-models-overview.qmd#def-lm-general-form), [logistic regression](logistic-regression.qmd#def-logistic-regression), or Poisson regression.
 
 ### Deviance Residuals
 
@@ -853,7 +857,7 @@ and $r_i^{CS}$ is the Cox-Snell residual (@def-CS-resid).
 :::
 
 ::: notes
-Deviance residuals are roughly centered on 0 with approximate standard deviation 1.
+Deviance residuals are roughly centered on 0 with approximate [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) 1.
 By symmetrizing the skewed martingale residuals,
 they make it equally easy to identify
 unexpectedly early events (large positive $r^D_i$)
@@ -909,11 +913,11 @@ Worth examining.
 -   **dfbeta** for observation $i$ is the approximate change in the
     coefficient vector $\hvb$ if subject $i$ were removed from the data:
     $$\text{dfbeta}_i \approx \hvb - \hvb_{(-i)}$$
-    computed via a one-step Newton approximation rather than a full refit
+    computed via a one-step [Newton](https://morrison-lab.github.io/sds/intro-MLEs.html#def-newton-raphson) approximation rather than a full refit
     [@klein2003survival, §11.4].
 
--   **dfbetas** for observation $i$ standardizes by the estimated standard
-    error of each coefficient:
+-   **dfbetas** for observation $i$ standardizes by the estimated [standard
+    error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of each coefficient:
     $$\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \hse{\hb_k}$$
 
 :::
@@ -921,7 +925,7 @@ Worth examining.
 ::: notes
 A useful rule of thumb is to examine the observations whose dfbeta values
 stand out from the rest — those whose removal would shift a coefficient
-the most — analogous to influence diagnostics such as Cook's distance in
+the most — analogous to influence diagnostics such as [Cook's distance](Linear-models-overview.qmd#def-cooks-distance) in
 linear regression.
 :::
 
@@ -1071,8 +1075,9 @@ hodg2[c(1, 15, 16, 18, 29), ] |>
     may be useful.
 -   The two largest residuals seem to be due to unexpectedly early
     deaths, but unfortunately this phenomenon can occur.
--   If hazards don't look proportional, then we may need to use strata,
-    between which the base hazards are permitted to be different. For
+-   If hazards don't look [proportional](#def-pha), then we may need to use strata,
+    between which the [base hazards](#def-base-hazard) are permitted to be different.
+    For
     this problem, the natural strata are the two diseases, because they
     could need to be managed differently anyway.
 -   A main point that we want to be sure of is the relative risk
@@ -1136,10 +1141,10 @@ ggcoxzph(hodg_cox2_zph)
 ### Strategy: stratify by disease type
 
 ::: notes
-The diagnostics suggest that the hazard-ratio profile for disease type
+The diagnostics suggest that the [hazard-ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) profile for disease type
 (and its interaction with graft type) is not constant over time.
 One remedy is a **stratified Cox model**
-that allows separate baseline hazards for each disease type,
+that allows separate [baseline hazards](#def-base-hazard) for each disease type,
 absorbing between-disease trajectory differences into two free baseline functions,
 while still estimating proportional effects of graft type, Karnofsky score, and waiting time.
 :::
@@ -1247,8 +1252,8 @@ data.frame(
 ```
 
 ::: notes
-We deliberately omit log-likelihood and AIC from this comparison:
-the partial likelihood of the stratified model `hodg_cox3`
+We deliberately omit [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) and [AIC](Linear-models-overview.qmd#def-aic) from this comparison:
+the [partial likelihood](#def-ph-partial-lik) of the stratified model `hodg_cox3`
 is computed within disease-type strata and excludes the between-stratum
 comparisons that `hodg_cox2`'s partial likelihood includes,
 so the two are not on a common scale and their AIC values are not comparable.
@@ -1268,7 +1273,7 @@ David Rocke's Epi 204 lecture
 [*Stratified Cox Models*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-18.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture13StratifiedCoxModels.pdf))
 covers the stratified Cox model for the `anderson` leukemia data,
-where the proportional hazards assumption fails for sex
+where the [proportional hazards assumption](#def-pha) fails for sex
 [@rocke2021epi204].
 :::
 
@@ -1427,11 +1432,11 @@ alterations.
 ### The Stratified Cox Model
 
 -   In a stratified Cox model, each stratum, defined by one or more
-    factors, has its own base survival function $\haz_0(t)$.
+    factors, has its own [base survival function](#def-baseline-surv) $\haz_0(t)$.
 -   But the coefficients for each variable not used in the strata
     definitions are assumed to be the same across strata.
 -   To check if this assumption is reasonable one can include
-    interactions with strata and see if they are significant (this specification may
+    interactions with strata and see if they are [significant](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant) (this specification may
     generate a warning and NA lines, but these warnings and NA lines can be ignored).
 -   Since the `sex` variable shows possible non-proportionality, we try
     stratifying on `sex`.
@@ -1498,7 +1503,7 @@ models.
 -   We chose to use a stratified model because of the apparent
     non-proportionality of the hazard for the sex variable.
 -   When we fit interactions with the strata variable, we did not get an
-    improved model (via the likelihood ratio test).
+    improved model (via the [likelihood ratio test](logistic-regression.qmd#def-lrt)).
 -   So we use the stratifed model with coefficients that are the same
     across strata.
 
@@ -1508,7 +1513,7 @@ models.
     need to stratify by sex.
 -   Instead, we could try to improve the model's functional form - maybe
     the interaction of treatment and sex is real, and after fitting that
-    we might not need separate hazard functions.
+    we might not need separate [hazard functions](intro-to-survival-analysis.qmd#def-hazard).
 -   Either approach may work.
 
 ```{r}
@@ -1573,7 +1578,7 @@ One or the other, both in either order, or neither may occur.
 
 #### Covariates
 
--   We are interested in possibly using the covariates `z1`-`z10` to
+-   We are interested in possibly using the [covariates](Intro-to-GLMs.qmd#def-predictors) `z1`-`z10` to
     adjust for other factors.
 
 -   In addition, the time-varying covariates for acute GVHD, chronic
@@ -1727,7 +1732,7 @@ bmt2 |>
 Note that `status` could have been `1` on the last row, indicating that
 relapse or death occurred; since it is false, the participant must have
 exited the study without experiencing relapse or death (i.e., they were
-censored).
+[censored](intro-to-survival-analysis.qmd#def-right-censor)).
 
 ### Event sequences
 
@@ -1835,7 +1840,7 @@ bmt_coxph_TV <- coxph(
 summary(bmt_coxph_TV)
 ```
 
-Platelet recovery is highly significant.
+Platelet recovery is highly [significant](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant).
 
 Neither acute GVHD (`agvhd`) nor chronic GVHD (`cgvhd`) has a
 statistically significant effect here, nor are they significant in
@@ -1863,8 +1868,8 @@ bmt_coxph_TV2 |> summary()
     true of many recurring-remitting diseases.
 -   In this case, we have more than one line in the data frame, but each
     line may have an event.
--   We have to use a "robust" variance estimator to account for
-    correlation of time-to-events within a patient.
+-   We have to use a "robust" [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) to account for
+    [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) of time-to-events within a patient.
 
 ### Bladder Cancer Data Set
 
@@ -1903,15 +1908,16 @@ related to cow tuberculosis.
 -   18 patients had exactly one recurrence.
 -   There were up to 4 recurrences in a patient.
 -   Of the 190 intervals, 112 terminated with a recurrence and 78 were
-    censored.
+    [censored](intro-to-survival-analysis.qmd#def-right-censor).
 
 #### Different intervals for the same patient are correlated.
 
--   Is the effective sample size 47 or 112? This difference might narrow confidence
-    intervals by as much as a factor of $\sqrt{112/47}=1.54$
+-   Is the effective sample size 47 or 112?
+    This difference might narrow [confidence
+    intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) by as much as a factor of $\sqrt{112/47}=1.54$
 
 -   What happens if I have 5 treatment and 5 control values and want to
-    do a t-test and I then duplicate the 10 values as if the sample size
+    do a [t-test](https://morrison-lab.github.io/sds/basic-statistical-methods.html#sec-two-sample-t-test) and I then duplicate the 10 values as if the sample size
     was 20? This falsely narrows confidence intervals by a factor of
     $\sqrt{2}=1.41$.
 
@@ -1964,8 +1970,9 @@ summary(bladder_cox1)
 ```
 
 ::: callout-note
-The likelihood ratio and score tests assume independence of observations
-within a cluster. The Wald and robust score tests do not.
+The [likelihood ratio](logistic-regression.qmd#def-lrt) and score tests assume [independence](https://morrison-lab.github.io/pds/independence.html#def-indpt) of observations
+within a cluster.
+The [Wald](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) and robust score tests do not.
 :::
 
 #### adding `cluster = id`

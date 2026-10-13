@@ -21,7 +21,7 @@ participants may:
 
 - Experience the event of interest (fracture)
 - Die before experiencing a fracture (competing event)
-- Be lost to follow-up or reach the end of the study period (censored)
+- Be lost to follow-up or reach the end of the study period ([censored](intro-to-survival-analysis.qmd#def-right-censor))
 
 #### Why Competing Risks Matter
 
@@ -98,7 +98,7 @@ the event of interest or a competing event prior to time $t$.
 - The numerator counts only events of type $k$
 - The denominator includes all participants
   who could have developed the event by time $t$
-- Reduces to the ordinary hazard function when there is only one failure type
+- Reduces to the ordinary [hazard function](intro-to-survival-analysis.qmd#def-hazard) when there is only one failure type
 
 **Estimation:**
 
@@ -108,8 +108,8 @@ To estimate and model cause-specific hazard functions:
 2. Define the $k$-th failure type as the only "event"
 3. Treat all competing causes (including death) as "censored"
 
-You can then examine predictor effects on the cause-specific hazard
-using standard Cox proportional hazards models.
+You can then examine [predictor](Intro-to-GLMs.qmd#def-predictors) effects on the cause-specific hazard
+using standard [Cox proportional hazards models](#def-ph-model).
 
 #### Cumulative Incidence Functions
 <!-- No slidebreak here: the heading shares its slide with the def-cumulative-incidence div. -->
@@ -196,8 +196,8 @@ where:
 
 - $t_i$ are the ordered event times
 - $d_{ki}$ is the number of type-$k$ events at time $t_i$
-- $n_i$ is the number at risk at time $t_i$
-- $\hskmf{t_{i-1}}$ is the Kaplan-Meier estimate of event-free survival
+- $n_i$ is the [number at risk](intro-to-survival-analysis.qmd#def-number-at-risk) at time $t_i$
+- $\hskmf{t_{i-1}}$ is the [Kaplan-Meier estimate](intro-to-survival-analysis.qmd#def-KM-estimator) of event-free survival
   just before time $t_i$
 
 The estimation proceeds in steps:
@@ -311,7 +311,7 @@ treating other event types as censored:
 **Advantages:**
 
 - Standard software can be used
-- Straightforward interpretation of hazard ratios
+- Straightforward interpretation of [hazard ratios](intro-to-survival-analysis.qmd#def-hazard-ratio)
 - Can assess effects on each failure type separately
 
 **Limitations:**
