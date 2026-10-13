@@ -1,0 +1,62 @@
+:::{#def-linear-predictor}
+#### Linear predictor
+
+Let $\vx \eqdef \tp{(1, x_1, \ldots, x_p)}$ be a covariate vector,
+with a leading 1 for the intercept,
+and let $\vb \eqdef \tp{(\b_0, \b_1, \ldots, \b_p)}$ be a vector of regression coefficients.
+The **linear predictor** (or **linear component**) of a regression model
+is the function
+
+$$
+\eta(\vx)
+\eqdef \underbrace{\tp{\vx}}_{1 \times (p+1)} \underbrace{\vb}_{(p+1) \times 1}
+= \b_0 + \b_1 x_1 + \cdots + \b_p x_p
+$$
+
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
+The linear predictor must be linear in the **coefficients** $\vb$;
+it need not be linear in the original covariates,
+because each $x_j$ can itself be a transformation of the data,
+such as $\logf{\text{dose}}$, $\text{age}^2$, or a product of two covariates.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-linear-predictor}
+#### Computing a linear predictor
+
+Suppose a model has one covariate, dose $x$, with coefficients $\b_0 = -60$ and $\b_1 = 34$.
+At dose $x = 1.8$:
+
+$$
+\ba
+\eta(1.8)
+&= \b_0 + \b_1 \cdot 1.8
+&& \text{(definition of } \eta\text{, with } p = 1\text{)}
+\\ &= -60 + 34 \cdot 1.8
+&& \text{(substitute the coefficients)}
+\\ &= -60 + 61.2
+&& \text{(multiply)}
+\\ &= 1.2
+&& \text{(add)}
+\ea
+$$
+
+The model $\eta(\vx) = \b_0 + \b_1 \logf{x} + \b_2 x^2$
+also has a linear predictor,
+with covariates $x_1 \eqdef \logf{x}$ and $x_2 \eqdef x^2$:
+it is a weighted sum of covariates with weights $\b_0, \b_1, \b_2$.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-not-linear-predictor}
+#### A function that is not a linear predictor
+
+The function $\eta(x) = \b_0 + x^{\b_1}$ is not a linear predictor,
+because $\b_1$ enters as an exponent rather than as a multiplier of a covariate.
+For example, at $x = 2$,
+increasing $\b_1$ from 1 to 2 changes $x^{\b_1}$ from $2$ to $4$, an increase of 2,
+but increasing $\b_1$ from 2 to 3 changes $x^{\b_1}$ from $4$ to $8$, an increase of 4.
+A linear function of $\b_1$ would change by the same amount for each equal step in $\b_1$.
+:::

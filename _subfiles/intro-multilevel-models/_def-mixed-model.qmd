@@ -1,0 +1,64 @@
+:::{#def-mixed-model}
+#### Mixed-effects model
+
+A **mixed-effects model** (or **mixed model**)
+is a regression model that contains
+both fixed effects (@def-fixed-effect)
+and random effects (@def-random-effect)
+[@rocke2021epi204; @dobson4e, Chapter 11].
+For example, a linear mixed model with a random intercept for each group is
+$$
+Y_{ij} \eqdef \tp{\vx_{ij}}\vb + \alpha_i + \epsilon_{ij},
+$$
+where $\vb$ is a vector of fixed effects,
+$\alpha_i \siid \ndist{0, \sigma_\alpha^2}$ is the random effect of group $i$,
+and $\epsilon_{ij} \siid \ndist{0, \sigma^2}$ is independent of the $\alpha_i$s.
+:::
+
+::: notes
+Whether a term is fixed or random is part of the *model structure*.
+It does not determine the *inference method*:
+the same mixed-effects model can be fit by maximum likelihood,
+by restricted maximum likelihood (REML),
+or by Bayesian inference.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-mixed-model}
+#### Drug trial with repeated measurements
+
+Combining @exm-fixed-effect and @exm-random-effect,
+suppose that each patient in the drug trial has blood pressure measured several times,
+and that
+$$
+Y_{ij} = \b_0 + \b_1 x_{ij} + \alpha_i + \epsilon_{ij},
+$$
+with fixed effects $\b_0 = 120$ and $\b_1 = -8$,
+and patient random effects $\alpha_i \siid \ndist{0, 10^2}$.
+If patient 3 takes the drug ($x_{3j} = 1$)
+and that patient's random effect is $\alpha_3 = 7$,
+then the mean blood pressure of patient 3 is:
+
+$$
+\begin{aligned}
+\E{Y_{3j}|x_{3j} = 1, \alpha_3 = 7}
+&= \b_0 + \b_1 \cdot 1 + \alpha_3
+&& \text{(substitute $x_{3j} = 1$; $\E{\epsilon_{3j}} = 0$)}\\
+&= 120 + (-8) \cdot 1 + 7
+&& \text{(substitute the values)}\\
+&= 119
+&& \text{(arithmetic)}
+\end{aligned}
+$$
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-not-mixed-model}
+#### A model with only fixed effects
+
+The model in @exm-fixed-effect is not a mixed-effects model:
+both of its coefficients are fixed effects,
+and it has no random effects.
+:::
