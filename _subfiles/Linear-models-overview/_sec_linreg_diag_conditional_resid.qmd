@@ -1,11 +1,11 @@
 
-If our Gaussian linear regression model is correct, the residuals $\resid_i$ and standardized residuals $\stdresid_i$ should have:
+If our [Gaussian linear regression model](#def-lm-general-form) is correct, the [residuals](#def-resid-fitted) $\resid_i$ and [standardized residuals](#def-stred) $\stdresid_i$ should have:
 
--   an approximately Gaussian distribution, with:
+-   an approximately [Gaussian distribution](https://morrison-lab.github.io/pds/random-variables.html#def-normal), with:
 -   a mean of 0
--   a constant variance
+-   a [constant variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-homosked)
 
-This mean and variance structure should be true **for every** value of $x$.
+This mean and [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) structure should be true **for every** value of $x$.
 
 ---
 
@@ -15,14 +15,14 @@ $$\E{Y \mid X=x} = \b_0 + \b_1 x_1 + \cdots + \b_p x_p$$
 
 Then the residuals might have nonzero mean.
 
-Regardless of whether we guessed the mean function correctly, the variance of the residuals might differ between values of $x$.
+Regardless of whether we guessed the [mean function](https://morrison-lab.github.io/sds/model-validation.html#def-mean-function) correctly, the variance of the residuals might differ between values of $x$.
 
 ---
 
 #### Residuals versus fitted values
 
 ::: notes
-To look for these issues, we can plot the residuals $\resid_i$ against the fitted values $\hat y_i$ (@fig-bw_lm2-resid-vs-fitted).
+To look for these issues, we can plot the residuals $\resid_i$ against the [fitted values](#def-fitted-value) $\hat y_i$ (@fig-bw_lm2-resid-vs-fitted).
 :::
 
 :::{#fig-bw_lm2-resid-vs-fitted}
@@ -61,7 +61,8 @@ $$\E{Y \mid X=x} = \b_0 + \b_1 x_1 + \cdots + \b_p x_p$$
 
 ::: notes
 
-We can also plot our standardized residuals against "leverage", which roughly speaking is a measure of how unusual each $x_i$ value is. Very unusual $x_i$ values can have extreme effects on the model fit, so we might want to remove those observations as outliers, particularly if they have large residuals.
+We can also plot our standardized residuals against "[leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage)", which roughly speaking is a measure of how unusual each $x_i$ value is.
+Very unusual $x_i$ values can have extreme effects on the model fit, so we might want to remove those observations as outliers, particularly if they have large residuals.
 
 :::
 
@@ -76,7 +77,7 @@ autoplot(bw_lm2, which = 5, ncol = 1) |> print()
 
 ::: notes
 The blue line should be relatively flat and close to 0 here.
-The curved dashed contour lines show where Cook's distance equals 0.5 and 1;
+The curved dashed contour lines show where [Cook's distance](#def-cooks-distance) equals 0.5 and 1;
 observations near or beyond those contours have substantial influence on the fit
 (see @sec-cooks-distance).
 :::

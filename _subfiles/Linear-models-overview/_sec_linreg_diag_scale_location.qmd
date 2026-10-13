@@ -3,12 +3,12 @@
 
 A **scale-location plot** graphs
 $\sqrt{\abs{\stdresid_i}}$,
-the square root of the absolute value of each standardized residual,
-against the corresponding fitted value $\hat y_i$.
+the square root of the absolute value of each [standardized residual](#def-stred),
+against the corresponding [fitted value](#def-fitted-value) $\hat y_i$.
 :::
 
 ::: notes
-Taking the absolute value folds the negative residuals onto the positive ones,
+Taking the absolute value folds the negative [residuals](#def-resid-fitted) onto the positive ones,
 so the height of the cloud of points tracks the spread of the residuals
 instead of their sign.
 Taking the square root then shrinks the large values of $\abs{\stdresid_i}$,
@@ -20,7 +20,7 @@ which makes the cloud less skewed.
 ::::{#exm-bw-scale-loc}
 #### Scale-location plot for the `birthweight` model
 
-@fig-bw-scale-loc shows the scale-location plot
+@fig-bw-scale-loc shows the [scale-location plot](#def-scale-location-plot)
 for the `birthweight` model with interactions (@eq-BW-lm-interact).
 
 :::{#fig-bw-scale-loc}
@@ -35,7 +35,7 @@ Scale-location plot of `birthweight` data
 :::
 
 The blue trend line is roughly flat,
-so this plot shows no clear sign that the residual variance changes with the fitted value.
+so this plot shows no clear sign that the residual [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) changes with the fitted value.
 ::::
 
 {{< slidebreak >}}
@@ -43,7 +43,7 @@ so this plot shows no clear sign that the residual variance changes with the fit
 Unlike the residuals-versus-fitted plot (@fig-bw_lm2-resid-vs-fitted),
 the blue line in a scale-location plot doesn't need to be near 0,
 but it should be flat.
-If the standardized residuals have a standard Gaussian distribution,
+If the standardized residuals have a standard [Gaussian distribution](https://morrison-lab.github.io/pds/random-variables.html#def-normal),
 the line should sit near $\E{\sqrt{\abs{Z}}} \approx 0.82$,
 where $Z \sim \ndist{0,1}$:
 
@@ -68,7 +68,7 @@ can help [@james2021islr2e, Section 3.3.3].
 
 @fig-scale-loc-hetero shows a scale-location plot
 for simulated data
-whose residual standard deviation grows in proportion to the mean.
+whose residual [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) grows in proportion to the mean.
 The blue line slopes clearly upward,
 which is the pattern that signals non-constant variance.
 

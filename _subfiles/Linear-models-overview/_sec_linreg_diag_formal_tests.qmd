@@ -2,18 +2,18 @@
 Graphical diagnostics are usually the first step,
 but formal tests can provide numerical summaries.
 
-For linear regression residuals,
+For linear regression [residuals](#def-resid-fitted),
 four common tests are:
 
-- `fligner.test()` for equal variances across groups
+- `fligner.test()` for equal [variances](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) across groups
   (the Fligner--Killeen test).
 - Levene / Brown--Forsythe test
   (a median-centered Levene variant,
   where standard Levene centers on group means,
   and Brown--Forsythe centers on group medians for more robustness;
   e.g., via `car::leveneTest(..., center = median)` or equivalent code).
-- `lmtest::bptest()` for error variance that changes with the covariates
-  (the Breusch--Pagan test).
+- `lmtest::bptest()` for error variance that changes with the [covariates](Intro-to-GLMs.qmd#def-predictors)
+  (the [Breusch--Pagan test](#def-breusch-pagan)).
 - `shapiro.test()` /
   [Shapiro--Wilk test](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test)
   for normality.
@@ -24,7 +24,7 @@ four common tests are:
 
 Suppose residuals are split into groups
 ($g = 1, \ldots, G$),
-for example by a categorical predictor.
+for example by a [categorical predictor](https://morrison-lab.github.io/sds/data.html#def-categorical-var).
 
 The test starts from absolute deviations from each group median:
 $$
@@ -34,9 +34,9 @@ $$
 After ranking the pooled $d_{gi}$ values,
 the Fligner--Killeen statistic is built from normal scores of those ranks.
 
-Under the null hypothesis of equal variances,
-the test statistic is approximately $\chi^2_{G-1}$.
-Small p-values suggest heteroskedasticity.
+Under the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) of equal variances,
+the [test statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) is approximately $\chi^2_{G-1}$.
+Small [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) suggest [heteroskedasticity](https://morrison-lab.github.io/pds/variance-covariance.html#def-heterosked).
 
 ---
 
@@ -52,7 +52,7 @@ Classical Levene uses the group mean for $c_g$.
 Brown--Forsythe uses the group median,
 which is more robust.
 
-Then run a one-way ANOVA on $z_{gi}$ by group:
+Then run a [one-way ANOVA](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-one-way-anova) on $z_{gi}$ by group:
 $$
 F = \frac{\text{MS}_{\text{between}}}{\text{MS}_{\text{within}}}
 \sim F_{G-1, N-G}
@@ -61,7 +61,7 @@ $$
 
 Small p-values suggest unequal residual variance.
 
-For simple linear regression,
+For [simple linear regression](https://morrison-lab.github.io/sds/correlation-regression.html#def-slr),
 @kutner2005applied [pp. 116--117] describes
 the Brown--Forsythe test
 by splitting observations into two $X$-level groups
@@ -88,7 +88,7 @@ Here,
 $\bar z_{1}$ and $\bar z_{2}$
 are the means of the $z_{ij}$ values
 in groups $i=1$ and $i=2$,
-$s_p$ is their pooled standard deviation,
+$s_p$ is their pooled [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd),
 and $n_{1}, n_{2}$ are the two group sample sizes.
 Large $|t_{\text{BF}}|$
 indicates nonconstant residual variance.
@@ -103,7 +103,7 @@ indicates nonconstant residual variance.
 
 #### Shapiro--Wilk test (normality of standardized residuals)
 
-For ordered standardized residuals
+For ordered [standardized residuals](#def-stred)
 $r_{(1)} \le \cdots \le r_{(n)}$,
 the Shapiro--Wilk statistic is:
 $$
@@ -184,8 +184,8 @@ Compared with visual diagnostics:
   that we inspect in residuals-vs-fitted (@fig-bw_lm2-resid-vs-fitted)
   and scale-location (@fig-bw-scale-loc) plots.
 - Shapiro–Wilk summarizes the same normality signal
-  that we inspect in QQ plots (@fig-qqplot-autoplot)
-  and standardized-residual histograms (@fig-marg-stresd).
+  that we inspect in [QQ plots](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-qq-plot) (@fig-qqplot-autoplot)
+  and standardized-residual [histograms](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-histogram) (@fig-marg-stresd).
 - Use tests and plots together:
   the tests provide a single numerical summary,
   while the plots show the shape and practical size of departures.

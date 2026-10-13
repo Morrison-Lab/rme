@@ -1,19 +1,19 @@
-We can also construct **prediction intervals** for
+We can also construct **[prediction intervals](https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval)** for
 the value of a new observation $Y^*$,
 given a covariate pattern $\vxs$.
 
-A new observation $Y^*$ at $\vxs$ follows the same linear model as the training data:
+A new observation $Y^*$ at $\vxs$ follows the same linear model as the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set):
 
 $$Y^* = \tp{(\vxs)}\vb + \eps^*$$
 
-where $\eps^* \sim \ndist{0, \sigma^2}$ is independent of the training data
+where $\eps^* \sim \ndist{0, \sigma^2}$ is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of the training data
 (and therefore independent of $\eb$).
 
-The predicted value of $Y^*$ is:
+The [predicted value](#def-predicted-value) of $Y^*$ is:
 
 $$\hat{Y}^* \eqdef \hat\mu(\vxs) = \tp{(\vxs)}\eb$$
 
-We base the prediction interval on the **prediction error** $Y^* - \hat{Y}^*$:
+We base the prediction interval on the **[prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error)** $Y^* - \hat{Y}^*$:
 
 $$
 \ba
@@ -24,7 +24,7 @@ Y^* - \hat{Y}^*
 \ea
 $$
 
-Assuming the model is correctly specified, the predictions will be unbiased:
+Assuming the model is correctly specified, the predictions will be [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased):
 
 $$
 \ba
@@ -37,7 +37,7 @@ $$
 \ea
 $$
 
-The variance of the prediction error is:
+The [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) of the prediction error is:
 
 $$
 \ba
@@ -70,13 +70,13 @@ which is irreducible.
 - $\Var{\dprodf{\vxs}{\eb}} = \tp{(\vxs)}\Var{\eb}\vxs$:
 the variance due to estimating the mean $\dprodf{\vxs}{\vb}$ from the data.
 
-The first component is not present in the confidence interval for $\hat\mu(\vxs)$,
+The first component is not present in the [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\hat\mu(\vxs)$,
 which only accounts for estimation uncertainty.
 This extra variance component is why prediction intervals are always wider than the corresponding confidence intervals:
 a prediction interval must additionally account for
 the irreducible noise $\eps^*$ in a new observation.
 
-The **standard error** of the prediction error is the square root of its variance:
+The **[standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE)** of the prediction error is the square root of its variance:
 
 $$
 \SE{Y^* - \hat{Y}^*}
@@ -98,7 +98,7 @@ their difference $Y^* - \hat{Y}^* = \eps^* - \tp{(\vxs)}(\eb - \vb)$
 is also normally distributed,
 with mean 0 and variance given by @eq-prediction-var.
 Standardizing by dividing by $\sigma\sqrt{1 + \tp{(\vxs)}(\mX'\mX)^{-1}\vxs}$
-yields a standard normal random variable.
+yields a [standard normal](https://morrison-lab.github.io/pds/random-variables.html#def-std-normal) [random variable](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable).
 Replacing $\sigma$ with $\es$,
 which is estimated with $n-p$ degrees of freedom and is independent of $Y^* - \hat{Y}^*$,
 the standardized prediction error follows a $t$ distribution:
