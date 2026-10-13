@@ -5,7 +5,7 @@ To confirm that the estimates in @exm-chronic-mle maximize the log-likelihood,
 differentiate the score components once more,
 using $\partial \mu_i / \partial \beta_0 = \mu_i$
 and $\partial \mu_i / \partial \beta_1 = x_i \mu_i$
-(chain rule applied to $\mu_i = e^{\beta_0 + \beta_1 x_i}$):
+([chain rule](https://morrison-lab.github.io/mds/calculus-derivatives.html#thm-chain-rule) applied to $\mu_i = e^{\beta_0 + \beta_1 x_i}$):
 
 $$
 \ba
@@ -21,7 +21,7 @@ $$
 $$
 
 Writing $\vx_i \eqdef \tp{(1, x_i)}$ and $\vb \eqdef \tp{(\beta_0, \beta_1)}$,
-these three second derivatives are the entries of the Hessian matrix
+these three second derivatives are the entries of the [Hessian matrix](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian)
 
 $$
 \underbrace{\hessf{\vb}}_{2 \times 2}
@@ -39,6 +39,6 @@ $\tp{\vec{a}} \hessf{\vb} \vec{a} = -\sum_{i=1}^{49} \mu_i \paren{\tp{\vec{a}} \
 because every $\mu_i > 0$
 and both groups contain women
 (so $\tp{\vec{a}} \vx_i \neq 0$ for some $i$).
-The log-likelihood is therefore strictly concave,
-and the stationary point we found is its unique maximum.
+The log-likelihood is therefore [strictly concave](https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex),
+and the [stationary point](https://morrison-lab.github.io/mds/optimization.html#def-stationary-point) we found is its unique maximum.
 :::

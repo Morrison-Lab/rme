@@ -189,7 +189,7 @@ at 5 years of follow-up:
 The cumulative incidence at time $t$ is calculated as:
 
 $$
-\hat{F}_k(t) = \sum_{t_i \le t} \hskmf{t_{i-1}} \times \frac{d_{ki}}{n_i}
+\hat{F}_k(t) = \sum_{t_i \le t} \eskmf{t_{i-1}} \times \frac{d_{ki}}{n_i}
 $$
 
 where:
@@ -197,7 +197,7 @@ where:
 - $t_i$ are the ordered event times
 - $d_{ki}$ is the number of type-$k$ events at time $t_i$
 - $n_i$ is the [number at risk](intro-to-survival-analysis.qmd#def-number-at-risk) at time $t_i$
-- $\hskmf{t_{i-1}}$ is the [Kaplan-Meier estimate](intro-to-survival-analysis.qmd#def-KM-estimator) of event-free survival
+- $\eskmf{t_{i-1}}$ is the [Kaplan-Meier estimate](intro-to-survival-analysis.qmd#def-KM-estimator) of event-free survival
   just before time $t_i$
 
 The estimation proceeds in steps:
@@ -253,7 +253,7 @@ event probability because many men are still event-free at 5 years.
 
 A naive approach treats competing events as censored
 and uses the standard Kaplan-Meier method:
-$1 - \hskmf{t}$.
+$1 - \eskmf{t}$.
 This naive Kaplan-Meier approach overestimates the true cumulative incidence
 because it assumes censored individuals
 (including those who died)

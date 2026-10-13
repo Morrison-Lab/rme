@@ -415,7 +415,7 @@ $$
 -   The [expected](https://morrison-lab.github.io/pds/expectation.html#def-expectation) event time can be tricky to calculate:
 
 $$
-\hat{\text{E}}[T|X=x] = \int_{t=0}^{\infty} \hsurv(t)dt
+\hat{\text{E}}[T|X=x] = \int_{t=0}^{\infty} \esurv(t)dt
 $$
 
 ### Wide prediction intervals
@@ -500,12 +500,12 @@ the **Schoenfeld residual** is defined as [@grambsch1994proportional]:
 
 $$
 r^S_{ik} =
-x_{ik}-\frac{\sum_{j\in \risksetf{t_i}} x_{jk}\,\hth\paren{\vx_j}}{\sum_{j\in \risksetf{t_i}} \hth\paren{\vx_j}}
+x_{ik}-\frac{\sum_{j\in \risksetf{t_i}} x_{jk}\,\ehazfactorf{\vx_j}}{\sum_{j\in \risksetf{t_i}} \ehazfactorf{\vx_j}}
 $$
 
 where $\risksetf{t_i}$ is the [risk set](intro-to-survival-analysis.qmd#def-risk-set) at event time $t_i$ of subject $i$,
 $x_{jk}$ is the value of predictor $k$ for subject $j$,
-and $\hth\paren{\vx_j}$ is the estimated risk score (@def-estimated-risk-score) for subject $j$.
+and $\ehazfactorf{\vx_j}$ is the estimated risk score (@def-estimated-risk-score) for subject $j$.
 
 :::
 
@@ -911,14 +911,14 @@ Worth examining.
 #### dfbeta and dfbetas
 
 -   **dfbeta** for observation $i$ is the approximate change in the
-    coefficient vector $\hvb$ if subject $i$ were removed from the data:
-    $$\text{dfbeta}_i \approx \hvb - \hvb_{(-i)}$$
+    coefficient vector $\evb$ if subject $i$ were removed from the data:
+    $$\text{dfbeta}_i \approx \evb - \evb_{(-i)}$$
     computed via a one-step [Newton](https://morrison-lab.github.io/sds/intro-MLEs.html#def-newton-raphson) approximation rather than a full refit
     [@klein2003survival, §11.4].
 
 -   **dfbetas** for observation $i$ standardizes by the estimated [standard
     error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of each coefficient:
-    $$\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \hse{\hb_k}$$
+    $$\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \ese{\eb_k}$$
 
 :::
 

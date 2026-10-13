@@ -10,7 +10,7 @@ We estimate them in two stages:
 
 1. estimate $\vb$ by maximizing a [*partial likelihood*](#def-ph-partial-lik) in which the unknown baseline $\haz_0(t)$ cancels out,
    so the covariate effects can be fit without committing to a shape for the baseline;
-2. then, with $\hvb$ in hand, estimate the [baseline cumulative hazard](#def-base-cuhaz) $\cuhaz_0(t)$ by the [Breslow estimator](#def-breslow-baseline-cuhaz-est).
+2. then, with $\evb$ in hand, estimate the [baseline cumulative hazard](#def-base-cuhaz) $\cuhaz_0(t)$ by the [Breslow estimator](#def-breslow-baseline-cuhaz-est).
 
 Throughout, assume for simplicity that there are no tied event times;
 let $t_1 < t_2 < \cdots < t_K$ be the distinct event times for the whole data set,
@@ -133,14 +133,14 @@ confirming that the product is free of $\haz_0$:
 We maximize this partial likelihood numerically with respect to $\vb$
 (which determines $\diffloghaz(\vx) = \tp{\vx}\vb$ and $\hazfactor(\vx) = \expf{\diffloghaz(\vx)}$).
 When there are tied event times some adjustments are needed, but the likelihood is similar.
-Crucially, the baseline hazard never enters, so we obtain $\hvb$ without estimating $\haz_0$.
+Crucially, the baseline hazard never enters, so we obtain $\evb$ without estimating $\haz_0$.
 :::
 
 {{< slidebreak >}}
 
 ::: notes
 **Stage 2: estimating the baseline hazard.**
-Once we have the coefficient estimates $\hvb = (\hat\beta_1, \ldots, \hat\beta_p)$ —
+Once we have the coefficient estimates $\evb = (\hat\beta_1, \ldots, \hat\beta_p)$ —
 and hence $\hat\diffloghaz(\vx)$ and $\hat\hazfactor(\vx)$ —
 the baseline cumulative hazard is estimated by the Breslow estimator:
 :::
