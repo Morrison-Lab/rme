@@ -100,7 +100,7 @@ A spline fit depends on three choices:
    Common practice: pick $K$ so that the resulting degrees of freedom is in the 4–8 range for most exposures, or tune $K$ by cross-validation.
 2. **Location of knots** $\xi_1, \ldots, \xi_K$.
    The standard recommendation is to place knots at **quantiles of the $X$ distribution** (e.g. for $K = 4$: at the 20th, 40th, 60th, 80th percentiles).
-   This puts more knots where there's more data — the exact opposite of what equally-spaced knots would do.
+   This quantile-based placement puts more knots where there's more data — the exact opposite of what equally-spaced knots would do.
 3. **Boundary handling** (cubic vs natural cubic).
 
 The `df` argument to `ns()` or `bs()` automates (1) and (2): R

@@ -49,11 +49,11 @@ observations from a U-shaped exposure--outcome relationship.
   every point --- it wiggles through the noise and overfits.
 - With $\l$ very large, the fitted curve is a straight line ---
   it misses the U-shape entirely.
-- At the GCV/REML-optimal $\hat\l$, the effective degrees of freedom
+- At the GCV/REML-optimal $\est{\l}$, the effective degrees of freedom
   lies somewhere between 2 (linear) and $n$ (interpolation),
   capturing the U-shape without chasing individual data points.
 
-The optimal $\hat\l$ is selected automatically by
+The optimal $\est{\l}$ is selected automatically by
 `smooth.spline(x, y)` (the default `cv = FALSE` uses GCV; pass
 `cv = TRUE` to switch to exact leave-one-out CV) or by
 `mgcv::gam(y ~ s(x), method = "REML")`.
@@ -61,7 +61,7 @@ The optimal $\hat\l$ is selected automatically by
 
 ## Effective degrees of freedom
 
-The smoothing spline fit can be written as $\hat{\mat{y}} = \mat{S}_\l \mat{y}$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
+The smoothing spline fit can be written as $\est{\mat{y}} = \mat{S}_\l \mat{y}$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
 Because the function is penalized rather than projected onto a low-dimensional subspace, the usual "number of parameters" count doesn't apply.
 
 The standard replacement is the **effective degrees of freedom**
@@ -73,7 +73,7 @@ The standard replacement is the **effective degrees of freedom**
 #### Effective degrees of freedom
 
 $$\text{EDF}(\l) \eqdef \text{tr}(\mat{S}_\l)
-= \sum_{i=1}^n \frac{\partial \hat y_i}{\partial y_i}.$$
+= \sum_{i=1}^n \frac{\partial \est{y}_i}{\partial y_i}.$$
 
 The EDF interpolates smoothly between two endpoints.
 For the **full smoothing-spline model** (intercept + smooth term), EDF ranges from:

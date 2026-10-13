@@ -27,7 +27,7 @@ To estimate the regression function $f(x_0)$ at a target point $x_0$:
 2. **Weight** the neighborhood observations using a kernel that gives higher weight to points closer to $x_0$ and zero weight to points outside the neighborhood.
    The tricube kernel $K(u) = (1 - |u|^3)^3 \indicp{|u| \le 1}$ is the standard choice.
 3. **Fit a low-degree polynomial** (constant, linear, or quadratic) by weighted least squares to the neighborhood, using the kernel weights.
-   The fitted value at $x_0$ is the prediction $\hat f(x_0)$.
+   The fitted value at $x_0$ is the prediction $\est{f}(x_0)$.
 
 To get the entire fitted curve, repeat for a dense grid of $x_0$
 values and connect the resulting predictions.
@@ -64,7 +64,7 @@ The predicted cholesterol at age 50 is the fitted value from the weighted least-
 ## Limitations
 
 - **No global model.**
-  Local regression doesn't produce a closed-form $\hat f(x)$ — predictions at any new $x$ are computed on demand by re-running the local fit at that point, but there is no parametric formula for the curve.
+  Local regression doesn't produce a closed-form $\est{f}(x)$ — predictions at any new $x$ are computed on demand by re-running the local fit at that point, but there is no parametric formula for the curve.
   Inference for the entire function (e.g. "is this exposure associated with outcome at all") needs special tooling.
 - **Hard to extend to many predictors.**
   With $p$ predictors, the local neighborhood is in $p$-dimensional space, and the curse of dimensionality bites hard: even for moderate $p$, "the nearest fraction $s$ of the data" is geometrically nothing like local.

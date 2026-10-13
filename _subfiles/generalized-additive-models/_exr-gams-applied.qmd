@@ -5,7 +5,7 @@ Applied exercises adapted from @james2021islr2e [§7.9] and
 
 {{< slidebreak >}}
 
-### Polynomial regression and step functions (ISLRv2 Applied 7) {#sec-exr-wage-poly}
+### Polynomial regression and step functions (ISLRv2 Applied 6) {#sec-exr-wage-poly}
 
 <!-- No slidebreak between this
 heading and the div that follows. The preceding slidebreak already opens a fresh
@@ -91,18 +91,18 @@ title-only slide. -->
 The **backfitting algorithm** [@hastie2009esl2e, §9.1.1] fits an additive model
 $Y = \a + \sum_j f_j(X_j) + \eps$ by iteratively smoothing partial residuals.
 
-For $p=2$ predictors with linear component smoothers $\hat f_j(X_j) = \eb_j X_j$:
+For $p=2$ predictors with linear component smoothers $\est{f_j}(X_j) = \eb_j X_j$:
 
-1. Initialise: $\hat\a = \bar{y}$, $\hat f_1 = \hat f_2 = 0$.
+1. Initialise: $\est{\a} = \bar{y}$, $\est{f_1} = \est{f_2} = 0$.
 2. Repeat until convergence (Gauss–Seidel order — re-centre each
-   $\hat f_j$ immediately, so the centred $\hat f_1$ is used when
+   $\est{f_j}$ immediately, so the centred $\est{f_1}$ is used when
    computing $r_2$):
-   a. $r_1 \leftarrow y - \hat\a - \hat f_2(x_2)$; regress $r_1$ on
-      $x_1$ to update $\hat f_1$; $\hat f_1 \leftarrow \hat f_1 -
-      \overline{\hat f_1}$.
-   b. $r_2 \leftarrow y - \hat\a - \hat f_1(x_1)$; regress $r_2$ on
-      $x_2$ to update $\hat f_2$; $\hat f_2 \leftarrow \hat f_2 -
-      \overline{\hat f_2}$.
+   a. $r_1 \leftarrow y - \est{\a} - \est{f_2}(x_2)$; regress $r_1$ on
+      $x_1$ to update $\est{f_1}$; $\est{f_1} \leftarrow \est{f_1} -
+      \overline{\est{f_1}}$.
+   b. $r_2 \leftarrow y - \est{\a} - \est{f_1}(x_1)$; regress $r_2$ on
+      $x_2$ to update $\est{f_2}$; $\est{f_2} \leftarrow \est{f_2} -
+      \overline{\est{f_2}}$.
 
 **(a)** Implement this on simulated data with known true coefficients.
 
