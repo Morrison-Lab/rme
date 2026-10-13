@@ -3,11 +3,11 @@
 :::{#exr-ci-diff-means}
 
 Given
-a maximum likelihood estimate $\hvb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hvb$
 and
-a corresponding estimated covariance matrix
+a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
 $\hS \eqdef \widehat{\Covt}(\hvb)$,
-calculate a 95% confidence interval for the difference in means
+calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the difference in means
 comparing covariate patterns $\vx$ and $\vxs$:
 
 $$\Delta \mu \eqdef \mu(\vx) - \mu(\vxs)$$
@@ -64,7 +64,7 @@ where $\diffvx \eqdef \vx - \vxs$.
 
 ::: notes
 
-How can we estimate the standard error of
+How can we estimate the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of
 $\widehat{\Delta \mu}$?
 
 :::
@@ -152,7 +152,7 @@ the only change is to replace $\vx$ with $\diffvx = \vx - \vxs$.
 
 In R, we can compute the CI for the difference in means
 by computing the predicted means for both covariate patterns
-and applying the variance formula directly:
+and applying the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) formula directly:
 
 ```{r}
 #| label: tbl-bw-diff-means

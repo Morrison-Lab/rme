@@ -1,5 +1,5 @@
 For Gaussian linear regression,
-the ordinary least squares (OLS) estimates $\hat\beta_k$ are exactly Gaussian
+the [ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) (OLS) estimates $\hat\beta_k$ are exactly Gaussian
 when the error terms $\epsilon_i$ are Gaussian,
 for any sample size.
 See also the [table of Gaussian vs. MLE-based tests](https://morrison-lab.github.io/sds/intro-MLEs.html#tbl-gaussian-vs-mle-tests).
@@ -14,14 +14,14 @@ Under $H_0$, $t_k \sim t_{n-p}$ exactly when errors are Gaussian.
 
 #### Confidence intervals for regression coefficients
 
-A 95% confidence interval for $\beta_k$ is:
+A 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\beta_k$ is:
 
 $$\hat\beta_k \pm t_{n-p}(0.975) \cdot \widehat{SE}(\hat\beta_k)$$
 
 #### In R
 
 In R, `parameters()` from the `parameters` package automatically computes
-Wald tests and confidence intervals for linear regression model coefficients:
+[Wald tests](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) and confidence intervals for [linear regression model](#def-lm-general-form) coefficients:
 
 ```{r}
 #| label: tbl-bw-wald-tests
@@ -108,7 +108,7 @@ This calculated confidence interval also matches.
 
 #### Gaussian approximations {.smaller}
 
-For large samples, the t-distribution is well-approximated by the standard Gaussian:
+For large samples, the [t-distribution](https://morrison-lab.github.io/sds/inference.html#def-t-dist) is well-approximated by the [standard Gaussian](https://morrison-lab.github.io/pds/random-variables.html#def-std-normal):
 
 ```{r}
 pval_z <- pnorm(abs(t_stat), lower.tail = FALSE) * 2

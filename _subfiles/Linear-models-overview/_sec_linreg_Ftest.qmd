@@ -6,7 +6,7 @@ See @vittinghoff2e [§4.3] and @dobson4e [§6.3] for further discussion.
 
 #### Setup {#sec-partial-F-test-setup}
 
-Suppose we have two **nested** linear regression models:
+Suppose we have two **nested** [linear regression models](#def-lm-general-form):
 
 ::: {#def-nested-lm}
 #### Nested linear models
@@ -25,7 +25,7 @@ $$
 $${#eq-lm-full}
 
 The **reduced model** (@eq-lm-reduced) has $p_1$ parameters.
-The **full model** (@eq-lm-full) adds $q$ extra predictors
+The **full model** (@eq-lm-full) adds $q$ extra [predictors](Intro-to-GLMs.qmd#def-predictors)
 and has $p_2 = p_1 + q$ parameters.
 The reduced model is a special case of the full model
 with the constraint $\vec{\g} = \vec 0$.
@@ -33,7 +33,7 @@ with the constraint $\vec{\g} = \vec 0$.
 
 ---
 
-The null and alternative hypotheses are:
+The null and [alternative hypotheses](https://morrison-lab.github.io/sds/inference.html#def-alternative-hypothesis) are:
 
 $$H_0: \vec{\g} = \vec 0 \qquad \text{(reduced model)}$$
 $$H_A: \vec{\g} \neq \vec 0 \qquad \text{(full model)}$$
@@ -61,7 +61,7 @@ $H_0: \beta_{AM} = 0$ vs. $H_A: \beta_{AM} \neq 0$.
 ::: {#def-partial-F-statistic}
 #### Partial F-statistic
 
-Let $\text{RSS}_0$ and $\text{RSS}_1$ denote the residual sums of squares
+Let $\text{RSS}_0$ and $\text{RSS}_1$ denote the [residual sums of squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-rss)
 from the reduced and full models, respectively.
 The **partial F-statistic** is:
 
@@ -101,9 +101,9 @@ it holds for any sample size $n$ when the errors $\epsilon_i \siid N(0, \sigma^2
 Under $H_0$, the extra predictors $\vec{z}$ contribute nothing,
 so the numerator $\text{RSS}_0 - \text{RSS}_1 \dist \sigma^2 \chi^2_q$
 and the denominator $\text{RSS}_1 \dist \sigma^2 \chi^2_{n-p_2}$
-are independent chi-squared random variables
+are [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) chi-squared [random variables](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable)
 (this independence property follows from the Gauss-Markov theorem and the properties
-of projections in the column spaces of the design matrices).
+of projections in the column spaces of the [design matrices](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix)).
 Therefore,
 
 $$
@@ -133,13 +133,13 @@ F
 $${#eq-F-from-deviance}
 
 The denominator $s^2 \eqdef \text{RSS}_1/(n - p_2)$
-is an unbiased estimator of $\sigma^2$ under both $H_0$ and $H_A$.
+is an [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimator of $\sigma^2$ under both $H_0$ and $H_A$.
 
 ---
 
 #### Connection to the likelihood ratio test {#sec-F-test-LRT}
 
-The **approximate likelihood ratio test** (LRT) for MLEs
+The **approximate [likelihood ratio test](logistic-regression.qmd#def-lrt)** (LRT) for [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
 (see the [table of Gaussian vs. MLE-based tests](https://morrison-lab.github.io/sds/intro-MLEs.html#tbl-gaussian-vs-mle-tests)
 and @sec-compare-lm-glm-deviance) uses the statistic:
 
@@ -150,7 +150,7 @@ $${#eq-LRT-stat}
 
 For Gaussian linear regression,
 the MLE of $\sigma^2$ under model $k$ is $\hat\sigma^2_k = \text{RSS}_k / n$,
-so the log-likelihood at the MLE is:
+so the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) at the MLE is:
 
 $$
 \ba
@@ -232,19 +232,19 @@ For Gaussian linear regression:
 - The **LRT** is **approximate** — it relies on the asymptotic $\chi^2_q$ distribution,
   which requires large $n$ and treats $\sigma^2$ as known (fixed at its MLE).
 
-Both tests give similar p-values for large $n$.
+Both tests give similar [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) for large $n$.
 For small to moderate $n$, the F-test is preferred because it is exact.
 
 For non-Gaussian GLMs (Poisson, Binomial),
 the F-test is not applicable;
-the LRT (or Wald test) is the standard approach.
+the LRT (or [Wald test](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test)) is the standard approach.
 :::
 
 ---
 
 #### In R {#sec-partial-F-test-R}
 
-In R, the partial F-test for two nested `lm` models
+In R, the [partial F-test](#sec-partial-F-test) for two nested `lm` models
 is performed with `anova()`:
 
 ```{r}

@@ -4,7 +4,7 @@
 :::{#def-lm-general-form}
 #### General form of a Gaussian linear regression model
 
-A Gaussian linear regression model has two components:
+A Gaussian linear [regression model](Intro-to-GLMs.qmd#def-regression-model) has two components:
 
 1. The **random part**
 
@@ -17,9 +17,9 @@ A Gaussian linear regression model has two components:
     Here $\vx_i$ is the observed covariate vector for unit $i$.
     Here $\simind$ means independently distributed.
     Conditional on $\vx_1,\ldots,\vx_n$,
-    the responses are independent across units,
+    the responses are [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) across units,
     and each $Y_i|\vx_i$ follows the same conditional distributional form
-    with common variance $\ss$
+    with common [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) $\ss$
     while allowing $\mu_i$ to vary by observation.
 
 2. The **systematic part**
@@ -42,7 +42,7 @@ For the systematic part of the model,
 here $\vb \eqdef (\beta_0,\beta_1,\ldots,\beta_p)$
 is the coefficient vector.
 
-Here $p$ is the number of covariates
+Here $p$ is the number of [covariates](Intro-to-GLMs.qmd#def-predictors)
 excluding the intercept.
 The vector $\vx_i$ includes an intercept entry equal to 1,
 so $\vx_i$ has length $p+1$.
@@ -150,7 +150,7 @@ Let's define some notation to represent this data:
 
 -   $Y$: birthweight (measured in grams)
 -   $S$: chromosomal sex: "male" (XY) or "female" (XX)
--   $M$: indicator variable for $S$ = "male"^[$M$ is implicitly a deterministic function of $S$]
+-   $M$: [indicator variable](https://morrison-lab.github.io/sds/data.html#def-indicator-variable) for $S$ = "male"^[$M$ is implicitly a deterministic function of $S$]
     -   $M = 0$ if $S$ = "female"
     -   $M = 1$ if $S$ = "male"
 -   $F$: indicator variable for $S$ = "female"^[$F$ is implicitly a deterministic function of $S$]
@@ -159,14 +159,14 @@ Let's define some notation to represent this data:
 -   $A$: estimated gestational age at birth (measured in weeks).
 
 ::: notes
-Female is the **reference level** for the categorical variable $S$ 
+Female is the **[reference level](https://morrison-lab.github.io/sds/data.html#def-reference-level)** for the [categorical variable](https://morrison-lab.github.io/sds/data.html#def-categorical-var) $S$ 
 (chromosomal sex) and corresponding indicator variable $M$ . 
 The choice of a reference level is arbitrary and does not limit what 
 we can do with the resulting model; 
 it only makes it more computationally convenient to make inferences 
 about comparisons involving that reference group.
 
-$M$ and $F$ are called **dummy variables**; 
+$M$ and $F$ are called **[dummy variables](https://morrison-lab.github.io/sds/data.html#def-dummy-variable)**; 
 together, they are a numeric representation of the categorical variable $S$.
 Dummy variables with values 0 and 1 are also called **indicator variables**.
 There are other ways to construct dummy variables, 

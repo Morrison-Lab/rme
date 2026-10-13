@@ -13,7 +13,7 @@ to make it easier to inspect.
 :::{#thm-gaussian-resid-deviation}
 #### Deviations in Gaussian models
 
-If $Y$ has a Gaussian distribution, 
+If $Y$ has a [Gaussian distribution](https://morrison-lab.github.io/pds/random-variables.html#def-normal), 
 then $\devn(Y)$ also has a Gaussian distribution, and vice versa.
 :::
 
@@ -67,7 +67,7 @@ plot1_interact +
   )
 ```
 
-Fitted values and residuals for interaction model for `birthweight` data
+[Fitted values](#def-fitted-value) and [residuals](#def-resid-fitted) for interaction model for `birthweight` data
 
 :::
 
@@ -97,12 +97,12 @@ For terminology in this course,
 we use:
 
 - **deviation**
-  for deviation of an observation from its population mean (typically conditional on covariates).
+  for deviation of an observation from its population mean (typically conditional on [covariates](Intro-to-GLMs.qmd#def-predictors)).
   This quantity is often called **error** in other sources,
   even though it doesn't directly involve an estimate;
   cf., <https://en.wikipedia.org/wiki/Errors_and_residuals>;
-- **estimation error** for deviation of an estimate from its estimand;
-- **residual** for deviation of an observed value from a fitted value.
+- **[estimation error](https://morrison-lab.github.io/sds/estimation.html#def-estimation-error)** for deviation of an estimate from its [estimand](https://morrison-lab.github.io/sds/estimation.html#def-estimand);
+- **residual** for deviation of an observed value from a [fitted value](#def-fitted-value).
 
 ---
 
@@ -111,13 +111,13 @@ we use:
 :::{#def-hat-matrix}
 ##### Hat matrix
 
-For an ordinary least squares linear model
-with design matrix $\mX$,
+For an [ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) linear model
+with [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) $\mX$,
 the **hat matrix** is
 
 $$H = \mX(\tp{\mX}\mX)^{-1}\tp{\mX}$$
 
-so the fitted values satisfy
+so the [fitted values](#def-fitted-value) satisfy
 
 $$\hat{\vY} = H\vY$$
 :::
@@ -128,7 +128,7 @@ $$\hat{\vY} = H\vY$$
 For an ordinary least squares linear model
 with fitted values $\hat y_i = \dprodf{\vx_i}{\vb}$
 (and fitted-value vector $\hat{\vY}$),
-if the conditional mean is correctly specified so that:
+if the [conditional mean](https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation) is correctly specified so that:
 
 $$ \E{\vY \mid \mX} = \mX\b$$
 
@@ -136,8 +136,8 @@ equivalently:
 
 $$ \E{\hat{\vY} \mid \mX} = \E{\vY \mid \mX}$$
 
-and if the errors are homoskedastic so that
-$\Var{\vY \mid \mX} = \ss \idmat_n$ where $\idmat_n$ is the $n \times n$ identity matrix,
+and if the errors are [homoskedastic](https://morrison-lab.github.io/pds/variance-covariance.html#def-homosked) so that
+$\Var{\vY \mid \mX} = \ss \idmat_n$ where $\idmat_n$ is the $n \times n$ [identity matrix](https://morrison-lab.github.io/mds/linear-algebra-matrices.html#def-identity-matrix),
 then,
 treating $\mX$ as fixed in this derivation,
 the residual moments are:
@@ -147,15 +147,15 @@ $$\Var{\resid_i \mid \mX} = \ss(1-h_{ii})$$ {#eq-var-resid-leverage}
 
 The conditional mean result (@eq-mean-resid-unbiased)
 uses unbiasedness of fitted values.
-The conditional variance result (@eq-var-resid-leverage)
+The [conditional variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance) result (@eq-var-resid-leverage)
 uses the homoskedasticity condition
 with the OLS hat-matrix representation.
 
-When leverage is roughly uniform,
+When [leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage) is roughly uniform,
 $h_{ii} \approx k/n$,
 where $k = \mathrm{rank}(\mX)$
 (so $k = p + 1$ for a full-rank model
-with an intercept and $p$ predictors),
+with an intercept and $p$ [predictors](Intro-to-GLMs.qmd#def-predictors)),
 so $\Var{\resid_i} \approx \ss$
 as $n$ grows.
 
@@ -205,8 +205,8 @@ $$
 :::{#thm-resid-gaussian}
 #### Conditional distribution of residuals in Gaussian models
 
-In a Gaussian linear regression model,
-the residuals $\resid_i$,
+In a [Gaussian linear regression model](#def-lm-general-form),
+the [residuals](#def-resid-fitted) $\resid_i$,
 conditional on the design matrix $\mX$,
 are normally distributed:
 
@@ -225,9 +225,9 @@ $$\resid_i \approx \Normal(0, \hs^2)$$ {#eq-resid-dist-approx}
 
 :::{.proof}
 
-Using the hat matrix (@def-hat-matrix),
+Using the [hat matrix](#def-hat-matrix) (@def-hat-matrix),
 the residual vector is $\vec{\resid} = (I-H)\vY$,
-so the $i$-th residual is a linear combination of the observations:
+so the $i$-th residual is a [linear combination](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) of the observations:
 
 $$\resid_i = [(I-H)\vY]_i = \sum_{j=1}^n (\delta_{ij} - h_{ij})\, Y_j$$
 
@@ -235,14 +235,14 @@ where $\delta_{ij}$ is the Kronecker delta
 ($\delta_{ij} = 1$ if $i = j$, else $\delta_{ij} = 0$).
 
 Given $\mX$,
-the random variables $Y_1, \ldots, Y_n$ are conditionally independent Gaussians
+the [random variables](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable) $Y_1, \ldots, Y_n$ are [conditionally independent](https://morrison-lab.github.io/pds/independence.html#def-cind) Gaussians
 by the Gaussian model assumption.
 Therefore,
 conditional on $\mX$,
-the residual $\resid_i$ is a linear combination of independent Gaussians,
+the residual $\resid_i$ is a linear combination of [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) Gaussians,
 so $\resid_i$ is Gaussian.
 
-The mean and variance follow from @thm-resid-unbiased:
+The mean and [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) follow from @thm-resid-unbiased:
 
 $$
 \ba
@@ -259,7 +259,7 @@ Therefore $\resid_i \mid \mX \sim \Normal(0, \ss(1 - h_{ii}))$.
 
 ## Computing residuals in R
 
-R provides a function for residuals:
+R provides a function for [residuals](#def-resid-fitted):
 
 ```{r}
 resid(bw_lm2)
@@ -304,7 +304,7 @@ plot1_interact +
   )
 ```
 
-fitted values
+[fitted values](#def-fitted-value)
 
 :::
 
@@ -343,7 +343,7 @@ plot_bw_resid <-
 print(plot_bw_resid + facet_wrap(~sex))
 ```
 
-Residuals
+[Residuals](#def-resid-fitted)
 
 :::
 
@@ -402,7 +402,7 @@ hers |>
 with intercept
 :::
 
-Residuals of `hers` data vs predictors
+[Residuals](#def-resid-fitted) of `hers` data vs [predictors](Intro-to-GLMs.qmd#def-predictors)
 
 :::
 
@@ -411,7 +411,7 @@ Residuals of `hers` data vs predictors
 ## Residuals versus fitted values
 
 ::: notes
-If the model contains multiple continuous covariates,
+If the model contains multiple [continuous covariates](https://morrison-lab.github.io/sds/data.html#def-continuous-var),
 how do we check for errors in the mean structure assumption?
 :::
 
@@ -486,7 +486,7 @@ with intercept term
 
 :::
 
-Residuals of interaction model for `hers` data, with and without intercept term
+[Residuals](#def-resid-fitted) of interaction model for `hers` data, with and without intercept term
 
 :::
 
@@ -497,7 +497,7 @@ Residuals of interaction model for `hers` data, with and without intercept term
 #### Standardized residuals
 
 For an ordinary linear model,
-the estimated standard deviation of the $i$th residual is
+the estimated [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) of the $i$th residual is
 
 $$
 \hSD{\resid_i} = \hat{\sigma}\sqrt{1-h_{ii}}
@@ -512,14 +512,14 @@ $$
 :::
 
 Hence, with enough data and a correct model,
-each standardized residual has an approximately standard Gaussian **marginal** distribution; that is,
+each [standardized residual](#def-stred) has an approximately [standard Gaussian](https://morrison-lab.github.io/pds/random-variables.html#def-std-normal) **marginal** distribution; that is,
 
 $$
 \stdresid_i \ddist N(0,1)
 $$
 
-but they are not independent.
-If $H$ is the hat matrix with entries $h_{ij}$,
+but they are not [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
+If $H$ is the [hat matrix](#def-hat-matrix) with entries $h_{ij}$,
 then
 
 $$
@@ -544,5 +544,5 @@ $$
 
 In particular,
 for $i \neq j$,
-these covariances are generally nonzero.
+these [covariances](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov) are generally nonzero.
 

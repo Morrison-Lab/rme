@@ -2,7 +2,7 @@
 (adapted from @dobson4e §6.3.3; for more information on prediction, see @james2013introduction and @rms2e).
 
 ::: notes
-If we have a lot of covariates in our dataset, we might want to choose a small subset to use in our model.
+If we have a lot of [covariates](Intro-to-GLMs.qmd#def-predictors) in our dataset, we might want to choose a small subset to use in our model.
 
 There are a few possible metrics to consider for choosing a "best" model.
 :::
@@ -13,14 +13,14 @@ For explanatory models,
 variable inclusion should not rely on automated algorithms alone.
 Directed acyclic graphs (DAGs)
 can help us encode substantive assumptions
-about which variables are confounders,
-mediators,
-or colliders.
+about which variables are [confounders](causal-inference.qmd#def-confounder),
+[mediators](causal-inference.qmd#def-mediator),
+or [colliders](causal-inference.qmd#def-collider).
 
 In a Dobson-style workflow,
 we use the DAG first
 to decide a defensible adjustment set,
-then compare candidate regression models
+then compare candidate [regression models](Intro-to-GLMs.qmd#def-regression-model)
 within that set using predictive or likelihood-based criteria.
 This approach keeps model selection aligned with study design,
 rather than only with numerical fit.
@@ -30,7 +30,7 @@ the DAG encodes hypothesized time ordering
 and causal pathways.
 This structure helps us decide
 which variables belong in the candidate model set
-before we run stepwise,
+before we run [stepwise](predictor-selection.qmd#sec-pred-sel-stepwise),
 subset,
 or penalized selection methods.
 The key point
@@ -85,7 +85,7 @@ dag_heat_deaths |>
   ggdag::theme_dag()
 ```
 
-If our estimand is the total effect
+If our [estimand](https://morrison-lab.github.io/sds/estimation.html#def-estimand) is the total effect
 of high temperatures on deaths,
 then blackouts,
 forest fires,
@@ -193,7 +193,7 @@ its scientific meaning
 
 ### Mean squared error
 
-We might want to minimize the **mean squared error**,
+We might want to minimize the **[mean squared error](https://morrison-lab.github.io/sds/estimation.html#def-mse)**,
 $\E{(y-\hat y)^2}$,
 for new observations
 that weren't in our data set when we fit the model.
@@ -201,17 +201,17 @@ that weren't in our data set when we fit the model.
 Unfortunately,
 $$\frac{1}{n}\sum_{i=1}^n (y_i-\hat y_i)^2$$
 gives a biased estimate of $\E{(y-\hat y)^2}$ for new data.
-If we want an unbiased estimate,
+If we want an [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimate,
 we will have to be clever.
 
 This optimism in sample fit is one reason that $R^2$ is not enough for model selection.
 $R^2$ does not decrease as we add explanatory variables,
 even when those variables do not improve out-of-sample prediction.
-Selecting a model by maximizing $R^2$ alone can lead to overfitting, since $R^2$ does not penalize this non-decreasing property.
+Selecting a model by maximizing $R^2$ alone can lead to [overfitting](predictor-selection.qmd#def-overfitting), since $R^2$ does not penalize this non-decreasing property.
 
 With a training/test split,
-we estimate coefficients in the training data
-and compute prediction error in held-out data:
+we estimate coefficients in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)
+and compute [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error) in held-out data:
 
 $$
 \hat\b_{\text{train}} =
@@ -242,15 +242,15 @@ In many applications,
 we split the data into
 training,
 validation,
-and test sets.
+and [test sets](https://morrison-lab.github.io/sds/model-validation.html#def-test-set).
 This validation approach extends the basic train/test split
 by separating model tuning
 from final model assessment.
 This framework follows
 [@james2021islr2e, pp. 198-201].
 
-- Use the **training set** to estimate model parameters.
-- Use the **validation set** to compare candidate models,
+- Use the **[training set](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)** to estimate model parameters.
+- Use the **[validation set](https://morrison-lab.github.io/sds/model-validation.html#def-validation-set)** to compare candidate models,
   choose transformations,
   or tune hyperparameters.
 - Use the **test set** once at the end
@@ -260,7 +260,7 @@ Keeping the test set untouched during model building
 helps avoid optimistic bias
 from repeatedly trying many models.
 If data are limited,
-$k$-fold cross-validation
+[$k$-fold cross-validation](predictor-selection.qmd#def-kfold)
 can replace a single validation split
 for more stable tuning.
 
@@ -282,7 +282,7 @@ and quartic models
 `mpg ~ wt + I(wt^2) + I(wt^3)`,
 and `mpg ~ wt + I(wt^2) + I(wt^3) + I(wt^4)`)
 on a validation set,
-then reports the chosen model's test RMSE
+then reports the chosen model's test [RMSE](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)
 on untouched test data
 [@james2021islr2e, p. 213].
 
@@ -610,8 +610,8 @@ for the chosen model
 ## Cross-validation
 
 Rather than one arbitrary split,
-$k$-fold cross-validation repeatedly partitions the data into training and test folds.
-For each split we compute prediction error,
+[$k$-fold cross-validation](predictor-selection.qmd#def-kfold) repeatedly partitions the data into training and test folds.
+For each split we compute [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
 then summarize errors across folds and replications.
 The preferred model has lower prediction error,
 with simpler models favored when errors are similar.
@@ -695,22 +695,22 @@ anova(full_model, reduced_model)
 
 ## Best subset selection
 
-When the number of candidate predictors is modest,
+When the number of candidate [predictors](Intro-to-GLMs.qmd#def-predictors) is modest,
 we can use **best subset selection**.
 For each model size $k = 0, 1, \ldots, p$,
 we fit all $\binom{p}{k}$ models
 and keep the best model of size $k$
-(e.g., by lowest RSS in the training data).
+(e.g., by lowest RSS in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)).
 
 Best subset selection yields at most $p+1$ candidate models to compare across model sizes,
 using criteria such as
-cross-validated prediction error,
+cross-validated [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
 $C_p$,
-AIC/BIC,
+[AIC](#def-aic)/BIC,
 or adjusted $R^2$.
 In that sense,
 best subset selection is more exhaustive
-than one-path methods like forward or backward stepwise selection.
+than one-path methods like forward or backward [stepwise selection](predictor-selection.qmd#sec-pred-sel-stepwise).
 
 ::: notes
 For a full algorithmic treatment,
@@ -740,7 +740,7 @@ hers_best_subset$metrics |>
 
 ## Stepwise regression
 
-Stepwise methods are another common approach.
+[Stepwise](predictor-selection.qmd#sec-pred-sel-stepwise) methods are another common approach.
 Forward selection adds variables one at a time.
 Backward selection starts with the full model
 and removes variables sequentially.
@@ -749,14 +749,14 @@ Both approaches can select different models from the same data.
 ::: {.callout-warning}
 ## Caution about stepwise selection
 
-Stepwise regression has several known problems:
+[Stepwise regression](predictor-selection.qmd#sec-pred-sel-stepwise) has several known problems:
 
-- It tends to select too many variables (overfitting)
-- P-values and confidence intervals are biased after selection
+- It tends to select too many variables ([overfitting](predictor-selection.qmd#def-overfitting))
+- [P-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) are biased after selection
 - It ignores model uncertainty
 - Results can be unstable across different samples
 
-Consider using cross-validation, penalized methods (like Lasso), 
+Consider using [cross-validation](predictor-selection.qmd#sec-pred-sel-cv), [penalized methods](predictor-selection.qmd#sec-pred-sel-lasso) (like Lasso), 
 or subject-matter knowledge instead.
 See @rms2e and @heinze2018variable for more discussion.
 :::
@@ -769,7 +769,7 @@ olsrr::ols_step_both_aic(full_model)
 
 ## Lasso
 
-Lasso is a penalized regression method
+[Lasso](predictor-selection.qmd#sec-pred-sel-lasso) is a penalized regression method
 that shrinks coefficient estimates toward zero.
 It adds an $L_1$ penalty term
 to the objective function,
@@ -782,10 +782,10 @@ and some become exactly zero.
 So lasso both regularizes the model
 and performs variable selection.
 In practice,
-$\lambda$ is usually chosen by cross-validation
-to minimize prediction error.
+$\lambda$ is usually chosen by [cross-validation](predictor-selection.qmd#sec-pred-sel-cv)
+to minimize [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error).
 
-For Gaussian linear models,
+For [Gaussian linear models](#def-lm-general-form),
 the penalized least-squares forms are:
 
 $$
@@ -869,8 +869,8 @@ coef(cvfit, s = "lambda.1se")
 For a general MLE-focused discussion of likelihood-ratio tests,
 see [Likelihood ratio tests for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-lrt-mles).
 
-A **likelihood ratio test (LRT)** compares two nested models
-by computing twice the difference in their log-likelihoods:
+A **[likelihood ratio test](logistic-regression.qmd#def-lrt) (LRT)** compares two [nested models](#def-nested-lm)
+by computing twice the difference in their [log-likelihoods](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik):
 
 $$2(\llik_1 - \llik_0) \dot \sim \chi^2_q \quad \text{(asymptotically under } H_0 \text{)}$$
 
@@ -925,7 +925,7 @@ chisq_plot |> print()
 
 ---
 
-Now we can get the p-value:
+Now we can get the [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value):
 
 ```{r}
 #| label: LRT-pval
