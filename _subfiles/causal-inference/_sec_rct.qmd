@@ -2,9 +2,9 @@
 
 In a **randomized controlled trial** (RCT),
 treatment is assigned by the investigator using a random mechanism,
-independent of any characteristics of the participants.
-Randomization makes the treatment groups **exchangeable**:
-the distribution of potential outcomes is the same
+[independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of any characteristics of the participants.
+Randomization makes the treatment groups **[exchangeable](#def-exchangeability)**:
+the distribution of [potential outcomes](#def-potential-outcomes) is the same
 in treated and untreated groups.
 
 As a result, in a perfectly randomized trial:
@@ -28,7 +28,7 @@ $$
 $$
 
 The observed mean difference between treatment groups
-is an unbiased estimate of the ATE:
+is an [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimate of the [ATE](#def-ate):
 
 $$\widehat{\text{ATE}} = \bar{Y}_{A=1} - \bar{Y}_{A=0}$$
 
@@ -38,7 +38,7 @@ Randomization achieves unconditional exchangeability:
 $A \perp\!\!\!\perp (Y(0), Y(1))$.
 Because there are no common causes of treatment assignment
 and the outcome,
-there is no confounding.
+there is no [confounding](#def-confounding-obs).
 The observed association between $A$ and $Y$ in the data
 is a direct measure of the causal effect.
 
@@ -50,7 +50,7 @@ is a direct measure of the causal effect.
 {{< include _subfiles/shared/_sec_hers_intro.qmd >}}
 
 In HERS, hormone therapy (HT) was randomized,
-so the treatment groups were exchangeable at baseline.
+so the treatment groups were [exchangeable](#def-exchangeability) at baseline.
 The observed difference in CHD event rates between
 the HT and placebo groups estimates the causal effect of HT.
 
@@ -70,17 +70,17 @@ Randomization in HERS removed this confounding.
 
 ## Covariate adjustment in RCTs {#sec-causal-rct-adjustment}
 
-Although randomization ensures no confounding,
-adjusting for baseline covariates in an RCT can still be useful:
+Although randomization ensures no [confounding](#def-confounding-obs),
+adjusting for baseline [covariates](Intro-to-GLMs.qmd#def-predictors) in an RCT can still be useful:
 
-- **Improved precision**: Adjusting for strong predictors of the outcome
-  reduces residual variance and narrows confidence intervals.
+- **Improved [precision](https://morrison-lab.github.io/pds/variance-covariance.html#def-precision)**: Adjusting for strong predictors of the outcome
+  reduces residual variance and narrows [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval).
 - **Covariate imbalance**: When randomization produces chance imbalances
   in small trials,
   adjustment can correct for these baseline differences.
 
 However, in an RCT,
-covariates that are **mediators** of the treatment effect
+covariates that are **[mediators](#def-mediator)** of the treatment effect
 (i.e., variables affected by treatment)
 should generally **not** be adjusted for
 when estimating the **total** causal effect of treatment.

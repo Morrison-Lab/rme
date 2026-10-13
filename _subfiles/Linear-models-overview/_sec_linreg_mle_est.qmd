@@ -2,9 +2,9 @@
 
 In EPI 203 and [our review of MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-intro-MLEs),
 we learned how to fit outcome-only models of the form $p(X=x|\theta)$
-to iid data $\vx = (x_1,…,x_n)$ using maximum likelihood estimation.
+to [iid](https://morrison-lab.github.io/pds/independence.html#def-iid) data $\vx = (x_1,…,x_n)$ using [maximum likelihood estimation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle).
 
-Now, we apply the same procedure to linear regression models:
+Now, we apply the same procedure to [linear regression models](#def-lm-general-form):
 
 :::
 
@@ -210,9 +210,9 @@ $$
 
 ## Solving the score equation
 
-To find the maximum likelihood estimator (MLE),
+To find the [maximum likelihood estimator](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) (MLE),
 we set the score vector equal to the zero vector.
-The score equation for $\vb$ is:
+The [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) for $\vb$ is:
 
 $$
 \score_{\vb} = \mathbf{0}_{(p+1) \times 1}
@@ -243,8 +243,8 @@ $$
 \sumin \vx_i (\vx_i \cdot \vb) = \sumin \vx_i y_i
 $$
 
-Assume the design matrix $\mX$ has full column rank $p+1$.
-This rank condition implies that $\sumin \vx_i \tp{\vx_i} = \tp{\mX}\mX$ is an invertible $(p+1) \times (p+1)$ matrix.
+Assume the [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) $\mX$ has [full column rank](https://morrison-lab.github.io/mds/linear-algebra-subspaces.html#def-full-column-rank) $p+1$.
+This rank condition implies that $\sumin \vx_i \tp{\vx_i} = \tp{\mX}\mX$ is an [invertible](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-invertible-matrix) $(p+1) \times (p+1)$ matrix.
 To solve for $\vb$, use the identity $\vx_i (\vx_i \cdot \vb) = (\vx_i \tp{\vx_i})\vb$:
 
 $$
@@ -322,7 +322,7 @@ $$
 \ea
 $$
 
-Expressed as a summation, the Hessian matrix is given by:
+Expressed as a summation, the [Hessian matrix](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) is given by:
 
 $$\hess = -\frac{1}{\ss} \sumin \vx_i \tp{\vx_i}$${#eq-lm-hess}
 

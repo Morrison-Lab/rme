@@ -1,10 +1,10 @@
 {{< include latex-macros/macros.qmd >}}
 
-Some scholars have raised objections to the use of odds ratios as 
+Some scholars have raised objections to the use of [odds ratios](binary-outcome-associations.qmd#def-OR) as 
 an effect measurement [@sackett1996down; @norton2024requiem]. 
 
 As we saw in [the figure comparing risk differences, risk ratios, and odds ratios](binary-outcome-associations.qmd#fig-rd-rr-or),
-the odds ratio is not very closely correlated with the risk difference, 
+the odds ratio is not very closely correlated with the [risk difference](binary-outcome-associations.qmd#def-RD), 
 and the risk difference is typically the metric 
 that ultimately matters for policy decisions.
 
@@ -12,10 +12,10 @@ that ultimately matters for policy decisions.
 
 ::: notes
 
-Another objection is that odds ratios (and risk ratios, and risk differences) 
+Another objection is that odds ratios (and [risk ratios](binary-outcome-associations.qmd#def-RR), and risk differences) 
 depend on the set of covariates
-in a logistic regression model,
-even when those covariates are independent of the exposure of interest
+in a [logistic regression model](#def-logistic-regression),
+even when those covariates are [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of the exposure of interest
 and do not interact with that exposure.
 For example, consider the following model:
 
@@ -46,14 +46,14 @@ $$
 
 ::: notes
 Since the $\expitf{}$ function is nonlinear, 
-we can't change the order of the expectation and $\expitf{}$ operators:
+we can't change the order of the [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation) and $\expitf{}$ operators:
 :::
 
 $$\Expf{\expitf{\eta_0 + \b_XX + \b_CC} | X} \neq \expitf{\Expf{\eta_0 + \b_XX + \b_CC} | X}$$
 
 {{< slidebreak >}}
 
-In contrast, consider a model with an identity link function:
+In contrast, consider a model with an identity [link function](Intro-to-GLMs.qmd#sec-why-link):
 
 $$\P(Y=y|X=x,C=c) = \red{\pi(x,c)}^y (1-\red{\pi(x,c)})^{1-y}$$
 

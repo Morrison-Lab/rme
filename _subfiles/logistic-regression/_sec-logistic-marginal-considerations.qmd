@@ -7,10 +7,10 @@
 2. **Collapsibility** (see @def-collapsibility):
    @eq-rd-collapsible and @eq-rr-not-collapsible re-derive @thm-collapsibility concretely
    for the risk-difference and risk-ratio/odds-ratio cases.
-   Risk differences are **collapsible**:
+   [Risk differences](binary-outcome-associations.qmd#def-RD) are **[collapsible](#def-collapsibility)**:
    the causal marginal RD ($\pi_1 - \pi_0$) equals the average
    of stratum-specific causal RDs ($\pi(1,z) - \pi(0,z)$)
-   weighted by the marginal distribution $f_Z$,
+   weighted by the [marginal distribution](https://morrison-lab.github.io/pds/random-variables.html#def-marginal) $f_Z$,
 
    $$
    \ba
@@ -27,11 +27,11 @@
    $$ {#eq-rd-collapsible}
 
    so there is no collapsibility bias from averaging over a covariate $Z$.
-   Risk ratios are **not** collapsible in general:
+   [Risk ratios](binary-outcome-associations.qmd#def-RR) are **not** collapsible in general:
    when the conditional RR varies across strata,
    the marginal RR does not equal the marginal-distribution-weighted average
    of conditional RRs, $\E{\text{RR}(Z)}$,
-   because a ratio of expectations is not the same as an expectation of ratios:
+   because a ratio of [expectations](https://morrison-lab.github.io/pds/expectation.html#def-expectation) is not the same as an expectation of ratios:
 
    $$
    \ba
@@ -47,9 +47,9 @@
    \ea
    $$ {#eq-rr-not-collapsible}
 
-   Unlike the odds ratio, though,
+   Unlike the [odds ratio](binary-outcome-associations.qmd#def-OR), though,
    this discrepancy is entirely a consequence of the conditional RR *varying* across strata:
-   when the conditional risk ratio is instead **constant**,
+   when the [conditional risk ratio](#def-cond-rrr) is instead **constant**,
    $\text{RR}(z) = r$ for every $z$,
    the marginal RR reproduces it exactly:
 
@@ -87,8 +87,8 @@
    by @thm-collapsibility, and the average of a constant is that constant).
 
 3. **Bootstrap sample size**:
-   A confidence interval needs more bootstrap resamples than a standard error,
-   because it depends on the tails of the bootstrap distribution
+   A [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) needs more bootstrap resamples than a [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE),
+   because it depends on the tails of the [bootstrap distribution](https://morrison-lab.github.io/sds/bootstrap.html#def-bootstrap-distribution)
    rather than just its spread
    [@efron1993introduction, Chapter 6; @davison1997bootstrap, Chapter 2].
    As a conservative rule of thumb,

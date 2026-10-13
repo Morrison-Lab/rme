@@ -1,13 +1,13 @@
 Now we use the bootstrap to estimate
-the standard error and construct a 95% confidence interval.
+the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) and construct a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval).
 In the non-parametric bootstrap,
 each iteration applies both the model-fitting step
 and the covariate standardization to the same bootstrap resample.
 This joint refit-and-restandardize approach mirrors the original world in the bootstrap world
-and is standard practice for this type of estimator
+and is standard practice for this type of [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator)
 [@efron1993introduction, Chapter 6].
 (An alternative would fix the covariates at the observed values,
-but is less common for g-computation estimators.)
+but is less common for [g-computation](#def-g-computation) estimators.)
 
 ```{r}
 #| label: bootstrap-ci
@@ -71,8 +71,8 @@ tibble(
   knitr::kable(digits = 4)
 ```
 
-Causal marginal risk difference (CMRD) for Type A vs Type B behavioral pattern
+[Causal marginal risk difference](#def-causal-marginal-rd) (CMRD) for Type A vs Type B behavioral pattern
 (adjusted for age) via g-computation,
-with bootstrap standard error and 95% confidence interval
+with [bootstrap standard error](https://morrison-lab.github.io/sds/bootstrap.html#def-bootstrap-se) and 95% confidence interval
 
 :::

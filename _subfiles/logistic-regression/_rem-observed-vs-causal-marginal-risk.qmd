@@ -4,7 +4,7 @@
 
 The two risks differ in what they define ---
 one conditions on the **observed** exposure $A = a$,
-the other on a **potential outcome** $Y^a$ ---
+the other on a **[potential outcome](causal-inference.qmd#def-potential-outcomes)** $Y^a$ ---
 and, once unpacked through
 $\teal{\pi(a, z)} = \Pr(Y = 1 \mid A = a, Z = z)$,
 in the distribution of $Z$ they average over:
@@ -23,13 +23,13 @@ $$
 \ea
 $$
 
-The observed marginal risk $\pi(a)$ (@thm-observed-marginal-risk)
+The [observed marginal risk](#def-observed-marginal-risk) $\pi(a)$ (@thm-observed-marginal-risk)
 weights $\teal{\pi(a, z)}$ by the covariate distribution
 $\red{f_{Z \mid A}(z \mid a)}$ **among those actually exposed to** $A = a$,
 so it inherits any association between $A$ and $Z$
-(that is, any confounding).
+(that is, any [confounding](causal-inference.qmd#def-confounding-obs)).
 
-The causal marginal risk $\pi_a$ (@thm-causal-marginal-risk)
+The [causal marginal risk](#def-causal-marginal-risk) $\pi_a$ (@thm-causal-marginal-risk)
 weights $\teal{\pi(a, z)}$ by the **whole population's** covariate distribution
 $\red{f_{Z}(z)}$,
 which is the *same* for every exposure level $a$;

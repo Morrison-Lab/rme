@@ -1,0 +1,83 @@
+:::{#def-link-function}
+#### Link function and inverse link
+
+Let $\mu(\vx) \eqdef \E{Y|\vX=\vx}$ be the conditional mean of the outcome.
+A **link function** is a monotone, differentiable function $g(\cdot)$
+that relates the mean to the linear predictor (@def-linear-predictor):
+
+$$
+g\paren{\mu(\vx)} \eqdef \eta(\vx)
+$$
+
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
+When $g$ is strictly monotone on the range of possible means,
+it has an inverse,
+the **inverse link** $g^{-1}(\cdot)$,
+which maps the linear predictor back to the mean:
+
+$$
+\mu(\vx) = g^{-1}\paren{\eta(\vx)}
+$$
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-link-function}
+#### Logit and log links
+
+Take $\eta = 1.2$ from @exm-linear-predictor.
+With the logit link $g(\mu) = \logit(\mu) = \logf{\frac{\mu}{1-\mu}}$,
+the inverse link is $g^{-1}(\eta) = \expit(\eta) = \frac{1}{1 + e^{-\eta}}$, so:
+
+$$
+\ba
+\mu
+&= \expit(1.2)
+&& \text{(apply the inverse link)}
+\\ &= \frac{1}{1 + e^{-1.2}}
+&& \text{(definition of } \expit\text{)}
+\\ &\approx \frac{1}{1 + 0.3012}
+&& \text{(evaluate } e^{-1.2}\text{)}
+\\ &= \frac{1}{1.3012}
+&& \text{(add)}
+\\ &\approx 0.7685
+&& \text{(divide)}
+\ea
+$$
+
+Applying the link to this mean recovers the linear predictor:
+
+$$
+\ba
+\frac{\mu}{1-\mu}
+&= \frac{1/(1 + e^{-1.2})}{e^{-1.2}/(1 + e^{-1.2})}
+&& \text{(since } 1 - \mu = e^{-1.2}/(1 + e^{-1.2})\text{)}
+\\ &= \frac{1}{e^{-1.2}}
+&& \text{(cancel } 1 + e^{-1.2}\text{)}
+\\ &= e^{1.2}
+&& \text{(reciprocal of an exponential)}
+\\ \logit(\mu)
+&= \logf{e^{1.2}}
+&& \text{(take logs)}
+\\ &= 1.2
+&& \text{(log inverts exp)}
+\ea
+$$
+
+With the log link $g(\mu) = \logf{\mu}$ instead,
+the inverse link is $g^{-1}(\eta) = \expf{\eta}$,
+so the same linear predictor gives $\mu = e^{1.2} \approx 3.320$.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-not-link-function}
+#### A function that is not a link function
+
+For a Gaussian outcome, whose mean can be any real number,
+$g(\mu) = \mu^2$ is not a valid link function,
+because it is not monotone on $(-\infty, \infty)$.
+Both $\mu = -1$ and $\mu = 1$ give $g(\mu) = 1$,
+so a linear predictor $\eta(\vx) = 1$ does not determine the mean,
+and $g$ has no inverse link.
+:::

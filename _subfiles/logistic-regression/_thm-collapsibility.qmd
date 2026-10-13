@@ -2,21 +2,21 @@
 
 #### Which estimands are collapsible?
 
-For **causal** estimands (@def-causal-marginal-risk),
+For **causal** [estimands](https://morrison-lab.github.io/sds/estimation.html#def-estimand) (@def-causal-marginal-risk),
 and under the identification assumptions of @thm-causal-marginal-risk,
 the collapsibility criterion (@def-collapsibility) is evaluated with respect to the **marginal** distribution $f_Z(z)$.
-Additive (difference) measures are collapsible;
-ratio and log-odds measures are not collapsible in general.
+Additive (difference) measures are [collapsible](#def-collapsibility);
+ratio and [log-odds](binary-outcome-associations.qmd#def-logodds) measures are not collapsible in general.
 
 For **observational** estimands (@def-observed-marginal-risk),
 the marginal measure uses the conditional distribution
 $f_{Z \mid A}(z \mid a)$ as weights rather than the marginal $f_Z(z)$.
 Collapsibility with respect to $f_Z$ therefore holds
-in particular when $Z \ind A$ (no confounding).
+in particular when $Z \ind A$ (no [confounding](causal-inference.qmd#def-confounding-obs)).
 
 ::: {.proof}
 
-Additive measures are collapsible by linearity of expectation,
+Additive measures are collapsible by linearity of [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation),
 applying the causal-marginal-risk identity (@thm-causal-marginal-risk)
 to each potential probability:
 
@@ -33,7 +33,7 @@ $$
 
 Ratio and log-odds measures are not collapsible in general:
 @exm-collapsibility gives a counterexample
-in which the marginal risk ratio and odds ratio
+in which the marginal risk ratio and [odds ratio](binary-outcome-associations.qmd#def-OR)
 differ from the marginal-distribution-weighted average
 of their stratum-specific values,
 and @eq-rr-not-collapsible derives the discrepancy algebraically

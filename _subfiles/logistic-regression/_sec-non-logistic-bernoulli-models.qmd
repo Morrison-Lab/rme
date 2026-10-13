@@ -1,10 +1,10 @@
 Alternatively,
-if you want to estimate risk ratios more directly from the model,
-you can sometimes change the link function from $\logitf{}$ to $\logf{}$;
+if you want to estimate [risk ratios](binary-outcome-associations.qmd#def-RR) more directly from the model,
+you can sometimes change the [link function](Intro-to-GLMs.qmd#sec-why-link) from $\logitf{}$ to $\logf{}$;
 then you can obtain risk ratios by exponentiating coefficients
-^[or linear combinations of coefficients,
+^[or [linear combinations](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) of coefficients,
 depending on what covariate patterns you are contrasting],
-just like we did for odds ratios with the logit link:
+just like we did for [odds ratios](binary-outcome-associations.qmd#def-OR) with the [logit](binary-outcome-associations.qmd#def-logit-fn) link:
 
 ```{r}
 data(anthers, package = "dobson")
@@ -119,14 +119,14 @@ fitted probabilities greater than 1.
 
 When this happens,
 you can instead switch the outcome distribution from binomial to Poisson
-and fit a Poisson regression model
+and fit a Poisson [regression model](Intro-to-GLMs.qmd#def-regression-model)
 (we will see those soon!).
 Note that this substitution is a change in model *structure* —
 a different outcome distribution —
 not just a different way of fitting the same model.
 With a Poisson outcome distribution,
 you won't get warnings about fitted probabilities greater than 1,
-but that distribution isn't quite right for binary outcomes.
+but that distribution isn't quite right for [binary outcomes](https://morrison-lab.github.io/sds/data.html#def-binary-var).
 Despite this mismatch,
 Poisson regression is the usual fallback
 when the log-binomial model fails to converge.

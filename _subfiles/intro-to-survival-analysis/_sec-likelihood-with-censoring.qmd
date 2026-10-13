@@ -1,7 +1,7 @@
 {{< include latex-macros/macros.qmd >}}
 
-If an event time $T$ is observed exactly as $T=t$, then the likelihood
-of that observation is just its probability density function:
+If an event time $T$ is observed exactly as $T=t$, then the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik-obs)
+of that observation is just its [probability density function](https://morrison-lab.github.io/pds/random-variables.html#def-pdf):
 
 $$
 \begin{aligned}
@@ -19,9 +19,9 @@ $$
 
 ---
 
-If instead the event time $T$ is censored and only known to be after
+If instead the event time $T$ is [censored](#def-right-censor) and only known to be after
 time $y$, then the likelihood of that censored observation is instead
-the survival function evaluated at the censoring time:
+the [survival function](#def-surv-fn) evaluated at the censoring time:
 
 $$
 \begin{aligned}
@@ -45,7 +45,7 @@ the corresponding density and survival functions for the censoring
 event.
 
 Let $Y$ denote the time when observation ended (either by censoring or
-by the event of interest occurring), and let $D$ be an indicator
+by the event of interest occurring), and let $D$ be an [indicator](https://morrison-lab.github.io/sds/data.html#def-indicator-variable)
 variable for the event occurring at $Y$ (so $D=0$ represents a censored
 observation and $D=1$ represents an uncensored observation). In other
 words, let $Y \eqdef  \min(T,C)$ and
@@ -75,7 +75,8 @@ $$
 ::: notes
 Typically, survival analyses assume that censoring is non-informative
 (@def-noninformative-censoring);
-in particular, $C$ and $T$ are mutually independent.
+in particular, $C$ and $T$ are mutually
+[independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
 
 Then the joint likelihood $\p(Y,D)$ factors into the product
 $\p(Y), \p(D)$, and the likelihood reduces to:
@@ -100,7 +101,7 @@ $$
 ---
 
 ::: notes
-The corresponding log-likelihood is:
+The corresponding [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is:
 :::
 
 $$
@@ -127,7 +128,7 @@ parameters.
 ---
 
 ::: notes
-The corresponding score function is:
+The corresponding [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) is:
 :::
 
 $$
@@ -161,7 +162,7 @@ $$
 
 ::: notes
 As long as $\theta_C$ and $\theta_T$ don't share any parameters, then if
-censoring is non-informative, the partial derivative with respect to
+censoring is non-informative, the [partial derivative](https://morrison-lab.github.io/mds/vector-calculus.html#def-partial-derivative) with respect to
 $\theta_T$ is:
 :::
 
@@ -201,7 +202,7 @@ $$
 ---
 
 ::: notes
-Thus, the MLE for $\theta_T$ won't depend on $\theta_C$, and we can
+Thus, the [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) for $\theta_T$ won't depend on $\theta_C$, and we can
 ignore the distribution of $C$ when estimating the parameters of
 $f_T(t)=p(T=t)$.
 :::
@@ -221,7 +222,7 @@ $$
 
 ::: notes
 Specifically, if the event occurred at time $y$ (i.e., if $d=1$), then the
-likelihood of $(Y,D) = (y,d)$ is equal to the hazard function at $y$
+likelihood of $(Y,D) = (y,d)$ is equal to the [hazard function](#def-hazard) at $y$
 times the survival function at $y$. Otherwise, the likelihood is equal
 to just the survival function at $y$.
 :::
@@ -245,7 +246,7 @@ $$
 
 ::: notes
 In other words, the log-likelihood contribution from a single
-observation $(Y,D) = (y,d)$ is equal to the negative cumulative hazard
+observation $(Y,D) = (y,d)$ is equal to the negative [cumulative hazard](#def-cuhaz)
 at $y$, plus the log of the hazard at $y$ if the event occurred at time
 $y$.
 :::

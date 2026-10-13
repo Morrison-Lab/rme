@@ -1,6 +1,6 @@
 #### Interpreting the layout of the covariance matrix
 
-The covariance matrix $\widehat{\Covt}(\evb)$ is a $p \times p$ symmetric matrix,
+The [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) $\widehat{\Covt}(\evb)$ is a $p \times p$ [symmetric matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-symmetric-matrix),
 where $p$ is the number of regression coefficients
 (including the intercept, if present).
 Its rows and columns correspond to those $p$ coefficient estimates.
@@ -27,10 +27,10 @@ $$
 
 Specifically, the matrix entries represent:
 
-- The **diagonal** entries are the **variances** of the individual coefficient estimates:
+- The **diagonal** entries are the **[variances](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance)** of the individual coefficient estimates:
   the entry in matrix position $(j+1, j+1)$ is $\Var{\hat\b_j}$,
   for $j = 0, 1, \ldots, p - 1$.
-- The **off-diagonal** entries are the **covariances** between pairs of coefficient estimates:
+- The **off-diagonal** entries are the **[covariances](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov)** between pairs of coefficient estimates:
   the entry in matrix position $(i+1, j+1)$ is $\Covs{\hat\b_i}{\hat\b_j}$,
   for $i \neq j$.
 - The matrix is **symmetric**: $\Covs{\hat\b_i}{\hat\b_j} = \Covs{\hat\b_j}{\hat\b_i}$.
@@ -71,7 +71,7 @@ Covariance matrix of $\evb$ for `birthweight` model [-@eq-BW-lm-interact] (with 
 :::
 
 ::: notes
-The square roots of the diagonal entries give the standard errors of the coefficient estimates:
+The square roots of the diagonal entries give the [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the coefficient estimates:
 :::
 
 ```{r}
@@ -91,7 +91,7 @@ bw_lm2 |>
 ```
 
 ::: notes
-So we can do confidence intervals, hypothesis tests, and p-values exactly as in the one-variable case we looked at previously.
+So we can do [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval), [hypothesis tests](https://morrison-lab.github.io/sds/inference.html#sec-hypothesis-tests), and [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) exactly as in the one-variable case we looked at previously.
 :::
 
 :::

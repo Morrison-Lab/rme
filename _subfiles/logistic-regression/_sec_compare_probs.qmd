@@ -23,7 +23,7 @@ $$\pi(OC) \eqdef \Pr(MI|OC), \quad \pi(\neg OC) \eqdef \Pr(MI|\neg OC)$$
 for the probability of MI given OC use and given OC non-use,
 respectively.
 
-In @exm-oc-mi, the maximum likelihood estimate of the difference in MI risk between OC users and OC non-users is:
+In @exm-oc-mi, the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of the difference in MI risk between OC users and OC non-users is:
 ```{r, include = FALSE}
 #| label: compute-risk-diff
 rd_OC <- p_MI_OC - p_MI_nOC # nolint: object_name_linter
@@ -46,7 +46,7 @@ $$
 :::{#exr-interpret-rd}
 #### interpreting risk differences
 
-How can we interpret the preceding risk difference estimate in prose?
+How can we interpret the preceding [risk difference](#def-RD) estimate in prose?
 :::
 
 {{< slidebreak >}}
@@ -117,7 +117,7 @@ $$\ph(MI|OC) = `r 13/5000`$$
 
 $$\ph(MI|\neg OC) = `r 7/10000`$$
 
-Now, estimate the *relative risk* of MI for OC versus non-OC.
+Now, estimate the *[relative risk](#def-RR)* of MI for OC versus non-OC.
 
 :::
 
@@ -181,7 +181,7 @@ see also @vittinghoff2e [Section 8.1.4], which uses similar phrasing.
 
 ::: notes
 The second approach in @sol-interpret-rr,
-where we subtract 1 from the risk ratio,
+where we subtract 1 from the [risk ratio](#def-RR),
 is actually reporting a slightly different metric:
 :::
 
@@ -190,7 +190,8 @@ is actually reporting a slightly different metric:
 #### Relative risk difference
 
 :::: notes
-Sometimes, we divide the risk difference by the comparison probability; the result is called the **relative risk difference**:
+Sometimes, we divide the [risk difference](#def-RD) by the comparison probability;
+the result is called the **relative risk difference**:
 ::::
 
 $$\xi(\pi_1,\pi_2) \eqdef \frac{\delta(\pi_1,\pi_2)}{\pi_2}$$
@@ -226,7 +227,7 @@ $$
 #### Relative difference in MI risk
 
 In @exm-oc-mi,
-the maximum likelihood estimate of
+the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of
 the relative risk difference in MI risk
 between OC users and OC non-users is:
 
@@ -250,12 +251,12 @@ $$
 $$
 
 ::: notes
-The numerator `r rd_OC` is the risk difference estimate from @exm-RD,
+The numerator `r rd_OC` is the [risk difference](#def-RD) estimate from @exm-RD,
 and the denominator `r p_MI_nOC` is the estimate $\hat\pi(\neg OC)$ from @sol-compute-probs.
 :::
 
 We can check this estimate using @thm-rrd-vs-rr
-and the risk ratio estimate from @sol-exr-RR:
+and the [risk ratio](#def-RR) estimate from @sol-exr-RR:
 
 $$
 \ba
@@ -278,7 +279,7 @@ The two calculations agree.
 ### Changing reference groups in risk comparisons
 
 :::: notes
-Risk differences, risk ratios, and relative risk differences are defined by two probabilities, plus a choice of which probability is the **baseline** or **reference** probability (i.e., which probability is the subtrahend of the risk difference or the denominator of the risk ratio).
+[Risk differences](#def-RD), [risk ratios](#def-RR), and relative risk differences are defined by two probabilities, plus a choice of which probability is the **baseline** or **reference** probability (i.e., which probability is the subtrahend of the risk difference or the denominator of the risk ratio).
 :::
 
 $$\delta(\pi_2,\pi_1) = -\delta(\pi_1, \pi_2)$$ {#eq-rd-switch-ref}
@@ -364,7 +365,7 @@ $$
 
 #### Switching the reference group in a risk difference
 
-In @exm-RD, we estimated that the risk difference of MI for OC versus non-OC is:
+In @exm-RD, we estimated that the [risk difference](#def-RD) of MI for OC versus non-OC is:
 
 $$
 \begin{aligned}
@@ -395,7 +396,7 @@ as @eq-rd-switch-ref states.
 
 #### Switching the reference group in a risk ratio
 
-In @sol-exr-RR, we estimated that the risk ratio of OC versus non-OC is:
+In @sol-exr-RR, we estimated that the [risk ratio](#def-RR) of OC versus non-OC is:
 
 $$
 \begin{aligned}

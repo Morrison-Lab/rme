@@ -1,25 +1,25 @@
 {{< include latex-macros/macros.qmd >}}
 
 Under the causal assumptions
-(consistency, conditional exchangeability, and positivity),
+([consistency](#def-consistency), conditional [exchangeability](#def-exchangeability), and [positivity](#def-positivity)),
 the causal effect can be estimated
-by adjusting for the confounders $\vec{L}$
-in a regression model.
+by adjusting for the [confounders](#def-confounder) $\vec{L}$
+in a [regression model](Intro-to-GLMs.qmd#def-regression-model).
 
 ## Direct standardization (G-computation) {#sec-causal-g-computation}
 
 The **G-computation** estimator
 (also called **direct standardization** or **standardization**)
-estimates the ATE by:
+estimates the [ATE](#def-ate) by:
 
-1. Fitting a regression model:
+1. Fitting a [regression model](Intro-to-GLMs.qmd#def-regression-model):
    $\emu(a, \vec{l}) \eqdef \Est{\E{Y \mid A = a, \vec{L} = \vec{l}}}$
 
-2. Predicting the potential outcome mean for each individual
+2. Predicting the [potential outcome](#def-potential-outcomes) mean for each individual
    under both treatment levels $a = 1$ and $a = 0$:
    $$\hat{Y}_i(a) \eqdef \emu(a, \vec{L}_i)$$
 
-3. Averaging over the study population:
+3. Averaging over the study [population](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-population):
    $$\Est{\E{Y(a)}} \eqdef \frac{1}{n} \sum_{i=1}^n \hat{Y}_i(a)$$
 
 4. Estimating the ATE as the contrast:
@@ -29,28 +29,28 @@ estimates the ATE by:
 
 G-computation is model-based:
 it relies on the regression model being correctly specified.
-A misspecified model will produce biased causal estimates
-even if confounders are included.
+A misspecified model will produce [biased](https://morrison-lab.github.io/sds/estimation.html#def-bias) causal estimates
+even if [confounders](#def-confounder) are included.
 
 G-computation is easily generalized to:
 
-- Binary outcomes (using logistic regression)
-- Survival outcomes (using Cox or Weibull models)
+- Binary outcomes (using [logistic regression](logistic-regression.qmd#def-logistic-regression))
+- Survival outcomes (using [Cox](proportional-hazards-models.qmd#def-ph-model) or [Weibull](https://morrison-lab.github.io/pds/distributions.html#def-weibull) models)
 - Multiple treatments or treatment levels
 
 :::
 
 ## Regression adjustment in linear models {#sec-causal-linear-adjustment}
 
-When the outcome is continuous
+When the [outcome](Intro-to-GLMs.qmd#def-outcome) is [continuous](https://morrison-lab.github.io/sds/data.html#def-continuous-var)
 and the regression model is linear,
 G-computation simplifies to the
-**adjusted treatment coefficient** from a linear regression:
+**adjusted treatment coefficient** from a [linear regression](Linear-models-overview.qmd#def-lm-general-form):
 
 $$Y = \beta_0 + \beta_A A + \tp{\vbeta_L} \vec{L} + \varepsilon$$
 
-Under consistency, conditional exchangeability,
-and positivity,
+Under [consistency](#def-consistency), conditional [exchangeability](#def-exchangeability),
+and [positivity](#def-positivity),
 the coefficient $\beta_A$ equals
 the average causal effect of $A$ on $Y$:
 
@@ -84,7 +84,7 @@ G-computation is preferred in that case.
 ## Example: regression adjustment for LDL in HERS {#sec-causal-hers-ldl-adj}
 
 The HERS study DAG (see @sec-pred-sel-hers-dag)
-shows that `LDL` and `HDL` are mediators of the HT → CHD pathway.
+shows that `LDL` and `HDL` are [mediators](#def-mediator) of the HT → CHD pathway.
 For estimating the total causal effect of HT on CHD,
 we should not adjust for `LDL` or `HDL`.
 
@@ -96,8 +96,8 @@ In this model,
 
 Since HT was randomized in HERS,
 no adjustment is needed for causal identification of HT → LDL.
-However, adjusting for strong predictors of LDL
-improves precision:
+However, adjusting for strong [predictors](Intro-to-GLMs.qmd#def-predictors) of LDL
+improves [precision](https://morrison-lab.github.io/pds/variance-covariance.html#def-precision):
 
 ```{r}
 #| label: causal-hers-ldl-setup
@@ -139,4 +139,4 @@ Since HT was randomized, adjustment is for precision only.
 
 The estimated causal effect of HT on LDL
 is approximately −11 mg/dL (negative = lower LDL on HT),
-with narrower confidence intervals than the unadjusted estimate.
+with narrower [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) than the unadjusted estimate.

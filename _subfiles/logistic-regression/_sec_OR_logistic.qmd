@@ -4,7 +4,7 @@
 
 #### General formula for odds ratios in logistic regression
 
-Consider the generic logistic regression model:
+Consider the generic [logistic regression model](#def-logistic-regression):
 
 - $Y_i|\vX_i \simind \Ber(\pi(\vX_i))$
 - $\logitf{\pi(\vx)} = \logodds(\vx)$
@@ -16,7 +16,7 @@ two individuals
 or two subpopulations.
 
 Find a concise formula to compute 
-the odds ratio comparing covariate patterns $\vx$ and $\vxs$:
+the [odds ratio](binary-outcome-associations.qmd#def-OR) comparing covariate patterns $\vx$ and $\vxs$:
 
 $$\ror(\vx,\vxs) \eqdef \frac{\odds(\vx)}{\odds(\vxs)}$${#eq-def-ror}
 
@@ -97,7 +97,7 @@ By @lem-logistic-OR and @def-difflogodds.
 :::{#exr-diff-logodds}
 #### Difference in log-odds
 Find a concise expression for 
-the difference in log-odds:
+the [difference in log-odds](#def-difflogodds):
 $$\difflogodds \eqdef \red{\logodds(\vx) - \logodds(\vxs)}$$
 :::
 
@@ -171,7 +171,7 @@ By @lem-diff-logodds and @def-diff-covs.
 
 :::{#exr-simplify-logistic-OR}
 
-Find an expression for the odds ratio $\ror(\vx,\vxs)$ 
+Find an expression for the [odds ratio](binary-outcome-associations.qmd#def-OR) $\ror(\vx,\vxs)$ 
 in terms of $\diffvx$ and $\vb$.
 
 :::
@@ -199,7 +199,7 @@ $$
 
 #### Odds ratio from difference in covariate patterns
 
-The odds ratio comparing covariate patterns $\vx$ and $\vxs$ is:
+The [odds ratio](binary-outcome-associations.qmd#def-OR) comparing covariate patterns $\vx$ and $\vxs$ is:
 
 {{< include _subfiles/logistic-regression/_eq_OR_delta.qmd >}}
 
@@ -216,7 +216,7 @@ By @sol-simplify-logistic-OR.
 #### Odds ratio between adjacent beetle dose levels
 
 ::: notes
-We can apply @thm-logistic-OR to the `beetles` logistic regression model
+We can apply @thm-logistic-OR to the `beetles` [logistic regression model](#def-logistic-regression)
 (@tbl-beetles-model-grouped).
 :::
 
@@ -233,7 +233,7 @@ Their difference is
 $\diffvx = \vx - \vxs = (0, `r beetles$dose[2] - beetles$dose[1]`)\'$.
 
 By @thm-logistic-OR,
-the estimated odds ratio comparing these two dose levels is:
+the estimated [odds ratio](binary-outcome-associations.qmd#def-OR) comparing these two dose levels is:
 
 $$
 \ba
@@ -255,7 +255,7 @@ $$
 ::: notes
 So an increase of $`r beetles$dose[2] - beetles$dose[1]`$ units in dose
 (the gap between the two lowest dose levels)
-multiplies the estimated odds of death
+multiplies the estimated [odds](binary-outcome-associations.qmd#def-odds) of death
 by about $`r round(exp(coef(beetles_glm_grouped)["dose"] * (beetles$dose[2] - beetles$dose[1])), 2)`$.
 :::
 
@@ -272,7 +272,7 @@ $$\logf {\ror(\vx,\vxs)} = \difflogodds$$
 :::
 
 ::: proof
-Taking the natural logarithm of both sides of @cor-logistic-OR:
+Taking the [natural logarithm](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of both sides of @cor-logistic-OR:
 
 $$
 \ba
@@ -291,9 +291,9 @@ $$ {#eq-log-or-diff-logodds-proof}
 
 #### Log odds ratio example
 
-If the difference in log-odds between two subjects is $\difflogodds = 0.693$,
+If the [difference in log-odds](#def-difflogodds) between two subjects is $\difflogodds = 0.693$,
 then by @cor-logistic-OR,
-the odds ratio is $\ror = \expf{0.693} \approx 2.0$.
+the [odds ratio](binary-outcome-associations.qmd#def-OR) is $\ror = \expf{0.693} \approx 2.0$.
 
 Taking the logarithm yields $\logf{\ror} = \logf{\expf{0.693}} = 0.693 = \difflogodds$,
 illustrating @cor-log-or;

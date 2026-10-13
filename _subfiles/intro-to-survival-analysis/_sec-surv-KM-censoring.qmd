@@ -1,5 +1,5 @@
 
--   For the 6-MP patients, we cannot ignore the censored data because we
+-   For the 6-MP patients, we cannot ignore the [censored](#def-right-censor) data because we
 know that the time to relapse is greater than the censoring time.
 
 -   For any time $t$ in months, we know that 6-MP patients with times
@@ -7,14 +7,14 @@ greater than $t$ have not relapsed, and those with relapse time less
 than $t$ have relapsed, but we don't know if patients with censored
 time less than $t$ have relapsed or not.
 
--   The procedure we usually use is the Kaplan-Meier product-limit
-estimator of the survival function.
+-   The procedure we usually use is the [Kaplan-Meier product-limit](#def-KM-estimator)
+estimator of the [survival function](#def-surv-fn).
 
 -   The Kaplan-Meier estimator is a step function (like the empirical
 cdf), which changes value only at the event times, not at the
 censoring times.
 
--   At each event time $t_i$, we compute the at-risk set, which
+-   At each event time $t_i$, we compute the [at-risk set](#def-risk-set), which
 includes all observations whose event time or censoring time is at
 least $t_i$.
     Its size is $r_i$.

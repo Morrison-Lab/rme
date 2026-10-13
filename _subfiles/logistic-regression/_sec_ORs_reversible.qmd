@@ -1,6 +1,6 @@
 
 :::: notes
-Odds ratios have a special property: we can swap a covariate with the outcome, and the odds ratio remains the same.
+[Odds ratios](#def-OR) have a special property: we can swap a covariate with the outcome, and the odds ratio remains the same.
 ::::
 
 :::{#thm-or-swap}
@@ -29,7 +29,7 @@ $$\ror(A|B) = \ror(B|A)$$
 
 @thm-or-swap says $\ror(MI|OC) = \ror(OC|MI)$:
 we can swap the roles of the outcome (MI) and the covariate (OC use)
-without changing the odds ratio.
+without changing the [odds ratio](#def-OR).
 We can confirm this equality numerically
 using the counts from @exm-oc-mi.
 
@@ -53,7 +53,7 @@ ror_OC_given_MI <- odds_OC_MI / odds_OC_nMI # nolint: object_name_linter
 ```
 
 The **disease** odds ratio
-(the odds of MI, comparing OC users to non-users) is,
+(the [odds](#def-odds) of MI, comparing OC users to non-users) is,
 using @def-OR and @thm-est-odds:
 
 $$
@@ -126,7 +126,7 @@ inserting $C$ into the conditions (RHS of $|$) of every expression.
 
 #### Reversibility within age strata in the WCGS data
 
-@thm-conditional-OR-swap says a conditional odds ratio is also reversible:
+@thm-conditional-OR-swap says a [conditional odds ratio](#def-OR) is also reversible:
 $\ror(A|B,C) = \ror(B|A,C)$.
 We can illustrate this equality using data from
 the Western Collaborative Group Study (`wcgs`)
@@ -175,9 +175,9 @@ e_old <- or_by_age |> filter(age_group == "50 or older") |> pull(exposure_or)
 ```
 
 Among participants under 50,
-the disease odds ratio
-(the odds of CHD, comparing Type A to Type B) is `r d_young`,
-and the exposure odds ratio
+the [disease odds ratio](#def-disease-OR)
+(the [odds](#def-odds) of CHD, comparing Type A to Type B) is `r d_young`,
+and the [exposure odds ratio](#def-exposure-OR)
 (the odds of Type A, comparing CHD cases to non-cases) is `r e_young`;
 the two agree, as @thm-conditional-OR-swap requires.
 

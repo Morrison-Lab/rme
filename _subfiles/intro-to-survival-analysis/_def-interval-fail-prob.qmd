@@ -3,7 +3,7 @@
 
 Fix an interval width $\Delta t$ and grid points $\tau$.
 For subject $j$, the **interval failure probability** at $\tau$ is the
-conditional probability that $j$ fails during $[\tau, \tau + \Delta t)$,
+[conditional probability](https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob) that $j$ fails during $[\tau, \tau + \Delta t)$,
 given that $j$ is still at risk at $\tau$:
 
 $$
@@ -15,7 +15,7 @@ $$
 #### Conditional survival as a ratio
 
 For $\tau_1 < \tau_2$, the conditional probability of surviving past $\tau_2$
-given survival past $\tau_1$ is the ratio of survival function values:
+given survival past $\tau_1$ is the ratio of [survival function](#def-surv-fn) values:
 
 $$
 \Pr(T > \tau_2 \mid T > \tau_1) = \frac{\surv(\tau_2)}{\surv(\tau_1)}.
@@ -72,7 +72,7 @@ the memoryless property of the exponential distribution.
 :::{#exm-interval-fail-prob}
 #### Interval failure probability: exact value
 
-Suppose subject $j$ has constant hazard $\haz(t) = 0.1$ per year,
+Suppose subject $j$ has constant [hazard](#def-hazard) $\haz(t) = 0.1$ per year,
 and consider the half-year interval $[4.0,\, 4.5)$, so $\Delta t = 0.5$ years.
 By @lem-cond-surv-ratio and the survival/cumulative-hazard relationship (@cor-surv-int-haz),
 the exact probability that $j$ fails in this interval, given survival to year $4$, is

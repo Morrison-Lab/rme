@@ -2,11 +2,11 @@
 
 :::{#exr-ci-OR}
 Given
-a maximum likelihood estimate $\eb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\eb$
 and
-a corresponding estimated covariance matrix 
+a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) 
 $\eS \eqdef \widehat{\Covt}(\eb)$, 
-calculate a 95% confidence interval for the odds ratio 
+calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the [odds ratio](binary-outcome-associations.qmd#def-OR) 
 comparing covariate patterns $\vx$ and $\vxs$, $\ror(\vx,\vxs)$.
 :::
 
@@ -40,7 +40,7 @@ $$\ror(\vx,\vxs) \in (e^L, e^R)$${#eq-ci-OR-exp}
 
 :::{#exr-or-diff-logodds}
 
-Find a 95% confidence interval for the natural logarithm of the odds ratio,
+Find a 95% confidence interval for the [natural logarithm](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of the odds ratio,
 $\logf{\ror(\vx,\vxs)}$
 
 :::
@@ -66,7 +66,7 @@ $$\edifflogodds \pm 1.96 * \teal{\HSE{\edifflogodds}}$$
 :::{#exr-se-diff-logodds}
 
 ::: notes
-How can we estimate the standard error of
+How can we estimate the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of
 $\edifflogodds$?
 :::
 
@@ -120,7 +120,7 @@ $$
 {{< slidebreak >}}
 
 Combining @eq-var-diff-logodds with the invariance property of MLEs
-gives an estimator for the variance and standard error:
+gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
 :::{#thm-est-se-diff-logodds}
 
@@ -140,7 +140,7 @@ $${#eq-est-se-diff-logodds}
 ::: proof
 By @sol-se-diff-logodds,
 $\Var{\edifflogodds} = \tp{\diffvx}\Sigma(\diffvx)$ (@eq-var-diff-logodds).
-By the invariance property of MLEs,
+By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,
 which yields @eq-est-var-difflogodds;
 taking the square root gives @eq-est-se-diff-logodds.
@@ -158,7 +158,7 @@ Compare @thm-est-se-diff-logodds with [confidence intervals](Linear-models-overv
 
 ::: notes
 We instantiate @thm-est-se-diff-logodds
-for the `beetles` logistic regression model
+for the `beetles` [logistic regression model](#def-logistic-regression)
 (@tbl-beetles-model-ungrouped).
 :::
 
@@ -180,15 +180,15 @@ ci_diff <- diff_logodds_hat + c(-1, 1) * 1.96 * se_diff
 ```
 
 By @eq-est-se-diff-logodds,
-the estimated standard error of the difference in log-odds is
+the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [difference in log-odds](#def-difflogodds) is
 $\HSE{\Delta\hat\logodds} = \sqrt{\tp{\diffvx}\eS(\diffvx)} = `r se_diff`$,
 and the estimated difference in log-odds is
 $\Delta\hat\logodds = (\diffvx)\cdot\eb = `r diff_logodds_hat`$.
 
-The resulting 95% confidence interval for $\difflogodds$ is
+The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\difflogodds$ is
 $(`r ci_diff[1]`, `r ci_diff[2]`)$,
 so by @eq-ci-OR-exp
-the estimated odds ratio and its 95% confidence interval are
+the estimated [odds ratio](binary-outcome-associations.qmd#def-OR) and its 95% confidence interval are
 $\hat\ror(\vx,\vxs) = e^{`r diff_logodds_hat`} = `r exp(diff_logodds_hat)`$,
 with CI $(`r exp(ci_diff[1])`, `r exp(ci_diff[2])`)$.
 

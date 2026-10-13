@@ -2,7 +2,7 @@
 #### Simulated example for independence diagnostics
 
 The following simulation generates ordered data with positively autocorrelated errors.
-This serial correlation creates a setting where independence should fail.
+This serial [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) creates a setting where [independence](https://morrison-lab.github.io/pds/independence.html#def-indpt) should fail.
 We generate the error term from an AR(1) process with coefficient 0.7,
 matching the notation in the mathematical details section.
 
@@ -27,7 +27,7 @@ serial_dep_exm_lm <- lm(y ~ x, data = serial_dep_exm)
 summary(serial_dep_exm_lm)
 ```
 
-Residuals versus order:
+[Residuals](#def-resid-fitted) versus order:
 
 ```{r}
 #| label: fig-independence-resid-order
@@ -64,7 +64,7 @@ local({
 })
 ```
 
-Durbin-Watson and Breusch-Godfrey tests:
+[Durbin-Watson](#def-durbin-watson-diagnostic) and [Breusch-Godfrey](#def-breusch-godfrey-diagnostic) tests:
 
 ```{r}
 #| label: exm-independence-formal-tests

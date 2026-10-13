@@ -56,16 +56,16 @@ beetles_pi_mid <-
 beetles_slope_mid <- beetles_pi_mid * (1 - beetles_pi_mid)
 ```
 
-Consider the grouped-data logistic regression model
+Consider the grouped-data [logistic regression model](#def-logistic-regression)
 for the beetles data (@tbl-beetles-model-grouped).
 At the middle (`r beetles_mid_row`th of `r nrow(beetles)`) dose in the dataset,
 $x = `r beetles_dose_mid`$,
-the fitted log-odds of death is
+the fitted [log-odds](binary-outcome-associations.qmd#def-logodds) of death is
 $\est{\logodds} = `r round(beetles_eta_mid, 4)`$,
 and the fitted probability of death is
 $\est{\prob} = \expitf{`r round(beetles_eta_mid, 4)`} = `r round(beetles_pi_mid, 4)`$.
 By @cor-deriv-expit,
-the slope of the expit function at this fitted log-odds value is:
+the slope of the [expit function](binary-outcome-associations.qmd#def-expit) at this fitted log-odds value is:
 
 $$
 \dexpitf{`r round(beetles_eta_mid, 4)`}

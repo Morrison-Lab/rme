@@ -14,10 +14,10 @@ In a DAG:
 
 DAGs are used in causal inference to:
 
-- Identify **confounders** that must be adjusted for.
-- Identify **mediators** that should generally *not* be adjusted for
+- Identify **[confounders](#def-confounder)** that must be adjusted for.
+- Identify **[mediators](#def-mediator)** that should generally *not* be adjusted for
 when estimating the total causal effect.
-- Identify **colliders** that should *not* be adjusted for
+- Identify **[colliders](#def-collider)** that should *not* be adjusted for
 (adjusting for a collider opens a non-causal path).
 
 ## Key concepts from DAG theory {#sec-pred-sel-dag-concepts}
@@ -26,14 +26,14 @@ when estimating the total causal effect.
 #### Confounder
 
 A **confounder** of the relationship between an exposure $X$ and
-outcome $Y$ is a variable $C$
+[outcome](Intro-to-GLMs.qmd#def-outcome) $Y$ is a variable $C$
 that is a common cause of both $X$ and $Y$.
 By contrast,
-a mediator lies on the causal path
+a [mediator](#def-mediator) lies on the causal path
 from $X$ to $Y$
 and is not a common cause of $X$ and $Y$.
 
-Adjusting for confounders removes confounding bias.
+Adjusting for confounders removes [confounding](#def-confounding-obs) bias.
 :::
 
 {{< slidebreak >}}
@@ -67,7 +67,7 @@ A **collider** is a variable $L$ that is caused by two or more
 variables on a path:
 $$X \to L \leftarrow Y$$
 
-Adjusting for a collider opens a non-causal (backdoor) path
+Adjusting for a collider opens a non-causal ([backdoor](#def-backdoor-criterion)) path
 between $X$ and $Y$,
 introducing **collider bias**.
 :::
@@ -114,9 +114,9 @@ Data dictionary for key HERS variables used in the DAG and examples.
 
 | Variable | Meaning | Type |
 |---|---|---|
-| `HT` | Hormone-therapy assignment (placebo vs estrogen+progestin) | Binary categorical |
+| `HT` | Hormone-therapy assignment (placebo vs estrogen+progestin) | [Binary](https://morrison-lab.github.io/sds/data.html#def-binary-var) [categorical](https://morrison-lab.github.io/sds/data.html#def-categorical-var) |
 | `CHD` | Recurrent coronary heart disease event outcome | Binary categorical |
-| `age` | Baseline age (years) | Continuous |
+| `age` | Baseline age (years) | [Continuous](https://morrison-lab.github.io/sds/data.html#def-continuous-var) |
 | `smoking` | Baseline smoking status | Binary categorical |
 | `diabetes` | Baseline diabetes status | Binary categorical |
 | `BMI` | Body mass index | Continuous |
@@ -148,11 +148,11 @@ adjustmentSets(
 ::: notes
 
 Since HT was randomized in HERS,
-there are no backdoor paths from HT to CHD.
+there are no [backdoor paths](#def-backdoor-criterion) from HT to CHD.
 The `adjustmentSets()` function confirms that no adjustment is needed
 to estimate the total causal effect of HT on CHD.
 
-The variables `LDL` and `HDL` are mediators on the path
+The variables `LDL` and `HDL` are [mediators](#def-mediator) on the path
 HT → LDL/HDL → CHD,
 so they should **not** be included
 when estimating the *total* causal effect of HT on CHD.
@@ -172,7 +172,7 @@ The HERS baseline dataset includes LDL and HDL cholesterol,
 allowing us to examine the effect of hormone therapy on lipid levels.
 
 Here we build models to predict LDL cholesterol,
-illustrating how DAG thinking guides predictor selection.
+illustrating how DAG thinking guides [predictor selection](predictor-selection.qmd#sec-pred-sel-strategies).
 
 :::
 
@@ -236,11 +236,11 @@ BMI is a common cause of LDL and other outcomes
 (but age does not confound the HT → LDL relationship,
 since HT was randomized).
 
-In a randomized trial,
-treatment assignment is independent of pre-treatment covariates,
-so confounding adjustment is not required to estimate the causal effect.
-However, adjusting for strong predictors of the outcome
-can improve precision.
+In a [randomized trial](#sec-causal-rct),
+treatment assignment is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of pre-treatment [covariates](Intro-to-GLMs.qmd#def-predictors),
+so [confounding](#def-confounding-obs) adjustment is not required to estimate the causal effect.
+However, adjusting for strong [predictors](Intro-to-GLMs.qmd#def-predictors) of the [outcome](Intro-to-GLMs.qmd#def-outcome)
+can improve [precision](https://morrison-lab.github.io/pds/variance-covariance.html#def-precision).
 
 ::: {#tbl-hers-ldl-adj}
 
@@ -266,8 +266,8 @@ improving precision of the HT coefficient.
 ## An observational study example: WCGS {#sec-pred-sel-wcgs-dag}
 
 The HERS study is a randomized trial,
-so confounding of the treatment-outcome relationship is not a concern.
-To illustrate DAG-guided confounder selection in an **observational study**,
+so [confounding](#def-confounding-obs) of the treatment-outcome relationship is not a concern.
+To illustrate DAG-guided [confounder](#def-confounder) selection in an **observational study**,
 we use the Western Collaborative Group Study (WCGS).
 
 The WCGS was a prospective cohort study of 3,154 men
@@ -277,7 +277,7 @@ The exposure of primary interest is **Type A behavior pattern**
 (a personality trait characterized by competitive drive,
 time urgency, and hostility),
 hypothesized to increase CHD risk
-independently of classic cardiovascular risk factors.
+independently of classic cardiovascular [risk factors](Intro-to-GLMs.qmd#def-predictors).
 
 ::: {#tbl-wcgs-data-dictionary}
 
@@ -350,7 +350,7 @@ we treat Type A behavior pattern
 as a relatively stable trait
 that can influence smoking behavior.
 Under that assumption,
-`smoking` is a mediator on the path
+`smoking` is a [mediator](#def-mediator) on the path
 `personality_type -> smoking -> CHD`,
 not a confounder.
 BMI is causally affected by age.
@@ -377,7 +377,7 @@ wcgs_adj
 ::: notes
 
 The `adjustmentSets()` function returns the minimal set(s) of variables
-that block all backdoor paths from `personality_type` to `CHD`.
+that block all [backdoor paths](#def-backdoor-criterion) from `personality_type` to `CHD`.
 Adjusting for any of these minimal sets is sufficient to
 estimate the total causal effect of Type A behavior on CHD
 (under the assumptions encoded in the DAG).
