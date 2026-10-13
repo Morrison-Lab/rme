@@ -12,8 +12,8 @@ a different route: they place a knot at every data point and then
 
 ## The penalized fit
 
-<!-- Reviewer note (intentional, do not re-flag): no slidebreak between this
-heading and the div below. The preceding slidebreak already opens a fresh
+<!-- No slidebreak between this
+heading and the div that follows. The preceding slidebreak already opens a fresh
 slide; the heading and this div intentionally share that slide to avoid a
 title-only slide. -->
 ::::{#def-smoothing-spline}
@@ -83,7 +83,7 @@ The standard replacement is the **effective degrees of freedom**
 ::::{#def-effective-degrees-of-freedom}
 #### Effective degrees of freedom
 
-$$\text{EDF}(\l) = \text{tr}(\mat{S}_\l)
+$$\text{EDF}(\l) \eqdef \text{tr}(\mat{S}_\l)
 = \sum_{i=1}^n \frac{\partial \hat y_i}{\partial y_i}.$$
 
 The EDF interpolates smoothly between two endpoints. For the **full
@@ -183,6 +183,6 @@ summary(m_ss)  # reports EDF of the s(x) term
 plot(m_ss)     # plots the fitted smooth with CI band
 ```
 
-We'll return to `mgcv::s()` in the GAM-fitting section below — the
+We'll return to `mgcv::s()` in @sec-gam-fitting — the
 same `s()` syntax extends to multi-predictor additive models with
 no additional machinery.

@@ -18,7 +18,7 @@ $$y_i = \b_0 + \b_1 x_i + \b_2 x_i^2 + \cdots + \b_d x_i^d + \eps_i$$
 
 with $\eps_i \siid \ndist{0, \s^2}$.
 
-This is still a *linear* regression model in the coefficients
+This model is still a *linear* regression model in the coefficients
 $\b_0, \ldots, \b_d$ — the nonlinearity lives in the deterministic
 transformations $x_i^k$ of the predictor, not in the relationship
 between coefficients and response. So everything we know about
@@ -87,11 +87,11 @@ lm(y ~ poly(x, 3), data = d)
 
 The two parameterizations produce identical fitted values $\hat y_i$
 and identical hypothesis tests of "is the polynomial nonzero", but
-differ in the interpretation of individual $\hat\b_k$ coefficients:
+differ in the interpretation of individual $\eb_k$ coefficients:
 
 - `x + I(x^2) + I(x^3)` uses **raw powers**. Coefficients are tightly
   correlated (the columns of the design matrix are not orthogonal),
-  so the individual $t$-statistic on $\hat\b_2$, say, is hard to
+  so the individual $t$-statistic on $\eb_2$, say, is hard to
   interpret on its own.
 - `poly(x, 3)` uses an **orthogonal basis** that decorrelates the
   columns. Individual $t$-statistics now test the marginal

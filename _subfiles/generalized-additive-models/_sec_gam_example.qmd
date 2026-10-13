@@ -98,6 +98,7 @@ m_gam2 <- gam(
 
 ```{r}
 #| eval: false
+#| code-fold: true
 plot(m_gam, pages = 1, shade = TRUE, seWithMean = TRUE)
 ```
 
@@ -115,6 +116,7 @@ alternative:
 
 ```{r}
 #| eval: false
+#| code-fold: true
 gratia::draw(m_gam)
 ```
 
@@ -128,6 +130,7 @@ then back-transform with `plogis()`:
 
 ```{r}
 #| eval: false
+#| code-fold: true
 grid <- data.frame(
   chol = seq(min(wcgs$chol), max(wcgs$chol), length.out = 200),
   age  = median(wcgs$age),
@@ -186,7 +189,7 @@ the curve plots reveal a substantively interesting shape; if they
 do, the GAM is the better report.
 
 The refit with `method = "ML"` is required only for the AIC
-comparison; the REML fit `m_gam` above remains the preferred fit for
+comparison; the REML fit `m_gam` remains the preferred fit for
 final inference and plotting [@wood2017generalized, §6.2].
 
 ## Reporting in a manuscript {.unnumbered}

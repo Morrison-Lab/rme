@@ -8,7 +8,7 @@ coefficient:
 
 $$g(\E{Y \mid X = x}) = \b_0 + \b_1 x_1 + \b_2 x_2 + \cdots + \b_p x_p$$
 
-This forces the effect of every predictor to be **monotone**: if
+This linearity forces the effect of every predictor to be **monotone**: if
 $\b_j > 0$, raising $x_j$ always increases the predicted response on
 the link scale; if $\b_j < 0$, it always decreases it. Many real
 epidemiologic exposures don't behave that way.
@@ -81,7 +81,7 @@ The rest of this chapter builds up to GAMs in stages:
 3. **Regression splines** and **smoothing splines** — the smoothers
    most commonly used inside GAMs.
 4. **Local regression (LOESS)** — an alternative smoother family.
-5. **GAMs** — additive combinations of any of the above smoothers,
+5. **GAMs** — additive combinations of any of the smoothers listed in this section,
    fit via penalized likelihood with automatic smoothness selection.
 
 We'll fit GAMs in R using the `mgcv` package [@wood2017generalized],
