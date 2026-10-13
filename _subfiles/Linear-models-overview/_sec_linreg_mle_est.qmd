@@ -257,7 +257,7 @@ $$
 &= \paren{\sumin \vx_i \tp{\vx_i}}^{-1}\sumin \vx_i y_i
 && \text{(multiply by inverse matrix)}
 \\
-\hvb
+\evb
 &= \paren{\underbrace{\tp{\mX}}_{(p+1) \times n} \underbrace{\mX}_{n \times (p+1)}}^{-1}
 \underbrace{\tp{\mX}}_{(p+1) \times n} \underbrace{\vy}_{n \times 1}
 && \text{(matrix formulation of ordinary least squares / MLE vector)}
@@ -441,7 +441,7 @@ $$
 &= \tp{\mX}\mX\vb
 && \text{(rearrange terms)}
 \\
-\hvb
+\evb
 &= (\tp{\mX}\mX)^{-1}\tp{\mX}\vy
 && \text{(multiply by inverse matrix } (\tp{\mX}\mX)^{-1}\text{)}
 \ea
@@ -464,12 +464,12 @@ $$
 \ea
 $$
 
-The Hessian matrix $-\frac{1}{\ss}\tp{\mX}\mX$ is negative definite when $\mX$ has full column rank $p+1$, confirming that $\hvb = (\tp{\mX}\mX)^{-1}\tp{\mX}\vy$ uniquely maximizes the log-likelihood and is the maximum likelihood estimator for $\vb$.
+The Hessian matrix $-\frac{1}{\ss}\tp{\mX}\mX$ is negative definite when $\mX$ has full column rank $p+1$, confirming that $\evb = (\tp{\mX}\mX)^{-1}\tp{\mX}\vy$ uniquely maximizes the log-likelihood and is the maximum likelihood estimator for $\vb$.
 
 ---
 
 Similarly (not shown):
 
 $$
-\es^2_{\text{ML}} = \frac{1}{n} \tp{(\vy - \mX\hvb)}(\vy - \mX\hvb)
+\es^2_{\text{ML}} = \frac{1}{n} \tp{(\vy - \mX\evb)}(\vy - \mX\evb)
 $$

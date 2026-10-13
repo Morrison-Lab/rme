@@ -1,12 +1,12 @@
 
-The estimated variance of $\hsurv(t)$ at a single time point $t$ is given
+The estimated variance of $\esurv(t)$ at a single time point $t$ is given
 by **Greenwood's formula**:
 
 :::{#thm-greenwood}
 #### Greenwood's estimator for variance of Kaplan-Meier survival estimator
 
 $$
-\varhf{\hsurv(t)} = \hsurv(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
+\varhf{\esurv(t)} = \esurv(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
 $$ {#eq-var-est-surv}
 
 [@klein2003survival, Section 4.2, eq. (4.2.2)]
@@ -29,14 +29,14 @@ independent binomials $\text{Bin}(r_i,p_i)$. Letting $\surv(t)$ be the
 
 $$
 \ba
-\hsurv(t) &=\prod_{t_i \le t}x_i/r_i\\
+\esurv(t) &=\prod_{t_i \le t}x_i/r_i\\
 \surv(t)&=\prod_{t_i \le t}p_i
 \ea
 $$
 
 $$
 \ba
-\frac{\hsurv(t)}{\surv(t)}
+\frac{\esurv(t)}{\surv(t)}
 &= \prod_{t_i \le t} \frac{x_i}{p_i r_i}
 \\ &= \prod_{t_i \le t} \frac{\hat p_i}{p_i}
 \\ &= \prod_{t_i \le t} \paren{1+\frac{\hat p_i-p_i}{p_i}}
@@ -48,14 +48,14 @@ $$
 
 $$
 \ba
-\Varf{\frac{\hsurv(t)}{\surv(t)}}
+\Varf{\frac{\esurv(t)}{\surv(t)}}
 &\approx \Varf{1+\sum_{t_i \le t} \frac{\hat p_i-p_i}{p_i}}
 \\ &=\sum_{t_i \le t} \frac{1}{p_i^2}\frac{p_i(1-p_i)}{r_i}
 \\ &= \sum_{t_i \le t} \frac{(1-p_i)}{p_i r_i}
 \\ &\approx\sum_{t_i \le t} \frac{(1-x_i/r_i)}{x_i}
 \\ &=\sum_{t_i \le t} \frac{r_i-x_i}{x_i r_i}
 \\ &=\sum_{t_i \le t} \frac{d_i}{r_i(r_i-d_i)}
-\\ \tf \Varf{\hsurv(t)}
-&\approx \hsurv(t)^2\sum_{t_i \le t} \frac{d_i}{r_i(r_i-d_i)}
+\\ \tf \Varf{\esurv(t)}
+&\approx \esurv(t)^2\sum_{t_i \le t} \frac{d_i}{r_i(r_i-d_i)}
 \ea
 $$
