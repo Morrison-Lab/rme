@@ -1,14 +1,14 @@
 The final step is inference:
-@dobson4e [§2.3.5] lists confidence intervals,
-hypothesis tests about the parameters,
+@dobson4e [§2.3.5] lists [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval),
+[hypothesis tests](https://morrison-lab.github.io/sds/inference.html#sec-hypothesis-tests) about the parameters,
 and interpretation of the results.
 By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle),
 in large samples $\eb$ is approximately Gaussian,
-with covariance matrix approximated by the inverse of the observed information
+with covariance matrix approximated by the inverse of the [observed information](https://morrison-lab.github.io/sds/intro-MLEs.html#def-oinf)
 $-\hessf{\eb}$.
-A 95% Wald confidence interval for $\beta_j$ is then
+A 95% [Wald confidence interval](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-ci) for $\beta_j$ is then
 $\eb_j \pm 1.96 \cdot \eSEf{\eb_j}$,
-and the Wald statistic $z_j \eqdef \eb_j / \eSEf{\eb_j}$
+and the [Wald statistic](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) $z_j \eqdef \eb_j / \eSEf{\eb_j}$
 tests $H_0: \beta_j = 0$.
 
 {{< slidebreak >}}
@@ -23,7 +23,7 @@ and
 $\sum_{i:\, x_i = 1} \est{\mu}_i = n_{\text{country}} \bar{y}_{\text{country}} = 21$
 for the country women.
 Substituting into the Hessian from @exm-chronic-concavity,
-the observed information matrix is
+the [observed information matrix](https://morrison-lab.github.io/sds/intro-MLEs.html#def-oinf) is
 
 $$
 \ba
@@ -42,7 +42,7 @@ $$
 \ea
 $$
 
-Its determinant is $58 \cdot 21 - 21 \cdot 21 = 21 \cdot 37 = 777$,
+Its [determinant](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-determinant) is $58 \cdot 21 - 21 \cdot 21 = 21 \cdot 37 = 777$,
 so its inverse is
 
 $$
@@ -90,7 +90,7 @@ summary(chronic_glm)$coefficients
   from `r round(exp(ci_b1[1]), 3)` to `r round(exp(ci_b1[2]), 3)`.
 - The Wald statistic is
   $z \approx$ `r round(z_b1, 3)`,
-  with two-sided $p \approx$ `r round(p_b1, 3)`.
+  with two-sided [$p$-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) $\approx$ `r round(p_b1, 3)`.
 
 These hand calculations match the standard error, $z$ value, and $p$-value
 that `summary()` reports for `country`.
