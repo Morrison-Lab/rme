@@ -1,0 +1,32 @@
+:::{#exm-saturated-model}
+#### Saturated model for a small dataset
+
+Suppose we observe $n = 6$ outcomes at $q = 3$ covariate patterns $x \in \{0, 1, 2\}$,
+with two replicates (@def-replicates) per pattern:
+
+| $x$ | $y$ values | pattern mean $\bar{y}_x$ |
+|-----|------------|--------------------------|
+| 0   | 1, 3       | $(1 + 3)/2 = 2$          |
+| 1   | 5, 7       | $(5 + 7)/2 = 6$          |
+| 2   | 6, 8       | $(6 + 8)/2 = 7$          |
+
+The Gaussian saturated model for these data has three mean parameters,
+$\mu_0$, $\mu_1$, and $\mu_2$, plus one variance parameter $\sigma^2$.
+Its maximum likelihood estimates of the means are the pattern means:
+$\est{\mu}_0 = 2$, $\est{\mu}_1 = 6$, and $\est{\mu}_2 = 7$.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-not-saturated-model}
+#### A model that is not saturated (counterexample)
+
+For the same data as @exm-saturated-model,
+the simple linear regression model $\E{Y \mid X = x} = \b_0 + \b_1 x$
+has only $p = 2$ mean parameters,
+fewer than the $q = 3$ covariate patterns.
+Because the three pattern means $2$, $6$, and $7$ do not lie on a straight line
+(the differences between consecutive means are $6 - 2 = 4$ and $7 - 6 = 1$, which are unequal),
+no choice of $\b_0$ and $\b_1$ reproduces all three pattern means,
+so this model is not saturated.
+:::
