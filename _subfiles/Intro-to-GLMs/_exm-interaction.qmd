@@ -1,0 +1,59 @@
+:::{#exm-interaction}
+#### A linear predictor with an interaction term
+
+Suppose a model has a numeric covariate $x$, a binary covariate $z \in \{0, 1\}$,
+and linear predictor
+
+$$\eta(x, z) = 1 + 2x + 3z + 4xz.$$
+
+The difference in $\eta$ per unit difference in $x$, holding $z$ fixed, is:
+
+$$
+\ba
+\eta(x + 1, z) - \eta(x, z)
+&= \sb{1 + 2(x + 1) + 3z + 4(x + 1)z} - \sb{1 + 2x + 3z + 4xz}
+&& \text{(substitute into } \eta\text{)}
+\\
+&= \sb{1 + 2x + 2 + 3z + 4xz + 4z} - \sb{1 + 2x + 3z + 4xz}
+&& \text{(distribute)}
+\\
+&= 2 + 4z
+&& \text{(cancel shared terms)}
+\ea
+$$
+
+- When $z = 0$: the difference is $2 + 4 \cdot 0 = 2$.
+- When $z = 1$: the difference is $2 + 4 \cdot 1 = 6$.
+
+The difference per unit of $x$ depends on $z$,
+so this model includes an interaction between $x$ and $z$,
+and $4xz$ is its interaction term,
+with interaction coefficient $4$.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-no-interaction}
+#### A linear predictor without an interaction term (counterexample)
+
+Now drop the interaction term, so that $\eta(x, z) = 1 + 2x + 3z$.
+Then:
+
+$$
+\ba
+\eta(x + 1, z) - \eta(x, z)
+&= \sb{1 + 2(x + 1) + 3z} - \sb{1 + 2x + 3z}
+&& \text{(substitute into } \eta\text{)}
+\\
+&= \sb{1 + 2x + 2 + 3z} - \sb{1 + 2x + 3z}
+&& \text{(distribute)}
+\\
+&= 2
+&& \text{(cancel shared terms)}
+\ea
+$$
+
+The difference per unit of $x$ is $2$ at both $z = 0$ and $z = 1$,
+so this model has no interaction between $x$ and $z$:
+the lines for $z = 0$ and $z = 1$ are parallel on the scale of $\eta$.
+:::
