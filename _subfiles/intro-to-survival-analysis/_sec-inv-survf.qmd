@@ -71,98 +71,19 @@ for various rate parameters $\haz$.
 
 :::
 
-**Numerical example.**
-Suppose patients in a clinical trial have exponentially distributed
-survival times with rate $\haz = 2$ events per year.
-What is the median survival time?
-
-The median survival time is the time $t$ at which
-half the patients are still alive, i.e. $\surv(t) = 0.5$:
-
-$$
-\surv^{-1}(0.5)
-= \frac{-\logf{0.5}}{2}
-= \frac{\logf{2}}{2}
-\approx \frac{0.693}{2}
-\approx 0.347 \text{ years.}
-$$
-
-@fig-isf-surv-exp-median and @fig-isf-isf-exp-median show the survival
-function $\surv(t) = \ef{-2t}$ and the inverse survival function
-$\surv^{-1}(p) = -\log(p)/2$, each with the median survival point
-highlighted.
-
-::::{#fig-isf-exp-median layout-ncol=2}
-
-:::{#fig-isf-surv-exp-median}
-```{r}
-#| code-fold: true
-library(ggplot2)
-
-lam <- 2
-t_med <- log(2) / lam
-t_seq <- seq(0, 2, length.out = 500)
-p_seq <- seq(0.001, 0.999, length.out = 500)
-
-ggplot(
-  data.frame(t = t_seq, s = exp(-lam * t_seq)),
-  aes(x = t, y = s)
-) +
-  geom_line() +
-  geom_segment(
-    aes(x = 0, xend = t_med, y = 0.5, yend = 0.5),
-    linetype = "dashed", color = "red"
-  ) +
-  geom_segment(
-    aes(x = t_med, xend = t_med, y = 0, yend = 0.5),
-    linetype = "dashed", color = "red"
-  ) +
-  geom_point(aes(x = t_med, y = 0.5), color = "red", size = 3) +
-  labs(x = "t (years)", y = expression(S(t))) +
-  theme_bw()
-```
-
-Survival function $\surv(t)$.
 :::
 
-:::{#fig-isf-isf-exp-median}
-```{r}
-#| code-fold: true
-ggplot(
-  data.frame(p = p_seq, isf = -log(p_seq) / lam),
-  aes(x = p, y = isf)
-) +
-  geom_line() +
-  geom_segment(
-    aes(x = 0.5, xend = 0.5, y = 0, yend = t_med),
-    linetype = "dashed", color = "red"
-  ) +
-  geom_segment(
-    aes(x = 0, xend = 0.5, y = t_med, yend = t_med),
-    linetype = "dashed", color = "red"
-  ) +
-  geom_point(aes(x = 0.5, y = t_med), color = "red", size = 3) +
-  labs(x = "p", y = expression(S^{-1}*(p))) +
-  theme_bw()
-```
+{{< slidebreak >}}
 
-Inverse survival function $\surv^{-1}(p)$.
-:::
+{{< include _subfiles/intro-to-survival-analysis/_def-median-survival.qmd >}}
 
-For $\haz = 2$, the survival function $\surv(t)$ (@fig-isf-surv-exp-median) and
-inverse survival function $\surv^{-1}(p)$ (@fig-isf-isf-exp-median),
-with the median survival time $\surv^{-1}(0.5) \approx 0.347$ years
-shown as a red point.
-::::
+{{< slidebreak >}}
 
-In R:
+{{< include _subfiles/intro-to-survival-analysis/_exm-median-survival-exp.qmd >}}
 
-```{r}
-#| code-fold: show
-qexp(p = 0.5, rate = 2)
-```
+{{< slidebreak >}}
 
-:::
+{{< include _subfiles/intro-to-survival-analysis/_exm-median-survival-cure.qmd >}}
 
 {{< slidebreak >}}
 

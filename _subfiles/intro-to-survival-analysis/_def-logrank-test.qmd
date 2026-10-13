@@ -1,0 +1,23 @@
+:::{#def-logrank-test}
+#### Log-rank test
+
+The **log-rank test** (also called the Mantel-Cox test) for two groups
+is the hypothesis test of
+
+$$H_0:\; \surv_1(t) = \surv_2(t) \text{ for all } t \ge 0,$$
+
+where $\surv_g(t)$ is the survival function of group $g$
+(the $G = 2$ case of the null hypothesis in @sec-logrank-notation),
+that uses the log-rank statistic $\chi^2_{\text{LR}}$ (@eq-logrank-stat-2grp)
+as its test statistic
+and the $\chi^2_1$ distribution (@thm-logrank-two-group)
+as its large-sample reference distribution.
+Its p-value is
+
+$$p \eqdef \Pr\paren{X \ge \chi^2_{\text{LR}}}, \quad X \sim \chi^2_1,$$
+
+and at significance level $\alpha$ the test rejects $H_0$
+when $\chi^2_{\text{LR}}$ exceeds the $(1 - \alpha)$ quantile of $\chi^2_1$.
+
+[@kleinbaum2012survival, Chapter 2; @klein2003survival, Chapter 7]
+:::
