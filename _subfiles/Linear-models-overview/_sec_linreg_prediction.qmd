@@ -7,20 +7,20 @@ A new observation $Y^*$ at $\vxs$ follows the same linear model as the [training
 $$Y^* = \tp{(\vxs)}\vb + \eps^*$$
 
 where $\eps^* \sim \ndist{0, \sigma^2}$ is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of the training data
-(and therefore independent of $\hb$).
+(and therefore independent of $\eb$).
 
 The [predicted value](#def-predicted-value) of $Y^*$ is:
 
-$$\hat{Y}^* \eqdef \hat\mu(\vxs) = \tp{(\vxs)}\hb$$
+$$\hat{Y}^* \eqdef \hat\mu(\vxs) = \tp{(\vxs)}\eb$$
 
 We base the prediction interval on the **[prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error)** $Y^* - \hat{Y}^*$:
 
 $$
 \ba
 Y^* - \hat{Y}^*
-&= \tp{(\vxs)}\vb + \eps^* - \tp{(\vxs)}\hb
+&= \tp{(\vxs)}\vb + \eps^* - \tp{(\vxs)}\eb
 \\
-&= \eps^* - \tp{(\vxs)}(\hb - \vb)
+&= \eps^* - \tp{(\vxs)}(\eb - \vb)
 \ea
 $$
 
@@ -29,7 +29,7 @@ Assuming the model is correctly specified, the predictions will be [unbiased](ht
 $$
 \ba
 \E{Y^* - \hat{Y}^*}
-&= \E{\eps^*} - \tp{(\vxs)}\E{\hb - \vb}
+&= \E{\eps^*} - \tp{(\vxs)}\E{\eb - \vb}
 \\
 &= 0 - \tp{(\vxs)} \cdot 0
 \\
@@ -42,12 +42,12 @@ The [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-v
 $$
 \ba
 \Var{Y^* - \hat{Y}^*}
-&= \Var{\eps^* - \tp{(\vxs)}(\hb - \vb)}
+&= \Var{\eps^* - \tp{(\vxs)}(\eb - \vb)}
 \\
-&= \Var{\eps^*} + \Var{\tp{(\vxs)}\hb}
-\quad \text{(since } \eps^* \ind \hb\text{)}
+&= \Var{\eps^*} + \Var{\tp{(\vxs)}\eb}
+\quad \text{(since } \eps^* \ind \eb\text{)}
 \\
-&= \sigma^2 + \tp{(\vxs)}\Var{\hb}\vxs
+&= \sigma^2 + \tp{(\vxs)}\Var{\eb}\vxs
 \\
 &= \sigma^2 + \tp{(\vxs)}\paren{\sigma^2(\mX'\mX)^{-1}}\vxs
 \\
@@ -67,7 +67,7 @@ The variance (@eq-prediction-var) has two components:
 the variance of the future observation's own noise,
 which is irreducible.
 
-- $\Var{\dprodf{\vxs}{\hb}} = \tp{(\vxs)}\Var{\hb}\vxs$:
+- $\Var{\dprodf{\vxs}{\eb}} = \tp{(\vxs)}\Var{\eb}\vxs$:
 the variance due to estimating the mean $\dprodf{\vxs}{\vb}$ from the data.
 
 The first component is not present in the [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\hat\mu(\vxs)$,
@@ -84,22 +84,22 @@ $$
 = \sigma\sqrt{1 + \tp{(\vxs)}(\mX'\mX)^{-1}\vxs}
 $$
 
-Replacing $\sigma$ with the residual standard error $\hs$ gives the estimated standard error:
+Replacing $\sigma$ with the residual standard error $\es$ gives the estimated standard error:
 
 $$
 \HSE{Y^* - \hat{Y}^*}
-= \hs\sqrt{1 + \tp{(\vxs)}(\mX'\mX)^{-1}\vxs}
+= \es\sqrt{1 + \tp{(\vxs)}(\mX'\mX)^{-1}\vxs}
 $${#eq-prediction-se}
 
-Since $\eps^* \sim \ndist{0, \sigma^2}$ and $\hb \sim \ndist{\vb, \sigma^2(\mX'\mX)^{-1}}$
+Since $\eps^* \sim \ndist{0, \sigma^2}$ and $\eb \sim \ndist{\vb, \sigma^2(\mX'\mX)^{-1}}$
 are both normally distributed,
-and since $\eps^* \ind \hb$ (by independence of the new error term and parameter estimates),
-their difference $Y^* - \hat{Y}^* = \eps^* - \tp{(\vxs)}(\hb - \vb)$
+and since $\eps^* \ind \eb$ (by independence of the new error term and parameter estimates),
+their difference $Y^* - \hat{Y}^* = \eps^* - \tp{(\vxs)}(\eb - \vb)$
 is also normally distributed,
 with mean 0 and variance given by @eq-prediction-var.
 Standardizing by dividing by $\sigma\sqrt{1 + \tp{(\vxs)}(\mX'\mX)^{-1}\vxs}$
 yields a [standard normal](https://morrison-lab.github.io/pds/random-variables.html#def-std-normal) [random variable](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable).
-Replacing $\sigma$ with $\hs$,
+Replacing $\sigma$ with $\es$,
 which is estimated with $n-p$ degrees of freedom and is independent of $Y^* - \hat{Y}^*$,
 the standardized prediction error follows a $t$ distribution:
 

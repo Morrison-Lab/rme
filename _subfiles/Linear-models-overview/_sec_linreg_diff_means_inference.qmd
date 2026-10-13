@@ -3,10 +3,10 @@
 :::{#exr-ci-diff-means}
 
 Given
-a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hvb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$
 and
 a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
-$\hS \eqdef \widehat{\Covt}(\hvb)$,
+$\eS \eqdef \widehat{\Covt}(\evb)$,
 calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the difference in means
 comparing covariate patterns $\vx$ and $\vxs$:
 
@@ -87,15 +87,15 @@ By @sol-diff-means-as-lincom and [the variance of a linear combination](https://
 $$
 \ba
 \red{\Var{\widehat{\Delta \mu}}}
-&= \Var{\dprodf{\diffvx}{\hvb}}
+&= \Var{\dprodf{\diffvx}{\evb}}
 \\
-&= \pt{\diffvx}\Cov{\hvb}(\diffvx)
+&= \pt{\diffvx}\Cov{\evb}(\diffvx)
 \\
 &= \red{\pt{\diffvx}\Sigma(\diffvx)}
 \ea
 $${#eq-var-diff-means}
 
-where $\Sigma \eqdef \Covt(\hvb)$.
+where $\Sigma \eqdef \Covt(\evb)$.
 
 ---
 
@@ -112,7 +112,7 @@ $$
 \\
 &= \sumip\sumjp (\Delta x_i) \Sigma_{ij} (\Delta x_j)
 \\
-&= \red{\sumip\sumjp (x_i - x^*_i) \Covt(\hvb_i,\hvb_j) (x_j - x^*_j)}
+&= \red{\sumip\sumjp (x_i - x^*_i) \Covt(\evb_i,\evb_j) (x_j - x^*_j)}
 \ea
 $$
 
@@ -125,7 +125,7 @@ Combining @eq-var-diff-means and the Gauss-Markov theorem:
 #### Estimated variance and standard error of difference in means
 
 $$
-\orange{\hVar{\widehat{\Delta \mu}}} = \orange{\tp{\diffvx}\hat{\Sigma}(\diffvx)}
+\orange{\eVar{\widehat{\Delta \mu}}} = \orange{\tp{\diffvx}\hat{\Sigma}(\diffvx)}
 $${#eq-est-var-diff-means}
 
 $$

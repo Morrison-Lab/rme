@@ -1,6 +1,6 @@
 #### Interpreting the layout of the covariance matrix
 
-The [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) $\widehat{\Covt}(\hvb)$ is a $p \times p$ [symmetric matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-symmetric-matrix),
+The [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) $\widehat{\Covt}(\evb)$ is a $p \times p$ [symmetric matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-symmetric-matrix),
 where $p$ is the number of regression coefficients
 (including the intercept, if present).
 Its rows and columns correspond to those $p$ coefficient estimates.
@@ -14,7 +14,7 @@ so matrix row/column index $1$ corresponds to the intercept term when one is inc
 The general layout is:
 
 $$
-\widehat{\Covt}(\hvb) =
+\widehat{\Covt}(\evb) =
 \begin{array}{c|cccc}
   & \hat\b_0 & \hat\b_1 & \cdots & \hat\b_{p-1} \\
 \hline
@@ -46,7 +46,7 @@ $(\hat\b_0, \hat\b_M, \hat\b_A, \hat\b_{AM})$,
 the covariance matrix has the following layout:
 
 $$
-\Covt(\hvb) =
+\Covt(\evb) =
 \begin{array}{c|cccc}
   & \hat\b_0 & \hat\b_M & \hat\b_A & \hat\b_{AM} \\
 \hline
@@ -57,7 +57,7 @@ $$
 \end{array}
 $$
 
-The estimate of that matrix, $\hat{\Covt}\paren{\hb}$ is in @tbl-vcov.
+The estimate of that matrix, $\hat{\Covt}\paren{\eb}$ is in @tbl-vcov.
 
 :::{#tbl-vcov}
 
@@ -66,7 +66,7 @@ The estimate of that matrix, $\hat{\Covt}\paren{\hb}$ is in @tbl-vcov.
 bw_lm2 |> vcov()
 ```
 
-Covariance matrix of $\hvb$ for `birthweight` model [-@eq-BW-lm-interact] (with interaction term)
+Covariance matrix of $\evb$ for `birthweight` model [-@eq-BW-lm-interact] (with interaction term)
 
 :::
 

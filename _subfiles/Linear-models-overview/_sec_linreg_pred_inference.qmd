@@ -3,10 +3,10 @@
 :::{#exr-ci-mean}
 
 Given
-a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hvb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$
 and
 a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
-$\hS \eqdef \widehat{\Covt}(\hvb)$,
+$\eS \eqdef \widehat{\Covt}(\evb)$,
 calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the predicted mean
 $\mu(\vx) = \E{Y|\vX=\vx}$.
 
@@ -19,13 +19,13 @@ $\mu(\vx) = \E{Y|\vX=\vx}$.
 ::: notes
 
 By [the Gauss-Markov theorem](https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem),
-the [OLS](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) estimate $\hvb$ is the best linear [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimator of $\vb$.
+the [OLS](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) estimate $\evb$ is the best linear [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimator of $\vb$.
 A 95% confidence interval for $\mu(\vx)$
 can be constructed directly on the original scale:
 
 $$\hat\mu(\vx) \pm t_{n-p}(0.975) \cdot \HSE{\hat\mu(\vx)}$$
 
-where $\hat\mu(\vx) = \vx'\hvb$.
+where $\hat\mu(\vx) = \vx'\evb$.
 
 Unlike in logistic regression,
 no transformation is needed;
@@ -61,21 +61,21 @@ $$
 \sqrt{\red{\Var{\hat\mu(\vx)}}}
 $${#eq-se-sqrt-var-mean}
 
-By the definition $\hat\mu(\vx) = \vx'\hvb$
+By the definition $\hat\mu(\vx) = \vx'\evb$
 and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
 
 $$
 \ba
 \red{\Var{\hat\mu(\vx)}}
-&= \Var{\vx'\hvb}
+&= \Var{\vx'\evb}
 \\
-&= \vx'\Cov{\hvb}\vx
+&= \vx'\Cov{\evb}\vx
 \\
 &= \red{\tp{\vx}\Sigma\vx}
 \ea
 $${#eq-var-mean}
 
-where $\Sigma \eqdef \Covt(\hvb)$.
+where $\Sigma \eqdef \Covt(\evb)$.
 
 ---
 
@@ -90,7 +90,7 @@ $$
 \red{\tp{\vx}\Sigma\vx}
 &= \sumip\sumjp x_i \Sigma_{ij} x_j
 \\
-&= \red{\sumip\sumjp x_i \Covt(\hvb_i,\hvb_j) x_j}
+&= \red{\sumip\sumjp x_i \Covt(\evb_i,\evb_j) x_j}
 \ea
 $$
 
@@ -103,7 +103,7 @@ Combining @eq-var-mean and the Gauss-Markov theorem:
 #### Estimated variance and standard error of predicted mean
 
 $$
-\orange{\hVar{\hat\mu(\vx)}} = \orange{\tp{\vx}\hat{\Sigma}\vx}
+\orange{\eVar{\hat\mu(\vx)}} = \orange{\tp{\vx}\hat{\Sigma}\vx}
 $${#eq-est-var-mean}
 
 $$
@@ -127,7 +127,7 @@ our estimate of $\Sigma$.
 #### In R
 
 In R, `predict()` with `se.fit = TRUE`
-computes the estimated mean $\hat\mu(\vx) = \vx'\hvb$
+computes the estimated mean $\hat\mu(\vx) = \vx'\evb$
 and its estimated standard error for each covariate pattern:
 
 ```{r}
@@ -253,7 +253,7 @@ Therefore the estimated standard error of the predicted mean at age $a$ is:
 
 $$
 \HSE{\hat\mu(a)}
-= \hs \sqrt{\frac{1}{n} + \frac{(a - \bar{a})^2}{S_{AA}}}
+= \es \sqrt{\frac{1}{n} + \frac{(a - \bar{a})^2}{S_{AA}}}
 $${#eq-se-fitted-slr}
 
 Since $(a - \bar{a})^2 \geq 0$ and equals zero when $a = \bar{a}$,
