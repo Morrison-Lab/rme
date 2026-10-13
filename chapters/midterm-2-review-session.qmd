@@ -18,7 +18,8 @@ format:
 
 This chapter walks through the **most common mistakes** that students made on
 Midterm 2, which covered survival analysis and [Cox proportional hazards
-models](proportional-hazards-models.qmd#def-ph-model). Each section states a mistake, explains *why* it is wrong, and works
+models](proportional-hazards-models.qmd#def-ph-model).
+Each section states a mistake, explains *why* it is wrong, and works
 through the correct approach.
 
 The exam had two parts:
@@ -254,7 +255,8 @@ survived event-free until then. They **never** contribute to an event
 In this example, subjects \#3 and \#4 (censored at $14^+$ and $15^+$) are
 counted in the number at risk at $t = 10$ and $t = 14$, which is why those
 denominators are 7 and 6. After their censoring times they drop out of all
-later risk sets. This mechanism is exactly what lets [Kaplan-Meier](intro-to-survival-analysis.qmd#def-KM-estimator) use partial information
+later risk sets.
+This mechanism is exactly what lets [Kaplan-Meier](intro-to-survival-analysis.qmd#def-KM-estimator) use partial information
 from censored subjects instead of discarding them.
 :::
 
@@ -301,7 +303,8 @@ Several patterns lost the most points here:
   functions**, and the **assumptions**.
 - Listing assumption *names* without **showing where they are used**, or
   writing the math without naming the assumption.
-- Adding a spurious **"[baseline hazard](proportional-hazards-models.qmd#def-base-hazard) is exponential"** assumption. The Cox
+- Adding a spurious **"[baseline hazard](proportional-hazards-models.qmd#def-base-hazard) is exponential"** assumption.
+  The Cox
   model leaves the baseline hazard $\lambda_0(t)$ **unspecified**; assuming a
   parametric form is wrong.
 - Omitting one or more of the standalone distribution functions ([survival](intro-to-survival-analysis.qmd#def-surv-fn),
@@ -374,7 +377,8 @@ whole time — we never assume a shape for it.
   other covariates.
 - Omitting **[statistical significance](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant)** (whether the 95% [CI](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) excludes 1, or
   $p < 0.05$).
-- Calling the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) a **risk** or an **[odds ratio](binary-outcome-associations.qmd#def-OR)**. It is a ratio of
+- Calling the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) a **risk** or an **[odds ratio](binary-outcome-associations.qmd#def-OR)**.
+  It is a ratio of
   *hazards*, not of risks or [odds](binary-outcome-associations.qmd#def-odds).
 :::
 
@@ -416,7 +420,8 @@ table reporting the HR per **decade**), the errors were:
 
 ::: {.solution}
 On the **log** scale, the effect is linear: a change of $c$ units multiplies the
-[log-hazard](proportional-hazards-models.qmd#def-loghaz) by $c \cdot \beta$. So the hazard ratio for a $c$-unit change is
+[log-hazard](proportional-hazards-models.qmd#def-loghaz) by $c \cdot \beta$.
+So the hazard ratio for a $c$-unit change is
 
 $$HR(c) = \exp{c\,\beta} = \paren{\exp{\beta}}^c = HR^{\,c}$$
 
@@ -432,7 +437,8 @@ multiplication.
 
 ## Comparing two coefficients: variance of a *difference* {#sec-wald}
 
-*Exam reference: **Exercise 2.4** (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers; compute the [z-statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) and two-sided [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value).*
+*Exam reference: **Exercise 2.4** (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers;
+compute the [z-statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) and two-sided [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value).*
 
 ::: {.callout-warning}
 
@@ -452,7 +458,8 @@ $H_0: \beta_H = \beta_L$, the [standard error](https://morrison-lab.github.io/sd
 
 ::: {.solution}
 Work on the $\log(HR)$ (coefficient) scale, where the estimates are
-approximately [normal](https://morrison-lab.github.io/pds/random-variables.html#def-normal). The point estimate of the difference is
+approximately [normal](https://morrison-lab.github.io/pds/random-variables.html#def-normal).
+The point estimate of the difference is
 
 $$\widehat{\Delta} = \hat\beta_H - \hat\beta_L = 0.78 - 0.36 = 0.42$$
 
