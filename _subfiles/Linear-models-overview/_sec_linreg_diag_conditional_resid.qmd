@@ -51,23 +51,9 @@ $$\E{Y \mid X=x} = \b_0 + \b_1 x_1 + \cdots + \b_p x_p$$
 
 #### Scale-location plot
 
-::: notes
-We can also plot the square roots of the absolute values of the standardized residuals against the fitted values (@fig-bw-scale-loc).
-:::
+<!-- No slidebreak here: the heading shares its slide with the def-scale-location-plot div. -->
 
-```{r}
-#| label: fig-bw-scale-loc
-#| fig-cap: "Scale-location plot of `birthweight` data"
-autoplot(bw_lm2, which = 3, ncol = 1) |> print()
-```
-
-::: notes
-Here, the blue line doesn't need to be near 0, 
-but it should be flat. 
-If not, the residual variance $\sigma^2$ might not be constant, 
-and we might need to transform our outcome $Y$ 
-(or use a model that allows non-constant variance).
-:::
+{{< include _subfiles/Linear-models-overview/_sec_linreg_diag_scale_location.qmd >}}
 
 ---
 
