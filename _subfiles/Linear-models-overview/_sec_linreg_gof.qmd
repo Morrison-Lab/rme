@@ -27,7 +27,7 @@ $p$ is the number of estimated parameters
 and $n$ is the number of observations.
 :::
 
----
+{{< slidebreak >}}
 
 :::{#def-bic}
 #### Bayesian Information Criterion (BIC)
@@ -138,7 +138,7 @@ Unique covariate combinations in the `birthweight` data, with replicate counts
 
 :::
 
----
+{{< slidebreak >}}
 
 ::: {#def-replicates}
 #### Replicates
@@ -146,7 +146,7 @@ If a given covariate pattern has more than one observation in a dataset,
 those observations are called **replicates**.
 :::
 
----
+{{< slidebreak >}}
 
 ::: {#exm-replicate-bw}
 
@@ -156,7 +156,7 @@ In the `birthweight` dataset, there are 2 replicates of the combination "female,
 
 :::
 
----
+{{< slidebreak >}}
 
 ::: {#exr-replicate-bw}
 
@@ -166,7 +166,7 @@ Which covariate pattern(s) in the `birthweight` data has the most replicates?
 
 :::
 
----
+{{< slidebreak >}}
 
 ::: {#sol-replicate-bw}
 
@@ -186,11 +186,45 @@ bw_X_unique |> dplyr::filter(n == max(n))
 
 #### Saturated models {.smaller}
 
-The most complicated model we could fit would have one parameter (a mean) for each covariate pattern, plus a variance parameter:
+The most complicated model we could fit would have one parameter (a mean) for each covariate pattern, plus a variance parameter.
+For the `birthweight` data,
+each covariate pattern is a combination $(s, a)$ of sex $S$ and gestational age $A$
+that appears in the data,
+so this model has the structure:
+
+$$
+\ba
+Y \mid S=s, A=a &\sim \ndist{\mu_{s,a}, \sigma^2}
+\\
+\mu_{s,a} &\eqdef \E{Y \mid S=s, A=a}
+\ea
+$$
+
+with a separate mean parameter $\mu_{s,a}$ for each observed pattern $(s, a)$
+and a single variance parameter $\sigma^2$ shared by all patterns.
+
+::: notes
+Written as a linear model,
+the mean is a sum of indicator terms,
+one per observed pattern $(s', a')$,
+with no intercept:
+
+$$
+\E{Y \mid S=s, A=a}
+= \sum_{(s', a')} \mu_{s',a'} \indicp{s=s', a=a'}
+$$
+
+That model is what the R formula `weight ~ sex:age - 1` fits,
+after converting `age` to a factor (@tbl-bw-model-sat).
+Because exactly one indicator equals 1 for each observation,
+each coefficient $\mu_{s,a}$ is estimated by the sample mean of $Y$
+among the observations with pattern $(s, a)$.
+:::
+
+:::{#tbl-bw-model-sat}
 
 ```{r}
-#| label: tbl-bw-model-sat
-#| tbl-cap: "Saturated model for the `birthweight` data"
+#| code-fold: true
 lm_max <-
   bw |>
   mutate(age = factor(age)) |>
@@ -203,6 +237,10 @@ lm_max |>
   parameters() |>
   print_md()
 ```
+
+Saturated model for the `birthweight` data
+
+:::
 
 We call this model the **full**, **maximal**, or **saturated** model for this dataset.
 

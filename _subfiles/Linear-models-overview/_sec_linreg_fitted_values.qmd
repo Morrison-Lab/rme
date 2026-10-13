@@ -23,7 +23,7 @@ $$
 \end{aligned}
 $$
 
----
+{{< slidebreak >}}
 
 :::{#def-fitted-value}
 #### Fitted value
@@ -33,6 +33,54 @@ the **fitted value** of $y_i$ is
 the predicted value (see @def-predicted-value) of $y$ when $\vX=\vx_i$ using the estimated parameters $\eb$:
 
 $$\hat y_i \eqdef \eExpf{Y_i|\vX=\vx_i} = \tp{\vxi}\eb$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-fitted-vs-predicted}
+#### Fitted values versus predicted values
+
+Fitted values and predicted values use the same formula,
+but they answer different questions:
+
+- A **fitted value** $\hat y_i$ describes an observation that is already in the dataset.
+  Its outcome $y_i$ helped determine $\eb$,
+  so the model has already "seen" $y_i$.
+- A **predicted value** $\hat y$ describes a new or hypothetical observation
+  with covariate vector $\vx$,
+  whose outcome was not used to estimate $\eb$
+  (and $\vx$ need not match any $\vx_i$ in the data).
+
+Because each observation pulls the fitted line toward itself,
+fitted values tend to be closer to their observed outcomes
+than predicted values are to the outcomes of new observations.
+So the residuals $y_i - \hat y_i$
+tend to understate how far off the model's predictions will be for new data.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-fitted-vs-predicted-bw}
+#### Fitted versus predicted value for one `birthweight` observation
+
+Take the first observation in the `birthweight` data.
+Its fitted value comes from `bw_lm1`, which was estimated using that observation.
+To predict the same observation as if it were new,
+refit the model without it and predict at its covariate values:
+
+```{r}
+#| code-fold: false
+bw_lm1_data <- model.frame(bw_lm1)
+bw_lm1_drop1 <- update(bw_lm1, data = bw_lm1_data[-1, ])
+tibble(
+  observed = bw_lm1_data$weight[1],
+  fitted = fitted(bw_lm1)[[1]],
+  predicted_without_obs = predict(bw_lm1_drop1, newdata = bw_lm1_data[1, ])
+)
+```
+
+The fitted value is closer to the observed weight
+than the prediction from the model that never saw this observation.
 :::
 
 ---

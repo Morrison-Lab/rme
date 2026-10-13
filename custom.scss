@@ -136,3 +136,11 @@ body.quarto-dark .pagedtable-index-separator-left,
 body.quarto-dark .pagedtable-index-separator-right {
   color: #adb5bd;
 }
+
+/* Land a link target in the upper-middle of the view, not flush against the
+   fixed navbar, where it looks missed. scroll-margin-top applies to every
+   in-page jump and to the scrollIntoView() in anchor-landing.html. */
+:target,
+:is(h1, h2, h3, h4, h5, h6, div, section, figure, table, span)[id] {
+  scroll-margin-top: 30vh;
+}

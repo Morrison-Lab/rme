@@ -42,6 +42,9 @@ Let:
 - $\hat{\cs}(y) = \hat{\Pr}(T > y \mid T \geq y) = [r(y) - d(y)]/r(y)$: conditional survival factor;
 - $\hat{\haz}(y) = \hat{\Pr}(T = y \mid T \geq y) = \frac{d(y)}{r(y)} = 1 - \hat{\cs}(y)$: estimated discrete hazard;
 - $\eskmf{y} = \prod_{k:\, y_k \leq y} \hat{\cs}(y_k)$: Kaplan-Meier survival estimate.
+  At each exit time $y_k$, update the previous estimate:
+  $\eskmf{y_k} = \eskmf{y_{k-1}} \cdot \hat{\cs}(y_k)$,
+  with $\eskmf{y_0} \eqdef 1$.
 
 :::{#tbl-km-curve}
 ```{r}
@@ -70,11 +73,15 @@ km_curve |>
   mutate(
     hazard_math = paste0("\\frac{", events, "}{", at_risk, "}"),
     km_factor_math = paste0("\\frac{", at_risk - events, "}{", at_risk, "}"),
+    # update from the previous row's estimate,
+    # instead of re-multiplying every factor so far:
+    km_prev = dplyr::lag(round(km_surv_curve, 4)),
     km_surv_curve = paste0(
       "$",
-      purrr::map_chr(
-        row_number(),
-        \(i) paste(km_factor_math[seq_len(i)], collapse = " \\times ")
+      dplyr::if_else(
+        is.na(km_prev),
+        km_factor_math,
+        paste0(km_prev, " \\times ", km_factor_math)
       ),
       " = ",
       round(km_surv_curve, 4),
@@ -89,7 +96,7 @@ km_curve |>
       round(km_factor, 4), "$"
     )
   ) |>
-  select(-hazard_math, -km_factor_math) |>
+  select(-hazard_math, -km_factor_math, -km_prev) |>
   rename(
     `$y$`                        = Y,
     `$d(y)$`                     = events,
