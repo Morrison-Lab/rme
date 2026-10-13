@@ -17,15 +17,15 @@ format:
 # Introduction
 
 This chapter walks through the **most common mistakes** that students made on
-Midterm 2, which covered survival analysis and Cox proportional hazards
-models. Each section states a mistake, explains *why* it is wrong, and works
+Midterm 2, which covered survival analysis and [Cox proportional hazards
+models](proportional-hazards-models.qmd#def-ph-model). Each section states a mistake, explains *why* it is wrong, and works
 through the correct approach.
 
 The exam had two parts:
 
-- **Part 1** (Kaplan-Meier and Nelson-Aalen estimators) used a small data set
+- **Part 1** ([Kaplan-Meier](intro-to-survival-analysis.qmd#def-KM-estimator) and [Nelson-Aalen estimators](intro-to-survival-analysis.qmd#def-na-cuhaz-est)) used a small data set
   of survival times: `10, 14, 14+, 15+, 18, 21, 25` months (the `+` marks
-  censored observations).
+  [censored](intro-to-survival-analysis.qmd#def-right-censor) observations).
 
 - **Part 2** (Cox proportional hazards regression) used a model fit to
   $n = 3{,}142$ men from the Western Collaborative Group Study (WCGS), relating
@@ -90,9 +90,9 @@ Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 
 ## Common mistake
 
-Reducing the number at risk by **one** at every row, regardless of how many
+Reducing the [number at risk](intro-to-survival-analysis.qmd#def-number-at-risk) by **one** at every row, regardless of how many
 subjects actually left the study. With this mistake, the number at risk after
-the two censored subjects (at $t = 14^+$ and $t = 15^+$) was computed as $5$
+the two [censored](intro-to-survival-analysis.qmd#def-right-censor) subjects (at $t = 14^+$ and $t = 15^+$) was computed as $5$
 instead of $4$.
 :::
 
@@ -113,7 +113,7 @@ Track the cohort of 7:
 | 25   | 1 death      | 1 |
 
 At $t = 14$, one subject dies *and* a different subject is censored (the
-`14+`), so **two** subjects leave the risk set; the count drops from 6 to 4,
+`14+`), so **two** subjects leave the [risk set](intro-to-survival-analysis.qmd#def-risk-set); the count drops from 6 to 4,
 not from 6 to 5. Every subject who has an event **or** is censored is removed
 from all later risk sets.
 :::
@@ -130,16 +130,16 @@ Two versions of this error were common:
 
 1. Computing a running sum of arbitrary quantities (e.g. summing survival
    probabilities, or summing $1 - \hat\lambda_j$) instead of summing the
-   hazards $\hat\lambda_j = d_j / n_j$.
+   [hazards](intro-to-survival-analysis.qmd#def-hazard) $\hat\lambda_j = d_j / n_j$.
 
-2. Computing the cumulative hazard correctly but then forgetting the final
+2. Computing the [cumulative hazard](intro-to-survival-analysis.qmd#def-cuhaz) correctly but then forgetting the final
    step, $\hsnaaf{t} = \exp{-\hat\Lambda(t)}$, and reporting the
    cumulative hazard itself (or the KM product) as the Nelson-Aalen survival
    estimate.
 :::
 
 ::: {.solution}
-The Nelson-Aalen estimator builds the **cumulative hazard** by adding up the
+The [Nelson-Aalen estimator](intro-to-survival-analysis.qmd#def-na-cuhaz-est) builds the **cumulative hazard** by adding up the
 instantaneous hazard contributions at each event time:
 
 $$\hat\Lambda(t) = \sum_{j: t_j \le t} \frac{d_j}{n_j}$$
@@ -155,8 +155,8 @@ $$\hat\Lambda(10) = \frac{1}{7} = 0.143,
 \qquad
 \hsnaaf{10} = \exp{-0.143} = 0.867$$
 
-Contrast this with Kaplan-Meier, which multiplies conditional survival
-probabilities:
+Contrast this with [Kaplan-Meier](intro-to-survival-analysis.qmd#def-KM-estimator), which multiplies [conditional survival
+probabilities](intro-to-survival-analysis.qmd#def-kappa):
 
 $$\hskmf{t} = \prod_{j: t_j \le t}\paren{1 - \frac{d_j}{n_j}},
 \qquad
@@ -201,7 +201,7 @@ Give the actual numbers, not just "it's flat."
 
 ## Common mistake
 
-Estimating the median by fitting an exponential model
+Estimating the median by fitting an [exponential](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) model
 ($\hat\lambda = \text{events} / \text{total follow-up}$, then
 $\hat{\text{E}}[T] = 1/\hat\lambda$). That computes an exponential-model
 **mean**, not the nonparametric **median**, and answers a different question.
@@ -228,7 +228,7 @@ We can confirm this in R:
 quantile(KM_est, p = 0.5)$quantile
 ```
 
-No distributional assumption (exponential or otherwise) is used: the Kaplan–Meier estimator is a
+No distributional assumption (exponential or otherwise) is used: the [Kaplan–Meier estimator](intro-to-survival-analysis.qmd#def-KM-estimator) is a
 nonparametric read-off of the estimated curve.
 :::
 
@@ -246,7 +246,7 @@ from the analysis entirely.
 :::
 
 ::: {.solution}
-A censored subject contributes to the **risk-set denominators** ($n_j$) for
+A censored subject contributes to the **[risk-set](intro-to-survival-analysis.qmd#def-risk-set) denominators** ($n_j$) for
 every event time up to and including their censoring time, because we know they
 survived event-free until then. They **never** contribute to an event
 **numerator** ($d_j$), because no event was observed for them.
@@ -254,7 +254,7 @@ survived event-free until then. They **never** contribute to an event
 In this example, subjects \#3 and \#4 (censored at $14^+$ and $15^+$) are
 counted in the number at risk at $t = 10$ and $t = 14$, which is why those
 denominators are 7 and 6. After their censoring times they drop out of all
-later risk sets. This mechanism is exactly what lets Kaplan-Meier use partial information
+later risk sets. This mechanism is exactly what lets [Kaplan-Meier](intro-to-survival-analysis.qmd#def-KM-estimator) use partial information
 from censored subjects instead of discarding them.
 :::
 
@@ -277,7 +277,7 @@ overweight ($B$), and high cholesterol ($C$).
 
 : Cox PH regression for the WCGS CHD data {#tbl-wcgs}
 
-The exam also provided the estimated covariance matrix of the coefficient
+The exam also provided the estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) of the coefficient
 estimates (on the $\log(HR)$ scale). The relevant entries are:
 
 $$\V(\hat\beta_L) = 0.024840,
@@ -297,15 +297,15 @@ $$\V(\hat\beta_L) = 0.024840,
 Several patterns lost the most points here:
 
 - Treating the question as "interpret the coefficients" and writing only the
-  linear predictor, omitting the **likelihood**, the **distribution
+  linear predictor, omitting the **[likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik)**, the **distribution
   functions**, and the **assumptions**.
 - Listing assumption *names* without **showing where they are used**, or
   writing the math without naming the assumption.
-- Adding a spurious **"baseline hazard is exponential"** assumption. The Cox
+- Adding a spurious **"[baseline hazard](proportional-hazards-models.qmd#def-base-hazard) is exponential"** assumption. The Cox
   model leaves the baseline hazard $\lambda_0(t)$ **unspecified**; assuming a
   parametric form is wrong.
-- Omitting one or more of the standalone distribution functions (survival,
-  density, hazard, log-hazard, cumulative hazard).
+- Omitting one or more of the standalone distribution functions ([survival](intro-to-survival-analysis.qmd#def-surv-fn),
+  [density](https://morrison-lab.github.io/pds/random-variables.html#def-pdf), [hazard](intro-to-survival-analysis.qmd#def-hazard), [log-hazard](proportional-hazards-models.qmd#def-loghaz), [cumulative hazard](intro-to-survival-analysis.qmd#def-cuhaz)).
 :::
 
 ::: {.solution}
@@ -319,7 +319,7 @@ $$\Lik \eqdef \p(\tilde Y = \tilde y, \tilde D = \tilde d \mid \mathbf X = \math
 **Marginal likelihood contribution of observation $i$:**
 $$\Lik_i \eqdef \p(Y_i = y_i, D_i = d_i \mid \tilde X_i = \tilde x_i)$$
 
-***Independent-observations assumption*** (used to factor the likelihood):
+***[Independent](https://morrison-lab.github.io/pds/independence.html#def-indpt)-observations assumption*** (used to factor the likelihood):
 $$\Lik = \prod_{i=1}^n \Lik_i$$
 
 ***Non-informative censoring assumption*** (used so each contribution reduces to
@@ -340,19 +340,19 @@ $$\cumhaz(t \mid \tilde x) \eqdef \int_0^t \haz(u \mid \tilde x)\,du = -\log\sur
 
 $$\loghaz(t \mid \tilde x) \eqdef \log\haz(t \mid \tilde x)$$
 
-***Proportional-hazards assumption*** (used to split the hazard into a baseline
+***[Proportional-hazards](proportional-hazards-models.qmd#def-pha) assumption*** (used to split the hazard into a baseline
 that depends only on time and a factor that depends only on covariates):
 $$\haz(t \mid \tilde x) = \lambda_0(t)\cdot\theta(\tilde x)$$
 where $\lambda_0(t)$ is the **unspecified** baseline hazard.
 
-***Logarithmic-link assumption*** (used to make the covariate factor a function
+***Logarithmic-[link](Intro-to-GLMs.qmd#sec-why-link) assumption*** (used to make the covariate factor a function
 of a linear predictor):
 $$\loghaz(t \mid \tilde x) = \loghaz_0(t) + \Delta\loghaz(\tilde x),
 \qquad
 \theta(\tilde x) = \exp{\Delta\loghaz(\tilde x)}$$
 
 ***Linear functional-form assumption*** (used to write the covariate term as a
-linear combination):
+[linear combination](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination)):
 $$\Delta\loghaz(\tilde x) = \tilde x \cdot \tilde\beta
 = \beta_L\, l + \beta_H\, h + \beta_A\, a + \beta_P\, p + \beta_B\, b + \beta_C\, c$$
 
@@ -372,14 +372,14 @@ whole time — we never assume a shape for it.
   higher/lower hazard") or the **reference group**.
 - Forgetting to say the estimate is **adjusted for / holding constant** the
   other covariates.
-- Omitting **statistical significance** (whether the 95% CI excludes 1, or
+- Omitting **[statistical significance](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant)** (whether the 95% [CI](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) excludes 1, or
   $p < 0.05$).
-- Calling the hazard ratio a **risk** or an **odds ratio**. It is a ratio of
-  *hazards*, not of risks or odds.
+- Calling the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) a **risk** or an **[odds ratio](binary-outcome-associations.qmd#def-OR)**. It is a ratio of
+  *hazards*, not of risks or [odds](binary-outcome-associations.qmd#def-odds).
 :::
 
 ::: {.solution}
-A complete interpretation has four parts: magnitude, reference group,
+A complete interpretation has four parts: magnitude, [reference group](https://morrison-lab.github.io/sds/data.html#def-reference-level),
 adjustment, and significance. For the smoking effect in @tbl-wcgs:
 
 > Adjusting for age, behavior pattern, overweight, and cholesterol, **light
@@ -406,7 +406,7 @@ reference, rather than lumping them together.
 
 ## Common mistake
 
-For the hazard ratio associated with a **7.5-year** increase in age (with the
+For the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) associated with a **7.5-year** increase in age (with the
 table reporting the HR per **decade**), the errors were:
 
 - Multiplying: $1.94 \times 0.75 = 1.46$. **Wrong** — the HR for a multi-unit
@@ -416,7 +416,7 @@ table reporting the HR per **decade**), the errors were:
 
 ::: {.solution}
 On the **log** scale, the effect is linear: a change of $c$ units multiplies the
-log-hazard by $c \cdot \beta$. So the hazard ratio for a $c$-unit change is
+[log-hazard](proportional-hazards-models.qmd#def-loghaz) by $c \cdot \beta$. So the hazard ratio for a $c$-unit change is
 
 $$HR(c) = \exp{c\,\beta} = \paren{\exp{\beta}}^c = HR^{\,c}$$
 
@@ -432,32 +432,32 @@ multiplication.
 
 ## Comparing two coefficients: variance of a *difference* {#sec-wald}
 
-*Exam reference: **Exercise 2.4** (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers; compute the z-statistic and two-sided p-value.*
+*Exam reference: **Exercise 2.4** (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers; compute the [z-statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) and two-sided [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value).*
 
 ::: {.callout-warning}
 
 ## Common mistake
 
 This mistake was the **single most consequential Part 2 error**. To test
-$H_0: \beta_H = \beta_L$, the standard error of $\hat\beta_H - \hat\beta_L$ was computed incorrectly in several ways:
+$H_0: \beta_H = \beta_L$, the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of $\hat\beta_H - \hat\beta_L$ was computed incorrectly in several ways:
 
-- Using a **single covariance entry** $\Covt(\hat\beta_L, \hat\beta_H)$ as the
-  variance.
+- Using a **single [covariance](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov) entry** $\Covt(\hat\beta_L, \hat\beta_H)$ as the
+  [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance).
 - **Adding** $2\,\Covt$ instead of **subtracting** it.
 - Plugging in the **hazard ratios** ($2.18$, $1.43$) instead of the
   **coefficients** ($0.78$, $0.36$) in the numerator.
-- Guessing a value for $z$ because the variance-of-a-difference formula was not
+- Guessing a value for $z$ because the [variance-of-a-difference formula](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom) was not
   on the formula sheet.
 :::
 
 ::: {.solution}
 Work on the $\log(HR)$ (coefficient) scale, where the estimates are
-approximately normal. The point estimate of the difference is
+approximately [normal](https://morrison-lab.github.io/pds/random-variables.html#def-normal). The point estimate of the difference is
 
 $$\widehat{\Delta} = \hat\beta_H - \hat\beta_L = 0.78 - 0.36 = 0.42$$
 
 The variance of a **difference** of two estimates uses **all three** relevant
-entries of the covariance matrix:
+entries of the [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x):
 
 $$\V(\hat\beta_H - \hat\beta_L)
 = \V(\hat\beta_H) + \V(\hat\beta_L) - 2\,\Covt(\hat\beta_H, \hat\beta_L)$$
@@ -482,13 +482,13 @@ c(diff = diff, se = se_diff, z = z, p_value = p_value) |> round(4)
 ```
 
 So $z = 0.42 / 0.160 = 2.62$, two-sided $p = 0.0088$. We **reject** $H_0$: the
-hazard of CHD differs significantly between heavy and light smokers, holding
+hazard of CHD differs [significantly](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant) between heavy and light smokers, holding
 the other covariates constant.
 
 ::: {.callout-note}
 Compare with the **naive** standard error that ignores the covariance,
 $\sqrt{\V(\hat\beta_H) + \V(\hat\beta_L)} = 0.216$. Because $\hat\beta_H$ and
-$\hat\beta_L$ are *positively* correlated, subtracting $2\,\Covt$ makes the
+$\hat\beta_L$ are *positively* [correlated](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation), subtracting $2\,\Covt$ makes the
 correct SE (0.160) **smaller**, which sharpens the test. Using a single
 covariance cell as the variance gave a wildly wrong SE and an absurd $z$.
 :::
@@ -496,7 +496,7 @@ covariance cell as the variance gave a wildly wrong SE and an absurd $z$.
 
 ## A confidence interval for a hazard ratio: build it on the log scale, then exponentiate {#sec-ci-hr}
 
-*Exam reference: **Exercise 2.5** (2 points) — a 95% confidence interval for the hazard ratio comparing heavy to light smokers.*
+*Exam reference: **Exercise 2.5** (2 points) — a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) comparing heavy to light smokers.*
 
 ::: {.callout-warning}
 
@@ -508,7 +508,7 @@ covariance cell as the variance gave a wildly wrong SE and an absurd $z$.
 - Building the log-scale interval correctly but **never exponentiating**, then
   reporting a log-scale interval as if it were the HR (sometimes even declaring
   "significant" while the reported interval contained 1).
-- Reusing the wrong SE from the Wald test in @sec-wald.
+- Reusing the wrong SE from the [Wald test](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) in @sec-wald.
 :::
 
 ::: {.solution}
