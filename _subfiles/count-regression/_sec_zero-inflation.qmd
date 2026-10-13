@@ -1,7 +1,7 @@
 
 
-We assume a latent (unobserved) binary variable, $Z$,
-which we model using logistic regression:
+We assume a latent (unobserved) [binary variable](https://morrison-lab.github.io/sds/data.html#def-binary), $Z$,
+which we model using [logistic regression](logistic-regression.qmd#def-logistic-regression):
 
 $$
 \ba
@@ -12,7 +12,7 @@ $$
 $$
 
 The model makes $Z$ depend on the covariates alone,
-not on the exposure magnitude $T$,
+not on the [exposure magnitude](https://morrison-lab.github.io/pds/distributions.html#def-exposure) $T$,
 so $\P(Z=1 \mid \vX=\vx, T=t) = \pi(\vx)$ for every $t$
 --- that is, $Z \ind T \mid \vX$.
 
@@ -22,7 +22,7 @@ regardless of $\vX$ and $T$:
 
 $$\P(Y=0 \mid Z=1, \vX=\vx, T=t) = 1$$
 
-Otherwise (if $Z=0$), $Y$ follows a Poisson distribution,
+Otherwise (if $Z=0$), $Y$ follows a [Poisson distribution](https://morrison-lab.github.io/pds/distributions.html#def-poisson),
 conditional on $\vX$ and $T$,
 as in a standard Poisson regression model.
 
@@ -35,7 +35,7 @@ which is strictly positive whenever $t > 0$.
 
 Even though we never observe $Z$,
 we can estimate the parameters $\gamma_0, \dots, \gamma_p$
-via maximum likelihood:
+via [maximum likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle):
 
 $$
 \ba

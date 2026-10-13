@@ -1,19 +1,19 @@
 Another way to handle overdispersion ---
-rather than switching to the negative binomial distributional family ---
+rather than switching to the [negative binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) distributional family ---
 is the quasipoisson approach.
 It assumes less *model structure* than the negative binomial does:
 rather than committing to a complete probability distribution
-and estimating by maximum likelihood,
+and estimating by [maximum likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 it assumes only the mean-variance relationship
 $\Var{Y \mid \vX=\vx, T=t} = \theta \mu(\vx, t)$,
 for a dispersion parameter $\theta$.
 It pairs that single assumption with a moment-based *inference method*,
-estimating $\theta$ from the Pearson residuals.
+estimating $\theta$ from the [Pearson residuals](Intro-to-GLMs.qmd#def-pearson-residual-glm).
 
 While point estimates for regression coefficients $\evb$
 remain identical to standard Poisson regression,
-their estimated standard errors are scaled by $\sqrt{\eth}$.
-This approach provides valid standard errors and $p$-values
+their estimated [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) are scaled by $\sqrt{\eth}$.
+This approach provides valid standard errors and [$p$-values](https://morrison-lab.github.io/sds/inference.html#def-p-value)
 when overdispersion is multiplicative.
 That validity comes from the assumed mean-variance relationship itself.
 A sandwich (robust) variance estimator also uses the residuals,
@@ -41,8 +41,8 @@ to the sample sizes many epidemiological studies actually have.
 
 The quasipoisson approach is simpler to implement
 than the negative binomial model,
-but provides less information than a full negative binomial likelihood:
+but provides less information than a full negative binomial [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik):
 it does not specify a full parametric distribution
-for prediction intervals or model likelihood comparisons.
+for [prediction intervals](https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval) or model likelihood comparisons.
 
 See `?quasipoisson` in R for implementation details.

@@ -3,11 +3,11 @@
 ## Bias–variance trade-off and overfitting {#sec-pred-sel-bias-var}
 
 When building a prediction model,
-adding more predictors generally **reduces bias**:
+adding more predictors generally **reduces [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias)**:
 the model better captures the true relationships in the population.
-But it also **increases variance**:
+But it also **increases [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance)**:
 more parameters to estimate means more sampling variability,
-and the model can start to fit noise in the training data.
+and the model can start to fit noise in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set).
 
 :::{#def-overfitting}
 #### Overfitting
@@ -20,7 +20,7 @@ relative to the effective sample size.
 :::
 
 A good prediction model minimizes the sum of bias and variance —
-the **bias–variance trade-off**.
+the **[bias–variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff)**.
 Adding a predictor helps only if
 the reduction in bias outweighs the increase in variance.
 
@@ -28,7 +28,7 @@ the reduction in bias outweighs the increase in variance.
 
 @tbl-overfit-example gives a simple numerical example.
 A parsimonious model and an intentionally overfit model
-are both trained on the same development set.
+are both trained on the same [development set](https://morrison-lab.github.io/sds/model-validation.html#def-training-set).
 The overfit model adds many noise predictors
 that have no true relationship with LDL.
 
@@ -100,29 +100,29 @@ lower training error but worse validation error.
 :::
 
 In this example,
-the overfit model usually has lower training RMSE
+the overfit model usually has lower training [RMSE](https://morrison-lab.github.io/sds/estimation.html#def-rmse)
 but higher validation RMSE,
-which is the defining pattern of overfitting.
+which is the defining pattern of [overfitting](#def-overfitting).
 
 ## Measures of prediction error {#sec-pred-sel-pe}
 
-To select a model that minimizes prediction error,
+To select a model that minimizes [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
 we need a measure of PE that does not simply increase
 with the number of predictors.
 
-For **continuous outcomes**:
+For **[continuous outcomes](https://morrison-lab.github.io/sds/data.html#def-continuous-var)**:
 
 - **Adjusted $R^2$** penalizes the number of predictors:
 $$\bar R^2 = 1 - \frac{n-1}{n-p-1}(1 - R^2)$$
 Adding a variable increases $\bar R^2$ only if it reduces
 the residual variance more than the penalty.
 
-- **AIC** and **BIC** impose steeper penalties:
+- **[AIC](Linear-models-overview.qmd#def-aic)** and **[BIC](Linear-models-overview.qmd#def-bic)** impose steeper penalties:
 $$\text{AIC} = -2\est{\llik} + 2p, \quad
   \text{BIC} = -2\est{\llik} + p\log n$$
 (see @sec-pred-sel-aic-bic).
 
-For **binary outcomes**,
+For **[binary outcomes](https://morrison-lab.github.io/sds/data.html#def-binary)**,
 common measures include
 **balanced accuracy** and the **C-statistic**.
 
@@ -168,16 +168,16 @@ $$
 {N_{\text{comparable}}},
 $$
 where pairs are comparable when one subject is observed to fail
-before the other is known to fail or be censored,
+before the other is known to fail or be [censored](intro-to-survival-analysis.qmd#def-right-censor),
 and concordance means the subject with earlier failure
-has the higher predicted risk score.
+has the higher predicted [risk score](proportional-hazards-models.qmd#def-risk-score).
 
 ## Optimism and cross-validation {#sec-pred-sel-cv}
 
 Naive estimates of PE evaluated on the same data used
 to fit the model are **optimistic**:
 they overstate the model's ability to predict new data.
-For example, $R^2$ always increases when a predictor is added,
+For example, [$R^2$](https://morrison-lab.github.io/sds/correlation-regression.html#def-r-squared) always increases when a predictor is added,
 even if the predictor is pure noise.
 
 **Cross-validation** provides a less optimistic estimate of PE
@@ -192,7 +192,7 @@ In **$k$-fold cross-validation**:
 1. The data are randomly divided into $k$ equal-sized subsets ("folds").
 2. For each fold $i = 1, \ldots, k$:
    - Fit the model using all data *except* fold $i$.
-   - Compute predicted values for the observations in fold $i$.
+   - Compute [predicted values](Linear-models-overview.qmd#def-predicted-value) for the observations in fold $i$.
 3. Compute a summary PE measure across all folds.
 
 Values of $k = 5$ or $k = 10$ are typical.
@@ -200,27 +200,27 @@ Values of $k = 5$ or $k = 10$ are typical.
 :::
 
 Using cross-validation to select predictors avoids overfitting
-because the predictive performance is evaluated on held-out data
+because the predictive performance is evaluated on [held-out data](https://morrison-lab.github.io/sds/model-validation.html#def-held-out-set)
 that did not influence the model fit.
 
 ## Cross-validation for LASSO in the HERS data {#sec-pred-sel-cv-hers}
 
-The LASSO (see @sec-pred-sel-lasso) uses cross-validation
-to select the penalty parameter $\lambda$
+The LASSO (see @sec-pred-sel-lasso) uses [cross-validation](#def-kfold)
+to select the [penalty parameter](https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter) $\lambda$
 that minimizes prediction error.
 The `cv.glmnet` function implements 10-fold cross-validation,
 fitting the LASSO for a grid of $\lambda$ values and evaluating
-mean squared error on held-out folds.
+[mean squared error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-mse) on held-out folds.
 The fitted object provides two key $\lambda$ values:
 `lambda.min` (minimizes CV mean squared error) and
-`lambda.1se` (largest $\lambda$ within one standard error of the minimum).
+`lambda.1se` (largest $\lambda$ within [one standard error](https://morrison-lab.github.io/sds/model-validation.html#def-one-se-rule) of the minimum).
 See @sec-pred-sel-lasso for the HERS example
 with coefficient paths and CV results.
 
 ::: notes
 
 The two recommended values of $\lambda$ represent different
-points on the bias–variance trade-off:
+points on the [bias–variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff):
 
 - `lambda.min` minimizes cross-validated MSE,
   yielding a model with good predictive accuracy.
@@ -234,9 +234,9 @@ points on the bias–variance trade-off:
 ## Development and validation sets {#sec-pred-sel-split}
 
 The most transparent approach to measuring prediction error
-is to split the data into a **development set**
+is to split the data into a **[development set](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)**
 (used to fit the model)
-and a **validation set**
+and a **[validation set](https://morrison-lab.github.io/sds/model-validation.html#def-validation-set)**
 (used only to evaluate predictions).
 
 ::: notes

@@ -30,11 +30,11 @@ This content is adapted from:
 David Rocke's Epi 204 lecture
 [*Poisson Regression*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-22.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-8%20Poisson%20Regression.pdf))
-covers Poisson regression with a log link and a population offset,
+covers Poisson regression with a log link and a population [offset](https://morrison-lab.github.io/pds/distributions.html#def-offset),
 rate ratios,
 residual diagnostics,
 goodness of fit,
-and overdispersion,
+and [overdispersion](#def-overdispersion),
 using Danish lung cancer incidence data
 [@rocke2021epi204].
 :::
@@ -46,8 +46,8 @@ Richard McElreath's
 accompanies Chapters 10 and 11 of @statrethink2e,
 which cover generalized linear models for binary and count outcomes,
 including Poisson regression.
-The lecture fits these models using Bayesian inference
-rather than the maximum likelihood estimation used in this chapter
+The lecture fits these models using [Bayesian inference](https://morrison-lab.github.io/sds/bayesian-inference.html#def-bayesian-paradigm)
+rather than the [maximum likelihood estimation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) used in this chapter
 [@mcelreath2026rethinking].
 :::
 
@@ -108,18 +108,18 @@ Most notably,
 the [negative binomial model](https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist).
 :::
 
-Diagnostics that reveal overdispersion are telling us
+Diagnostics that reveal [overdispersion](#def-overdispersion) are telling us
 that the data violate the standard Poisson assumption
 
 $$\Var{Y \mid \vX=\vx, T=t} = \E{Y \mid \vX=\vx, T=t}$$
 
-Ignoring that violation leads to artificially narrow standard errors
+Ignoring that violation leads to artificially narrow [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE)
 and inflated type I error rates.
 The [negative binomial distribution](https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist)
-serves as a natural generalization of the Poisson distribution
+serves as a natural generalization of the [Poisson distribution](https://morrison-lab.github.io/pds/distributions.html#def-poisson)
 for count outcomes.
 It introduces an overdispersion parameter $\rho$
-that allows the conditional variance to exceed the mean
+that allows the [conditional variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance) to exceed the mean
 ($\Var{Y \mid \vX=\vx, T=t} = \mu(\vx, t) + \mu(\vx, t)^2 / \rho$).
 We still model $\mu(\vx, t) = t \exp{\eta(\vx)}$ as before,
 preserving the rate-ratio interpretation for regression coefficients.

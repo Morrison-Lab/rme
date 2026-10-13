@@ -249,12 +249,12 @@ We treat **homelessness as the exposure of interest**
 and ask how it affects the number of shared syringes —
 following @vittinghoff2e [§8.3.1], who model this outcome on `homeless`.
 
-Injection frequency `nivdu` is a **mediator**:
+Injection frequency `nivdu` is a **[mediator](causal-inference.qmd#def-mediator)**:
 a shared syringe is necessarily one of the injections,
 so homelessness can raise sharing partly by raising how often a person injects.
 Because `nivdu` lies *on* the causal path from `homeless` to `shared_syr`,
 we do **not** adjust for it
-(neither as a covariate nor as an offset);
+(neither as a covariate nor as an [offset](https://morrison-lab.github.io/pds/distributions.html#def-offset));
 doing so would block that path and estimate only a partial effect.
 We want the **total** effect of homelessness on needle-sharing.
 
@@ -262,7 +262,7 @@ Because the study is **cross-sectional**,
 the remaining covariates are measured at the same interview as the exposure,
 so we cannot order them causally relative to `homeless` or to one another.
 We draw their mutual associations as non-directional (bidirected) edges
-and adjust for the measured covariates to control the confounding they carry.
+and adjust for the measured covariates to control the [confounding](causal-inference.qmd#def-confounding-obs) they carry.
 A single fitted coefficient is therefore an **adjusted association**,
 not an isolated causal effect.
 
@@ -393,7 +393,7 @@ Following @vittinghoff2e [§8.3.1],
 we take **homelessness as the exposure of interest**
 and ask how it affects the **count** of shared syringes,
 using a Poisson regression (log link) rather than modeling a rate.
-The remaining covariates enter as adjustments for confounding
+The remaining covariates enter as adjustments for [confounding](causal-inference.qmd#def-confounding-obs)
 (@fig-needles-dag): because the study is cross-sectional,
 they are mutually associated with homelessness through shared, unobserved
 earlier circumstances, which we cannot resolve into a causal order.
@@ -402,7 +402,7 @@ earlier circumstances, which we cannot resolve into a causal order.
 A Poisson *rate* model would add `offset(log(nivdu))`,
 forcing the expected count to be proportional to injection frequency
 (the coefficient of `log(nivdu)` fixed at exactly 1).
-Why not use `nivdu` as an offset here?
+Why not use `nivdu` as an [offset](https://morrison-lab.github.io/pds/distributions.html#def-offset) here?
 :::
 
 {{< slidebreak >}}
@@ -410,7 +410,7 @@ Why not use `nivdu` as an offset here?
 :::{#sol-nivdu-offset}
 We avoid an offset here for two reasons:
 
-- **`nivdu` is a mediator, not an exposure window.**
+- **`nivdu` is a [mediator](causal-inference.qmd#def-mediator), not an exposure window.**
 An offset is appropriate when its variable is a known denominator —
 person-time or population at risk — that is external to the causal
 question. Injection frequency is instead on the causal path from
@@ -519,9 +519,9 @@ $\exp{\b_j}$ is the multiplicative change in the expected number of
 shared syringes per one-unit increase in $x_j$,
 holding the other covariates fixed.
 Our **focal estimate is the IRR for homelessness**;
-the remaining coefficients are adjustments for confounding,
+the remaining coefficients are adjustments for [confounding](causal-inference.qmd#def-confounding-obs),
 not effects of separate interest.
-Because we do not condition on the mediator `nivdu`,
+Because we do not condition on the [mediator](causal-inference.qmd#def-mediator) `nivdu`,
 the homelessness IRR is a *total* effect.
 The fitted ratios are reported in @tbl-needles-pois.
 
@@ -589,9 +589,9 @@ count by `r round(irr[["hplsns"]], 2)`,
 adjusting for the other covariates.
 
 ::: {.callout-warning title="Overdispersion caveat"}
-These data are highly overdispersed — the variance far exceeds the mean —
-so the model-based Poisson standard errors are too small.
+These data are highly [overdispersed](#def-overdispersion) — the variance far exceeds the mean —
+so the model-based Poisson [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) are too small.
 @vittinghoff2e [§8.3.1] recommends robust standard errors or a
-negative-binomial model for this example.
+[negative-binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) model for this example.
 :::
 
