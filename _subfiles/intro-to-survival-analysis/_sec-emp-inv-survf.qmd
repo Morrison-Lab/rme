@@ -5,34 +5,34 @@
 Given a time-to-event dataset,
 the **empirical inverse survival function** (empirical ISF),
 also called the **empirical survival quantile function** (empirical SQF),
-$\hsurv^{-1}(p)$
+$\esurv^{-1}(p)$
 replaces the population survival function $\surv(t)$
-with an estimated survival function $\hsurv(t)$:
+with an estimated survival function $\esurv(t)$:
 
-$$\hsurv^{-1}(p) \eqdef \inf\cb{t \ge 0 : \hsurv(t) \le p}, \quad 0 < p < 1.$$
+$$\esurv^{-1}(p) \eqdef \inf\cb{t \ge 0 : \esurv(t) \le p}, \quad 0 < p < 1.$$
 
 :::
 
 {{< slidebreak >}}
 
-Since $\hsurv(t)$ is a non-increasing step function,
-$\hsurv^{-1}(p)$ equals the smallest observed event time
+Since $\esurv(t)$ is a non-increasing step function,
+$\esurv^{-1}(p)$ equals the smallest observed event time
 at which the estimated survival probability has dropped to or below $p$.
 
 **From the Kaplan-Meier estimator.**
-Substituting $\hskmf{t}$ from @def-KM-estimator:
+Substituting $\eskmf{t}$ from @def-KM-estimator:
 
 $$
-\hskm^{-1}(p)
+\eskm^{-1}(p)
 = \inf\cb{t \ge 0 : \prod_{t_i \le t}\sb{1 - \frac{d_i}{r_i}} \le p}.
 $$
 
 **From the Nelson-Aalen estimator.**
-Substituting $\hsnaaf{t} = \expf{-\hat{\cuhaz}_{NA}(t)}$
+Substituting $\esnaaf{t} = \expf{-\hat{\cuhaz}_{NA}(t)}$
 from @def-na-cuhaz-est:
 
 $$
-\hsnaa^{-1}(p)
+\esnaa^{-1}(p)
 = \inf\cb{t \ge 0 : \expf{-\sum_{t_i \le t}\frac{d_i}{r_i}} \le p}.
 $$
 
@@ -79,8 +79,8 @@ kable(
     "Time (months)",
     "At risk $r_i$",
     "Events $d_i$",
-    "$\\hskmf{t}$",
-    "$\\hsnaaf{t}$"
+    "$\\eskmf{t}$",
+    "$\\esnaaf{t}$"
   )
 )
 ```
@@ -197,28 +197,28 @@ ggplot(isf_steps, aes(x = p, y = t, color = estimator)) +
   theme(legend.position = "top")
 ```
 
-Empirical inverse survival function $\hsurv^{-1}(p)$ for 6-MP patients
+Empirical inverse survival function $\esurv^{-1}(p)$ for 6-MP patients
 from the KM and Nelson-Aalen estimators.
 
 :::
 
 The rightmost step is drawn out to $p = 1$ for visual continuity only.
 The inverse survival function is defined for $0 < p < 1$;
-at the boundary, $\hsurv^{-1}(1) = \inf\cb{t \ge 0 : \hsurv(t) \le 1} = 0$,
-since $\hsurv(0) = 1$.
+at the boundary, $\esurv^{-1}(1) = \inf\cb{t \ge 0 : \esurv(t) \le 1} = 0$,
+since $\esurv(0) = 1$.
 
 The empirical median survival time is the smallest event time $t$
 at which the estimated survival probability falls to or below 0.5.
 
 From the table:
 
-- $\hskmf{22} \approx 0.538 > 0.5$
-  and $\hskmf{23} \approx 0.448 \le 0.5$,
-  so $\hskm^{-1}(0.5) = 23$ months.
+- $\eskmf{22} \approx 0.538 > 0.5$
+  and $\eskmf{23} \approx 0.448 \le 0.5$,
+  so $\eskm^{-1}(0.5) = 23$ months.
 
-- $\hsnaaf{22} \approx 0.557 > 0.5$
-  and $\hsnaaf{23} \approx 0.471 \le 0.5$,
-  so $\hsnaa^{-1}(0.5) = 23$ months.
+- $\esnaaf{22} \approx 0.557 > 0.5$
+  and $\esnaaf{23} \approx 0.471 \le 0.5$,
+  so $\esnaa^{-1}(0.5) = 23$ months.
 
 In R:
 
