@@ -1,6 +1,24 @@
 profile:
   default: website
 
+# The website profile's format names, repeated here on purpose.
+# When Quarto resolves a link to another chapter's .qmd file,
+# it reuses that chapter's cached index only if the format names in this
+# file match the merged project's format names.
+# Ours live in _quarto-website.yml, so without this list the check always
+# failed: Quarto rebuilt the target chapter's index once per link, and the
+# site render ran out of Deno heap (exit 133) once the book had a few
+# hundred cross-chapter links.
+# The settings for each format stay in _quarto-website.yml.
+# Keep these names, and their order, in sync with its `format:` block.
+# The book and handout profiles inherit these formats too,
+# so render them with `--to pdf` (or `--to html`) to skip the others.
+format:
+  html: default
+  revealjs: default
+  pdf: default
+  docx: default
+
 # `code-language-labels` is vendored from `d-morrison/code-language-labels`
 # (version in its `_extension.yml`); it labels each highlighted code block with its language (R,
 # Python, Julia, ...) in the HTML and revealjs formats, and leaves PDF alone.
