@@ -22,7 +22,7 @@ of causal inference from observational data.
 
 # Introduction {#sec-causal-intro}
 
-Regression models describe statistical associations between variables.
+[Regression models](Intro-to-GLMs.qmd#def-regression-model) describe statistical associations between variables.
 But in many research settings,
 the goal is not merely to describe associations
 but to estimate **causal effects**:
@@ -42,13 +42,13 @@ that must be justified using subject-matter knowledge.
 :::
 
 The causal inference framework covered in this chapter
-is based on the **potential outcomes** model
+is based on the **[potential outcomes](#def-potential-outcomes)** model
 [@rubin1974estimating; @holland1986statistics].
 This framework provides:
 
 - A precise language for defining causal effects
 - Explicit assumptions required to identify causal effects from data
-- Estimation methods that target specific causal estimands
+- Estimation methods that target specific [causal estimands](#sec-causal-estimands)
 
 For more resources on causal inference,
 including additional courses and books,
@@ -81,7 +81,7 @@ Richard McElreath's
 [*Elemental Confounds I*](https://www.youtube.com/watch?v=lGR7D45Ww38)
 (Statistical Rethinking 2026, Lecture A06)
 accompanies Chapter 6 of @statrethink2e,
-which uses directed acyclic graphs (DAGs) to describe confounding
+which uses [directed acyclic graphs (DAGs)](#sec-pred-sel-dag) to describe [confounding](#def-confounding-obs)
 [@mcelreath2026rethinking].
 :::
 
@@ -94,7 +94,7 @@ Richard McElreath's
 [*Good and Bad Controls*](https://www.youtube.com/watch?v=sTieMzOcreQ)
 (Statistical Rethinking 2026, Lecture A07)
 also accompanies Chapter 6 of @statrethink2e,
-and discusses which covariates a regression model should
+and discusses which [covariates](Intro-to-GLMs.qmd#def-predictors) a [regression model](Intro-to-GLMs.qmd#def-regression-model) should
 and should not adjust for
 [@mcelreath2026rethinking].
 :::
@@ -111,62 +111,62 @@ Causal inference requires moving beyond statistical association
 to make statements about what would happen under intervention.
 The key ideas from this chapter are:
 
-**Potential outcomes** define what we mean by a causal effect.
+**[Potential outcomes](#def-potential-outcomes)** define what we mean by a causal effect.
 For each unit, there is a potential outcome under treatment
 and a potential outcome under control;
-the individual causal effect is their difference.
+the [individual causal effect](#def-individual-causal-effect) is their difference.
 
-**Causal estimands** — ATE, ATT, ATU —
+**Causal estimands** — [ATE](#def-ate), [ATT](#def-att), [ATU](#def-atu) —
 summarize the causal effect at the population level.
 
 **Three key assumptions** are needed
 to identify causal effects from observed data:
 
-1. **Consistency**: The observed outcome equals the potential outcome
+1. **[Consistency](#def-consistency)**: The [observed outcome](#def-observed-outcome) equals the potential outcome
    under the received treatment.
-2. **Exchangeability**: Treatment assignment is independent
-   of potential outcomes, given measured confounders.
-3. **Positivity**: Every individual has a positive probability
+2. **[Exchangeability](#def-exchangeability)**: Treatment assignment is [independent](https://morrison-lab.github.io/pds/independence.html#def-cind)
+   of potential outcomes, given measured [confounders](#def-confounder).
+3. **[Positivity](#def-positivity)**: Every individual has a positive probability
    of receiving each treatment level.
 
-**Randomized experiments** achieve unconditional exchangeability
+**[Randomized experiments](#sec-causal-rct)** achieve unconditional exchangeability
 and allow unbiased causal inference
 from simple treatment comparisons.
 
-**In observational studies**, confounding violates exchangeability.
-DAGs help identify which variables are confounders, mediators,
-and colliders, and the backdoor criterion identifies
+**In observational studies**, [confounding](#def-confounding-obs) violates exchangeability.
+[DAGs](#sec-pred-sel-dag) help identify which variables are confounders, [mediators](#def-mediator),
+and [colliders](#def-collider), and the [backdoor criterion](#def-backdoor-criterion) identifies
 sufficient adjustment sets.
 
-**Estimation methods** — regression adjustment (G-computation)
-and propensity score methods (matching, stratification, IPW) —
+**Estimation methods** — [regression adjustment](#sec-causal-regression) ([G-computation](#sec-causal-g-computation))
+and [propensity score](#def-propensity-score) methods (matching, stratification, [IPW](#def-ipw)) —
 can recover causal estimates under these three core identification assumptions.
 
 # Learning Objectives {#sec-causal-objectives .unnumbered}
 
 After completing this chapter, students should be able to:
 
-1. **Define potential outcomes** and the fundamental problem
+1. **Define [potential outcomes](#def-potential-outcomes)** and the fundamental problem
    of causal inference.
 
-2. **Distinguish** the ATE, ATT, and ATU,
+2. **Distinguish** the [ATE](#def-ate), [ATT](#def-att), and [ATU](#def-atu),
    and explain when they agree and when they differ.
 
 3. **State and interpret** the three core causal assumptions:
-   consistency, exchangeability, and positivity.
+   [consistency](#def-consistency), [exchangeability](#def-exchangeability), and [positivity](#def-positivity).
 
 4. **Explain why randomization** achieves unconditional exchangeability
    and allows unbiased causal effect estimation.
 
-5. **Use a DAG** to identify confounders, mediators, and colliders,
-   and apply the backdoor criterion to select sufficient adjustment sets.
+5. **Use a DAG** to identify [confounders](#def-confounder), [mediators](#def-mediator), and [colliders](#def-collider),
+   and apply the [backdoor criterion](#def-backdoor-criterion) to select sufficient adjustment sets.
 
-6. **Describe the G-computation estimator**
+6. **Describe the [G-computation estimator](#sec-causal-g-computation)**
    and explain how it relates to regression adjustment.
 
 7. **Describe propensity score methods**
    (matching, stratification, IPW)
-   and explain how they use the propensity score to remove confounding.
+   and explain how they use the [propensity score](#def-propensity-score) to remove confounding.
 
 8. **Contrast causal inference from randomized trials
    with causal inference from observational studies**,

@@ -1,8 +1,8 @@
 {{< include latex-macros/macros.qmd >}}
 
 **Propensity score methods** are an alternative approach
-to confounding adjustment in observational studies.
-They replace adjustment for a high-dimensional confounder set $\vec{L}$
+to [confounding](#def-confounding-obs) adjustment in [observational studies](#sec-causal-observational).
+They replace adjustment for a high-dimensional [confounder](#def-confounder) set $\vec{L}$
 with adjustment for a single scalar summary:
 the propensity score.
 
@@ -11,13 +11,13 @@ the propensity score.
 :::{#def-propensity-score}
 #### Propensity score
 
-The **propensity score** is the conditional probability of treatment
-given the observed covariates:
+The **propensity score** is the [conditional probability](https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob) of treatment
+given the observed [covariates](Intro-to-GLMs.qmd#def-predictors):
 $$e(\vec{L}) \eqdef \Pf{A = 1 \mid \vec{L}}$$
 
 @rosenbaum1983central showed that
 if $A \perp\!\!\!\perp (Y(0), Y(1)) \mid \vec{L}$
-(conditional exchangeability given $\vec{L}$),
+([conditional exchangeability](#def-exchangeability) given $\vec{L}$),
 then also:
 $$A \perp\!\!\!\perp (Y(0), Y(1)) \mid e(\vec{L})$$
 
@@ -30,8 +30,8 @@ to remove confounding.
 ## Propensity score estimation {#sec-ps-estimation}
 
 The propensity score is estimated by fitting a model
-for the probability of treatment given covariates,
-typically using logistic regression:
+for the probability of treatment given [covariates](Intro-to-GLMs.qmd#def-predictors),
+typically using [logistic regression](logistic-regression.qmd#def-logistic-regression):
 
 $$\text{logit}(\hat{e}(\vec{L}_i)) =
 \hat{\beta}_0 + \hat{\beta}_1 L_{i1} + \cdots + \hat{\beta}_p L_{ip}$$
@@ -48,7 +48,7 @@ There are four main ways to use the propensity score:
    The matched dataset is then analyzed as a simple comparison.
 
 2. **Stratification (subclassification)**: Divide individuals
-   into strata based on propensity score quantiles.
+   into strata based on propensity score [quantiles](https://morrison-lab.github.io/sds/nonparametric-models.html#def-sample-quantile).
    Estimate the causal effect within each stratum,
    then combine across strata.
 
@@ -58,8 +58,8 @@ There are four main ways to use the propensity score:
    See @def-ipw.
 
 4. **Covariate adjustment using the propensity score**:
-   Include the estimated propensity score as a covariate
-   in a regression model for the outcome.
+   Include the estimated propensity score as a [covariate](Intro-to-GLMs.qmd#def-predictors)
+   in a [regression model](Intro-to-GLMs.qmd#def-regression-model) for the [outcome](Intro-to-GLMs.qmd#def-outcome).
 
 {{< slidebreak >}}
 
@@ -67,7 +67,7 @@ There are four main ways to use the propensity score:
 #### Inverse probability weighting (IPW)
 
 The **inverse probability weighted (IPW)** estimator
-of the ATE uses weights:
+of the [ATE](#def-ate) uses weights:
 $$w_i \eqdef \frac{A_i}{\hat{e}(\vec{L}_i)} +
 \frac{1 - A_i}{1 - \hat{e}(\vec{L}_i)}$$
 
@@ -76,8 +76,8 @@ $$\Est{\E{Y(a)}}_{\text{IPW}} \eqdef
 \frac{\sum_{i: A_i = a} w_i Y_i}{\sum_{i: A_i = a} w_i}$$
 
 Reweighting by $w_i$ creates a **pseudo-population**
-in which treatment is independent of covariates,
-effectively removing confounding.
+in which treatment is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of covariates,
+effectively removing [confounding](#def-confounding-obs).
 
 :::
 
@@ -86,8 +86,8 @@ effectively removing confounding.
 In the WCGS study,
 we can use propensity score methods
 to estimate the causal effect of Type A behavior on CHD.
-We first fit a logistic regression model
-predicting Type A behavior from the confounders
+We first fit a [logistic regression](logistic-regression.qmd#def-logistic-regression) model
+predicting Type A behavior from the [confounders](#def-confounder)
 identified by the DAG (@sec-pred-sel-wcgs-dag):
 
 ```{r}
@@ -155,7 +155,7 @@ Distribution of estimated propensity scores
 by personality type in the WCGS study.
 Good overlap between the two groups
 (the **overlap** or **common support** assumption)
-supports positivity.
+supports [positivity](#def-positivity).
 
 :::
 
@@ -187,7 +187,7 @@ Inverse probability weighted (IPW) logistic regression model for the effect of T
 
 The IPW-weighted odds ratio for Type A vs. Type B behavior
 estimates the causal odds ratio for CHD,
-adjusting for confounding by age, BMI, SBP, cholesterol, and smoking.
+adjusting for [confounding](#def-confounding-obs) by age, BMI, SBP, cholesterol, and smoking.
 
 Compare this to the unadjusted estimate:
 the difference reflects the degree of confounding
