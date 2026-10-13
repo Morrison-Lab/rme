@@ -13,13 +13,12 @@ predictors whose effect on CHD risk need not be linear on the log-odds scale.
 ## Setup {.unnumbered}
 
 ```{r}
-#| eval: false
 library(mgcv)        # gam(), s()
 library(ggplot2)
 library(gratia)      # tidy plots for gam fits (optional)
 
-# WCGS ships with this package:
-wcgs <- readRDS(system.file("extdata", "wcgs.rds", package = "rme"))
+# WCGS ships with this repository (cleaned once in the chapter setup):
+wcgs <- readRDS(here::here("inst/extdata/wcgs.rds"))
 
 # Binary 0/1 outcome, and drop the one known cholesterol outlier (645):
 wcgs <- subset(wcgs, !is.na(chol) & chol < 645)
@@ -31,7 +30,6 @@ wcgs$chd <- as.integer(wcgs$chd69 == "Yes")
 Start with an ordinary logistic GLM as a baseline:
 
 ```{r}
-#| eval: false
 m_lin <- glm(
   chd ~ age + bmi + chol + sbp,
   family = binomial(), data = wcgs
@@ -47,7 +45,6 @@ That's a strong assumption: it forces risk to climb at a constant rate across th
 Now refit with a smooth on each continuous predictor:
 
 ```{r}
-#| eval: false
 m_gam <- gam(
   chd ~ s(age) + s(bmi) + s(chol) + s(sbp),
   family = binomial(),
@@ -79,7 +76,6 @@ If `gam.check(m_gam)` flags any smooth as having `edf` close to
 `k'`, bump `k` up:
 
 ```{r}
-#| eval: false
 m_gam2 <- gam(
   chd ~ s(age) + s(bmi) + s(chol, k = 20) + s(sbp),
   family = binomial(),
@@ -91,7 +87,6 @@ m_gam2 <- gam(
 ## Plotting partial-effect curves {.unnumbered}
 
 ```{r}
-#| eval: false
 #| code-fold: true
 plot(m_gam, pages = 1, shade = TRUE, seWithMean = TRUE)
 ```
@@ -105,7 +100,6 @@ For a cleaner ggplot rendering, `gratia::draw()` is a one-line
 alternative:
 
 ```{r}
-#| eval: false
 #| code-fold: true
 gratia::draw(m_gam)
 ```
@@ -116,7 +110,6 @@ Partial-effect plots are on the **link scale** (log-odds for binary).
 To plot predicted probability against a single predictor — here cholesterol, the predictor with the clearest curvature — hold the others at typical values, build the Wald CI on the **link** scale, then back-transform with `plogis()`:
 
 ```{r}
-#| eval: false
 #| code-fold: true
 grid <- data.frame(
   chol = seq(min(wcgs$chol), max(wcgs$chol), length.out = 200),
@@ -145,7 +138,6 @@ Working on the link scale and applying the monotone `plogis()` transformation ke
 ## Comparing GLM and GAM {.unnumbered}
 
 ```{r}
-#| eval: false
 # Refit the GAM with method = "ML" for AIC comparison.
 # REML and ML likelihoods are on different scales; comparing AIC
 # from glm() (always ML) with a REML-fitted gam() mixes criteria.

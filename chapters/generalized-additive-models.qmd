@@ -13,6 +13,19 @@ format:
 
 {{< include shared-config.qmd >}}
 
+```{r}
+#| label: gam-setup
+#| include: false
+# Data and packages shared by the whole chapter.
+# wcgs: the Western Collaborative Group Study cohort used throughout.
+library(ggplot2)
+library(mgcv)
+library(splines)
+wcgs <- readRDS(here::here("inst/extdata/wcgs.rds"))
+wcgs <- subset(wcgs, !is.na(chol) & chol < 645)
+wcgs$chd <- as.integer(wcgs$chd69 == "Yes")
+```
+
 # Motivation: beyond the linear predictor {#sec-gam-motivation}
 
 {{< include _subfiles/generalized-additive-models/_sec_motivation.qmd >}}

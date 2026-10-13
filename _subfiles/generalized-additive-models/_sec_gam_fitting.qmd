@@ -11,12 +11,11 @@ The basic syntax mirrors `lm()`/`glm()`, with smoothers introduced by
 `s()`:
 
 ```{r}
-#| eval: false
 library(mgcv)
 
 m <- gam(
-  y ~ s(age) + s(bmi) + sex + s(year, k = 10),
-  data = d,
+  chd ~ s(age) + s(bmi) + dibpat + s(chol, k = 10),
+  data = wcgs,
   family = binomial(),
   method = "REML"
 )
@@ -24,11 +23,11 @@ m <- gam(
 
 Reading the formula:
 
-- `s(age)`, `s(bmi)`, `s(year, k = 10)` are **smooth terms**.
+- `s(age)`, `s(bmi)`, `s(chol, k = 10)` are **smooth terms**.
   Each introduces a basis expansion plus a smoothness penalty.
   The default basis (`bs = "tp"`, thin-plate regression spline) is almost always a good choice.
   `k = 10` requests a basis of dimension up to 10 — large enough that the smoothness penalty, not the basis, controls flexibility.
-- `sex` is a **parametric term**, treated exactly as in a GLM.
+- `dibpat` (behavior pattern, Type A or B) is a **parametric term**, treated exactly as in a GLM.
 
 You can mix smooth and parametric terms freely.
 Parametric terms contribute conventional regression coefficients (with $t$/$z$ statistics in the model summary);
@@ -72,7 +71,6 @@ This refit makes AIC comparisons more honest because the GAM is then allowed to 
 After fitting, run `gam.check()` to verify:
 
 ```{r}
-#| eval: false
 gam.check(m)
 ```
 
@@ -89,7 +87,6 @@ Output includes:
 ## Plotting smooths
 
 ```{r}
-#| eval: false
 #| code-fold: true
 plot(m, pages = 1, shade = TRUE)
 ```

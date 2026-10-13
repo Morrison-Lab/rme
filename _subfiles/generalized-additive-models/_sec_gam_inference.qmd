@@ -15,22 +15,22 @@ These are the non-smooth terms in the formula — intercept,
 categorical predictors, terms entered as `x` rather than `s(x)`.
 Their output is identical to a GLM:
 
-```
-Parametric coefficients:
-            Estimate Std. Error z value Pr(>|z|)
-(Intercept)  -2.143      0.087  -24.63  < 2e-16 ***
-sexFemale     0.342      0.061    5.61  2.0e-08 ***
+```{r}
+#| label: gam-inference-summary
+# Fit a logistic GAM with one parametric term (dibpat) and two smooths,
+# then pull the two summary tables out of the summary.gam object.
+m_inf <- gam(chd ~ dibpat + s(age) + s(bmi),
+             family = binomial(), data = wcgs, method = "REML")
+sm_inf <- summary(m_inf)
+sm_inf$p.table  # parametric coefficients
 ```
 
 Read these exactly as you would GLM coefficients.
 
 ### Smooth terms
 
-```
-Approximate significance of smooth terms:
-        edf  Ref.df  Chi.sq  p-value
-s(age)  4.82   5.93   76.2   3.6e-14 ***
-s(bmi)  2.13   2.78   18.4   2.4e-04 ***
+```{r}
+sm_inf$s.table  # smooth terms
 ```
 
 Each column reports:

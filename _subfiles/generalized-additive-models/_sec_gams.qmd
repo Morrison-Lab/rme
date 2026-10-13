@@ -84,8 +84,7 @@ The two standard escape hatches are:
   When `sex` is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else);
   the correct idiom is:
   ```{r}
-  #| eval: false
-  gam(y ~ sex + s(age, by = sex), data = d, method = "REML")
+  gam(chol ~ dibpat + s(age, by = dibpat), data = wcgs, method = "REML")
   ```
   The result is still additive in the *factors*, but allows
   separate smooth shapes within each level.

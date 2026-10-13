@@ -6,7 +6,6 @@ Lab adapted from @james2021islr2e [§7.8] and @james2023islp [§7.8].
 #### R
 ```{r}
 #| label: lab-setup-r
-#| eval: false
 #| message: false
 library(ISLR2)
 library(splines)
@@ -18,6 +17,8 @@ head(Wage[, c("age", "wage", "education", "year")])
 ```
 
 #### Python
+The Python blocks in this lab are shown but not run when the book is rendered, because the render has no Python environment;
+run them locally.
 The smoothing-spline and GAM sections also require `pygam`, which is
 not part of the standard ISLP/sklearn ecosystem — install with
 `pip install pygam` before running those blocks.
@@ -25,6 +26,7 @@ not part of the standard ISLP/sklearn ecosystem — install with
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -46,7 +48,6 @@ Fit degree-1 through degree-5 polynomials, then use ANOVA to select degree [@jam
 #### R
 ```{r}
 #| label: lab-poly-r
-#| eval: false
 #| code-fold: true
 fit1 <- lm(wage ~ poly(age, 1), data = Wage)
 fit2 <- lm(wage ~ poly(age, 2), data = Wage)
@@ -60,7 +61,6 @@ The ANOVA p-values suggest degree 3 or 4 is adequate.
 
 ```{r}
 #| label: lab-poly-plot-r
-#| eval: false
 #| code-fold: true
 age_grid <- seq(min(Wage$age), max(Wage$age), length.out = 200)
 pred <- predict(fit4, newdata = data.frame(age = age_grid), se.fit = TRUE)
@@ -81,6 +81,7 @@ ggplot(Wage, aes(age, wage)) +
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 from scipy import stats
 results = {}
 for deg in range(1, 6):
@@ -99,6 +100,7 @@ for d in range(1, 5):
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 age_grid = np.linspace(Wage["age"].min(), Wage["age"].max(), 200)
 X_grid = sm.add_constant(np.column_stack([age_grid ** k for k in range(1, 5)]))
 pred4 = results[4].get_prediction(X_grid)
@@ -122,7 +124,6 @@ Cut `age` into four intervals and fit a piecewise-constant model [@james2021islr
 #### R
 ```{r}
 #| label: lab-step-r
-#| eval: false
 #| code-fold: true
 Wage$age_cut <- cut(Wage$age, 4)
 fit_step <- lm(wage ~ age_cut, data = Wage)
@@ -132,6 +133,7 @@ summary(fit_step)$coef
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 Wage["age_cut"] = pd.cut(Wage["age"], bins=4)
 step_dummies = pd.get_dummies(Wage["age_cut"], drop_first=True).astype(float)
 X_step = sm.add_constant(step_dummies)
@@ -148,7 +150,6 @@ Fit a cubic B-spline with knots at ages 25, 40, and 60, and a natural cubic spli
 #### R
 ```{r}
 #| label: lab-splines-r
-#| eval: false
 #| code-fold: true
 # Redefine age_grid so the splines section runs in isolation
 # (it's also defined in the poly-plot chunk above).
@@ -177,6 +178,7 @@ ggplot(Wage, aes(age, wage)) +
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 bs_mat = dmatrix("bs(age, knots=(25,40,60), include_intercept=False)",
                  {"age": Wage["age"]}, return_type="dataframe")
 ns_mat = dmatrix("cr(age, knots=(25,40,60))",
@@ -208,7 +210,6 @@ LOESS uses a local polynomial fit [@james2021islr2e, §7.5–7.6].
 #### R
 ```{r}
 #| label: lab-smooth-r
-#| eval: false
 #| code-fold: true
 fit_ss_16 <- smooth.spline(Wage$age, Wage$wage, df = 16)
 fit_ss_gcv <- smooth.spline(Wage$age, Wage$wage, cv = FALSE)  # GCV
@@ -235,6 +236,7 @@ ggplot(Wage, aes(age, wage)) +
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 from pygam import LinearGAM, s as gam_s
 from statsmodels.nonparametric.smoothers_lowess import lowess
 
@@ -271,7 +273,6 @@ This lab follows the ISLRv2 code, which uses the `mgcv` default
 #### R
 ```{r}
 #| label: lab-gam-r
-#| eval: false
 #| code-fold: true
 gam1 <- gam(wage ~ s(year, k = 4) + s(age, k = 5) + education,
             data = Wage)
@@ -290,6 +291,7 @@ plot(gam1, shade = TRUE, seWithMean = TRUE,
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 from pygam import LinearGAM, s as gam_s, f as gam_f
 
 edu_codes = Wage["education"].cat.codes.values
@@ -325,7 +327,6 @@ We subset to workers with at least some college education, following @james2021i
 #### R
 ```{r}
 #| label: lab-gam-logistic-r
-#| eval: false
 #| code-fold: true
 Wage$high <- factor(ifelse(Wage$wage > 250, "High", "Low"),
                     levels = c("Low", "High"))
@@ -347,6 +348,7 @@ plot(fit_logit_gam, shade = TRUE, seWithMean = TRUE,
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 from pygam import LogisticGAM, s as gam_s, f as gam_f
 
 mask = Wage["education"] != "1. < HS Grad"

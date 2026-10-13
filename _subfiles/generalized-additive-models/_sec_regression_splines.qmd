@@ -110,19 +110,18 @@ of the requested dimension.
 ## Regression splines in R
 
 ```{r}
-#| eval: false
 library(splines)
 
 # Natural cubic spline with 4 degrees of freedom
 # (knots auto-placed at quantiles)
-m_ns <- lm(y ~ ns(x, df = 4), data = d)
+m_ns <- lm(chol ~ ns(age, df = 4), data = wcgs)
 
 # Cubic B-spline basis with 6 degrees of freedom
-m_bs <- lm(y ~ bs(x, df = 6), data = d)
+m_bs <- lm(chol ~ bs(age, df = 6), data = wcgs)
 
 # In a GLM, just substitute glm() and a family
-m_glm <- glm(y ~ ns(x, df = 4),
-             data = d, family = binomial())
+m_glm <- glm(chd ~ ns(age, df = 4),
+             data = wcgs, family = binomial())
 ```
 
 Both `ns()` and `bs()` return numeric matrices that slot directly into `lm()`/`glm()` formulas.
@@ -134,8 +133,7 @@ The fitted curve and pointwise CIs come from `predict()` with
 `se.fit = TRUE` in the usual way:
 
 ```{r}
-#| eval: false
-grid  <- data.frame(x = seq(min(d$x), max(d$x), length.out = 200))
+grid  <- data.frame(age = seq(min(wcgs$age), max(wcgs$age), length.out = 200))
 pred  <- predict(m_ns, newdata = grid, se.fit = TRUE)
 grid$fit   <- pred$fit
 grid$lower <- pred$fit - 1.96 * pred$se.fit

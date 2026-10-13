@@ -36,7 +36,6 @@ Plot the chosen step-function fit.
 
 ```{r}
 #| code-fold: true
-#| eval: false
 library(ISLR2)
 library(boot)
 library(ggplot2)
@@ -56,6 +55,7 @@ points(best_d, cv_poly[best_d], col = "red", pch = 19)
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -121,7 +121,6 @@ For $p=2$ predictors with linear component smoothers $\est{f_j}(X_j) = \eb_j X_j
 
 ```{r}
 #| code-fold: true
-#| eval: false
 set.seed(1)
 n <- 100
 x1 <- rnorm(n)
@@ -150,6 +149,7 @@ cat(sprintf("lm():        b1=%.4f, b2=%.4f\n",
 ```{python}
 #| eval: false
 #| python.reticulate: false
+# Not run: the rme render has no Python environment.
 import numpy as np
 rng = np.random.default_rng(1)
 n = 100; x1 = rng.standard_normal(n); x2 = rng.standard_normal(n)

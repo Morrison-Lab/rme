@@ -143,19 +143,18 @@ Base R has `smooth.spline()`, but for any nontrivial use we'll go
 through `mgcv`:
 
 ```{r}
-#| eval: false
 library(mgcv)
 
 # Univariate smoother, REML smoothness selection
-m_ss <- gam(y ~ s(x, k = 20, bs = "tp"),
-            data = d, method = "REML")
+m_ss <- gam(chol ~ s(age, k = 20, bs = "tp"),
+            data = wcgs, method = "REML")
 
 # Same idea inside a GLM
-m_ss_logistic <- gam(y ~ s(x, k = 20, bs = "tp"),
-                     data = d, family = binomial(),
+m_ss_logistic <- gam(chd ~ s(age, k = 20, bs = "tp"),
+                     data = wcgs, family = binomial(),
                      method = "REML")
 
-summary(m_ss)  # reports EDF of the s(x) term
+summary(m_ss)  # reports EDF of the s(age) term
 plot(m_ss)     # plots the fitted smooth with CI band
 ```
 

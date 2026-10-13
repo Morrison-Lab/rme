@@ -42,7 +42,6 @@ To smooth the relationship between age and total cholesterol in the
 WCGS data using LOESS with a span of 0.5:
 
 ```{r}
-#| eval: false
 m_loess <- loess(chol ~ age, data = wcgs, span = 0.5)
 ```
 
@@ -76,15 +75,14 @@ The predicted cholesterol at age 50 is the fitted value from the weighted least-
 ## Local regression in R
 
 ```{r}
-#| eval: false
-m_loess <- loess(y ~ x, data = d, span = 0.5)
-grid <- data.frame(x = seq(min(d$x), max(d$x), length.out = 200))
+m_loess <- loess(chol ~ age, data = wcgs, span = 0.5)
+grid <- data.frame(age = seq(min(wcgs$age), max(wcgs$age), length.out = 200))
 grid$fit <- predict(m_loess, newdata = grid)
 
 # Inside ggplot2, geom_smooth() with method = "loess"
 # is the standard scatterplot smoother:
-ggplot(d, aes(x = x, y = y)) +
-  geom_point() +
+ggplot(wcgs, aes(x = age, y = chol)) +
+  geom_point(alpha = 0.2) +
   geom_smooth(method = "loess", span = 0.5)
 ```
 
