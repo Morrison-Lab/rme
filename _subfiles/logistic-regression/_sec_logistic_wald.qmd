@@ -1,5 +1,5 @@
 By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle),
-the maximum likelihood estimates $\hb_k$ are approximately Gaussian
+the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hb_k$ are approximately Gaussian
 for large sample sizes;
 see also the [table of Gaussian vs. MLE-based tests](https://morrison-lab.github.io/sds/intro-MLEs.html#tbl-gaussian-vs-mle-tests).
 
@@ -13,16 +13,16 @@ Under $H_0$, $z_k \overset{\cdot}{\sim} N(0,1)$ for large $n$.
 
 #### Confidence intervals for regression coefficients
 
-A 95% confidence interval for $\beta_k$ is:
+A 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\beta_k$ is:
 
 $$\hb_k \pm 1.96 \cdot \HSE{\hb_k}$$
 
 #### Confidence intervals for exponentiated coefficients
 
-By the invariance property of MLEs,
+By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 the MLE of $e^{\beta_k}$ is $e^{\hb_k}$.
 
-A 95% confidence interval for $e^{\beta_k}$ is obtained by
+A 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $e^{\beta_k}$ is obtained by
 exponentiating the endpoints of the CI for $\beta_k$:
 
 $$
@@ -32,8 +32,8 @@ e^{\beta_k} \in \paren{
 }
 $$
 
-For covariate coefficients ($k \neq 0$), $e^{\beta_k}$ is an odds ratio
-(the multiplicative change in odds per 1-unit increase in $x_k$,
+For covariate coefficients ($k \neq 0$), $e^{\beta_k}$ is an [odds ratio](binary-outcome-associations.qmd#def-OR)
+(the multiplicative change in [odds](binary-outcome-associations.qmd#def-odds) per 1-unit increase in $x_k$,
 holding all other covariates fixed).
 For the intercept ($k = 0$), $e^{\beta_0}$ is the baseline odds
 (the odds when all covariates equal zero), not an odds ratio.
@@ -41,7 +41,7 @@ For the intercept ($k = 0$), $e^{\beta_0}$ is the baseline odds
 #### In R
 
 In R, `parameters()` from the `parameters` package automatically computes
-Wald tests and confidence intervals for logistic regression model coefficients:
+[Wald tests](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for [logistic regression model](#def-logistic-regression) coefficients:
 
 ```{r}
 #| label: tbl-beetles-wald-tests
@@ -53,8 +53,8 @@ beetles_glm_ungrouped |>
 
 Pass `exponentiate = TRUE` to `parameters()` to report
 exponentiated coefficients.
-The intercept is then interpreted as baseline odds,
-while the non-intercept coefficients are odds ratios:
+The intercept is then interpreted as baseline [odds](binary-outcome-associations.qmd#def-odds),
+while the non-intercept coefficients are [odds ratios](binary-outcome-associations.qmd#def-OR):
 
 ```{r}
 #| label: tbl-beetles-wald-tests-OR

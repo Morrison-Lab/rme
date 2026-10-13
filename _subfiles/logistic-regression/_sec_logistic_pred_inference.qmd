@@ -3,11 +3,11 @@
 :::{#exr-ci-prob}
 
 Given
-a maximum likelihood estimate $\hb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hb$
 and
-a corresponding estimated covariance matrix
+a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
 $\hS \eqdef \widehat{\Covt}(\hb)$,
-calculate a 95% confidence interval for the predicted probability
+calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the predicted probability
 $\pi(\vx) = \Pr(Y = 1 | \vX = \vx)$.
 
 :::
@@ -29,7 +29,7 @@ doing so would require using the
 [delta method](https://en.wikipedia.org/wiki/Delta_method).
 
 Instead, using the invariance property of MLEs,
-we can first calculate a confidence interval for the log-odds,
+we can first calculate a confidence interval for the [log-odds](binary-outcome-associations.qmd#def-logodds),
 
 $$\logodds(\vx) = \vx'\vb \in (L, R)$$
 
@@ -69,7 +69,7 @@ where $\hat\logodds(\vx) = \vx'\hb$.
 
 ::: notes
 
-How can we estimate the standard error of
+How can we estimate the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of
 $\hat\logodds(\vx)$?
 
 :::
@@ -125,7 +125,7 @@ $$
 {{< slidebreak >}}
 
 Combining @eq-var-logodds with the invariance property of MLEs
-gives an estimator for the variance and standard error:
+gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
 :::{#thm-est-se-logodds}
 
@@ -145,7 +145,7 @@ $${#eq-est-se-logodds}
 ::: proof
 By @sol-se-logodds,
 $\Var{\hat\logodds(\vx)} = \tp{\vx}\Sigma\vx$ (@eq-var-logodds).
-By the invariance property of MLEs,
+By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 we estimate $\Sigma$ with $\hS \eqdef \widehat{\Covt}(\hb)$,
 which yields @eq-est-var-logodds;
 taking the square root gives @eq-est-se-logodds.
@@ -159,7 +159,7 @@ taking the square root gives @eq-est-se-logodds.
 
 ::: notes
 We instantiate @thm-est-se-logodds
-for the `beetles` logistic regression model
+for the `beetles` [logistic regression model](#def-logistic-regression)
 (@tbl-beetles-model-ungrouped).
 :::
 
@@ -177,12 +177,12 @@ ci_logodds <- logodds_hat + c(-1, 1) * 1.96 * se_logodds
 ```
 
 By @eq-est-se-logodds,
-the estimated standard error of the log-odds is
+the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [log-odds](binary-outcome-associations.qmd#def-logodds) is
 $\HSE{\hat\logodds(\vx)} = \sqrt{\tp{\vx}\hS\vx} = `r se_logodds`$,
 while the estimated log-odds itself is
 $\hat\logodds(\vx) = \vx'\hb = `r logodds_hat`$.
 
-The resulting 95% confidence interval for the log-odds is
+The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the log-odds is
 $(`r ci_logodds[1]`, `r ci_logodds[2]`)$,
 and applying $\expit$ to its endpoints (@eq-ci-prob-exp)
 gives a 95% confidence interval for $\pi(\vx)$ of

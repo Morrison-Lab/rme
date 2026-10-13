@@ -90,7 +90,7 @@ $$\logitf{\expitf{\logodds}} = \logodds \qquad \expitf{\logitf{\pi}} = \pi$$
 
 {{< include _subfiles/logistic-regression/_fig-expit-logit-diagram-content.qmd >}}
 
-Diagram of logistic regression link and inverse link functions
+Diagram of [logistic regression](logistic-regression.qmd#def-logistic-regression) link and inverse [link functions](Intro-to-GLMs.qmd#sec-why-link)
 
 :::
 
@@ -106,7 +106,7 @@ $$\ratio(\odds_1, \odds_2)
 = \rho(\pi_1, \pi_2) \cdot \frac{1-\pi_2}{1-\pi_1}$$
 When $\pi_1$ and $\pi_2$ are both small,
 the correction factor is close to 1,
-so the odds ratio is close to the risk ratio.
+so the [odds ratio](binary-outcome-associations.qmd#def-OR) is close to the [risk ratio](binary-outcome-associations.qmd#def-RR).
 
 :::
 
@@ -114,7 +114,7 @@ so the odds ratio is close to the risk ratio.
 
 {{< include _subfiles/logistic-regression/_eq-logistic-deriv-matrix.qmd >}}
 
-Column labels indicate the numerators of the derivatives;
+Column labels indicate the numerators of the [derivatives](https://morrison-lab.github.io/mds/calculus-derivatives.html#def-derivative);
 row labels indicate the denominators
 (dimensions and details in [tbl](logistic-regression.qmd#tbl-logistic-deriv-matrix)).
 
@@ -152,14 +152,14 @@ $$\vec{\llik'}(\vb) = \sumin \vec{\llik'_i}(\vb),
 
 :::
 
-**Score function** ([thm](logistic-regression.qmd#thm-logistic-score-fn))
+**[Score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score)** ([thm](logistic-regression.qmd#thm-logistic-score-fn))
 $$\vec{\llik'}(\vb) = \sumin \vx_i\eps_i
 = \underbrace{\tp{\mX}}_{(p+1) \times n}\underbrace{\veps}_{n \times 1}$$
 
 ## Maximum likelihood estimation {.unnumbered}
 
 **Estimating equation** ([eq](logistic-regression.qmd#eq-score-logistic))
-The MLE $\hvb$ solves the score equation:
+The [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hvb$ solves the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
 $$\underbrace{\vec{\llik'}(\hvb)}_{(p+1) \times 1} = \sumin \underbrace{\vx_i}_{(p+1) \times 1}\underbrace{\paren{y_i - \expitf{\tp{\vx_i}\hvb}}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}$$
 
 This estimating equation has no closed-form solution in general;
@@ -169,9 +169,9 @@ $\hvb$ must be computed by numerical iteration.
 $$\underbrace{\llik''(\vb)}_{(p+1) \times (p+1)} = -\underbrace{\tp{\mX}}_{(p+1) \times n} \underbrace{\matr{D}}_{n \times n} \underbrace{\mX}_{n \times (p+1)}, \qquad \matr{D} \eqdef \text{diag}(\Varf{Y_i|\vX_i=\vx_i}) = \text{diag}(\pi_i(1-\pi_i))$$
 
 **Concavity** ([rem](logistic-regression.qmd#rem-hessian-nsd)):
-the Hessian is negative semi-definite for every $\vb$
+the [Hessian](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) is negative semi-definite for every $\vb$
 (negative definite when $\mX$ has full column rank),
-so the log-likelihood is concave
+so the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is [concave](https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex)
 and every solution of the score equation is a global maximum.
 
 **Newton-Raphson update** ([Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson))
@@ -193,12 +193,12 @@ $$\hat{\odds}= \frac{x}{n-x}$$
 $$z_k = \frac{\hb_k - \b_{k,0}}{\HSE{\hb_k}},
 \qquad z_k \dsim N(0,1) \text{ under } H_0$$
 
-**95% confidence intervals for $\b_k$ and $e^{\b_k}$** (MLE invariance)
+**95% confidence intervals for $\b_k$ and $e^{\b_k}$** ([MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) invariance)
 $$\hb_k \pm 1.96 \cdot \HSE{\hb_k},
 \qquad e^{\b_k} \in \paren{e^{\hb_k - 1.96 \cdot \HSE{\hb_k}},\; e^{\hb_k + 1.96 \cdot \HSE{\hb_k}}}$$
 
-For $k \neq 0$, $e^{\b_k}$ is an odds ratio;
-for $k = 0$, $e^{\b_0}$ is the baseline odds.
+For $k \neq 0$, $e^{\b_k}$ is an [odds ratio](binary-outcome-associations.qmd#def-OR);
+for $k = 0$, $e^{\b_0}$ is the baseline [odds](binary-outcome-associations.qmd#def-odds).
 
 :::
 
@@ -250,7 +250,7 @@ $$\ror(D|E) \eqdef \frac{\odds(D|E)}{\odds(D|\neg E)},
 \qquad \ror(E|D) \eqdef \frac{\odds(E|D)}{\odds(E|\neg D)}$$
 
 **Case-control studies** ([section](binary-outcome-associations.qmd#sec-CC-studies)):
-outcome-stratified sampling breaks estimation of risks, risk ratios,
+outcome-stratified sampling breaks estimation of risks, [risk ratios](binary-outcome-associations.qmd#def-RR),
 and the components of the disease odds ratio ([def](binary-outcome-associations.qmd#def-disease-OR)),
 but the exposure odds ratio ([def](binary-outcome-associations.qmd#def-exposure-OR)) is estimable,
 and it equals the disease odds ratio by reversibility ([thm](binary-outcome-associations.qmd#thm-or-swap)).
@@ -286,7 +286,7 @@ $$\text{AIC} = -2 \llik(\hth) + 2p,
 \qquad \text{BIC} = -2 \llik(\hth) + p \logf{n}$$
 
 **Likelihood ratio test** ([def](logistic-regression.qmd#def-lrt); for nested models with $p_0 < p_1$ parameters —
-here $\llik_1$ and $\llik_0$ are the two fitted models' log-likelihoods,
+here $\llik_1$ and $\llik_0$ are the two fitted models' [log-likelihoods](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik),
 not the saturated model's)
 $$\Lambda \eqdef 2(\llik_1(\hth_1) - \llik_0(\hth_0)),
 \qquad \Lambda \dsim \chi^2(p_1 - p_0) \text{ under } H_0$$
@@ -319,8 +319,8 @@ $$D_k \eqdef \frac{(r_{P_k})^2}{p} \cdot \frac{h_k}{1 - h_k}$$
 :::
 
 **Leverage** ([def](logistic-regression.qmd#def-leverage-glm)):
-$h_k$ is the $k$-th diagonal element of the weighted hat matrix
-(with $\mX$ here the $q \times p$ design matrix of covariate patterns):
+$h_k$ is the $k$-th diagonal element of the weighted [hat matrix](Linear-models-overview.qmd#def-hat-matrix)
+(with $\mX$ here the $q \times p$ [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) of covariate patterns):
 $$\underbrace{\matr{H}}_{q \times q}
 \eqdef
 \underbrace{\matr{W}^{1/2}}_{q \times q}
@@ -363,7 +363,7 @@ $$\pi(a) \eqdef \Pr(Y = 1 \mid A = a) = \E{\pi(a, Z) \mid A = a}$$
 $$\mu_a \eqdef \E{Y^a},
 \qquad \pi_a \eqdef \Pr(Y^a = 1) = \E{\pi(a, Z)}$$
 
-**No confounding: observed = causal** ([cor](logistic-regression.qmd#cor-observed-equals-causal); the two estimands are contrasted in [rem](logistic-regression.qmd#rem-observed-vs-causal-marginal-risk))
+**No confounding: observed = causal** ([cor](logistic-regression.qmd#cor-observed-equals-causal); the two [estimands](https://morrison-lab.github.io/sds/estimation.html#def-estimand) are contrasted in [rem](logistic-regression.qmd#rem-observed-vs-causal-marginal-risk))
 $$Z \ind A \implies \pi(a) = \pi_a$$
 
 **G-computation estimator** ([def](logistic-regression.qmd#def-g-computation); consistent for $\pi_a$ by [thm](logistic-regression.qmd#thm-g-computation-consistency))
@@ -391,12 +391,12 @@ $$\text{CMRD} \eqdef \pi_1 - \pi_0,
 ([def](logistic-regression.qmd#def-bootstrap-marginal-rd); see [Bootstrap Confidence Intervals](https://morrison-lab.github.io/sds/bootstrap.html#sec-bootstrap-ci) and [exm](logistic-regression.qmd#exm-wcgs-marginal-rd)):
 resample the data with replacement $B$ times;
 refit the logistic model and recompute the marginal contrast on each resample;
-the bootstrap SE is the standard deviation of the $B$ estimates,
+the bootstrap SE is the [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) of the $B$ estimates,
 and a 95% percentile CI uses their 2.5th and 97.5th percentiles.
 
 **Collapsibility** ([def](logistic-regression.qmd#def-collapsibility)):
 an estimand $\theta$ is collapsible with respect to $Z$ if
 $$\theta \eqdef \E{\theta(Z)}$$
-Risk differences are collapsible;
-risk ratios and odds ratios are not collapsible in general
+[Risk differences](binary-outcome-associations.qmd#def-RD) are collapsible;
+[risk ratios](binary-outcome-associations.qmd#def-RR) and [odds ratios](binary-outcome-associations.qmd#def-OR) are not collapsible in general
 ([thm](logistic-regression.qmd#thm-collapsibility); counterexample in [exm](logistic-regression.qmd#exm-collapsibility)).

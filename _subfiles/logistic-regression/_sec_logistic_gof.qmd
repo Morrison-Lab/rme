@@ -6,7 +6,7 @@
 
 #### Deviance goodness-of-fit test
 
-We can compare the maximized log-likelihood of our model,
+We can compare the maximized [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) of our model,
 $\llik(\hat\beta; \mathbf x)$,
 versus the log-likelihood of the full
 model (aka saturated model aka maximal model), $\llik_{\text{full}}$,
@@ -20,7 +20,7 @@ $D \dot \sim \chi^2(q - p)$,
 where $q$ is the number of distinct covariate patterns
 and $p$ is the number of $\beta$ parameters in our model.
 The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution;
-a significant p-value for this **deviance** statistic
+a significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this **deviance** statistic
 indicates that there's some detectable pattern in the data
 that our model isn't flexible enough to catch.
 
@@ -36,7 +36,7 @@ pattern $k\in 1:q$.
 :::
 
 If you have covariates measured on a continuous scale, you may not be
-able to use the deviance tests to assess goodness of fit.
+able to use the [deviance tests](#def-deviance-test) to assess goodness of fit.
 
 {{< slidebreak >}}
 
@@ -48,7 +48,7 @@ Our CHD model `chd_glm_contrasts` was fit to individual-level observations,
 but its covariate patterns are just the combinations of
 personality type (`dibpat`) and whole-year `age`,
 so we can refit the same model to the grouped data
-and perform the deviance test:
+and perform the [deviance test](#def-deviance-test):
 
 ```{r}
 #| label: deviance-test-wcgs
@@ -91,7 +91,7 @@ and the model has $p = `r p_gof`$ parameters,
 so the deviance statistic
 $D = `r round(deviance_gof, 2)`$
 has $q - p = `r q_gof - p_gof`$ degrees of freedom.
-The corresponding p-value is
+The corresponding [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) is
 $p(\chi^2(`r q_gof - p_gof`) > `r round(deviance_gof, 2)`) = `r round(pval_deviance_gof, 3)`$,
 so the deviance test finds no significant evidence of lack of fit
 for this model.
@@ -119,7 +119,7 @@ probability together, and so on; $g=10$ categories in all.
 Then we can construct a statistic
 $$X^2 \eqdef \sum_{c=1}^g \frac{(o_c - e_c)^2}{e_c}$$ where $o_c$ is the
 number of events *observed* in group $c$, and $e_c$ is the number of
-events expected in group $c$ (based on the sum of the fitted values
+events expected in group $c$ (based on the sum of the [fitted values](https://morrison-lab.github.io/sds/estimation.html#def-fitted-value)
 $\hat\pi_i$ for observations in group $c$).
 
 If each group has enough observations in it, you can compare $X^2$ to a
@@ -129,9 +129,9 @@ found to be approximately $g-2$.
 :::
 
 ::: callout-note
-The Hosmer-Lemeshow statistic depends on how the observations are grouped.
+The [Hosmer-Lemeshow](#def-hosmer-lemeshow) statistic depends on how the observations are grouped.
 Changing the number of groups $g$, or the cut points used to form them,
-can change the value of $X^2$ and its p-value for the same fitted model,
+can change the value of $X^2$ and its [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for the same fitted model,
 so the test can reach different conclusions depending on the grouping choice.
 @hosmer1997comparison compare the Hosmer-Lemeshow test against several
 alternative goodness-of-fit tests and document this sensitivity.
@@ -180,7 +180,7 @@ pval1 <- pchisq(X2, lower = FALSE, df = nrow(HL_table) - 2)
 ```
 
 Our statistic is $X^2 = `r X2`$; $p(\chi^2(1) > `r X2`) = `r pval1`$,
-which is our p-value for detecting a lack of goodness of fit.
+which is our [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for detecting a lack of goodness of fit.
 
 Unfortunately that grouping plan left us with
 just three categories with any observations,
@@ -273,13 +273,13 @@ better\]
     [@schwarz1978estimating]
     (see [the BIC definition](Linear-models-overview.qmd#def-bic))
 
-A larger maximized log-likelihood is not, by itself,
+A larger maximized [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is not, by itself,
 evidence that one model is better than another:
 adding parameters to a model can never decrease
 its maximized log-likelihood,
 so the more complex of two nested models always fits at least as well.
 For **nested** models,
-the likelihood ratio test accounts for this complexity difference
+the [likelihood ratio test](#def-lrt) accounts for this complexity difference
 by testing whether the improvement in fit
 is larger than chance alone would produce:
 
@@ -297,9 +297,9 @@ The **likelihood ratio test statistic** is:
 $$\Lambda \eqdef 2(\llik_{\text{full}}(\hat\theta_1) - \llik_{\text{red}}(\hat\theta_0))$$
 
 where $\hat\theta_1$ and $\hat\theta_0$ are
-the maximum likelihood estimates
+the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
 of the full and reduced models, respectively.
-Under the null hypothesis that the reduced model is adequate,
+Under the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) that the reduced model is adequate,
 $\Lambda \dot \sim \chi^2(p_1 - p_0)$
 by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 The **likelihood ratio test (LRT)** rejects the reduced model
@@ -321,7 +321,7 @@ Our CHD model `chd_glm_contrasts` includes a `dibpat:age` interaction term.
 Does that interaction term improve the fit
 enough to justify its extra parameter?
 Let's fit the nested model without the interaction term
-and compare the two models with a likelihood ratio test:
+and compare the two models with a [likelihood ratio test](#def-lrt):
 
 ```{r}
 #| label: lrt-wcgs
@@ -348,7 +348,7 @@ df_chd <- lrt_chd$Df[2]
 pval_lrt_chd <- lrt_chd$`Pr(>Chi)`[2]
 ```
 
-Here the test statistic is:
+Here the [test statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) is:
 
 $$
 \ba
@@ -368,7 +368,7 @@ The full model has $p_1 = `r length(coef(chd_glm_contrasts))`$ parameters
 and the reduced model has $p_0 = `r length(coef(chd_glm_additive))`$,
 so the null distribution is
 $\chi^2(p_1 - p_0) = \chi^2(`r df_chd`)$,
-and the p-value is
+and the [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) is
 $p(\chi^2(`r df_chd`) > `r round(lambda_chd, 2)`) = `r round(pval_lrt_chd, 3)`$.
 The LRT finds no significant evidence
 that the interaction term improves the fit.
@@ -383,7 +383,7 @@ performs the same test:
 lmtest::lrtest(chd_glm_contrasts, chd_glm_additive)
 ```
 
-AIC and BIC can also compare these two models:
+[AIC](Linear-models-overview.qmd#def-aic) and [BIC](Linear-models-overview.qmd#def-bic) can also compare these two models:
 
 ```{r}
 #| label: aic-bic-wcgs

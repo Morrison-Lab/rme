@@ -1,6 +1,6 @@
 ### Logistic regression residuals only work for grouped data
 
-The residual and leverage diagnostics in this section
+The residual and [leverage](#def-leverage-glm) diagnostics in this section
 follow the logistic-regression diagnostics developed by @pregibon1981logistic;
 see also @dobson4e [Chapter 7] and @vittinghoff2e [Chapter 5]
 for textbook treatments.
@@ -111,7 +111,7 @@ and $\hat\pi(x_k)$ is the fitted probability for pattern $k$.
 #### Response residuals for the WCGS CHD model
 
 We can graph these residuals $e_k$ (@def-response-residual-logistic)
-against the fitted values
+against the [fitted values](https://morrison-lab.github.io/sds/estimation.html#def-fitted-value)
 $\hat\pi(x_k)$:
 
 ```{r}
@@ -164,18 +164,18 @@ wcgs_response_resid_plot |> print()
 ```
 
 We can see a slight fan-shape here: observations on the right have
-larger variance (as expected since $var(\bar y) = \pi(1-\pi)/n$ is
+larger [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) (as expected since $var(\bar y) = \pi(1-\pi)/n$ is
 maximized when $\pi = 0.5$).
 
 :::
 
 ### Pearson residuals
 
-The fan-shape in the response residuals plot isn't necessarily a concern
-here, since we haven't made an assumption of constant residual variance,
+The fan-shape in the [response residuals](#def-response-residual-logistic) plot isn't necessarily a concern
+here, since we haven't made an assumption of constant residual [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance),
 as we did for linear regression.
 
-However, we might want to divide by the standard error in order to make
+However, we might want to divide by the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) in order to make
 the graph easier to interpret. Here's one way to do that:
 
 {{< slidebreak >}}
@@ -209,7 +209,7 @@ $$
 
 Let's take a look at the Pearson residuals (@def-pearson-residual)
 for our CHD model from the
-WCGS data (graphed against the fitted values on the logit scale):
+WCGS data (graphed against the [fitted values](https://morrison-lab.github.io/sds/estimation.html#def-fitted-value) on the [logit](binary-outcome-associations.qmd#def-logit-fn) scale):
 
 ```{r}
 library(ggfortify)
@@ -255,7 +255,7 @@ autoplot(beetles_glm_grouped, which = 1, ncol = 1) |> print()
 ```
 
 The clear pattern in the residuals
-signals that the straight-line logit model
+signals that the straight-line [logit](binary-outcome-associations.qmd#def-logit-fn) model
 does not fit the beetle-mortality data well.
 
 :::
@@ -289,7 +289,7 @@ With a single binary observation per covariate pattern,
 the residuals have no meaningful reference distribution
 to assess the model fit against;
 this lack of a reference distribution is why
-logistic regression residuals only work for grouped data,
+[logistic regression](#def-logistic-regression) residuals only work for grouped data,
 with multiple observations per covariate pattern.
 
 #### Residuals plot by hand
@@ -345,7 +345,7 @@ wcgs_resid_plot1 |> print()
 The Pearson chi-squared goodness of fit statistic is:
 $$X^2 = \sum_{k=1}^q X_k^2$$
 
-Under the null hypothesis that the model in question is correct
+Under the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) that the model in question is correct
 (i.e., sufficiently complex), $X^2\ \dot \sim\ \chi^2(q-p)$.
 
 ```{r}
@@ -361,7 +361,7 @@ pval <- pchisq(
 )
 ```
 
-For our CHD model, the p-value for this test is `r pval`; no significant
+For our CHD model, the [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this test is `r pval`; no significant
 evidence of a lack of fit at the 0.05 level.
 
 {{< slidebreak >}}
@@ -386,7 +386,7 @@ $$
 
 where
 $\underbrace{\matr{W}}_{q \times q} \eqdef \text{diag}\paren{n_k \, \hat\pi_k \, (1 - \hat\pi_k)}$
-is the diagonal matrix of binomial weights,
+is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) of binomial weights,
 and the **leverage** $h_k$ of covariate pattern $k$
 is the $k$-th diagonal element of $\matr{H}$.
 
@@ -402,7 +402,7 @@ the weight matrix $\matr{W}$ reduces to the identity in the ordinary-least-squar
 #### Standardized Pearson residual
 
 Especially for small data sets, we might want to adjust our residuals
-for leverage (since outliers in $X$ add extra variance to the
+for [leverage](#def-leverage-glm) (since outliers in $X$ add extra [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) to the
 residuals):
 
 $$r_{P_k} \eqdef \frac{X_k}{\sqrt{1-h_k}}$$
@@ -415,10 +415,10 @@ The functions `autoplot()` and
 
 ### Deviance residuals
 
-For large sample sizes, the Pearson and deviance residuals will be
+For large sample sizes, the Pearson and [deviance residuals](#def-deviance-residual-logistic) will be
 approximately the same. For small sample sizes, the deviance residuals
 from covariate patterns with small sample sizes can be unreliable (high
-variance).
+[variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance)).
 
 {{< slidebreak >}}
 
@@ -428,7 +428,7 @@ variance).
 
 Here $\llik_{\text{full}}(x_k)$ is the saturated model's log-likelihood contribution
 from covariate pattern $k$,
-so that summing over the covariate patterns gives the full log-likelihood:
+so that summing over the covariate patterns gives the full [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik):
 
 $$\llik_{\text{full}} \eqdef \sum_{k} \llik_{\text{full}}(x_k)$$
 
@@ -443,7 +443,7 @@ $$d_k \eqdef \signt(y_k - n_k \hat \pi_k)
 #### Standardized deviance residuals
 
 Analogously to the standardized Pearson residual (@def-standardized-pearson-residual),
-we can adjust the deviance residual for leverage:
+we can adjust the [deviance residual](#def-deviance-residual-logistic) for [leverage](#def-leverage-glm):
 
 $$r_{D_k} \eqdef \frac{d_k}{\sqrt{1-h_k}}$$
 

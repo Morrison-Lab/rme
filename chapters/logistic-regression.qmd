@@ -36,9 +36,9 @@ This content is adapted from:
 
 ::: notes
 This chapter assumes familiarity with
-the measures of association for binary outcomes —
-risks, risk differences and ratios, odds, odds ratios,
-and the logit and expit functions —
+the measures of association for [binary outcomes](https://morrison-lab.github.io/sds/data.html#def-binary-var) —
+risks, [risk differences](binary-outcome-associations.qmd#def-RD) and ratios, [odds](binary-outcome-associations.qmd#def-odds), [odds ratios](binary-outcome-associations.qmd#def-OR),
+and the [logit](binary-outcome-associations.qmd#def-logit-fn) and [expit](binary-outcome-associations.qmd#def-expit) functions —
 which are reviewed in
 [Measures of Association for Binary Outcomes](binary-outcome-associations.qmd).
 :::
@@ -50,8 +50,8 @@ David Rocke's Epi 204 lecture
 [*Introduction to Logistic Regression*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-03-30.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-1%20Introduction%20to%20Logistic%20Regression.pdf))
 continues from [risks and odds ratios](binary-outcome-associations.qmd)
-to generalized linear models, the logit link,
-and fitting and interpreting logistic regression models in R
+to generalized linear models, the [logit](binary-outcome-associations.qmd#def-logit-fn) link,
+and fitting and interpreting [logistic regression models](#def-logistic-regression) in R
 [@rocke2021epi204].
 :::
 
@@ -59,8 +59,8 @@ and fitting and interpreting logistic regression models in R
 Josh Starmer's StatQuest video
 [*StatQuest: Logistic Regression*](https://www.youtube.com/watch?v=yIYKR4sgzI8)
 gives a visual overview of logistic regression:
-modeling the probability of a binary outcome,
-and fitting the model by maximum likelihood rather than least squares
+modeling the probability of a [binary outcome](https://morrison-lab.github.io/sds/data.html#def-binary-var),
+and fitting the model by [maximum likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) rather than least squares
 [@starmer-statquest].
 :::
 
@@ -86,8 +86,8 @@ rather than the maximum likelihood estimation used in this chapter
 ::: {.callout-tip title="Video tutorial"}
 Josh Starmer's StatQuest video
 [*Logistic Regression Details Pt1: Coefficients*](https://www.youtube.com/watch?v=vN5cNN2-HWE)
-explains how logistic regression coefficients are interpreted on the log-odds scale,
-for both continuous and categorical predictors
+explains how [logistic regression](#def-logistic-regression) coefficients are interpreted on the [log-odds](binary-outcome-associations.qmd#def-logodds) scale,
+for both continuous and [categorical predictors](https://morrison-lab.github.io/sds/data.html#def-categorical-var)
 [@starmer-statquest].
 :::
 
@@ -107,9 +107,9 @@ for both continuous and categorical predictors
 David Rocke's Epi 204 lecture
 [*Logistic Regression and Likelihood*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-01.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2%20Logistic%20Regression%20and%20Likelihood.pdf))
-covers maximum likelihood estimation for logistic regression,
+covers [maximum likelihood estimation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) for [logistic regression](#def-logistic-regression),
 deviance,
-and comparing models with AIC and deviance tests
+and comparing models with [AIC](Linear-models-overview.qmd#def-aic) and [deviance tests](#def-deviance-test)
 [@rocke2021epi204].
 :::
 
@@ -135,8 +135,8 @@ shows how maximum likelihood estimation fits a logistic regression curve
 David Rocke's Epi 204 lecture
 [*Inference for Logistic Regression*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-06.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-3%20Inference%20for%20Logistic%20Regression.pdf))
-covers likelihood ratio tests for nested models,
-Wald tests and confidence intervals,
+covers [likelihood ratio tests](#def-lrt) for nested models,
+[Wald tests](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval),
 and interaction terms,
 using the Evans County heart disease data
 [@rocke2021epi204].
@@ -166,8 +166,8 @@ using the Evans County heart disease data
 David Rocke's Epi 204 lecture
 [*Diagnostics and Goodness of Fit*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-13.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture5_Diagnostics_Logistic_Regression.pdf))
-covers the deviance goodness-of-fit test
-and the Hosmer-Lemeshow test
+covers the [deviance goodness-of-fit test](#def-deviance-test)
+and the [Hosmer-Lemeshow test](#def-hosmer-lemeshow)
 [@rocke2021epi204].
 :::
 
@@ -181,8 +181,8 @@ explains saturated models, null deviance, and residual deviance
 ::: {.callout-tip title="Video tutorial"}
 Josh Starmer's StatQuest video
 [*Logistic Regression Details Pt 3: R-squared and p-value*](https://www.youtube.com/watch?v=xxFYro8QuXA)
-explains a likelihood-based pseudo-$R^2$ for logistic regression
-and the likelihood ratio test of the fitted model against the intercept-only model
+explains a likelihood-based pseudo-$R^2$ for [logistic regression](#def-logistic-regression)
+and the [likelihood ratio test](#def-lrt) of the fitted model against the intercept-only model
 [@starmer-statquest].
 :::
 
@@ -194,16 +194,16 @@ and the likelihood ratio test of the fitted model against the intercept-only mod
 David Rocke's Epi 204 lecture
 [*Diagnostics and Goodness of Fit*](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-13.mp4)
 ([slides](https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture5_Diagnostics_Logistic_Regression.pdf))
-covers residuals, leverage, and influence diagnostics
+covers residuals, [leverage](#def-leverage-glm), and influence diagnostics
 for grouped and ungrouped logistic models,
-and overdispersion
+and [overdispersion](count-regression.qmd#def-overdispersion)
 [@rocke2021epi204].
 :::
 
 ::: {.callout-tip title="Video tutorial"}
 Josh Starmer's StatQuest video
 [*Deviance Residuals*](https://www.youtube.com/watch?v=JC56jS2gVUE)
-explains how deviance residuals are computed and used
+explains how [deviance residuals](#def-deviance-residual-logistic) are computed and used
 [@starmer-statquest].
 :::
 
