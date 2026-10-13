@@ -19,9 +19,6 @@ $g\paren{\mu(\vx)} = \eta(\vx)$ (@def-link-function).
 :::
 
 ::: notes
-The classical definition also requires the distribution family
-to be an exponential dispersion family;
-@sec-canonical-link defines that family.
 A GLM specifies model structure only:
 its coefficients $\vb$ can be estimated by maximum likelihood,
 by Bayesian methods, or by other inference methods.
@@ -35,7 +32,7 @@ by Bayesian methods, or by other inference methods.
 Let $Y \in \{0, 1\}$ indicate death of a beetle exposed to dose $x$.
 The model with
 
-1.  outcome distribution $Y|X=x \sim \text{Bernoulli}\paren{\mu(x)}$,
+1.  outcome distribution $Y|X=x \sim \Bernoulli\paren{\mu(x)}$,
 2.  linear predictor $\eta(x) = \b_0 + \b_1 x$,
 3.  logit link $\logit\paren{\mu(x)} = \eta(x)$
 
@@ -45,7 +42,7 @@ With $\b_0 = -60$ and $\b_1 = 34$,
 $\eta(1.8) = 1.2$ and $\P(Y=1|X=1.8) = \mu(1.8) \approx 0.7685$.
 
 The Gaussian linear regression model
-$Y|X=x \sim \text{N}\paren{\b_0 + \b_1 x, \sigma^2}$
+$Y|X=x \sim \ndist{\b_0 + \b_1 x, \sigma^2}$
 is also a GLM,
 with a Gaussian outcome distribution
 and the identity link $g(\mu) = \mu$,
