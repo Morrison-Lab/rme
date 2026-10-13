@@ -1,0 +1,64 @@
+:::{#exm-deviance}
+#### Residual and null deviance for a small dataset
+
+Use the data from @exm-saturated-model,
+and suppose that the variance $\sigma^2 = 1$ is known.
+With $\sigma^2$ fixed, a Gaussian log-likelihood depends on the data
+only through the residual sum of squares (RSS):
+$\llik = -\frac{n}{2}\logf{2\pi\sigma^2} - \frac{\text{RSS}}{2\sigma^2}$.
+For a model $M$ with residual sum of squares $\text{RSS}_M$:
+
+$$
+\ba
+D
+&= 2\paren{\llik_{\text{sat}} - \llik(\evb)}
+&& \text{(definition of deviance)}
+\\
+&= 2\paren{\sb{-\frac{n}{2}\logf{2\pi\sigma^2} - \frac{\text{RSS}_{\text{sat}}}{2\sigma^2}}
+- \sb{-\frac{n}{2}\logf{2\pi\sigma^2} - \frac{\text{RSS}_M}{2\sigma^2}}}
+&& \text{(substitute log-likelihoods)}
+\\
+&= 2\paren{\frac{\text{RSS}_M}{2\sigma^2} - \frac{\text{RSS}_{\text{sat}}}{2\sigma^2}}
+&& \text{(cancel log terms)}
+\\
+&= \frac{\text{RSS}_M - \text{RSS}_{\text{sat}}}{\sigma^2}
+&& \text{(simplify)}
+\ea
+$$
+
+**Saturated model:** the fitted values are the pattern means $2$, $6$, and $7$, so
+$\text{RSS}_{\text{sat}} = (1-2)^2 + (3-2)^2 + (5-6)^2 + (7-6)^2 + (6-7)^2 + (8-7)^2 = 6$.
+
+**Simple linear regression model:**
+the least-squares estimates use $\bar{x} = 1$ and $\bar{y} = 30/6 = 5$:
+
+$$
+\ba
+\eb_1
+&= \frac{\sumin (x_i - \bar{x})(y_i - \bar{y})}{\sumin (x_i - \bar{x})^2}
+&& \text{(least-squares slope)}
+\\
+&= \frac{(-1)(-4) + (-1)(-2) + 0 + 0 + (1)(1) + (1)(3)}{1 + 1 + 0 + 0 + 1 + 1}
+&& \text{(substitute data)}
+\\
+&= \frac{10}{4} = 2.5
+&& \text{(arithmetic)}
+\\
+\eb_0
+&= \bar{y} - \eb_1 \bar{x} = 5 - 2.5 \cdot 1 = 2.5
+&& \text{(least-squares intercept)}
+\ea
+$$
+
+The fitted values are $2.5$, $5$, and $7.5$ at $x = 0, 1, 2$, so
+$\text{RSS}_M = (1-2.5)^2 + (3-2.5)^2 + (5-5)^2 + (7-5)^2 + (6-7.5)^2 + (8-7.5)^2 = 9$,
+and the residual deviance is $D = (9 - 6)/1 = 3$.
+
+**Null model:** the fitted value is $\bar{y} = 5$ for every observation, so
+$\text{RSS}_0 = (1-5)^2 + (3-5)^2 + (5-5)^2 + (7-5)^2 + (6-5)^2 + (8-5)^2 = 34$,
+and the null deviance is $D_0 = (34 - 6)/1 = 28$.
+
+The linear model's residual deviance ($3$) is much smaller than the null deviance ($28$):
+the linear model captures most of the variation in pattern means
+that the null model misses.
+:::
