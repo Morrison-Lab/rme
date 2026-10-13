@@ -95,10 +95,10 @@ $$
 && \text{(distribute summation)}
 \\
 &= -\frac{n}{2}\logf{2\pi\ss} - \frac{1}{2\ss}\paren{\veps \cdot \veps}
-&& \text{(express sum of squared residuals as dot product)}
+&& \text{(express sum of squared deviations as dot product)}
 \\
 &= -\frac{n}{2}\logf{2\pi\ss} - \frac{1}{2\ss}\paren{(\vy - \vm) \cdot (\vy - \vm)}
-&& \text{(substitute residual vector } \veps = \vy - \vm\text{)}
+&& \text{(substitute deviation vector } \veps = \vy - \vm\text{)}
 \\
 &= -\frac{n}{2}\logf{2\pi\ss} - \frac{1}{2\ss}\paren{(\vy - \mX\vb) \cdot (\vy - \mX\vb)}
 && \text{(substitute mean vector } \vm = \mX\vb\text{)}
@@ -136,7 +136,7 @@ $$
 \ba
 \eps'_i
 &\eqdef \deriv{\vb}\eps_i
-&& \text{(gradient of residual w.r.t. } \vb\text{)}
+&& \text{(gradient of deviation w.r.t. } \vb\text{)}
 \\
 &= \deriv{\vb} (y_i - \mu_i)
 && \text{(substitute definition of the deviation)}
@@ -230,7 +230,7 @@ $$
 \ba
 \mathbf{0}_{(p+1) \times 1}
 &= \sumin \vx_i \paren{y_i - (\vx_i \cdot \vb)}
-&& \text{(substitute explicit residual expression)}
+&& \text{(substitute explicit deviation expression)}
 \\
 &= \sumin \vx_i y_i - \sumin \vx_i (\vx_i \cdot \vb)
 && \text{(distribute summation across terms)}
@@ -351,7 +351,7 @@ $$ {#eq-linreg-score}
 Let's switch to matrix-vector notation:
 :::
 
-The sum of squared residuals can be rewritten in vector notation using the inner product:
+The sum of squared deviations can be rewritten in vector notation using the inner product:
 
 $$
 \sumin (y_i - \tp{\vx_i} \vb)^2 = (\vy - \mX\vb) \cdot (\vy - \mX\vb) = \tp{(\vy - \mX\vb)}(\vy - \mX\vb)
@@ -381,7 +381,7 @@ $$
 We will use some results from [vector calculus](https://morrison-lab.github.io/mds/vector-calculus.html):
 :::
 
-Differentiating each term in the expanded sum-of-squared-residuals quadratic form with respect to $\vb$:
+Differentiating each term in the expanded sum-of-squared-deviations quadratic form with respect to $\vb$:
 
 $$
 \ba
@@ -402,11 +402,11 @@ $$
 && \text{(substitute conditional mean } \E{\vY \mid \mX} = \mX\vb\text{)}
 \\
 &= -2\tp{\mX} \veps
-&& \text{(substitute residual vector } \veps = \vy - \mX\vb\text{)}
+&& \text{(substitute deviation vector } \veps = \vy - \mX\vb\text{)}
 \ea
 $${#eq-scorefun-linreg}
 
-Multiplying the sum-of-squared-residuals gradient by the scalar factor $-\frac{1}{2\ss}$ yields the full log-likelihood score vector $\score_{\vb}$:
+Multiplying the sum-of-squared-deviations gradient by the scalar factor $-\frac{1}{2\ss}$ yields the full log-likelihood score vector $\score_{\vb}$:
 
 $$
 \ba
