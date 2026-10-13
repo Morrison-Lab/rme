@@ -23,11 +23,7 @@ With enough data,
 $D \dot \sim \chi^2(q - p)$,
 where $q$ is the number of distinct covariate patterns
 and $p$ is the number of $\beta$ parameters in our model.
-The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution;
-a significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this **deviance** statistic
-indicates that there's some detectable pattern in the data
-that our model isn't flexible enough to catch.
-
+The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution.
 :::
 
 ::: callout-caution
@@ -100,6 +96,16 @@ $p(\chi^2(`r q_gof - p_gof`) > `r round(deviance_gof, 2)`) = `r round(pval_devia
 so the deviance test finds no significant evidence of lack of fit
 for this model.
 
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-deviance-test-interpretation}
+#### Interpreting the deviance test
+
+A significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this deviance statistic
+indicates that there's some detectable pattern in the data
+that our model isn't flexible enough to catch.
 :::
 
 ### Hosmer-Lemeshow test

@@ -40,11 +40,16 @@ one of them is necessarily counterfactual
 The **observed outcome** for unit $i$ is the potential outcome
 corresponding to the treatment actually received:
 $$Y_i \eqdef Y_i(A_i) = A_i \cdot Y_i(1) + (1 - A_i) \cdot Y_i(0)$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-observed-outcome-consistency}
+#### Observed and potential outcomes: the consistency assumption
 
 This relationship between observed and potential outcomes is sometimes called the **[consistency](#def-consistency)** assumption:
 the observed outcome under the observed treatment
 equals the potential outcome under that treatment.
-
 :::
 
 {{< slidebreak >}}
@@ -55,11 +60,6 @@ equals the potential outcome under that treatment.
 The **individual causal effect** for unit $i$ is the difference
 between that unit's two potential outcomes:
 $$\tau_i \eqdef Y_i(1) - Y_i(0)$$
-
-Because of the fundamental problem of causal inference,
-we can never observe both $Y_i(1)$ and $Y_i(0)$ for the same unit,
-so individual causal effects are generally not identified.
-
 :::
 
 {{< slidebreak >}}
@@ -80,4 +80,14 @@ For unit 1 ($A_1 = 1$), we observe $Y_1 = Y_1(1) = 15$, while $Y_1(0) = 5$ is un
 For unit 2 ($A_2 = 0$), we observe $Y_2 = Y_2(0) = 2$, while $Y_2(1) = 8$ is counterfactual.
 Because only one potential outcome is observed per unit,
 we cannot directly calculate $\tau_i$ for any individual in real data.
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-individual-causal-effect-identification}
+#### Individual causal effects are not identified
+
+Because of the fundamental problem of causal inference,
+we can never observe both $Y_i(1)$ and $Y_i(0)$ for the same unit,
+so individual causal effects are generally not identified.
 :::
