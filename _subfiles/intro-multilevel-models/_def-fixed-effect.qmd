@@ -1,0 +1,39 @@
+:::{#def-fixed-effect}
+#### Fixed effect
+
+A **fixed effect** is a model term
+whose coefficient the model treats as an unknown constant,
+such as the effect of a specific treatment
+or the mean of a specific group;
+the goal is to estimate that particular value
+[@rocke2021epi204; @gelman2006data, Chapter 11].
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-fixed-effect}
+#### A treatment fixed effect
+
+In a trial comparing a new blood-pressure drug with a placebo,
+let $X = 1$ for the drug group and $X = 0$ for the placebo group,
+and suppose that the mean systolic blood pressure (in mmHg) is
+$$
+\E{Y|X=x} = \b_0 + \b_1 x,
+$$
+with $\b_0 = 120$ and $\b_1 = -8$.
+Both coefficients are fixed effects:
+each is a single constant that applies to every participant.
+The mean in the drug group is:
+
+$$
+\begin{aligned}
+\E{Y|X=1}
+&= \b_0 + \b_1 \cdot 1
+&& \text{(substitute $x = 1$)}\\
+&= 120 + (-8) \cdot 1
+&& \text{(substitute the coefficient values)}\\
+&= 112
+&& \text{(arithmetic)}
+\end{aligned}
+$$
+:::
