@@ -4,7 +4,7 @@ contains data from a clinical trial
 of D-penicillamine treatment in primary biliary cholangitis (PBC)
 [@dickson1989prognosis].
 
-Here we demonstrate the effect of left-truncation
+Here we demonstrate the effect of [left-truncation](#def-left-truncation)
 by comparing analyses using two different time scales:
 
 1. Time from enrollment (standard approach, no truncation)
@@ -69,7 +69,7 @@ ggplot(km_combined) +
   theme(legend.position = "bottom")
 ```
 
-Kaplan-Meier survival curves for the PBC study
+[Kaplan-Meier](#def-KM-estimator) survival curves for the PBC study
 using two different time scales:
 time from enrollment (no truncation)
 vs. age centered at the median enrollment age (left-truncated).
@@ -87,7 +87,7 @@ would lead to overestimated survival:
 participants who died at younger ages ---
 before reaching their enrollment age ---
 were never observed and are excluded from the data,
-leading to a risk set that over-represents longer survivors.
+leading to a [risk set](#def-risk-set) that over-represents longer survivors.
 :::
 
 ## Effect of Ignoring Left-Truncation
@@ -98,11 +98,11 @@ When left-truncation is ignored:
   (especially at early time points)
 - The analysis fails to account
   for undersampling of short survival times
-- Hazard ratios in Cox models may be attenuated
+- [Hazard ratios](#def-hazard-ratio) in [Cox models](proportional-hazards-models.qmd#def-ph-model) may be attenuated
   (effect is less predictable)
 
-The following example illustrates the bias using the PBC data.
-The naive analysis treats all participants as entering the risk set
+The following example illustrates the [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias) using the PBC data.
+The naive analysis treats all participants as entering the [risk set](#def-risk-set)
 at the earliest observed age,
 whereas the proper analysis uses counting-process notation
 to enter each participant at their actual enrollment age.

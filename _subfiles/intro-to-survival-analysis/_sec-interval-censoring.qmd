@@ -47,8 +47,8 @@ but we know it occurred within a specific time interval.
 
 **When intervals are regularly spaced:**
 
-- Pooled logistic regression [@vittinghoff2e, Section 5.5.2]
-  can handle interval censoring
+- Pooled [logistic regression](logistic-regression.qmd#def-logistic-regression) [@vittinghoff2e, Section 5.5.2]
+  can handle [interval censoring](#def-interval-censoring)
   when intervals arise from
   a regular study follow-up schedule
 
@@ -62,7 +62,7 @@ but we know it occurred within a specific time interval.
 
 The `mira_hsv` dataset from the `rmb` package
 contains data from the
-MIRA randomized trial evaluating HIV prevention [@debruyn2011mira].
+MIRA [randomized trial](causal-inference.qmd#sec-causal-rct) evaluating HIV prevention [@debruyn2011mira].
 Participants were tested for HSV-2 antibodies every 3 months.
 
 The data have a **panel structure**:
@@ -99,7 +99,7 @@ For subject 119, seroconversion occurred in (9, 12] months.
 For participants who seroconverted,
 the exact time of infection is unknown,
 but bounded by the last negative and first positive test.
-This uncertainty is the defining feature of interval censoring.
+This uncertainty is the defining feature of [interval censoring](#def-interval-censoring).
 
 The interval-censored structure for these three participants is:
 
@@ -111,6 +111,6 @@ The interval-censored structure for these three participants is:
 
 Since visits occur every 3 months,
 the infection time is known to within a 3-month window.
-This regular spacing allows pooled logistic regression
+This regular spacing allows pooled [logistic regression](logistic-regression.qmd#def-logistic-regression)
 to handle the interval censoring,
 as described in [@vittinghoff2e, Section 5.5.2].

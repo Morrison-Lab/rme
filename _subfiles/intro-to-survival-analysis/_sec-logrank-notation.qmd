@@ -10,11 +10,11 @@ For each ordered failure time $t_i$ and each group $g$, define:
 | Symbol | Meaning |
 |---|---|
 | $d_{gi}$ | number of failures in group $g$ at time $t_i$ |
-| $r_{gi}$ | number at risk in group $g$ just before time $t_i$ |
+| $r_{gi}$ | [number at risk](#def-number-at-risk) in group $g$ just before time $t_i$ |
 | $d_i = \sum_{g=1}^{G} d_{gi}$ | total failures at $t_i$ (pooled across groups) |
 | $r_i = \sum_{g=1}^{G} r_{gi}$ | total at risk at $t_i$ (pooled across groups) |
 
-This notation matches the $(d_i, r_i)$ notation used for the Kaplan-Meier estimator
+This notation matches the $(d_i, r_i)$ notation used for the [Kaplan-Meier estimator](#def-KM-estimator)
 elsewhere in this chapter;
 here we additionally split each count by group.
 
@@ -25,16 +25,16 @@ chapter.
 
 ## Expected counts under the null
 
-The null hypothesis is
+The [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) is
 
 $$H_0:\; \text{all $G$ groups have the same survival function.}$$
 
-Under $H_0$, the pooled marginal hazard estimate at time $t_i$ is
+Under $H_0$, the pooled marginal [hazard](#def-hazard) estimate at time $t_i$ is
 
 $$\hat{\haz}_i = \frac{d_i}{r_i}.$$
 
 The **expected** number of failures in group $g$ at time $t_i$ under
-$H_0$ is the pooled hazard applied to that group's risk set
+$H_0$ is the pooled hazard applied to that group's [risk set](#def-risk-set)
 [@kleinbaum2012survival, p. 68, "expected-cell-counts" box]:
 
 $$
