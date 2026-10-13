@@ -1,9 +1,9 @@
 @dobson4e [§2.3.4] describes checking a fitted model's adequacy
-by examining residuals:
-summaries of how far each observation falls from its fitted value.
+by examining [residuals](Linear-models-overview.qmd#def-resid-fitted):
+summaries of how far each observation falls from its [fitted value](Linear-models-overview.qmd#def-fitted-value).
 In a generalized linear model the outcome variance usually changes with the mean,
 so raw differences $y_i - \est{\mu}_i$ are not on a common scale;
-dividing by an estimated standard deviation puts them on one.
+dividing by an estimated [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) puts them on one.
 
 {{< slidebreak >}}
 
@@ -27,10 +27,10 @@ For a Poisson outcome, $V(\mu) = \mu$.
 
 ::: notes
 If the model is adequate and the fitted means are not too small,
-$X^2$ is approximately chi-squared distributed with $n - p$ degrees of freedom,
+$X^2$ is approximately [chi-squared distributed](https://morrison-lab.github.io/sds/inference.html#def-chi-square-dist) with $n - p$ degrees of freedom,
 where $p$ is the number of regression coefficients,
 so $X^2 / (n - p)$ should be close to 1;
-a ratio well above 1 suggests overdispersion
+a ratio well above 1 suggests [overdispersion](count-regression.qmd#def-overdispersion)
 [@dunn2018generalized, Chapter 7].
 The [count regression chapter](count-regression.qmd) returns to overdispersion.
 :::

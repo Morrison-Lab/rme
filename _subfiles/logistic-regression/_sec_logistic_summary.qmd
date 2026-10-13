@@ -159,11 +159,11 @@ $$\vec{\llik'}(\vb) = \sumin \vx_i\eps_i
 ## Maximum likelihood estimation {.unnumbered}
 
 **Estimating equation** ([eq](logistic-regression.qmd#eq-score-logistic))
-The [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hvb$ solves the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
-$$\underbrace{\vec{\llik'}(\hvb)}_{(p+1) \times 1} = \sumin \underbrace{\vx_i}_{(p+1) \times 1}\underbrace{\paren{y_i - \expitf{\tp{\vx_i}\hvb}}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}$$
+The [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$ solves the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
+$$\underbrace{\vec{\llik'}(\evb)}_{(p+1) \times 1} = \sumin \underbrace{\vx_i}_{(p+1) \times 1}\underbrace{\paren{y_i - \expitf{\tp{\vx_i}\evb}}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}$$
 
 This estimating equation has no closed-form solution in general;
-$\hvb$ must be computed by numerical iteration.
+$\evb$ must be computed by numerical iteration.
 
 **Hessian** ([eq](logistic-regression.qmd#eq-logistic-hess))
 $$\underbrace{\llik''(\vb)}_{(p+1) \times (p+1)} = -\underbrace{\tp{\mX}}_{(p+1) \times n} \underbrace{\matr{D}}_{n \times n} \underbrace{\mX}_{n \times (p+1)}, \qquad \matr{D} \eqdef \text{diag}(\Varf{Y_i|\vX_i=\vx_i}) = \text{diag}(\pi_i(1-\pi_i))$$
@@ -190,12 +190,12 @@ $$\hat{\odds}= \frac{x}{n-x}$$
 
 **Wald test statistic** for $H_0: \b_k = \b_{k,0}$
 ([CLT for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle))
-$$z_k = \frac{\hb_k - \b_{k,0}}{\HSE{\hb_k}},
+$$z_k = \frac{\eb_k - \b_{k,0}}{\HSE{\eb_k}},
 \qquad z_k \dsim N(0,1) \text{ under } H_0$$
 
 **95% confidence intervals for $\b_k$ and $e^{\b_k}$** ([MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) invariance)
-$$\hb_k \pm 1.96 \cdot \HSE{\hb_k},
-\qquad e^{\b_k} \in \paren{e^{\hb_k - 1.96 \cdot \HSE{\hb_k}},\; e^{\hb_k + 1.96 \cdot \HSE{\hb_k}}}$$
+$$\eb_k \pm 1.96 \cdot \HSE{\eb_k},
+\qquad e^{\b_k} \in \paren{e^{\eb_k - 1.96 \cdot \HSE{\eb_k}},\; e^{\eb_k + 1.96 \cdot \HSE{\eb_k}}}$$
 
 For $k \neq 0$, $e^{\b_k}$ is an [odds ratio](binary-outcome-associations.qmd#def-OR);
 for $k = 0$, $e^{\b_0}$ is the baseline [odds](binary-outcome-associations.qmd#def-odds).
@@ -231,17 +231,17 @@ $$\logf{\ror(\vx,\vxs)} = \difflogodds$$
 ## Inference for log-odds and odds ratios {.unnumbered}
 
 **Estimated SE of log-odds** ([thm](logistic-regression.qmd#thm-est-se-logodds))
-$$\hVar{\hat\logodds(\vx)} = \underbrace{\tp{\vx}}_{1 \times (p+1)}\underbrace{\eSigma}_{(p+1) \times (p+1)}\underbrace{\vx}_{(p+1) \times 1},
+$$\eVar{\hat\logodds(\vx)} = \underbrace{\tp{\vx}}_{1 \times (p+1)}\underbrace{\eSigma}_{(p+1) \times (p+1)}\underbrace{\vx}_{(p+1) \times 1},
 \qquad \HSE{\hat\logodds(\vx)} = \sqrt{\tp{\vx}\eSigma\vx}$$
 
 **Estimated SE of $\Delta\widehat{\logodds}$** ([thm](logistic-regression.qmd#thm-est-se-diff-logodds))
-$$\hVar{\Delta{\hat\logodds}} = \underbrace{\tp{\diffvx}}_{1 \times (p+1)}\underbrace{\eSigma}_{(p+1) \times (p+1)}\underbrace{(\diffvx)}_{(p+1) \times 1},
+$$\eVar{\Delta{\hat\logodds}} = \underbrace{\tp{\diffvx}}_{1 \times (p+1)}\underbrace{\eSigma}_{(p+1) \times (p+1)}\underbrace{(\diffvx)}_{(p+1) \times 1},
 \qquad \HSE{\Delta{\hat\logodds}} = \sqrt{\tp{\diffvx}\eSigma(\diffvx)}$$
 
 **CI for an odds ratio** ([eq](logistic-regression.qmd#eq-ci-OR-exp); details in [sec](logistic-regression.qmd#sec-or-inference)):
 exponentiate the endpoints of the CI for $\difflogodds$:
 $$\ror(\vx,\vxs) \in (e^L, e^R),
-\qquad (L, R) = \hdifflogodds \mp 1.96 \cdot \HSE{\hdifflogodds}$$
+\qquad (L, R) = \edifflogodds \mp 1.96 \cdot \HSE{\edifflogodds}$$
 
 ## Odds ratios in study designs {.unnumbered}
 
@@ -256,8 +256,8 @@ but the exposure odds ratio ([def](binary-outcome-associations.qmd#def-exposure-
 and it equals the disease odds ratio by reversibility ([thm](binary-outcome-associations.qmd#thm-or-swap)).
 
 **2×2 table shortcut** ([table](binary-outcome-associations.qmd#tbl-2x2-generic); cell counts $a, b$ = exposed events and non-events, $c, d$ = unexposed events and non-events):
-$$\hodds(Event|Exposed) = \frac{a}{b},
-\qquad \hodds(Event|\neg Exposed) = \frac{c}{d},
+$$\eodds(Event|Exposed) = \frac{a}{b},
+\qquad \eodds(Event|\neg Exposed) = \frac{c}{d},
 \qquad \ror(Exposed, \neg Exposed) = \frac{ad}{bc}$$
 
 ## Model fit and comparison {.unnumbered}
@@ -270,7 +270,7 @@ and $\llik_{\text{full}}$ is the saturated-model log-likelihood.
 :::{style="column-count: 2; column-gap: 2em;"}
 
 **Deviance test** ([def](logistic-regression.qmd#def-deviance-test))
-$$D \eqdef 2(\llik_{\text{full}} - \llik(\hb; \mathbf x)),
+$$D \eqdef 2(\llik_{\text{full}} - \llik(\eb; \mathbf x)),
 \qquad D \dsim \chi^2(q - p)$$
 
 **Hosmer-Lemeshow test** ([def](logistic-regression.qmd#def-hosmer-lemeshow); $g$ groups by predicted probability)
@@ -282,13 +282,13 @@ $$X^2 = \sum_{k=1}^q X_k^2 \dsim \chi^2(q-p)$$
 **AIC and BIC** [lower is better]
 ([AIC](Linear-models-overview.qmd#def-aic) [@akaike1974new];
 [BIC](Linear-models-overview.qmd#def-bic) [@schwarz1978estimating])
-$$\text{AIC} = -2 \llik(\hth) + 2p,
-\qquad \text{BIC} = -2 \llik(\hth) + p \logf{n}$$
+$$\text{AIC} = -2 \llik(\eth) + 2p,
+\qquad \text{BIC} = -2 \llik(\eth) + p \logf{n}$$
 
 **Likelihood ratio test** ([def](logistic-regression.qmd#def-lrt); for nested models with $p_0 < p_1$ parameters —
 here $\llik_1$ and $\llik_0$ are the two fitted models' [log-likelihoods](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik),
 not the saturated model's)
-$$\Lambda \eqdef 2(\llik_1(\hth_1) - \llik_0(\hth_0)),
+$$\Lambda \eqdef 2(\llik_1(\eth_1) - \llik_0(\eth_0)),
 \qquad \Lambda \dsim \chi^2(p_1 - p_0) \text{ under } H_0$$
 by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 
@@ -310,7 +310,7 @@ $$X_k \eqdef \frac{\bar y_k - \hat\pi_k}{\sqrt{\hat \pi_k (1-\hat\pi_k)/n_k}},
 
 **Deviance residual (and standardized version)** ([def](logistic-regression.qmd#def-deviance-residual-logistic))
 $$d_k \eqdef \signt(y_k - n_k \hat \pi_k)
-\set{\sqrt{2[\llik_{\text{full}}(x_k) - \llik(\hb; x_k)]}},
+\set{\sqrt{2[\llik_{\text{full}}(x_k) - \llik(\eb; x_k)]}},
 \qquad r_{D_k} \eqdef \frac{d_k}{\sqrt{1-h_k}}$$
 
 **Cook's distance** ([def](logistic-regression.qmd#def-cooks-distance-glm))

@@ -215,9 +215,9 @@ $$\resid_i \mid \mX \sim \Normal\paren{0,\; \ss(1 - h_{ii})}$$ {#eq-resid-dist-e
 where $h_{ii}$ is the $i$-th diagonal element of the hat matrix (@def-hat-matrix).
 When leverage is roughly uniform,
 $\ss(1-h_{ii}) \approx \ss$ for large $n$;
-replacing the unknown $\ss$ with its estimate $\hs^2$ gives:
+replacing the unknown $\ss$ with its estimate $\es^2$ gives:
 
-$$\resid_i \approx \Normal(0, \hs^2)$$ {#eq-resid-dist-approx}
+$$\resid_i \approx \Normal(0, \es^2)$$ {#eq-resid-dist-approx}
 
 :::
 
@@ -500,13 +500,13 @@ For an ordinary linear model,
 the estimated standard deviation of the $i$th residual is
 
 $$
-\hSD{\resid_i} = \hat{\sigma}\sqrt{1-h_{ii}}
+\eSD{\resid_i} = \hat{\sigma}\sqrt{1-h_{ii}}
 $$
 
 so the standardized residual is
 
 $$
-\stdresid_i = \frac{\resid_i}{\hSD{\resid_i}}
+\stdresid_i = \frac{\resid_i}{\eSD{\resid_i}}
 = \frac{\resid_i}{\hat{\sigma}\sqrt{1-h_{ii}}}
 $$
 :::

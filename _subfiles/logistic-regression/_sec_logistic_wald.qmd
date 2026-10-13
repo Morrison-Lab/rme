@@ -1,5 +1,5 @@
 By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle),
-the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hb_k$ are approximately Gaussian
+the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\eb_k$ are approximately Gaussian
 for large sample sizes;
 see also the [table of Gaussian vs. MLE-based tests](https://morrison-lab.github.io/sds/intro-MLEs.html#tbl-gaussian-vs-mle-tests).
 
@@ -7,7 +7,7 @@ see also the [table of Gaussian vs. MLE-based tests](https://morrison-lab.github
 
 To test $H_0: \beta_k = \beta_{k,0}$ (typically $\beta_{k,0} = 0$):
 
-$$z_k = \frac{\hb_k - \beta_{k,0}}{\HSE{\hb_k}}$$
+$$z_k = \frac{\eb_k - \beta_{k,0}}{\HSE{\eb_k}}$$
 
 Under $H_0$, $z_k \overset{\cdot}{\sim} N(0,1)$ for large $n$.
 
@@ -15,20 +15,20 @@ Under $H_0$, $z_k \overset{\cdot}{\sim} N(0,1)$ for large $n$.
 
 A 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\beta_k$ is:
 
-$$\hb_k \pm 1.96 \cdot \HSE{\hb_k}$$
+$$\eb_k \pm 1.96 \cdot \HSE{\eb_k}$$
 
 #### Confidence intervals for exponentiated coefficients
 
 By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
-the MLE of $e^{\beta_k}$ is $e^{\hb_k}$.
+the MLE of $e^{\beta_k}$ is $e^{\eb_k}$.
 
 A 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $e^{\beta_k}$ is obtained by
 exponentiating the endpoints of the CI for $\beta_k$:
 
 $$
 e^{\beta_k} \in \paren{
-  e^{\hb_k - 1.96 \cdot \HSE{\hb_k}},\;
-  e^{\hb_k + 1.96 \cdot \HSE{\hb_k}}
+  e^{\eb_k - 1.96 \cdot \HSE{\eb_k}},\;
+  e^{\eb_k + 1.96 \cdot \HSE{\eb_k}}
 }
 $$
 

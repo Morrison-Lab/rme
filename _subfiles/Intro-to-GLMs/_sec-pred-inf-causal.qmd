@@ -1,4 +1,4 @@
-The goal of **prediction** is to forecast an outcome $Y$ for new observations,
+The goal of **[prediction](https://morrison-lab.github.io/pds/expectation.html#def-prediction)** is to forecast an outcome $Y$ for new observations,
 given observed predictor variables $X_1, \ldots, X_p$.
 In a prediction problem,
 the model is often treated as a "black box":
@@ -20,7 +20,7 @@ the goal is that,
 by including enough informative predictors and combining them flexibly,
 we can reduce as much as possible the residual randomness in our forecasts.
 
-**Statistical inference** also studies the relationship between $Y$ and $X_1, \ldots, X_p$,
+**[Statistical inference](https://morrison-lab.github.io/sds/inference.html#def-inference)** also studies the relationship between $Y$ and $X_1, \ldots, X_p$,
 but the goal shifts from accuracy to understanding:
 which predictors are associated with the response,
 in what direction,
@@ -32,7 +32,7 @@ and by how much
 :::{#exm-inference-smoking-cohort}
 For example,
 a cohort study might estimate the association between smoking and lung cancer incidence,
-along with a confidence interval quantifying uncertainty about the magnitude of that association.
+along with a [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) quantifying uncertainty about the magnitude of that association.
 :::
 
 Unlike prediction,
@@ -58,14 +58,14 @@ a question that requires additional assumptions about the data-generating proces
 One useful framing of causal inference is as a prediction problem in **counterfactual** worlds:
 predicting what outcomes would have occurred
 under treatment conditions that were not actually administered.
-Under the **potential outcomes framework**
+Under the **[potential outcomes](causal-inference.qmd#def-potential-outcomes) framework**
 [@neyman1923application; @rubin1974estimating, pp. 688--701; @vittinghoff2e, Chapter 12],
-individual causal effects are treated as deterministic in principle ---
+[individual causal effects](causal-inference.qmd#def-individual-causal-effect) are treated as deterministic in principle ---
 each person has a fixed potential outcome under each treatment condition ---
 and uncertainty arises from the fact that we can observe only one potential outcome per person,
 and from heterogeneity in effects across individuals.
 
-Accurate causal inference typically requires accounting for **confounding**:
+Accurate causal inference typically requires accounting for **[confounding](causal-inference.qmd#def-confounding-obs)**:
 in observational data,
 people who receive a treatment are often systematically different from those who do not
 in ways that also affect the outcome.

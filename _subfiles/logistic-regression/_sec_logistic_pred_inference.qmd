@@ -3,10 +3,10 @@
 :::{#exr-ci-prob}
 
 Given
-a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\hb$
+a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\eb$
 and
 a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
-$\hS \eqdef \widehat{\Covt}(\hb)$,
+$\eS \eqdef \widehat{\Covt}(\eb)$,
 calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the predicted probability
 $\pi(\vx) = \Pr(Y = 1 | \vX = \vx)$.
 
@@ -59,7 +59,7 @@ can be constructed as:
 
 $$\hat\logodds(\vx) \pm 1.96 * \teal{\HSE{\hat\logodds(\vx)}}$$
 
-where $\hat\logodds(\vx) = \vx'\hb$.
+where $\hat\logodds(\vx) = \vx'\eb$.
 
 :::
 
@@ -87,21 +87,21 @@ $$
 \sqrt{\red{\Var{\hat\logodds(\vx)}}}
 $${#eq-se-sqrt-var-logodds}
 
-By the definition $\hat\logodds(\vx) = \vx'\hb$
+By the definition $\hat\logodds(\vx) = \vx'\eb$
 and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
 
 $$
 \ba
 \red{\Var{\hat\logodds(\vx)}}
-&= \Var{\tp{\vx}\hb}
+&= \Var{\tp{\vx}\eb}
 \\
-&= \tp{\vx}\Cov{\hb}\vx
+&= \tp{\vx}\Cov{\eb}\vx
 \\
 &= \red{\tp{\vx}\Sigma\vx}
 \ea
 $${#eq-var-logodds}
 
-where $\Sigma \eqdef \Covt(\hb)$.
+where $\Sigma \eqdef \Covt(\eb)$.
 
 {{< slidebreak >}}
 
@@ -116,7 +116,7 @@ $$
 \red{\tp{\vx}\Sigma\vx}
 &= \sumip\sumjp x_i \Sigma_{ij} x_j
 \\
-&= \red{\sumip\sumjp x_i \Covt(\hb_i,\hb_j) x_j}
+&= \red{\sumip\sumjp x_i \Covt(\eb_i,\eb_j) x_j}
 \ea
 $$
 
@@ -132,12 +132,12 @@ gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-esti
 #### Estimated variance and standard error of log-odds
 
 $$
-\orange{\hVar{\hat\logodds(\vx)}} = \orange{\tp{\vx}\hS\vx}
+\orange{\eVar{\hat\logodds(\vx)}} = \orange{\tp{\vx}\eS\vx}
 $${#eq-est-var-logodds}
 
 $$
 \teal{\HSE{\hat\logodds(\vx)}} =
-\teal{\sqrt{\tp{\vx}\hS\vx}}
+\teal{\sqrt{\tp{\vx}\eS\vx}}
 $${#eq-est-se-logodds}
 
 :::
@@ -146,7 +146,7 @@ $${#eq-est-se-logodds}
 By @sol-se-logodds,
 $\Var{\hat\logodds(\vx)} = \tp{\vx}\Sigma\vx$ (@eq-var-logodds).
 By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
-we estimate $\Sigma$ with $\hS \eqdef \widehat{\Covt}(\hb)$,
+we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,
 which yields @eq-est-var-logodds;
 taking the square root gives @eq-est-se-logodds.
 :::
@@ -178,9 +178,9 @@ ci_logodds <- logodds_hat + c(-1, 1) * 1.96 * se_logodds
 
 By @eq-est-se-logodds,
 the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [log-odds](binary-outcome-associations.qmd#def-logodds) is
-$\HSE{\hat\logodds(\vx)} = \sqrt{\tp{\vx}\hS\vx} = `r se_logodds`$,
+$\HSE{\hat\logodds(\vx)} = \sqrt{\tp{\vx}\eS\vx} = `r se_logodds`$,
 while the estimated log-odds itself is
-$\hat\logodds(\vx) = \vx'\hb = `r logodds_hat`$.
+$\hat\logodds(\vx) = \vx'\eb = `r logodds_hat`$.
 
 The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the log-odds is
 $(`r ci_logodds[1]`, `r ci_logodds[2]`)$,
@@ -190,7 +190,7 @@ $(`r plogis(ci_logodds[1])`, `r plogis(ci_logodds[2])`)$.
 
 These values match the `dose = 1.8` row of @tbl-beetles-pred-logodds,
 which uses `predict()` with `type = "link"` and `se.fit = TRUE`
-to compute the estimated log-odds $\hat\logodds(\vx) = \vx'\hb$
+to compute the estimated log-odds $\hat\logodds(\vx) = \vx'\eb$
 and its estimated standard error for each covariate pattern:
 
 ```{r}
