@@ -2,20 +2,16 @@
 Adapted from @james2021islr2e [§7.3] and @wood2017generalized [§4].
 :::
 
-Polynomial regression and step-function regression look very
-different, but they share a common structure: both replace $X$ with
-a fixed set of **transformations** of $X$, then fit a linear
-regression in those transformations. This shared structure is the
-**basis function** framework, and it's the foundation for splines.
+Polynomial regression and step-function regression look very different, but they share a common structure: both replace $X$ with a fixed set of **transformations** of $X$, then fit a linear regression in those transformations.
+This shared structure is the **basis function** framework, and it's the foundation for splines.
 
 {{< slidebreak >}}
 
 ::::{#def-basis-expansion}
 #### Basis expansion
 
-A **basis expansion** of $X$ is a fixed (data-free) set of functions
-$b_1(X), \ldots, b_K(X)$. The basis-expansion regression model
-replaces $X$ with these transformations:
+A **basis expansion** of $X$ is a fixed (data-free) set of functions $b_1(X), \ldots, b_K(X)$.
+The basis-expansion regression model replaces $X$ with these transformations:
 
 $$y_i = \b_0 + \b_1 b_1(x_i) + \b_2 b_2(x_i) + \cdots + \b_K b_K(x_i) + \eps_i.$$
 
@@ -50,34 +46,27 @@ $$b_k(X) = \indicp{c_{k-1} < X \le c_k}, \quad k = 1, \ldots, K+1.$$
 
 ## Why the basis-function abstraction matters
 
-Once we see polynomial and step-function regression as instances of
-the same template, we can ask: *which other basis functions might be
-worth trying?* Two answers turn out to be especially useful:
+Once we see polynomial and step-function regression as instances of the same template, we can ask: *which other basis functions might be worth trying?*
+Two answers turn out to be especially useful:
 
-- **Truncated power basis functions** —
-  $b_k(X) = (X - \xi_k)_+^d$ for chosen knots $\xi_k$. These give the
-  **regression spline** family, which enforces piecewise-polynomial
-  structure with continuity and smoothness constraints at the knots
-  (developed in the next section).
+- **Truncated power basis functions** — $b_k(X) = (X - \xi_k)_+^d$ for chosen knots $\xi_k$.
+  These give the **regression spline** family, which enforces piecewise-polynomial structure with continuity and smoothness constraints at the knots (developed in the next section).
 - **B-spline basis functions** — a numerically well-conditioned
   alternative basis that spans the same space of piecewise
   polynomials as the truncated power basis, but with locally
   supported basis functions (each $b_k$ is nonzero only on a small
   region of the $x$-axis).
 
-Both of these are still **linear** in the coefficients, so all of the
-GLM machinery — likelihood, standard errors, Wald tests, AIC, etc. —
-applies unchanged. The only thing that changes is the design matrix:
-each row $i$ of the design matrix has entries
-$1, b_1(x_i), \ldots, b_K(x_i)$ instead of $1, x_i$.
+Both of these are still **linear** in the coefficients, so all of the GLM machinery — likelihood, standard errors, Wald tests, AIC, etc. — applies unchanged.
+The only thing that changes is the design matrix: each row $i$ of the design matrix has entries $1, b_1(x_i), \ldots, b_K(x_i)$ instead of $1, x_i$.
 
 ## The general estimation recipe
 
 For a continuous response $Y$ and a basis expansion
 $b_1(\cdot), \ldots, b_K(\cdot)$:
 
-1. **Build the design matrix.** Construct the $n \times (K+1)$
-   matrix
+1. **Build the design matrix.**
+   Construct the $n \times (K+1)$ matrix
 
    $$\mat{B} = \sbmat{
    1 & b_1(x_1) & \cdots & b_K(x_1) \\
@@ -92,10 +81,9 @@ $b_1(\cdot), \ldots, b_K(\cdot)$:
    regression machinery from earlier chapters, just with a different
    design matrix.
 
-3. **Plot the fitted curve.** For a dense grid of $x$ values, compute
-   $\hat y(x) = \eb_0 + \sum_k \eb_k b_k(x)$ and plot. Standard
-   errors and pointwise confidence bands come from the usual linear
-   model formulas applied to $\mat{B}$.
+3. **Plot the fitted curve.**
+   For a dense grid of $x$ values, compute $\hat y(x) = \eb_0 + \sum_k \eb_k b_k(x)$ and plot.
+   Standard errors and pointwise confidence bands come from the usual linear model formulas applied to $\mat{B}$.
 
 The remaining design decision is **which basis functions to use** —
 and that choice is what distinguishes regression splines from

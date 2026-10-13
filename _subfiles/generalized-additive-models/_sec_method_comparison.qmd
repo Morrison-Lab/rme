@@ -33,9 +33,8 @@ function
 
 $$f(x) = \sin(x) + 0.3 \sin(3 x), \quad x \in [0, 2\pi],$$
 
-with additive Gaussian noise ($\s = 0.4$). The truth is bumpy
-enough to expose differences between the methods but not so wild
-that any one of them obviously breaks.
+with additive Gaussian noise ($\s = 0.4$).
+The truth is bumpy enough to expose differences between the methods but not so wild that any one of them obviously breaks.
 
 ```{r}
 #| label: method-comparison-data-fits
@@ -114,9 +113,9 @@ ggplot(grid, aes(x = x)) +
   theme(legend.position = "bottom")
 ```
 
-Polynomial fits. Quadratic underfits the central inflection; the
-degree-12 polynomial chases the noise and swings wildly near the
-boundaries (Runge's phenomenon).
+Polynomial fits.
+Quadratic underfits the central inflection;
+the degree-12 polynomial chases the noise and swings wildly near the boundaries (Runge's phenomenon).
 :::
 
 :::{#fig-method-comparison-step}
@@ -140,9 +139,8 @@ ggplot(grid, aes(x = x)) +
   theme(legend.position = "bottom")
 ```
 
-Step function with 5 quantile-spaced bins. Captures the broad shape
-but is discontinuous at each cutpoint — almost never the right
-model for a continuous exposure.
+Step function with 5 quantile-spaced bins.
+Captures the broad shape but is discontinuous at each cutpoint — almost never the right model for a continuous exposure.
 :::
 
 :::{#fig-method-comparison-splines}
@@ -176,10 +174,9 @@ ggplot(grid, aes(x = x)) +
   theme(legend.position = "bottom")
 ```
 
-Splines. Both spline fits track the truth closely without the
-boundary swings of the degree-12 polynomial. The smoothing spline
-(REML-selected $\l$) has slightly less peak-to-peak amplitude
-because the penalty shrinks toward a straight line.
+Splines.
+Both spline fits track the truth closely without the boundary swings of the degree-12 polynomial.
+The smoothing spline (REML-selected $\l$) has slightly less peak-to-peak amplitude because the penalty shrinks toward a straight line.
 :::
 
 :::{#fig-method-comparison-loess}
@@ -203,42 +200,26 @@ ggplot(grid, aes(x = x)) +
   theme(legend.position = "bottom")
 ```
 
-LOESS with the default 50% span. Similar shape to the splines but
-without a global closed-form parametric representation — the curve
-is computed on demand at any evaluation point rather than stored as
-a parametric formula.
+LOESS with the default 50% span.
+Similar shape to the splines but without a global closed-form parametric representation — the curve is computed on demand at any evaluation point rather than stored as a parametric formula.
 :::
 
-Comparison of nonlinear regression methods on synthetic data
-$y = \sin(x) + 0.3\sin(3x) + \eps$, $\eps \sim \ndist{0, 0.4^2}$,
-$n = `r n`$. Splines (both regression and smoothing) and LOESS
-track the truth closely; quadratic polynomial underfits the multi-
-modal structure; degree-12 polynomial overfits and swings at
-boundaries.
+Comparison of nonlinear regression methods on synthetic data $y = \sin(x) + 0.3\sin(3x) + \eps$, $\eps \sim \ndist{0, 0.4^2}$, $n = `r n`$.
+Splines (both regression and smoothing) and LOESS track the truth closely;
+quadratic polynomial underfits the multi- modal structure;
+degree-12 polynomial overfits and swings at boundaries.
 ::::
 
 ## Takeaways
 
-- **Polynomials beyond degree 3–4 are usually a bad idea.** The
-  degree-12 fit is a clean illustration: it's interpolating noise in
-  the middle of the data and swinging beyond the data range. With 13
-  parameters (intercept + 12 polynomial terms) it has more flexibility
-  than the natural cubic spline (`df = 6`), yet uses that flexibility
-  on noise rather than on the curve's shape — a reminder that global
-  polynomials concentrate their degrees of freedom in the wrong
-  places.
-- **Splines and LOESS are essentially indistinguishable on this
-  example.** Both produce smooth curves close to the truth. The
-  practical differences are in how easily they extend to multi-
-  predictor settings (splines do, LOESS doesn't beyond 2-D) and in
-  how inference works (splines have full Wald/Bayesian machinery,
-  LOESS doesn't).
-- **REML-selected smoothing spline doesn't require a degrees-of-
-  freedom choice.** The `df = 6` for the natural cubic spline was a
-  modeler choice; the REML smoothing spline picked its own
-  smoothness from the data.
-- **Step functions are for categorization, not smoothing.** The 5-
-  bin step function is the worst fit on a smooth-truth dataset, but
-  on real epidemiologic data where bins have substantive meaning
-  (clinical BMI categories, age groups), the interpretability
-  benefit can outweigh the within-bin information loss.
+- **Polynomials beyond degree 3–4 are usually a bad idea.**
+  The degree-12 fit is a clean illustration: it's interpolating noise in the middle of the data and swinging beyond the data range.
+  With 13 parameters (intercept + 12 polynomial terms) it has more flexibility than the natural cubic spline (`df = 6`), yet uses that flexibility on noise rather than on the curve's shape — a reminder that global polynomials concentrate their degrees of freedom in the wrong places.
+- **Splines and LOESS are essentially indistinguishable on this example.**
+  Both produce smooth curves close to the truth.
+  The practical differences are in how easily they extend to multi- predictor settings (splines do, LOESS doesn't beyond 2-D) and in how inference works (splines have full Wald/Bayesian machinery, LOESS doesn't).
+- **REML-selected smoothing spline doesn't require a degrees-of- freedom choice.**
+  The `df = 6` for the natural cubic spline was a modeler choice;
+  the REML smoothing spline picked its own smoothness from the data.
+- **Step functions are for categorization, not smoothing.**
+  The 5- bin step function is the worst fit on a smooth-truth dataset, but on real epidemiologic data where bins have substantive meaning (clinical BMI categories, age groups), the interpretability benefit can outweigh the within-bin information loss.

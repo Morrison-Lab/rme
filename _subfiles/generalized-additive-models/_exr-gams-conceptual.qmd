@@ -26,7 +26,8 @@ where $(u)_+ = \max(u,0)$.
 
 **(d)** Show the second derivatives match at $\xi$.
 
-**(e)** Do the third derivatives match? What order of smoothness does this cubic spline achieve?
+**(e)** Do the third derivatives match?
+What order of smoothness does this cubic spline achieve?
 
 ::::
 
@@ -47,8 +48,8 @@ At $X=\xi$: $(X-\xi)_+^2 = 0$, so the derivatives agree. $\checkmark$
 At $X=\xi$: $(X-\xi)_+ = 0$. $\checkmark$
 
 **(e)** $f_1^{\prime\prime\prime} = 6\b_3$ and $f_2^{\prime\prime\prime} = 6\b_3 + 6\b_4$ for $X > \xi$.
-These differ (unless $\b_4=0$). The truncated power basis gives a **cubic spline**:
-continuous with continuous 1st and 2nd derivatives, but a jump in the 3rd derivative at each knot.
+These differ (unless $\b_4=0$).
+The truncated power basis gives a **cubic spline**: continuous with continuous 1st and 2nd derivatives, but a jump in the 3rd derivative at each knot.
 
 ::::
 
@@ -80,13 +81,14 @@ $$\hat{g} = \arg\min_g \left\{ \sum_{i=1}^n (y_i - g(x_i))^2 + \l \int g^{\prime
 
 ::::{#sol-smoothing-penalty}
 
-**(a)** As $\l \to \infty$ the roughness penalty dominates. The only $g$ with
-$\int g^{\prime\prime}(t)^2\,dt = 0$ is a linear function $g(x) = a + bx$.
+**(a)** As $\l \to \infty$ the roughness penalty dominates.
+The only $g$ with $\int g^{\prime\prime}(t)^2\,dt = 0$ is a linear function $g(x) = a + bx$.
 So $\hat{g}$ converges to the ordinary least-squares line.
 
 **(b)** As $\l \to 0$ there is no penalty; the minimizer interpolates every
 training point: $g(x_i) = y_i$ for all $i$.
 
-**(c)** Yes. Interpolation means training RSS $= 0$ -- the overfit extreme.
+**(c)** Yes.
+Interpolation means training RSS $= 0$ -- the overfit extreme.
 
 ::::

@@ -2,10 +2,8 @@
 Adapted from @james2021islr2e [§7.4] and @wood2017generalized [§5].
 :::
 
-A **regression spline** is a piecewise polynomial that's constrained
-to be smooth at the points where the pieces meet ("knots"). The
-result is much more flexible than a single global polynomial but
-much smoother than a step function.
+A **regression spline** is a piecewise polynomial that's constrained to be smooth at the points where the pieces meet ("knots").
+The result is much more flexible than a single global polynomial but much smoother than a step function.
 
 {{< slidebreak >}}
 
@@ -18,13 +16,8 @@ title-only slide. -->
 ::::{#def-piecewise-polynomial}
 #### Piecewise polynomial
 
-Choose **knots** $\xi_1 < \xi_2 < \cdots < \xi_K$ on the support of
-$X$. A **piecewise polynomial of degree $d$** with knots
-$\xi_1, \ldots, \xi_K$ is a function that is a polynomial of degree
-$d$ on each of the intervals
-$(-\infty, \xi_1], (\xi_1, \xi_2], \ldots, (\xi_K, \infty)$ — but
-the polynomials in different intervals can have different
-coefficients.
+Choose **knots** $\xi_1 < \xi_2 < \cdots < \xi_K$ on the support of $X$.
+A **piecewise polynomial of degree $d$** with knots $\xi_1, \ldots, \xi_K$ is a function that is a polynomial of degree $d$ on each of the intervals $(-\infty, \xi_1], (\xi_1, \xi_2], \ldots, (\xi_K, \infty)$ — but the polynomials in different intervals can have different coefficients.
 ::::
 
 {{< slidebreak >}}
@@ -32,11 +25,8 @@ coefficients.
 ::::{#exm-piecewise-polynomial}
 #### Unconstrained piecewise polynomial parameter count
 
-Without any continuity constraint, an unconstrained piecewise
-polynomial has $(K+1)(d+1)$ free coefficients ($d+1$ per piece, $K+1$
-pieces) and can have **jumps and corners** at every knot — basically
-$K+1$ independent polynomial fits glued side by side. That's almost
-always *too* flexible.
+Without any continuity constraint, an unconstrained piecewise polynomial has $(K+1)(d+1)$ free coefficients ($d+1$ per piece, $K+1$ pieces) and can have **jumps and corners** at every knot — basically $K+1$ independent polynomial fits glued side by side.
+That's almost always *too* flexible.
 ::::
 
 ## Continuity and smoothness constraints
@@ -60,11 +50,9 @@ derivative at every knot.
 ::::{#exm-spline}
 #### Effective parameter count for a cubic spline
 
-Each continuity constraint removes one degree of freedom. A
-piecewise-cubic ($d = 3$) with $K$ knots has $(K+1) \cdot 4 = 4K + 4$
-unconstrained parameters. Requiring continuity of the function and
-its first two derivatives at each of the $K$ knots imposes $3K$
-constraints, leaving $4K + 4 - 3K = K + 4$ effective parameters.
+Each continuity constraint removes one degree of freedom.
+A piecewise-cubic ($d = 3$) with $K$ knots has $(K+1) \cdot 4 = 4K + 4$ unconstrained parameters.
+Requiring continuity of the function and its first two derivatives at each of the $K$ knots imposes $3K$ constraints, leaving $4K + 4 - 3K = K + 4$ effective parameters.
 ::::
 
 The most common choice in practice is $d = 3$ — the **cubic
@@ -80,55 +68,39 @@ $\xi_1, \ldots, \xi_K$ is the **truncated power basis**:
 $$\b_0 + \b_1 X + \b_2 X^2 + \cdots + \b_d X^d
 + \sum_{k=1}^K \b_{d+k} (X - \xi_k)_+^d,$$
 
-where $(u)_+ = \max(u, 0)$. The first $d+1$ terms are a global
-polynomial; each truncated-power term $(X - \xi_k)_+^d$ adds a "kink"
-of order $d$ that turns on at knot $\xi_k$. The basis has $K + d + 1$
-columns — one for the intercept, $d$ for the global polynomial, and
-$K$ for the knot-activated terms — matching the $K + 4$ effective
-parameters of a cubic spline (when $d = 3$).
+where $(u)_+ = \max(u, 0)$.
+The first $d+1$ terms are a global polynomial;
+each truncated-power term $(X - \xi_k)_+^d$ adds a "kink" of order $d$ that turns on at knot $\xi_k$.
+The basis has $K + d + 1$ columns — one for the intercept, $d$ for the global polynomial, and $K$ for the knot-activated terms — matching the $K + 4$ effective parameters of a cubic spline (when $d = 3$).
 
-This basis is conceptually clean — every basis function has an
-obvious geometric meaning — but **numerically poorly conditioned**
-when knots are close together or far from zero. The design matrix
-$\tp{\mat{B}} \mat{B}$ can be nearly singular, so OLS
-estimates are unstable. For numerical work, the **B-spline basis**
-(equivalent space of splines, locally supported basis functions) is
-the standard choice. R's `splines::bs()` returns a B-spline basis.
+This basis is conceptually clean — every basis function has an obvious geometric meaning — but **numerically poorly conditioned** when knots are close together or far from zero.
+The design matrix $\tp{\mat{B}} \mat{B}$ can be nearly singular, so OLS estimates are unstable.
+For numerical work, the **B-spline basis** (equivalent space of splines, locally supported basis functions) is the standard choice.
+R's `splines::bs()` returns a B-spline basis.
 
 ## Natural cubic splines
 
-Cubic splines often **misbehave at the boundary**: with no data
-beyond the outermost knots, the cubic terms can swing wildly past the
-last observed $x$. The **natural cubic spline** fixes this by adding
-four more constraints — the function is required to be **linear**
-beyond the outermost knots, which is equivalent to forcing the
-second and third derivatives to vanish at each boundary knot:
+Cubic splines often **misbehave at the boundary**: with no data beyond the outermost knots, the cubic terms can swing wildly past the last observed $x$.
+The **natural cubic spline** fixes this by adding four more constraints — the function is required to be **linear** beyond the outermost knots, which is equivalent to forcing the second and third derivatives to vanish at each boundary knot:
 
 $$f''(\xi_1) = f'''(\xi_1) = f''(\xi_K) = f'''(\xi_K) = 0.$$
 
-These four boundary constraints (linearity past each end of the
-data) reduce the effective parameter count from $K + 4$ to $K$. The
-fit is identical to a cubic spline in the *interior* but is forced
-to be linear in the tails — almost always a better-behaved
-extrapolation than an unconstrained cubic.
+These four boundary constraints (linearity past each end of the data) reduce the effective parameter count from $K + 4$ to $K$.
+The fit is identical to a cubic spline in the *interior* but is forced to be linear in the tails — almost always a better-behaved extrapolation than an unconstrained cubic.
 
-R provides natural cubic splines via `splines::ns()`. For routine
-work, **natural cubic splines are the default recommendation** over
-unconstrained cubic splines.
+R provides natural cubic splines via `splines::ns()`.
+For routine work, **natural cubic splines are the default recommendation** over unconstrained cubic splines.
 
 ## Knot placement
 
 A spline fit depends on three choices:
 
-1. **Number of knots** $K$. More knots = more flexibility = more risk
-   of overfitting. Common practice: pick $K$ so that the resulting
-   degrees of freedom is in the 4–8 range for most exposures, or
-   tune $K$ by cross-validation.
-2. **Location of knots** $\xi_1, \ldots, \xi_K$. The standard
-   recommendation is to place knots at **quantiles of the $X$
-   distribution** (e.g. for $K = 4$: at the 20th, 40th, 60th, 80th
-   percentiles). This puts more knots where there's more data — the
-   exact opposite of what equally-spaced knots would do.
+1. **Number of knots** $K$.
+   More knots = more flexibility = more risk of overfitting.
+   Common practice: pick $K$ so that the resulting degrees of freedom is in the 4–8 range for most exposures, or tune $K$ by cross-validation.
+2. **Location of knots** $\xi_1, \ldots, \xi_K$.
+   The standard recommendation is to place knots at **quantiles of the $X$ distribution** (e.g. for $K = 4$: at the 20th, 40th, 60th, 80th percentiles).
+   This puts more knots where there's more data — the exact opposite of what equally-spaced knots would do.
 3. **Boundary handling** (cubic vs natural cubic).
 
 The `df` argument to `ns()` or `bs()` automates (1) and (2): R
@@ -153,14 +125,10 @@ m_glm <- glm(y ~ ns(x, df = 4),
              data = d, family = binomial())
 ```
 
-Both `ns()` and `bs()` return numeric matrices that slot directly
-into `lm()`/`glm()` formulas. The `df` argument is the **exact**
-degrees of freedom (basis dimension), in contrast to the `k`
-argument of `mgcv::s()` introduced later in this chapter, which is
-an **upper bound** that REML penalization can reduce to the actual
-effective degrees of freedom. With `splines::ns(df = 4)` you always
-get 4 df; with `mgcv::s(x, k = 20)` you might end up with EDF 3 or
-EDF 15 depending on the data.
+Both `ns()` and `bs()` return numeric matrices that slot directly into `lm()`/`glm()` formulas.
+The `df` argument is the **exact** degrees of freedom (basis dimension), in contrast to the `k` argument of `mgcv::s()` introduced later in this chapter, which is an **upper bound** that REML penalization can reduce to the actual effective degrees of freedom.
+With `splines::ns(df = 4)` you always get 4 df;
+with `mgcv::s(x, k = 20)` you might end up with EDF 3 or EDF 15 depending on the data.
 
 The fitted curve and pointwise CIs come from `predict()` with
 `se.fit = TRUE` in the usual way:
