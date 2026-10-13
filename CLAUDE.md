@@ -46,6 +46,10 @@ Before committing any `.qmd`, `.R`, or config file change:
     Home stays out of the sidebar unless the opt-in `page-navigation.html` include is on (see the comments in `_quarto-website.yml`).
   - `_quarto-book.yml` — the book/PDF TOC: add to `book.chapters:` (directly or inside a `part:` grouping)
   - `_quarto-handout.yml` — a curated PDF-handout subset with its own `render:` list; add the page here too if it belongs in the handouts
+- `_quarto.yml` repeats the website profile's format names (`html`, `revealjs`, `pdf`, `docx`) so that Quarto can reuse its cached chapter indexes when it resolves cross-chapter `.qmd` links.
+  Without that list, the site render runs out of memory.
+  When adding or removing a format in `_quarto-website.yml`, change the list in `_quarto.yml` to match.
+  The book and handout profiles inherit those formats, so render them with `--to pdf` (or `--to html`).
 
 ### Quarto
 - Use `{{< slidebreak >}}` instead of `---` for slide breaks
