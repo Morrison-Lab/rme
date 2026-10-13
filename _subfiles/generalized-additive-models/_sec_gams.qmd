@@ -80,8 +80,8 @@ The strict-additivity restriction can be relaxed when needed.
 The two standard escape hatches are:
 
 - **Predictor-by-factor interactions.**
-  A smooth that varies by category — e.g. an age effect that's different for men and women — is fit as $f_j(X_j) + f_{j,\text{by}}(X_j) \cdot \indicp{\text{sex} = M}$ via `s(age, by = sex)` in `mgcv`.
-  When `sex` is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else);
+  A smooth that varies by category — e.g. an age effect that's different for Type A and Type B behavior patterns (`dibpat`) — is fit as $f_j(X_j) + f_{j,\text{by}}(X_j) \cdot \indicp{\text{dibpat} = \text{Type A}}$ via `s(age, by = dibpat)` in `mgcv`.
+  When `dibpat` is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else);
   the correct idiom is:
   ```{r}
   gam(chol ~ dibpat + s(age, by = dibpat), data = wcgs, method = "REML")
