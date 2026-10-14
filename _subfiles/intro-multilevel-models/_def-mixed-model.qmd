@@ -6,13 +6,6 @@ is a regression model that contains
 both fixed effects (@def-fixed-effect)
 and random effects (@def-random-effect)
 [@rocke2021epi204; @dobson4e, Chapter 11].
-For example, a linear mixed model with a random intercept for each group is
-$$
-Y_{ij} \eqdef \tp{\vx_{ij}}\vb + \alpha_i + \epsilon_{ij},
-$$
-where $\vb$ is a vector of fixed effects,
-$\alpha_i \siid \ndist{0, \sigma_\alpha^2}$ is the random effect of group $i$,
-and $\epsilon_{ij} \siid \ndist{0, \sigma^2}$ is independent of the $\alpha_i$s.
 :::
 
 ::: notes
@@ -21,6 +14,20 @@ It does not determine the *inference method*:
 the same mixed-effects model can be fit by maximum likelihood,
 by restricted maximum likelihood (REML),
 or by Bayesian inference.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-mixed-model-random-intercept}
+#### Linear mixed model with a random intercept
+
+For example, a linear mixed model with a random intercept for each group is
+$$
+Y_{ij} \eqdef \tp{\vx_{ij}}\vb + \alpha_i + \epsilon_{ij},
+$$
+where $\vb$ is a vector of fixed effects,
+$\alpha_i \siid \ndist{0, \sigma_\alpha^2}$ is the random effect of group $i$,
+and $\epsilon_{ij} \siid \ndist{0, \sigma^2}$ is independent of the $\alpha_i$s.
 :::
 
 {{< slidebreak >}}
