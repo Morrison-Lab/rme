@@ -73,7 +73,20 @@ The first $d+1$ terms are a global polynomial;
 each truncated-power term $(X - \xi_k)_+^d$ adds a "kink" of order $d$ that turns on at knot $\xi_k$.
 The basis has $K + d + 1$ columns — one for the intercept, $d$ for the global polynomial, and $K$ for the knot-activated terms — matching the $K + 4$ effective parameters of a cubic spline (when $d = 3$).
 
-This basis is conceptually clean — every basis function has an obvious geometric meaning — but **numerically poorly conditioned** when knots are close together or far from zero.
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_thm-truncated-power-spline.qmd >}}
+
+{{< include _subfiles/generalized-additive-models/_prf-truncated-power-spline.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-truncated-power-spline.qmd >}}
+
+{{< slidebreak >}}
+
+
+The truncated power basis is conceptually clean — every basis function has an obvious geometric meaning — but **numerically poorly conditioned** when knots are close together or far from zero.
 The design matrix $\tp{\mat{B}} \mat{B}$ can be nearly singular, so OLS estimates are unstable.
 For numerical work, the **B-spline basis** (equivalent space of splines, locally supported basis functions) is the standard choice.
 R's `splines::bs()` returns a B-spline basis.

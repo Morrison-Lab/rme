@@ -1,0 +1,38 @@
+::::{#exm-local-constant}
+#### A tricube-weighted average
+
+Take the target point $x_0 = 0$
+and a local neighborhood of five observations
+whose farthest member lies at distance 1 from $x_0$,
+so the scaled distances are $u_i = x_i - x_0 = x_i$:
+
+| $x_i$ | $y_i$ | $w_i = K(u_i) = (1 - \abs{u_i}^3)^3$ |
+|---|---|---|
+| $-1$ | 10 | $(1 - 1)^3 = 0$ |
+| $-0.5$ | 2 | $(1 - 0.125)^3 \approx 0.6699$ |
+| $0$ | 3 | $(1 - 0)^3 = 1$ |
+| $0.5$ | 7 | $(1 - 0.125)^3 \approx 0.6699$ |
+| $1$ | 10 | $(1 - 1)^3 = 0$ |
+
+By @thm-local-constant:
+
+$$
+\ba
+\est{f}(0)
+&= \frac{0 \cdot 10 + 0.6699 \cdot 2 + 1 \cdot 3 + 0.6699 \cdot 7 + 0 \cdot 10}
+{0 + 0.6699 + 1 + 0.6699 + 0}
+&& \text{(substitute the table)}
+\\ &\approx \frac{1.3398 + 3 + 4.6895}{0.6699 + 1 + 0.6699}
+&& \text{(multiply, and drop the zero terms)}
+\\ &= \frac{9.0293}{2.3398}
+&& \text{(add)}
+\\ &\approx 3.859
+&& \text{(divide)}
+\ea
+$$
+
+The two observations at distance 1 get zero weight,
+so the large outcomes $y = 10$ at $x = \pm 1$ do not affect the fit,
+and the closer observation at $x = 0$ counts more than those at $x = \pm 0.5$.
+The unweighted mean of all five outcomes would be $32/5 = 6.4$.
+::::

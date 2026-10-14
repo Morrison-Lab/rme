@@ -72,9 +72,21 @@ A foundational result is that the minimizer is always a **natural cubic spline w
 So even though the problem is defined over all twice-differentiable functions, the answer lives in a finite-dimensional space we can compute with.
 ::::
 
+## The penalized least-squares solution
+
+<!-- No slidebreak here: the heading shares its slide with the thm-penalized-least-squares div. -->
+
+{{< include _subfiles/generalized-additive-models/_thm-penalized-least-squares.qmd >}}
+
+{{< include _subfiles/generalized-additive-models/_prf-penalized-least-squares.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-penalized-least-squares.qmd >}}
+
 ## Effective degrees of freedom
 
-The smoothing spline fit can be written as $\est{\mat{y}} = \mat{S}_\l \mat{y}$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
+By @thm-penalized-least-squares, the smoothing spline fit can be written as $\est{\vy} = \mat{S}_\l \vy$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
 Because the function is penalized rather than projected onto a low-dimensional subspace, the usual "number of parameters" count doesn't apply.
 
 The standard replacement is the **effective degrees of freedom**
@@ -88,6 +100,10 @@ The standard replacement is the **effective degrees of freedom**
 $$\text{EDF}(\l) \eqdef \text{tr}(\mat{S}_\l)
 = \sum_{i=1}^n \frac{\partial \est{y}_i}{\partial y_i}.$$
 ::::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-effective-degrees-of-freedom.qmd >}}
 
 {{< slidebreak >}}
 
