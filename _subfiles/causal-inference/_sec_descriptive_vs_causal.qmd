@@ -27,3 +27,94 @@ Descriptive questions do not require [covariates](Intro-to-GLMs.qmd#def-predicto
 they only require covariates that we can observe.
 This hypothetical example illustrates the distinction
 that the [potential outcomes](#def-potential-outcomes) framework of this chapter makes precise.
+
+The same distinction arises with binary outcomes,
+where the descriptive summary is often a **risk difference**:
+the difference between the proportions of two groups
+who experience the outcome.
+
+{{< slidebreak >}}
+
+:::{#exm-crude-vs-stratified-rd}
+#### A crude risk difference that reverses within age groups
+
+Consider a hypothetical population of 1000 adults,
+with a binary treatment $A$ ($A = 1$ for treated),
+a binary outcome $Y$ ($Y = 1$ for death within a year),
+and a binary covariate $L$ ($L = 1$ for age 65 or older).
+Older adults are more likely to be treated,
+and older adults are also more likely to die,
+whether or not they are treated:
+
+| $L$ | treated | untreated | $\Pf{Y = 1 \mid A = 1, L}$ | $\Pf{Y = 1 \mid A = 0, L}$ |
+|:---:|:---:|:---:|:---:|:---:|
+| 0 (younger) | 100 | 500 | 0.05 | 0.10 |
+| 1 (older) | 300 | 100 | 0.30 | 0.40 |
+
+Within each age group,
+the treated have lower risk than the untreated:
+
+$$
+\ba
+\text{RD}_{L = 0}
+&\eqdef \Pf{Y = 1 \mid A = 1, L = 0} - \Pf{Y = 1 \mid A = 0, L = 0}
+&& \text{(define the age-specific risk difference)} \\
+&= 0.05 - 0.10
+&& \text{(substitute from the table)} \\
+&= -0.05
+&& \text{(subtract)} \\
+\text{RD}_{L = 1}
+&\eqdef \Pf{Y = 1 \mid A = 1, L = 1} - \Pf{Y = 1 \mid A = 0, L = 1}
+&& \text{(define the age-specific risk difference)} \\
+&= 0.30 - 0.40
+&& \text{(substitute from the table)} \\
+&= -0.10
+&& \text{(subtract)}
+\ea
+$$
+
+Ignoring age,
+the risk in each treatment group averages the age-specific risks
+in proportion to that group's own age distribution:
+
+$$
+\ba
+\Pf{Y = 1 \mid A = 1}
+&= \frac{100 \cdot 0.05 + 300 \cdot 0.30}{400}
+&& \text{(average over the 400 treated)} \\
+&= \frac{5 + 90}{400}
+&& \text{(multiply)} \\
+&= 0.2375
+&& \text{(add and divide)} \\
+\Pf{Y = 1 \mid A = 0}
+&= \frac{500 \cdot 0.10 + 100 \cdot 0.40}{600}
+&& \text{(average over the 600 untreated)} \\
+&= \frac{50 + 40}{600}
+&& \text{(multiply)} \\
+&= 0.15
+&& \text{(add and divide)} \\
+\text{RD}_{\text{crude}}
+&\eqdef \Pf{Y = 1 \mid A = 1} - \Pf{Y = 1 \mid A = 0}
+&& \text{(define the crude risk difference)} \\
+&= 0.2375 - 0.15
+&& \text{(substitute)} \\
+&= 0.0875
+&& \text{(subtract)}
+\ea
+$$
+
+The crude risk difference of $+0.0875$ is a correct *descriptive* answer:
+in this population,
+treated adults really did die more often than untreated adults.
+It is a misleading answer to the *causal* question
+"would treating someone raise or lower their risk?",
+because 75% of the treated group is older,
+compared with about 17% of the untreated group.
+If age were the only factor that influenced both who was treated and who died,
+the age-specific risk differences ($-0.05$ and $-0.10$)
+would compare like with like,
+and they say that treatment lowers risk.
+The rest of this chapter makes precise
+when a comparison of this kind has a causal interpretation.
+
+:::

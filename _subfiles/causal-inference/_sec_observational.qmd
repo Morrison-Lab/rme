@@ -33,6 +33,99 @@ As a result, the observed association between $A$ and $Y$
 does not equal the causal effect of $A$ on $Y$.
 :::
 
+{{< slidebreak >}}
+
+:::{#exm-confounding-coffee}
+#### Confounding of coffee and lung cancer by smoking
+
+Consider a hypothetical cohort of 1000 adults,
+with coffee drinking $A$ ($A = 1$ for daily coffee),
+lung cancer $Y$ ($Y = 1$ for diagnosis during follow-up),
+and smoking $L$ ($L = 1$ for smokers).
+Suppose coffee has **no** effect on lung cancer,
+so that $Y_i(1) = Y_i(0)$ for every individual,
+but smokers are both more likely to drink coffee
+and more likely to develop lung cancer:
+
+| $L$ | coffee | no coffee | $\Pf{Y = 1 \mid A = 1, L}$ | $\Pf{Y = 1 \mid A = 0, L}$ |
+|:---:|:---:|:---:|:---:|:---:|
+| 0 (nonsmokers) | 200 | 500 | 0.01 | 0.01 |
+| 1 (smokers) | 200 | 100 | 0.10 | 0.10 |
+
+Within each smoking stratum,
+the risk difference is $0$,
+matching the true (null) causal effect.
+Ignoring smoking:
+
+$$
+\ba
+\Pf{Y = 1 \mid A = 1}
+&= \frac{200 \cdot 0.01 + 200 \cdot 0.10}{400}
+&& \text{(average over the 400 coffee drinkers)} \\
+&= \frac{2 + 20}{400}
+&& \text{(multiply)} \\
+&= 0.055
+&& \text{(add and divide)} \\
+\Pf{Y = 1 \mid A = 0}
+&= \frac{500 \cdot 0.01 + 100 \cdot 0.10}{600}
+&& \text{(average over the 600 non-drinkers)} \\
+&= \frac{5 + 10}{600}
+&& \text{(multiply)} \\
+&= 0.025
+&& \text{(add and divide)} \\
+\Pf{Y = 1 \mid A = 1} - \Pf{Y = 1 \mid A = 0}
+&= 0.055 - 0.025
+&& \text{(subtract the two crude risks)} \\
+&= 0.03
+&& \text{(subtract)}
+\ea
+$$
+
+The crude risk difference of $0.03$ suggests that coffee is harmful,
+even though coffee has no effect in this cohort.
+Because $Y_i(0) = Y_i(1) = Y_i$ for everyone here,
+the crude risks are also the mean [potential outcomes](#def-potential-outcomes) under no coffee in each group:
+$\E{Y(0) \mid A = 1} = 0.055 \neq 0.025 = \E{Y(0) \mid A = 0}$.
+So $A \not\ind Y(0)$,
+which is the failure of unconditional exchangeability
+described in @rem-confounding-potential-outcomes.
+Smoking $L$ is a [confounder](#def-confounder):
+it is a common cause of $A$ and $Y$.
+
+:::
+
+## Why observational studies are harder than randomized trials {#sec-causal-obs-harder}
+
+In a [randomized experiment](#sec-causal-rct),
+the investigator controls treatment assignment,
+so the identification assumptions hold by design
+[@hernan2020causal, Chapter 3]:
+
+- randomization makes the groups [exchangeable](#def-exchangeability)
+  without conditioning on any covariates (@def-unconditional-exchangeability);
+- the randomization probabilities are strictly between 0 and 1,
+  so [positivity](#def-positivity) holds;
+- the protocol specifies the treatment,
+  which supports [consistency](#def-consistency).
+
+In an observational study,
+none of these assumptions is guaranteed by design
+[@hernan2020causal, Chapter 3]:
+
+- exchangeability (@def-exchangeability) can hold at best conditionally on measured covariates $\vec{L}$,
+  so we must measure and adjust for a sufficient set of confounders,
+  and we cannot check from the data that no confounder is missing;
+- positivity (@def-positivity) can fail
+  when some covariate patterns, such as the most severe patients, are always (or never) treated;
+- consistency (@def-consistency) requires a well-defined treatment,
+  which is harder to ensure when "treatment" is a self-chosen exposure,
+  such as "drinks coffee" in @exm-confounding-coffee,
+  that people can take up in many different ways.
+
+The [DAG](#sec-pred-sel-dag) tools of @sec-pred-sel-dag
+help with the first of these difficulties,
+by showing which covariates must be in $\vec{L}$.
+
 [Directed Acyclic Graphs (DAGs)](#sec-pred-sel-dag)
 provide a formal graphical tool
 for representing causal assumptions
