@@ -1,0 +1,23 @@
+:::{#thm-lasso-soft-threshold}
+#### The LASSO with one predictor soft-thresholds
+
+Consider a Gaussian linear model with no intercept,
+one predictor $x$ scaled so that $\sumin x_i^2 = 1$,
+and error variance $\sigma^2 = 1$,
+so that the log-likelihood is
+$\llik(\beta) = c - \frac{1}{2} \sumin (y_i - x_i \beta)^2$
+for a constant $c$ that does not depend on $\beta$.
+Let $z \eqdef \sumin x_i y_i$,
+the [ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) estimate of $\beta$ in this model.
+Then the LASSO estimate (@def-lasso) is
+
+$$
+\est{\beta}_\lambda =
+\begin{cases}
+z - \lambda & \text{if } z > \lambda \\
+0 & \text{if } \abs{z} \le \lambda \\
+z + \lambda & \text{if } z < -\lambda
+\end{cases}
+$$ {#eq-lasso-soft-threshold}
+
+:::

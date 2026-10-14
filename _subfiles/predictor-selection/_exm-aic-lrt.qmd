@@ -1,0 +1,54 @@
+:::{#exm-aic-lrt}
+#### The significance levels implied by AIC and BIC
+
+Suppose model A in @exm-aic-bic-compare is nested in model B,
+so model B adds $k = 2$ parameters.
+The likelihood ratio statistic is
+
+$$
+\ba
+G^2
+&= 2\paren{-118.5 - (-120.0)}
+&& \text{(definition of } G^2 \text{)} \\
+&= 2 \cdot 1.5
+&& \text{(subtract)} \\
+&= 3
+&& \text{(multiply)}
+\ea
+$$
+
+By @thm-aic-lrt,
+AIC prefers model B only if $G^2 > 2k = 4$,
+and BIC (with $n = 100$) only if $G^2 > 2 \logf{100} \approx 9.21$.
+Since $G^2 = 3$ clears neither threshold,
+both criteria prefer model A,
+matching @exm-aic-bic-compare.
+
+Under $H_0$ (the $k = 2$ extra parameters are zero),
+$G^2$ approximately follows a $\chi^2_2$ distribution,
+which is the [exponential distribution](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) with mean 2,
+so $\P(\chi^2_2 > c) = \expf{-c/2}$.
+Choosing model B whenever AIC prefers it
+therefore acts like a likelihood ratio test at level
+
+$$
+\P(\chi^2_2 > 4) = \expf{-2} \approx 0.135
+$$
+
+and choosing by BIC acts like a test at level
+
+$$
+\ba
+\P(\chi^2_2 > 2 \logf{100})
+&= \expf{-\logf{100}}
+&& \text{(} \chi^2_2 \text{ tail probability)} \\
+&= \frac{1}{100}
+&& \text{(} \expf{-\logf{a}} = 1/a \text{)}
+\ea
+$$
+
+AIC is a more lenient threshold than the conventional $\alpha = 0.05$,
+which is one reason it tends to select larger models,
+while BIC's implied level shrinks as $n$ grows.
+
+:::
