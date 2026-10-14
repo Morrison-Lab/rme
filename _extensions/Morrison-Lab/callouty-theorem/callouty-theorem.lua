@@ -110,7 +110,7 @@ local function read_meta(meta)
   callouty_meta = stringify_meta(meta['callouty-theorem'])
   quarto.doc.add_html_dependency({
     name = 'callouty-theorem',
-    version = '1.2.0',
+    version = '1.2.1',
     stylesheets = {'callouty-theorem.css'},
     scripts = {'callouty-theorem.js'}
   })
@@ -235,10 +235,12 @@ local function calloutify(el, is_proof)
   local numbered_id = ref_prefix and numbered_prefixes[ref_prefix] and el.identifier or nil
   if override_title and my_types[typ] then
     callout_tbl.title = spawn_callout_title(my_types[typ].title, el.name, numbered_id)
-  elseif title_ref and numbered_id then
+  elseif title_ref and numbered_id and quarto.doc.is_format('html') then
     -- Put the numbered label ("Example 1 (name)") in the callout header.
     -- A citation of the element's own id resolves to "Example 1" in the
     -- crossref stage; the body keeps the Theorem node, so numbering is unchanged.
+    -- HTML only: the stylesheet that hides the body's repeat of the label has no
+    -- PDF or Word counterpart, so there the header would print the label twice.
     local title = pandoc.List({label_cite(numbered_id)})
     if el.name then
       title:insert(pandoc.Str(" ("))
