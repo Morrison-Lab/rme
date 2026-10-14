@@ -1,0 +1,55 @@
+:::{#exm-zip-reg}
+#### Zero-inflated Poisson probabilities and moments
+
+Suppose that at some covariate pattern and exposure,
+a zero-inflated Poisson regression model (@def-zip-reg)
+has $\pi = 0.3$ and $\mu_0 = 2$.
+By the solution to @exr-zinf-pmf,
+
+$$
+\ba
+\P(Y = 0 \mid \vX = \vx, T = t)
+&= \pi + (1 - \pi) \expf{-\mu_0}
+&& \text{(zero-inflated PMF at 0)} \\
+&= 0.3 + 0.7 \expf{-2}
+&& \text{(substitute)} \\
+&\approx 0.3 + 0.7 \cdot 0.135
+&& \text{(} \expf{-2} \approx 0.135 \text{)} \\
+&\approx 0.395
+&& \text{(multiply and add)}
+\ea
+$$
+
+and by the solution to @exr-zinf-moments,
+
+$$
+\ba
+\E{Y \mid \vX = \vx, T = t}
+&= (1 - \pi) \mu_0
+&& \text{(zero-inflated mean)} \\
+&= 0.7 \cdot 2
+&& \text{(substitute)} \\
+&= 1.4
+&& \text{(multiply)} \\
+\Var{Y \mid \vX = \vx, T = t}
+&= (1 - \pi) \mu_0 (1 + \pi \mu_0)
+&& \text{(zero-inflated variance)} \\
+&= 1.4 \cdot (1 + 0.3 \cdot 2)
+&& \text{(substitute)} \\
+&= 1.4 \cdot 1.6
+&& \text{(multiply and add)} \\
+&= 2.24
+&& \text{(multiply)}
+\ea
+$$
+
+A Poisson distribution with the same mean, $1.4$,
+has variance $1.4$
+and $\P(Y = 0) = \expf{-1.4} \approx 0.247$.
+The zero-inflated model has both more zeros
+($0.395$ versus $0.247$)
+and a larger variance
+($2.24$ versus $1.4$),
+so it is [overdispersed](#def-overdispersion) relative to that Poisson model.
+
+:::

@@ -1,0 +1,34 @@
+:::{#exm-nb-reg}
+#### Negative binomial variance
+
+Suppose a negative binomial regression model (@def-nb-reg)
+has $\rho = 2$,
+and that at some covariate pattern and exposure
+the mean count is $\mu(\vx, t) = 4$.
+By @eq-nb-reg-var:
+
+$$
+\ba
+\Var{Y \mid \vX = \vx, T = t}
+&= 4 + \frac{4^2}{2}
+&& \text{(substitute } \mu = 4 \text{ and } \rho = 2 \text{)} \\
+&= 4 + 8
+&& \text{(square and divide)} \\
+&= 12
+&& \text{(add)}
+\ea
+$$
+
+A Poisson regression model with the same mean
+would specify variance $4$,
+so this negative binomial model allows three times as much variance at this mean.
+At a covariate pattern with mean $\mu(\vx, t) = 1$,
+the same model gives variance $1 + 1^2 / 2 = 1.5$,
+only $1.5$ times the Poisson variance:
+the extra variance $\mu^2 / \rho$ grows faster than the mean,
+so negative binomial overdispersion is largest where counts are large.
+As $\rho \to \infty$,
+$\mu^2 / \rho \to 0$
+and the variance approaches the Poisson variance $\mu$.
+
+:::

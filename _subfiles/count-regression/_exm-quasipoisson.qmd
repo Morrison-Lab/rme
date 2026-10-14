@@ -1,0 +1,39 @@
+:::{#exm-quasipoisson}
+#### Quasipoisson standard errors
+
+Suppose a Poisson regression model with an intercept and $p = 2$ covariates
+is fit to $n = 50$ observations,
+the Pearson $\chi^2$ statistic is $94$,
+and the Poisson regression standard error of $\eb_1$ is $0.10$.
+By @eq-quasipoisson-theta:
+
+$$
+\ba
+\eth
+&= \frac{94}{50 - (2 + 1)}
+&& \text{(substitute)} \\
+&= \frac{94}{47}
+&& \text{(subtract)} \\
+&= 2
+&& \text{(divide)}
+\ea
+$$
+
+so the quasipoisson standard error of $\eb_1$ is
+
+$$
+\ba
+\sqrt{\eth} \cdot 0.10
+&= \sqrt{2} \cdot 0.10
+&& \text{(scale the Poisson standard error)} \\
+&\approx 0.141
+&& \text{(evaluate)}
+\ea
+$$
+
+The point estimate $\eb_1$ does not change,
+but its 95% confidence interval becomes $\sqrt{2} \approx 1.41$ times as wide.
+If $\eth$ had been close to $1$,
+the quasipoisson and Poisson standard errors would nearly agree.
+
+:::
