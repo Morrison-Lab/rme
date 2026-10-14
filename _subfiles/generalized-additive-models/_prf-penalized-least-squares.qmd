@@ -1,0 +1,85 @@
+::: proof
+Expand the penalized residual sum of squares:
+
+$$
+\ba
+\text{PRSS}_\l(\vb)
+&= \tp{\vy}\vy - \tp{\vy}\mat{B}\vb - \tp{\vb}\tp{\mat{B}}\vy
++ \tp{\vb}\tp{\mat{B}}\mat{B}\vb + \l \tp{\vb}\mat{P}\vb
+&& \text{(distribute the product)}
+\\ &= \tp{\vy}\vy - 2\tp{\vb}\tp{\mat{B}}\vy
++ \tp{\vb}\tp{\mat{B}}\mat{B}\vb + \l \tp{\vb}\mat{P}\vb
+&& \text{(a scalar equals its transpose)}
+\\ &= \tp{\vy}\vy - 2\tp{\vb}\tp{\mat{B}}\vy
++ \tp{\vb}\paren{\tp{\mat{B}}\mat{B} + \l\mat{P}}\vb
+&& \text{(collect the quadratic terms)}
+\ea
+$$
+
+Write $\mat{A} \eqdef \tp{\mat{B}}\mat{B} + \l\mat{P}$,
+a symmetric $q \times q$ matrix.
+The gradient with respect to $\vb$ is
+
+$$
+\ba
+\ub{\deriv{\vb}\text{PRSS}_\l(\vb)}_{q \times 1}
+&= \deriv{\vb}\paren{-2\tp{\vb}\tp{\mat{B}}\vy} + \deriv{\vb}\paren{\tp{\vb}\mat{A}\vb}
+&& \text{(} \tp{\vy}\vy \text{ does not depend on } \vb\text{)}
+\\ &= -2\tp{\mat{B}}\vy + \deriv{\vb}\paren{\tp{\vb}\mat{A}\vb}
+&& \text{(gradient of a linear form: } \deriv{\vb}\tp{\vb}\vec{c} = \vec{c}\text{)}
+\\ &= -2\tp{\mat{B}}\vy + 2\mat{A}\vb
+&& \text{(gradient of a symmetric quadratic form)}
+\ea
+$$
+
+Setting the gradient to $\mat{0}_{q \times 1}$ gives the penalized normal equations:
+
+$$
+\ba
+-2\tp{\mat{B}}\vy + 2\mat{A}\vb &= \mat{0}_{q \times 1}
+&& \text{(set the gradient to zero)}
+\\ 2\mat{A}\vb &= 2\tp{\mat{B}}\vy
+&& \text{(add } 2\tp{\mat{B}}\vy \text{ to both sides)}
+\\ \mat{A}\vb &= \tp{\mat{B}}\vy
+&& \text{(divide by 2)}
+\\ \vb &= \mat{A}^{-1}\tp{\mat{B}}\vy
+&& \text{(multiply on the left by } \mat{A}^{-1}\text{)}
+\ea
+$$
+
+{{< slidebreak >}}
+
+This stationary point is the unique minimizer
+because the Hessian $2\mat{A}$ is positive definite:
+for any $\vec{v} \ne \mat{0}_{q \times 1}$,
+$\tp{\vec{v}}\mat{A}\vec{v}
+= \tp{(\mat{B}\vec{v})}(\mat{B}\vec{v}) + \l \tp{\vec{v}}\mat{P}\vec{v} \ge 0$,
+since both terms are nonnegative.
+If equality held, then $\mat{A}\vec{v} = \mat{0}_{q \times 1}$,
+because $\tp{\vec{v}}\mat{A}\vec{v} = 0$ implies $\mat{A}\vec{v} = \mat{0}_{q \times 1}$
+for a positive semidefinite matrix $\mat{A}$;
+that would contradict the invertibility of $\mat{A}$.
+So $\tp{\vec{v}}\mat{A}\vec{v} > 0$.
+
+Finally, the fitted values are
+
+$$
+\ba
+\est{\vy}
+&= \mat{B}\evb_\l
+&& \text{(fitted values of a basis expansion)}
+\\ &= \mat{B}\mat{A}^{-1}\tp{\mat{B}}\vy
+&& \text{(substitute } \evb_\l\text{)}
+\\ &= \mat{S}_\l \vy
+&& \text{(definition of } \mat{S}_\l\text{)}
+\ea
+$$
+:::
+
+::: notes
+The smoothing spline of @def-smoothing-spline is a special case.
+By @rem-smoothing-spline-natural-cubic, its minimizer is a natural cubic spline,
+so it can be written $g(x) = \sum_k \b_k b_k(x)$ in a natural cubic spline basis,
+and its penalty is $\int g''(t)^2\,dt = \tp{\vb}\mat{P}\vb$
+with $P_{jk} \eqdef \int b_j''(t)\, b_k''(t)\,dt$.
+:::
