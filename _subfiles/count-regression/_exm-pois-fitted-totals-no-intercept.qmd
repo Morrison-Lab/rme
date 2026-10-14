@@ -11,9 +11,8 @@ the $j = 0$ equation no longer applies:
 #| code-fold: show
 ins$age_num <- as.integer(ins$Age)
 ins_glm0 <- glm(
-  Claims ~ 0 + age_num,
-  offset = log(Holders),
-  family = poisson,
+  Claims ~ 0 + age_num + offset(log(Holders)),
+  family = stats::poisson(),
   data = ins
 )
 c(observed = sum(ins$Claims), fitted = sum(fitted(ins_glm0)))

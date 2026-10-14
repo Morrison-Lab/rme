@@ -15,9 +15,8 @@ and $\logf{\text{Holders}}$ as the offset:
 ins <- MASS::Insurance
 ins$Age <- factor(ins$Age, ordered = FALSE)
 ins_glm <- glm(
-  Claims ~ District + Age,
-  offset = log(Holders),
-  family = poisson,
+  Claims ~ District + Age + offset(log(Holders)),
+  family = stats::poisson(),
   data = ins
 )
 c(observed = sum(ins$Claims), fitted = sum(fitted(ins_glm)))
