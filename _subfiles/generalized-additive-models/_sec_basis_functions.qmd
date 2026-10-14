@@ -14,11 +14,6 @@ A **basis expansion** of $X$ is a fixed (data-free) set of functions $b_1(X), \l
 The basis-expansion regression model replaces $X$ with these transformations:
 
 $$y_i = \b_0 + \b_1 b_1(x_i) + \b_2 b_2(x_i) + \cdots + \b_K b_K(x_i) + \eps_i.$$
-
-The basis functions $b_k(\cdot)$ are chosen ahead of time; the
-coefficients $\b_k$ are estimated by least squares (or, more
-generally, by maximum likelihood for a GLM with link
-$g(\E{Y \mid X}) = \b_0 + \sum_k \b_k b_k(X)$).
 ::::
 
 {{< slidebreak >}}
@@ -30,6 +25,17 @@ For polynomial regression of degree $d$ (@def-polynomial-regression),
 the basis functions are the monomials
 
 $$b_k(X) = X^k, \quad k = 1, \ldots, d.$$
+::::
+
+{{< slidebreak >}}
+
+::::{#rem-basis-expansion-estimation}
+#### How a basis-expansion model is fit
+
+The basis functions $b_k(\cdot)$ are chosen ahead of time; the
+coefficients $\b_k$ are estimated by least squares (or, more
+generally, by maximum likelihood for a GLM with link
+$g(\E{Y \mid X}) = \b_0 + \sum_k \b_k b_k(X)$).
 ::::
 
 {{< slidebreak >}}
