@@ -1,0 +1,33 @@
+::: proof
+For any real $y$:
+
+$$
+\ba
+\P(Y_i > y)
+&= \P(T_i > \ef{y})
+&& \text{(} \log \text{ is increasing)} \\
+&= \expf{-\theta_i (\lambda \ef{y})^p}
+&& \text{(Weibull PH survival function at } \ef{y} \text{)} \\
+&= \expf{-\ef{\eta_i} (\lambda \ef{y})^p}
+&& \text{(} \theta_i = \ef{\eta_i} \text{)} \\
+&= \expf{-\ef{\eta_i} \lambda^p \ef{p y}}
+&& \text{(power of a product)} \\
+&= \expf{-\ef{\eta_i} \ef{p \logf{\lambda}} \ef{p y}}
+&& \text{(} \lambda^p = \ef{p \logf{\lambda}} \text{)} \\
+&= \expf{-\ef{\eta_i + p \logf{\lambda} + p y}}
+&& \text{(product rule for exponentials)} \\
+&= \expf{-\ef{\eta_i + (y - \alpha)/\sigma}}
+&& \text{(substitute } p = 1/\sigma,\ \logf{\lambda} = -\alpha \text{)} \\
+&= \expf{-\ef{(y - \alpha + \sigma \eta_i)/\sigma}}
+&& \text{(common denominator } \sigma \text{)} \\
+&= \P\paren{W > \frac{y - \alpha + \sigma \eta_i}{\sigma}}
+&& \text{(Gumbel survival function)} \\
+&= \P\paren{\sigma W > y - \alpha + \sigma \eta_i}
+&& \text{(multiply both sides by } \sigma > 0 \text{)} \\
+&= \P\paren{\alpha - \sigma \eta_i + \sigma W > y}
+&& \text{(add } \alpha - \sigma \eta_i \text{ to both sides)}
+\ea
+$$
+
+The two random variables have the same survival function, so they have the same distribution.
+:::
