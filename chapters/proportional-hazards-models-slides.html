@@ -371,13 +371,16 @@ text-align: center;
 <span class="header-section-number">1</span> Introduction</h1>
 
 </section><section class="slide level2"><div id="exr-review-exp-dist" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1</strong></span> Recall the key characteristics of the exponential distribution:</p>
+<p><span class="theorem-title"><strong>Exercise 1</strong></span> Recall the key characteristics of the <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential distribution</a>:</p>
 <ul>
-<li>density function <span class="math inline">\(\operatorname{f}(t)\)</span>
+<li>
+<a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density function</a> <span class="math inline">\(\operatorname{f}(t)\)</span>
 </li>
-<li>survival function <span class="math inline">\(\operatorname{S}(t)\)</span>
+<li>
+<a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a> <span class="math inline">\(\operatorname{S}(t)\)</span>
 </li>
-<li>hazard function <span class="math inline">\({\lambda}(t)\)</span>
+<li>
+<a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a> <span class="math inline">\({\lambda}(t)\)</span>
 </li>
 </ul>
 </div>
@@ -421,7 +424,7 @@ text-align: center;
 </div>
 </div>
 <!-- {{< include _subfiles/misc/_sec_cox-bio.qmd >}} -->
-</section><section class="slide level2"><aside class="notes"><p>Let’s make two generalizations. First, we let the hazard depend on some covariates <span class="math inline">\(x_1,x_2, \dots, x_p\)</span>; we will indicate this dependence by extending our notation for hazard:</p>
+</section><section class="slide level2"><aside class="notes"><p>Let’s make two generalizations. First, we let the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard</a> depend on some <a href="../chapters/Intro-to-GLMs.html#def-predictors">covariates</a> <span class="math inline">\(x_1,x_2, \dots, x_p\)</span>; we will indicate this dependence by extending our notation for hazard:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -433,12 +436,12 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-cond-hazard" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (conditional hazard)</strong></span> The <strong>conditional hazard</strong> of outcome <span class="math inline">\(T\)</span> at value <span class="math inline">\(t\)</span>, given covariate vector <span class="math inline">\(\tilde{x}\)</span>, is the conditional density of the event <span class="math inline">\(T=t\)</span>, given <span class="math inline">\(T \ge t\)</span> and <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 1 (conditional hazard)</strong></span> The <strong>conditional hazard</strong> of <a href="../chapters/Intro-to-GLMs.html#def-outcome">outcome</a> <span class="math inline">\(T\)</span> at value <span class="math inline">\(t\)</span>, given <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-slr-covariate-vector">covariate vector</a> <span class="math inline">\(\tilde{x}\)</span>, is the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-pdf">conditional density</a> of the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-event">event</a> <span class="math inline">\(T=t\)</span>, given <span class="math inline">\(T \ge t\)</span> and <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>:</p>
 <p><span id="eq-def-cond-haz"><span class="math display">\[{\lambda}(t|\tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t, \tilde{X}= \tilde{x}) \tag{1}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="def-base-hazard" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (baseline hazard)</strong></span> &nbsp;</p>
-<aside class="notes"><p>The <strong>baseline hazard</strong>, <strong>base hazard</strong>, or <strong>reference hazard</strong>, denoted <span class="math inline">\({\lambda}_0(t)\)</span> or <span class="math inline">\(\lambda_0(t)\)</span>, is the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a> for the subpopulation of individuals whose covariates are all equal to their reference levels:</p>
+<aside class="notes"><p>The <strong>baseline hazard</strong>, <strong>base hazard</strong>, or <strong>reference hazard</strong>, denoted <span class="math inline">\({\lambda}_0(t)\)</span> or <span class="math inline">\(\lambda_0(t)\)</span>, is the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a> for the subpopulation of individuals whose covariates are all equal to their <a href="https://morrison-lab.github.io/sds/data.html#def-reference-level">reference levels</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -451,7 +454,7 @@ text-align: center;
           display:block!important;
       }</style></aside><p><span id="eq-def-baseline-haz"><span class="math display">\[{\lambda}_0(t) \stackrel{\text{def}}{=}{\lambda}(t | \tilde{X}= \tilde{0}) \tag{2}\]</span></span></p>
 </div>
-<aside class="notes"><p>The baseline hazard is <em>somewhat</em> analogous to the intercept term in linear regression, but it is <strong>not</strong> a mean.</p>
+<aside class="notes"><p>The baseline hazard is <em>somewhat</em> analogous to the intercept term in <a href="../chapters/Linear-models-overview.html#def-lm-general-form">linear regression</a>, but it is <strong>not</strong> a <a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">mean</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -500,7 +503,7 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-baseline-surv" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Baseline survival function)</strong></span> The <strong>baseline survival function</strong> is the survival function for an individual whose covariates are all equal to their default values.</p>
+<p><span class="theorem-title"><strong>Definition 4 (Baseline survival function)</strong></span> The <strong>baseline survival function</strong> is the <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a> for an individual whose covariates are all equal to their default values.</p>
 <p><span class="math display">\[\operatorname{S}_0(t) \stackrel{\text{def}}{=}\operatorname{S}(t | \tilde{X}= \tilde{0})\]</span></p>
 </div>
 </section><section class="slide level2"><aside class="notes"><p>Now, let’s define <strong><em>how</em></strong> the hazard function depends on covariates. We typically use a log link to model the relationship between the hazard function, <span class="math inline">\({\lambda}(t|\tilde{x})\)</span>, and the linear component, <span class="math inline">\(\eta(t|\tilde{x})\)</span>, as in Poisson models (<a href="../chapters/count-regression.html">models for count outcomes</a>); specifically:</p>
@@ -516,7 +519,7 @@ text-align: center;
           display:block!important;
       }</style></aside><div id="def-loghaz" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5 (log-hazard)</strong></span> &nbsp;</p>
-<aside class="notes"><p>The <strong>log-hazard</strong> function, denoted <span class="math inline">\(\eta(t)\)</span>, is the natural logarithm of the hazard function:</p>
+<aside class="notes"><p>The <strong>log-hazard</strong> function, denoted <span class="math inline">\(\eta(t)\)</span>, is the <a href="https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log">natural logarithm</a> of the hazard function:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -531,7 +534,7 @@ text-align: center;
 </div>
 </section><section class="slide level2"><div id="def-cond-loghaz" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6 (conditional log-hazard)</strong></span> &nbsp;</p>
-<aside class="notes"><p>The <strong>conditional log-hazard</strong> function, denoted <span class="math inline">\(\eta(t|\tilde{x})\)</span>, is the natural logarithm of the conditional hazard function:</p>
+<aside class="notes"><p>The <strong>conditional log-hazard</strong> function, denoted <span class="math inline">\(\eta(t|\tilde{x})\)</span>, is the natural logarithm of the <a href="#/def-cond-hazard">conditional hazard function</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -557,7 +560,7 @@ text-align: center;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="def-base-loghaz" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 7 (baseline log-hazard)</strong></span> &nbsp;</p>
-<aside class="notes"><p>The <strong>baseline log-hazard</strong>, denoted <span class="math inline">\(\eta_0(t)\)</span>, log-hazard function for the subpopulation of individuals whose covariates are all equal to their reference levels:</p>
+<aside class="notes"><p>The <strong>baseline log-hazard</strong>, denoted <span class="math inline">\(\eta_0(t)\)</span>, <a href="#/def-loghaz">log-hazard function</a> for the subpopulation of individuals whose covariates are all equal to their reference levels:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -591,7 +594,7 @@ text-align: center;
 <p><span class="math display">\[\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\eta(t|\tilde{x}) - \eta(t|\mathord{{\tilde{x}^*}})\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-diff-loghaz" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Difference of log-hazards vs hazard ratio)</strong></span> If <span class="math inline">\(\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is the difference in log-hazard between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is corresponding hazard ratio, then:</p>
+<p><span class="theorem-title"><strong>Theorem 2 (Difference of log-hazards vs hazard ratio)</strong></span> If <span class="math inline">\(\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is the <a href="#/def-diffloghaz">difference in log-hazard</a> between covariate patterns <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\)</span> is corresponding hazard ratio, then:</p>
 <p><span class="math display">\[\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}})= \operatorname{log}\mathopen{}\left\{\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})\right\}\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
@@ -705,7 +708,7 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-ph-model" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 11 (Cox proportional hazards model)</strong></span> The <strong>Cox proportional hazards</strong> model <span class="citation" data-cites="cox1972regression">(<a href="#/references" role="doc-biblioref" onclick="">Cox 1972</a>)</span> for a time-to-event outcome <span class="math inline">\(T\)</span> is a model where the difference in log-hazard from the baseline log-hazard is equal to a linear combination of the predictors:</p>
+<p><span class="theorem-title"><strong>Definition 11 (Cox proportional hazards model)</strong></span> The <strong>Cox proportional hazards</strong> model <span class="citation" data-cites="cox1972regression">(<a href="#/references" role="doc-biblioref" onclick="">Cox 1972</a>)</span> for a time-to-event outcome <span class="math inline">\(T\)</span> is a model where the <a href="#/def-difflog-hazard-from-baseline">difference in log-hazard from the baseline</a> log-hazard is equal to a <a href="https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination">linear combination</a> of the <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictors</a>:</p>
 <p><span id="eq-ph-diffloghaz"><span class="math display">\[\Delta\eta(t|\tilde{x}) \stackrel{\text{def}}{=}\tilde{x}\cdot \tilde{\beta} \tag{11}\]</span></span></p>
 </div>
 </section><section class="slide level2"><p>Equivalently:</p>
@@ -724,7 +727,7 @@ text-align: center;
 \end{aligned}
 \tag{13}\]</span></span></p>
 </div>
-<aside class="notes"><p>In a proportional hazards model, the baseline log-hazard is analogous to the intercept term in a generalized linear model, except that the baseline log-hazard depends on time, <span class="math inline">\(t\)</span>.</p>
+<aside class="notes"><p>In a proportional hazards model, the <a href="#/def-base-loghaz">baseline log-hazard</a> is analogous to the intercept term in a <a href="../chapters/Intro-to-GLMs.html#def-glm">generalized linear model</a>, except that the baseline log-hazard depends on time, <span class="math inline">\(t\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -785,9 +788,9 @@ text-align: center;
 &amp;= \operatorname{exp}\mathopen{}\left\{\Delta\tilde{x}\cdot \tilde{\beta}\right\}\mathclose{}
 \end{aligned}
 \tag{17}\]</span></span></p>
-<p>Expanding the definition of <span class="math inline">\(\text{ϙ}_{{\lambda}}\)</span>, the first equality writes the ratio as the exponential of a difference of logarithms; the second applies the definition of <span class="math inline">\(\Delta\eta\)</span> as that difference; the third is <a href="#/lem-diffloghaz-ph" class="quarto-xref">Lemma&nbsp;2</a>; and the last substitutes <span class="math inline">\(\Delta\tilde{x}\)</span> for <span class="math inline">\(\tilde{x}- \mathord{{\tilde{x}^*}}\)</span>.</p>
+<p>Expanding the definition of <span class="math inline">\(\text{ϙ}_{{\lambda}}\)</span>, the first equality writes the ratio as the exponential of a difference of logarithms; the second applies the <a href="#/def-diffloghaz">definition</a> of <span class="math inline">\(\Delta\eta\)</span> as that difference; the third is <a href="#/lem-diffloghaz-ph" class="quarto-xref">Lemma&nbsp;2</a>; and the last substitutes <span class="math inline">\(\Delta\tilde{x}\)</span> for <span class="math inline">\(\tilde{x}- \mathord{{\tilde{x}^*}}\)</span>.</p>
 </div>
-</section><section class="slide level2"><p>So for proportional hazards models, we can write the hazard ratio using a shorthand notation:</p>
+</section><section class="slide level2"><p>So for <a href="#/def-ph-model">proportional hazards models</a>, we can write the hazard ratio using a shorthand notation:</p>
 <p><span class="math display">\[\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}})  = \text{ϙ}_{{\lambda}}(\tilde{x}: \mathord{{\tilde{x}^*}})\]</span></p>
 </section><section class="slide level2"><div id="lem-ph-diffloghaz-0" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 3 (Difference of log-hazard from baseline)</strong></span> <span id="eq-diffloghaz-0-ph"><span class="math display">\[\Delta\eta(t|\tilde{x})= \tilde{x}\cdot \tilde{\beta} \tag{18}\]</span></span></p>
@@ -867,7 +870,7 @@ text-align: center;
 \end{aligned}
 \]</span></p>
 </div>
-<aside class="notes"><p>This model is <strong>semi-parametric</strong>, because the linear predictor depends on estimated parameters but the base hazard function is unspecified. There is no constant term in <span class="math inline">\(\eta(x)\)</span>, because it is absorbed in the base hazard.</p>
+<aside class="notes"><p>This model is <strong>semi-parametric</strong>, because the <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a> depends on estimated parameters but the <a href="#/def-base-hazard">base hazard function</a> is unspecified. There is no constant term in <span class="math inline">\(\eta(x)\)</span>, because it is absorbed in the base hazard.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -898,7 +901,7 @@ text-align: center;
 &amp;=\frac{\theta_{{\lambda}}(\tilde{x}_1)}{\theta_{{\lambda}}(\tilde{x}_2)}\\
 \end{aligned}
 \]</span></p>
-<aside class="notes"><p>Under the proportional hazards model, this ratio (a.k.a. proportion) does not depend on <span class="math inline">\(t\)</span>. This property is a structural limitation of the model; it is called the <strong>proportional hazards assumption</strong>.</p>
+<aside class="notes"><p>Under the proportional hazards model, this ratio (a.k.a. proportion) does not depend on <span class="math inline">\(t\)</span>. This property is a structural limitation of the model; it is called the <a href="#/def-pha"><strong>proportional hazards assumption</strong></a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1021,7 +1024,7 @@ text-align: center;
 &amp;=\operatorname{log}\mathopen{}\left\{{\lambda}_0(t)\right\}\mathclose{}  + \tilde{x}\cdot \tilde{\beta}
 \end{aligned}
 \]</span></p>
-<aside class="notes"><p>Under this structure, covariate effects combine by addition on the log-hazard scale; log-hazard functions for different covariate patterns should be vertical shifts of each other.</p>
+<aside class="notes"><p>Under this structure, covariate effects combine by addition on the <a href="#/def-loghaz">log-hazard</a> scale; log-hazard functions for different covariate patterns should be vertical shifts of each other.</p>
 <p>See also:</p>
 <p><a href="https://en.wikipedia.org/wiki/Proportional_hazards_model#Why_it_is_called_%22proportional%22" class="uri">https://en.wikipedia.org/wiki/Proportional_hazards_model#Why_it_is_called_%22proportional%22</a></p>
 <style type="text/css">
@@ -1100,21 +1103,21 @@ text-align: center;
 \tag{29}\]</span></span></p>
 </div>
 <h3 id="summary-of-proportional-hazards-model-structure-and-assumptions">Summary of proportional hazards model structure and assumptions</h3>
-<p><strong>Joint likelihood of data set</strong>: <span class="math inline">\(\mathcal{L}\stackrel{\text{def}}{=}\operatorname{p}(\tilde{Y}= \tilde{y}, \tilde{D}= \tilde{d}| \mathbf{X}= \mathbf{x})\)</span></p>
+<p><strong>Joint <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a> of data set</strong>: <span class="math inline">\(\mathcal{L}\stackrel{\text{def}}{=}\operatorname{p}(\tilde{Y}= \tilde{y}, \tilde{D}= \tilde{d}| \mathbf{X}= \mathbf{x})\)</span></p>
 <p><strong>Marginal likelihood contribution of obs. <em>i</em> </strong>: <span class="math inline">\(\mathcal{L}_i \stackrel{\text{def}}{=}\operatorname{p}(Y_i= y_i, D_i = d_i | \tilde{X}_i = \tilde{x}_i)\)</span></p>
-<p><em>Independent Observations Assumption:</em> <span class="math inline">\(\mathcal{L}= \prod_{i=1}^n \mathcal{L}_i\)</span></p>
-<p><em>Non-Informative Censoring Assumption:</em> <span class="math inline">\(T_i\perp\!\!\!\perp C_i | \tilde{X}_i\)</span></p>
+<p><em><a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">Independent</a> Observations Assumption:</em> <span class="math inline">\(\mathcal{L}= \prod_{i=1}^n \mathcal{L}_i\)</span></p>
+<p><em><a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">Non-Informative Censoring</a> Assumption:</em> <span class="math inline">\(T_i\perp\!\!\!\perp C_i | \tilde{X}_i\)</span></p>
 <p><span class="math display">\[
 \mathcal{L}_i \propto [\operatorname{f}_T(y_i|\tilde{x}_i)]^{d_i} [\operatorname{S}_T(y_i | \tilde{x}_i)]^{1-d_i}
 = \operatorname{S}_T(y_i|\tilde{x}_i) \cdot [{\lambda}_T(y_i|\tilde{x}_i)]^{d_i}
 \]</span></p>
-<p><strong>Survival function</strong>: <span class="math inline">\(\operatorname{S}(t | \tilde{x}) \stackrel{\text{def}}{=}\operatorname{P}(T &gt; t|\tilde{X}= \tilde{x}) = \int_{u=t}^{\infty} \operatorname{f}(u|\tilde{x})du = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t|\tilde{x})\right\}\mathclose{}\)</span></p>
-<p><strong>Probability density function</strong>: <span class="math inline">\(\operatorname{f}(t| \tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|\tilde{X}= \tilde{x}) = -\operatorname{S}'(t|\tilde{x}) = {\lambda}(t| \tilde{x}) \operatorname{S}(t | \tilde{x})\)</span></p>
-<p><strong>Cumulative hazard function</strong>: <span class="math inline">\({\Lambda}(t | \tilde{x}) \stackrel{\text{def}}{=}\int_{u=0}^t {\lambda}(u|\tilde{x})du = -\operatorname{log}\mathopen{}\left\{\operatorname{S}(t|\tilde{x})\right\}\mathclose{}\)</span></p>
-<p><strong>Hazard function</strong>: <span class="math inline">\({\lambda}(t |\tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t,\tilde{X}= \tilde{x}) = {\Lambda}'(t|\tilde{x}) = \frac{\operatorname{f}(t|\tilde{x})}{\operatorname{S}(t|\tilde{x})}\)</span></p>
-<p><strong>Hazard ratio</strong>: <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\)</span></p>
-<p><strong>Log-Hazard function</strong>: <span class="math inline">\(\eta(t|\tilde{x}) \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\lambda(t|\tilde{x})\right\}\mathclose{} = \eta_0(t) + \Delta\eta(t|\tilde{x})\)</span></p>
-<p><em>Proportional Hazards Assumption:</em></p>
+<p><strong><a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">Survival function</a></strong>: <span class="math inline">\(\operatorname{S}(t | \tilde{x}) \stackrel{\text{def}}{=}\operatorname{P}(T &gt; t|\tilde{X}= \tilde{x}) = \int_{u=t}^{\infty} \operatorname{f}(u|\tilde{x})du = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t|\tilde{x})\right\}\mathclose{}\)</span></p>
+<p><strong><a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">Probability density function</a></strong>: <span class="math inline">\(\operatorname{f}(t| \tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|\tilde{X}= \tilde{x}) = -\operatorname{S}'(t|\tilde{x}) = {\lambda}(t| \tilde{x}) \operatorname{S}(t | \tilde{x})\)</span></p>
+<p><strong><a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">Cumulative hazard function</a></strong>: <span class="math inline">\({\Lambda}(t | \tilde{x}) \stackrel{\text{def}}{=}\int_{u=0}^t {\lambda}(u|\tilde{x})du = -\operatorname{log}\mathopen{}\left\{\operatorname{S}(t|\tilde{x})\right\}\mathclose{}\)</span></p>
+<p><strong><a href="../chapters/intro-to-survival-analysis.html#def-hazard">Hazard function</a></strong>: <span class="math inline">\({\lambda}(t |\tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t,\tilde{X}= \tilde{x}) = {\Lambda}'(t|\tilde{x}) = \frac{\operatorname{f}(t|\tilde{x})}{\operatorname{S}(t|\tilde{x})}\)</span></p>
+<p><strong><a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">Hazard ratio</a></strong>: <span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\)</span></p>
+<p><strong><a href="#/def-loghaz">Log-Hazard function</a></strong>: <span class="math inline">\(\eta(t|\tilde{x}) \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\lambda(t|\tilde{x})\right\}\mathclose{} = \eta_0(t) + \Delta\eta(t|\tilde{x})\)</span></p>
+<p><em><a href="#/def-pha">Proportional Hazards Assumption</a>:</em></p>
 <p><span class="math display">\[
 \begin{aligned}
 {\lambda}(t |\tilde{x}) &amp;= {\color{blue}{{\lambda}_0(t)}} \cdot {\color{red}{\theta_{{\lambda}}(\tilde{x})}}
@@ -1137,8 +1140,8 @@ text-align: center;
 </section></section><section><section id="testing-the-proportional-hazards-assumption" class="title-slide slide level1 center" data-number="3"><h1>
 <span class="header-section-number">3</span> Testing the proportional hazards assumption</h1>
 
-</section><section class="slide level2"><aside class="notes"><p>The Nelson-Aalen estimate of the cumulative hazard is usually used for estimates of the hazard and often the cumulative hazard.</p>
-<p>If the hazards of the three groups are proportional, the hazard ratio remains constant over <span class="math inline">\(t\)</span>. We can test this using the ratios of the estimated cumulative hazards, which also would be proportional.</p>
+</section><section class="slide level2"><aside class="notes"><p>The <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimate</a> of the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a> is usually used for estimates of the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard</a> and often the cumulative hazard.</p>
+<p>If the hazards of the three groups are <a href="#/def-pha">proportional</a>, the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> remains constant over <span class="math inline">\(t\)</span>. We can test this using the ratios of the estimated cumulative hazards, which also would be proportional.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1277,7 +1280,7 @@ Figure&nbsp;4: Disease-Free Cumulative Hazard by Disease Group (log-scale)
 </figure>
 </div>
 <h3 id="smoothed-hazard-functions">Smoothed hazard functions</h3>
-<aside class="notes"><p>The Nelson-Aalen estimate of the cumulative hazard is usually used for estimates of the hazard. Since the hazard is the derivative of the cumulative hazard, we need a smooth estimate of the cumulative hazard, which is provided by smoothing the step-function cumulative hazard.</p>
+<aside class="notes"><p>The Nelson-Aalen estimate of the cumulative hazard is usually used for estimates of the hazard. Since the hazard is the <a href="https://morrison-lab.github.io/mds/calculus-derivatives.html#def-derivative">derivative</a> of the cumulative hazard, we need a smooth estimate of the cumulative hazard, which is provided by smoothing the step-function cumulative hazard.</p>
 <p>The R package <code>muhaz</code> handles this task. What we are looking for is whether the hazard function is more or less the same shape, increasing, decreasing, constant, etc. Are the hazards “proportional”?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1340,12 +1343,12 @@ Figure&nbsp;5: Smoothed Hazard Rate Estimates by Disease Group
 </div>
 </div>
 </div>
-</section><section class="slide level2 scrollable"><aside class="notes"><p>Fitting a proportional hazards model means estimating two pieces: the coefficients <span class="math inline">\(\tilde{\beta}= (\beta_1, \ldots, \beta_p)\)</span> that govern the covariate effects, and the baseline hazard <span class="math inline">\({\lambda}_0(t)\)</span>. We estimate them in two stages:</p>
+</section><section class="slide level2 scrollable"><aside class="notes"><p>Fitting a <a href="#/def-ph-model">proportional hazards model</a> means estimating two pieces: the coefficients <span class="math inline">\(\tilde{\beta}= (\beta_1, \ldots, \beta_p)\)</span> that govern the covariate effects, and the <a href="#/def-base-hazard">baseline hazard</a> <span class="math inline">\({\lambda}_0(t)\)</span>. We estimate them in two stages:</p>
 <ol type="1">
-<li>estimate <span class="math inline">\(\tilde{\beta}\)</span> by maximizing a <em>partial likelihood</em> in which the unknown baseline <span class="math inline">\({\lambda}_0(t)\)</span> cancels out, so the covariate effects can be fit without committing to a shape for the baseline;</li>
-<li>then, with <span class="math inline">\(\hat{\tilde{\beta}}\)</span> in hand, estimate the baseline cumulative hazard <span class="math inline">\({\Lambda}_0(t)\)</span> by the Breslow estimator.</li>
+<li>estimate <span class="math inline">\(\tilde{\beta}\)</span> by maximizing a <a href="#/def-ph-partial-lik"><em>partial likelihood</em></a> in which the unknown baseline <span class="math inline">\({\lambda}_0(t)\)</span> cancels out, so the covariate effects can be fit without committing to a shape for the baseline;</li>
+<li>then, with <span class="math inline">\(\hat{\tilde{\beta}}\)</span> in hand, estimate the <a href="#/def-base-cuhaz">baseline cumulative hazard</a> <span class="math inline">\({\Lambda}_0(t)\)</span> by the <a href="#/def-breslow-baseline-cuhaz-est">Breslow estimator</a>.</li>
 </ol>
-<p>Throughout, assume for simplicity that there are no tied event times; let <span class="math inline">\(t_1 &lt; t_2 &lt; \cdots &lt; t_K\)</span> be the distinct event times for the whole data set, let <span class="math inline">\(R(t_i)\)</span> be the risk set at time <span class="math inline">\(t_i\)</span>, and let <span class="math inline">\((i)\)</span> denote the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption). Recall the model:</p>
+<p>Throughout, assume for simplicity that there are no tied event times; let <span class="math inline">\(t_1 &lt; t_2 &lt; \cdots &lt; t_K\)</span> be the distinct event times for the whole data set, let <span class="math inline">\(R(t_i)\)</span> be the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at time <span class="math inline">\(t_i\)</span>, and let <span class="math inline">\((i)\)</span> denote the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption). Recall the model:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1411,14 +1414,14 @@ Figure&nbsp;5: Smoothed Hazard Rate Estimates by Disease Group
 <li>
 <span class="math inline">\((i)\)</span> is the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption);</li>
 <li>
-<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the risk set at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
+<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
 <li>
 <span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span> (so <span class="math inline">\(d_i = 1\)</span> when there are no ties);</li>
 <li>
-<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (risk score) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
 </ul>
 </div>
-<aside class="notes"><p>To prove that this partial likelihood is free of the baseline hazard, we first assemble a chain of general discretized-likelihood building blocks — used only by this proof, so we develop them here rather than in the <a href="../chapters/intro-to-survival-analysis.html">Intro to Survival Analysis</a> chapter. One piece carries over from that chapter: the <a href="../chapters/intro-to-survival-analysis.html#def-interval-fail-prob">interval failure probability</a> <span class="math inline">\(q_j(\tau)\)</span> (introduced ahead of that chapter’s Kaplan-Meier section, since the Kaplan-Meier derivation also relies on it). From it we build its first-order approximation, the censored-data likelihood, the exact discretized survival factor, the per-interval likelihood factor, and the likelihood regrouped by interval:</p>
+<aside class="notes"><p>To prove that this partial likelihood is free of the baseline hazard, we first assemble a chain of general discretized-likelihood building blocks — used only by this proof, so we develop them here rather than in the <a href="../chapters/intro-to-survival-analysis.html">Intro to Survival Analysis</a> chapter. One piece carries over from that chapter: the <a href="../chapters/intro-to-survival-analysis.html#def-interval-fail-prob">interval failure probability</a> <span class="math inline">\(q_j(\tau)\)</span> (introduced ahead of that chapter’s Kaplan-Meier section, since the Kaplan-Meier derivation also relies on it). From it we build its <a href="#/def-first-order-interval-fail-prob">first-order approximation</a>, the <a href="#/lem-censored-lik">censored-data likelihood</a>, the <a href="#/lem-surv-discretized">exact discretized survival factor</a>, the <a href="#/def-interval-lik-factor">per-interval likelihood factor</a>, and the <a href="#/lem-lik-by-interval">likelihood regrouped by interval</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1430,7 +1433,7 @@ Figure&nbsp;5: Smoothed Hazard Rate Estimates by Disease Group
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-first-order-interval-fail-prob" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 15 (First-order interval failure probability)</strong></span> To first order in <span class="math inline">\(\Delta t\)</span>, the <a href="../chapters/intro-to-survival-analysis.html#def-interval-fail-prob">interval failure probability</a> <span class="math inline">\(q_j(\tau)\)</span> is the hazard times the interval width. We give that approximation its own symbol, the <strong>first-order interval failure probability</strong>:</p>
+<p><span class="theorem-title"><strong>Definition 15 (First-order interval failure probability)</strong></span> To first order in <span class="math inline">\(\Delta t\)</span>, the <a href="../chapters/intro-to-survival-analysis.html#def-interval-fail-prob">interval failure probability</a> <span class="math inline">\(q_j(\tau)\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard</a> times the interval width. We give that approximation its own symbol, the <strong>first-order interval failure probability</strong>:</p>
 <p><span class="math display">\[
 q^*_j(\tau) \stackrel{\text{def}}{=}{\lambda}(\tau)\,\Delta t,
 \]</span></p>
@@ -1454,7 +1457,7 @@ q^*_j(4.0)
 &amp;&amp; \text{(arithmetic)}
 \end{aligned}
 \]</span></p>
-<p>The first-order approximation <span class="math inline">\(q^*_j(4.0) = 0.05\)</span> overstates the exact value <span class="math inline">\(q_j(4.0) \approx 0.0488\)</span> by about <span class="math inline">\(0.0012\)</span>, a relative error of roughly <span class="math inline">\(2.5\%\)</span>. The discrepancy is exactly the leading term dropped by the linearization <span class="math inline">\(1 - \operatorname{exp}\mathopen{}\left\{-x\right\}\mathclose{} = x - \frac{x^2}{2} + \cdots\)</span>: here <span class="math inline">\(x = {\lambda}(4.0)\,\Delta t = 0.05\)</span>, so the dropped term is <span class="math inline">\(\frac{x^2}{2} = \frac{0.05^2}{2} \approx 0.00125\)</span>, which shrinks to zero as <span class="math inline">\(\Delta t \to 0\)</span>. This vanishing discrepancy is why proofs based on this discretization become exact in the continuous-time limit.</p>
+<p>The first-order approximation <span class="math inline">\(q^*_j(4.0) = 0.05\)</span> overstates the exact value <span class="math inline">\(q_j(4.0) \approx 0.0488\)</span> by about <span class="math inline">\(0.0012\)</span>, a relative error of roughly <span class="math inline">\(2.5\%\)</span>. The discrepancy is exactly the leading term dropped by the <a href="https://morrison-lab.github.io/mds/calculus-derivatives.html#def-linear-approximation">linearization</a> <span class="math inline">\(1 - \operatorname{exp}\mathopen{}\left\{-x\right\}\mathclose{} = x - \frac{x^2}{2} + \cdots\)</span>: here <span class="math inline">\(x = {\lambda}(4.0)\,\Delta t = 0.05\)</span>, so the dropped term is <span class="math inline">\(\frac{x^2}{2} = \frac{0.05^2}{2} \approx 0.00125\)</span>, which shrinks to zero as <span class="math inline">\(\Delta t \to 0\)</span>. This vanishing discrepancy is why proofs based on this discretization become exact in the continuous-time limit.</p>
 </div>
 </section><section class="slide level2"><div id="lem-surv-discretized" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 4 (Exact discretization of the survival factor)</strong></span> Partition <span class="math inline">\([0, \max_j Y_j]\)</span> into intervals of width <span class="math inline">\(\Delta t\)</span> with left endpoints <span class="math inline">\(\tau\)</span>, and assume each observed time <span class="math inline">\(Y_j\)</span> falls on an interval boundary (for an interior <span class="math inline">\(Y_j\)</span> the identity instead holds in the <span class="math inline">\(\Delta t \to 0\)</span> limit). Then each subject’s survival factor is the <em>exact</em> product of its per-interval conditional survival probabilities:</p>
@@ -1464,7 +1467,7 @@ q^*_j(4.0)
 <p>where <span class="math inline">\(q_j(\tau)\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-interval-fail-prob">interval failure probability</a>.</p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Surviving to <span class="math inline">\(Y_j\)</span> is the intersection of the events “survive interval <span class="math inline">\(\tau\)</span>”, over all grid intervals <span class="math inline">\(\tau &lt; Y_j\)</span>, which tile <span class="math inline">\([0, Y_j)\)</span> exactly because <span class="math inline">\(Y_j\)</span> is a grid boundary. By the chain rule for survival over a partition, the probability of this intersection factors into the product, over those intervals, of the conditional probability of surviving each interval given survival to its left endpoint. That conditional survival probability is, by definition, <span class="math inline">\(1 - q_j(\tau)\)</span>. The factorization is <em>exact</em>: each factor is the exact conditional survival probability <span class="math inline">\(1 - q_j(\tau)\)</span>, not its first-order hazard approximation, so no error is incurred at this step.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Surviving to <span class="math inline">\(Y_j\)</span> is the intersection of the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-event">events</a> “survive interval <span class="math inline">\(\tau\)</span>”, over all grid intervals <span class="math inline">\(\tau &lt; Y_j\)</span>, which tile <span class="math inline">\([0, Y_j)\)</span> exactly because <span class="math inline">\(Y_j\)</span> is a grid boundary. By the chain rule for survival over a partition, the probability of this intersection factors into the product, over those intervals, of the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob">conditional probability</a> of surviving each interval given survival to its left endpoint. That conditional survival probability is, by definition, <span class="math inline">\(1 - q_j(\tau)\)</span>. The factorization is <em>exact</em>: each factor is the exact conditional survival probability <span class="math inline">\(1 - q_j(\tau)\)</span>, not its first-order hazard approximation, so no error is incurred at this step.</p>
 </div>
 <div id="exm-surv-discretized" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2 (Discretizing a constant hazard)</strong></span> Suppose subject <span class="math inline">\(j\)</span> has constant hazard <span class="math inline">\({\lambda}(t \mid \tilde{x}_j) = 0.1\)</span>/yr and is observed to <span class="math inline">\(Y_j = 1.5\)</span> yr, discretized with <span class="math inline">\(\Delta t = 0.5\)</span> yr (three intervals, <span class="math inline">\(\tau = 0,\, 0.5,\, 1.0\)</span>). Each exact per-interval survival factor is</p>
@@ -1498,7 +1501,7 @@ q^*_j(4.0)
 <p>which matches the closed form <span class="math inline">\(\operatorname{S}(1.5 \mid \tilde{x}_j) = \operatorname{exp}\mathopen{}\left\{-0.1 \times 1.5\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{-0.15\right\}\mathclose{} \approx 0.8607\)</span> exactly, confirming that the discretization introduces no error.</p>
 </div>
 </section><section class="slide level2"><div id="lem-censored-lik" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 5 (Censored-data likelihood)</strong></span> Under noninformative censoring (conditional on <span class="math inline">\(\tilde{x}\)</span>, censoring times are independent of event times), the likelihood of the observed data <span class="math inline">\(\mathopen{}\left\{(Y_j, D_j, \tilde{x}_j)\right\}\mathclose{}_{j=1}^n\)</span> is</p>
+<p><span class="theorem-title"><strong>Lemma 5 (Censored-data likelihood)</strong></span> Under <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">noninformative censoring</a> (conditional on <span class="math inline">\(\tilde{x}\)</span>, censoring times are <a href="https://morrison-lab.github.io/pds/independence.html#def-cind">independent</a> of event times), the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a> of the observed data <span class="math inline">\(\mathopen{}\left\{(Y_j, D_j, \tilde{x}_j)\right\}\mathclose{}_{j=1}^n\)</span> is</p>
 <p><span id="eq-obs-lik"><span class="math display">\[
 \mathcal{L}
 = \prod_{j=1}^{n}
@@ -1508,7 +1511,7 @@ q^*_j(4.0)
 <p>where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is the observed follow-up time and <span class="math inline">\(D_j = \text{1}_{T_j \le C_j}\)</span> the event indicator.</p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>A subject observed to fail (<span class="math inline">\(D_j = 1\)</span>) contributes the event-time density <span class="math inline">\({\lambda}(Y_j \mid \tilde{x}_j)\,\operatorname{S}(Y_j \mid \tilde{x}_j)\)</span>, while a subject still censored (<span class="math inline">\(D_j = 0\)</span>) contributes the survival probability <span class="math inline">\(\operatorname{S}(Y_j \mid \tilde{x}_j)\)</span>. Under noninformative censoring the two cases combine into the single contribution <span class="math inline">\(\operatorname{S}(Y_j \mid \tilde{x}_j)\,{\lambda}(Y_j \mid \tilde{x}_j)^{D_j}\)</span> (the <a href="../chapters/intro-to-survival-analysis.html#sec-likelihood-with-censoring">likelihood with censoring</a> section). Subjects are independent, so the full likelihood is the product of these contributions over <span class="math inline">\(j\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>A subject observed to fail (<span class="math inline">\(D_j = 1\)</span>) contributes the event-time <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density</a> <span class="math inline">\({\lambda}(Y_j \mid \tilde{x}_j)\,\operatorname{S}(Y_j \mid \tilde{x}_j)\)</span>, while a subject still <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a> (<span class="math inline">\(D_j = 0\)</span>) contributes the survival probability <span class="math inline">\(\operatorname{S}(Y_j \mid \tilde{x}_j)\)</span>. Under noninformative censoring the two cases combine into the single contribution <span class="math inline">\(\operatorname{S}(Y_j \mid \tilde{x}_j)\,{\lambda}(Y_j \mid \tilde{x}_j)^{D_j}\)</span> (the <a href="../chapters/intro-to-survival-analysis.html#sec-likelihood-with-censoring">likelihood with censoring</a> section). Subjects are independent, so the full likelihood is the product of these contributions over <span class="math inline">\(j\)</span>.</p>
 </div>
 <div id="exm-censored-lik" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3 (A two-subject likelihood)</strong></span> Suppose subject <span class="math inline">\(1\)</span> fails at <span class="math inline">\(Y_1 = 3\)</span> (<span class="math inline">\(D_1 = 1\)</span>) and subject <span class="math inline">\(2\)</span> is still censored at <span class="math inline">\(Y_2 = 5\)</span> (<span class="math inline">\(D_2 = 0\)</span>). Then <a href="#/eq-obs-lik" class="quarto-xref">Equation&nbsp;31</a> gives</p>
@@ -1577,7 +1580,7 @@ q_j(Y_j)^{D_j}
 \]</span></p>
 <p>The two products contain identical factors; regrouping only changes the order of multiplication, which is why it is exact.</p>
 </div>
-</section><section class="slide level2"><aside class="notes"><p>Under the proportional-hazards model, the first-order interval failure probability splits into a shared baseline factor and a subject-specific hazard ratio:</p>
+</section><section class="slide level2"><aside class="notes"><p>Under the proportional-hazards model, the first-order interval failure probability splits into a shared baseline factor and a subject-specific <a href="#/def-hr-vs-baseline">hazard ratio</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1614,7 +1617,7 @@ q^*_j(4.0)
 \]</span></p>
 <p>Equivalently, the subject’s total hazard is <span class="math inline">\({\lambda}(4.0 \mid \tilde{x}_j) = {\color{blue}{{\lambda}_0(4.0)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x}_j)}} = 0.2\)</span>/yr, so <span class="math inline">\(q^*_j(4.0) = {\lambda}(4.0 \mid \tilde{x}_j)\,\Delta t = 0.2 \times 0.5 = 0.10\)</span>.</p>
 </div>
-<aside class="notes"><p>We then build up to the partial likelihood through a chain of proportional-hazards lemmas: the single-subject failure probability and the two factors of each event (<em>whether</em> a failure occurs and <em>which</em> subject it is), and finally the assembly that cancels the baseline hazard.</p>
+<aside class="notes"><p>We then build up to the partial likelihood through a chain of proportional-hazards lemmas: the <a href="#/lem-ph-single-subj-fail">single-subject failure probability</a> and the two factors of each event (<a href="#/lem-ph-whether-failure"><em>whether</em></a> a failure occurs and <a href="#/lem-ph-which-subject"><em>which</em></a> subject it is), and finally the assembly that cancels the baseline hazard.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1626,7 +1629,7 @@ q^*_j(4.0)
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="lem-ph-single-subj-fail" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 7 (Single-subject failure probability in a risk set)</strong></span> For any subject <span class="math inline">\(j \in R(t_i)\)</span>, under noninformative censoring, the probability that <span class="math inline">\(j\)</span> fails in the interval at <span class="math inline">\(t_i\)</span> given that <span class="math inline">\(j\)</span> is at risk is the interval failure probability, and to first order in <span class="math inline">\(\Delta t\)</span>,</p>
+<p><span class="theorem-title"><strong>Lemma 7 (Single-subject failure probability in a risk set)</strong></span> For any subject <span class="math inline">\(j \in R(t_i)\)</span>, under <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">noninformative censoring</a>, the probability that <span class="math inline">\(j\)</span> fails in the interval at <span class="math inline">\(t_i\)</span> given that <span class="math inline">\(j\)</span> is at risk is the interval failure probability, and to first order in <span class="math inline">\(\Delta t\)</span>,</p>
 <p><span id="eq-ph-single-subj"><span class="math display">\[
 \begin{aligned}
 \Pr\mathopen{}\left[j \text{ fails at } t_i \mid j \in R(t_i)\right]\mathclose{}
@@ -1660,7 +1663,7 @@ q^*_3(4) = 0.15 ,
 <p><span id="eq-ph-risk-set-score"><span class="math display">\[
 S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(\tilde{x}_k)}},
 \tag{36}\]</span></span></p>
-<p>where <span class="math inline">\(R(t_i)\)</span> is the risk set at <span class="math inline">\(t_i\)</span> and <span class="math inline">\({\color{red}{\theta_{{\lambda}}(\tilde{x})}} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (risk score) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</p>
+<p>where <span class="math inline">\(R(t_i)\)</span> is the risk set at <span class="math inline">\(t_i\)</span> and <span class="math inline">\({\color{red}{\theta_{{\lambda}}(\tilde{x})}} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="#/def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</p>
 </div>
 <div id="exm-ph-risk-set-score" class="theorem example">
 <p><span class="theorem-title"><strong>Example 8 (Risk-set score total in the three-subject risk set)</strong></span> For the running scenario of <a href="#/exm-ph-single-subj-fail" class="quarto-xref">Example&nbsp;7</a> — <span class="math inline">\(R(4) = \mathopen{}\left\{1, 2, 3\right\}\mathclose{}\)</span> with hazard ratios <span class="math inline">\({\color{red}{\theta_{{\lambda}}(\tilde{x}_1)}} = 1\)</span>, <span class="math inline">\({\color{red}{\theta_{{\lambda}}(\tilde{x}_2)}} = 2\)</span>, <span class="math inline">\({\color{red}{\theta_{{\lambda}}(\tilde{x}_3)}} = 3\)</span> — the risk-set score total (<a href="#/eq-ph-risk-set-score" class="quarto-xref">Equation&nbsp;36</a>) is</p>
@@ -1687,7 +1690,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 \tag{37}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Treating subjects’ failure events as conditionally independent given <span class="math inline">\(R(t_i)\)</span> (the Cox-model assumption used throughout; see <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 8.3</a>)</span>), the probability of exactly one failure is, by inclusion-exclusion,</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Treating subjects’ failure events as <a href="https://morrison-lab.github.io/pds/independence.html#def-cind">conditionally independent</a> given <span class="math inline">\(R(t_i)\)</span> (the Cox-model assumption used throughout; see <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 8.3</a>)</span>), the probability of exactly one failure is, by inclusion-exclusion,</p>
 <p><span class="math display">\[
 \Pr\mathopen{}\left[1 \text{ failure at } t_i \mid R(t_i)\right]\mathclose{}
 = \sum_{k \in R(t_i)}
@@ -1746,7 +1749,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 <li>
 <span class="math inline">\(C \stackrel{\text{def}}{=}\)</span> “the risk set at <span class="math inline">\(t_i\)</span> is <span class="math inline">\(R(t_i)\)</span>”.</li>
 </ul>
-<p>By the chain rule of probability, <span class="math inline">\(\Pr(A \cap B \mid C) = \Pr(A \mid B \cap C)\,\Pr(B \mid C)\)</span>. Under the no-ties assumption <span class="math inline">\(A \subset B\)</span> (subject <span class="math inline">\((i)\)</span> failing at <span class="math inline">\(t_i\)</span> is automatically a one-failure event), so <span class="math inline">\(A \cap B = A\)</span> and therefore <span class="math inline">\(\Pr(A \mid C) = \Pr(A \mid B \cap C)\,\Pr(B \mid C)\)</span>, which is <a href="#/eq-ph-chain-rule" class="quarto-xref">Equation&nbsp;38</a>.</p>
+<p>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-law-conditional-prob">chain rule of probability</a>, <span class="math inline">\(\Pr(A \cap B \mid C) = \Pr(A \mid B \cap C)\,\Pr(B \mid C)\)</span>. Under the no-ties assumption <span class="math inline">\(A \subset B\)</span> (subject <span class="math inline">\((i)\)</span> failing at <span class="math inline">\(t_i\)</span> is automatically a one-failure event), so <span class="math inline">\(A \cap B = A\)</span> and therefore <span class="math inline">\(\Pr(A \mid C) = \Pr(A \mid B \cap C)\,\Pr(B \mid C)\)</span>, which is <a href="#/eq-ph-chain-rule" class="quarto-xref">Equation&nbsp;38</a>.</p>
 </div>
 <div id="exm-ph-event-chain-rule" class="theorem example">
 <p><span class="theorem-title"><strong>Example 10 (Splitting the event probability numerically)</strong></span> Continue the running scenario of <a href="#/exm-ph-single-subj-fail" class="quarto-xref">Example&nbsp;7</a>, in which subject <span class="math inline">\(2\)</span> is the one who fails at <span class="math inline">\(t_i = 4\)</span>. The left side of <a href="#/eq-ph-chain-rule" class="quarto-xref">Equation&nbsp;38</a> is subject <span class="math inline">\(2\)</span>’s single-subject failure probability, <span class="math inline">\(q^*_2(4) = 0.10\)</span> (<a href="#/exm-ph-single-subj-fail" class="quarto-xref">Example&nbsp;7</a>), and the whether-a-failure factor is <span class="math inline">\(0.30\)</span> (<a href="#/exm-ph-whether-failure" class="quarto-xref">Example&nbsp;9</a>). The chain rule therefore pins the which-subject factor at</p>
@@ -1821,8 +1824,8 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
           display:block!important;
       }</style></aside><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Adapted from <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 8.3</a>, Theoretical Note 1, p.&nbsp;257)</span>. This proof draws on the discretized-likelihood building blocks assembled earlier in this section — <a href="#/lem-censored-lik" class="quarto-xref">Lemma&nbsp;5</a>, <a href="#/lem-surv-discretized" class="quarto-xref">Lemma&nbsp;4</a>, and <a href="#/lem-lik-by-interval" class="quarto-xref">Lemma&nbsp;6</a> — together with the proportional-hazards lemmas <a href="#/lem-ph-single-subj-fail" class="quarto-xref">Lemma&nbsp;7</a>, <a href="#/lem-ph-whether-failure" class="quarto-xref">Lemma&nbsp;8</a>, <a href="#/lem-ph-event-chain-rule" class="quarto-xref">Lemma&nbsp;9</a>, and <a href="#/lem-ph-which-subject" class="quarto-xref">Lemma&nbsp;10</a>.</p>
-<p>Assume noninformative censoring (conditional on <span class="math inline">\(\tilde{x}\)</span>, censoring times are independent of event times) and no tied event times. Let <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> be the distinct observed failure times, and let <span class="math inline">\((i)\)</span> be the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption).</p>
-<p>By <a href="#/lem-lik-by-interval" class="quarto-xref">Lemma&nbsp;6</a>, the likelihood factors over intervals, <span class="math inline">\(\mathcal{L}\approx \prod_\tau \mathcal{L}_\tau\)</span>. Separate the <span class="math inline">\(K\)</span> intervals that contain a failure from the rest. A no-failure interval contributes <span class="math inline">\(\mathcal{L}_\tau^{\text{no failure}} = \prod_{m \in R(\tau)}\mathopen{}\left(1 - q_m(\tau)\right)\mathclose{}\)</span>; the interval containing <span class="math inline">\(t_i\)</span> contributes the event factor <span class="math inline">\(\Pr\mathopen{}\left[(i) \text{ fails at } t_i \mid R(t_i)\right]\mathclose{}\)</span> times the survival of the other members, which to first order is just the event factor itself, since each other member survives with probability <span class="math inline">\(1 - O(\Delta t)\)</span>. Applying <a href="#/lem-ph-event-chain-rule" class="quarto-xref">Lemma&nbsp;9</a> to each event factor, and then <a href="#/lem-ph-whether-failure" class="quarto-xref">Lemma&nbsp;8</a> and <a href="#/lem-ph-which-subject" class="quarto-xref">Lemma&nbsp;10</a> to its two pieces,</p>
+<p>Assume <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">noninformative censoring</a> (conditional on <span class="math inline">\(\tilde{x}\)</span>, censoring times are independent of event times) and no tied event times. Let <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> be the distinct observed failure times, and let <span class="math inline">\((i)\)</span> be the subject who fails at <span class="math inline">\(t_i\)</span> (unique under the no-ties assumption).</p>
+<p>By <a href="#/lem-lik-by-interval" class="quarto-xref">Lemma&nbsp;6</a>, the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a> factors over intervals, <span class="math inline">\(\mathcal{L}\approx \prod_\tau \mathcal{L}_\tau\)</span>. Separate the <span class="math inline">\(K\)</span> intervals that contain a failure from the rest. A no-failure interval contributes <span class="math inline">\(\mathcal{L}_\tau^{\text{no failure}} = \prod_{m \in R(\tau)}\mathopen{}\left(1 - q_m(\tau)\right)\mathclose{}\)</span>; the interval containing <span class="math inline">\(t_i\)</span> contributes the event factor <span class="math inline">\(\Pr\mathopen{}\left[(i) \text{ fails at } t_i \mid R(t_i)\right]\mathclose{}\)</span> times the survival of the other members, which to first order is just the event factor itself, since each other member survives with probability <span class="math inline">\(1 - O(\Delta t)\)</span>. Applying <a href="#/lem-ph-event-chain-rule" class="quarto-xref">Lemma&nbsp;9</a> to each event factor, and then <a href="#/lem-ph-whether-failure" class="quarto-xref">Lemma&nbsp;8</a> and <a href="#/lem-ph-which-subject" class="quarto-xref">Lemma&nbsp;10</a> to its two pieces,</p>
 <p><span id="eq-ph-factored-lik"><span class="math display">\[
 \begin{aligned}
 \mathcal{L}
@@ -1846,7 +1849,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 \tag{40}\]</span></span></p>
 <p>Under the no-ties assumption each event time has <span class="math inline">\(d_i = 1\)</span> (where <span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span>), so the kept product <span class="math inline">\(\prod_{i=1}^{K}(\cdots) = \prod_{\mathopen{}\left\{i:\ d_i = 1\right\}\mathclose{}}(\cdots)\)</span> matches the form of <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> in <a href="#/def-ph-partial-lik" class="quarto-xref">Definition&nbsp;14</a>.</p>
 <p>The partial likelihood keeps the first product, <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span>, and drops the second, <span class="math inline">\(\mathcal{B}(\tilde{\beta}, {\lambda}_0)\)</span>. The discarded factor <span class="math inline">\(\mathcal{B}(\tilde{\beta}, {\lambda}_0)\)</span> collects both the whether-a-failure-occurs factors and the entire between-event survival background, and it is the only place the baseline hazard <span class="math inline">\({\color{blue}{{\lambda}_0(\cdot)}}\)</span> appears — equivalently, the shared <span class="math inline">\({\color{blue}{{\lambda}_0(t_i)\,\Delta t}}\)</span> cancels from each kept factor in <a href="#/eq-ph-which-subject" class="quarto-xref">Equation&nbsp;39</a> — which is why maximizing <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> alone frees the estimator from <span class="math inline">\({\lambda}_0(\cdot)\)</span>. The discarded factor is <strong>not</strong> free of <span class="math inline">\(\tilde{\beta}\)</span>, however: it still depends on <span class="math inline">\(\tilde{\beta}\)</span> through the risk-set score totals <span class="math inline">\({\color{red}{S_i}}\)</span> and the survival background. Dropping it therefore sacrifices the information about <span class="math inline">\(\tilde{\beta}\)</span> carried by <em>when</em> (and within how large a risk set) failures occur, retaining only the information in <em>which</em> subject fails at each event time.</p>
-<p>The factorization in <a href="#/eq-ph-factored-lik" class="quarto-xref">Equation&nbsp;40</a> is a <em>construction</em> rather than an exact decomposition of the joint probability: the factors are not formally independent (the risk set <span class="math inline">\(R(t_{i+1})\)</span> depends on who failed and was censored before <span class="math inline">\(t_{i+1}\)</span>, and the discretization is exact only in the <span class="math inline">\(\Delta t \to 0\)</span> limit), but Cox showed that treating <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> as a likelihood — i.e., maximizing it as a function of <span class="math inline">\(\tilde{\beta}\)</span> — yields estimators with the usual large-sample properties (consistency, asymptotic normality, the standard score and information identities; see also <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 8.3</a>, Theoretical Note 1)</span>). Under noninformative censoring, each kept factor depends on the observed history only through <span class="math inline">\(R(t_i)\)</span> and <span class="math inline">\(\mathopen{}\left\{\tilde{x}_j\right\}\mathclose{}_{j \in R(t_i)}\)</span>, and <a href="#/eq-ph-which-subject" class="quarto-xref">Equation&nbsp;39</a> gives exactly the partial likelihood <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> of <a href="#/def-ph-partial-lik" class="quarto-xref">Definition&nbsp;14</a>.</p>
+<p>The factorization in <a href="#/eq-ph-factored-lik" class="quarto-xref">Equation&nbsp;40</a> is a <em>construction</em> rather than an exact decomposition of the joint probability: the factors are not formally independent (the risk set <span class="math inline">\(R(t_{i+1})\)</span> depends on who failed and was censored before <span class="math inline">\(t_{i+1}\)</span>, and the discretization is exact only in the <span class="math inline">\(\Delta t \to 0\)</span> limit), but Cox showed that treating <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> as a likelihood — i.e., maximizing it as a function of <span class="math inline">\(\tilde{\beta}\)</span> — yields <a href="https://morrison-lab.github.io/sds/estimation.html#def-estimator">estimators</a> with the usual large-sample properties (consistency, <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle">asymptotic normality</a>, the standard <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score">score</a> and <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-einf">information</a> identities; see also <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 8.3</a>, Theoretical Note 1)</span>). Under noninformative censoring, each kept factor depends on the observed history only through <span class="math inline">\(R(t_i)\)</span> and <span class="math inline">\(\mathopen{}\left\{\tilde{x}_j\right\}\mathclose{}_{j \in R(t_i)}\)</span>, and <a href="#/eq-ph-which-subject" class="quarto-xref">Equation&nbsp;39</a> gives exactly the partial likelihood <span class="math inline">\(\mathcal{L}^*(\tilde{\beta})\)</span> of <a href="#/def-ph-partial-lik" class="quarto-xref">Definition&nbsp;14</a>.</p>
 </div>
 <aside class="notes"><p>We maximize this partial likelihood numerically with respect to <span class="math inline">\(\tilde{\beta}\)</span> (which determines <span class="math inline">\(\Delta\eta(\tilde{x}) = {\tilde{x}}^{\top}\tilde{\beta}\)</span> and <span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x})\right\}\mathclose{}\)</span>). When there are tied event times some adjustments are needed, but the likelihood is similar. Crucially, the baseline hazard never enters, so we obtain <span class="math inline">\(\hat{\tilde{\beta}}\)</span> without estimating <span class="math inline">\({\lambda}_0\)</span>.</p>
 <style type="text/css">
@@ -1878,9 +1881,9 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 <li>
 <span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span>;</li>
 <li>
-<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the risk set at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
+<span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
 <li>
-<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (risk score) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
 </ul>
 </div>
 <div id="exm-breslow-baseline-cuhaz-est" class="theorem example">
@@ -1889,7 +1892,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 \hat{\Lambda}_0(4) = \frac{1}{10} + \frac{1}{6} \approx 0.267 .
 \]</span></p>
 </div>
-<aside class="notes"><p>This estimator reduces to the Nelson-Aalen estimator when there are no covariates; several other estimators have also been proposed. To derive it as a profile likelihood, substitute the proportional-hazards decomposition into the full censored-data likelihood (<a href="#/lem-censored-lik" class="quarto-xref">Lemma&nbsp;5</a>):</p>
+<aside class="notes"><p>This estimator reduces to the <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimator</a> when there are no covariates; several other estimators have also been proposed. To derive it as a <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-profile-loglik">profile likelihood</a>, substitute the proportional-hazards decomposition into the full censored-data likelihood (<a href="#/lem-censored-lik" class="quarto-xref">Lemma&nbsp;5</a>):</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1906,7 +1909,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
     \mathopen{}\left[{\color{blue}{{\lambda}_0(\tilde{T}_j)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x}_j)}}\right]\mathclose{}^{\delta_j}\,
     \operatorname{exp}\mathopen{}\left\{-{\color{blue}{{\Lambda}_0(\tilde{T}_j)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x}_j)}}\right\}\mathclose{},
 \tag{41}\]</span></span></p>
-<aside class="notes"><p>where <span class="math inline">\(\delta_j\)</span> is the event indicator and <span class="math inline">\(\tilde{T}_j\)</span> the observed time for subject <span class="math inline">\(j\)</span> — the same quantities denoted <span class="math inline">\(D_j\)</span> and <span class="math inline">\(Y_j\)</span> in the censored-data likelihood lemma, so <span class="math inline">\(\tilde{T}_j = Y_j = \min(T_j, C_j)\)</span> and <span class="math inline">\(\delta_j = D_j\)</span> — using <span class="math inline">\({\lambda}(t \mid \tilde{x}) = {\color{blue}{{\lambda}_0(t)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x})}}\)</span> (<a href="#/thm-ph-haz-decomp" class="quarto-xref">Theorem&nbsp;6</a>) and <span class="math inline">\(\operatorname{S}(t \mid \tilde{x}) = \operatorname{exp}\mathopen{}\left\{-{\color{blue}{{\Lambda}_0(t)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x})}}\right\}\mathclose{}\)</span> (by <a href="#/thm-ph-cuhaz" class="quarto-xref">Theorem&nbsp;10</a>, using <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span> from the <a href="../chapters/intro-to-survival-analysis.html#cor-surv-int-haz">survival/cumulative hazard relationship</a>). Fix <span class="math inline">\(\tilde{\beta}\)</span> and maximize over <span class="math inline">\({\lambda}_0(\cdot)\)</span>. We build up to the Breslow estimator’s profile-likelihood justification through a chain of lemmas: the point-mass form of the maximizing hazard, the resulting profile likelihood, the maximizer of each point mass, and the assembly that recovers the partial likelihood.</p>
+<aside class="notes"><p>where <span class="math inline">\(\delta_j\)</span> is the event <a href="https://morrison-lab.github.io/sds/data.html#def-indicator-variable">indicator</a> and <span class="math inline">\(\tilde{T}_j\)</span> the observed time for subject <span class="math inline">\(j\)</span> — the same quantities denoted <span class="math inline">\(D_j\)</span> and <span class="math inline">\(Y_j\)</span> in the censored-data likelihood lemma, so <span class="math inline">\(\tilde{T}_j = Y_j = \min(T_j, C_j)\)</span> and <span class="math inline">\(\delta_j = D_j\)</span> — using <span class="math inline">\({\lambda}(t \mid \tilde{x}) = {\color{blue}{{\lambda}_0(t)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x})}}\)</span> (<a href="#/thm-ph-haz-decomp" class="quarto-xref">Theorem&nbsp;6</a>) and <span class="math inline">\(\operatorname{S}(t \mid \tilde{x}) = \operatorname{exp}\mathopen{}\left\{-{\color{blue}{{\Lambda}_0(t)}}\,{\color{red}{\theta_{{\lambda}}(\tilde{x})}}\right\}\mathclose{}\)</span> (by <a href="#/thm-ph-cuhaz" class="quarto-xref">Theorem&nbsp;10</a>, using <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span> from the <a href="../chapters/intro-to-survival-analysis.html#cor-surv-int-haz">survival/cumulative hazard relationship</a>). Fix <span class="math inline">\(\tilde{\beta}\)</span> and maximize over <span class="math inline">\({\lambda}_0(\cdot)\)</span>. We build up to the Breslow estimator’s profile-likelihood justification through a chain of lemmas: the <a href="#/lem-ph-breslow-point-mass">point-mass form</a> of the maximizing hazard, the <a href="#/lem-ph-breslow-profile-lik">resulting profile likelihood</a>, the <a href="#/lem-ph-breslow-mle">maximizer of each point mass</a>, and the <a href="#/lem-ph-breslow-closes-loop">assembly that recovers the partial likelihood</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1918,7 +1921,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="lem-ph-breslow-point-mass" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 11 (Point-mass optimality of the profile baseline hazard)</strong></span> Fix <span class="math inline">\(\tilde{\beta}\)</span> and maximize the censored-data likelihood <a href="#/eq-ph-breslow-full-lik" class="quarto-xref">Equation&nbsp;41</a> over <span class="math inline">\({\lambda}_0(\cdot)\)</span>. The maximizing <span class="math inline">\({\lambda}_0(\cdot)\)</span> places mass only at the <span class="math inline">\(K\)</span> distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span>, as a discrete hazard measure with point masses <span class="math inline">\({\color{blue}{h_{0i}}} \stackrel{\text{def}}{=}{\color{blue}{{\lambda}_0(t_i)}}\)</span>:</p>
+<p><span class="theorem-title"><strong>Lemma 11 (Point-mass optimality of the profile baseline hazard)</strong></span> Fix <span class="math inline">\(\tilde{\beta}\)</span> and maximize the <a href="#/lem-censored-lik">censored-data likelihood</a> <a href="#/eq-ph-breslow-full-lik" class="quarto-xref">Equation&nbsp;41</a> over <span class="math inline">\({\lambda}_0(\cdot)\)</span>. The maximizing <span class="math inline">\({\lambda}_0(\cdot)\)</span> places mass only at the <span class="math inline">\(K\)</span> distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span>, as a discrete hazard measure with point masses <span class="math inline">\({\color{blue}{h_{0i}}} \stackrel{\text{def}}{=}{\color{blue}{{\lambda}_0(t_i)}}\)</span>:</p>
 <p><span id="eq-ph-breslow-point-mass"><span class="math display">\[
 {\color{blue}{{\lambda}_0(t)}} = \begin{cases}
 {\color{blue}{h_{0i}}}, &amp; t = t_i \text{ for some } i \in \mathopen{}\left\{1, \dots, K\right\}\mathclose{},\\
@@ -1990,14 +1993,14 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 \tag{44}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Taking logs of <a href="#/eq-ph-breslow-profile-lik" class="quarto-xref">Equation&nbsp;43</a>, the log-likelihood is separable in the <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> — each summand depends on only one point mass:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Taking logs of <a href="#/eq-ph-breslow-profile-lik" class="quarto-xref">Equation&nbsp;43</a>, the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is separable in the <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> — each summand depends on only one point mass:</p>
 <p><span class="math display">\[
 \ell\mathopen{}\left[\tilde{\beta},\,h_{01},\dots,h_{0K}\right]\mathclose{}
 = \sum_{i = 1}^{K} \log{\color{red}{\theta_{{\lambda}}(\tilde{x}_{(i)})}}
   + \sum_{i = 1}^{K}
     \mathopen{}\left\{\log {\color{blue}{h_{0i}}} - {\color{blue}{h_{0i}}}\,{\color{red}{S_i}}\right\}\mathclose{} .
 \]</span></p>
-<p>So each <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> can be maximized separately. Differentiate the <span class="math inline">\(i\)</span>-th summand with respect to <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> and set the derivative to zero:</p>
+<p>So each <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> can be maximized separately. Differentiate the <span class="math inline">\(i\)</span>-th summand with respect to <span class="math inline">\({\color{blue}{h_{0i}}}\)</span> and set the <a href="https://morrison-lab.github.io/mds/calculus-derivatives.html#def-derivative">derivative</a> to zero:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{1}{{\color{blue}{h_{0i}}}} - {\color{red}{S_i}} &amp;= 0
@@ -2007,7 +2010,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 &amp;&amp; \text{(solve for } {\color{blue}{\hat h_{0i}}} \text{)}
 \end{aligned}
 \]</span></p>
-<p>The second derivative <span class="math inline">\(-1/{\color{blue}{h_{0i}}}^2 &lt; 0\)</span> confirms this critical point is a maximum, giving <a href="#/eq-ph-breslow-mle" class="quarto-xref">Equation&nbsp;44</a>.</p>
+<p>The <a href="https://morrison-lab.github.io/mds/calculus-derivatives.html#def-second-derivative">second derivative</a> <span class="math inline">\(-1/{\color{blue}{h_{0i}}}^2 &lt; 0\)</span> confirms this critical point is a maximum, giving <a href="#/eq-ph-breslow-mle" class="quarto-xref">Equation&nbsp;44</a>.</p>
 </div>
 <div id="exm-ph-breslow-mle" class="theorem example">
 <p><span class="theorem-title"><strong>Example 15 (Maximum likelihood point masses for two event times)</strong></span> Continue the two-event scenario of <a href="#/exm-ph-breslow-profile-lik" class="quarto-xref">Example&nbsp;14</a>, with <span class="math inline">\({\color{red}{S_1}} = 10\)</span> at <span class="math inline">\(t_1 = 2\)</span> and <span class="math inline">\({\color{red}{S_2}} = 6\)</span> at <span class="math inline">\(t_2 = 4\)</span>. By <a href="#/eq-ph-breslow-mle" class="quarto-xref">Equation&nbsp;44</a>,</p>
@@ -2019,7 +2022,7 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 <p>Summing gives the Breslow estimator at <span class="math inline">\(t = 4\)</span>: <span class="math inline">\({\color{blue}{\hat{\Lambda}_0(4)}} = {\color{blue}{\hat h_{01}}} + {\color{blue}{\hat h_{02}}} = 0.1 + 0.167 = 0.267\)</span> (<a href="#/def-breslow-baseline-cuhaz-est" class="quarto-xref">Definition&nbsp;19</a>).</p>
 </div>
 <div id="lem-ph-breslow-closes-loop" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 14 (The profile likelihood at the MLE recovers the partial likelihood)</strong></span> Substituting the maximum likelihood point masses <span class="math inline">\({\color{blue}{\hat h_{0i}}} = 1/{\color{red}{S_i}}\)</span> (<a href="#/lem-ph-breslow-mle" class="quarto-xref">Lemma&nbsp;13</a>) back into the profile likelihood <a href="#/eq-ph-breslow-profile-lik" class="quarto-xref">Equation&nbsp;43</a> (<a href="#/lem-ph-breslow-profile-lik" class="quarto-xref">Lemma&nbsp;12</a>) gives, up to a <span class="math inline">\(\tilde{\beta}\)</span>-free constant, the partial likelihood of <a href="#/def-ph-partial-lik" class="quarto-xref">Definition&nbsp;14</a>:</p>
+<p><span class="theorem-title"><strong>Lemma 14 (The profile likelihood at the MLE recovers the partial likelihood)</strong></span> Substituting the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood</a> point masses <span class="math inline">\({\color{blue}{\hat h_{0i}}} = 1/{\color{red}{S_i}}\)</span> (<a href="#/lem-ph-breslow-mle" class="quarto-xref">Lemma&nbsp;13</a>) back into the profile likelihood <a href="#/eq-ph-breslow-profile-lik" class="quarto-xref">Equation&nbsp;43</a> (<a href="#/lem-ph-breslow-profile-lik" class="quarto-xref">Lemma&nbsp;12</a>) gives, up to a <span class="math inline">\(\tilde{\beta}\)</span>-free constant, the partial likelihood of <a href="#/def-ph-partial-lik" class="quarto-xref">Definition&nbsp;14</a>:</p>
 <p><span id="eq-ph-breslow-closes-loop"><span class="math display">\[
 \mathcal{L}\mathopen{}\left[\tilde{\beta},\,\hat h_{01},\dots,\hat h_{0K}\right]\mathclose{} = e^{-K}\,\mathcal{L}^*(\tilde{\beta}) .
 \tag{45}\]</span></span></p>
@@ -2120,23 +2123,23 @@ S_i \stackrel{\text{def}}{=}\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(
 <span id="cb9-22"><a aria-label="22"></a><span class="co">#&gt; Score (logrank) test = 13.8  on 2 df,   p=0.001</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The table provides hypothesis tests comparing groups 2 and 3 to group 1. Group 3 has the highest hazard, so the most significant comparison is not directly shown.</p>
-<p>The coefficient 0.3834 is on the log-hazard-ratio scale. The next column gives the hazard ratio 1.4673, and a hypothesis (Wald) test.</p>
+<p>The table provides <a href="https://morrison-lab.github.io/sds/inference.html#sec-hypothesis-tests">hypothesis tests</a> comparing groups 2 and 3 to group 1. Group 3 has the highest <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard</a>, so the most <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">significant</a> comparison is not directly shown.</p>
+<p>The coefficient 0.3834 is on the log-hazard-ratio scale. The next column gives the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> 1.4673, and a hypothesis (<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test">Wald</a>) test.</p>
 <p>The (not shown) group 3 vs.&nbsp;group 2 log hazard ratio is 0.3834 − (-0.5742) = 0.9576. The hazard ratio is 2.605.</p>
-<p>Inference on all coefficients and combinations can be constructed using <code>coef(bmt.cox)</code> and <code>vcov(bmt.cox)</code> as with logistic and poisson regression.</p>
+<p>Inference on all coefficients and combinations can be constructed using <code>coef(bmt.cox)</code> and <code>vcov(bmt.cox)</code> as with <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic</a> and poisson regression.</p>
 <p><strong>Concordance</strong> is agreement of first failure between pairs of subjects and higher predicted risk between those subjects, omitting non-informative pairs.</p>
 <p>The Rsquare value is Cox and Snell’s pseudo R-squared and is not very useful.</p>
 <h3 id="tests-for-nested-models">Tests for nested models</h3>
 <p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> prints three tests for whether the model with the group covariate is better than the one without</p>
 <ul>
 <li>
-<code>Likelihood ratio test</code> (chi-squared)</li>
+<code>Likelihood ratio test</code> (<a href="https://morrison-lab.github.io/sds/inference.html#def-chi-square-dist">chi-squared</a>)</li>
 <li>
 <code>Wald test</code> (also chi-squared), obtained by adding the squares of the z-scores</li>
 <li>
-<code>Score</code> = log-rank test, as with comparison of survival functions.</li>
+<code>Score</code> = <a href="../chapters/intro-to-survival-analysis.html#thm-logrank-two-group">log-rank test</a>, as with comparison of <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival functions</a>.</li>
 </ul>
-<p>The likelihood ratio test is probably best in smaller samples, followed by the Wald test.</p>
+<p>The <a href="../chapters/logistic-regression.html#def-lrt">likelihood ratio test</a> is probably best in smaller samples, followed by the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test">Wald test</a>.</p>
 <h3 id="survival-curves-from-the-cox-model">Survival Curves from the Cox Model</h3>
 <p>We can take a look at the resulting group-specific curves:</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-label="1"></a>km_fit <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(t2, d3) <span class="sc">~</span> group, <span class="at">data =</span> <span class="fu">as.data.frame</span>(bmt))</span>
@@ -2177,7 +2180,7 @@ Figure&nbsp;6: Survival Functions for Three Groups by KM and Cox Model
 </div>
 </figure>
 </div>
-<p>When we use <code>survfit()</code> with a Cox model, we have to specify the covariate levels we are interested in; the argument <code>newdata</code> should include a <code>data.frame</code> with the same named columns as the predictors in the Cox model and one or more levels of each.</p>
+<p>When we use <code>survfit()</code> with a <a href="#/def-ph-model">Cox model</a>, we have to specify the covariate levels we are interested in; the argument <code>newdata</code> should include a <code>data.frame</code> with the same named columns as the <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictors</a> in the Cox model and one or more levels of each.</p>
 </section><section class="slide level2"><p>From <code>?survfit.coxph</code>:</p>
 <blockquote>
 <p>If the <code>newdata</code> argument is missing, a curve is produced for a single “pseudo” subject with covariate values equal to the means component of the fit. The resulting curve(s) almost never make sense, but the default remains due to an unwarranted attachment to the option shown by some users and by other packages. Two particularly egregious examples are factor variables and interactions. Suppose one were studying interspecies transmission of a virus, and the data set has a factor variable with levels (“pig”, “chicken”) and about equal numbers of observations for each. The “mean” covariate level will be 0.5 – is this a flying pig?</p>
@@ -2392,7 +2395,7 @@ Figure&nbsp;6: Survival Functions for Three Groups by KM and Cox Model
 </section></section><section><section id="adjustment-for-ties-optional" class="title-slide slide level1 center" data-number="6"><h1>
 <span class="header-section-number">6</span> Adjustment for Ties (optional)</h1>
 
-</section><section class="slide level2"></section><section class="slide level2"><p>At each time <span class="math inline">\(t_i\)</span> at which more than one of the subjects has an event, let <span class="math inline">\(d_i\)</span> be the number of events at that time, <span class="math inline">\(D_i\)</span> the set of subjects with events at that time, and let <span class="math inline">\(s_i\)</span> be a covariate vector for an artificial subject obtained by adding up the covariate values for the subjects with an event at time <span class="math inline">\(t_i\)</span>. Let <span class="math display">\[\bar\eta_i = \beta_1s_{i1}+\cdots+\beta_ps_{ip}\]</span> and <span class="math inline">\(\bar\theta_i = \operatorname{exp}\mathopen{}\left\{\bar\eta_i\right\}\mathclose{}\)</span>.</p>
+</section><section class="slide level2"></section><section class="slide level2"><p>At each time <span class="math inline">\(t_i\)</span> at which more than one of the subjects has an event, let <span class="math inline">\(d_i\)</span> be the number of events at that time, <span class="math inline">\(D_i\)</span> the set of subjects with events at that time, and let <span class="math inline">\(s_i\)</span> be a <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-slr-covariate-vector">covariate vector</a> for an artificial subject obtained by adding up the covariate values for the subjects with an event at time <span class="math inline">\(t_i\)</span>. Let <span class="math display">\[\bar\eta_i = \beta_1s_{i1}+\cdots+\beta_ps_{ip}\]</span> and <span class="math inline">\(\bar\theta_i = \operatorname{exp}\mathopen{}\left\{\bar\eta_i\right\}\mathclose{}\)</span>.</p>
 <p>Note that</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -2403,7 +2406,7 @@ Figure&nbsp;6: Survival Functions for Three Groups by KM and Cox Model
 \end{aligned}
 \]</span></p>
 <h4 id="breslows-method-for-ties">Breslow’s method for ties</h4>
-<p>Breslow’s method estimates the partial likelihood as</p>
+<p>Breslow’s method estimates the <a href="#/def-ph-partial-lik">partial likelihood</a> as</p>
 <p><span class="math display">\[
 \begin{aligned}
 L(\beta|T) &amp;=
@@ -2434,7 +2437,7 @@ L(\beta|T) &amp;=
 \mathopen{}\left(\frac{\theta_3}{\theta_R+\theta_3}\right)\mathclose{}
 \]</span></p>
 </div>
-<p>as the risk set got smaller with each failure. The exact method roughly averages the results for the six possible orderings of the failures.</p>
+<p>as the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> got smaller with each failure. The exact method roughly averages the results for the six possible orderings of the failures.</p>
 <h4 id="example-efrons-method">Example: Efron’s method</h4>
 <p>Because the exact failure order among tied event times is unobserved, rather than reducing the denominator by one risk coefficient at each step, Efron’s method reduces it by a uniform fractional amount.</p>
 <div class="smaller">
@@ -2476,7 +2479,7 @@ L(\beta|T) &amp;=
 <li>
 <code>time</code>: time to study exit</li>
 <li>
-<code>delta</code>: study exit reason (death/relapse vs censored)</li>
+<code>delta</code>: study exit reason (death/relapse vs <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a>)</li>
 <li>
 <code>wtime</code>: waiting time to transplant (in months)</li>
 <li>
@@ -2580,7 +2583,7 @@ Table&nbsp;1: Summary of Proportional Hazards model for Hodgkins Lymphoma data
 <h3 id="analysis-plan">Analysis plan</h3>
 <ul>
 <li>
-<strong>survival function</strong> for the four combinations of disease type and graft type.</li>
+<strong><a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a></strong> for the four combinations of disease type and graft type.</li>
 <li>
 <strong>observed (nonparametric) vs.&nbsp;expected (semiparametric) survival</strong> functions.</li>
 <li>
@@ -2762,7 +2765,7 @@ Figure&nbsp;9: Complementary log-log survival curves - PH estimates
 </div>
 </div>
 </div>
-<p>Now let’s overlay these cumulative hazard curves:</p>
+<p>Now let’s overlay these <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a> curves:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a>na_and_cph <span class="ot">&lt;-</span></span>
 <span id="cb23-2"><a aria-label="2"></a>  na_model <span class="sc">|&gt;</span></span>
@@ -2811,7 +2814,7 @@ Figure&nbsp;10: Observed and expected cumulative hazard curves for <code>bmt</co
 <span class="header-section-number">7.4</span> Predictions and Residuals</h2>
 <h3 id="review-predictions-in-linear-regression">Review: Predictions in Linear Regression</h3>
 <ul>
-<li>In linear regression, we have a linear predictor for each data point <span class="math inline">\(i\)</span>
+<li>In <a href="../chapters/Linear-models-overview.html#def-lm-general-form">linear regression</a>, we have a linear predictor for each data point <span class="math inline">\(i\)</span>
 </li>
 </ul>
 <p><span class="math display">\[
@@ -2823,26 +2826,26 @@ y_i &amp;\sim N(\eta_i,\sigma^2)
 \]</span></p>
 <ul>
 <li>
-<span class="math inline">\(\hat y_i\)</span> estimates the conditional mean of <span class="math inline">\(y_i\)</span> given the covariate values <span class="math inline">\(\tilde{x}_i\)</span>. This together with the prediction error says that we are predicting the distribution of values of <span class="math inline">\(y\)</span>.</li>
+<span class="math inline">\(\hat y_i\)</span> estimates the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation">conditional mean</a> of <span class="math inline">\(y_i\)</span> given the covariate values <span class="math inline">\(\tilde{x}_i\)</span>. This together with the <a href="https://morrison-lab.github.io/sds/estimation.html#def-prediction-error">prediction error</a> says that we are predicting the distribution of values of <span class="math inline">\(y\)</span>.</li>
 </ul>
 <h3 id="review-residuals-in-linear-regression">Review: Residuals in Linear Regression</h3>
 <ul>
-<li>The usual residual is <span class="math inline">\(r_i=y_i-\hat y_i\)</span>, the difference between the actual value of <span class="math inline">\(y\)</span> and a prediction of its mean.</li>
-<li>The residuals are also the quantities the sum of whose squares is being minimized by the least squares/MLE estimation.</li>
+<li>The usual <a href="../chapters/Linear-models-overview.html#def-resid-fitted">residual</a> is <span class="math inline">\(r_i=y_i-\hat y_i\)</span>, the difference between the actual value of <span class="math inline">\(y\)</span> and a prediction of its mean.</li>
+<li>The residuals are also the quantities the sum of whose squares is being minimized by the <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">least squares</a>/<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">MLE</a> estimation.</li>
 </ul>
 <h3 id="predictions-and-residuals-in-survival-models">Predictions and Residuals in survival models</h3>
 <ul>
-<li>In survival analysis, the equivalent of <span class="math inline">\(y_i\)</span> is the event time <span class="math inline">\(t_i\)</span>, which is unknown for the censored observations.</li>
-<li>The expected event time can be tricky to calculate:</li>
+<li>In survival analysis, the equivalent of <span class="math inline">\(y_i\)</span> is the event time <span class="math inline">\(t_i\)</span>, which is unknown for the <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a> observations.</li>
+<li>The <a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">expected</a> event time can be tricky to calculate:</li>
 </ul>
 <p><span class="math display">\[
 \hat{\text{E}}[T|X=x] = \int_{t=0}^{\infty} \mathop{\hat{\operatorname{S}}}\nolimits(t)dt
 \]</span></p>
 <h3 id="wide-prediction-intervals">Wide prediction intervals</h3>
-<p>The nature of time-to-event data results in very wide prediction intervals:</p>
+<p>The nature of time-to-event data results in very wide <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval">prediction intervals</a>:</p>
 <ul>
-<li>Suppose a cancer patient is predicted to have a mean lifetime of 5 years after diagnosis and suppose the distribution is exponential.</li>
-<li>If we want a 95% interval for survival, the lower end is at the 0.025 percentage point of the exponential which is <code>qexp(.025, rate = 1/5)</code> = 0.126589 years, or 1/40 of the mean lifetime.</li>
+<li>Suppose a cancer patient is predicted to have a mean lifetime of 5 years after diagnosis and suppose the distribution is <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential</a>.</li>
+<li>If we want a 95% interval for survival, the lower end is at the 0.025 <a href="https://morrison-lab.github.io/pds/random-variables.html#def-quantile-function">percentage point</a> of the exponential which is <code>qexp(.025, rate = 1/5)</code> = 0.126589 years, or 1/40 of the mean lifetime.</li>
 <li>The upper end is at the 0.975 point which is <code>qexp(.975, rate = 1/5)</code> = 18.444397 years, or 3.7 times the mean lifetime.</li>
 <li>Saying that the survival time is somewhere between 6 weeks and 18 years does not seem very useful, but it may be the best we can do.</li>
 <li>For survival analysis, something is like a residual if it is small when the model is accurate or if the accumulation of them is in some way minimized by the estimation algorithm, but there is no exact equivalence to linear regression residuals.</li>
@@ -2854,13 +2857,13 @@ y_i &amp;\sim N(\eta_i,\sigma^2)
 <li>Some diagnostic tests are based on residuals as with other regression methods:
 <ul>
 <li>
-<strong>Schoenfeld residuals</strong> (via <code>cox.zph</code>) for proportionality</li>
+<strong><a href="#/def-schoenfeld-residual">Schoenfeld residuals</a></strong> (via <code>cox.zph</code>) for proportionality</li>
 <li>
-<strong>Cox-Snell residuals</strong> for goodness of fit (<a href="#/sec-cox-snell" class="quarto-xref">Section&nbsp;7.5</a>)</li>
+<strong><a href="#/def-CS-resid">Cox-Snell residuals</a></strong> for goodness of fit (<a href="#/sec-cox-snell" class="quarto-xref">Section&nbsp;7.5</a>)</li>
 <li>
-<strong>martingale residuals</strong> for non-linearity</li>
+<strong><a href="#/def-martingale-residual">martingale residuals</a></strong> for non-linearity</li>
 <li>
-<strong>dfbeta</strong> for influence.</li>
+<strong><a href="#/def-dfbeta">dfbeta</a></strong> for influence.</li>
 </ul>
 </li>
 </ul>
@@ -2870,14 +2873,14 @@ y_i &amp;\sim N(\eta_i,\sigma^2)
 </div>
 <h3 id="schoenfeld-residuals">Schoenfeld residuals</h3>
 <div id="def-schoenfeld-residual" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 21 (Schoenfeld Residual)</strong></span> For each subject <span class="math inline">\(i\)</span> who experienced an event (not censored) and for each predictor <span class="math inline">\(k\)</span>, the <strong>Schoenfeld residual</strong> is defined as <span class="citation" data-cites="grambsch1994proportional">(<a href="#/references" role="doc-biblioref" onclick="">Grambsch and Therneau 1994</a>)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 21 (Schoenfeld Residual)</strong></span> For each subject <span class="math inline">\(i\)</span> who experienced an event (not censored) and for each <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictor</a> <span class="math inline">\(k\)</span>, the <strong>Schoenfeld residual</strong> is defined as <span class="citation" data-cites="grambsch1994proportional">(<a href="#/references" role="doc-biblioref" onclick="">Grambsch and Therneau 1994</a>)</span>:</p>
 <p><span class="math display">\[
 r^S_{ik} =
-x_{ik}-\frac{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} x_{jk}\,\hat\theta\mathopen{}\left(\tilde{x}_j\right)\mathclose{}}{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} \hat\theta\mathopen{}\left(\tilde{x}_j\right)\mathclose{}}
+x_{ik}-\frac{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} x_{jk}\,\hat{\theta}_{{\lambda}}\mathopen{}\left(\tilde{x}_j\right)\mathclose{}}{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} \hat{\theta}_{{\lambda}}\mathopen{}\left(\tilde{x}_j\right)\mathclose{}}
 \]</span></p>
-<p>where <span class="math inline">\(\mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at event time <span class="math inline">\(t_i\)</span> of subject <span class="math inline">\(i\)</span>, <span class="math inline">\(x_{jk}\)</span> is the value of predictor <span class="math inline">\(k\)</span> for subject <span class="math inline">\(j\)</span>, and <span class="math inline">\(\hat\theta\mathopen{}\left(\tilde{x}_j\right)\mathclose{}\)</span> is the estimated risk score (<a href="#/def-estimated-risk-score" class="quarto-xref">Definition&nbsp;20</a>) for subject <span class="math inline">\(j\)</span>.</p>
+<p>where <span class="math inline">\(\mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at event time <span class="math inline">\(t_i\)</span> of subject <span class="math inline">\(i\)</span>, <span class="math inline">\(x_{jk}\)</span> is the value of predictor <span class="math inline">\(k\)</span> for subject <span class="math inline">\(j\)</span>, and <span class="math inline">\(\hat{\theta}_{{\lambda}}\mathopen{}\left(\tilde{x}_j\right)\mathclose{}\)</span> is the estimated risk score (<a href="#/def-estimated-risk-score" class="quarto-xref">Definition&nbsp;20</a>) for subject <span class="math inline">\(j\)</span>.</p>
 </div>
-<aside class="notes"><p>Intuitively, <span class="math inline">\(r^S_{ik}\)</span> measures how unusual subject <span class="math inline">\(i\)</span>’s covariate value is, relative to the risk-weighted average among those at risk when subject <span class="math inline">\(i\)</span> failed. If the proportional hazards assumption holds, these residuals should show no systematic trend over time. A trend signals non-proportionality.</p>
+<aside class="notes"><p>Intuitively, <span class="math inline">\(r^S_{ik}\)</span> measures how unusual subject <span class="math inline">\(i\)</span>’s covariate value is, relative to the risk-weighted average among those at risk when subject <span class="math inline">\(i\)</span> failed. If the <a href="#/def-pha">proportional hazards assumption</a> holds, these residuals should show no systematic trend over time. A trend signals non-proportionality.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2888,7 +2891,7 @@ x_{ik}-\frac{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} x_{j
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside></section><section class="slide level2"><aside class="notes"><p>We can test for such a trend with the correlation between Schoenfeld residuals and a function of time. The default in <code>cox.zph()</code> uses the KM survival curve as a transform, which handles censoring better than raw ranks. The <code>cox.zph()</code> function implements a score test proposed in <span class="citation" data-cites="grambsch1994proportional">Grambsch and Therneau (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span>.</p>
+      }</style></aside></section><section class="slide level2"><aside class="notes"><p>We can test for such a trend with the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation">correlation</a> between Schoenfeld residuals and a function of time. The default in <code>cox.zph()</code> uses the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">KM survival curve</a> as a transform, which handles censoring better than raw ranks. The <code>cox.zph()</code> function implements a score test proposed in <span class="citation" data-cites="grambsch1994proportional">Grambsch and Therneau (<a href="#/references" role="doc-biblioref" onclick="">1994</a>)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2963,14 +2966,14 @@ x_{ik}-\frac{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} x_{j
 </div>
 <h4 id="conclusions">Conclusions</h4>
 <ul>
-<li>From the correlation test, the Karnofsky score and the interaction with graft type disease type induce modest but statistically significant non-proportionality.</li>
+<li>From the correlation test, the Karnofsky score and the interaction with graft type disease type induce modest but <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">statistically significant</a> non-proportionality.</li>
 <li>The sample size here is relatively small (26 events in 43 subjects). If the sample size is large, very small amounts of non-proportionality can induce a significant result.</li>
 <li>As time goes on, autologous grafts are over-represented at their own event times, but those from HOD patients become less represented.</li>
 <li>Both the statistical tests and the plots are useful.</li>
 </ul></section><section id="sec-cox-snell" class="slide level2" data-number="7.5"><h2>
 <span class="header-section-number">7.5</span> Goodness of Fit using the Cox-Snell Residuals</h2>
 <p>(references: <span class="citation" data-cites="klein2003survival">Klein and Moeschberger (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span>, §11.2, and <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, §10.6)</p>
-</section><section class="slide level2"><aside class="notes"><p>Suppose that an individual has a survival time <span class="math inline">\(T\)</span> which has survival function <span class="math inline">\(\operatorname{S}(t)\)</span>, meaning that <span class="math inline">\(\Pr(T&gt; t) = \operatorname{S}(t)\)</span>. Then <span class="math inline">\(S(T)\)</span> has a uniform distribution on <span class="math inline">\((0,1)\)</span>:</p>
+</section><section class="slide level2"><aside class="notes"><p>Suppose that an individual has a survival time <span class="math inline">\(T\)</span> which has <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a> <span class="math inline">\(\operatorname{S}(t)\)</span>, meaning that <span class="math inline">\(\Pr(T&gt; t) = \operatorname{S}(t)\)</span>. Then <span class="math inline">\(S(T)\)</span> has a <a href="https://morrison-lab.github.io/pds/random-variables.html#def-uniform">uniform distribution</a> on <span class="math inline">\((0,1)\)</span>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3006,7 +3009,7 @@ x_{ik}-\frac{\sum_{j\in \mathcal{R}\mathopen{}\left(t_i\right)\mathclose{}} x_{j
 &amp;= 1-e^{-x}
 \end{aligned}
 \]</span></p>
-<aside class="notes"><p>which is the CDF of an exponential distribution with parameter <span class="math inline">\(\lambda=1\)</span>.</p>
+<aside class="notes"><p>which is the <a href="https://morrison-lab.github.io/pds/random-variables.html#def-cdf">CDF</a> of an <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential distribution</a> with parameter <span class="math inline">\(\lambda=1\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3087,7 +3090,7 @@ Figure&nbsp;11: Cumulative Hazard of Cox-Snell Residuals
 </div>
 <div class="callout-content">
 <p>Martingale residuals estimate the excess number of events in the data relative to what the model predicted. They are bounded above by <span class="math inline">\(1\)</span> (a subject who died very early has residual close to <span class="math inline">\(1 - 0 = 1\)</span>) but unbounded below (a long-lived censored subject in a high-risk group can have a very large negative residual). This asymmetry makes it harder to spot unexpectedly early deaths, motivating the deviance residual.</p>
-<p>We will use martingale residuals to examine the functional forms of continuous covariates.</p>
+<p>We will use martingale residuals to examine the functional forms of <a href="https://morrison-lab.github.io/sds/data.html#def-continuous-var">continuous</a> covariates.</p>
 </div>
 </div>
 </div>
@@ -3104,7 +3107,7 @@ Figure&nbsp;11: Cumulative Hazard of Cox-Snell Residuals
 <dl>
 <dt>martingale</dt>
 <dd>
-<p>In probability, a <strong>martingale</strong> is a sequence of random variables such that the expected value of the next event at any time is the present observed value, and that no better predictor can be derived even with all past values of the series available. At least to a close approximation, the stock market is a martingale. Under the assumptions of the proportional hazards model, the martingale residuals ordered in time form a martingale.</p>
+<p>In probability, a <strong>martingale</strong> is a sequence of <a href="https://morrison-lab.github.io/pds/random-variables.html#def-random-variable">random variables</a> such that the <a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">expected value</a> of the next event at any time is the present observed value, and that no better predictor can be derived even with all past values of the series available. At least to a close approximation, the stock market is a martingale. Under the assumptions of the <a href="#/def-ph-model">proportional hazards model</a>, the martingale residuals ordered in time form a martingale.</p>
 </dd>
 </dl>
 </div>
@@ -3209,10 +3212,10 @@ Figure&nbsp;11: Cumulative Hazard of Cox-Snell Residuals
 </div>
 </div>
 </div>
-<p>The new model has better (lower) AIC.</p>
+<p>The new model has better (lower) <a href="../chapters/Linear-models-overview.html#def-aic">AIC</a>.</p>
 </section><section id="checking-for-outliers-and-influential-observations" class="slide level2" data-number="7.7"><h2>
 <span class="header-section-number">7.7</span> Checking for Outliers and Influential Observations</h2>
-<p>We will check for outliers using the deviance residuals. The martingale residuals show excess events or the opposite, but highly skewed, with the maximum possible value being 1, but the smallest value can be very large negative. Martingale residuals can detect unexpectedly long-lived patients, but patients who die unexpectedly early show up only in the deviance residual. Influence will be examined using dfbeta in a similar way to linear regression, logistic regression, or Poisson regression.</p>
+<p>We will check for outliers using the <a href="#/def-deviance-residual">deviance residuals</a>. The martingale residuals show excess events or the opposite, but highly skewed, with the maximum possible value being 1, but the smallest value can be very large negative. Martingale residuals can detect unexpectedly long-lived patients, but patients who die unexpectedly early show up only in the deviance residual. Influence will be examined using <a href="#/def-dfbeta">dfbeta</a> in a similar way to <a href="../chapters/Linear-models-overview.html#def-lm-general-form">linear regression</a>, <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a>, or Poisson regression.</p>
 <h3 id="deviance-residuals">Deviance Residuals</h3>
 <div id="def-deviance-residual" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 24 (Deviance Residual)</strong></span> The <strong>deviance residual</strong> for subject <span class="math inline">\(i\)</span> is defined as <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 11.3</a>)</span>:</p>
@@ -3224,7 +3227,7 @@ r_i^D &amp;= \operatorname{sign}\mathopen{}\left\{r_i^M\right\}\mathclose{}\sqrt
 \]</span></p>
 <p>where <span class="math inline">\(\operatorname{sign}\mathopen{}\left\{\cdot\right\}\mathclose{}\)</span> is the sign function, <span class="math inline">\(r_i^M\)</span> is the martingale residual (<a href="#/def-martingale-residual" class="quarto-xref">Definition&nbsp;23</a>), and <span class="math inline">\(r_i^{CS}\)</span> is the Cox-Snell residual (<a href="#/def-CS-resid" class="quarto-xref">Definition&nbsp;22</a>).</p>
 </div>
-<aside class="notes"><p>Deviance residuals are roughly centered on 0 with approximate standard deviation 1. By symmetrizing the skewed martingale residuals, they make it equally easy to identify unexpectedly early events (large positive <span class="math inline">\(r^D_i\)</span>) and unexpectedly long survival (large negative <span class="math inline">\(r^D_i\)</span>).</p>
+<aside class="notes"><p>Deviance residuals are roughly centered on 0 with approximate <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-sd">standard deviation</a> 1. By symmetrizing the skewed martingale residuals, they make it equally easy to identify unexpectedly early events (large positive <span class="math inline">\(r^D_i\)</span>) and unexpectedly long survival (large negative <span class="math inline">\(r^D_i\)</span>).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3285,13 +3288,12 @@ Figure&nbsp;13: Deviance Residuals vs.&nbsp;Linear Predictor
 <p>The two largest deviance residuals are observations 1 and 29. Worth examining.</p>
 <h3 id="dfbeta">dfbeta</h3>
 <div id="def-dfbeta" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 25 (dfbeta and dfbetas)</strong></span> &nbsp;</p>
-<ul>
-<li><p><strong>dfbeta</strong> for observation <span class="math inline">\(i\)</span> is the approximate change in the coefficient vector <span class="math inline">\(\hat{\tilde{\beta}}\)</span> if subject <span class="math inline">\(i\)</span> were removed from the data: <span class="math display">\[\text{dfbeta}_i \approx \hat{\tilde{\beta}}- \hat{\tilde{\beta}}_{(-i)}\]</span> computed via a one-step Newton approximation rather than a full refit <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 11.4</a>)</span>.</p></li>
-<li><p><strong>dfbetas</strong> for observation <span class="math inline">\(i\)</span> standardizes by the estimated standard error of each coefficient: <span class="math display">\[\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat \beta_k\right)\mathclose{}\]</span></p></li>
-</ul>
+<p><span class="theorem-title"><strong>Definition 25 (dfbeta)</strong></span> The <strong>dfbeta</strong> for observation <span class="math inline">\(i\)</span> is the approximate change in the coefficient vector <span class="math inline">\(\hat{\tilde{\beta}}\)</span> if subject <span class="math inline">\(i\)</span> were removed from the data: <span class="math display">\[\text{dfbeta}_i \approx \hat{\tilde{\beta}}- \hat{\tilde{\beta}}_{(-i)}\]</span> computed via a one-step <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-newton-raphson">Newton</a> approximation rather than a full refit <span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 11.4</a>)</span>.</p>
 </div>
-<aside class="notes"><p>A useful rule of thumb is to examine the observations whose dfbeta values stand out from the rest — those whose removal would shift a coefficient the most — analogous to influence diagnostics such as Cook’s distance in linear regression.</p>
+</section><section class="slide level2"><div id="def-dfbetas" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 26 (dfbetas)</strong></span> The <strong>dfbetas</strong> for observation <span class="math inline">\(i\)</span> standardizes the dfbeta (<a href="#/def-dfbeta" class="quarto-xref">Definition&nbsp;25</a>) by the estimated <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard error</a> of each coefficient: <span class="math display">\[\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_k\right)\mathclose{}\]</span></p>
+</div>
+<aside class="notes"><p>A useful rule of thumb is to examine the observations whose dfbeta values stand out from the rest — those whose removal would shift a coefficient the most — analogous to influence diagnostics such as <a href="../chapters/Linear-models-overview.html#def-cooks-distance">Cook’s distance</a> in linear regression.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3512,7 +3514,7 @@ Table&nbsp;2: Observations to Examine by Residuals and Influence
 <ul>
 <li>Unusual points may need checking, particularly if the data are not completely cleaned. In this case, observations 15 and 16 may show some trouble with the dichotomization of waiting time, but it still may be useful.</li>
 <li>The two largest residuals seem to be due to unexpectedly early deaths, but unfortunately this phenomenon can occur.</li>
-<li>If hazards don’t look proportional, then we may need to use strata, between which the base hazards are permitted to be different. For this problem, the natural strata are the two diseases, because they could need to be managed differently anyway.</li>
+<li>If hazards don’t look <a href="#/def-pha">proportional</a>, then we may need to use strata, between which the <a href="#/def-base-hazard">base hazards</a> are permitted to be different. For this problem, the natural strata are the two diseases, because they could need to be managed differently anyway.</li>
 <li>A main point that we want to be sure of is the relative risk difference by disease type and graft type.</li>
 </ul>
 <div class="cell" data-tbl-cap="Linear Risk Predictors for Lymphoma">
@@ -3621,7 +3623,7 @@ Figure&nbsp;19: Scaled Schoenfeld residuals for hodg_cox2
 </div>
 </div>
 <h3 id="strategy-stratify-by-disease-type">Strategy: stratify by disease type</h3>
-<aside class="notes"><p>The diagnostics suggest that the hazard-ratio profile for disease type (and its interaction with graft type) is not constant over time. One remedy is a <strong>stratified Cox model</strong> that allows separate baseline hazards for each disease type, absorbing between-disease trajectory differences into two free baseline functions, while still estimating proportional effects of graft type, Karnofsky score, and waiting time.</p>
+<aside class="notes"><p>The diagnostics suggest that the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard-ratio</a> profile for disease type (and its interaction with graft type) is not constant over time. One remedy is a <strong>stratified Cox model</strong> that allows separate <a href="#/def-base-hazard">baseline hazards</a> for each disease type, absorbing between-disease trajectory differences into two free baseline functions, while still estimating proportional effects of graft type, Karnofsky score, and waiting time.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3795,7 +3797,7 @@ Table&nbsp;3: Comparison of unstratified and stratified Cox PH models
 </figure>
 </div>
 </div>
-<aside class="notes"><p>We deliberately omit log-likelihood and AIC from this comparison: the partial likelihood of the stratified model <code>hodg_cox3</code> is computed within disease-type strata and excludes the between-stratum comparisons that <code>hodg_cox2</code>’s partial likelihood includes, so the two are not on a common scale and their AIC values are not comparable.</p>
+<aside class="notes"><p>We deliberately omit <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> and <a href="../chapters/Linear-models-overview.html#def-aic">AIC</a> from this comparison: the <a href="#/def-ph-partial-lik">partial likelihood</a> of the stratified model <code>hodg_cox3</code> is computed within disease-type strata and excludes the between-stratum comparisons that <code>hodg_cox2</code>’s partial likelihood includes, so the two are not on a common scale and their AIC values are not comparable.</p>
 <p>The stratified model resolves the PH violation by allowing disease-specific baseline hazards. The trade-off: we can no longer directly estimate a disease-type hazard ratio, as that effect is absorbed into the baseline functions. The graft-type coefficient remains interpretable as the within-stratum hazard ratio comparing autologous to allogeneic grafts.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3819,7 +3821,7 @@ Table&nbsp;3: Comparison of unstratified and stratified Cox PH models
 <p><strong>Video lecture</strong></p>
 </div>
 <div class="callout-content">
-<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-18.mp4"><em>Stratified Cox Models</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture13StratifiedCoxModels.pdf">slides</a>) covers the stratified Cox model for the <code>anderson</code> leukemia data, where the proportional hazards assumption fails for sex <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-18.mp4"><em>Stratified Cox Models</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture13StratifiedCoxModels.pdf">slides</a>) covers the stratified Cox model for the <code>anderson</code> leukemia data, where the <a href="#/def-pha">proportional hazards assumption</a> fails for sex <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -3962,9 +3964,9 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <p>This issue can be fixed by using strata or possibly by other model alterations.</p>
 <h3 id="the-stratified-cox-model">The Stratified Cox Model</h3>
 <ul>
-<li>In a stratified Cox model, each stratum, defined by one or more factors, has its own base survival function <span class="math inline">\({\lambda}_0(t)\)</span>.</li>
+<li>In a stratified Cox model, each stratum, defined by one or more factors, has its own <a href="#/def-baseline-surv">base survival function</a> <span class="math inline">\({\lambda}_0(t)\)</span>.</li>
 <li>But the coefficients for each variable not used in the strata definitions are assumed to be the same across strata.</li>
-<li>To check if this assumption is reasonable one can include interactions with strata and see if they are significant (this specification may generate a warning and NA lines, but these warnings and NA lines can be ignored).</li>
+<li>To check if this assumption is reasonable one can include interactions with strata and see if they are <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">significant</a> (this specification may generate a warning and NA lines, but these warnings and NA lines can be ignored).</li>
 <li>Since the <code>sex</code> variable shows possible non-proportionality, we try stratifying on <code>sex</code>.</li>
 </ul>
 <div class="cell">
@@ -4110,13 +4112,13 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <h3 id="conclusions-1">Conclusions</h3>
 <ul>
 <li>We chose to use a stratified model because of the apparent non-proportionality of the hazard for the sex variable.</li>
-<li>When we fit interactions with the strata variable, we did not get an improved model (via the likelihood ratio test).</li>
+<li>When we fit interactions with the strata variable, we did not get an improved model (via the <a href="../chapters/logistic-regression.html#def-lrt">likelihood ratio test</a>).</li>
 <li>So we use the stratifed model with coefficients that are the same across strata.</li>
 </ul>
 <h3 id="another-modeling-approach">Another Modeling Approach</h3>
 <ul>
 <li>We used an additive model without interactions and saw that we might need to stratify by sex.</li>
-<li>Instead, we could try to improve the model’s functional form - maybe the interaction of treatment and sex is real, and after fitting that we might not need separate hazard functions.</li>
+<li>Instead, we could try to improve the model’s functional form - maybe the interaction of treatment and sex is real, and after fitting that we might not need separate <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard functions</a>.</li>
 <li>Either approach may work.</li>
 </ul>
 <div class="cell">
@@ -4217,7 +4219,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <p>One or the other, both in either order, or neither may occur.</p>
 <h4 id="covariates">Covariates</h4>
 <ul>
-<li><p>We are interested in possibly using the covariates <code>z1</code>-<code>z10</code> to adjust for other factors.</p></li>
+<li><p>We are interested in possibly using the <a href="../chapters/Intro-to-GLMs.html#def-predictors">covariates</a> <code>z1</code>-<code>z10</code> to adjust for other factors.</p></li>
 <li><p>In addition, the time-varying covariates for acute GVHD, chronic GVHD, and platelet recovery may be useful.</p></li>
 </ul>
 <h4 id="preprocessing">Preprocessing</h4>
@@ -4381,7 +4383,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 </div>
 </div>
 </div>
-<p>Note that <code>status</code> could have been <code>1</code> on the last row, indicating that relapse or death occurred; since it is false, the participant must have exited the study without experiencing relapse or death (i.e., they were censored).</p>
+<p>Note that <code>status</code> could have been <code>1</code> on the last row, indicating that relapse or death occurred; since it is false, the participant must have exited the study without experiencing relapse or death (i.e., they were <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a>).</p>
 <h3 id="event-sequences">Event sequences</h3>
 <p>Let:</p>
 <ul>
@@ -4554,7 +4556,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <span id="cb81-41"><a aria-label="41"></a><span class="co">#&gt; Score (logrank) test = 47.2  on 9 df,   p=4e-07</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Platelet recovery is highly significant.</p>
+<p>Platelet recovery is highly <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">significant</a>.</p>
 <p>Neither acute GVHD (<code>agvhd</code>) nor chronic GVHD (<code>cgvhd</code>) has a statistically significant effect here, nor are they significant in models with the other one removed.</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a aria-label="1"></a><span class="fu">update</span>(bmt_coxph_TV, . <span class="sc">~</span> . <span class="sc">-</span> agvhd) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
@@ -4668,7 +4670,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <li>Sometimes an appropriate analysis requires consideration of recurrent events.</li>
 <li>A patient with arthritis may have more than one flareup. The same is true of many recurring-remitting diseases.</li>
 <li>In this case, we have more than one line in the data frame, but each line may have an event.</li>
-<li>We have to use a “robust” variance estimator to account for correlation of time-to-events within a patient.</li>
+<li>We have to use a “robust” <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-variance">variance</a> <a href="https://morrison-lab.github.io/sds/estimation.html#def-estimator">estimator</a> to account for <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation">correlation</a> of time-to-events within a patient.</li>
 </ul>
 <h3 id="bladder-cancer-data-set">Bladder Cancer Data Set</h3>
 <p>The bladder cancer dataset from <span class="citation" data-cites="kleinbaum2012survival">Kleinbaum and Klein (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> contains recurrent event outcome information for eighty-six cancer patients followed for the recurrence of bladder cancer tumor after transurethral surgical excision (Byar and Green 1980). The exposure of interest is the effect of the drug treatment of thiotepa. Control variables are the initial number and initial size of tumors. The data layout is suitable for a counting processes approach.</p>
@@ -4725,12 +4727,12 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <li>Of the 85 patients, 47 had at least one recurrence and 38 had none.</li>
 <li>18 patients had exactly one recurrence.</li>
 <li>There were up to 4 recurrences in a patient.</li>
-<li>Of the 190 intervals, 112 terminated with a recurrence and 78 were censored.</li>
+<li>Of the 190 intervals, 112 terminated with a recurrence and 78 were <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a>.</li>
 </ul>
 <h4 id="different-intervals-for-the-same-patient-are-correlated.">Different intervals for the same patient are correlated.</h4>
 <ul>
-<li><p>Is the effective sample size 47 or 112? This difference might narrow confidence intervals by as much as a factor of <span class="math inline">\(\sqrt{112/47}=1.54\)</span></p></li>
-<li><p>What happens if I have 5 treatment and 5 control values and want to do a t-test and I then duplicate the 10 values as if the sample size was 20? This falsely narrows confidence intervals by a factor of <span class="math inline">\(\sqrt{2}=1.41\)</span>.</p></li>
+<li><p>Is the effective sample size 47 or 112? This difference might narrow <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">confidence intervals</a> by as much as a factor of <span class="math inline">\(\sqrt{112/47}=1.54\)</span></p></li>
+<li><p>What happens if I have 5 treatment and 5 control values and want to do a <a href="https://morrison-lab.github.io/sds/basic-statistical-methods.html#sec-two-sample-t-test">t-test</a> and I then duplicate the 10 values as if the sample size was 20? This falsely narrows confidence intervals by a factor of <span class="math inline">\(\sqrt{2}=1.41\)</span>.</p></li>
 </ul>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a aria-label="1"></a>bladder <span class="ot">&lt;-</span></span>
@@ -4796,7 +4798,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The likelihood ratio and score tests assume independence of observations within a cluster. The Wald and robust score tests do not.</p>
+<p>The <a href="../chapters/logistic-regression.html#def-lrt">likelihood ratio</a> and score tests assume <a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">independence</a> of observations within a cluster. The <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test">Wald</a> and robust score tests do not.</p>
 </div>
 </div>
 </div>
@@ -4897,13 +4899,13 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <h3 id="what-are-competing-risks">What Are Competing Risks?</h3>
 <!-- No slidebreak here: the heading shares its slide with the def-competing-risks div. -->
 <div id="def-competing-risks" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 26 (Competing Risks Data)</strong></span> <strong>Competing risks data</strong> arise when multiple events can occur, and follow-up can end due to occurrence of one or more of those types of events, precluding observation of at least one of the other event types.</p>
+<p><span class="theorem-title"><strong>Definition 27 (Competing Risks Data)</strong></span> <strong>Competing risks data</strong> arise when multiple events can occur, and follow-up can end due to occurrence of one or more of those types of events, precluding observation of at least one of the other event types.</p>
 </div>
 <p>Competing risks are common in medical research. For example, in a study of bone fracture risk in elderly men, participants may:</p>
 <ul>
 <li>Experience the event of interest (fracture)</li>
 <li>Die before experiencing a fracture (competing event)</li>
-<li>Be lost to follow-up or reach the end of the study period (censored)</li>
+<li>Be lost to follow-up or reach the end of the study period (<a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a>)</li>
 </ul>
 <h4 id="why-competing-risks-matter">Why Competing Risks Matter</h4>
 <p>When analyzing time-to-event data, standard survival analysis methods make assumptions about censoring. The <strong>independent censoring assumption</strong> assumes that the future risk of censored observations can be represented by those who remain under follow-up.</p>
@@ -4944,7 +4946,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <h4 id="cause-specific-hazard-functions">Cause-Specific Hazard Functions</h4>
 <!-- No slidebreak here: the heading shares its slide with the def-cause-specific-hazard div. -->
 <div id="def-cause-specific-hazard" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 27 (Cause-Specific Hazard Function)</strong></span> The <strong>cause-specific hazard function</strong> for event type <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(h_k(t)\)</span>, is the short-term rate at which participants experience the onset of the <span class="math inline">\(k\)</span>-th event among those who have not yet experienced the event of interest or a competing event prior to time <span class="math inline">\(t\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 28 (Cause-Specific Hazard Function)</strong></span> The <strong>cause-specific hazard function</strong> for event type <span class="math inline">\(k\)</span>, denoted <span class="math inline">\(h_k(t)\)</span>, is the short-term rate at which participants experience the onset of the <span class="math inline">\(k\)</span>-th event among those who have not yet experienced the event of interest or a competing event prior to time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p><strong>Key properties:</strong></p>
 <ul>
@@ -4952,7 +4954,7 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 </li>
 <li>The denominator includes all participants who could have developed the event by time <span class="math inline">\(t\)</span>
 </li>
-<li>Reduces to the ordinary hazard function when there is only one failure type</li>
+<li>Reduces to the ordinary <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a> when there is only one failure type</li>
 </ul>
 <p><strong>Estimation:</strong></p>
 <p>To estimate and model cause-specific hazard functions:</p>
@@ -4961,11 +4963,11 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <li>Define the <span class="math inline">\(k\)</span>-th failure type as the only “event”</li>
 <li>Treat all competing causes (including death) as “censored”</li>
 </ol>
-<p>You can then examine predictor effects on the cause-specific hazard using standard Cox proportional hazards models.</p>
+<p>You can then examine <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictor</a> effects on the cause-specific hazard using standard <a href="#/def-ph-model">Cox proportional hazards models</a>.</p>
 <h4 id="cumulative-incidence-functions">Cumulative Incidence Functions</h4>
 <!-- No slidebreak here: the heading shares its slide with the def-cumulative-incidence div. -->
 <div id="def-cumulative-incidence" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 28 (Cumulative Incidence Function)</strong></span> The <strong>cumulative incidence function</strong> (CIF) for cause type <span class="math inline">\(k\)</span> at time <span class="math inline">\(t\)</span>, denoted <span class="math inline">\(F_k(t)\)</span>, is the proportion of the population who have experienced the <span class="math inline">\(k\)</span>-th event prior to time <span class="math inline">\(t\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 29 (Cumulative Incidence Function)</strong></span> The <strong>cumulative incidence function</strong> (CIF) for cause type <span class="math inline">\(k\)</span> at time <span class="math inline">\(t\)</span>, denoted <span class="math inline">\(F_k(t)\)</span>, is the proportion of the population who have experienced the <span class="math inline">\(k\)</span>-th event prior to time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>The cumulative incidence function:</p>
 <ul>
@@ -4994,10 +4996,10 @@ Figure&nbsp;23: Cumulative hazard (cloglog scale) for <code>anderson</code> data
 <span class="math inline">\(d_{ki}\)</span> is the number of type-<span class="math inline">\(k\)</span> events at time <span class="math inline">\(t_i\)</span>
 </li>
 <li>
-<span class="math inline">\(n_i\)</span> is the number at risk at time <span class="math inline">\(t_i\)</span>
+<span class="math inline">\(n_i\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-number-at-risk">number at risk</a> at time <span class="math inline">\(t_i\)</span>
 </li>
 <li>
-<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t_{i-1}\right)\mathclose{}\)</span> is the Kaplan-Meier estimate of event-free survival just before time <span class="math inline">\(t_i\)</span>
+<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t_{i-1}\right)\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimate</a> of event-free survival just before time <span class="math inline">\(t_i\)</span>
 </li>
 </ul>
 <p>The estimation proceeds in steps:</p>
@@ -5099,7 +5101,8 @@ Figure&nbsp;25
 <p><strong>Advantages:</strong></p>
 <ul>
 <li>Standard software can be used</li>
-<li>Straightforward interpretation of hazard ratios</li>
+<li>Straightforward interpretation of <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratios</a>
+</li>
 <li>Can assess effects on each failure type separately</li>
 </ul>
 <p><strong>Limitations:</strong></p>

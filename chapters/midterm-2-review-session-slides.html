@@ -348,10 +348,10 @@ text-align: center;
 </style></section><section><section id="introduction" class="title-slide slide level1 center" data-number="1"><h1>
 <span class="header-section-number">1</span> Introduction</h1>
 
-</section><section class="slide level2"><p>This chapter walks through the <strong>most common mistakes</strong> that students made on Midterm 2, which covered survival analysis and Cox proportional hazards models. Each section states a mistake, explains <em>why</em> it is wrong, and works through the correct approach.</p>
+</section><section class="slide level2"><p>This chapter walks through the <strong>most common mistakes</strong> that students made on Midterm 2, which covered survival analysis and <a href="../chapters/proportional-hazards-models.html#def-ph-model">Cox proportional hazards models</a>. Each section states a mistake, explains <em>why</em> it is wrong, and works through the correct approach.</p>
 <p>The exam had two parts:</p>
 <ul>
-<li><p><strong>Part 1</strong> (Kaplan-Meier and Nelson-Aalen estimators) used a small data set of survival times: <code>10, 14, 14+, 15+, 18, 21, 25</code> months (the <code>+</code> marks censored observations).</p></li>
+<li><p><strong>Part 1</strong> (<a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier</a> and <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimators</a>) used a small data set of survival times: <code>10, 14, 14+, 15+, 18, 21, 25</code> months (the <code>+</code> marks <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a> observations).</p></li>
 <li><p><strong>Part 2</strong> (Cox proportional hazards regression) used a model fit to <span class="math inline">\(n = 3{,}142\)</span> men from the Western Collaborative Group Study (WCGS), relating time to incident coronary heart disease (CHD) to baseline cigarette smoking and other covariates.</p></li>
 </ul>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -498,7 +498,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <p><strong>Common mistake</strong></p>
 </div>
 <div class="callout-content">
-<p>Reducing the number at risk by <strong>one</strong> at every row, regardless of how many subjects actually left the study. With this mistake, the number at risk after the two censored subjects (at <span class="math inline">\(t = 14^+\)</span> and <span class="math inline">\(t = 15^+\)</span>) was computed as <span class="math inline">\(5\)</span> instead of <span class="math inline">\(4\)</span>.</p>
+<p>Reducing the <a href="../chapters/intro-to-survival-analysis.html#def-number-at-risk">number at risk</a> by <strong>one</strong> at every row, regardless of how many subjects actually left the study. With this mistake, the number at risk after the two <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">censored</a> subjects (at <span class="math inline">\(t = 14^+\)</span> and <span class="math inline">\(t = 15^+\)</span>) was computed as <span class="math inline">\(5\)</span> instead of <span class="math inline">\(4\)</span>.</p>
 </div>
 </div>
 </div>
@@ -544,7 +544,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 </tr>
 </tbody>
 </table>
-<p>At <span class="math inline">\(t = 14\)</span>, one subject dies <em>and</em> a different subject is censored (the <code>14+</code>), so <strong>two</strong> subjects leave the risk set; the count drops from 6 to 4, not from 6 to 5. Every subject who has an event <strong>or</strong> is censored is removed from all later risk sets.</p>
+<p>At <span class="math inline">\(t = 14\)</span>, one subject dies <em>and</em> a different subject is censored (the <code>14+</code>), so <strong>two</strong> subjects leave the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a>; the count drops from 6 to 4, not from 6 to 5. Every subject who has an event <strong>or</strong> is censored is removed from all later risk sets.</p>
 </div>
 </section><section id="sec-na-exp" class="slide level2 scrollable" data-number="2.2"><h2>
 <span class="header-section-number">2.2</span> Nelson-Aalen estimates the <em>cumulative hazard</em> first, then exponentiates</h2>
@@ -560,14 +560,14 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <div class="callout-content">
 <p>Two versions of this error were common:</p>
 <ol type="1">
-<li><p>Computing a running sum of arbitrary quantities (e.g.&nbsp;summing survival probabilities, or summing <span class="math inline">\(1 - \hat\lambda_j\)</span>) instead of summing the hazards <span class="math inline">\(\hat\lambda_j = d_j / n_j\)</span>.</p></li>
-<li><p>Computing the cumulative hazard correctly but then forgetting the final step, <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}\)</span>, and reporting the cumulative hazard itself (or the KM product) as the Nelson-Aalen survival estimate.</p></li>
+<li><p>Computing a running sum of arbitrary quantities (e.g.&nbsp;summing survival probabilities, or summing <span class="math inline">\(1 - \hat\lambda_j\)</span>) instead of summing the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazards</a> <span class="math inline">\(\hat\lambda_j = d_j / n_j\)</span>.</p></li>
+<li><p>Computing the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a> correctly but then forgetting the final step, <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}\)</span>, and reporting the cumulative hazard itself (or the KM product) as the Nelson-Aalen survival estimate.</p></li>
 </ol>
 </div>
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>The Nelson-Aalen estimator builds the <strong>cumulative hazard</strong> by adding up the instantaneous hazard contributions at each event time:</p>
+<p><span class="proof-title"><em>Solution</em>. </span>The <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimator</a> builds the <strong>cumulative hazard</strong> by adding up the instantaneous hazard contributions at each event time:</p>
 <p><span class="math display">\[\hat\Lambda(t) = \sum_{j: t_j \le t} \frac{d_j}{n_j}\]</span></p>
 <p>and then converts it to a survival estimate using <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span>:</p>
 <p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}\]</span></p>
@@ -575,7 +575,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <p><span class="math display">\[\hat\Lambda(10) = \frac{1}{7} = 0.143,
 \qquad
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(10\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-0.143\right\}\mathclose{} = 0.867\]</span></p>
-<p>Contrast this with Kaplan-Meier, which multiplies conditional survival probabilities:</p>
+<p>Contrast this with <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier</a>, which multiplies <a href="../chapters/intro-to-survival-analysis.html#def-kappa">conditional survival probabilities</a>:</p>
 <p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} = \prod_{j: t_j \le t}\mathopen{}\left(1 - \frac{d_j}{n_j}\right)\mathclose{},
 \qquad
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(10\right)\mathclose{} = 1 - \tfrac{1}{7} = 0.857\]</span></p>
@@ -606,7 +606,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 </div>
 </section><section id="sec-median" class="slide level2" data-number="2.4"><h2>
 <span class="header-section-number">2.4</span> Median survival time is read off the curve, not modeled</h2>
-<p><em>Exam reference: <strong>Exercise 1.4</strong> (1 point) — the KM and NA estimates of median survival time.</em></p>
+<p><em>Exam reference: <strong>Exercise 1.4</strong> (1 point) — the KM and NA estimates of <a href="../chapters/intro-to-survival-analysis.html#def-median-survival">median survival time</a>.</em></p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -616,7 +616,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <p><strong>Common mistake</strong></p>
 </div>
 <div class="callout-content">
-<p>Estimating the median by fitting an exponential model (<span class="math inline">\(\hat\lambda = \text{events} / \text{total follow-up}\)</span>, then <span class="math inline">\(\hat{\text{E}}[T] = 1/\hat\lambda\)</span>). That computes an exponential-model <strong>mean</strong>, not the nonparametric <strong>median</strong>, and answers a different question. A second error was reading the median off the wrong curve or the wrong row.</p>
+<p>Estimating the median by fitting an <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential</a> model (<span class="math inline">\(\hat\lambda = \text{events} / \text{total follow-up}\)</span>, then <span class="math inline">\(\hat{\text{E}}[T] = 1/\hat\lambda\)</span>). That computes an exponential-model <strong>mean</strong>, not the nonparametric <strong>median</strong>, and answers a different question. A second error was reading the median off the wrong curve or the wrong row.</p>
 </div>
 </div>
 </div>
@@ -637,7 +637,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <span id="cb5-3"><a aria-label="3"></a><span class="co">#&gt; 18</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>No distributional assumption (exponential or otherwise) is used: the Kaplan–Meier estimator is a nonparametric read-off of the estimated curve.</p>
+<p>No distributional assumption (exponential or otherwise) is used: the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan–Meier estimator</a> is a nonparametric read-off of the estimated curve.</p>
 </div>
 </section><section id="sec-censoring-role" class="slide level2" data-number="2.5"><h2>
 <span class="header-section-number">2.5</span> How censored times are used: denominator yes, numerator no</h2>
@@ -656,8 +656,8 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>A censored subject contributes to the <strong>risk-set denominators</strong> (<span class="math inline">\(n_j\)</span>) for every event time up to and including their censoring time, because we know they survived event-free until then. They <strong>never</strong> contribute to an event <strong>numerator</strong> (<span class="math inline">\(d_j\)</span>), because no event was observed for them.</p>
-<p>In this example, subjects #3 and #4 (censored at <span class="math inline">\(14^+\)</span> and <span class="math inline">\(15^+\)</span>) are counted in the number at risk at <span class="math inline">\(t = 10\)</span> and <span class="math inline">\(t = 14\)</span>, which is why those denominators are 7 and 6. After their censoring times they drop out of all later risk sets. This mechanism is exactly what lets Kaplan-Meier use partial information from censored subjects instead of discarding them.</p>
+<p><span class="proof-title"><em>Solution</em>. </span>A censored subject contributes to the <strong><a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk-set</a> denominators</strong> (<span class="math inline">\(n_j\)</span>) for every event time up to and including their censoring time, because we know they survived event-free until then. They <strong>never</strong> contribute to an event <strong>numerator</strong> (<span class="math inline">\(d_j\)</span>), because no event was observed for them.</p>
+<p>In this example, subjects #3 and #4 (censored at <span class="math inline">\(14^+\)</span> and <span class="math inline">\(15^+\)</span>) are counted in the number at risk at <span class="math inline">\(t = 10\)</span> and <span class="math inline">\(t = 14\)</span>, which is why those denominators are 7 and 6. After their censoring times they drop out of all later risk sets. This mechanism is exactly what lets <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier</a> use partial information from censored subjects instead of discarding them.</p>
 </div>
 </section></section><section><section id="sec-part2" class="title-slide slide level1 center" data-number="3"><h1>
 <span class="header-section-number">3</span> Part 2: Cox proportional hazards models</h1>
@@ -737,7 +737,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 </div>
 </figure>
 </div>
-<p>The exam also provided the estimated covariance matrix of the coefficient estimates (on the <span class="math inline">\(\log(HR)\)</span> scale). The relevant entries are:</p>
+<p>The exam also provided the estimated <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x">covariance matrix</a> of the coefficient estimates (on the <span class="math inline">\(\log(HR)\)</span> scale). The relevant entries are:</p>
 <p><span class="math display">\[{\operatorname{Var}}(\hat\beta_L) = 0.024840,
 \quad
 {\operatorname{Var}}(\hat\beta_H) = 0.021905,
@@ -757,10 +757,10 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <div class="callout-content">
 <p>Several patterns lost the most points here:</p>
 <ul>
-<li>Treating the question as “interpret the coefficients” and writing only the linear predictor, omitting the <strong>likelihood</strong>, the <strong>distribution functions</strong>, and the <strong>assumptions</strong>.</li>
+<li>Treating the question as “interpret the coefficients” and writing only the <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a>, omitting the <strong><a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a></strong>, the <strong>distribution functions</strong>, and the <strong>assumptions</strong>.</li>
 <li>Listing assumption <em>names</em> without <strong>showing where they are used</strong>, or writing the math without naming the assumption.</li>
-<li>Adding a spurious <strong>“baseline hazard is exponential”</strong> assumption. The Cox model leaves the baseline hazard <span class="math inline">\(\lambda_0(t)\)</span> <strong>unspecified</strong>; assuming a parametric form is wrong.</li>
-<li>Omitting one or more of the standalone distribution functions (survival, density, hazard, log-hazard, cumulative hazard).</li>
+<li>Adding a spurious <strong>“<a href="../chapters/proportional-hazards-models.html#def-base-hazard">baseline hazard</a> is exponential”</strong> assumption. The Cox model leaves the baseline hazard <span class="math inline">\(\lambda_0(t)\)</span> <strong>unspecified</strong>; assuming a parametric form is wrong.</li>
+<li>Omitting one or more of the standalone distribution functions (<a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival</a>, <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density</a>, <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard</a>, <a href="../chapters/proportional-hazards-models.html#def-loghaz">log-hazard</a>, <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a>).</li>
 </ul>
 </div>
 </div>
@@ -769,8 +769,8 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><span class="proof-title"><em>Solution</em>. </span>A full-credit answer connects the likelihood to the linear predictor through a chain of named components and assumptions. Using <span class="math inline">\(\tilde X = (L, H, A, P, B, C)\)</span>:</p>
 <p><strong>Joint likelihood of the data set:</strong> <span class="math display">\[\mathcal{L}\stackrel{\text{def}}{=}\operatorname{p}(\tilde Y = \tilde y, \tilde D = \tilde d \mid \mathbf X = \mathbf x)\]</span></p>
 <p><strong>Marginal likelihood contribution of observation <span class="math inline">\(i\)</span>:</strong> <span class="math display">\[\mathcal{L}_i \stackrel{\text{def}}{=}\operatorname{p}(Y_i = y_i, D_i = d_i \mid \tilde X_i = \tilde x_i)\]</span></p>
-<p><strong><em>Independent-observations assumption</em></strong> (used to factor the likelihood): <span class="math display">\[\mathcal{L}= \prod_{i=1}^n \mathcal{L}_i\]</span></p>
-<p><strong><em>Non-informative censoring assumption</em></strong> (used so each contribution reduces to survival and hazard terms): <span class="math inline">\(T_i \perp\!\!\!\perp C_i \mid \tilde X_i\)</span>, giving <span class="math display">\[\mathcal{L}_i \propto \mathopen{}\left[\operatorname{f}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}
+<p><strong><em><a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">Independent</a>-observations assumption</em></strong> (used to factor the likelihood): <span class="math display">\[\mathcal{L}= \prod_{i=1}^n \mathcal{L}_i\]</span></p>
+<p><strong><em><a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">Non-informative censoring</a> assumption</em></strong> (used so each contribution reduces to survival and hazard terms): <span class="math inline">\(T_i \perp\!\!\!\perp C_i \mid \tilde X_i\)</span>, giving <span class="math display">\[\mathcal{L}_i \propto \mathopen{}\left[\operatorname{f}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}
 \mathopen{}\left[\operatorname{S}(y_i \mid \tilde x_i)\right]\mathclose{}^{1 - d_i}
 = \operatorname{S}(y_i \mid \tilde x_i)\cdot\mathopen{}\left[{\lambda}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}\]</span></p>
 <p><strong>Distribution functions</strong> (define each one):</p>
@@ -779,11 +779,11 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><span class="math display">\[{\lambda}(t \mid \tilde x) \stackrel{\text{def}}{=}\operatorname{p}(T = t \mid T \ge t, \tilde X = \tilde x) = \frac{\operatorname{f}(t \mid \tilde x)}{\operatorname{S}(t \mid \tilde x)}\]</span></p>
 <p><span class="math display">\[{\Lambda}(t \mid \tilde x) \stackrel{\text{def}}{=}\int_0^t {\lambda}(u \mid \tilde x)\,du = -\log\operatorname{S}(t \mid \tilde x)\]</span></p>
 <p><span class="math display">\[\eta(t \mid \tilde x) \stackrel{\text{def}}{=}\log{\lambda}(t \mid \tilde x)\]</span></p>
-<p><strong><em>Proportional-hazards assumption</em></strong> (used to split the hazard into a baseline that depends only on time and a factor that depends only on covariates): <span class="math display">\[{\lambda}(t \mid \tilde x) = \lambda_0(t)\cdot\theta(\tilde x)\]</span> where <span class="math inline">\(\lambda_0(t)\)</span> is the <strong>unspecified</strong> baseline hazard.</p>
-<p><strong><em>Logarithmic-link assumption</em></strong> (used to make the covariate factor a function of a linear predictor): <span class="math display">\[\eta(t \mid \tilde x) = \eta_0(t) + \Delta\eta(\tilde x),
+<p><strong><em><a href="../chapters/proportional-hazards-models.html#def-pha">Proportional-hazards</a> assumption</em></strong> (used to split the hazard into a baseline that depends only on time and a factor that depends only on covariates): <span class="math display">\[{\lambda}(t \mid \tilde x) = \lambda_0(t)\cdot\theta(\tilde x)\]</span> where <span class="math inline">\(\lambda_0(t)\)</span> is the <strong>unspecified</strong> baseline hazard.</p>
+<p><strong><em>Logarithmic-<a href="../chapters/Intro-to-GLMs.html#sec-why-link">link</a> assumption</em></strong> (used to make the covariate factor a function of a linear predictor): <span class="math display">\[\eta(t \mid \tilde x) = \eta_0(t) + \Delta\eta(\tilde x),
 \qquad
 \theta(\tilde x) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde x)\right\}\mathclose{}\]</span></p>
-<p><strong><em>Linear functional-form assumption</em></strong> (used to write the covariate term as a linear combination): <span class="math display">\[\Delta\eta(\tilde x) = \tilde x \cdot \tilde\beta
+<p><strong><em>Linear functional-form assumption</em></strong> (used to write the covariate term as a <a href="https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination">linear combination</a>): <span class="math display">\[\Delta\eta(\tilde x) = \tilde x \cdot \tilde\beta
 = \beta_L\, l + \beta_H\, h + \beta_A\, a + \beta_P\, p + \beta_B\, b + \beta_C\, c\]</span></p>
 <p>Notice that the baseline hazard <span class="math inline">\(\lambda_0(t)\)</span> is carried along symbolically the whole time — we never assume a shape for it.</p>
 </div>
@@ -802,14 +802,14 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <ul>
 <li>Reporting the direction of the effect but omitting the <strong>magnitude</strong> (“X% higher/lower hazard”) or the <strong>reference group</strong>.</li>
 <li>Forgetting to say the estimate is <strong>adjusted for / holding constant</strong> the other covariates.</li>
-<li>Omitting <strong>statistical significance</strong> (whether the 95% CI excludes 1, or <span class="math inline">\(p &lt; 0.05\)</span>).</li>
-<li>Calling the hazard ratio a <strong>risk</strong> or an <strong>odds ratio</strong>. It is a ratio of <em>hazards</em>, not of risks or odds.</li>
+<li>Omitting <strong><a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">statistical significance</a></strong> (whether the 95% <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">CI</a> excludes 1, or <span class="math inline">\(p &lt; 0.05\)</span>).</li>
+<li>Calling the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> a <strong>risk</strong> or an <strong><a href="../chapters/binary-outcome-associations.html#def-OR">odds ratio</a></strong>. It is a ratio of <em>hazards</em>, not of risks or <a href="../chapters/binary-outcome-associations.html#def-odds">odds</a>.</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>A complete interpretation has four parts: magnitude, reference group, adjustment, and significance. For the smoking effect in <a href="#/tbl-wcgs" class="quarto-xref">Table&nbsp;2</a>:</p>
+<p><span class="proof-title"><em>Solution</em>. </span>A complete interpretation has four parts: magnitude, <a href="https://morrison-lab.github.io/sds/data.html#def-reference-level">reference group</a>, adjustment, and significance. For the smoking effect in <a href="#/tbl-wcgs" class="quarto-xref">Table&nbsp;2</a>:</p>
 <blockquote>
 <p>Adjusting for age, behavior pattern, overweight, and cholesterol, <strong>light smokers</strong> had an estimated hazard of incident CHD about <strong>43% higher</strong> than <strong>nonsmokers</strong> (<span class="math inline">\(\widehat{HR} = 1.43\)</span>); this hazard ratio is statistically significant at the 0.05 level, since the 95% CI <span class="math inline">\((1.05, 1.95)\)</span> excludes 1 (<span class="math inline">\(p = 0.023\)</span>).</p>
 <p><strong>Heavy smokers</strong> had an estimated hazard about <strong>118% higher</strong> (roughly double; <span class="math inline">\(\widehat{HR} = 2.18\)</span>) than nonsmokers, also adjusting for the other covariates; this hazard ratio is highly significant (<span class="math inline">\(p &lt; 0.001\)</span>, CI <span class="math inline">\((1.63, 2.91)\)</span>).</p>
@@ -828,7 +828,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><strong>Common mistake</strong></p>
 </div>
 <div class="callout-content">
-<p>For the hazard ratio associated with a <strong>7.5-year</strong> increase in age (with the table reporting the HR per <strong>decade</strong>), the errors were:</p>
+<p>For the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> associated with a <strong>7.5-year</strong> increase in age (with the table reporting the HR per <strong>decade</strong>), the errors were:</p>
 <ul>
 <li>Multiplying: <span class="math inline">\(1.94 \times 0.75 = 1.46\)</span>. <strong>Wrong</strong> — the HR for a multi-unit change is <em>not</em> linear in the HR.</li>
 <li>Arithmetic slips that produced answers like 2.08.</li>
@@ -837,7 +837,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>On the <strong>log</strong> scale, the effect is linear: a change of <span class="math inline">\(c\)</span> units multiplies the log-hazard by <span class="math inline">\(c \cdot \beta\)</span>. So the hazard ratio for a <span class="math inline">\(c\)</span>-unit change is</p>
+<p><span class="proof-title"><em>Solution</em>. </span>On the <strong>log</strong> scale, the effect is linear: a change of <span class="math inline">\(c\)</span> units multiplies the <a href="../chapters/proportional-hazards-models.html#def-loghaz">log-hazard</a> by <span class="math inline">\(c \cdot \beta\)</span>. So the hazard ratio for a <span class="math inline">\(c\)</span>-unit change is</p>
 <p><span class="math display">\[HR(c) = \operatorname{exp}\mathopen{}\left\{c\,\beta\right\}\mathclose{} = \mathopen{}\left(\operatorname{exp}\mathopen{}\left\{\beta\right\}\mathclose{}\right)\mathclose{}^c = HR^{\,c}\]</span></p>
 <p>A 7.5-year increase is <span class="math inline">\(c = 0.75\)</span> decades, and the per-decade <span class="math inline">\(\widehat{HR} = 1.94\)</span> (i.e.&nbsp;<span class="math inline">\(\hat\beta_A = \log 1.94 = 0.66\)</span>):</p>
 <p><span class="math display">\[\widehat{HR}(0.75) = 1.94^{\,0.75} = \operatorname{exp}\mathopen{}\left\{0.75 \times 0.66\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{0.495\right\}\mathclose{} = 1.64\]</span></p>
@@ -846,7 +846,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 </section><section id="sec-wald" class="slide level2" data-number="3.4"><h2>
 <span class="header-section-number">3.4</span> Comparing two coefficients: variance of a <em>difference</em>
 </h2>
-<p><em>Exam reference: <strong>Exercise 2.4</strong> (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers; compute the z-statistic and two-sided p-value.</em></p>
+<p><em>Exam reference: <strong>Exercise 2.4</strong> (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers; compute the <a href="https://morrison-lab.github.io/sds/inference.html#def-test-statistic">z-statistic</a> and two-sided <a href="https://morrison-lab.github.io/sds/inference.html#def-p-value">p-value</a>.</em></p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -856,21 +856,21 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><strong>Common mistake</strong></p>
 </div>
 <div class="callout-content">
-<p>This mistake was the <strong>single most consequential Part 2 error</strong>. To test <span class="math inline">\(H_0: \beta_H = \beta_L\)</span>, the standard error of <span class="math inline">\(\hat\beta_H - \hat\beta_L\)</span> was computed incorrectly in several ways:</p>
+<p>This mistake was the <strong>single most consequential Part 2 error</strong>. To test <span class="math inline">\(H_0: \beta_H = \beta_L\)</span>, the <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard error</a> of <span class="math inline">\(\hat\beta_H - \hat\beta_L\)</span> was computed incorrectly in several ways:</p>
 <ul>
-<li>Using a <strong>single covariance entry</strong> <span class="math inline">\(\operatorname{Cov}(\hat\beta_L, \hat\beta_H)\)</span> as the variance.</li>
+<li>Using a <strong>single <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cov">covariance</a> entry</strong> <span class="math inline">\(\operatorname{Cov}(\hat\beta_L, \hat\beta_H)\)</span> as the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-variance">variance</a>.</li>
 <li>
 <strong>Adding</strong> <span class="math inline">\(2\,\operatorname{Cov}\)</span> instead of <strong>subtracting</strong> it.</li>
 <li>Plugging in the <strong>hazard ratios</strong> (<span class="math inline">\(2.18\)</span>, <span class="math inline">\(1.43\)</span>) instead of the <strong>coefficients</strong> (<span class="math inline">\(0.78\)</span>, <span class="math inline">\(0.36\)</span>) in the numerator.</li>
-<li>Guessing a value for <span class="math inline">\(z\)</span> because the variance-of-a-difference formula was not on the formula sheet.</li>
+<li>Guessing a value for <span class="math inline">\(z\)</span> because the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom">variance-of-a-difference formula</a> was not on the formula sheet.</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>Work on the <span class="math inline">\(\log(HR)\)</span> (coefficient) scale, where the estimates are approximately normal. The point estimate of the difference is</p>
+<p><span class="proof-title"><em>Solution</em>. </span>Work on the <span class="math inline">\(\log(HR)\)</span> (coefficient) scale, where the estimates are approximately <a href="https://morrison-lab.github.io/pds/random-variables.html#def-normal">normal</a>. The point estimate of the difference is</p>
 <p><span class="math display">\[\widehat{\Delta} = \hat\beta_H - \hat\beta_L = 0.78 - 0.36 = 0.42\]</span></p>
-<p>The variance of a <strong>difference</strong> of two estimates uses <strong>all three</strong> relevant entries of the covariance matrix:</p>
+<p>The variance of a <strong>difference</strong> of two estimates uses <strong>all three</strong> relevant entries of the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x">covariance matrix</a>:</p>
 <p><span class="math display">\[{\operatorname{Var}}(\hat\beta_H - \hat\beta_L)
 = {\operatorname{Var}}(\hat\beta_H) + {\operatorname{Var}}(\hat\beta_L) - 2\,\operatorname{Cov}(\hat\beta_H, \hat\beta_L)\]</span></p>
 <p>The <span class="math inline">\(-2\,\operatorname{Cov}\)</span> term is essential — its sign is <strong>minus</strong> for a difference. Plugging in:</p>
@@ -891,7 +891,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <span id="cb6-14"><a aria-label="14"></a><span class="co">#&gt;  0.4200  0.1604  2.6180  0.0088</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>So <span class="math inline">\(z = 0.42 / 0.160 = 2.62\)</span>, two-sided <span class="math inline">\(p = 0.0088\)</span>. We <strong>reject</strong> <span class="math inline">\(H_0\)</span>: the hazard of CHD differs significantly between heavy and light smokers, holding the other covariates constant.</p>
+<p>So <span class="math inline">\(z = 0.42 / 0.160 = 2.62\)</span>, two-sided <span class="math inline">\(p = 0.0088\)</span>. We <strong>reject</strong> <span class="math inline">\(H_0\)</span>: the hazard of CHD differs <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">significantly</a> between heavy and light smokers, holding the other covariates constant.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -901,14 +901,14 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>Compare with the <strong>naive</strong> standard error that ignores the covariance, <span class="math inline">\(\sqrt{{\operatorname{Var}}(\hat\beta_H) + {\operatorname{Var}}(\hat\beta_L)} = 0.216\)</span>. Because <span class="math inline">\(\hat\beta_H\)</span> and <span class="math inline">\(\hat\beta_L\)</span> are <em>positively</em> correlated, subtracting <span class="math inline">\(2\,\operatorname{Cov}\)</span> makes the correct SE (0.160) <strong>smaller</strong>, which sharpens the test. Using a single covariance cell as the variance gave a wildly wrong SE and an absurd <span class="math inline">\(z\)</span>.</p>
+<p>Compare with the <strong>naive</strong> standard error that ignores the covariance, <span class="math inline">\(\sqrt{{\operatorname{Var}}(\hat\beta_H) + {\operatorname{Var}}(\hat\beta_L)} = 0.216\)</span>. Because <span class="math inline">\(\hat\beta_H\)</span> and <span class="math inline">\(\hat\beta_L\)</span> are <em>positively</em> <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation">correlated</a>, subtracting <span class="math inline">\(2\,\operatorname{Cov}\)</span> makes the correct SE (0.160) <strong>smaller</strong>, which sharpens the test. Using a single covariance cell as the variance gave a wildly wrong SE and an absurd <span class="math inline">\(z\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 </section><section id="sec-ci-hr" class="slide level2" data-number="3.5"><h2>
 <span class="header-section-number">3.5</span> A confidence interval for a hazard ratio: build it on the log scale, then exponentiate</h2>
-<p><em>Exam reference: <strong>Exercise 2.5</strong> (2 points) — a 95% confidence interval for the hazard ratio comparing heavy to light smokers.</em></p>
+<p><em>Exam reference: <strong>Exercise 2.5</strong> (2 points) — a 95% <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">confidence interval</a> for the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> comparing heavy to light smokers.</em></p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -921,7 +921,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <ul>
 <li>Forming the interval directly on the HR scale, <span class="math inline">\(\widehat{HR} \pm 1.96 \cdot \text{SE}\)</span> (e.g.&nbsp;<span class="math inline">\(1.52 \pm 0.31\)</span>), instead of on the log scale.</li>
 <li>Building the log-scale interval correctly but <strong>never exponentiating</strong>, then reporting a log-scale interval as if it were the HR (sometimes even declaring “significant” while the reported interval contained 1).</li>
-<li>Reusing the wrong SE from the Wald test in <a href="#/sec-wald" class="quarto-xref">Section&nbsp;3.4</a>.</li>
+<li>Reusing the wrong SE from the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test">Wald test</a> in <a href="#/sec-wald" class="quarto-xref">Section&nbsp;3.4</a>.</li>
 </ul>
 </div>
 </div>
