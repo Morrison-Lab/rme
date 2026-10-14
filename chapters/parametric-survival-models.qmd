@@ -58,6 +58,16 @@ $$
 \ea
 $$
 
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_thm-exp-memoryless.qmd >}}
+
+{{< include _subfiles/parametric-survival-models/_prf-exp-memoryless.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-exp-memoryless.qmd >}}
+
 ## Weibull Distribution
 
 The [Weibull distribution](https://morrison-lab.github.io/pds/distributions.html#def-weibull) generalizes the exponential distribution by introducing a shape parameter $p > 0$ alongside the scale parameter $\lambda > 0$ [@kalbfleisch2011statistical].
@@ -427,6 +437,16 @@ Rather than multiplying the hazard rate, covariates accelerate or decelerate the
 
 {{< slidebreak >}}
 
+{{< include _subfiles/parametric-survival-models/_thm-aft-quantiles.qmd >}}
+
+{{< include _subfiles/parametric-survival-models/_prf-aft-quantiles.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-aft-quantiles.qmd >}}
+
+{{< slidebreak >}}
+
 We derive the expected survival time under the AFT model using change-of-variables integration:
 
 $$
@@ -481,7 +501,7 @@ The Weibull distribution has the same property.
 $$
 \ba
 \surv_i(t)
-&= \expf{-\int_0^t \haz_0(u) \cdot \theta_i \, du}
+&\eqdef \expf{-\int_0^t \haz_0(u) \cdot \theta_i \, du}
 && \text{(survival function in terms of the hazard)} \\
 &= \expf{-\theta_i \cdot \cuhaz_0(t)}
 && \text{(factor the constant $\theta_i$ out of the integral)} \\
@@ -504,18 +524,18 @@ $$
 
 {{< slidebreak >}}
 
-In terms of log survival time $Y \eqdef \log T$, the Weibull AFT model takes a log-linear regression form:
+{{< include _subfiles/parametric-survival-models/_thm-weibull-log-linear.qmd >}}
 
-$$
-\ba
-Y &= \alpha - \sigma \eta + \sigma W && \text{(log-linear AFT regression formulation)} \\
-\alpha &\eqdef -\logf{\lambda} && \text{(intercept parameter definition)} \\
-\sigma &\eqdef \frac{1}{p} && \text{(scale parameter definition as inverse shape $p$)}
-\ea
-$$
+{{< include _subfiles/parametric-survival-models/_prf-weibull-log-linear.qmd >}}
 
-where $W$ follows the standard Gumbel (extreme value) distribution.
-The estimated AFT regression coefficients $\eb_{\text{AFT}}$ produced by R's `survreg()` function relate directly to the PH regression coefficients $\eb_{\text{PH}}$ produced by `coxph()` via the identity $\eb_{\text{AFT}} = -\sigma \eb_{\text{PH}}$.
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-weibull-log-linear.qmd >}}
+
+{{< slidebreak >}}
+
+By @eq-weibull-log-linear,
+the estimated AFT regression coefficients $\eb_{\text{AFT}}$ produced by R's `survreg()` function relate directly to the PH regression coefficients $\eb_{\text{PH}}$ produced by `coxph()` via the identity $\eb_{\text{AFT}} = -\sigma \eb_{\text{PH}}$.
 
 The exponential and Weibull distributions are the only continuous distributions that are simultaneously proportional hazards models and accelerated failure time models.
 Other parametric families commonly used for survival data

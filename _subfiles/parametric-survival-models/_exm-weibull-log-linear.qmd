@@ -1,0 +1,32 @@
+:::{#exm-weibull-log-linear}
+#### Median event times from the log-linear form
+
+Take $\lambda = 0.1$ and $p = 2$,
+so $\alpha = -\logf{0.1} = \logf{10} \approx 2.3026$ and $\sigma = 0.5$.
+The median of $W$ solves $\expf{-\ef{w}} = 0.5$,
+so $\ef{w} = \logf{2}$ and $w = \logf{\logf{2}} \approx -0.3665$.
+Because $\alpha - \sigma \eta + \sigma W$ is an increasing function of $W$,
+the median of $Y$ is that function evaluated at the median of $W$.
+
+For a baseline subject ($\eta = 0$):
+
+$$
+\ba
+\text{median}(Y)
+&= \alpha + \sigma \cdot (-0.3665)
+&& \text{(log-linear form at the median of } W \text{)} \\
+&= 2.3026 - 0.1833
+&& \text{(multiply)} \\
+&= 2.1193
+&& \text{(subtract)}
+\ea
+$$
+
+so the median event time is $\ef{2.1193} \approx 8.33$.
+Directly, $\surv_0(8.33) = \expf{-(0.833)^2} = \expf{-0.694} \approx 0.5$.
+
+For a subject with hazard ratio $\theta = 4$, so $\eta = \logf{4} \approx 1.3863$,
+the median of $Y$ shifts by $-\sigma \eta = -0.5 \cdot 1.3863 \approx -0.6931$,
+so the median event time is multiplied by $\ef{-0.6931} = 0.5$,
+giving $8.33 \cdot 0.5 \approx 4.16$.
+:::
