@@ -1,0 +1,58 @@
+:::{#exm-aic-bic-compare}
+#### Comparing two models by AIC and BIC
+
+Suppose two candidate models are fit to the same $n = 100$ observations.
+Model A has $p = 3$ parameters
+and maximized log-likelihood $\est{\llik}_A = -120.0$,
+while model B has $p = 5$ parameters and $\est{\llik}_B = -118.5$.
+Then
+
+$$
+\ba
+\text{AIC}_A
+&= -2(-120.0) + 2 \cdot 3
+&& \text{(AIC formula)} \\
+&= 240 + 6
+&& \text{(multiply)} \\
+&= 246
+&& \text{(add)} \\
+\text{AIC}_B
+&= -2(-118.5) + 2 \cdot 5
+&& \text{(AIC formula)} \\
+&= 237 + 10
+&& \text{(multiply)} \\
+&= 247
+&& \text{(add)}
+\ea
+$$
+
+and, with $\logf{100} \approx 4.605$,
+
+$$
+\ba
+\text{BIC}_A
+&= 240 + 3 \logf{100}
+&& \text{(BIC formula)} \\
+&\approx 240 + 13.82
+&& \text{(multiply)} \\
+&= 253.82
+&& \text{(add)} \\
+\text{BIC}_B
+&= 237 + 5 \logf{100}
+&& \text{(BIC formula)} \\
+&\approx 237 + 23.03
+&& \text{(multiply)} \\
+&= 260.03
+&& \text{(add)}
+\ea
+$$
+
+Both criteria prefer model A.
+Model B fits better ($\est{\llik}_B > \est{\llik}_A$),
+but its two extra parameters cost more than that better fit gains.
+The AIC difference is only 1,
+which is negligible,
+while the BIC difference of about 6.2 favors model A more clearly,
+because BIC charges $\logf{100} \approx 4.6$ per parameter instead of 2.
+
+:::

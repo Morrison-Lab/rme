@@ -1,0 +1,42 @@
+:::{#exm-standardization}
+#### Standardizing over disease severity
+
+In the population of @exm-exchangeability-strata,
+$\Pf{L = 0} = 600/1000 = 0.6$ and $\Pf{L = 1} = 0.4$,
+and by consistency the observed stratum means are
+$\E{Y \mid A = 1, L = l} = \E{Y(1) \mid L = l}$
+and $\E{Y \mid A = 0, L = l} = \E{Y(0) \mid L = l}$.
+By @thm-standardization:
+
+$$
+\ba
+\E{Y(1)}
+&= 10 \cdot 0.6 + 20 \cdot 0.4
+&& \text{(standardization formula with } a = 1 \text{)} \\
+&= 6 + 8
+&& \text{(multiply)} \\
+&= 14
+&& \text{(add)} \\
+\E{Y(0)}
+&= 8 \cdot 0.6 + 18 \cdot 0.4
+&& \text{(standardization formula with } a = 0 \text{)} \\
+&= 4.8 + 7.2
+&& \text{(multiply)} \\
+&= 12
+&& \text{(add)} \\
+\text{ATE}
+&= 14 - 12
+&& \text{(definition of ATE)} \\
+&= 2
+&& \text{(subtract)}
+\ea
+$$
+
+Standardization recovers the true ATE of 2,
+whereas the naive contrast in @exm-rct-identification-fails gave 7.
+Standardization weights both treatment groups' stratum means
+by the same distribution of $L$,
+the whole population's,
+instead of each group's own distribution of $L$.
+
+:::
