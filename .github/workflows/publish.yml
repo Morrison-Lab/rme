@@ -116,8 +116,8 @@ jobs:
           set -euo pipefail
           mapfile -t pages < <(
             awk '/^  render:/ {in_render=1; next}
-                 in_render && /^    - / {sub(/^    - /, ""); print; next}
-                 in_render && !/^    #/ {in_render=0}' _quarto-website.yml
+                 in_render && /^    - / {sub(/^    - /, ""); sub(/[ \t]+#.*$/, ""); sub(/[ \t]+$/, ""); print; next}
+                 in_render && !/^[ \t]*(#.*)?$/ {in_render=0}' _quarto-website.yml
           )
           echo "Rendering ${#pages[@]} pages to PDF, one per invocation"
           test "${#pages[@]}" -gt 0
