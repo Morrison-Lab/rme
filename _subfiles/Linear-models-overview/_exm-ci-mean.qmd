@@ -8,6 +8,7 @@ and compares the result with the interval from `predict(interval = "confidence")
 
 ```{r}
 #| label: exm-ci-mean-calc
+#| code-fold: show
 ex_new <- data.frame(sex = "male", age = 40)
 ex_pred <- predict(bw_lm2, newdata = ex_new, se.fit = TRUE)
 ex_tcrit <- qt(0.975, df = bw_lm2$df.residual)
