@@ -367,9 +367,9 @@ evidence of a lack of fit at the 0.05 level.
 
 {{< slidebreak >}}
 
-:::{#def-leverage-glm}
+:::{#def-weighted-hat-matrix-glm}
 
-#### Leverage for a GLM
+#### Weighted hat matrix for a GLM
 
 For a logistic (or other) generalized linear model
 fit to $q$ covariate patterns with $p$ parameters,
@@ -387,9 +387,25 @@ $$
 
 where
 $\underbrace{\matr{W}}_{q \times q} \eqdef \text{diag}\paren{n_k \, \hat\pi_k \, (1 - \hat\pi_k)}$
-is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) of binomial weights,
-and the **leverage** $h_k$ of covariate pattern $k$
+is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) of binomial weights.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-leverage-glm}
+
+#### Leverage for a GLM
+
+Let $\matr{H}$ be the weighted hat matrix (@def-weighted-hat-matrix-glm).
+The **leverage** $h_k$ of covariate pattern $k$
 is the $k$-th diagonal element of $\matr{H}$.
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-weighted-hat-matrix-glm-analog}
+
+#### The weighted hat matrix as the GLM analog of the linear-model hat matrix
 
 This weighted hat matrix is the GLM analog
 of [the linear-model hat matrix](Linear-models-overview.qmd#def-hat-matrix);
@@ -410,6 +426,13 @@ $$r_{P_k} \eqdef \frac{X_k}{\sqrt{1-h_k}}$$
 
 where $X_k$ is the Pearson residual (@def-pearson-residual)
 and $h_k$ is the leverage of covariate pattern $k$ (@def-leverage-glm).
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-standardized-pearson-residual-plots}
+#### Standardized Pearson residuals in R diagnostic plots
+
 The functions `autoplot()` and
 `plot.lm()` use these for some of their graphs.
 :::
@@ -466,9 +489,6 @@ and the leverage (@def-leverage-glm):
 $$D_k \eqdef \frac{(r_{P_k})^2}{p} \cdot \frac{h_k}{1 - h_k}$$
 
 where $p$ is the number of parameters.
-This diagnostic is the GLM analog
-of [Cook's distance](Linear-models-overview.qmd#def-cooks-distance) for linear models,
-and shares its closed-form structure.
 :::
 
 {{< slidebreak >}}
@@ -499,6 +519,16 @@ the grouped residuals should be approximately Gaussian.
 
 :::
 
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-cooks-distance-glm-linear-analog}
+#### Relation to Cook's distance for linear models
+
+This diagnostic is the GLM analog
+of [Cook's distance](Linear-models-overview.qmd#def-cooks-distance) for linear models,
+and shares its closed-form structure.
 :::
 
 {{< slidebreak >}}
