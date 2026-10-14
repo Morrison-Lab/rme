@@ -1,0 +1,44 @@
+:::{#exm-anderson-exp-mle}
+#### Exponential rate estimates for the leukemia trial
+
+By the [MLE of the exponential rate parameter](intro-to-survival-analysis.qmd#thm-mle-exp),
+each group's estimated hazard rate is its number of relapses
+divided by its total follow-up time:
+
+```{r}
+#| label: anderson-exp-mle
+anderson |>
+  summarize(
+    .by = rx,
+    relapses = sum(status == "relapse"),
+    follow_up = sum(survt),
+    rate = relapses / follow_up
+  )
+```
+
+For the new treatment, 9 relapses over 359 weeks of follow-up give
+$\est{\haz}_{\text{new}} = 9/359 \approx 0.0251$ relapses per week;
+for the standard treatment, 21 relapses over 182 weeks give
+$\est{\haz}_{\text{standard}} = 21/182 \approx 0.1154$.
+The estimated log hazard ratio is then:
+
+$$
+\ba
+\logf{\frac{\est{\haz}_{\text{standard}}}{\est{\haz}_{\text{new}}}}
+&= \logf{\frac{21/182}{9/359}}
+&& \text{(substitute the rate estimates)} \\
+&= \logf{\frac{21 \cdot 359}{182 \cdot 9}}
+&& \text{(divide fractions)} \\
+&= \logf{\frac{7539}{1638}}
+&& \text{(multiply)} \\
+&\approx 1.527
+&& \text{(evaluate)}
+\ea
+$$
+
+The `survreg()` fit's `rxstandard` coefficient, $-1.527$,
+is the negative of this log hazard ratio, as the exponential AFT model predicts,
+and its intercept, $3.686$, is $\logf{359/9}$,
+the log of the estimated mean remission time on the new treatment.
+
+:::

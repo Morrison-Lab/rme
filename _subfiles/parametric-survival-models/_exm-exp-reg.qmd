@@ -1,0 +1,34 @@
+:::{#exm-exp-reg}
+#### Exponential regression with one binary covariate
+
+Let $x_1 = 1$ for patients on a standard treatment
+and $x_1 = 0$ for patients on a new treatment,
+and suppose $\beta_0 = \logf{0.025}$ and $\beta_1 = \logf{4}$,
+with time measured in weeks.
+By @eq-exp-reg-haz:
+
+$$
+\ba
+\haz(t \mid x_1 = 0)
+&= \expf{\beta_0}
+&& \text{(exponential regression hazard with } x_1 = 0 \text{)} \\
+&= 0.025
+&& \text{(} \expf{\logf{0.025}} = 0.025 \text{)} \\
+\haz(t \mid x_1 = 1)
+&= \expf{\beta_0 + \beta_1}
+&& \text{(exponential regression hazard with } x_1 = 1 \text{)} \\
+&= \expf{\beta_0} \cdot \expf{\beta_1}
+&& \text{(product rule for exponentials)} \\
+&= 0.025 \cdot 4
+&& \text{(evaluate each factor)} \\
+&= 0.1
+&& \text{(multiply)}
+\ea
+$$
+
+Each group's mean event time is the reciprocal of its hazard rate,
+as derived in the [exponential distribution section](#sec-psm-exp-dist):
+$1/0.025 = 40$ weeks on the new treatment
+and $1/0.1 = 10$ weeks on the standard treatment.
+
+:::

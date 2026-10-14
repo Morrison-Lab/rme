@@ -1,0 +1,29 @@
+:::{#exm-aft}
+#### An acceleration factor of 4
+
+Suppose the baseline survival function is exponential with mean 40 weeks,
+$\surv_0(t) = \expf{-t/40}$,
+and a covariate pattern $\vx$ has acceleration factor $\hazfactor(\vx) = 4$.
+By @eq-aft-surv,
+the probability that a subject with covariates $\vx$ is still event-free at 10 weeks is:
+
+$$
+\ba
+\surv(10 \mid \vx)
+&= \surv_0(10 \cdot 4)
+&& \text{(AFT survival function with } t = 10 \text{ and } \hazfactor(\vx) = 4 \text{)} \\
+&= \surv_0(40)
+&& \text{(multiply)} \\
+&= \expf{-40/40}
+&& \text{(substitute the baseline survival function)} \\
+&= \expf{-1}
+&& \text{(divide)} \\
+&\approx 0.368
+&& \text{(evaluate)}
+\ea
+$$
+
+A subject with covariates $\vx$ has the same chance of lasting 10 weeks
+that a baseline subject has of lasting 40 weeks.
+
+:::

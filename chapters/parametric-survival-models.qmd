@@ -28,7 +28,7 @@ using the `anderson` data
 [@rocke2021epi204].
 :::
 
-## Exponential Distribution
+## Exponential Distribution {#sec-psm-exp-dist}
 
 The [exponential distribution](https://morrison-lab.github.io/pds/random-variables.html#def-exponential) is the baseline parametric model in survival analysis.
 It assumes a constant [hazard rate](intro-to-survival-analysis.qmd#def-hazard) $\lambda > 0$ over time.
@@ -361,12 +361,20 @@ ggplot() +
 
 ## Exponential Regression
 
-For each subject $i$, define a [linear predictor](Intro-to-GLMs.qmd#def-linear-predictor) $\eta(\vx) \eqdef \beta_0 + (\beta_1 x_1 + \dots + \beta_p x_p) = \vx \cdot \vb$.
-Exponential regression models the [hazard rate](intro-to-survival-analysis.qmd#def-hazard) using a log [link function](Intro-to-GLMs.qmd#def-link-function):
+<!-- No slidebreak here: the heading shares its slide with the def-exp-reg div. -->
+{{< include _subfiles/parametric-survival-models/_def-exp-reg.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-exp-reg.qmd >}}
+
+{{< slidebreak >}}
+
+Exponential regression models the hazard rate using a log [link function](Intro-to-GLMs.qmd#def-link-function).
+At $\vx = \vzero$, @eq-exp-reg-haz gives the baseline hazard rate:
 
 $$
 \ba
-\haz(t \mid \vx) &\eqdef \expf{\eta(\vx)} && \text{(exponential regression hazard specification)} \\
 \haz_0(t) &\eqdef \haz(t \mid \vzero) && \text{(baseline hazard rate definition at $\vx = \vzero$)} \\
 &= \expf{\eta(\vzero)} && \text{(substituting $\vx = \vzero$ into hazard function)} \\
 &= \expf{\beta_0 + (\beta_1 \cdot 0 + \dots + \beta_p \cdot 0)} && \text{(evaluating linear predictor at zero vector)} \\
@@ -407,13 +415,17 @@ $$
 $$
 
 An alternative modeling framework is the **Accelerated Failure Time (AFT)** model.
-Rather than multiplying the hazard rate, covariates accelerate or decelerate the progression of time itself:
+Rather than multiplying the hazard rate, covariates accelerate or decelerate the progression of time itself.
 
-$$
-\surv(t \mid \vx) \eqdef \surv_0\paren{ t \cdot \hazfactor(\vx) }
-$$
+{{< slidebreak >}}
 
-where $\hazfactor(\vx) \eqdef \expf{\eta(\vx)}$, $\eta(\vx) \eqdef \beta_1 x_1 + \dots + \beta_p x_p$, and $\surv_0(t) \eqdef \P(T \ge t \mid \vx = \vzero)$ is the [baseline survival function](proportional-hazards-models.qmd#def-baseline-surv).
+{{< include _subfiles/parametric-survival-models/_def-aft.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-aft.qmd >}}
+
+{{< slidebreak >}}
 
 We derive the expected survival time under the AFT model using change-of-variables integration:
 
@@ -458,22 +470,39 @@ $$
 
 This derivation demonstrates that the exponential AFT model is mathematically identical to the exponential PH model.
 
-For a Weibull baseline distribution with scale $\lambda$ and shape $p$, the hazard and survival functions are $\haz(t) = \lambda p (\lambda t)^{p-1}$ and $\surv(t) = \expf{-(\lambda t)^p}$.
-Specifying a proportional hazards model with subject-specific multiplier $\theta_i \eqdef \expf{\eta_i}$ gives hazard rate $\haz(t) = \lambda p (\lambda t)^{p-1} \theta_i$.
-Defining an adjusted scale parameter $\lambda^* \eqdef \lambda \theta_i^{1/p}$, the resulting survival function is:
+The Weibull distribution has the same property.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_thm-weibull-ph-aft.qmd >}}
+
+::: proof
 
 $$
 \ba
-\surv^*(t) &\eqdef \expf{-(\lambda^* t)^p} && \text{(Weibull survival formula with scale parameter $\lambda^*$)} \\
-&= \expf{-\paren{\lambda \theta_i^{1/p} t}^p} && \text{(substituting $\lambda^* = \lambda \theta_i^{1/p}$)} \\
-&= \expf{-(\lambda t)^p \cdot \theta_i} && \text{(simplifying exponent $\paren{\theta_i^{1/p}}^p = \theta_i$)} \\
-&= \sb{ \expf{-(\lambda t)^p} }^{\theta_i} && \text{(applying exponent laws)} \\
-&= \sb{ \surv_0(t) }^{\theta_i} && \text{(substituting baseline Weibull survival function)} \\
-&= \surv_0\paren{ t \cdot \theta_i^{1/p} } && \text{(expressing as AFT model with acceleration factor $\theta_i^{1/p}$)}
+\surv_i(t)
+&= \expf{-\int_0^t \haz_0(u) \cdot \theta_i \, du}
+&& \text{(survival function in terms of the hazard)} \\
+&= \expf{-\theta_i \cdot \cuhaz_0(t)}
+&& \text{(factor the constant $\theta_i$ out of the integral)} \\
+&= \expf{-\theta_i (\lambda t)^p}
+&& \text{(Weibull cumulative hazard $\cuhaz_0(t) = (\lambda t)^p$)} \\
+&= \expf{-\paren{\theta_i^{1/p}}^p (\lambda t)^p}
+&& \text{(write $\theta_i = \paren{\theta_i^{1/p}}^p$)} \\
+&= \expf{-\paren{\lambda \cdot t \cdot \theta_i^{1/p}}^p}
+&& \text{(combine the $p$-th powers)} \\
+&= \surv_0\paren{ t \cdot \theta_i^{1/p} }
+&& \text{(Weibull baseline survival function at $t \cdot \theta_i^{1/p}$)}
 \ea
 $$
 
-This derivation proves that the Weibull model is simultaneously a proportional hazards model and an accelerated failure time model.
+:::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-weibull-ph-aft.qmd >}}
+
+{{< slidebreak >}}
 
 In terms of log survival time $Y \eqdef \log T$, the Weibull AFT model takes a log-linear regression form:
 
@@ -620,6 +649,10 @@ summary(anderson_exp)
 ```
 
 In the exponential model, $\eb_{\text{AFT}} = -\eb_{\text{PH}}$, so the AFT coefficient is equal in magnitude and opposite in sign to the Cox proportional hazards coefficient.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-anderson-exp-mle.qmd >}}
 
 ### Diagnostic: complementary log-log survival plot
 
