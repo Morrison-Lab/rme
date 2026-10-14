@@ -32,7 +32,15 @@ Choosing model B whenever AIC prefers it
 therefore acts like a likelihood ratio test at level
 
 $$
-\P(\chi^2_2 > 4) = \expf{-2} \approx 0.135
+\ba
+\P(\chi^2_2 > 4)
+&= \expf{-4/2}
+&& \text{(} \chi^2_2 \text{ tail probability with } c = 2k = 4 \text{)} \\
+&= \expf{-2}
+&& \text{(divide)} \\
+&\approx 0.135
+&& \text{(evaluate)}
+\ea
 $$
 
 and choosing by BIC acts like a test at level
@@ -40,8 +48,10 @@ and choosing by BIC acts like a test at level
 $$
 \ba
 \P(\chi^2_2 > 2 \logf{100})
+&= \expf{-2 \logf{100} / 2}
+&& \text{(} \chi^2_2 \text{ tail probability with } c = 2 \logf{100} \text{)} \\
 &= \expf{-\logf{100}}
-&& \text{(} \chi^2_2 \text{ tail probability)} \\
+&& \text{(cancel the 2s)} \\
 &= \frac{1}{100}
 && \text{(} \expf{-\logf{a}} = 1/a \text{)}
 \ea
