@@ -1,4 +1,4 @@
-A model can have more than one level of random effects.
+A model can have more than one level of [random effects](#def-random-effect).
 When each lower-level group belongs to exactly one higher-level group,
 the random effects are **nested**
 [@rocke2021epi204].
@@ -19,7 +19,7 @@ $$ {#eq-nested-re}
 where $L_i \siid \ndist{0, \sigma_L^2}$ is the effect of laboratory $i$,
 $B_{ij} \siid \ndist{0, \sigma_B^2}$ is the effect of batch $j$ within laboratory $i$,
 $\epsilon_{ijk} \siid \ndist{0, \sigma^2}$ is the replicate error,
-and all three sets of random variables are mutually independent.
+and all three sets of [random variables](https://morrison-lab.github.io/pds/random-variables.html#def-random-variable) are [mutually independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
 :::
 
 By the same argument as @thm-ems-one-way,
@@ -56,7 +56,7 @@ which is wrong here;
 the correct statistic is
 $F = 0.37804 / 0.01703 \approx 22.2$ on $(5, 12)$ degrees of freedom.
 
-The equivalent mixed model has a random intercept for each laboratory
+The equivalent [mixed model](#def-mixed-model) has a random intercept for each laboratory
 and for each batch within each laboratory:
 
 ```{r}
@@ -73,8 +73,18 @@ and $\est\sigma_L^2 \approx 0.0602$ (laboratories).
 Most of the variation in the measurements comes from differences between laboratories.
 :::
 
-Testing whether a variance component is zero is harder than testing a fixed effect,
-because $\sigma^2 = 0$ lies on the boundary of the parameter space:
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_thm-nested-re-cov.qmd >}}
+
+{{< include _subfiles/intro-multilevel-models/_prf-nested-re-cov.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_exm-nested-re-cov.qmd >}}
+
+Testing whether a variance component is zero is harder than testing a [fixed effect](#def-fixed-effect),
+because $\sigma^2 = 0$ lies on the boundary of the [parameter space](https://morrison-lab.github.io/sds/bayesian-inference.html#def-parameter-space):
 a variance cannot be negative,
-so the usual large-sample distribution of the likelihood ratio statistic does not apply
+so the usual large-sample distribution of the [likelihood ratio statistic](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lrt-stat) does not apply
 [@rocke2021epi204].

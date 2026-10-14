@@ -14,17 +14,32 @@ the propensity score.
 The **propensity score** is the [conditional probability](https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob) of treatment
 given the observed [covariates](Intro-to-GLMs.qmd#def-predictors):
 $$e(\vec{L}) \eqdef \Pf{A = 1 \mid \vec{L}}$$
+:::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_exm-propensity-score.qmd >}}
+
+{{< slidebreak >}}
+
+:::{#rem-propensity-score-balancing}
+#### Propensity scores and exchangeability
 
 @rosenbaum1983central showed that
 if $A \perp\!\!\!\perp (Y(0), Y(1)) \mid \vec{L}$
 ([conditional exchangeability](#def-exchangeability) given $\vec{L}$),
 then also:
 $$A \perp\!\!\!\perp (Y(0), Y(1)) \mid e(\vec{L})$$
+:::
 
-In other words, the propensity score is a **balancing score**:
+{{< slidebreak >}}
+
+:::{#def-balancing-score}
+#### Balancing score
+
+In other words, the propensity score (@def-propensity-score) is a **balancing score**:
 conditioning on the propensity score is sufficient
 to remove confounding.
-
 :::
 
 ## Propensity score estimation {#sec-ps-estimation}
@@ -74,12 +89,25 @@ $$w_i \eqdef \frac{A_i}{\hat{e}(\vec{L}_i)} +
 The IPW estimator of $\E{Y(a)}$ is:
 $$\Est{\E{Y(a)}}_{\text{IPW}} \eqdef
 \frac{\sum_{i: A_i = a} w_i Y_i}{\sum_{i: A_i = a} w_i}$$
+:::
 
-Reweighting by $w_i$ creates a **pseudo-population**
+{{< slidebreak >}}
+
+:::{#def-pseudo-population}
+#### Pseudo-population
+
+Reweighting by the weights $w_i$ of @def-ipw creates a **pseudo-population**
 in which treatment is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of covariates,
 effectively removing [confounding](#def-confounding-obs).
-
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_thm-ipw-identification.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_exm-ipw.qmd >}}
 
 ## Propensity score example: WCGS {#sec-ps-wcgs}
 

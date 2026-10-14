@@ -1,4 +1,4 @@
-The simplest model with a random effect has one grouping factor and no covariates
+The simplest model with a [random effect](#def-random-effect) has one grouping factor and no covariates
 [@rocke2021epi204; @dobson4e, Chapter 11].
 
 {{< slidebreak >}}
@@ -18,10 +18,7 @@ where:
 - $\alpha_1, \ldots, \alpha_a \siid \ndist{0, \sigma_\alpha^2}$
 are the **random effects** of the groups;
 - $\epsilon_{ij} \siid \ndist{0, \sigma^2}$ are the within-group errors;
-- the $\alpha_i$s and the $\epsilon_{ij}$s are mutually independent.
-
-The variances $\sigma_\alpha^2$ and $\sigma^2$
-are called **variance components**.
+- the $\alpha_i$s and the $\epsilon_{ij}$s are [mutually independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
 :::
 
 {{< slidebreak >}}
@@ -41,6 +38,24 @@ $\alpha_i$ as the deviation of batch $i$'s mean yield from the overall mean $\mu
 #| code-fold: show
 with(Dyestuff, tapply(Yield, Batch, mean))
 ```
+:::
+
+{{< slidebreak >}}
+
+:::{#def-variance-components}
+#### Variance components
+
+In @def-one-way-re, the variances $\sigma_\alpha^2$ and $\sigma^2$
+are called **variance components**.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-variance-components-dyestuff}
+#### Variance components of the dyestuff batches
+
+In @exm-dyestuff, $\sigma_\alpha^2$ is the variance of the batch means around the overall mean $\mu$,
+and $\sigma^2$ is the variance of the yields within a batch.
 :::
 
 {{< include _subfiles/intro-multilevel-models/_thm-re-cov.qmd >}}

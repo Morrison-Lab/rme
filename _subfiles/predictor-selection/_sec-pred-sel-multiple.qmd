@@ -6,19 +6,19 @@
 
 When the goal is to identify *all* important predictors of an outcome
 (Goal 3, @sec-pred-sel-goals),
-confounding remains a primary concern for each predictor in turn,
+[confounding](causal-inference.qmd#def-confounding-obs) remains a primary concern for each predictor in turn,
 not just a single primary predictor of interest.
 
 :::
 
 This goal is the most challenging because:
 
-- Overfitting and false-positive results are a greater concern
+- [Overfitting](#def-overfitting) and false-positive results are a greater concern
   (many predictors, many opportunities for spurious findings).
 - Interactions among candidate predictors may be of interest,
   but systematically testing all possible interactions
   can easily produce false positives.
-- Collinear predictors may be difficult to disentangle.
+- [Collinear](#def-collinearity) predictors may be difficult to disentangle.
 
 The same strategies recommended for Goal 2
 (face validity, backward selection with liberal criterion)
@@ -61,7 +61,7 @@ producing many more potential opportunities for false findings.
 For Goal 3 analyses,
 we do **not** recommend using only predictors significant at $p < 0.05$:
 in small samples, even important predictors may fail to meet this threshold,
-and a parsimonious model may have substantial residual confounding.
+and a parsimonious model may have substantial residual [confounding](causal-inference.qmd#def-confounding-obs).
 
 Instead, the recommended approach is:
 
@@ -76,7 +76,7 @@ Instead, the recommended approach is:
 ## Example: risk factors for CHD in HERS {#sec-pred-sel-chd-risk-factors}
 
 @Vittinghoff2003 identified independent CHD risk factors
-in the HERS cohort using a multipredictor Cox model.
+in the HERS cohort using a multipredictor [Cox model](proportional-hazards-models.qmd#def-ph-model).
 The large number of outcome events ($n = 361$) allowed
 all previously identified risk factors with $p < 0.2$
 in unadjusted models to be included.

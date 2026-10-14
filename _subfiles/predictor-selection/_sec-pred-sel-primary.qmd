@@ -6,7 +6,7 @@
 
 When the goal is to estimate the causal effect of
 a specific exposure on an outcome,
-the central challenge in observational data is **confounding**.
+the central challenge in observational data is **[confounding](causal-inference.qmd#def-confounding-obs)**.
 Relatively inclusive models — those including more potential confounders —
 are better at minimizing confounding bias.
 
@@ -17,10 +17,10 @@ The following principles guide predictor selection for this goal.
 ## Including predictors for face validity {#sec-pred-sel-face-validity}
 
 Some predictors are such well-established causal antecedents of the outcome
-that they should be included regardless of their statistical significance
+that they should be included regardless of their [statistical significance](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant)
 in the current data.
 Including these variables ensures the **face validity** of the model:
-readers and reviewers can be confident that obvious confounders
+readers and reviewers can be confident that obvious [confounders](causal-inference.qmd#def-confounder)
 have been accounted for.
 
 For example, age and smoking are established CHD risk factors
@@ -30,20 +30,20 @@ even if they are not statistically significant in a small sample.
 ## Selecting confounders on statistical grounds {#sec-pred-sel-confounders}
 
 In addition to variables included for face validity,
-we may consider other potential confounders
+we may consider other potential [confounders](causal-inference.qmd#def-confounder)
 identified in previous studies or on substantive grounds.
 
 A practical approach is **backward selection with a liberal criterion**:
 
 1. Start with a full model including all pre-specified candidates.
-2. At each step, remove the predictor with the largest p-value,
+2. At each step, remove the predictor with the largest [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value),
    provided it exceeds a liberal threshold (e.g., $p > 0.2$).
 3. Stop when all remaining predictors meet the retention criterion.
 
 The liberal threshold ($p > 0.2$ rather than $p > 0.05$)
 is important for confounding control:
 in small samples, even important confounders may have large p-values,
-and removing them could introduce bias.
+and removing them could introduce [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias).
 
 An alternative retention criterion is the
 **10% change-in-estimate rule**
@@ -87,14 +87,14 @@ The WCGS (Western Collaborative Group Study) is an observational
 prospective cohort of 3,154 men followed for CHD events.
 Unlike HERS (a randomized trial),
 the WCGS exposure — Type A behavior pattern — was not randomly assigned,
-so confounding is a genuine concern.
+so [confounding](causal-inference.qmd#def-confounding-obs) is a genuine concern.
 
 :::
 
 In the WCGS study,
 the exposure of interest is Type A behavior pattern (`dibpat`),
 and the outcome is CHD incidence (`chd69`).
-We fit logistic regression models
+We fit [logistic regression](logistic-regression.qmd#def-logistic-regression) models
 and apply the 10% change-in-estimate rule
 to assess whether age, cholesterol, SBP, and BMI
 are meaningful confounders of the Type A → CHD relationship,
@@ -216,7 +216,7 @@ At each step:
 4. Among those candidates,
    drop the covariate
    that gives the largest reduction
-   in the exposure coefficient's standard error.
+   in the exposure coefficient's [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE).
 5. Repeat until no remaining covariate can be dropped
    without either
    exceeding the 10% threshold
@@ -339,7 +339,7 @@ and @me4 [Chapter 21, section "Model Selection"].
 ::: {.callout-note}
 ## Collinearity between confounders is not a problem
 
-Unlike collinearity between a predictor of primary interest
+Unlike [collinearity](#def-collinearity) between a predictor of primary interest
 and other covariates (which inflates its standard error),
 collinearity *among* adjustment variables does not affect
 the precision of the primary predictor's estimate.
@@ -372,7 +372,7 @@ summary(back_model)
 ::: notes
 
 The backward selection procedure retains the predictors that
-most improve model fit according to AIC.
+most improve model fit according to [AIC](Linear-models-overview.qmd#def-aic).
 In this setting, since HT was randomized,
 we interpret the selected set as prognostic covariates
 that improve precision of the HT estimate,
@@ -402,28 +402,28 @@ and unexpected interactions should be interpreted cautiously.
 ## Randomized experiments {#sec-pred-sel-rct}
 
 In randomized trials, participants are allocated to treatment randomly,
-so the treatment indicator is by design uncorrelated
+so the treatment indicator is by design [uncorrelated](https://morrison-lab.github.io/pds/variance-covariance.html#def-uncorrelated)
 with pre-treatment covariates in expectation.
-Confounding adjustment is therefore **not required** for causal inference.
+[Confounding](causal-inference.qmd#def-confounding-obs) adjustment is therefore **not required** for causal inference.
 
 However, there are several reasons to include covariates
 in trial analyses:
 
-1. **Improving precision** (continuous outcomes).
+1. **Improving precision** ([continuous outcomes](https://morrison-lab.github.io/sds/data.html#def-continuous-var)).
    Adjusting for strong predictors of the outcome
    reduces residual variance and tightens the treatment effect estimate.
    Because treatment is uncorrelated with the covariates by randomization,
-   variance inflation is negligible.
+   [variance inflation](#sec-pred-sel-vif) is negligible.
 
 2. **De-attenuation** (binary and survival outcomes).
-   In logistic and Cox models,
+   In logistic and [Cox models](proportional-hazards-models.qmd#def-ph-model),
    omitting important predictors attenuates the treatment effect estimate.
    Adjusting for them moves the estimate closer to the true subject-specific effect.
 
 3. **Accounting for stratified designs**.
    In stratified or cluster-randomized trials,
    including stratification variables in the model
-   yields correct standard errors and p-values.
+   yields correct [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) and [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value).
 
 4. **Correcting for chance imbalances**.
    In small trials, randomization may leave residual imbalance

@@ -1,0 +1,54 @@
+::: {#exm-edf-poisson-bernoulli}
+#### Poisson and Bernoulli distributions in exponential dispersion form
+
+For a [Poisson](https://morrison-lab.github.io/pds/distributions.html#def-poisson) outcome with mean $\mu$,
+
+$$
+f(y; \mu)
+= \frac{\mu^y e^{-\mu}}{y!}
+= \expf{y \logf{\mu} - \mu - \logf{y!}},
+$$
+
+so $\theta \eqdef \logf{\mu}$, $b(\theta) \eqdef e^\theta$, and $\phi \eqdef 1$.
+For a [Bernoulli](https://morrison-lab.github.io/pds/random-variables.html#def-bernoulli) outcome with success probability $\pi$,
+
+$$
+f(y; \pi)
+= \pi^y (1 - \pi)^{1 - y}
+= \expf{y \logf{\frac{\pi}{1 - \pi}} + \logf{1 - \pi}},
+$$
+
+so $\theta \eqdef \logit(\pi)$, $b(\theta) \eqdef \logf{1 + e^\theta}$, and $\phi \eqdef 1$.
+
+The code below checks both forms against R's built-in densities,
+at $\mu = 3$, $y = 2$ and at $\pi = 0.25$, $y = 1$.
+
+```{r}
+#| code-fold: true
+mu <- 3
+theta_pois <- log(mu)
+y_pois <- 2
+pois_exp_form <- exp(
+  y_pois * theta_pois - exp(theta_pois) - lgamma(y_pois + 1)
+)
+pois_check <- isTRUE(all.equal(pois_exp_form, dpois(y_pois, mu)))
+
+pi_bern <- 0.25
+theta_bern <- qlogis(pi_bern)
+y_bern <- 1
+bern_exp_form <- exp(y_bern * theta_bern - log1p(exp(theta_bern)))
+bern_check <- isTRUE(all.equal(bern_exp_form, dbinom(y_bern, 1, pi_bern)))
+```
+
+- For the Poisson distribution with $\mu = 3$,
+  the natural parameter is $\theta = \log(3) =$ `r round(theta_pois, 4)`,
+  and the exponential-family form gives
+  $f(2) =$ `r round(pois_exp_form, 4)`,
+  which matches `dpois(2, 3)`: `r pois_check`.
+
+- For the Bernoulli distribution with $\pi = 0.25$,
+  the natural parameter is $\theta = \logit(0.25) =$ `r round(theta_bern, 4)`,
+  and the exponential-family form gives
+  $f(1) =$ `r round(bern_exp_form, 4)`,
+  which matches `dbinom(1, 1, 0.25)`: `r bern_check`.
+:::

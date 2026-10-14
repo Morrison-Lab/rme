@@ -1,28 +1,35 @@
 @dobson4e [§2.3.4] describes checking a fitted model's adequacy
 by examining [residuals](Linear-models-overview.qmd#def-resid-fitted):
 summaries of how far each observation falls from its [fitted value](Linear-models-overview.qmd#def-fitted-value).
-In a generalized linear model the outcome variance usually changes with the mean,
+In a [generalized linear model](#def-glm) the outcome variance usually changes with the mean,
 so raw differences $y_i - \est{\mu}_i$ are not on a common scale;
 dividing by an estimated [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) puts them on one.
 
 {{< slidebreak >}}
 
 ::: {#def-pearson-residual-glm}
-#### Pearson residual and Pearson chi-squared statistic
+#### Pearson residual
 
 For a generalized linear model with variance function $V(\mu)$
-(@def-natural-parameter)
+(@def-variance-function)
 and dispersion parameter $\phi = 1$,
 the **Pearson residual** for observation $i$ is
 
 $$
-r_i \eqdef \frac{y_i - \est{\mu}_i}{\sqrt{V(\est{\mu}_i)}},
+r_i \eqdef \frac{y_i - \est{\mu}_i}{\sqrt{V(\est{\mu}_i)}}.
 $$
 
-and the **Pearson chi-squared statistic** is
+[@dunn2018generalized, Chapters 7 and 8]
+:::
+
+{{< slidebreak >}}
+
+:::{#def-pearson-chisq-glm}
+#### Pearson chi-squared statistic
+
+The **Pearson chi-squared statistic** of a generalized linear model (@def-pearson-residual-glm) is
 $X^2 \eqdef \sum_{i=1}^n r_i^2$
 [@dunn2018generalized, Chapters 7 and 8].
-For a Poisson outcome, $V(\mu) = \mu$.
 :::
 
 ::: notes

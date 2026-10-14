@@ -7,27 +7,23 @@ Randomization makes the treatment groups **[exchangeable](#def-exchangeability)*
 the distribution of [potential outcomes](#def-potential-outcomes) is the same
 in treated and untreated groups.
 
-As a result, in a perfectly randomized trial:
+As a result, in a perfectly randomized trial,
+the observed group means identify the mean potential outcomes:
 
-$$
-\ba
-\E{Y(1)}
-&= \E{Y(1) \mid A = 1} && \text{(unconditional exchangeability: } Y(1) \perp\!\!\!\perp A \text{)}
-\\&= \E{Y \mid A = 1} && \text{(consistency: } Y = Y(1) \text{ when } A = 1 \text{)}
-\ea
-$$
+{{< slidebreak >}}
 
-and similarly for the control group:
+{{< include _subfiles/causal-inference/_thm-rct-identification.qmd >}}
 
-$$
-\ba
-\E{Y(0)}
-&= \E{Y(0) \mid A = 0} && \text{(unconditional exchangeability: } Y(0) \perp\!\!\!\perp A \text{)}
-\\&= \E{Y \mid A = 0} && \text{(consistency: } Y = Y(0) \text{ when } A = 0 \text{)}
-\ea
-$$
+{{< slidebreak >}}
 
-The observed mean difference between treatment groups
+{{< include _subfiles/causal-inference/_exm-rct-identification.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_exm-rct-identification-fails.qmd >}}
+
+In a randomized trial, therefore,
+the observed mean difference between treatment groups
 is an [unbiased](https://morrison-lab.github.io/sds/estimation.html#def-unbiased) estimate of the [ATE](#def-ate):
 
 $$\widehat{\text{ATE}} = \bar{Y}_{A=1} - \bar{Y}_{A=0}$$

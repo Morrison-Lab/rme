@@ -1,11 +1,11 @@
-The link functions listed in the structure of a GLM are not all on the same footing.
+The [link functions](#def-link-function) listed in the structure of a [GLM](#def-glm) are not all on the same footing.
 For each outcome distribution, the form of its density singles out one link.
 To say which, we need the density's *natural parameter*.
 
 {{< slidebreak >}}
 
 ::: {#def-natural-parameter}
-#### Exponential dispersion family, natural parameter, and canonical link
+#### Exponential dispersion family and natural parameter
 
 A distribution belongs to the **exponential dispersion family**
 if its [density](https://morrison-lab.github.io/pds/random-variables.html#def-pdf) (or [probability mass function](https://morrison-lab.github.io/pds/random-variables.html#def-pmf)) can be written as
@@ -17,89 +17,81 @@ $$
 
 for some functions $b(\cdot)$ and $c(\cdot, \cdot)$.
 The parameter $\theta$ is the **natural parameter**,
-and $\phi > 0$ is the **dispersion parameter**.
-Then
+and $\phi > 0$ is the **dispersion parameter**
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
+:::
 
-$$
-\begin{aligned}
-\E{Y} &= b'(\theta) \eqdef \mu \\
-\Varf{Y} &= \phi\, b''(\theta) = \phi\, V(\mu),
-\end{aligned}
-$$
+{{< slidebreak >}}
 
-where $V(\mu) \eqdef b''(\theta)$,
-written as a function of $\mu$,
+{{< include _subfiles/Intro-to-GLMs/_exm-edf-poisson-bernoulli.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Intro-to-GLMs/_exm-edf-gaussian.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Intro-to-GLMs/_thm-edf-mean-variance.qmd >}}
+
+{{< include _subfiles/Intro-to-GLMs/_prf-edf-mean-variance.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Intro-to-GLMs/_exm-edf-mean-variance.qmd >}}
+
+{{< slidebreak >}}
+
+:::{#def-variance-function}
+#### Variance function
+
+In an exponential dispersion family (@def-natural-parameter), $V(\mu) \eqdef b''(\theta)$,
+written as a function of $\mu \eqdef b'(\theta)$,
 is the **variance function**.
-The **canonical link** is the link function $g(\cdot)$
-that sets the linear predictor equal to the natural parameter:
+:::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/Intro-to-GLMs/_exm-variance-function.qmd >}}
+
+{{< slidebreak >}}
+
+:::{#rem-variance-function-variance}
+#### The variance function and the variance
+
+By @thm-edf-mean-variance and @def-variance-function,
+$\Varf{Y} = \phi\, V(\mu)$.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-canonical-link}
+#### Canonical link
+
+In an exponential dispersion family (@def-natural-parameter),
+the **canonical link** is the link function $g(\cdot)$ (@def-link-function)
+that sets the [linear predictor](#def-linear-predictor) equal to the natural parameter:
 $g(\mu) \eqdef \theta$
 [@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
 :::
 
 {{< slidebreak >}}
 
-::: {#exm-canonical-link-numeric}
-#### Natural parameters of a Poisson and a Bernoulli outcome
+{{< include _subfiles/Intro-to-GLMs/_thm-canonical-link-inverse.qmd >}}
 
-For a [Poisson](https://morrison-lab.github.io/pds/distributions.html#def-poisson) outcome with mean $\mu$,
+{{< include _subfiles/Intro-to-GLMs/_prf-canonical-link-inverse.qmd >}}
 
-$$
-f(y; \mu)
-= \frac{\mu^y e^{-\mu}}{y!}
-= \expf{y \logf{\mu} - \mu - \logf{y!}},
-$$
+{{< slidebreak >}}
 
-so $\theta \eqdef \logf{\mu}$, $b(\theta) \eqdef e^\theta$, and $\phi \eqdef 1$.
-For a [Bernoulli](https://morrison-lab.github.io/pds/random-variables.html#def-bernoulli) outcome with success probability $\pi$,
+{{< include _subfiles/Intro-to-GLMs/_exm-canonical-links.qmd >}}
 
-$$
-f(y; \pi)
-= \pi^y (1 - \pi)^{1 - y}
-= \expf{y \logf{\frac{\pi}{1 - \pi}} + \logf{1 - \pi}},
-$$
+## The score function under a canonical link
 
-so $\theta \eqdef \logit(\pi)$, $b(\theta) \eqdef \logf{1 + e^\theta}$, and $\phi \eqdef 1$.
+<!-- No slidebreak here: the heading shares its slide with the thm-canonical-score div. -->
 
-The code below checks both forms against R's built-in densities,
-at $\mu = 3$, $y = 2$ and at $\pi = 0.25$, $y = 1$,
-and computes $b'(\theta)$ and $b''(\theta)$ for the Bernoulli case.
+{{< include _subfiles/Intro-to-GLMs/_thm-canonical-score.qmd >}}
 
-```{r}
-#| code-fold: true
-mu <- 3
-theta_pois <- log(mu)
-y_pois <- 2
-pois_exp_form <- exp(y_pois * theta_pois - exp(theta_pois) - lgamma(y_pois + 1))
-pois_check <- isTRUE(all.equal(pois_exp_form, dpois(y_pois, mu)))
+{{< include _subfiles/Intro-to-GLMs/_prf-canonical-score.qmd >}}
 
-pi_bern <- 0.25
-theta_bern <- qlogis(pi_bern)
-y_bern <- 1
-bern_exp_form <- exp(y_bern * theta_bern - log1p(exp(theta_bern)))
-bern_check <- isTRUE(all.equal(bern_exp_form, dbinom(y_bern, 1, pi_bern)))
+{{< slidebreak >}}
 
-b1_bern <- plogis(theta_bern)
-b2_bern <- b1_bern * (1 - b1_bern)
-```
-
-- For the Poisson distribution with $\mu = 3$,
-  the natural parameter is $\theta = \log(3) =$ `r round(theta_pois, 4)`,
-  and the exponential-family form gives
-  $f(2) =$ `r round(pois_exp_form, 4)`,
-  which matches `dpois(2, 3)`: `r pois_check`.
-  Here $b'(\theta) = b''(\theta) = e^\theta =$ `r round(exp(theta_pois), 4)`,
-  so $V(\mu) = \mu$.
-
-- For the Bernoulli distribution with $\pi = 0.25$,
-  the natural parameter is $\theta = \logit(0.25) =$ `r round(theta_bern, 4)`,
-  and the exponential-family form gives
-  $f(1) =$ `r round(bern_exp_form, 4)`,
-  which matches `dbinom(1, 1, 0.25)`: `r bern_check`.
-  Here $b'(\theta) = \expit(\theta) =$ `r round(b1_bern, 4)`,
-  which is $\pi$,
-  and $b''(\theta) = \pi (1 - \pi) =$ `r round(b2_bern, 4)`,
-  so $V(\pi) = \pi(1 - \pi)$.
-
-Consequently, the canonical link for the Poisson distribution is the log link,
-and the canonical link for the Bernoulli distribution is the logit link.
-:::
+{{< include _subfiles/Intro-to-GLMs/_exm-canonical-score.qmd >}}

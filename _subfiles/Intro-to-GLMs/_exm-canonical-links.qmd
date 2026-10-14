@@ -1,0 +1,56 @@
+:::{#exm-canonical-links}
+#### Canonical links of three families
+
+We apply @thm-canonical-link-inverse,
+using $b'(\theta)$ from @exm-edf-mean-variance.
+
+- **Gaussian**: $b'(\theta) = \theta$, so $\invf{b'}(\mu) = \mu$,
+  and the canonical link is the identity link $g(\mu) = \mu$.
+
+- **Poisson**: $\mu = b'(\theta) = e^\theta$,
+  so $\theta = \logf{\mu}$,
+  and the canonical link is the log link $g(\mu) = \logf{\mu}$.
+  At $\mu = 3$, $g(3) = \logf{3} \approx 1.0986$.
+
+For the **Bernoulli** distribution, we solve $\mu = b'(\theta) = \expit(\theta)$ for $\theta$:
+
+$$
+\ba
+\mu &= \frac{e^\theta}{1 + e^\theta}
+&& \text{(definition of } \expit\text{)}
+\\ \mu (1 + e^\theta) &= e^\theta
+&& \text{(multiply both sides by } 1 + e^\theta\text{)}
+\\ \mu + \mu e^\theta &= e^\theta
+&& \text{(distribute)}
+\\ \mu &= e^\theta - \mu e^\theta
+&& \text{(subtract } \mu e^\theta \text{ from both sides)}
+\\ &= e^\theta (1 - \mu)
+&& \text{(factor out } e^\theta\text{)}
+\\ \frac{\mu}{1 - \mu} &= e^\theta
+&& \text{(divide by } 1 - \mu\text{)}
+\\ \logit(\mu) &= \theta
+&& \text{(take logs)}
+\ea
+$$
+
+So the canonical link is the logit link.
+At $\mu = 0.25$,
+$g(0.25) = \logf{0.25 / 0.75} = \logf{1/3} \approx -1.0986$.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-noncanonical-link}
+#### A link that is not canonical
+
+The probit link $g(\mu) = \Phi^{-1}(\mu)$,
+where $\Phi$ is the standard Gaussian cumulative distribution function,
+is a valid link function for a Bernoulli outcome,
+because it is strictly increasing on $(0, 1)$.
+It is not the canonical link:
+at $\mu = 0.25$,
+$\Phi^{-1}(0.25) \approx -0.6745$,
+whereas the natural parameter is
+$\theta = \logit(0.25) \approx -1.0986$
+(@exm-canonical-links).
+:::

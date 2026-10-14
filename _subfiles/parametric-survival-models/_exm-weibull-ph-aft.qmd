@@ -1,0 +1,40 @@
+:::{#exm-weibull-ph-aft}
+#### A hazard ratio of 4 with Weibull shape 2
+
+Take $\lambda = 0.05$, $p = 2$, and $\theta_i = 4$,
+with time in weeks.
+By @thm-weibull-ph-aft, the acceleration factor is
+
+$$
+\ba
+\theta_i^{1/p}
+&= 4^{1/2}
+&& \text{(substitute } \theta_i = 4,\ p = 2 \text{)} \\
+&= 2
+&& \text{(square root)}
+\ea
+$$
+
+To check, compute subject $i$'s survival at 10 weeks both ways:
+
+$$
+\ba
+\sb{\surv_0(10)}^{\theta_i}
+&= \sb{\expf{-(0.05 \cdot 10)^2}}^{4}
+&& \text{(proportional hazards form)} \\
+&= \expf{-4 \cdot 0.25}
+&& \text{(} (0.5)^2 = 0.25 \text{; exponent laws)} \\
+&= \expf{-1}
+&& \text{(multiply)} \\
+\surv_0(10 \cdot 2)
+&= \expf{-(0.05 \cdot 20)^2}
+&& \text{(AFT form with acceleration factor 2)} \\
+&= \expf{-1}
+&& \text{(} (1)^2 = 1 \text{)}
+\ea
+$$
+
+Both forms give $\expf{-1} \approx 0.368$:
+a four-fold hazard means that subject $i$ ages twice as fast as baseline.
+
+:::

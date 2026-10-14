@@ -24,17 +24,6 @@ $$\underbrace{\sum_{i=1}^n (y_i - g(x_i))^2}_{\text{fit to data}}
 
 The first term rewards close fit to the data; the second term
 penalizes large second derivatives, i.e. fast changes in slope.
-The trade-off is controlled by $\l$:
-
-- $\l \to 0$: the function passes through every data point ($g(x_i) = y_i$).
-  No penalty for wiggling — pure interpolation, badly overfits.
-- $\l \to \infty$: the integrated squared second derivative is forced to zero, so $g$ is a straight line.
-  Maximum smoothness — reduces to ordinary linear regression.
-- Intermediate $\l$: a smooth nonparametric fit.
-
-A foundational result is that the minimizer is always a **natural cubic spline with knots at every unique $x_i$** [@wood2017generalized, §5.1;
-@james2021islr2e, §7.5].
-So even though the problem is defined over all twice-differentiable functions, the answer lives in a finite-dimensional space we can compute with.
 ::::
 
 {{< slidebreak >}}
@@ -59,9 +48,45 @@ The optimal $\est{\l}$ is selected automatically by
 `mgcv::gam(y ~ s(x), method = "REML")`.
 ::::
 
+{{< slidebreak >}}
+
+::::{#rem-smoothing-spline-parameter}
+#### Effect of the smoothing parameter
+
+The trade-off is controlled by $\l$:
+
+- $\l \to 0$: the function passes through every data point ($g(x_i) = y_i$).
+  No penalty for wiggling — pure interpolation, badly overfits.
+- $\l \to \infty$: the integrated squared second derivative is forced to zero, so $g$ is a straight line.
+  Maximum smoothness — reduces to ordinary linear regression.
+- Intermediate $\l$: a smooth nonparametric fit.
+::::
+
+{{< slidebreak >}}
+
+::::{#rem-smoothing-spline-natural-cubic}
+#### The smoothing spline is a natural cubic spline
+
+A foundational result is that the minimizer is always a **natural cubic spline with knots at every unique $x_i$** [@wood2017generalized, §5.1;
+@james2021islr2e, §7.5].
+So even though the problem is defined over all twice-differentiable functions, the answer lives in a finite-dimensional space we can compute with.
+::::
+
+## The penalized least-squares solution
+
+<!-- No slidebreak here: the heading shares its slide with the thm-penalized-least-squares div. -->
+
+{{< include _subfiles/generalized-additive-models/_thm-penalized-least-squares.qmd >}}
+
+{{< include _subfiles/generalized-additive-models/_prf-penalized-least-squares.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-penalized-least-squares.qmd >}}
+
 ## Effective degrees of freedom
 
-The smoothing spline fit can be written as $\est{\mat{y}} = \mat{S}_\l \mat{y}$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
+By @thm-penalized-least-squares, the smoothing spline fit can be written as $\est{\vy} = \mat{S}_\l \vy$ for a smoother matrix $\mat{S}_\l$ that depends on $\l$ and the $x_i$ values.
 Because the function is penalized rather than projected onto a low-dimensional subspace, the usual "number of parameters" count doesn't apply.
 
 The standard replacement is the **effective degrees of freedom**
@@ -74,6 +99,16 @@ The standard replacement is the **effective degrees of freedom**
 
 $$\text{EDF}(\l) \eqdef \text{tr}(\mat{S}_\l)
 = \sum_{i=1}^n \frac{\partial \est{y}_i}{\partial y_i}.$$
+::::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-effective-degrees-of-freedom.qmd >}}
+
+{{< slidebreak >}}
+
+::::{#rem-edf-range}
+#### Range of the effective degrees of freedom
 
 The EDF interpolates smoothly between two endpoints.
 For the **full smoothing-spline model** (intercept + smooth term), EDF ranges from:
@@ -100,7 +135,7 @@ of:
   loop).
 - **Generalized cross-validation** (GCV), a fast computational
   approximation to LOO-CV.
-- **REML** (restricted maximum likelihood), which treats the penalty as arising from a normal-prior random effect and selects $\l$ by likelihood.
+- **REML** (restricted maximum likelihood), which treats the penalty as arising from a normal-prior [random effect](intro-multilevel-models.qmd#def-random-effect) and selects $\l$ by likelihood.
   REML is not the default in `mgcv::gam()` (which uses `method = "GCV.Cp"`), but it is generally preferred for its better statistical properties [@wood2017generalized, §6.2];
   pass `method = "REML"` explicitly.
 

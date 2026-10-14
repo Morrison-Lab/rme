@@ -1,0 +1,31 @@
+::: proof
+The weighted residual sum of squares for a constant $a$ is
+$Q(a) \eqdef \sum_{i=1}^n w_i (y_i - a)^2$.
+Its derivative is
+
+$$
+\ba
+Q'(a)
+&= \sum_{i=1}^n w_i \cdot 2 (y_i - a) \cdot (-1)
+&& \text{(chain rule, term by term)}
+\\ &= \sum_{i=1}^n \paren{-2 w_i y_i + 2 a w_i}
+&& \text{(distribute)}
+\\ &= -2 \sum_{i=1}^n w_i y_i + 2 a \sum_{i=1}^n w_i
+&& \text{(split the sum)}
+\ea
+$$
+
+Setting $Q'(a) = 0$:
+
+$$
+\ba
+2 a \sum_{i=1}^n w_i &= 2 \sum_{i=1}^n w_i y_i
+&& \text{(add } 2 \textstyle\sum w_i y_i \text{ to both sides)}
+\\ a &= \frac{\sum_{i=1}^n w_i y_i}{\sum_{i=1}^n w_i}
+&& \text{(divide by } 2 \textstyle\sum w_i > 0\text{)}
+\ea
+$$
+
+The second derivative $Q''(a) = 2\sum_{i=1}^n w_i$ is positive,
+so this stationary point is the minimizer.
+:::

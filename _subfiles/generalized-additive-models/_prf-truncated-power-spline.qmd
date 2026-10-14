@@ -1,0 +1,45 @@
+::: proof
+For $x < \xi$, $h(x) = 0$,
+so every [derivative](https://morrison-lab.github.io/mds/calculus-derivatives.html#def-derivative) of $h$ is 0 there.
+For $x > \xi$, $h(x) = (x - \xi)^d$, a polynomial,
+so its $j$-th derivative, for $0 \le j \le d$, is
+
+$$
+\ba
+h^{(j)}(x)
+&= d (d-1) \cdots (d - j + 1) (x - \xi)^{d - j}
+&& \text{(power rule, applied } j \text{ times)}
+\\ &= \frac{d!}{(d - j)!} (x - \xi)^{d - j}
+&& \text{(write the product as a ratio of factorials)}
+\ea
+$$
+
+{{< slidebreak >}}
+
+Now compare the one-sided limits at $\xi$.
+
+- For $0 \le j \le d - 1$, the exponent $d - j$ is at least 1,
+  so the right-hand limit is
+  $\lim_{x \downarrow \xi} \frac{d!}{(d - j)!} (x - \xi)^{d - j} = 0$,
+  which equals the left-hand limit 0.
+  So $h^{(j)}$ is continuous at $\xi$.
+- For $j = d$, the exponent $d - j$ is 0,
+  so $h^{(d)}(x) = d!$ for every $x > \xi$,
+  while $h^{(d)}(x) = 0$ for every $x < \xi$:
+  the $d$-th derivative jumps by $d!$.
+
+On each side of $\xi$, $h$ is a polynomial of degree at most $d$,
+so $h$ is a piecewise polynomial of degree $d$ (@def-piecewise-polynomial)
+with continuous derivatives through order $d - 1$:
+a spline of degree $d$.
+
+For the second claim,
+the global polynomial $\b_0 + \b_1 x + \cdots + \b_d x^d$
+has continuous derivatives of every order,
+and each term $\b_{d+k} (x - \xi_k)_+^d$
+is a spline with knot $\xi_k$ by the first claim.
+A sum of functions whose derivatives through order $d - 1$ are continuous
+also has continuous derivatives through order $d - 1$,
+and it is a polynomial of degree at most $d$ between consecutive knots,
+so the sum is a spline of degree $d$ with knots $\xi_1, \ldots, \xi_K$.
+:::

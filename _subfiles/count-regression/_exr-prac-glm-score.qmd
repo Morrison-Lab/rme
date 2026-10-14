@@ -8,15 +8,16 @@ Consider the Poisson log-linear model
 $\logf{\mu_i} = \beta_0 + \beta_1 x_i$,
 with $Y_i \mid x_i \simind \Pois(\mu_i)$.
 
-**(a)** Write the log-likelihood $\llik(\beta_0, \beta_1; \vy, \vx)$.
+**(a)** Write the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik)
+$\llik(\beta_0, \beta_1; \vy, \vx)$.
 
-**(b)** Derive the score equations
+**(b)** Derive the [score equations](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation)
 $\deriv{\beta_0}\llik = 0$
 and
 $\deriv{\beta_1}\llik = 0$.
 
 **(c)** Interpret the score equations:
-what condition on the fitted values $\emu_i$ do they imply?
+what condition on the [fitted values](Linear-models-overview.qmd#def-fitted-value) $\emu_i$ do they imply?
 :::
 
 ::: {.solution}
@@ -37,7 +38,7 @@ so $\mu_i = \exp{\beta_0 + \beta_1 x_i}$.
 
 **(b)**
 
-Using the chain rule with $\deriv{\beta_j}\mu_i = \mu_i x_{ij}$
+Using the [chain rule](https://morrison-lab.github.io/mds/calculus-derivatives.html#thm-chain-rule) with $\deriv{\beta_j}\mu_i = \mu_i x_{ij}$
 (where $x_{i0} = 1$ and $x_{i1} = x_i$):
 
 $$
@@ -60,7 +61,7 @@ $$
 
 **(c)**
 
-These equations hold at the maximum likelihood estimate $\evb$,
+These equations hold at the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$,
 where $\mu_i$ takes its fitted value
 $\emu_i \eqdef \exp{\eb_0 + \eb_1 x_i}$.
 
@@ -72,13 +73,13 @@ the fitted counts are balanced against observed counts,
 weighted by $x_i$.
 
 More generally,
-these score equations say that the **residuals $(y_i - \emu_i)$
+these score equations say that the **[residuals](Linear-models-overview.qmd#def-resid-fitted) $(y_i - \emu_i)$
 are [orthogonal](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-orthogonal-vectors)
 to each predictor column**:
 for each predictor $j$, the residual vector $(\vy - \est{\vec{\mu}})$ satisfies
 $\tp{\vx_{(j)}}(\vy - \est{\vec{\mu}}) = 0$,
 where $\vx_{(j)} \eqdef \tp{(x_{1j}, \ldots, x_{nj})} \in \reals^n$ is the column of $j$-th
 predictor values across observations.
-This system of equations is the GLM analogue of the OLS normal equations.
+This system of equations is the GLM analogue of the [OLS](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) [normal equations](https://morrison-lab.github.io/sds/correlation-regression.html#def-normal-equations).
 
 :::

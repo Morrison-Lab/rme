@@ -28,9 +28,6 @@ To estimate the regression function $f(x_0)$ at a target point $x_0$:
    The tricube kernel $K(u) = (1 - |u|^3)^3 \indicp{|u| \le 1}$ is the standard choice.
 3. **Fit a low-degree polynomial** (constant, linear, or quadratic) by weighted least squares to the neighborhood, using the kernel weights.
    The fitted value at $x_0$ is the prediction $\est{f}(x_0)$.
-
-To get the entire fitted curve, repeat for a dense grid of $x_0$
-values and connect the resulting predictions.
 ::::
 
 {{< slidebreak >}}
@@ -49,6 +46,25 @@ At age 50, the local neighborhood is the 50% of observations with ages closest t
 Each observation in that window is weighted by the tricube kernel --- down-weighted as its age moves away from 50, zero weight outside the window.
 The predicted cholesterol at age 50 is the fitted value from the weighted least-squares linear regression over that neighborhood.
 ::::
+
+{{< slidebreak >}}
+
+::::{#rem-local-regression-fitted-curve}
+#### From local fits to a fitted curve
+
+To get the entire fitted curve, repeat for a dense grid of $x_0$
+values and connect the resulting predictions.
+::::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_thm-local-constant.qmd >}}
+
+{{< include _subfiles/generalized-additive-models/_prf-local-constant.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/generalized-additive-models/_exm-local-constant.qmd >}}
 
 ## Strengths
 

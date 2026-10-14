@@ -1,0 +1,34 @@
+::::{#exm-effective-degrees-of-freedom}
+#### Effective degrees of freedom of the three-point fit
+
+In @exm-penalized-least-squares,
+the smoother matrix has entries
+
+$$
+\ba
+(\mat{S}_\l)_{ij}
+&= \sbmat{1 & x_i} \sbmat{1/3 & 0 \\ 0 & 1/(2 + \l)} \sbmat{1 \\ x_j}
+&& \text{(row } i \text{ of } \mat{B}\text{, then column } j \text{ of } \tp{\mat{B}}\text{)}
+\\ &= \frac{1}{3} + \frac{x_i x_j}{2 + \l}
+&& \text{(multiply)}
+\ea
+$$
+
+so its trace is
+
+$$
+\ba
+\text{EDF}(\l)
+&= \sum_{i=1}^3 \paren{\frac{1}{3} + \frac{x_i^2}{2 + \l}}
+&& \text{(sum the diagonal entries)}
+\\ &= 1 + \frac{\sum_{i=1}^3 x_i^2}{2 + \l}
+&& \text{(sum each term separately)}
+\\ &= 1 + \frac{2}{2 + \l}
+&& \text{(} \textstyle\sum x_i^2 = 2\text{)}
+\ea
+$$
+
+- With $\l = 0$, $\text{EDF} = 2$: an unpenalized line has two parameters.
+- With $\l = 2$, $\text{EDF} = 1.5$: the penalized slope counts as half a parameter.
+- As $\l \to \infty$, $\text{EDF} \to 1$: only the intercept remains.
+::::

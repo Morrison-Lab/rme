@@ -1,0 +1,25 @@
+::: proof
+The time $t_q(\vx)$ solves $\surv(t_q(\vx) \mid \vx) = 1 - q$:
+
+$$
+\ba
+1 - q &= \surv(t_q(\vx) \mid \vx)
+&& \text{(definition of } t_q(\vx) \text{)} \\
+&= \surv_0\paren{t_q(\vx) \cdot \hazfactor(\vx)}
+&& \text{(AFT survival function)}
+\ea
+$$
+
+Because $\surv_0$ is strictly decreasing,
+$t_q^0$ is the only time at which $\surv_0$ equals $1 - q$, so:
+
+$$
+\ba
+t_q(\vx) \cdot \hazfactor(\vx) &= t_q^0
+&& \text{(} \surv_0 \text{ is one-to-one)} \\
+t_q(\vx) &= \frac{t_q^0}{\hazfactor(\vx)}
+&& \text{(divide by } \hazfactor(\vx) > 0 \text{)}
+\ea
+$$
+
+:::

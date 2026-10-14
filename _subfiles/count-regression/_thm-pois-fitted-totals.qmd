@@ -1,0 +1,23 @@
+:::{#thm-pois-fitted-totals}
+#### Poisson regression reproduces observed totals
+
+Suppose we fit the Poisson regression model (@def-poisson-reg)
+with linear predictor $\eta(\vx) = \b_0 + \b_1 x_1 + \dots + \b_p x_p$
+to independent observations $(y_i, \vx_i, t_i)$, $i = 1, \lds, n$,
+and that the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$ exists.
+Write $x_{i0} \eqdef 1$ for the intercept's covariate,
+and $\emu_i \eqdef t_i \expf{\eta(\vx_i)}$ evaluated at $\vb = \evb$
+for the fitted mean of observation $i$.
+Then, for every $j \in \cb{0, 1, \lds, p}$:
+
+$$
+\sumin x_{ij} \, y_i = \sumin x_{ij} \, \emu_i
+$$ {#eq-pois-fitted-totals}
+
+In particular,
+taking $j = 0$,
+the fitted event counts add up to the observed event count:
+$\sumin y_i = \sumin \emu_i$.
+If $x_j$ is the [indicator variable](https://morrison-lab.github.io/sds/data.html#def-indicator-variable) for a group,
+then the fitted event counts in that group add up to the group's observed event count.
+:::

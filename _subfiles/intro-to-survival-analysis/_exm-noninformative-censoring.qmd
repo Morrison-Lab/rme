@@ -1,0 +1,89 @@
+:::{#exm-noninformative-censoring}
+#### Administrative censoring
+
+A trial enrolls patients at a steady rate over two years
+and ends four years after the first enrollment,
+so each patient's censoring time $C$ is the time from their enrollment to the end of the study,
+$C \sim \text{Uniform}(2, 4)$ years.
+Enrollment dates are set by the recruitment calendar, not by patients' prognoses,
+so $T \ind C$;
+the censoring parameters $\theta_C = (2, 4)$ are unrelated to the event-time parameters,
+so censoring is non-informative (@def-noninformative-censoring).
+
+Suppose $T \sim \text{Exponential}(\haz)$ with $\haz = 0.2$ per year,
+and a patient enrolled 3 years before the end of the study is still event-free at the end,
+so $(y, d) = (3, 0)$.
+The patient's likelihood contribution is
+
+$$
+\ba
+\Lik(3, 0)
+&= \sb{\p(T=3,C> 3)}^0 \cdot \sb{\p(T>3,C=3)}^{1}
+&& \text{(likelihood of $(Y, D)$ with $d = 0$)}
+\\
+&= \p(T>3,C=3)
+&& \text{($x^0 = 1$ and $x^1 = x$)}
+\\
+&= \p(T>3)\,\p(C=3)
+&& \text{(independence of $T$ and $C$)}
+\\
+&= \surv_T(3)\,\pdf_C(3)
+&& \text{(definitions of $\surv_T$ and $\pdf_C$)}
+\\
+&= \ef{-0.2 \cdot 3} \cdot \frac{1}{4 - 2}
+&& \text{(exponential survival function, uniform density)}
+\\
+&= \ef{-0.6} \cdot 0.5
+&& \text{(arithmetic)}
+\\
+&\approx 0.5488 \cdot 0.5
+&& \text{($\ef{-0.6} \approx 0.5488$)}
+\\
+&\approx 0.2744.
+&& \text{(arithmetic)}
+\ea
+$$
+
+The factor $\pdf_C(3) = 0.5$ does not involve $\haz$,
+so it does not affect which value of $\haz$ maximizes the likelihood.
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-informative-censoring}
+#### Informative censoring (counterexample)
+
+Suppose half of a cohort is frail, with event time $T = 1$ year,
+and half is robust, with $T = 5$ years.
+Frail patients become too sick to attend follow-up visits
+and drop out at $C = 0.5$ years,
+while robust patients stay in the study until it ends at $C = 10$ years.
+Then $\p(C = 0.5 \mid T = 1) = 1$ but $\p(C = 0.5 \mid T = 5) = 0$,
+so $T$ and $C$ are dependent and censoring is informative.
+
+The true probability of surviving past 2 years is
+$\surv_T(2) = \p(T > 2) = 0.5$.
+Everyone still under observation just after $0.5$ years is robust,
+so if we treated the dropouts as representative of the patients still under observation,
+as independence would justify,
+we would compute
+
+$$
+\ba
+\p(T > 2)
+&= \p(T > 0.5) \cdot \p(T > 2 \mid T > 0.5)
+&& \text{(chain rule; $\cb{T > 2} \subseteq \cb{T > 0.5}$)}
+\\
+&\approx 1 \cdot \p(T > 2 \mid T > 0.5,\ C > 0.5)
+&& \text{(no events before 0.5; treat dropouts as representative)}
+\\
+&= 1 \cdot 1
+&& \text{(all observed patients past 0.5 are robust)}
+\\
+&= 1,
+&& \text{(arithmetic)}
+\ea
+$$
+
+which overstates the true value $0.5$.
+:::

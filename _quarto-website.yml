@@ -164,38 +164,51 @@ bibliography: references.bib
 
 callouty-theorem:
   thm:
+    title-ref: true
     override-title: false # do not have the filter set
                           # or override a callout title
     callout: # parameters of the wrapping callout
              # see Quarto callout docs for details
       type: lem  # same color as lem (royal blue); color set in custom-callout block below
       appearance: minimal
+      collapse: false # foldable, open by default
   lem:
+    title-ref: true
     override-title: false
     callout:
       type: lem
       appearance: minimal
+      collapse: false # foldable, open by default
   cor:
+    title-ref: true
     override-title: false
     callout:
       type: cor
       appearance: minimal
+      collapse: false # foldable, open by default
   prp:
+    title-ref: true
     override-title: false
     callout:
       type: prp
       appearance: minimal
+      collapse: false # foldable, open by default
   cnj:
+    title-ref: true
     override-title: false
     callout:
       type: cnj
       appearance: minimal
+      collapse: false # foldable, open by default
   def:
+    title-ref: true
     override-title: false
     callout:
       type: def
       appearance: minimal
+      collapse: false # foldable, open by default
   exm:
+    title-ref: true
     override-title: false
     callout:
       type: exm
@@ -203,10 +216,12 @@ callouty-theorem:
       collapse: false
       icon: false
   exr:
+    title-ref: true
     override-title: false
     callout:
       type: exr
       appearance: minimal
+      collapse: false # foldable, open by default
   proof: # also support wrapping proof-like environments
     override-title: true # override the callout title with
                          # the proof-type label,
@@ -224,10 +239,12 @@ callouty-theorem:
       collapse: true
       icon: false
   remark:
+    title-ref: true
     override-title: false
     callout:
       type: remark
       appearance: minimal
+      collapse: false # foldable, open by default
 
 # Color palette for theorem/proof environments.
 # The coatless-quarto/custom-callout extension reads this block and injects
@@ -258,7 +275,7 @@ custom-callout:
 format:
   html:
     filters:
-      - callouty-theorem
+      - Morrison-Lab/callouty-theorem
       - coatless-quarto/custom-callout
     theme:
       light: [cosmo, offwhite.scss, custom.scss]
@@ -322,7 +339,7 @@ format:
     fig-width: 7
   pdf:
     filters:
-      - callouty-theorem
+      - Morrison-Lab/callouty-theorem
       - coatless-quarto/custom-callout
     geometry:
       - top=15mm
@@ -352,7 +369,7 @@ format:
         \makeatother
   docx:
     filters:
-      - callouty-theorem
+      - Morrison-Lab/callouty-theorem
       - coatless-quarto/custom-callout
     toc: true
     toc-depth: 3

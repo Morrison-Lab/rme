@@ -1,0 +1,24 @@
+:::{#lem-partial-pooling-blp}
+#### The partial-pooling weight minimizes mean squared error
+
+In the random-intercept model with known $\mu$, $\sigma_\alpha^2$, and $\sigma^2$,
+consider predictors of the group mean $\mu_j \eqdef \mu + \alpha_j$ of the form
+
+$$
+\tilde\mu_j(c) \eqdef \mu + c\,(\bar{y}_j - \mu)
+$$
+
+for a constant $c$.
+The mean squared error $\E{\paren{\tilde\mu_j(c) - \mu_j}^2}$ is minimized at $c = w_j$,
+the weight in @eq-partial-pooling,
+which can also be written as
+
+$$
+w_j = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}.
+$$ {#eq-partial-pooling-weight}
+
+::: notes
+This lemma does not need the normality assumptions of the model,
+only the means, variances, and independence of its terms.
+:::
+:::

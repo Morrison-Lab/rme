@@ -1,6 +1,6 @@
 
 
-A Wald 95% confidence interval for a single coefficient $\beta_j$ is:
+A [Wald 95% confidence interval](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-ci) for a single coefficient $\beta_j$ is:
 
 $$
 \beta_j \in \sb{\eb_j \pm \ciradf{\eb_j}}
@@ -20,30 +20,42 @@ $$
   }
 $$
 
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_thm-pois-two-group-se.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_exm-pois-two-group-ci.qmd >}}
+
 ### Hypothesis tests for regression coefficients
 
-To test $H_0: \beta_j = \beta_{j,0}$ against a one- or two-sided alternative,
-compute the Wald $z$-statistic:
+To test $H_0: \beta_j = \beta_{j,0}$ against a one- or [two-sided alternative](https://morrison-lab.github.io/sds/inference.html#def-two-sided-alternative),
+compute the [Wald $z$-statistic](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test):
 
 $$
 z = \frac{\eb_j - \beta_{j,0}}{\ese{\eb_j}}
 $$
 
 and compare $z$ (one-sided) or $|z|$ (two-sided) to the tails of the
-standard Gaussian distribution.
-The most common null hypothesis is $H_0: \beta_j = 0$,
+[standard Gaussian distribution](https://morrison-lab.github.io/pds/random-variables.html#def-std-normal).
+The most common [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) is $H_0: \beta_j = 0$,
 i.e., that covariate $j$ has no association with the outcome rate.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_exm-pois-two-group-wald.qmd >}}
 
 ### Comparing nested models
 
 To compare a smaller model $M_0$ (with $p_0$ parameters) to a larger model
-$M_1$ (with $p_1 > p_0$ parameters), use the likelihood ratio test statistic:
+$M_1$ (with $p_1 > p_0$ parameters), use the [likelihood ratio test statistic](logistic-regression.qmd#def-lrt-statistic):
 
 $$
 G^2 = 2\sb{\est{\llik}_1 - \est{\llik}_0}
 $$
 
-where $\est{\llik}_1$ and $\est{\llik}_0$ are the maximized log-likelihoods
+where $\est{\llik}_1$ and $\est{\llik}_0$ are the maximized [log-likelihoods](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik)
 of $M_1$ and $M_0$ respectively.
 
 Under $H_0$ that the additional $p_1 - p_0$ parameters are all zero,

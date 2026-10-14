@@ -1,0 +1,37 @@
+:::{#thm-standardization}
+#### Identification by standardization
+
+Suppose $\vec{L}$ is discrete,
+and that [consistency](#def-consistency),
+conditional [exchangeability](#def-exchangeability) given $\vec{L}$,
+and [positivity](#def-positivity) hold.
+Then for each treatment level $a \in \cb{0, 1}$,
+
+$$
+\E{Y(a)} = \sum_{\vec{l}} \E{Y \mid A = a, \vec{L} = \vec{l}} \Pf{\vec{L} = \vec{l}}
+$$ {#eq-standardization}
+
+where the sum runs over the support of $\vec{L}$.
+
+:::
+
+::: proof
+For treatment level $a$:
+
+$$
+\ba
+\E{Y(a)}
+&= \sum_{\vec{l}} \E{Y(a) \mid \vec{L} = \vec{l}} \Pf{\vec{L} = \vec{l}}
+&& \text{(law of total expectation over } \vec{L} \text{)} \\
+&= \sum_{\vec{l}} \E{Y(a) \mid A = a, \vec{L} = \vec{l}} \Pf{\vec{L} = \vec{l}}
+&& \text{(conditional exchangeability: } Y(a) \ind A \mid \vec{L} \text{)} \\
+&= \sum_{\vec{l}} \E{Y \mid A = a, \vec{L} = \vec{l}} \Pf{\vec{L} = \vec{l}}
+&& \text{(consistency: } Y = Y(a) \text{ when } A = a \text{)}
+\ea
+$$
+
+Positivity guarantees $\Pf{A = a \mid \vec{L} = \vec{l}} > 0$
+for every $\vec{l}$ in the support,
+so each conditioning event $\cb{A = a, \vec{L} = \vec{l}}$ has positive probability
+and every term in the second and third lines is defined.
+:::

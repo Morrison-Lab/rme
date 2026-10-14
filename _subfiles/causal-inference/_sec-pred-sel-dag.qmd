@@ -28,7 +28,14 @@ when estimating the total causal effect.
 A **confounder** of the relationship between an exposure $X$ and
 [outcome](Intro-to-GLMs.qmd#def-outcome) $Y$ is a variable $C$
 that is a common cause of both $X$ and $Y$.
-By contrast,
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-confounder-vs-mediator}
+#### Confounders compared with mediators
+
+Unlike a confounder (@def-confounder),
 a [mediator](#def-mediator) lies on the causal path
 from $X$ to $Y$
 and is not a common cause of $X$ and $Y$.
@@ -44,6 +51,12 @@ Adjusting for confounders removes [confounding](#def-confounding-obs) bias.
 A **mediator** $M$ is a variable that lies on the causal pathway
 from the exposure $X$ to the outcome $Y$:
 $$X \to M \to Y$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-mediator-adjustment}
+#### Adjusting for a mediator
 
 Adjusting for a mediator blocks the indirect causal pathway
 through $M$,
@@ -66,10 +79,24 @@ adjust for $M$.
 A **collider** is a variable $L$ that is caused by two or more
 variables on a path:
 $$X \to L \leftarrow Y$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-collider-adjustment}
+#### Adjusting for a collider
 
 Adjusting for a collider opens a non-causal ([backdoor](#def-backdoor-criterion)) path
-between $X$ and $Y$,
-introducing **collider bias**.
+between $X$ and $Y$.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-collider-bias}
+#### Collider bias
+
+Adjusting for a collider (@def-collider) introduces **collider bias**:
+the bias from the non-causal path that the adjustment opens between $X$ and $Y$.
 :::
 
 {{< slidebreak >}}
@@ -83,11 +110,16 @@ with respect to the ordered pair $(A, Y)$ in a DAG if:
 1. No variable in $\vec{L}$ is a descendant of $A$.
 2. $\vec{L}$ blocks every path between $A$ and $Y$
    that has an arrow into $A$ (a "backdoor" path).
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-backdoor-adjustment}
+#### Identification by backdoor adjustment
 
 If $\vec{L}$ satisfies the backdoor criterion,
 then adjusting for $\vec{L}$ identifies the causal effect of $A$ on $Y$:
 $$\E{Y(a)} = \sum_{\vec{l}} \E{Y \mid A = a, \vec{L} = \vec{l}} \Pf{\vec{L} = \vec{l}}$$
-
 :::
 
 ## HERS study DAG {#sec-pred-sel-hers-dag}
@@ -106,7 +138,7 @@ representing the assumed causal structure among key variables.
 
 The main goal of the HERS study was to estimate
 the causal effect of hormone therapy (HT)
-on recurrent CHD event risk.
+on recurrent CHD event [risk](binary-outcome-associations.qmd#def-risk-epi).
 
 ::: {#tbl-hers-data-dictionary}
 
@@ -276,7 +308,7 @@ followed from 1960 to 1969 [@rosenman1975coronary].
 The exposure of primary interest is **Type A behavior pattern**
 (a personality trait characterized by competitive drive,
 time urgency, and hostility),
-hypothesized to increase CHD risk
+hypothesized to increase CHD [risk](binary-outcome-associations.qmd#def-risk-epi)
 independently of classic cardiovascular [risk factors](Intro-to-GLMs.qmd#def-predictors).
 
 ::: {#tbl-wcgs-data-dictionary}

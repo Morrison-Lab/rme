@@ -14,6 +14,12 @@ the [observed outcome](#def-observed-outcome) for a treated unit equals
 that unit's [potential outcome](#def-potential-outcomes) under treatment,
 and similarly for control:
 $$Y_i \eqdef Y_i(A_i)$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-consistency-well-defined-treatment}
+#### Well-defined treatment and violations of consistency
 
 Consistency requires that the treatment is well-defined:
 there is only one version of treatment,
@@ -21,7 +27,6 @@ or different versions have the same effect on the outcome.
 Violations of consistency (e.g., different doses of a drug
 being lumped together as "treated")
 can introduce [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias).
-
 :::
 
 ## Exchangeability (No Unmeasured Confounding) {#sec-causal-exchangeability}
@@ -35,17 +40,32 @@ or *ignorability*) states that,
 conditional on observed covariates $\vec{L}$,
 treatment assignment is [independent](https://morrison-lab.github.io/pds/independence.html#def-cind) of [potential outcomes](#def-potential-outcomes):
 $$A \perp\!\!\!\perp (Y(0), Y(1)) \mid \vec{L}$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-exchangeability-interpretation}
+#### Interpretation of exchangeability
 
 Intuitively, exchangeability means that among individuals with the same
 covariate values,
 treatment was assigned as if at random —
 there are no unmeasured common causes of treatment and outcome.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-unconditional-exchangeability}
+#### Unconditional exchangeability
 
 **Unconditional exchangeability** ($A \perp\!\!\!\perp (Y(0), Y(1))$)
 holds in perfectly [randomized trials](#sec-causal-rct).
-**Conditional exchangeability** requires adjusting for $\vec{L}$.
-
+Exchangeability conditional on $\vec{L}$ (@def-exchangeability) requires adjusting for $\vec{L}$.
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_exm-exchangeability-strata.qmd >}}
 
 ## Positivity {#sec-causal-positivity}
 
@@ -59,16 +79,32 @@ each treatment level,
 at every covariate value $\vec{l}$ in the [support](https://morrison-lab.github.io/mds/notation.html#def-support) of $\vec{L}$:
 $$0 < \Pf{A = 1 \mid \vec{L} = \vec{l}} < 1
 \quad \text{for all } \vec{l} \text{ in the support of } \vec{L}$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-positivity-consequences}
+#### Why positivity is needed
 
 Without positivity,
 some subgroups have no treated (or untreated) members,
 making it impossible to estimate the [counterfactual outcome](#def-potential-outcomes)
 for those subgroups.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-positivity-violation}
+#### Positivity violation
+
 A failure of positivity is sometimes called a **positivity violation** or
 **practical positivity violation**
 when near-zero probabilities occur in small strata.
-
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/causal-inference/_exm-positivity.qmd >}}
 
 ::: notes
 

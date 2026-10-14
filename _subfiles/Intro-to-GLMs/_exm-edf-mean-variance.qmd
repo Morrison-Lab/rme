@@ -1,0 +1,42 @@
+:::{#exm-edf-mean-variance}
+#### Means and variances from $b(\theta)$
+
+We apply @thm-edf-mean-variance
+to the distributions in @exm-edf-poisson-bernoulli and @exm-edf-gaussian.
+
+- **Gaussian**, with $b(\theta) = \theta^2/2$ and $\phi = \sigma^2$:
+  $b'(\theta) = \theta = \mu$ and $b''(\theta) = 1$,
+  so $\E{Y} = \mu$ and $\Varf{Y} = \sigma^2 \cdot 1 = \sigma^2$.
+  With $\mu = 2$ and $\sigma^2 = 4$, $\E{Y} = 2$ and $\Varf{Y} = 4$.
+
+- **Poisson**, with $b(\theta) = e^\theta$ and $\phi = 1$:
+  $b'(\theta) = b''(\theta) = e^\theta$.
+  With $\mu = 3$, so that $\theta = \logf{3}$,
+  $\E{Y} = e^{\logf{3}} = 3$ and $\Varf{Y} = 1 \cdot e^{\logf{3}} = 3$.
+
+For the **Bernoulli** distribution, $b(\theta) = \logf{1 + e^\theta}$ and $\phi = 1$, so:
+
+$$
+\ba
+b'(\theta)
+&= \frac{e^\theta}{1 + e^\theta}
+&& \text{(chain rule for the logarithm)}
+\\ &= \expit(\theta)
+&& \text{(definition of } \expit\text{)}
+\\ b''(\theta)
+&= \frac{e^\theta (1 + e^\theta) - e^\theta e^\theta}{(1 + e^\theta)^2}
+&& \text{(quotient rule)}
+\\ &= \frac{e^\theta}{(1 + e^\theta)^2}
+&& \text{(cancel } e^{2\theta}\text{)}
+\\ &= \frac{e^\theta}{1 + e^\theta} \cdot \frac{1}{1 + e^\theta}
+&& \text{(split the fraction)}
+\\ &= \expit(\theta)\paren{1 - \expit(\theta)}
+&& \text{(since } \textstyle 1 - \frac{e^\theta}{1 + e^\theta} = \frac{1}{1 + e^\theta}\text{)}
+\ea
+$$
+
+With $\pi = 0.25$, so that $\theta = \logit(0.25)$ and $\expit(\theta) = 0.25$,
+$\E{Y} = 0.25$ and $\Varf{Y} = 0.25 \cdot 0.75 = 0.1875$.
+
+Each result matches the familiar mean and variance of that distribution.
+:::

@@ -1,0 +1,68 @@
+:::{#thm-poisson-rate-ratio}
+#### Rate ratios in Poisson regression
+
+In a Poisson regression model (@def-poisson-reg),
+suppose covariate $x_j$ enters the linear predictor $\eta(\vx)$
+only through the single term $\b_j x_j$
+(no interactions or transformations involving $x_j$).
+Let $\vx$ and $\vxs$ be two covariate patterns
+that are identical except that $x_j = a$ and $x^*_j = b$.
+Then
+
+$$\rateratio(\vx : \vxs) = \expf{\b_j (a - b)}$$ {#eq-poisson-rate-ratio}
+
+and for any common exposure magnitude $t > 0$,
+the ratio of expected counts equals the same rate ratio:
+
+$$\frac{\mu(\vx, t)}{\mu(\vxs, t)} = \rateratio(\vx : \vxs)$$
+
+:::
+
+::: proof
+Because $\vx$ and $\vxs$ agree on every covariate except $x_j$,
+every term of $\eta(\vx)$ except $\b_j x_j$ is shared with $\eta(\vxs)$:
+
+$$
+\ba
+\eta(\vx) - \eta(\vxs)
+&= \paren{\b_0 + \b_1 x_1 + \lds + \red{\b_j a} + \lds + \b_p x_p} \\
+&\phantom{={}} - \paren{\b_0 + \b_1 x_1 + \lds + \red{\b_j b} + \lds + \b_p x_p}
+&& \text{(substitute the linear predictor)} \\
+&= \red{\b_j a} - \red{\b_j b}
+&& \text{(cancel the shared terms)} \\
+&= \red{\b_j (a - b)}
+&& \text{(factor out } \b_j \text{)}
+\ea
+$$
+
+Then the rate ratio is:
+
+$$
+\ba
+\rateratio(\vx : \vxs)
+&= \frac{\lambda(\vx)}{\lambda(\vxs)}
+&& \text{(definition of rate ratio)} \\
+&= \frac{\expf{\eta(\vx)}}{\expf{\eta(\vxs)}}
+&& \text{(Poisson regression rate function)} \\
+&= \expf{\eta(\vx) - \eta(\vxs)}
+&& \text{(quotient rule for exponentials)} \\
+&= \expf{\b_j (a - b)}
+&& \text{(substitute the difference of linear predictors)}
+\ea
+$$
+
+For the expected counts at a common exposure $t > 0$:
+
+$$
+\ba
+\frac{\mu(\vx, t)}{\mu(\vxs, t)}
+&= \frac{\lambda(\vx) \cdot t}{\lambda(\vxs) \cdot t}
+&& \text{(Poisson regression mean function)} \\
+&= \frac{\lambda(\vx)}{\lambda(\vxs)}
+&& \text{(cancel } t > 0 \text{)} \\
+&= \rateratio(\vx : \vxs)
+&& \text{(definition of rate ratio)}
+\ea
+$$
+
+:::

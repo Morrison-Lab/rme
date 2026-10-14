@@ -1,0 +1,23 @@
+::: proof
+
+$$
+\ba
+\P(T > s + t \mid T > s)
+&= \frac{\P(T > s + t,\ T > s)}{\P(T > s)}
+&& \text{(definition of conditional probability)} \\
+&= \frac{\P(T > s + t)}{\P(T > s)}
+&& \text{(the event } T > s + t \text{ implies } T > s \text{)} \\
+&= \frac{\surv(s + t)}{\surv(s)}
+&& \text{(definition of the survival function)} \\
+&= \frac{\ef{-\lambda (s + t)}}{\ef{-\lambda s}}
+&& \text{(exponential survival function)} \\
+&= \ef{-\lambda (s + t) + \lambda s}
+&& \text{(quotient rule for exponentials)} \\
+&= \ef{-\lambda t}
+&& \text{(cancel } \lambda s \text{)} \\
+&= \P(T > t)
+&& \text{(exponential survival function)}
+\ea
+$$
+
+:::

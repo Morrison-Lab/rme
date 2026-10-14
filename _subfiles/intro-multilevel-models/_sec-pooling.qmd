@@ -1,8 +1,8 @@
-A **multilevel model** is a regression model
+A **multilevel model** is a [regression model](Intro-to-GLMs.qmd#def-regression-model)
 whose coefficients are allowed to vary by group,
 with the group-level coefficients themselves given a model
 [@gelman2006data, Chapter 12].
-The random-effects models in @def-one-way-re and @def-nested-re
+The [random-effects](#def-random-effect) models in @def-one-way-re and @def-nested-re
 are the simplest multilevel models.
 
 {{< slidebreak >}}
@@ -16,7 +16,7 @@ from 919 houses in 85 Minnesota counties.
 We use the copy of these data distributed with the `rstanarm` R package
 [@goodrich2024rstanarm]:
 
-- `log_radon`: natural log of the radon measurement in the house;
+- `log_radon`: [natural log](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of the radon measurement in the house;
 - `floor`: `0` if the measurement was taken in the basement, `1` if on the first floor;
 - `county`: the county the house is in;
 - `log_uranium`: natural log of the county-level soil uranium measurement.
@@ -38,7 +38,7 @@ There are three ways to estimate it
 
 - **Complete pooling** ignores the counties
 and estimates every county's mean by the overall mean.
-- **No pooling** estimates each county's mean by its own sample mean $\bar{y}_j$,
+- **No pooling** estimates each county's mean by its own [sample mean](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-mean) $\bar{y}_j$,
 which is very noisy for counties with only one or two houses.
 - **Partial pooling** fits the random-intercept model
 $Y_{ij} = \mu + \alpha_j + \epsilon_{ij}$ for house $i$ in county $j$
@@ -60,11 +60,11 @@ w_j \eqdef \frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2},
 $$ {#eq-partial-pooling}
 
 a weighted average of the group's sample mean and the overall mean,
-with weights proportional to their precisions
+with weights proportional to their [precisions](https://morrison-lab.github.io/pds/variance-covariance.html#def-precision)
 [@gelman2006data, Chapter 12].
 :::
 
-The proof of @thm-partial-pooling uses the conditional distribution of one normal variable given another,
+The proof of @thm-partial-pooling uses the conditional distribution of one [normal variable](https://morrison-lab.github.io/pds/random-variables.html#def-normal) given another,
 which is beyond the scope of this chapter.
 The weight $w_j$ increases with the group size $n_j$:
 large groups keep estimates close to their own sample means,
@@ -73,3 +73,17 @@ and small groups are pulled, or **shrunk**, toward the overall mean.
 {{< slidebreak >}}
 
 {{< include _subfiles/intro-multilevel-models/_exm-radon-shrinkage.qmd >}}
+
+The weight $w_j$ is not arbitrary:
+even without the normality assumptions,
+it is the best choice among predictors that move $\bar{y}_j$ toward $\mu$ by a fixed fraction.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_lem-partial-pooling-blp.qmd >}}
+
+{{< include _subfiles/intro-multilevel-models/_prf-partial-pooling-blp.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/intro-multilevel-models/_exm-partial-pooling-blp.qmd >}}

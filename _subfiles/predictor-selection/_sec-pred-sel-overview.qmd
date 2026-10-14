@@ -6,16 +6,16 @@ In regression modeling,
 we often have many potential predictors available,
 but including too many predictors can cause problems:
 
-- **Overfitting**: the model fits noise in the training data and
+- **[Overfitting](#def-overfitting)**: the model fits noise in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set) and
 predicts poorly for new data.
-- **Multicollinearity**: highly correlated predictors make
+- **[Multicollinearity](#def-collinearity)**: highly [correlated](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) predictors make
 coefficients unstable and hard to interpret.
 - **Loss of precision**: including unnecessary predictors increases
-standard errors.
+[standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE).
 
 On the other hand, excluding important predictors can lead to:
 
-- **Confounding bias**: omitting a common cause of the exposure and
+- **[Confounding](causal-inference.qmd#def-confounding-obs) bias**: omitting a common cause of the exposure and
 outcome distorts the estimated association.
 - **Reduced power**: failing to adjust for strong predictors of the
 outcome can reduce statistical power.
@@ -26,7 +26,7 @@ outcome can reduce statistical power.
 predictor selection:
 
 1. **Science-driven (purposeful) selection**:
-Use subject-matter knowledge and a causal diagram (DAG)
+Use subject-matter knowledge and a [causal diagram (DAG)](causal-inference.qmd#sec-pred-sel-dag)
 to identify which variables to include.
 Science-driven selection is the preferred approach when the goal is causal inference.
 
@@ -38,7 +38,7 @@ These methods have well-known problems and should be used with caution
 (see @sec-pred-sel-stepwise).
 
 3. **Criterion-based selection**:
-Compare models using information criteria such as AIC or BIC.
+Compare models using information criteria such as [AIC](Linear-models-overview.qmd#def-aic) or [BIC](Linear-models-overview.qmd#def-bic).
 These criteria balance model fit against complexity
 (see @sec-pred-sel-aic-bic).
 
@@ -66,7 +66,7 @@ causal effects.
 To draw causal conclusions, we need:
 
 1. A causal model (such as a DAG) specifying assumed causal relationships.
-2. Appropriate adjustment for confounders.
-3. Careful avoidance of adjusting for mediators or colliders.
+2. Appropriate adjustment for [confounders](causal-inference.qmd#def-confounder).
+3. Careful avoidance of adjusting for [mediators](causal-inference.qmd#def-mediator) or [colliders](causal-inference.qmd#def-collider).
 
 These concepts are discussed in the [causal inference chapter](causal-inference.qmd#sec-pred-sel-dag).

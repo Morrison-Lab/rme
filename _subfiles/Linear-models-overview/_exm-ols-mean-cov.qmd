@@ -1,0 +1,48 @@
+:::{#exm-ols-mean-cov}
+#### Covariance matrix of $\evb$ for the `birthweight` model
+
+For the `birthweight` model with an interaction term (`bw_lm2`),
+@thm-ols-mean-cov says that
+$\Cov{\evb \mid \mX} = \ss \inv{\tp{\mX}\mX}$.
+Replacing the unknown $\ss$ by its estimate $\es^2$
+gives the estimated covariance matrix that `vcov()` reports:
+
+```{r}
+#| label: bw-vcov-by-hand
+#| code-fold: show
+bw_x <- model.matrix(bw_lm2)
+bw_vcov_by_hand <- sigma(bw_lm2)^2 * solve(crossprod(bw_x))
+max(abs(bw_vcov_by_hand - vcov(bw_lm2)))
+```
+
+The largest difference between the two matrices is zero,
+up to floating-point rounding error.
+
+To see that $\evb$ is unbiased with this covariance matrix,
+we can treat the fitted coefficients and $\es$ as the true $\vb$ and $\s$,
+simulate many new outcome vectors $\vY$ with the same design matrix $\mX$,
+and refit the model to each one:
+
+```{r}
+#| label: bw-ols-sim
+#| code-fold: show
+set.seed(1)
+bw_beta <- coef(bw_lm2)
+bw_mu <- drop(bw_x %*% bw_beta)
+bw_sims <- replicate(10000, {
+  bw_y <- rnorm(length(bw_mu), mean = bw_mu, sd = sigma(bw_lm2))
+  drop(solve(crossprod(bw_x), crossprod(bw_x, bw_y)))
+})
+rbind(
+  true = bw_beta,
+  mean_of_estimates = rowMeans(bw_sims),
+  formula_se = sqrt(diag(bw_vcov_by_hand)),
+  sd_of_estimates = apply(bw_sims, 1, sd)
+)
+```
+
+The average of the 10,000 simulated estimates is close to $\vb$ for every coefficient,
+and the standard deviation of the simulated estimates is close to
+the standard error from $\ss \inv{\tp{\mX}\mX}$,
+as @eq-ols-mean-cov predicts.
+:::

@@ -5,7 +5,7 @@
 :::{#def-collinearity}
 #### Collinearity
 
-**Collinearity** refers to high correlation between predictors,
+**Collinearity** refers to high [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) between predictors,
 sufficient to substantially degrade the precision of
 one or more regression coefficient estimates.
 
@@ -13,21 +13,21 @@ one or more regression coefficient estimates.
 
 When two predictors are highly correlated,
 each appears unimportant in the model adjusting for the other,
-even if both are statistically significant in simpler models.
-The joint F-test for both predictors may be highly significant,
+even if both are [statistically significant](https://morrison-lab.github.io/sds/inference.html#def-statistically-significant) in simpler models.
+The joint [F-test](Linear-models-overview.qmd#sec-partial-F-test) for both predictors may be highly significant,
 while the individual t-tests are not.
 
 How we handle collinearity depends on the inferential goal:
 
 - **Prediction**: If including both collinear predictors reduces PE,
   include both.
-  Cross-validation determines whether each contributes.
+  [Cross-validation](#def-kfold) determines whether each contributes.
 
 - **Evaluating a primary predictor**: If the primary predictor
-  remains statistically significant after adjusting for a collinear confounder,
+  remains statistically significant after adjusting for a collinear [confounder](causal-inference.qmd#def-confounder),
   the evidence for an independent effect is convincing.
   If collinearity with a *required* confounder inflates the primary
-  predictor's standard error,
+  predictor's [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE),
   we may need to accept reduced precision or
   present sensitivity analyses.
 
@@ -46,7 +46,7 @@ how much its variance is inflated by correlation with other predictors:
 
 $$\text{VIF}_j \eqdef \frac{1}{1 - R_j^2}$$
 
-where $R_j^2$ is the $R^2$ from regressing $x_j$ on all other predictors.
+where $R_j^2$ is the [$R^2$](https://morrison-lab.github.io/sds/correlation-regression.html#def-r-squared) from regressing $x_j$ on all other predictors.
 
 A VIF $> 10$ (or equivalently, $R_j^2 > 0.9$) indicates
 problematic collinearity.
@@ -57,14 +57,14 @@ problematic collinearity.
 #### Variance inflation and standard error inflation
 
 Suppose $x_1$ and $x_2$ are candidate predictors in a linear model.
-If $x_1$ and $x_2$ have correlation $r = 0.95$,
+If $x_1$ and $x_2$ have [correlation](https://morrison-lab.github.io/pds/variance-covariance.html#def-correlation) $r = 0.95$,
 then regressing $x_1$ on $x_2$ gives $R_1^2 = 0.95^2 = 0.9025$.
 
 The variance inflation factor for $x_1$ is:
 $$\text{VIF}_1 = \frac{1}{1 - 0.9025} = \frac{1}{0.0975} \approx 10.26$$
 
 Because variance is inflated by a factor of 10.26,
-the standard error of $\hat\beta_1$ is increased by a factor of $\sqrt{10.26} \approx 3.20$
+the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of $\hat\beta_1$ is increased by a factor of $\sqrt{10.26} \approx 3.20$
 compared to an orthogonal design with $R_1^2 = 0$.
 :::
 
@@ -115,8 +115,8 @@ Conversely, adding a single collinear covariate can degrade it severely.
 
 The rule is best used as a **warning flag**:
 if the EPV falls below 10,
-check whether the standard errors are unusually large,
-and whether Wald and likelihood ratio test p-values
+check whether the [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) are unusually large,
+and whether [Wald](https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test) and [likelihood ratio test](logistic-regression.qmd#def-lrt) [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value)
 give consistent results.
 If problems are detected, tighten the backward selection criterion
 (e.g., to $p < 0.15$ or $p < 0.10$)
@@ -128,7 +128,7 @@ The main alternatives to backward selection are:
 
 - **Best subsets**: screens all possible subsets of candidate predictors
   and selects the model minimizing a summary measure
-  (adjusted $R^2$, AIC, or a cross-validated PE measure).
+  (adjusted $R^2$, [AIC](Linear-models-overview.qmd#def-aic), or a cross-validated PE measure).
   Computationally intensive for large sets of predictors.
 
 - **Forward selection**: starts with an empty model and adds
@@ -159,7 +159,7 @@ if at least one member passes the inclusion criterion on its own.
 ## Model selection complicates inference {#sec-pred-sel-inference}
 
 When predictors are selected from the data,
-the p-values and confidence intervals computed as if the model
+the [p-values](https://morrison-lab.github.io/sds/inference.html#def-p-value) and [confidence intervals](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) computed as if the model
 were pre-specified are no longer valid.
 
 Specific problems include:
@@ -175,7 +175,7 @@ Specific problems include:
 How much these issues matter depends on the inferential goal:
 
 - **Prediction** (Goal 1):
-  Cross-validation of a PE measure protects against overfitting
+  [Cross-validation](#def-kfold) of a PE measure protects against [overfitting](#def-overfitting)
   without relying on p-values,
   so inference is least affected.
 

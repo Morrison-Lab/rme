@@ -1,0 +1,28 @@
+:::{#exm-aft-quantiles}
+#### Median event times with an acceleration factor of 4
+
+In @exm-aft, the baseline survival function is $\surv_0(t) = \expf{-t/40}$.
+Its median ($q = 0.5$) solves $\surv_0(t_{0.5}^0) = 0.5$:
+
+$$
+\ba
+\expf{-t_{0.5}^0 / 40} &= 0.5
+&& \text{(definition of the median)} \\
+-t_{0.5}^0 / 40 &= \logf{0.5}
+&& \text{(take logs)} \\
+t_{0.5}^0 &= -40 \logf{0.5}
+&& \text{(multiply by } -40 \text{)} \\
+&= 40 \logf{2}
+&& \text{(} -\logf{0.5} = \logf{1/0.5} = \logf{2} \text{)} \\
+&\approx 27.73
+&& \text{(evaluate)}
+\ea
+$$
+
+By @thm-aft-quantiles, with $\hazfactor(\vx) = 4$,
+the median for covariate pattern $\vx$ is
+$27.73 / 4 \approx 6.93$ weeks.
+To check:
+$\surv(6.93 \mid \vx) = \surv_0(6.93 \cdot 4) = \surv_0(27.73) = 0.5$.
+
+:::

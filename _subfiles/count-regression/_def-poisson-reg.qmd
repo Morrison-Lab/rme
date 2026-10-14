@@ -1,0 +1,27 @@
+:::{#def-poisson-reg}
+#### Poisson regression model
+
+Let $Y$ be a count outcome,
+$\vX$ a covariate vector,
+and $T$ the [exposure magnitude](https://morrison-lab.github.io/pds/distributions.html#def-exposure)
+(such as [person-years](https://morrison-lab.github.io/mds/algebra-sums.html#def-person-years) or observation time)
+over which the events in $Y$ are counted.
+A **Poisson regression model** assumes that,
+given $\vX = \vx$ and $T = t$,
+$Y$ has a [Poisson distribution](https://morrison-lab.github.io/pds/distributions.html#def-poisson)
+
+$$Y \mid \vX = \vx, T = t \sim \Pois(\mu(\vx, t))$$
+
+whose mean is the event rate $\lambda(\vx)$ multiplied by the exposure,
+with the log of the event rate equal to a [linear predictor](Intro-to-GLMs.qmd#def-linear-predictor):
+
+$$
+\ba
+\E{Y \mid \vX = \vx, T = t} &= \mu(\vx,t) \\
+\mu(\vx,t) &\eqdef \lambda(\vx)\cdot t \\
+\lambda(\vx) &\eqdef \exp{\eta(\vx)} \\
+\eta(\vx) &\eqdef \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
+\ea
+$${#eq-mean-poisson}
+
+:::
