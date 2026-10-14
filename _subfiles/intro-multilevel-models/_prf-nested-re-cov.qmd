@@ -1,0 +1,46 @@
+::: proof
+Subtracting the constant $\mu$ does not change a covariance,
+and covariance is bilinear, so:
+
+$$
+\ba
+\Cov{Y_{ijk}, Y_{i'j'k'}}
+&= \Cov{L_i + B_{ij} + \epsilon_{ijk},\ L_{i'} + B_{i'j'} + \epsilon_{i'j'k'}}
+&& \text{(subtract the constant } \mu \text{)}
+\\
+&= \Cov{L_i, L_{i'}} + \Cov{B_{ij}, B_{i'j'}} + \Cov{\epsilon_{ijk}, \epsilon_{i'j'k'}} + R
+&& \text{(bilinearity of covariance)}
+\\
+&= \Cov{L_i, L_{i'}} + \Cov{B_{ij}, B_{i'j'}} + \Cov{\epsilon_{ijk}, \epsilon_{i'j'k'}}
+&& \text{(} R = 0 \text{)}
+\ea
+$$
+
+where $R$ is the sum of the six cross covariances,
+such as $\Cov{L_i, B_{i'j'}}$,
+each between two independent random variables,
+so each is 0.
+
+Each remaining covariance is a variance when its two arguments are the same random variable,
+and 0 when they are different, independent random variables:
+
+- $\Cov{L_i, L_{i'}}$ is $\sigma_L^2$ if $i' = i$ and 0 otherwise;
+- $\Cov{B_{ij}, B_{i'j'}}$ is $\sigma_B^2$
+if $(i', j') = (i, j)$ and 0 otherwise;
+- $\Cov{\epsilon_{ijk}, \epsilon_{i'j'k'}}$ is $\sigma^2$ if $(i', j', k') = (i, j, k)$ and 0 otherwise.
+
+Adding the three terms in each case of @eq-nested-re-cov:
+
+- if $(i', j', k') = (i, j, k)$,
+all three conditions hold,
+so the covariance is $\sigma_L^2 + \sigma_B^2 + \sigma^2$;
+- if $i' = i$, $j' = j$, and $k' \ne k$,
+the laboratory and batch conditions hold but the error condition fails,
+so the covariance is $\sigma_L^2 + \sigma_B^2 + 0 = \sigma_L^2 + \sigma_B^2$;
+- if $i' = i$ and $j' \ne j$,
+only the laboratory condition holds,
+so the covariance is $\sigma_L^2 + 0 + 0 = \sigma_L^2$;
+- if $i' \ne i$,
+none of the conditions hold,
+so the covariance is $0 + 0 + 0 = 0$.
+:::
