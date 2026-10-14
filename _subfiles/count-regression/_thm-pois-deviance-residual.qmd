@@ -1,0 +1,68 @@
+:::{#thm-pois-deviance-residual}
+#### Deviance residuals in Poisson regression
+
+In a Poisson regression model,
+the deviance residual of observation $i$ is
+
+$$
+d_i = \signt(y_i - \ey_i)
+\sqrt{2\sb{y_i \logf{\frac{y_i}{\ey_i}} - (y_i - \ey_i)}}
+$$ {#eq-pois-deviance-residual}
+
+where $y_i \logf{y_i / \ey_i}$ is taken to be $0$ when $y_i = 0$.
+
+:::
+
+::: proof
+The [saturated model](Linear-models-overview.qmd#def-saturated-model) fits each observation's mean exactly,
+so its fitted mean for observation $i$ is $y_i$,
+while the fitted Poisson regression model has fitted mean $\ey_i$.
+A Poisson observation with mean $\mu$ contributes the log-likelihood term
+
+$$
+\ba
+\llik(\mu; y_i)
+&= \logf{\frac{\mu^{y_i} \expf{-\mu}}{y_i!}}
+&& \text{(log of the Poisson PMF)} \\
+&= y_i \logf{\mu} - \mu - \logf{y_i!}
+&& \text{(log of a product and quotient)}
+\ea
+$$
+
+For $y_i > 0$, the difference between the saturated and fitted terms is
+
+$$
+\ba
+\llik_{\text{full}}(y_i) - \llik(\evb; y_i)
+&= \sb{y_i \logf{y_i} - y_i - \logf{y_i!}} \\
+&\phantom{={}} - \sb{y_i \logf{\ey_i} - \ey_i - \logf{y_i!}}
+&& \text{(substitute } \mu = y_i \text{ and } \mu = \ey_i \text{)} \\
+&= y_i \logf{y_i} - y_i - y_i \logf{\ey_i} + \ey_i
+&& \text{(cancel } \logf{y_i!} \text{)} \\
+&= y_i \paren{\logf{y_i} - \logf{\ey_i}} - (y_i - \ey_i)
+&& \text{(group terms)} \\
+&= y_i \logf{\frac{y_i}{\ey_i}} - (y_i - \ey_i)
+&& \text{(quotient rule for logarithms)}
+\ea
+$$
+
+For $y_i = 0$, the saturated mean is $0$,
+and a Poisson variable with mean $0$ equals $0$ with probability $1$,
+so $\llik_{\text{full}}(0) = \logf{1} = 0$, and
+
+$$
+\ba
+\llik_{\text{full}}(0) - \llik(\evb; 0)
+&= 0 - \paren{0 \cdot \logf{\ey_i} - \ey_i - \logf{0!}}
+&& \text{(substitute } y_i = 0 \text{)} \\
+&= \ey_i
+&& \text{(} \logf{0!} = \logf{1} = 0 \text{)} \\
+&= 0 - (0 - \ey_i)
+&& \text{(the bracket in the residual formula, with } y_i \logf{y_i/\ey_i} \eqdef 0 \text{)}
+\ea
+$$
+
+Substituting either case into the deviance residual definition
+$d_i \eqdef \signt(y_i - \ey_i) \sqrt{2\sb{\llik_{\text{full}}(y_i) - \llik(\evb; y_i)}}$
+gives @eq-pois-deviance-residual.
+:::

@@ -1,0 +1,61 @@
+:::{#exm-pois-deviance-residual}
+#### Residuals for two observations
+
+Suppose an observation has $y_i = 5$ events
+and fitted mean $\ey_i = 2.5$.
+Its Pearson residual is
+
+$$
+\ba
+r_i
+&\approx \frac{y_i - \ey_i}{\sqrt{\ey_i}}
+&& \text{(Pearson residual)} \\
+&= \frac{5 - 2.5}{\sqrt{2.5}}
+&& \text{(substitute)} \\
+&\approx 1.581
+&& \text{(evaluate)}
+\ea
+$$
+
+and by @thm-pois-deviance-residual its deviance residual is
+
+$$
+\ba
+d_i
+&= \signt(5 - 2.5) \sqrt{2\sb{5 \logf{\frac{5}{2.5}} - (5 - 2.5)}}
+&& \text{(deviance residual formula)} \\
+&= \sqrt{2\sb{5 \logf{2} - 2.5}}
+&& \text{(} \signt(2.5) = 1 \text{; simplify)} \\
+&\approx \sqrt{2\sb{3.466 - 2.5}}
+&& \text{(} 5 \logf{2} \approx 3.466 \text{)} \\
+&= \sqrt{1.931}
+&& \text{(subtract and double)} \\
+&\approx 1.390
+&& \text{(square root)}
+\ea
+$$
+
+An observation with $y_i = 0$ and the same fitted mean
+has Pearson residual $-2.5 / \sqrt{2.5} \approx -1.581$
+and deviance residual
+
+$$
+\ba
+d_i
+&= \signt(0 - 2.5) \sqrt{2\sb{0 - (0 - 2.5)}}
+&& \text{(deviance residual formula with } y_i = 0 \text{)} \\
+&= -\sqrt{5}
+&& \text{(} \signt(-2.5) = -1 \text{; simplify)} \\
+&\approx -2.236
+&& \text{(square root)}
+\ea
+$$
+
+The two Pearson residuals have equal magnitude,
+but the deviance residuals do not.
+The saturated model predicts an observed zero with probability 1,
+so the fitted model loses more log-likelihood on the zero
+than on the count of 5,
+and the deviance residual of the zero is larger in magnitude.
+
+:::

@@ -1,0 +1,27 @@
+:::{#def-quasipoisson}
+#### Quasipoisson regression
+
+**Quasipoisson regression** assumes the Poisson regression mean function
+$\E{Y \mid \vX = \vx, T = t} = \mu(\vx, t) \eqdef t \expf{\eta(\vx)}$
+and the variance function
+
+$$\Var{Y \mid \vX = \vx, T = t} = \theta \, \mu(\vx, t)$$
+
+for a dispersion parameter $\theta > 0$,
+without assuming a full distribution for $Y$.
+It estimates $\vb$ with the Poisson regression estimate $\evb$,
+and estimates $\theta$ by the
+[Pearson $\chi^2$ statistic](Intro-to-GLMs.qmd#def-pearson-chisq-glm)
+divided by its residual degrees of freedom:
+
+$$
+\eth \eqdef \frac{1}{n - (p + 1)} \sumin \frac{(y_i - \emu_i)^2}{\emu_i}
+$$ {#eq-quasipoisson-theta}
+
+where $n$ is the number of observations
+and $p + 1$ is the number of estimated coefficients
+(an intercept and $p$ covariate coefficients).
+The quasipoisson standard error of each $\eb_j$
+is the Poisson regression standard error multiplied by $\sqrt{\eth}$.
+
+:::

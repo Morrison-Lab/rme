@@ -1,0 +1,17 @@
+:::{#def-zip-reg}
+#### Zero-inflated Poisson regression model
+
+A **zero-inflated Poisson regression model** for a count outcome $Y$
+with covariate vector $\vX$ and exposure magnitude $T$
+assumes a latent binary variable $Z$ such that:
+
+- $\P(Z = 1 \mid \vX = \vx, T = t) = \pi(\vx) \eqdef \expit(\gamma_0 + \gamma_1 x_1 + \dots + \gamma_p x_p)$
+  for every $t$;
+- if $Z = 1$, then $Y = 0$;
+- if $Z = 0$, then $Y$ follows the [Poisson regression model](#def-poisson-reg):
+  $Y \mid Z = 0, \vX = \vx, T = t \sim \Pois(\mu_0(\vx, t))$,
+  with $\mu_0(\vx, t) \eqdef t \expf{\eta(\vx)}$.
+
+Observations with $Z = 1$ are called **structural zeros**.
+
+:::
