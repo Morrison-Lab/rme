@@ -5,7 +5,7 @@ To say which, we need the density's *natural parameter*.
 {{< slidebreak >}}
 
 ::: {#def-natural-parameter}
-#### Exponential dispersion family, natural parameter, and canonical link
+#### Exponential dispersion family and natural parameter
 
 A distribution belongs to the **exponential dispersion family**
 if its [density](https://morrison-lab.github.io/pds/random-variables.html#def-pdf) (or [probability mass function](https://morrison-lab.github.io/pds/random-variables.html#def-pmf)) can be written as
@@ -17,20 +17,51 @@ $$
 
 for some functions $b(\cdot)$ and $c(\cdot, \cdot)$.
 The parameter $\theta$ is the **natural parameter**,
-and $\phi > 0$ is the **dispersion parameter**.
-Then
+and $\phi > 0$ is the **dispersion parameter**
+[@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-exponential-dispersion-mean-variance}
+#### Mean and variance in an exponential dispersion family
+
+If $Y$ has the density $f(y; \theta, \phi)$ of @def-natural-parameter, then
 
 $$
 \begin{aligned}
 \E{Y} &= b'(\theta) \eqdef \mu \\
-\Varf{Y} &= \phi\, b''(\theta) = \phi\, V(\mu),
+\Varf{Y} &= \phi\, b''(\theta).
 \end{aligned}
 $$
+:::
 
-where $V(\mu) \eqdef b''(\theta)$,
-written as a function of $\mu$,
+{{< slidebreak >}}
+
+:::{#def-variance-function}
+#### Variance function
+
+In an exponential dispersion family (@def-natural-parameter), $V(\mu) \eqdef b''(\theta)$,
+written as a function of $\mu \eqdef b'(\theta)$,
 is the **variance function**.
-The **canonical link** is the link function $g(\cdot)$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-variance-function-variance}
+#### The variance function and the variance
+
+By @rem-exponential-dispersion-mean-variance and @def-variance-function,
+$\Varf{Y} = \phi\, V(\mu)$.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-canonical-link}
+#### Canonical link
+
+In an exponential dispersion family (@def-natural-parameter),
+the **canonical link** is the link function $g(\cdot)$ (@def-link-function)
 that sets the [linear predictor](#def-linear-predictor) equal to the natural parameter:
 $g(\mu) \eqdef \theta$
 [@dobson4e, Chapter 3; @dunn2018generalized, Chapter 5].

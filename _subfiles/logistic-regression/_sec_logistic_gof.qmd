@@ -23,11 +23,17 @@ With enough data,
 $D \dot \sim \chi^2(q - p)$,
 where $q$ is the number of distinct covariate patterns
 and $p$ is the number of $\beta$ parameters in our model.
-The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution;
-a significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this **deviance** statistic
+The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution.
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-deviance-test-interpretation}
+#### Interpreting the deviance test
+
+A significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this deviance statistic
 indicates that there's some detectable pattern in the data
 that our model isn't flexible enough to catch.
-
 :::
 
 ::: callout-caution
@@ -289,9 +295,9 @@ is larger than chance alone would produce:
 
 {{< slidebreak >}}
 
-:::{#def-lrt}
+:::{#def-lrt-statistic}
 
-#### Likelihood ratio test (LRT)
+#### Likelihood ratio test statistic
 
 Suppose a **reduced** model with $p_0$ parameters
 is nested in a **full** model with $p_1 > p_0$ parameters;
@@ -303,12 +309,20 @@ $$\Lambda \eqdef 2(\llik_{\text{full}}(\hat\theta_1) - \llik_{\text{red}}(\hat\t
 where $\hat\theta_1$ and $\hat\theta_0$ are
 the [maximum likelihood estimates](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
 of the full and reduced models, respectively.
+:::
+
+{{< slidebreak >}}
+
+:::{#def-lrt}
+
+#### Likelihood ratio test (LRT)
+
 Under the [null hypothesis](https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis) that the reduced model is adequate,
+the likelihood ratio test statistic $\Lambda$ (@def-lrt-statistic) satisfies
 $\Lambda \dot \sim \chi^2(p_1 - p_0)$
 by [Wilks' theorem](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-wilks).
 The **likelihood ratio test (LRT)** rejects the reduced model
 when $\Lambda$ is large relative to that $\chi^2(p_1 - p_0)$ distribution.
-
 :::
 
 ::: notes
@@ -321,7 +335,7 @@ See also [the likelihood ratio test for linear models](Linear-models-overview.qm
 
 #### Testing the WCGS interaction term with a likelihood ratio test
 
-Our CHD model `chd_glm_contrasts` includes a `dibpat:age` [interaction term](Intro-to-GLMs.qmd#def-interaction).
+Our CHD model `chd_glm_contrasts` includes a `dibpat:age` [interaction term](Intro-to-GLMs.qmd#def-interaction-term).
 Does that interaction term improve the fit
 enough to justify its extra parameter?
 Let's fit the nested model without the interaction term
