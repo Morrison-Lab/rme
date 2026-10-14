@@ -8,6 +8,7 @@ and compares its fitted values with those of the least-squares line:
 
 ```{r}
 #| label: exm-ss-large-penalty
+#| code-fold: show
 cars_lm <- lm(dist ~ speed, data = cars)
 cars_big_lambda <- smooth.spline(cars$speed, cars$dist, lambda = 1e6)
 max_gap <- max(abs(predict(cars_big_lambda, cars$speed)$y - fitted(cars_lm)))
