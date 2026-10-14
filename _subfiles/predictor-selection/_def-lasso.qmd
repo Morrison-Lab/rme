@@ -1,0 +1,19 @@
+:::{#def-lasso}
+#### LASSO estimate
+
+The **LASSO** (Least Absolute Shrinkage and Selection Operator) estimate
+of the coefficients $\vb = \tp{(\beta_1, \dots, \beta_p)}$
+maximizes the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik)
+minus an $\lpnorm{1}$ penalty:
+
+$$
+\evb_\lambda \eqdef \arg\max_{\vb} \set{
+\llik(\vb) - \lambda \sum_{j=1}^p \abs{\beta_j}
+}
+$$ {#eq-lasso}
+
+where $\lambda \ge 0$ is a
+[tuning parameter](https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter).
+The intercept, if any, is not penalized.
+
+:::
