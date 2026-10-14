@@ -1,0 +1,20 @@
+::::{#exm-smoothing-spline-large-penalty}
+
+#### A heavily penalized smoothing spline matches the least-squares line
+
+In the built-in `cars` data,
+the code below fits a smoothing spline of stopping distance on speed with a very large penalty,
+and compares its fitted values with those of the least-squares line:
+
+```{r}
+#| label: exm-ss-large-penalty
+cars_lm <- lm(dist ~ speed, data = cars)
+cars_big_lambda <- smooth.spline(cars$speed, cars$dist, lambda = 1e6)
+max_gap <- max(abs(predict(cars_big_lambda, cars$speed)$y - fitted(cars_lm)))
+```
+
+The largest gap between the two sets of fitted values is `r format(max_gap, digits = 2)`,
+which is negligible next to stopping distances measured in feet,
+as @thm-smoothing-spline-large-penalty says.
+
+::::
