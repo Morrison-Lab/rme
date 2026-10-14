@@ -12,12 +12,17 @@ averages of [potential outcomes](#def-potential-outcomes) over a [population](ht
 The **Average Treatment Effect** is the [expected](https://morrison-lab.github.io/pds/expectation.html#def-expectation) difference
 in potential outcomes in the study population:
 $$\text{ATE} \eqdef \E{Y(1) - Y(0)} = \E{Y(1)} - \E{Y(0)}$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-ate-interpretation}
+#### Interpretation of the ATE
 
 The ATE represents the average causal effect of treatment
 compared with control,
 averaged over all units in the population
 (both those who would and would not actually receive treatment).
-
 :::
 
 {{< slidebreak >}}
@@ -29,10 +34,15 @@ The **Average Treatment Effect on the Treated** is the expected
 difference in potential outcomes
 among units who actually received treatment:
 $$\text{ATT} \eqdef \E{Y(1) - Y(0) \mid A = 1} = \E{Y(1) \mid A = 1} - \E{Y(0) \mid A = 1}$$
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-att-interpretation}
+#### Interpretation of the ATT
 
 The ATT answers the question:
 "On average, how much did treatment help the people who received it?"
-
 :::
 
 {{< slidebreak >}}
@@ -44,11 +54,6 @@ The **Average Treatment Effect on the Untreated** is the expected
 difference in potential outcomes
 among units who did not receive treatment:
 $$\text{ATU} \eqdef \E{Y(1) - Y(0) \mid A = 0} = \E{Y(1) \mid A = 0} - \E{Y(0) \mid A = 0}$$
-
-The ATU answers the question:
-"On average, how much would treatment have helped
-the people who did not receive it?"
-
 :::
 
 {{< slidebreak >}}
@@ -72,6 +77,16 @@ In this toy population, treatment effect heterogeneity exists ($\tau_i$ varies a
 but because average gains happen to balance across treatment groups, ATE = ATT = ATU.
 In general observational datasets with selection bias,
 ATT and ATU often differ markedly from ATE.
+:::
+
+{{< slidebreak >}}
+
+:::{#rem-atu-interpretation}
+#### Interpretation of the ATU
+
+The ATU answers the question:
+"On average, how much would treatment have helped
+the people who did not receive it?"
 :::
 
 ::: notes
