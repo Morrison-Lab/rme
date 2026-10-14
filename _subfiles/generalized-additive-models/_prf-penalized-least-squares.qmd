@@ -23,8 +23,12 @@ The gradient with respect to $\vb$ is
 $$
 \ba
 \ub{\deriv{\vb}\text{PRSS}_\l(\vb)}_{q \times 1}
-&= -2\tp{\mat{B}}\vy + 2\mat{A}\vb
-&& \text{(gradients of linear and symmetric quadratic forms)}
+&= \deriv{\vb}\paren{-2\tp{\vb}\tp{\mat{B}}\vy} + \deriv{\vb}\paren{\tp{\vb}\mat{A}\vb}
+&& \text{(} \tp{\vy}\vy \text{ does not depend on } \vb\text{)}
+\\ &= -2\tp{\mat{B}}\vy + \deriv{\vb}\paren{\tp{\vb}\mat{A}\vb}
+&& \text{(gradient of a linear form: } \deriv{\vb}\tp{\vb}\vec{c} = \vec{c}\text{)}
+\\ &= -2\tp{\mat{B}}\vy + 2\mat{A}\vb
+&& \text{(gradient of a symmetric quadratic form)}
 \ea
 $$
 
