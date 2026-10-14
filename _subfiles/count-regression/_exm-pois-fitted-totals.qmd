@@ -1,0 +1,52 @@
+:::{#exm-pois-fitted-totals}
+#### Fitted totals for automobile insurance claims
+
+The `Insurance` data distributed with the `MASS` R package [@venables2002modern]
+count the automobile insurance claims (`Claims`)
+among the policyholders (`Holders`)
+in each combination of `District` (4 levels), car `Group`, and driver `Age` (4 levels).
+We fit a Poisson regression model for the claim rate per policyholder,
+with district and age as categorical covariates
+and $\logf{\text{Holders}}$ as the offset:
+
+```{r}
+#| label: insurance-fitted-totals
+#| code-fold: show
+ins <- MASS::Insurance
+ins$Age <- factor(ins$Age, ordered = FALSE)
+ins_glm <- glm(
+  Claims ~ District + Age,
+  offset = log(Holders),
+  family = poisson,
+  data = ins
+)
+c(observed = sum(ins$Claims), fitted = sum(fitted(ins_glm)))
+cbind(
+  observed = tapply(ins$Claims, ins$District, sum),
+  fitted = tapply(fitted(ins_glm), ins$District, sum)
+)
+cbind(
+  observed = tapply(ins$Claims, ins$Age, sum),
+  fitted = tapply(fitted(ins_glm), ins$Age, sum)
+)
+```
+
+As @thm-pois-fitted-totals guarantees,
+the fitted claim counts add up to the 3151 observed claims,
+and they also reproduce the observed total in each district and in each age group,
+because each non-reference group has an indicator variable in the model,
+and each reference group's total is the overall total minus the other groups' totals.
+The fitted counts do not match the individual rows, though:
+
+```{r}
+#| label: insurance-fitted-rows
+#| code-fold: show
+head(cbind(ins[c("District", "Age")], observed = ins$Claims,
+           fitted = round(fitted(ins_glm), 1)), 4)
+```
+
+The first four rows have 38, 35, 20, and 156 observed claims,
+but fitted counts of about 38.4, 44.0, 35.6, and 196.9:
+the model has no indicator for each row,
+so @thm-pois-fitted-totals says nothing about individual rows.
+:::

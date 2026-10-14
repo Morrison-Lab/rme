@@ -1,0 +1,31 @@
+::: proof
+A Poisson distribution's mean and variance both equal its mean parameter,
+so $\E{Y \mid \Lambda} = \Lambda$ and $\Var{Y \mid \Lambda} = \Lambda$.
+By the [law of total expectation](https://morrison-lab.github.io/pds/expectation.html#thm-lie):
+
+$$
+\ba
+\E{Y}
+&= \E{\E{Y \mid \Lambda}}
+&& \text{(law of total expectation)} \\
+&= \E{\Lambda}
+&& \text{(Poisson mean)} \\
+&= \mu
+&& \text{(mean of } \Lambda \text{)}
+\ea
+$$
+
+By the [law of total variance](https://morrison-lab.github.io/pds/variance-covariance.html#thm-total-variance):
+
+$$
+\ba
+\Var{Y}
+&= \E{\Var{Y \mid \Lambda}} + \Var{\E{Y \mid \Lambda}}
+&& \text{(law of total variance)} \\
+&= \E{\Lambda} + \Var{\Lambda}
+&& \text{(Poisson mean and variance)} \\
+&= \mu + \frac{\mu^2}{\rho}
+&& \text{(moments of } \Lambda \text{)}
+\ea
+$$
+:::

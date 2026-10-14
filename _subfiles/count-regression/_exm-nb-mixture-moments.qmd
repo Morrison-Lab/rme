@@ -1,0 +1,29 @@
+:::{#exm-nb-mixture-moments}
+#### Simulating a Poisson mixture
+
+In @exm-nb-reg, $\mu = 4$ and $\rho = 2$.
+By @thm-nb-mixture-moments,
+any positive $\Lambda$ with mean $4$ and variance $4^2 / 2 = 8$
+mixes Poisson counts into counts with mean $4$ and variance $4 + 8 = 12$,
+matching @exm-nb-reg.
+The first term, $4$, is the Poisson variation around each $\Lambda$;
+the second term, $8$, is the variation of $\Lambda$ itself.
+
+We can check this result by simulation,
+drawing $\Lambda$ from a distribution with mean $4$ and variance $8$
+and then drawing $Y$ given $\Lambda$:
+
+```{r}
+#| label: nb-mixture-sim
+#| code-fold: show
+set.seed(1)
+lambda <- rgamma(1e6, shape = 2, rate = 0.5)
+c(mean = mean(lambda), var = var(lambda))
+y <- rpois(1e6, lambda)
+c(mean = mean(y), var = var(y))
+```
+
+The simulated $\Lambda$ values have mean about $4$ and variance about $8$,
+and the simulated counts have mean about $4$ and variance about $12$,
+three times the variance of Poisson counts with the same mean.
+:::
