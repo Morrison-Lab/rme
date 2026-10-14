@@ -1,0 +1,30 @@
+:::{#exm-rct-identification}
+#### Randomizing the severity example
+
+Suppose the 1000 patients of @exm-exchangeability-strata
+had instead been randomized,
+each treated with probability 0.5 regardless of severity.
+Then each treatment group has the population's severity mix,
+60% non-severe and 40% severe
+(treating proportions as probabilities),
+so by consistency
+
+$$
+\ba
+\E{Y \mid A = 1}
+&= 0.6 \cdot 10 + 0.4 \cdot 20
+&& \text{(severity mix of the treated; } \E{Y(1) \mid L} \text{)} \\
+&= 14
+&& \text{(multiply and add)} \\
+\E{Y \mid A = 0}
+&= 0.6 \cdot 8 + 0.4 \cdot 18
+&& \text{(severity mix of the untreated; } \E{Y(0) \mid L} \text{)} \\
+&= 12
+&& \text{(multiply and add)}
+\ea
+$$
+
+and @eq-rct-ate gives $\text{ATE} = 14 - 12 = 2$,
+the treatment's effect in every stratum.
+
+:::
