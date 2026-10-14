@@ -908,18 +908,24 @@ Worth examining.
 
 :::{#def-dfbeta}
 
-#### dfbeta and dfbetas
+#### dfbeta
 
--   **dfbeta** for observation $i$ is the approximate change in the
-    coefficient vector $\evb$ if subject $i$ were removed from the data:
-    $$\text{dfbeta}_i \approx \evb - \evb_{(-i)}$$
-    computed via a one-step [Newton](https://morrison-lab.github.io/sds/intro-MLEs.html#def-newton-raphson) approximation rather than a full refit
-    [@klein2003survival, §11.4].
+The **dfbeta** for observation $i$ is the approximate change in the
+coefficient vector $\evb$ if subject $i$ were removed from the data:
+$$\text{dfbeta}_i \approx \evb - \evb_{(-i)}$$
+computed via a one-step [Newton](https://morrison-lab.github.io/sds/intro-MLEs.html#def-newton-raphson) approximation rather than a full refit
+[@klein2003survival, §11.4].
+:::
 
--   **dfbetas** for observation $i$ standardizes by the estimated [standard
-    error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of each coefficient:
-    $$\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \ese{\eb_k}$$
+{{< slidebreak >}}
 
+:::{#def-dfbetas}
+
+#### dfbetas
+
+The **dfbetas** for observation $i$ standardizes the dfbeta (@def-dfbeta) by the estimated [standard
+error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of each coefficient:
+$$\text{dfbetas}_{ik} = \text{dfbeta}_{ik} / \ese{\eb_k}$$
 :::
 
 ::: notes
