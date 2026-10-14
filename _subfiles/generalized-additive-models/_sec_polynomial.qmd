@@ -17,9 +17,6 @@ For a continuous predictor $X$ and degree $d \ge 1$, the
 $$y_i = \b_0 + \b_1 x_i + \b_2 x_i^2 + \cdots + \b_d x_i^d + \eps_i$$
 
 with $\eps_i \siid \ndist{0, \s^2}$.
-
-This model is still a *linear* regression model in the coefficients $\b_0, \ldots, \b_d$ — the nonlinearity lives in the deterministic transformations $x_i^k$ of the predictor, not in the relationship between coefficients and response.
-So everything we know about linear-regression estimation, inference, and prediction (least squares, standard errors, confidence intervals) applies directly.
 ::::
 
 {{< slidebreak >}}
@@ -33,6 +30,15 @@ $$\logitf{\Pr(Y = 1 \mid \text{BMI} = b)} = \b_0 + \b_1 b + \b_2 b^2$$
 
 can capture a single-minimum U-shape, with the minimum-risk BMI at $-\b_1 / (2 \b_2)$ (assuming $\b_2 > 0$, i.e., the parabola opens upward).
 A quadratic is the lowest-degree polynomial that admits a turning point, so it's a natural first step beyond a linear fit.
+::::
+
+{{< slidebreak >}}
+
+::::{#rem-polynomial-regression-linear}
+#### Polynomial regression is linear in the coefficients
+
+This model is still a *linear* regression model in the coefficients $\b_0, \ldots, \b_d$ — the nonlinearity lives in the deterministic transformations $x_i^k$ of the predictor, not in the relationship between coefficients and response.
+So everything we know about linear-regression estimation, inference, and prediction (least squares, standard errors, confidence intervals) applies directly.
 ::::
 
 ## Limitations of polynomial regression

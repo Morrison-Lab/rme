@@ -29,11 +29,6 @@ where:
   estimated from the data.
 - $\b_0$ is an intercept (sometimes absorbed into one of the $f_j$'s
   via a centering constraint).
-
-A "smooth function" in practice means a regression spline,
-smoothing spline, or other smoother — anything that can be written
-as a basis expansion $f_j(x_j) = \sum_k \b_{jk} b_{jk}(x_j)$ with
-the coefficients $\b_{jk}$ estimated jointly across all predictors.
 ::::
 
 {{< slidebreak >}}
@@ -49,6 +44,17 @@ $$\logitf{\Pr(\text{chd69} = 1 \mid \text{age}, \text{sbp}, \text{chol})}
 
 where each $f_j$ is a smoothing spline estimated by REML.
 The three partial-effect curves can be plotted separately, revealing, for example, whether CHD risk rises linearly with age or accelerates nonlinearly.
+::::
+
+{{< slidebreak >}}
+
+::::{#rem-gam-smooth-function}
+#### What counts as a smooth function
+
+A "smooth function" in practice means a regression spline,
+smoothing spline, or other smoother — anything that can be written
+as a basis expansion $f_j(x_j) = \sum_k \b_{jk} b_{jk}(x_j)$ with
+the coefficients $\b_{jk}$ estimated jointly across all predictors.
 ::::
 
 The model class includes ordinary linear regression as a special case (every $f_j$ is just $\b_j x_j$) and ordinary GLMs as another special case (same — every $f_j$ linear, with the right link function).
