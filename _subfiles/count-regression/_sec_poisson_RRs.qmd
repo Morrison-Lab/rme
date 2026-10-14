@@ -9,43 +9,20 @@ $$\exp{a-b} = \frac{\exp{a}}{\exp{b}}$$
 
 (recall from [Algebra 2](https://morrison-lab.github.io/mds/algebra-exponentials.html#cor-exp-sum))
 
-Therefore, according to this model,
-**a difference of $\delta \eqdef a - b$
-between two values $a$ and $b$ of covariate $x_j$
-corresponds to a rate ratio of $\exp{\b_j \cdot \delta}$**.
+So Poisson regression coefficients are naturally interpreted through rate ratios.
 
-Specifically, let $\vX_{-j}$ denote the vector of all covariates except $X_j$,
-and abbreviate the two expected counts being compared as
+{{< slidebreak >}}
 
-$$
-\ba
-\mu_a &\eqdef \E{Y \mid \red{X_j = a}, \vX_{-j} = \vx_{-j}, T = t} \\
-\mu_b &\eqdef \E{Y \mid \red{X_j = b}, \vX_{-j} = \vx_{-j}, T = t}
-\ea
-$$
+{{< include _subfiles/count-regression/_def-rate-ratio-patterns.qmd >}}
 
-$$
-\ba
-&\phantom{={}} \logf{\mu_a} - \logf{\mu_b} \\
-&= \paren{\logf{t} + \b_0 + \b_1 x_1 + \lds + \red{\b_j a} + \lds + \b_p x_p} \\
-&\phantom{={}} - \paren{\logf{t} + \b_0 + \b_1 x_1 + \lds + \red{\b_j b} + \lds + \b_p x_p} \\
-&\quad \text{(substituting the linear predictor)} \\
-&= \red{\b_j a} - \red{\b_j b} \\
-&\quad \text{(canceling terms shared by both patterns)} \\
-&= \red{\b_j(a-b)} \\
-&\quad \text{(factoring out coefficient } \b_j\text{)}
-\ea
-$$
+{{< slidebreak >}}
 
-The rate ratio between the two covariate patterns
-is therefore the exponential of that difference in log expectations:
+{{< include _subfiles/count-regression/_exm-rate-ratio-patterns.qmd >}}
 
-$$
-\ba
-&\phantom{={}} \frac{\mu_a}{\mu_b} \\
-&= \exp{\logf{\mu_a} - \logf{\mu_b}} \\
-&\quad \text{(by identity } \frac{u}{v} = \exp{\logf{u} - \logf{v}}\text{)} \\
-&= \exp{\red{\b_j(a-b)}} \\
-&\quad \text{(substituting the difference in log expectations)}
-\ea
-$$
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_thm-poisson-rate-ratio.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_exm-poisson-rate-ratio.qmd >}}

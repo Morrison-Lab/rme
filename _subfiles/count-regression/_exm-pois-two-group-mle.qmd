@@ -1,0 +1,57 @@
+:::{#exm-pois-two-group-mle}
+#### Estimating a rate ratio from two cohorts
+
+An unexposed cohort contributes $D_0 = 12$ events
+over $T_0 = 4000$ person-years,
+and an exposed cohort contributes $D_1 = 15$ events
+over $T_1 = 2500$ person-years.
+By @thm-pois-two-group-mle,
+the Poisson regression estimates are:
+
+$$
+\ba
+\el(0)
+&= \frac{D_0}{T_0}
+&& \text{(crude rate, unexposed)} \\
+&= \frac{12}{4000}
+&& \text{(substitute)} \\
+&= 0.003
+&& \text{(divide)} \\
+\el(1)
+&= \frac{D_1}{T_1}
+&& \text{(crude rate, exposed)} \\
+&= \frac{15}{2500}
+&& \text{(substitute)} \\
+&= 0.006
+&& \text{(divide)} \\
+\erateratio(1 : 0)
+&= \frac{0.006}{0.003}
+&& \text{(ratio of crude rates)} \\
+&= 2
+&& \text{(divide)}
+\ea
+$$
+
+so $\eb_0 = \logf{0.003} \approx -5.809$
+and $\eb_1 = \logf{2} \approx 0.693$.
+Fitting the same model in R
+(with $\logf{t_i}$ as an [offset](https://morrison-lab.github.io/pds/distributions.html#def-offset))
+gives the same estimates:
+
+```{r}
+#| code-fold: show
+two_cohorts <- data.frame(
+  exposed = c(0, 1),
+  events = c(12, 15),
+  person_years = c(4000, 2500)
+)
+fit_two_cohorts <- glm(
+  events ~ exposed + offset(log(person_years)),
+  family = poisson(),
+  data = two_cohorts
+)
+coef(fit_two_cohorts)
+exp(coef(fit_two_cohorts))
+```
+
+:::

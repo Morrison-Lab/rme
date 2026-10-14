@@ -10,24 +10,15 @@ $\vX = \tp{(X_1, \dots, X_p)} \in \reals^p$.
 Typically, count data models use
 a $\logf{}$ [link function](Intro-to-GLMs.qmd#sec-why-link),
 and thus an $\exp{}$ inverse-link function.
-Specifically, the model relates the expected outcome count
-to the event rate and linear predictor as:
 :::
 
-$$
-\ba
-\E{Y \mid \vX = \vx, T = t} &= \mu(\vx,t) \\
-\mu(\vx,t) &= \lambda(\vx)\cdot t \\
-\lambda(\vx) &= \exp{\eta(\vx)} \\
-\eta(\vx) &= \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
-\ea
-$${#eq-mean-poisson}
+{{< slidebreak >}}
 
-::: notes
-The term $T=t$ represents the [exposure magnitude](https://morrison-lab.github.io/pds/distributions.html#def-exposure)
-(such as [person-years](https://morrison-lab.github.io/mds/algebra-sums.html#def-person-years) or observation time)
-and plays a structural role in scaling rates to expected counts.
-:::
+{{< include _subfiles/count-regression/_def-poisson-reg.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/count-regression/_exm-poisson-reg.qmd >}}
 
 {{< slidebreak >}}
 
