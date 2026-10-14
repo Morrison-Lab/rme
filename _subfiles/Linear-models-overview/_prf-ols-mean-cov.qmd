@@ -1,0 +1,62 @@
+::: proof
+Write $\mathbf{A} \eqdef \inv{\tp{\mX}\mX}\tp{\mX}$,
+a $(p+1) \times n$ matrix that is fixed once we condition on $\mX$,
+so that $\evb = \mathbf{A}\vY$.
+Under @def-lm-general-form,
+$\E{\vY \mid \mX} = \mX\vb$,
+and because the $Y_i$ are independent with common variance $\ss$,
+$\Cov{\vY \mid \mX} = \ss \bfI_n$.
+
+For the mean,
+using linearity of expectation for a fixed matrix times a random vector:
+
+$$
+\ba
+\E{\evb \mid \mX}
+&= \underbrace{\mathbf{A}}_{(p+1) \times n} \underbrace{\E{\vY \mid \mX}}_{n \times 1}
+&& \text{(linearity of expectation)}
+\\
+&= \inv{\tp{\mX}\mX}\tp{\mX} \mX \vb
+&& \text{(substitute } \mathbf{A} \text{ and } \E{\vY \mid \mX} \text{)}
+\\
+&= \underbrace{\bfI_{p+1}}_{(p+1) \times (p+1)} \underbrace{\vb}_{(p+1) \times 1}
+&& \text{(a matrix inverse times the matrix is the identity)}
+\\
+&= \vb
+&& \text{(identity matrix)}
+\ea
+$$
+
+For the covariance,
+using $\Cov{\mathbf{A}\vY} = \mathbf{A}\Cov{\vY}\tp{\mathbf{A}}$ for a fixed matrix $\mathbf{A}$,
+and $\tp{\mathbf{A}} = \mX\inv{\tp{\mX}\mX}$
+(because $\tp{\mX}\mX$ is symmetric, so its inverse is too):
+
+$$
+\ba
+\Cov{\evb \mid \mX}
+&= \underbrace{\mathbf{A}}_{(p+1) \times n}
+\underbrace{\Cov{\vY \mid \mX}}_{n \times n}
+\underbrace{\tp{\mathbf{A}}}_{n \times (p+1)}
+&& \text{(covariance of a linear transformation)}
+\\
+&= \mathbf{A} \paren{\ss \bfI_n} \tp{\mathbf{A}}
+&& \text{(substitute } \Cov{\vY \mid \mX} \text{)}
+\\
+&= \ss \mathbf{A} \bfI_n \tp{\mathbf{A}}
+&& \text{(move the scalar } \ss \text{ to the front)}
+\\
+&= \ss \mathbf{A} \tp{\mathbf{A}}
+&& \text{(multiplying by } \bfI_n \text{ changes nothing)}
+\\
+&= \ss \inv{\tp{\mX}\mX}\tp{\mX} \mX\inv{\tp{\mX}\mX}
+&& \text{(substitute } \mathbf{A} \text{ and } \tp{\mathbf{A}} \text{)}
+\\
+&= \ss \bfI_{p+1} \inv{\tp{\mX}\mX}
+&& \text{(a matrix inverse times the matrix is the identity)}
+\\
+&= \ss \inv{\tp{\mX}\mX}
+&& \text{(identity matrix)}
+\ea
+$$
+:::
