@@ -1,0 +1,21 @@
+:::{#thm-canonical-score}
+#### Score function of a GLM with a canonical link
+
+Consider a GLM (@def-glm) for independent outcomes $Y_1, \ldots, Y_n$
+with covariate vectors $\vx_1, \ldots, \vx_n$,
+whose outcome distribution is an exponential dispersion family
+(@def-natural-parameter)
+satisfying the conditions of @thm-edf-mean-variance,
+with natural parameters $\theta_i$ and a common dispersion parameter $\phi$,
+and whose link is the canonical link (@def-canonical-link).
+Write $\mu_i \eqdef \E{Y_i | \vX_i = \vx_i}$.
+Then the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score)
+for $\vb$ is
+
+$$
+\scorev(\vb)
+= \frac{1}{\phi} \sumin \ub{\vx_i}_{(p+1) \times 1} \ub{(y_i - \mu_i)}_{1 \times 1}
+$$ {#eq-canonical-score}
+
+[@dobson4e, Chapter 4; @dunn2018generalized, Chapter 6].
+:::
