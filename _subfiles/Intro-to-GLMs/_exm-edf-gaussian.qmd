@@ -1,0 +1,48 @@
+:::{#exm-edf-gaussian}
+#### The Gaussian distribution in exponential dispersion form
+
+For a Gaussian outcome $Y \sim \ndist{\mu, \sigma^2}$:
+
+$$
+\ba
+f(y; \mu, \sigma^2)
+&= \frac{1}{\sqrt{2\pi\sigma^2}} \expf{-\frac{(y - \mu)^2}{2\sigma^2}}
+&& \text{(Gaussian density)}
+\\ &= \expf{-\frac{(y - \mu)^2}{2\sigma^2} - \frac{1}{2}\logf{2\pi\sigma^2}}
+&& \text{(write the constant as the exponential of its log)}
+\\ &= \expf{-\frac{y^2 - 2y\mu + \mu^2}{2\sigma^2} - \frac{1}{2}\logf{2\pi\sigma^2}}
+&& \text{(expand the square)}
+\\ &= \expf{\frac{y\mu - \mu^2/2}{\sigma^2} - \frac{y^2}{2\sigma^2} - \frac{1}{2}\logf{2\pi\sigma^2}}
+&& \text{(split the fraction)}
+\ea
+$$
+
+Matching this last line to @def-natural-parameter gives
+$\theta \eqdef \mu$,
+$b(\theta) \eqdef \theta^2/2$,
+$\phi \eqdef \sigma^2$,
+and
+$c(y, \phi) \eqdef -\frac{y^2}{2\phi} - \frac{1}{2}\logf{2\pi\phi}$.
+
+For instance, take $\mu = 2$, $\sigma^2 = 4$, and $y = 3$.
+The first term of the exponent is
+
+$$
+\ba
+\frac{y\theta - b(\theta)}{\phi}
+&= \frac{3 \cdot 2 - 2^2/2}{4}
+&& \text{(substitute } y = 3,\ \theta = 2,\ \phi = 4\text{)}
+\\ &= \frac{6 - 2}{4}
+&& \text{(multiply and square)}
+\\ &= 1
+&& \text{(subtract and divide)}
+\ea
+$$
+
+and the second term is
+$c(3, 4) = -\frac{9}{8} - \frac{1}{2}\logf{8\pi}$,
+so the exponent is $-\frac{1}{8} - \frac{1}{2}\logf{8\pi}$.
+The Gaussian density's own exponent is also
+$-\frac{(3 - 2)^2}{8} - \frac{1}{2}\logf{8\pi} = -\frac{1}{8} - \frac{1}{2}\logf{8\pi}$,
+and both forms give $f(3) \approx 0.1760$.
+:::
