@@ -1,0 +1,28 @@
+:::{#exm-pois-two-group-wald}
+#### Wald test for a two-cohort rate ratio
+
+To test $H_0: \b_1 = 0$
+(equal event rates in the two cohorts of @exm-pois-two-group-mle),
+use $\eb_1 \approx 0.693$ and $\ese{\eb_1} \approx 0.387$
+from @exm-pois-two-group-ci:
+
+$$
+\ba
+z
+&= \frac{\eb_1 - 0}{\ese{\eb_1}}
+&& \text{(Wald } z \text{-statistic with } \b_{1,0} = 0 \text{)} \\
+&= \frac{0.693}{0.387}
+&& \text{(substitute)} \\
+&\approx 1.79
+&& \text{(divide)}
+\ea
+$$
+
+The two-sided $p$-value is
+$2 \cdot \P(Z > 1.79) \approx 0.074$,
+where $Z$ has a standard Gaussian distribution,
+so at the 5% level these data do not reject equal rates.
+That conclusion agrees with the 95% confidence interval for the rate ratio in @exm-pois-two-group-ci,
+which includes 1.
+
+:::

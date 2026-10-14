@@ -1,0 +1,51 @@
+:::{#exm-pois-two-group-ci}
+#### Confidence interval for a two-cohort rate ratio
+
+In @exm-pois-two-group-mle,
+$D_0 = 12$, $D_1 = 15$, and $\eb_1 = \logf{2} \approx 0.693$.
+By @thm-pois-two-group-se:
+
+$$
+\ba
+\ese{\eb_1}
+&= \sqrt{\frac{1}{12} + \frac{1}{15}}
+&& \text{(two-group standard error formula)} \\
+&= \sqrt{0.0833 + 0.0667}
+&& \text{(evaluate each fraction)} \\
+&= \sqrt{0.15}
+&& \text{(add)} \\
+&\approx 0.387
+&& \text{(square root)}
+\ea
+$$
+
+The Wald 95% confidence interval for $\b_1$ is then
+
+$$
+\ba
+\eb_1 \pm 1.96 \cdot \ese{\eb_1}
+&= 0.693 \pm 1.96 \cdot 0.387
+&& \text{(substitute)} \\
+&= 0.693 \pm 0.759
+&& \text{(multiply)} \\
+&= \sb{-0.066, 1.452}
+&& \text{(add and subtract)}
+\ea
+$$
+
+and exponentiating both endpoints gives a 95% confidence interval
+for the rate ratio of
+$\sb{\expf{-0.066}, \expf{1.452}} \approx \sb{0.94, 4.27}$.
+The point estimate doubles the rate,
+but with only 27 events in total the interval still includes 1.
+
+R's `confint.default()`,
+which computes Wald intervals from the observed information,
+reproduces this interval:
+
+```{r}
+#| code-fold: show
+exp(confint.default(fit_two_cohorts, parm = "exposed"))
+```
+
+:::

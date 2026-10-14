@@ -1,0 +1,63 @@
+:::{#exm-poisson-reg}
+#### Poisson regression with one binary covariate
+
+Let $x_1 = 1$ for smokers and $x_1 = 0$ for non-smokers,
+and suppose a Poisson regression model for hospitalizations has
+$\beta_0 = \logf{0.002}$ and $\beta_1 = \logf{1.5}$,
+with exposure measured in person-years.
+By @eq-mean-poisson,
+the event rates are:
+
+$$
+\ba
+\lambda(x_1 = 0)
+&= \expf{\beta_0}
+&& \text{(rate function with } x_1 = 0 \text{)} \\
+&= 0.002
+&& \text{(} \expf{\logf{0.002}} = 0.002 \text{)} \\
+\lambda(x_1 = 1)
+&= \expf{\beta_0 + \beta_1}
+&& \text{(rate function with } x_1 = 1 \text{)} \\
+&= \expf{\beta_0} \cdot \expf{\beta_1}
+&& \text{(product rule for exponentials)} \\
+&= 0.002 \cdot 1.5
+&& \text{(evaluate each factor)} \\
+&= 0.003
+&& \text{(multiply)}
+\ea
+$$
+
+For a group of non-smokers followed for $t = 500$ person-years,
+the expected number of hospitalizations is
+
+$$
+\ba
+\mu(x_1 = 0, t = 500)
+&= \lambda(x_1 = 0) \cdot 500
+&& \text{(mean = rate} \times \text{exposure)} \\
+&= 0.002 \cdot 500
+&& \text{(substitute the rate)} \\
+&= 1
+&& \text{(multiply)}
+\ea
+$$
+
+and the probability that this group has no hospitalizations is
+
+$$
+\ba
+\P(Y = 0 \mid x_1 = 0, t = 500)
+&= \frac{1^0 \expf{-1}}{0!}
+&& \text{(Poisson PMF with mean 1)} \\
+&= \expf{-1}
+&& \text{(} 1^0 = 0! = 1 \text{)} \\
+&\approx 0.368
+&& \text{(evaluate)}
+\ea
+$$
+
+The same follow-up time for smokers gives
+$\mu(x_1 = 1, t = 500) = 0.003 \cdot 500 = 1.5$
+expected hospitalizations.
+
+:::

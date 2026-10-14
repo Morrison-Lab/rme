@@ -1,0 +1,150 @@
+::: proof
+Write $\mu_i \eqdef t_i \expf{\b_0 + \b_1 x_i}$ for observation $i$'s mean.
+Each $y_i$ has a Poisson distribution with mean $\mu_i$,
+so the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is
+
+$$
+\ba
+\llik(\b_0, \b_1)
+&= \sumin \logf{\frac{\mu_i^{y_i} \expf{-\mu_i}}{y_i!}}
+&& \text{(independence; Poisson PMF)} \\
+&= \sumin \paren{y_i \logf{\mu_i} - \mu_i - \logf{y_i!}}
+&& \text{(log of a product and quotient)} \\
+&= \sumin \paren{y_i \paren{\logf{t_i} + \b_0 + \b_1 x_i} - \mu_i - \logf{y_i!}}
+&& \text{(} \logf{\mu_i} = \logf{t_i} + \b_0 + \b_1 x_i \text{)}
+\ea
+$$
+
+Each mean has derivatives
+$\deriv{\b_0} \mu_i = \mu_i$
+and
+$\deriv{\b_1} \mu_i = \mu_i x_i$
+(chain rule for $\expf{\cdot}$),
+so the [score equations](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) are:
+
+$$
+\ba
+0 = \deriv{\b_0} \llik
+&= \sumin \paren{y_i - \mu_i}
+&& \text{(differentiate term by term)} \\
+0 = \deriv{\b_1} \llik
+&= \sumin x_i \paren{y_i - \mu_i}
+&& \text{(differentiate term by term)}
+\ea
+$$
+
+In the second score equation, the terms with $x_i = 0$ vanish,
+and every remaining term has mean $\mu_i = t_i \expf{\b_0 + \b_1}$:
+
+$$
+\ba
+0
+&= \sum_{i: x_i = 1} \paren{y_i - t_i \expf{\b_0 + \b_1}}
+&& \text{(drop the } x_i = 0 \text{ terms)} \\
+&= D_1 - T_1 \expf{\b_0 + \b_1}
+&& \text{(definitions of } D_1 \text{ and } T_1 \text{)} \\
+\expf{\b_0 + \b_1}
+&= \frac{D_1}{T_1}
+&& \text{(solve for } \expf{\b_0 + \b_1} \text{)}
+\ea
+$$
+
+Subtracting the second score equation from the first
+leaves the terms with $x_i = 0$,
+whose means are $\mu_i = t_i \expf{\b_0}$:
+
+$$
+\ba
+0
+&= \sum_{i: x_i = 0} \paren{y_i - t_i \expf{\b_0}}
+&& \text{(first equation minus second)} \\
+&= D_0 - T_0 \expf{\b_0}
+&& \text{(definitions of } D_0 \text{ and } T_0 \text{)} \\
+\expf{\b_0}
+&= \frac{D_0}{T_0}
+&& \text{(solve for } \expf{\b_0} \text{)}
+\ea
+$$
+
+Both solutions are positive because $D_k > 0$,
+so the logarithm gives a unique stationary point $(\eb_0, \eb_1)$.
+That stationary point is the maximum,
+because $\llik$ is strictly concave.
+To see this concavity,
+write $x_{i0} \eqdef 1$ and $x_{i1} \eqdef x_i$,
+so that both score equations read
+$\deriv{\b_j} \llik = \sumin x_{ij} \paren{y_i - \mu_i}$.
+Differentiating again:
+
+$$
+\ba
+\frac{\partial^2 \llik}{\partial \b_j \, \partial \b_k}
+&= \deriv{\b_k} \sumin x_{ij} \paren{y_i - \mu_i}
+&& \text{(differentiate the score)} \\
+&= -\sumin x_{ij} \deriv{\b_k} \mu_i
+&& \text{(} y_i \text{ and } x_{ij} \text{ do not depend on } \b_k \text{)} \\
+&= -\sumin x_{ij} x_{ik} \mu_i
+&& \text{(} \deriv{\b_k} \mu_i = \mu_i x_{ik} \text{)}
+\ea
+$$
+
+Let $\mu_{\cdot k} \eqdef \sum_{i: x_i = k} \mu_i > 0$ be group $k$'s total mean.
+Because $x_i^2 = x_i$ for $x_i \in \cb{0, 1}$,
+$\sumin x_i^2 \mu_i = \sumin x_i \mu_i = \mu_{\cdot 1}$
+and $\sumin \mu_i = \mu_{\cdot 0} + \mu_{\cdot 1}$,
+so the [Hessian](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) of $\llik$ is
+
+$$
+\underbrace{\hessian}_{2 \times 2}
+= -\underbrace{\begin{bmatrix}
+\sumin \mu_i & \sumin x_i \mu_i \\
+\sumin x_i \mu_i & \sumin x_i^2 \mu_i
+\end{bmatrix}}_{2 \times 2}
+= -\underbrace{\begin{bmatrix}
+\mu_{\cdot 0} + \mu_{\cdot 1} & \mu_{\cdot 1} \\
+\mu_{\cdot 1} & \mu_{\cdot 1}
+\end{bmatrix}}_{2 \times 2}
+$$ {#eq-pois-two-group-hessian}
+
+Its upper-left entry $-(\mu_{\cdot 0} + \mu_{\cdot 1})$ is negative
+and its determinant is
+
+$$
+\ba
+\det \hessian
+&= (-1)^2 \det \begin{bmatrix}
+\mu_{\cdot 0} + \mu_{\cdot 1} & \mu_{\cdot 1} \\
+\mu_{\cdot 1} & \mu_{\cdot 1}
+\end{bmatrix}
+&& \text{(} \det(-\mat{A}) = (-1)^2 \det \mat{A} \text{ for a } 2 \times 2 \text{ matrix)} \\
+&= (\mu_{\cdot 0} + \mu_{\cdot 1}) \mu_{\cdot 1} - \mu_{\cdot 1}^2
+&& \text{(} 2 \times 2 \text{ determinant formula; } (-1)^2 = 1 \text{)} \\
+&= \mu_{\cdot 0} \mu_{\cdot 1} + \mu_{\cdot 1}^2 - \mu_{\cdot 1}^2
+&& \text{(distribute)} \\
+&= \mu_{\cdot 0} \mu_{\cdot 1}
+&& \text{(cancel)} \\
+&> 0
+&& \text{(both group totals are positive)}
+\ea
+$$
+
+so $\hessian$ is negative definite at every $(\b_0, \b_1)$,
+which makes $\llik$ strictly concave.
+
+Finally, the rate ratio estimate follows by division:
+
+$$
+\ba
+\erateratio(1 : 0)
+&= \frac{\el(1)}{\el(0)}
+&& \text{(definition of rate ratio)} \\
+&= \frac{\expf{\eb_0 + \eb_1}}{\expf{\eb_0}}
+&& \text{(fitted rate function)} \\
+&= \expf{\eb_1}
+&& \text{(quotient rule for exponentials)} \\
+&= \frac{D_1 / T_1}{D_0 / T_0}
+&& \text{(substitute the two solutions)}
+\ea
+$$
+
+:::
