@@ -1,0 +1,22 @@
+:::{#exm-exp-hazard}
+
+#### Hazard of an exponential time at several times
+
+Suppose an event time $T$ is exponential with rate $\lambda = 0.1$ events per year.
+The hazard is the density divided by the survival function.
+The code below computes it at three times:
+
+```{r}
+#| label: exm-exp-hazard-calc
+exp_lambda <- 0.1
+exp_times <- c(1, 5, 20)
+hazards <- dexp(exp_times, rate = exp_lambda) /
+  pexp(exp_times, rate = exp_lambda, lower.tail = FALSE)
+```
+
+The hazards at 1, 5 and 20 years are
+`r paste(round(hazards, 4), collapse = ", ")`,
+all equal to $\lambda =$ `r exp_lambda`,
+as @thm-exp-hazard states.
+
+:::
