@@ -1,0 +1,21 @@
+:::{#thm-ols-mean-cov}
+#### Exact mean and covariance of $\evb$
+
+Under the Gaussian linear regression model (@def-lm-general-form),
+let $\mX$ be the $n \times (p+1)$ design matrix whose rows are $\tp{\vx_i}$,
+and suppose $\mX$ has [full column rank](https://morrison-lab.github.io/mds/linear-algebra-subspaces.html#def-full-column-rank).
+Then, conditional on $\mX$,
+the maximum likelihood estimator
+$\evb = \inv{\tp{\mX}\mX}\tp{\mX}\vY$
+is unbiased for $\vb$
+and has covariance matrix $\ss \inv{\tp{\mX}\mX}$:
+
+$$
+\E{\evb \mid \mX} = \vb,
+\qquad
+\Cov{\evb \mid \mX} = \ss \underbrace{\inv{\tp{\mX}\mX}}_{(p+1) \times (p+1)}
+$$ {#eq-ols-mean-cov}
+
+These results are exact for every sample size,
+not large-sample approximations.
+:::

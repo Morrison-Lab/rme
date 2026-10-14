@@ -1,0 +1,48 @@
+::: proof
+In @sec-est-LMs,
+setting the score equal to zero showed that $\evb$ solves
+$\tp{\mX}\mX\evb = \tp{\mX}\vy$.
+Then:
+
+$$
+\ba
+\tp{\mX}\vresid
+&= \tp{\mX}\paren{\vy - \mX\evb}
+&& \text{(definition of } \vresid \text{ and } \hat{\vy} \text{)}
+\\
+&= \tp{\mX}\vy - \tp{\mX}\mX\evb
+&& \text{(distribute } \tp{\mX} \text{)}
+\\
+&= \tp{\mX}\vy - \tp{\mX}\vy
+&& \text{(} \evb \text{ solves the score equation)}
+\\
+&= \mathbf{0}_{(p+1) \times 1}
+&& \text{(subtract)}
+\ea
+$$
+
+If the model has an intercept,
+the first column of $\mX$ is all ones,
+so the first entry of @eq-ols-resid-orthogonal is $\sumin 1 \cdot \resid_i = 0$.
+For the fitted values:
+
+$$
+\ba
+\sumin \hat y_i \resid_i
+&= \tp{\hat{\vy}} \vresid
+&& \text{(sum of products as an inner product)}
+\\
+&= \tp{\paren{\mX\evb}} \vresid
+&& \text{(definition of } \hat{\vy} \text{)}
+\\
+&= \tp{\evb} \tp{\mX} \vresid
+&& \text{(transpose of a product)}
+\\
+&= \tp{\evb} \mathbf{0}_{(p+1) \times 1}
+&& \text{(the orthogonality just shown)}
+\\
+&= 0
+&& \text{(multiply)}
+\ea
+$$
+:::

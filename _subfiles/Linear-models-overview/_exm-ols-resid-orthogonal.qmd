@@ -1,0 +1,24 @@
+:::{#exm-ols-resid-orthogonal}
+#### Residual sums in the `birthweight` model
+
+For the `birthweight` model with an interaction term (`bw_lm2`),
+we can compute $\tp{\mX}\vresid$,
+$\sumin \resid_i$,
+and $\sumin \hat y_i \resid_i$ directly:
+
+```{r}
+#| label: bw-resid-orthogonal
+#| code-fold: show
+bw_resid <- resid(bw_lm2)
+crossprod(model.matrix(bw_lm2), bw_resid)
+sum(bw_resid)
+sum(fitted(bw_lm2) * bw_resid)
+```
+
+All three are zero up to floating-point rounding error,
+as @thm-ols-resid-orthogonal guarantees.
+Because the model includes an indicator for male babies,
+the entry of $\tp{\mX}\vresid$ for that indicator is zero too:
+the residuals for the male babies add up to zero,
+and so, subtracting from the overall sum, do the residuals for the female babies.
+:::
