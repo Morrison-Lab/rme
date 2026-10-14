@@ -1,0 +1,25 @@
+:::{#exm-ci-mean}
+
+#### Confidence interval for the mean birthweight of 40-week males
+
+For the `birthweight` model with an interaction (`bw_lm2`),
+the code below applies @thm-ci-mean at sex male and gestational age 40 weeks,
+and compares the result with the interval from `predict(interval = "confidence")`:
+
+```{r}
+#| label: exm-ci-mean-calc
+ex_new <- data.frame(sex = "male", age = 40)
+ex_pred <- predict(bw_lm2, newdata = ex_new, se.fit = TRUE)
+ex_tcrit <- qt(0.975, df = bw_lm2$df.residual)
+ex_ci <- ex_pred$fit + c(-1, 1) * ex_tcrit * ex_pred$se.fit
+ex_ci_predict <- predict(bw_lm2, newdata = ex_new, interval = "confidence")
+```
+
+The estimated mean is `r round(ex_pred$fit, 1)` grams,
+with 95% confidence interval
+(`r round(ex_ci[1], 1)`, `r round(ex_ci[2], 1)`).
+The interval from `predict()` is
+(`r round(ex_ci_predict[, "lwr"], 1)`, `r round(ex_ci_predict[, "upr"], 1)`),
+which agrees.
+
+:::
