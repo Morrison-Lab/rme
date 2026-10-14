@@ -1,0 +1,44 @@
+:::{#thm-rct-identification}
+#### Identification of the ATE under randomization
+
+If [consistency](#def-consistency) and
+[unconditional exchangeability](#def-unconditional-exchangeability) hold,
+and $0 < \Pf{A = 1} < 1$,
+then for each treatment level $a \in \cb{0, 1}$,
+
+$$\E{Y(a)} = \E{Y \mid A = a}$$
+
+and therefore
+
+$$\text{ATE} = \E{Y \mid A = 1} - \E{Y \mid A = 0}$$ {#eq-rct-ate}
+
+:::
+
+::: proof
+For treatment level $a$:
+
+$$
+\ba
+\E{Y(a)}
+&= \E{Y(a) \mid A = a}
+&& \text{(unconditional exchangeability: } Y(a) \ind A \text{)} \\
+&= \E{Y \mid A = a}
+&& \text{(consistency: } Y = Y(a) \text{ when } A = a \text{)}
+\ea
+$$
+
+where the condition $0 < \Pf{A = 1} < 1$
+makes both conditioning events $\cb{A = 1}$ and $\cb{A = 0}$ have positive probability.
+Substituting into the [ATE](#def-ate):
+
+$$
+\ba
+\text{ATE}
+&= \E{Y(1)} - \E{Y(0)}
+&& \text{(definition of ATE)} \\
+&= \E{Y \mid A = 1} - \E{Y \mid A = 0}
+&& \text{(apply the first result with } a = 1 \text{ and } a = 0 \text{)}
+\ea
+$$
+
+:::

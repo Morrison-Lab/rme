@@ -1,0 +1,45 @@
+:::{#exm-ipw}
+#### The pseudo-population in the severity example
+
+In the population of @exm-exchangeability-strata,
+with the propensity scores of @exm-propensity-score,
+the weights of @def-ipw are:
+
+| Group | patients | weight $w_i$ | weighted count |
+|:---|:---:|:---:|:---:|
+| treated, $L = 0$ | 120 | $1/0.2 = 5$ | 600 |
+| treated, $L = 1$ | 280 | $1/0.7 \approx 1.43$ | 400 |
+| untreated, $L = 0$ | 480 | $1/0.8 = 1.25$ | 600 |
+| untreated, $L = 1$ | 120 | $1/0.3 \approx 3.33$ | 400 |
+
+In the [pseudo-population](#def-pseudo-population),
+each treatment group has 1000 members,
+600 non-severe and 400 severe:
+the same severity mix as the whole population,
+so $L$ no longer predicts treatment.
+The weighted means are:
+
+$$
+\ba
+\Est{\E{Y(1)}}_{\text{IPW}}
+&= \frac{600 \cdot 10 + 400 \cdot 20}{600 + 400}
+&& \text{(IPW estimator, treated)} \\
+&= \frac{6000 + 8000}{1000}
+&& \text{(multiply)} \\
+&= 14
+&& \text{(add and divide)} \\
+\Est{\E{Y(0)}}_{\text{IPW}}
+&= \frac{600 \cdot 8 + 400 \cdot 18}{600 + 400}
+&& \text{(IPW estimator, untreated)} \\
+&= \frac{4800 + 7200}{1000}
+&& \text{(multiply)} \\
+&= 12
+&& \text{(add and divide)}
+\ea
+$$
+
+These weighted means match @exm-standardization,
+as @thm-ipw-identification says they should,
+and their difference recovers the ATE of 2.
+
+:::
