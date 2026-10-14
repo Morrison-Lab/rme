@@ -110,7 +110,7 @@ local function read_meta(meta)
   callouty_meta = stringify_meta(meta['callouty-theorem'])
   quarto.doc.add_html_dependency({
     name = 'callouty-theorem',
-    version = '1.2.1',
+    version = '1.2.2',
     stylesheets = {'callouty-theorem.css'},
     scripts = {'callouty-theorem.js'}
   })
@@ -234,7 +234,10 @@ local function calloutify(el, is_proof)
   local ref_prefix = refType(el.identifier)
   local numbered_id = ref_prefix and numbered_prefixes[ref_prefix] and el.identifier or nil
   if override_title and my_types[typ] then
-    callout_tbl.title = spawn_callout_title(my_types[typ].title, el.name, numbered_id)
+    -- Outside HTML the header keeps the plain type label: the stylesheet that hides
+    -- the body's repeat of the number has no PDF or Word counterpart.
+    local header_id = quarto.doc.is_format('html') and numbered_id or nil
+    callout_tbl.title = spawn_callout_title(my_types[typ].title, el.name, header_id)
   elseif title_ref and numbered_id and quarto.doc.is_format('html') then
     -- Put the numbered label ("Example 1 (name)") in the callout header.
     -- A citation of the element's own id resolves to "Example 1" in the
