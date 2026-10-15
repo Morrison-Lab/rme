@@ -163,10 +163,12 @@ body.quarto-dark .pagedtable-index-separator-right {
  * table across the whole column. The cap uses the viewport, not a percentage: a
  * percentage `max-width` on the caption is cyclic while the table is being
  * sized, and stretched the table to the full column. `100vw - 6rem` keeps the
- * caption inside the column on a phone, callouts included. */
+ * caption inside the column on a phone, callouts included. The pagedtable
+ * widget (`df-print: paged`) sizes its own table to fill its box, so the
+ * rules leave that table alone. */
 @media screen {
-  main table,
-  main table.table {
+  main table:not(.pagedtable table),
+  main table.table:not(.pagedtable table) {
     display: block;
     width: fit-content;
     max-width: 100%;
@@ -174,7 +176,7 @@ body.quarto-dark .pagedtable-index-separator-right {
     overflow-x: auto;
   }
 
-  main table > caption {
+  main table:not(.pagedtable table) > caption {
     width: max-content;
     max-width: min(24em, calc(100vw - 6rem));
   }
