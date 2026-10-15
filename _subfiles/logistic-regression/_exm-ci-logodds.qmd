@@ -1,0 +1,32 @@
+:::{#exm-ci-logodds}
+
+#### Confidence interval for a beetle log-odds
+
+For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`),
+the code below applies @thm-ci-logodds at dose 1.8,
+using the standard error from `predict()` and, as a check,
+the standard error from the estimated covariance matrix:
+
+```{r}
+#| label: exm-ci-logodds-calc
+#| code-fold: show
+ex_pred <- predict(
+  beetles_glm_ungrouped,
+  newdata = data.frame(dose = 1.8),
+  type = "link",
+  se.fit = TRUE
+)
+ex_ci_predict <- ex_pred$fit + c(-1, 1) * 1.96 * ex_pred$se.fit
+ex_x <- c(1, 1.8)
+ex_se_vcov <- sqrt(drop(t(ex_x) %*% vcov(beetles_glm_ungrouped) %*% ex_x))
+ex_ci_vcov <- sum(ex_x * coef(beetles_glm_ungrouped)) + c(-1, 1) * 1.96 * ex_se_vcov
+```
+
+The estimated log-odds is `r round(ex_pred$fit, 3)`,
+with 95% confidence interval
+(`r round(ex_ci_predict[1], 3)`, `r round(ex_ci_predict[2], 3)`).
+The covariance-matrix calculation gives
+(`r round(ex_ci_vcov[1], 3)`, `r round(ex_ci_vcov[2], 3)`),
+which agrees.
+
+:::

@@ -1,0 +1,26 @@
+:::{#exm-logistic-slope}
+
+#### The slope of a logistic probability curve
+
+Suppose
+$\alpha = -2$ and $\beta = 0.5$ in the single-predictor logistic regression model of @eq-unipredictor-logreg.
+The code below approximates $\derivf{\pi}{x}$ at $x = 1$ with a central difference,
+and compares it with the formula of @cor-logistic-slope:
+
+```{r}
+#| label: exm-logistic-slope-calc
+#| code-fold: show
+ex_alpha <- -2
+ex_beta <- 0.5
+ex_pi <- function(x) plogis(ex_alpha + ex_beta * x)
+ex_h <- 1e-6
+ex_numeric <- (ex_pi(1 + ex_h) - ex_pi(1 - ex_h)) / (2 * ex_h)
+ex_formula <- ex_pi(1) * (1 - ex_pi(1)) * ex_beta
+```
+
+At $x = 1$, $\pi =$ `r round(ex_pi(1), 4)`.
+The central difference gives `r round(ex_numeric, 5)`
+and the formula $\pi(1-\pi)\beta$ gives `r round(ex_formula, 5)`,
+so the two agree.
+
+:::

@@ -1,0 +1,26 @@
+:::{#exm-wcgs-strat-from-contrast}
+
+#### Converting the fitted WCGS coefficients
+
+The code below applies @thm-wcgs-strat-from-contrast to the coefficients of the fitted corner-point model (`chd_glm_contrasts`),
+and compares the result with the coefficients of the model fitted directly with the stratified parametrization (`chd_glm_strat`):
+
+```{r}
+#| label: exm-wcgs-strat-from-contrast-calc
+#| code-fold: show
+ex_b <- coef(chd_glm_contrasts)
+ex_converted <- c(
+  "dibpatType B" = unname(ex_b["(Intercept)"]),
+  "dibpatType A" = unname(ex_b["(Intercept)"] + ex_b["dibpatType A"]),
+  "dibpatType B:age" = unname(ex_b["age"]),
+  "dibpatType A:age" = unname(ex_b["age"] + ex_b["dibpatType A:age"])
+)
+ex_direct <- coef(chd_glm_strat)[names(ex_converted)]
+ex_max_gap <- max(abs(ex_converted - ex_direct))
+```
+
+The largest difference between the converted coefficients and the directly fitted ones is
+`r format(ex_max_gap, digits = 2)`,
+which is zero up to numerical error.
+
+:::
