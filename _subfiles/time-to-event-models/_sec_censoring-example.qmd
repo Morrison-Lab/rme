@@ -1,0 +1,74 @@
+:::{#exm-tte-overview-censoring-bias}
+#### Six patients followed for relapse
+
+Suppose a study follows six cancer patients in remission for up to 12 months,
+and we want to estimate the 12-month relapse risk,
+$1 - \survf{12}$,
+where $\surv$ is the [survival function](intro-to-survival-analysis.qmd#def-surv-fn) of time to relapse
+(in months).
+@tbl-tte-overview-patients shows each patient's observed follow-up time
+and event indicator
+(1 = relapse observed; 0 = [right-censored](intro-to-survival-analysis.qmd#def-right-censor)).
+
+::: {#tbl-tte-overview-patients}
+
+| Patient | Follow-up time (months) | Event indicator | Relapse status at 12 months |
+|:-------:|:-----------------------:|:---------------:|:----------------------------|
+| A | 3  | 1 | relapsed |
+| B | 5  | 0 | unknown (withdrew) |
+| C | 7  | 1 | relapsed |
+| D | 9  | 0 | unknown (withdrew) |
+| E | 12 | 0 | relapse-free |
+| F | 12 | 0 | relapse-free |
+
+Hypothetical follow-up data for six patients
+
+:::
+
+**Naive approach 1: treat censored patients as event-free.**
+Counting patients B and D as relapse-free gives
+$2/6 \approx 0.333$.
+This approach can only *under*estimate the risk,
+because any relapses that B or D experienced after withdrawal
+are counted as non-relapses.
+
+**Naive approach 2: drop patients with unknown status.**
+Discarding patients B and D gives
+$2/4 = 0.5$.
+This approach throws away the information that B stayed relapse-free for 5 months
+and D for 9 months,
+so in this example it *over*estimates the risk.
+
+**Using the censored observations.**
+The [Kaplan-Meier estimator](intro-to-survival-analysis.qmd#def-KM-estimator)
+keeps each censored patient in the [risk set](intro-to-survival-analysis.qmd#def-risk-set)
+until their censoring time
+[@kleinbaum2012survival, Chapter 2].
+Relapses occur at 3 months (6 patients at risk)
+and at 7 months (4 patients at risk: C, D, E, F),
+so
+
+$$
+\ba
+\eskmf{12}
+&= \paren{1 - \frac{1}{6}} \cdot \paren{1 - \frac{1}{4}}
+&& \text{(product over the event times 3 and 7)}
+\\
+&= \frac{5}{6} \cdot \frac{3}{4}
+&& \text{(subtract inside each factor)}
+\\
+&= \frac{15}{24}
+&& \text{(multiply numerators and denominators)}
+\\
+&= 0.625
+&& \text{(divide)}
+\ea
+$$
+
+and the estimated 12-month risk is
+$1 - 0.625 = 0.375$.
+That estimate lies between the two naive estimates,
+and it is valid under [non-informative censoring](intro-to-survival-analysis.qmd#def-noninformative-censoring)
+[@kleinbaum2012survival, Chapter 1].
+
+:::
