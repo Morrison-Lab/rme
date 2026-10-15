@@ -144,3 +144,40 @@ body.quarto-dark .pagedtable-index-separator-right {
 :is(h1, h2, h3, h4, h5, h6, div, section, figure, table, span)[id] {
   scroll-margin-top: 30vh;
 }
+
+/* A table is only as wide as its content needs, up to the column, instead of
+ * stretching to the full column width. Bootstrap sets `.table { width: 100% }`,
+ * which spread a short table across the page. `fit-content` gives a table its
+ * natural width when that fits the column and the column's width when it does
+ * not, so cells wrap only when they must. A table narrower than the column is
+ * centred. A table whose narrowest layout still overflows scrolls inside its own
+ * box instead of widening the page, at every screen width.
+ *
+ * The rules apply on screen only: a block table loses its repeating header rows
+ * in print, so print keeps the real table. A `<col>` width, such as one from
+ * `tbl-colwidths`, is left alone. A block table can also lose its table role in
+ * some browsers, so `table-roles.html` restores it. The caption stays a real
+ * table caption, so `caption-side` still works and the rows fill the table when
+ * the caption is the widest part. The caption takes its natural width, up to no
+ * wider than a comfortable line, so a long caption does not stretch a narrow
+ * table across the whole column. The cap uses the viewport, not a percentage: a
+ * percentage `max-width` on the caption is cyclic while the table is being
+ * sized, and stretched the table to the full column. `100vw - 6rem` keeps the
+ * caption inside the column on a phone, callouts included. The pagedtable
+ * widget (`df-print: paged`) sizes its own table to fill its box, so the
+ * rules leave that table alone. */
+@media screen {
+  main table:not(.pagedtable table),
+  main table.table:not(.pagedtable table) {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow-x: auto;
+  }
+
+  main table:not(.pagedtable table) > caption {
+    width: max-content;
+    max-width: min(24em, calc(100vw - 6rem));
+  }
+}
