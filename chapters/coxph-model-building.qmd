@@ -279,7 +279,42 @@ Also known as "complementary log-log (clog-log) survival curves".
 
 ```{r}
 #| label: fig-cloglog-na
-#| fig-cap: "Complementary log-log survival curves - Nelson-Aalen estimates"
+#| fig-cap: >
+#|   Cumulative hazard curves, on log-spaced axes
+#|   (complementary log-log survival curves) - Nelson-Aalen estimates
+
+# draw cumulative hazard against time, both on log-spaced axes,
+# so that the ticks are in days and in units of cumulative hazard
+# rather than in the logs of those quantities:
+# (`text_size` is the legend text size;
+# 9 matches `legend_text_size` in r-config)
+plot_cloglog <- function(curves, text_size = 9) {
+  curves |>
+    # log10(0) is not finite, so leave out the time-zero points
+    filter(.data$time > 0, .data$cumhaz > 0) |>
+    ggplot() +
+    aes(x = .data$time, y = .data$cumhaz, col = .data$strata) +
+    geom_step(linewidth = .5) +
+    theme_bw() +
+    scale_x_continuous(
+      trans = "log10",
+      labels = scales::label_number(drop0trailing = TRUE, big.mark = ","),
+      name = "Time since transplant (days, log scale)"
+    ) +
+    scale_y_continuous(
+      trans = "log10",
+      labels = scales::label_number(drop0trailing = TRUE, big.mark = ","),
+      name = "Cumulative hazard H(t) (log scale)"
+    ) +
+    theme(legend.position = "bottom", legend.title = element_blank()) +
+    guides(
+      col =
+        guide_legend(
+          ncol = 2,
+          label.theme = element_text(size = text_size)
+        )
+    )
+}
 
 na_model <- survfit(
   formula = surv ~ dtype + gtype,
@@ -288,25 +323,11 @@ na_model <- survfit(
 )
 
 na_model |>
-  survminer::ggsurvplot(
-    legend = "bottom",
-    legend.title = "",
-    ylab = "log(Cumulative Hazard)",
-    xlab = "Time since transplant (days, log-scale)",
-    fun = "cloglog",
-    size = .5,
-    ggtheme = theme_bw(),
-    conf.int = FALSE,
-    censor = TRUE
-  ) |>
-  magrittr::extract2("plot") +
-  guides(
-    col =
-      guide_legend(
-        ncol = 2,
-        label.theme = element_text(size = legend_text_size)
-      )
-  )
+  fortify(fun = "cumhaz") |>
+  # `fortify.survfit()` doesn't name cumhaz correctly:
+  rename(cumhaz = surv) |>
+  mutate(strata = trimws(strata)) |>
+  plot_cloglog()
 ```
 
 Let's compare these empirical (i.e., non-parametric) curves with the
@@ -314,29 +335,13 @@ fitted curves from our `coxph()` model:
 
 ```{r}
 #| label: fig-cloglog-ph
-#| fig-cap: "Complementary log-log survival curves - PH estimates"
+#| fig-cap: >
+#|   Cumulative hazard curves, on log-spaced axes
+#|   (complementary log-log survival curves) - PH estimates
 
 cox_model |>
-  survminer::ggsurvplot(
-    facet_by = "",
-    legend = "bottom",
-    legend.title = "",
-    ylab = "log(Cumulative Hazard)",
-    xlab = "Time since transplant (days, log-scale)",
-    fun = "cloglog",
-    size = .5,
-    ggtheme = theme_bw(),
-    censor = FALSE, # doesn't make sense for cox model
-    conf.int = FALSE
-  ) |>
-  magrittr::extract2("plot") +
-  guides(
-    col =
-      guide_legend(
-        ncol = 2,
-        label.theme = element_text(size = legend_text_size)
-      )
-  )
+  stack_surv_ph() |>
+  plot_cloglog()
 ```
 
 Now let's overlay these [cumulative hazard](intro-to-survival-analysis.qmd#def-cuhaz) curves:
