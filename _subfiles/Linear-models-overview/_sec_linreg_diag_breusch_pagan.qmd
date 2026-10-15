@@ -8,8 +8,8 @@ which can be continuous
 
 {{< slidebreak >}}
 
-:::{#def-breusch-pagan}
-#### Studentized Breusch--Pagan statistic
+:::{#def-auxiliary-regression}
+#### Auxiliary regression
 
 Let $\resid_1, \ldots, \resid_n$ be the [residuals](#def-resid-fitted)
 from a fitted [linear regression model](#def-lm-general-form),
@@ -19,8 +19,15 @@ and let $z_i$ be a vector of $q$ covariates for observation $i$
 The **auxiliary regression** is the ordinary least-squares regression
 of the squared residuals $\resid_i^2$ on $z_i$, with an intercept;
 let $R^2_{\text{aux}}$ be its [coefficient of determination](https://morrison-lab.github.io/sds/correlation-regression.html#def-r-squared).
+:::
 
-The **studentized Breusch--Pagan statistic**
+{{< slidebreak >}}
+
+:::{#def-breusch-pagan}
+#### Studentized Breusch--Pagan statistic
+
+With $R^2_{\text{aux}}$ the coefficient of determination of the auxiliary regression (@def-auxiliary-regression),
+the **studentized Breusch--Pagan statistic**
 [@koenker1981note] is:
 
 $$
