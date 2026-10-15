@@ -165,3 +165,12 @@ main table.table {
 main table col {
   width: auto !important;
 }
+
+/* A native <caption> is a table-caption box inside the block table, so on a
+ * narrow table it wrapped into a column as wide as the table. Let it take its
+ * natural width, up to the column. */
+main table > caption {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+}
