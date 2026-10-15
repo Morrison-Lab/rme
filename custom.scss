@@ -144,3 +144,24 @@ body.quarto-dark .pagedtable-index-separator-right {
 :is(h1, h2, h3, h4, h5, h6, div, section, figure, table, span)[id] {
   scroll-margin-top: 30vh;
 }
+
+/* A table is only as wide as its content needs, up to the column, instead of
+ * stretching to the full column width (Ezra, 2026-10-15). Bootstrap sets
+ * `.table { width: 100% }`, and Pandoc adds a `<col style="width: N%">` to a
+ * pipe table with a long row, so a short table spread across the page.
+ * `fit-content` gives a table its natural width when that fits the column and
+ * the column's width when it does not, so cells wrap only when they must. A
+ * table whose narrowest layout still overflows scrolls inside its own box
+ * instead of widening the page, at every width. */
+main table,
+main table.table {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  overflow-x: auto;
+}
+
+main table col {
+  width: auto !important;
+}
