@@ -1545,7 +1545,7 @@ title-only slide. -->
 <span id="cb14-7"><a aria-label="7"></a><span class="co">#&gt; chol ~ dibpat + s(age, by = dibpat)</span></span>
 <span id="cb14-8"><a aria-label="8"></a><span class="co">#&gt; </span></span>
 <span id="cb14-9"><a aria-label="9"></a><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.00 1.01  total = 4.01 </span></span>
+<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.02 1.03  total = 4.05 </span></span>
 <span id="cb14-11"><a aria-label="11"></a><span class="co">#&gt; </span></span>
 <span id="cb14-12"><a aria-label="12"></a><span class="co">#&gt; REML score: 16231.9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1666,9 +1666,9 @@ title-only slide. -->
 <pre><code>#&gt; 
 #&gt; Method: REML   Optimizer: outer newton
 #&gt; full convergence after 7 iterations.
-#&gt; Gradient range [-0.000358419,-2.1343e-05]
+#&gt; Gradient range [-0.000404069,-1.352e-05]
 #&gt; (score 821.975 &amp; scale 1).
-#&gt; Hessian positive definite, eigenvalue range [3.16164e-05,0.220195].
+#&gt; Hessian positive definite, eigenvalue range [1.35192e-05,0.220195].
 #&gt; Model rank =  29 / 29 
 #&gt; 
 #&gt; Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
@@ -1729,18 +1729,18 @@ title-only slide. -->
 <span id="cb19-4"><a aria-label="4"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> wcgs, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb19-5"><a aria-label="5"></a>sm_inf <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_inf)</span>
 <span id="cb19-6"><a aria-label="6"></a>sm_inf<span class="sc">$</span>p.table  <span class="co"># parametric coefficients</span></span>
-<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
-<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.97147   0.117513 -25.28619 4.53227e-141</span></span>
-<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.78173   0.141714   5.51627  3.46277e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;               Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
+<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.971461   0.117513 -25.28618 4.53331e-141</span></span>
+<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.781729   0.141714   5.51626  3.46292e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Read these exactly as you would GLM coefficients.</p>
 <h3 id="smooth-terms">Smooth terms</h3>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>sm_inf<span class="sc">$</span>s.table  <span class="co"># smooth terms</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq   p-value</span></span>
-<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00107 1.00214 36.4005 0.0000000</span></span>
-<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29959 1.54968 10.8386 0.0064354</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq    p-value</span></span>
+<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00156 1.00312 36.3980 0.00000000</span></span>
+<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29791 1.54685 10.8353 0.00641275</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Each column reports:</p>
@@ -1868,10 +1868,10 @@ title-only slide. -->
 <span id="cb23-20"><a aria-label="20"></a><span class="co">#&gt; </span></span>
 <span id="cb23-21"><a aria-label="21"></a><span class="co">#&gt; Approximate significance of smooth terms:</span></span>
 <span id="cb23-22"><a aria-label="22"></a><span class="co">#&gt;          edf Ref.df Chi.sq p-value    </span></span>
-<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 1.1e-06 ***</span></span>
+<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 5.8e-07 ***</span></span>
 <span id="cb23-24"><a aria-label="24"></a><span class="co">#&gt; s(bmi)  1.00   1.00   2.18    0.14    </span></span>
 <span id="cb23-25"><a aria-label="25"></a><span class="co">#&gt; s(chol) 1.61   2.02  56.48 &lt; 2e-16 ***</span></span>
-<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.4e-06 ***</span></span>
+<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.7e-06 ***</span></span>
 <span id="cb23-27"><a aria-label="27"></a><span class="co">#&gt; ---</span></span>
 <span id="cb23-28"><a aria-label="28"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb23-29"><a aria-label="29"></a><span class="co">#&gt; </span></span>
@@ -1970,7 +1970,7 @@ title-only slide. -->
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58585","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58571","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -2426,32 +2426,41 @@ title-only slide. -->
 <div class="cell" data-python.reticulate="false">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a aria-label="1"></a><span class="co"># Not run: the rme render has no Python environment.</span></span>
 <span id="cb45-2"><a aria-label="2"></a><span class="im">from</span> pygam <span class="im">import</span> LogisticGAM, s <span class="im">as</span> gam_s, f <span class="im">as</span> gam_f</span>
-<span id="cb45-3"><a aria-label="3"></a></span>
-<span id="cb45-4"><a aria-label="4"></a>mask <span class="op">=</span> Wage[<span class="st">"education"</span>] <span class="op">!=</span> <span class="st">"1. &lt; HS Grad"</span></span>
-<span id="cb45-5"><a aria-label="5"></a>W2 <span class="op">=</span> Wage[mask].copy()</span>
-<span id="cb45-6"><a aria-label="6"></a>W2[<span class="st">"high"</span>] <span class="op">=</span> (W2[<span class="st">"wage"</span>] <span class="op">&gt;</span> <span class="dv">250</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb45-7"><a aria-label="7"></a>edu2 <span class="op">=</span> W2[<span class="st">"education"</span>].cat.codes.values</span>
-<span id="cb45-8"><a aria-label="8"></a></span>
-<span id="cb45-9"><a aria-label="9"></a>X_log <span class="op">=</span> np.column_stack([W2[<span class="st">"year"</span>].values,</span>
-<span id="cb45-10"><a aria-label="10"></a>                          W2[<span class="st">"age"</span>].values,</span>
-<span id="cb45-11"><a aria-label="11"></a>                          edu2])</span>
-<span id="cb45-12"><a aria-label="12"></a>y_log <span class="op">=</span> W2[<span class="st">"high"</span>].values</span>
-<span id="cb45-13"><a aria-label="13"></a></span>
-<span id="cb45-14"><a aria-label="14"></a>gam_log <span class="op">=</span> LogisticGAM(</span>
-<span id="cb45-15"><a aria-label="15"></a>    gam_s(<span class="dv">0</span>, n_splines<span class="op">=</span><span class="dv">4</span>) <span class="op">+</span> gam_s(<span class="dv">1</span>, n_splines<span class="op">=</span><span class="dv">5</span>) <span class="op">+</span> gam_f(<span class="dv">2</span>)</span>
-<span id="cb45-16"><a aria-label="16"></a>).gridsearch(X_log, y_log)</span>
-<span id="cb45-17"><a aria-label="17"></a></span>
-<span id="cb45-18"><a aria-label="18"></a><span class="bu">print</span>(<span class="st">"Training accuracy:"</span>, (gam_log.predict(X_log) <span class="op">==</span> y_log).mean())</span>
+<span id="cb45-3"><a aria-label="3"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
+<span id="cb45-4"><a aria-label="4"></a></span>
+<span id="cb45-5"><a aria-label="5"></a>mask <span class="op">=</span> Wage[<span class="st">"education"</span>] <span class="op">!=</span> <span class="st">"1. &lt; HS Grad"</span></span>
+<span id="cb45-6"><a aria-label="6"></a>W2 <span class="op">=</span> Wage[mask].copy()</span>
+<span id="cb45-7"><a aria-label="7"></a>W2[<span class="st">"high"</span>] <span class="op">=</span> (W2[<span class="st">"wage"</span>] <span class="op">&gt;</span> <span class="dv">250</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb45-8"><a aria-label="8"></a><span class="co"># drop the unused level so the codes run from 0, as pygam's factor term expects:</span></span>
+<span id="cb45-9"><a aria-label="9"></a>edu2 <span class="op">=</span> W2[<span class="st">"education"</span>].cat.remove_unused_categories().cat.codes.values</span>
+<span id="cb45-10"><a aria-label="10"></a></span>
+<span id="cb45-11"><a aria-label="11"></a>X_log <span class="op">=</span> np.column_stack([W2[<span class="st">"year"</span>].values,</span>
+<span id="cb45-12"><a aria-label="12"></a>                          W2[<span class="st">"age"</span>].values,</span>
+<span id="cb45-13"><a aria-label="13"></a>                          edu2])</span>
+<span id="cb45-14"><a aria-label="14"></a>y_log <span class="op">=</span> W2[<span class="st">"high"</span>].values</span>
+<span id="cb45-15"><a aria-label="15"></a></span>
+<span id="cb45-16"><a aria-label="16"></a>gam_log <span class="op">=</span> LogisticGAM(</span>
+<span id="cb45-17"><a aria-label="17"></a>    gam_s(<span class="dv">0</span>, n_splines<span class="op">=</span><span class="dv">4</span>) <span class="op">+</span> gam_s(<span class="dv">1</span>, n_splines<span class="op">=</span><span class="dv">5</span>) <span class="op">+</span> gam_f(<span class="dv">2</span>)</span>
+<span id="cb45-18"><a aria-label="18"></a>).gridsearch(X_log, y_log)</span>
 <span id="cb45-19"><a aria-label="19"></a></span>
-<span id="cb45-20"><a aria-label="20"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>))</span>
-<span id="cb45-21"><a aria-label="21"></a>titles <span class="op">=</span> [<span class="st">"year"</span>, <span class="st">"age"</span>, <span class="st">"education"</span>]</span>
-<span id="cb45-22"><a aria-label="22"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes):</span>
-<span id="cb45-23"><a aria-label="23"></a>    XX <span class="op">=</span> gam_log.generate_X_grid(term<span class="op">=</span>i)</span>
-<span id="cb45-24"><a aria-label="24"></a>    pdep, confi <span class="op">=</span> gam_log.partial_dependence(term<span class="op">=</span>i, X<span class="op">=</span>XX, width<span class="op">=</span><span class="fl">0.95</span>)</span>
-<span id="cb45-25"><a aria-label="25"></a>    ax.plot(XX[:, i], pdep, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb45-26"><a aria-label="26"></a>    ax.fill_between(XX[:, i], confi[:,<span class="dv">0</span>], confi[:,<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb45-27"><a aria-label="27"></a>    ax.set_xlabel(titles[i])<span class="op">;</span> ax.set_ylabel(<span class="st">"Partial effect (log-odds)"</span>)</span>
-<span id="cb45-28"><a aria-label="28"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb45-20"><a aria-label="20"></a><span class="bu">print</span>(<span class="st">"Training accuracy:"</span>, (gam_log.predict(X_log) <span class="op">==</span> y_log).mean())</span>
+<span id="cb45-21"><a aria-label="21"></a></span>
+<span id="cb45-22"><a aria-label="22"></a><span class="co"># pygam's partial effects are on the log-odds scale and leave out the intercept</span></span>
+<span id="cb45-23"><a aria-label="23"></a><span class="co"># (the last coefficient), so add it back before applying the inverse logit:</span></span>
+<span id="cb45-24"><a aria-label="24"></a>intercept <span class="op">=</span> gam_log.coef_[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb45-25"><a aria-label="25"></a></span>
+<span id="cb45-26"><a aria-label="26"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>))</span>
+<span id="cb45-27"><a aria-label="27"></a>titles <span class="op">=</span> [<span class="st">"year"</span>, <span class="st">"age"</span>, <span class="st">"education"</span>]</span>
+<span id="cb45-28"><a aria-label="28"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes):</span>
+<span id="cb45-29"><a aria-label="29"></a>    XX <span class="op">=</span> gam_log.generate_X_grid(term<span class="op">=</span>i)</span>
+<span id="cb45-30"><a aria-label="30"></a>    pdep, confi <span class="op">=</span> gam_log.partial_dependence(term<span class="op">=</span>i, X<span class="op">=</span>XX, width<span class="op">=</span><span class="fl">0.95</span>)</span>
+<span id="cb45-31"><a aria-label="31"></a>    ax.plot(XX[:, i], expit(pdep <span class="op">+</span> intercept), linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb45-32"><a aria-label="32"></a>    ax.fill_between(XX[:, i],</span>
+<span id="cb45-33"><a aria-label="33"></a>                    expit(confi[:, <span class="dv">0</span>] <span class="op">+</span> intercept),</span>
+<span id="cb45-34"><a aria-label="34"></a>                    expit(confi[:, <span class="dv">1</span>] <span class="op">+</span> intercept),</span>
+<span id="cb45-35"><a aria-label="35"></a>                    alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb45-36"><a aria-label="36"></a>    ax.set_xlabel(titles[i])<span class="op">;</span> ax.set_ylabel(<span class="st">"P(wage &gt; 250k)"</span>)</span>
+<span id="cb45-37"><a aria-label="37"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>

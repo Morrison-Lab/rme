@@ -761,23 +761,23 @@ Figure&nbsp;4: Palmer penguins - multiple groups
 <span id="cb6-9"><a aria-label="9"></a></span>
 <span id="cb6-10"><a aria-label="10"></a>plot1 <span class="ot">&lt;-</span></span>
 <span id="cb6-11"><a aria-label="11"></a>  beetles <span class="sc">|&gt;</span></span>
-<span id="cb6-12"><a aria-label="12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> pct)) <span class="sc">+</span></span>
+<span id="cb6-12"><a aria-label="12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">10</span><span class="sc">^</span>dose, <span class="at">y =</span> pct)) <span class="sc">+</span></span>
 <span id="cb6-13"><a aria-label="13"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n)) <span class="sc">+</span></span>
-<span id="cb6-14"><a aria-label="14"></a>  <span class="fu">xlab</span>(<span class="st">"Dose (log mg/L)"</span>) <span class="sc">+</span></span>
-<span id="cb6-15"><a aria-label="15"></a>  <span class="fu">ylab</span>(<span class="st">"Mortality rate (%)"</span>) <span class="sc">+</span></span>
-<span id="cb6-16"><a aria-label="16"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb6-17"><a aria-label="17"></a>  <span class="co"># xlab(bquote(log[10]), bquote(CS[2])) +</span></span>
+<span id="cb6-14"><a aria-label="14"></a>  <span class="fu">scale_x_log10</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb6-15"><a aria-label="15"></a>  <span class="fu">xlab</span>(<span class="st">"Dose of CS2 (mg/L)"</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a aria-label="16"></a>  <span class="fu">ylab</span>(<span class="st">"Mortality rate (%)"</span>) <span class="sc">+</span></span>
+<span id="cb6-17"><a aria-label="17"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb6-18"><a aria-label="18"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb6-19"><a aria-label="19"></a></span>
 <span id="cb6-20"><a aria-label="20"></a><span class="fu">print</span>(plot1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-beetles_1a" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles_1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
+Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935). The <code>dose</code> column holds the base-10 logarithm of the dose in mg/L, and the models use it as is; the figures show the dose itself, in mg/L, on a log-spaced axis.
 </figcaption><div aria-describedby="fig-beetles_1a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)"><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" width="672"></a></p>
+<figure><p><a href="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935). The dose column holds the base-10 logarithm of the dose in mg/L, and the models use it as is; the figures show the dose itself, in mg/L, on a log-spaced axis."><img data-src="Intro-to-GLMs_files/figure-revealjs/unnamed-chunk-1-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -804,16 +804,13 @@ Figure&nbsp;5: Mortality rates of adult flour beetles after five hours’ exposu
 <span id="cb7-15"><a aria-label="15"></a>    <span class="at">data =</span> _</span>
 <span id="cb7-16"><a aria-label="16"></a>  )</span>
 <span id="cb7-17"><a aria-label="17"></a></span>
-<span id="cb7-18"><a aria-label="18"></a></span>
-<span id="cb7-19"><a aria-label="19"></a>range1 <span class="ot">&lt;-</span> <span class="fu">range</span>(beetles<span class="sc">$</span>dose) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">2</span>, .<span class="dv">2</span>)</span>
-<span id="cb7-20"><a aria-label="20"></a></span>
-<span id="cb7-21"><a aria-label="21"></a>f_linear <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
-<span id="cb7-22"><a aria-label="22"></a></span>
-<span id="cb7-23"><a aria-label="23"></a>plot2 <span class="ot">&lt;-</span></span>
-<span id="cb7-24"><a aria-label="24"></a>  plot1 <span class="sc">+</span></span>
-<span id="cb7-25"><a aria-label="25"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linear, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Straight line"</span>)) <span class="sc">+</span></span>
-<span id="cb7-26"><a aria-label="26"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Model"</span>, <span class="at">size =</span> <span class="st">""</span>)</span>
-<span id="cb7-27"><a aria-label="27"></a><span class="fu">print</span>(plot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-18"><a aria-label="18"></a>f_linear <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> <span class="fu">log10</span>(x)))</span>
+<span id="cb7-19"><a aria-label="19"></a></span>
+<span id="cb7-20"><a aria-label="20"></a>plot2 <span class="ot">&lt;-</span></span>
+<span id="cb7-21"><a aria-label="21"></a>  plot1 <span class="sc">+</span></span>
+<span id="cb7-22"><a aria-label="22"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linear, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Straight line"</span>)) <span class="sc">+</span></span>
+<span id="cb7-23"><a aria-label="23"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">"Model"</span>, <span class="at">size =</span> <span class="st">""</span>)</span>
+<span id="cb7-24"><a aria-label="24"></a><span class="fu">print</span>(plot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-beetles-plot1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles-plot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
@@ -853,13 +850,13 @@ Figure&nbsp;7: Mortality rates of adult flour beetles after five hours’ exposu
 <span id="cb8-3"><a aria-label="3"></a>  beetles_long <span class="sc">|&gt;</span></span>
 <span id="cb8-4"><a aria-label="4"></a>  <span class="fu">lm</span>(<span class="at">formula =</span> outcome <span class="sc">~</span> <span class="fu">log</span>(dose), <span class="at">data =</span> _)</span>
 <span id="cb8-5"><a aria-label="5"></a></span>
-<span id="cb8-6"><a aria-label="6"></a>f_linearlog <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x))</span>
+<span id="cb8-6"><a aria-label="6"></a>f_linearlog <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> <span class="fu">log10</span>(x)))</span>
 <span id="cb8-7"><a aria-label="7"></a></span>
 <span id="cb8-8"><a aria-label="8"></a>plot3 <span class="ot">&lt;-</span> plot2 <span class="sc">+</span></span>
-<span id="cb8-9"><a aria-label="9"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb8-9"><a aria-label="9"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
 <span id="cb8-10"><a aria-label="10"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> f_linearlog, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Log-transform dose"</span>))</span>
 <span id="cb8-11"><a aria-label="11"></a></span>
-<span id="cb8-12"><a aria-label="12"></a><span class="fu">print</span>(plot3 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-12"><a aria-label="12"></a><span class="fu">print</span>(plot3 <span class="sc">+</span> <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">100</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-beetles3" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-beetles3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8: Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide (Bliss 1935)
@@ -883,7 +880,7 @@ Figure&nbsp;8: Mortality rates of adult flour beetles after five hours’ exposu
 <span id="cb9-4"><a aria-label="4"></a></span>
 <span id="cb9-5"><a aria-label="5"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb9-6"><a aria-label="6"></a>  glm1 <span class="sc">|&gt;</span> </span>
-<span id="cb9-7"><a aria-label="7"></a>    <span class="fu">predict</span>(<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> x), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb9-7"><a aria-label="7"></a>    <span class="fu">predict</span>(<span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> <span class="fu">log10</span>(x)), <span class="at">type =</span> <span class="st">"response"</span>)</span>
 <span id="cb9-8"><a aria-label="8"></a>}</span>
 <span id="cb9-9"><a aria-label="9"></a></span>
 <span id="cb9-10"><a aria-label="10"></a>plot4 <span class="ot">&lt;-</span> plot3 <span class="sc">+</span> <span class="fu">geom_function</span>(<span class="at">fun =</span> f, <span class="fu">aes</span>(<span class="at">col =</span> <span class="st">"Logistic regression"</span>))</span>
@@ -1019,7 +1016,7 @@ Table&nbsp;3: Common pairings of terms for variables <span class="math inline">\
 </li>
 <li>log: <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\mu(y)\right\}\mathclose{} = \eta(\tilde{x})\)</span>
 </li>
-<li>inverse: <span class="math inline">\(\mathopen{}\left(\mu(y)\right)^{-1}\mathclose{} = \eta(\tilde{x})\)</span>
+<li>inverse: <span class="math inline">\({\mathopen{}\left(\mu(y)\right)\mathclose{}}^{-1} = \eta(\tilde{x})\)</span>
 </li>
 <li>clog-log: <span class="math inline">\(\operatorname{log}\mathopen{}\left\{-\operatorname{log}\mathopen{}\left\{1-\mu(y)\right\}\mathclose{}\right\}\mathclose{} = \eta(\tilde{x})\)</span>
 </li>
@@ -1110,12 +1107,15 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
 </section><section class="slide level2"><div id="exm-not-link-function" class="theorem example">
 <p><span class="theorem-title"><strong>Example 7 (A function that is not a link function)</strong></span> For a Gaussian outcome, whose mean can be any real number, <span class="math inline">\(g(\mu) = \mu^2\)</span> is not a valid link function, because it is not monotone on <span class="math inline">\((-\infty, \infty)\)</span>. Both <span class="math inline">\(\mu = -1\)</span> and <span class="math inline">\(\mu = 1\)</span> give <span class="math inline">\(g(\mu) = 1\)</span>, so a linear predictor <span class="math inline">\(\eta(\tilde{x}) = 1\)</span> does not determine the mean, and <span class="math inline">\(g\)</span> has no inverse link.</p>
 </div>
+</section><section class="slide level2"><div id="def-outcome-distribution" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (Outcome distribution (random component))</strong></span> In a regression model (<a href="#/def-regression-model" class="quarto-xref">Definition&nbsp;1</a>) for an outcome <span class="math inline">\(Y\)</span> given covariates <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>, the <strong>outcome distribution</strong> family (the <strong>random component</strong>) is the specified distribution family that <span class="math inline">\(Y\)</span> follows given <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>, such as Gaussian, Bernoulli, or Poisson, with conditional mean <span class="math inline">\(\mu(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y|\tilde{X}=\tilde{x}\right]\mathclose{}\)</span>, where observations are independent given their covariates <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
+</div>
 </section><section class="slide level2 scrollable"><div id="def-glm" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7 (Generalized linear model)</strong></span> A <strong>generalized linear model (GLM)</strong> is a regression model (<a href="#/def-regression-model" class="quarto-xref">Definition&nbsp;1</a>) for an outcome <span class="math inline">\(Y\)</span> given covariates <span class="math inline">\(\tilde{X}= \tilde{x}\)</span> with three components <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 8 (Generalized linear model)</strong></span> A <strong>generalized linear model (GLM)</strong> is a regression model (<a href="#/def-regression-model" class="quarto-xref">Definition&nbsp;1</a>) for an outcome <span class="math inline">\(Y\)</span> given covariates <span class="math inline">\(\tilde{X}= \tilde{x}\)</span> with three components <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>:</p>
 <ol type="1">
-<li><p>an <strong>outcome distribution</strong> family (the <strong>random component</strong>): given <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>, <span class="math inline">\(Y\)</span> follows a specified distribution family, such as Gaussian, Bernoulli, or Poisson, with conditional mean <span class="math inline">\(\mu(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y|\tilde{X}=\tilde{x}\right]\mathclose{}\)</span>, and observations are independent given their covariates;</p></li>
-<li><p>a <strong>linear predictor</strong> <span class="math inline">\(\eta(\tilde{x}) = {\tilde{x}}^{\top}\tilde{\beta}\)</span> (<a href="#/def-linear-predictor" class="quarto-xref">Definition&nbsp;4</a>);</p></li>
-<li><p>a <strong>link function</strong> <span class="math inline">\(g\)</span> connecting the two, <span class="math inline">\(g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} = \eta(\tilde{x})\)</span> (<a href="#/def-link-function" class="quarto-xref">Definition&nbsp;5</a>).</p></li>
+<li><p>an outcome distribution family (the random component): given <span class="math inline">\(\tilde{X}= \tilde{x}\)</span>, <span class="math inline">\(Y\)</span> follows a specified distribution family, such as Gaussian, Bernoulli, or Poisson, with conditional mean <span class="math inline">\(\mu(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y|\tilde{X}=\tilde{x}\right]\mathclose{}\)</span>, and observations are independent given their covariates (<a href="#/def-outcome-distribution" class="quarto-xref">Definition&nbsp;7</a>);</p></li>
+<li><p>a linear predictor <span class="math inline">\(\eta(\tilde{x}) = {\tilde{x}}^{\top}\tilde{\beta}\)</span> (<a href="#/def-linear-predictor" class="quarto-xref">Definition&nbsp;4</a>);</p></li>
+<li><p>a link function <span class="math inline">\(g\)</span> connecting the two, <span class="math inline">\(g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} = \eta(\tilde{x})\)</span> (<a href="#/def-link-function" class="quarto-xref">Definition&nbsp;5</a>).</p></li>
 </ol>
 </div>
 <aside class="notes"><p>A GLM specifies model structure only: its coefficients <span class="math inline">\(\tilde{\beta}\)</span> can be estimated by maximum likelihood, by Bayesian methods, or by other inference methods.</p>
@@ -1141,9 +1141,9 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
 <p>The Gaussian linear regression model <span class="math inline">\(Y|X=x \sim \operatorname{N}\mathopen{}\left(\beta_0 + \beta_1 x, \sigma^2\right)\mathclose{}\)</span> is also a GLM, with a Gaussian outcome distribution and the identity link <span class="math inline">\(g(\mu) = \mu\)</span>, so that <span class="math inline">\(\mu(x) = \eta(x)\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="def-interaction" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (Interaction)</strong></span> Consider a regression model whose linear predictor <span class="math inline">\(\eta(\tilde{x})\)</span> includes two covariates <span class="math inline">\(x_j\)</span> and <span class="math inline">\(x_k\)</span>. The model includes an <strong>interaction</strong> between <span class="math inline">\(x_j\)</span> and <span class="math inline">\(x_k\)</span> when the difference in <span class="math inline">\(\eta(\tilde{x})\)</span> per unit difference in <span class="math inline">\(x_j\)</span>, holding the other covariates fixed, depends on the value of <span class="math inline">\(x_k\)</span> <span class="citation" data-cites="dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 6</a>)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 9 (Interaction)</strong></span> Consider a regression model whose linear predictor <span class="math inline">\(\eta(\tilde{x})\)</span> includes two covariates <span class="math inline">\(x_j\)</span> and <span class="math inline">\(x_k\)</span>. The model includes an <strong>interaction</strong> between <span class="math inline">\(x_j\)</span> and <span class="math inline">\(x_k\)</span> when the difference in <span class="math inline">\(\eta(\tilde{x})\)</span> per unit difference in <span class="math inline">\(x_j\)</span>, holding the other covariates fixed, depends on the value of <span class="math inline">\(x_k\)</span> <span class="citation" data-cites="dobson4e">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 6</a>)</span>.</p>
 </div>
-<aside class="notes"><p><a href="#/def-interaction" class="quarto-xref">Definition&nbsp;8</a> describes only how the linear predictor varies across subpopulations, so it makes no causal claim. Interaction is also scale-dependent: <a href="#/def-interaction" class="quarto-xref">Definition&nbsp;8</a> is stated on the scale of the linear predictor <span class="math inline">\(\eta(\tilde{x})\)</span>, which can differ from the scale of the mean <span class="math inline">\(\mu(\tilde{x})\)</span>.</p>
+<aside class="notes"><p><a href="#/def-interaction" class="quarto-xref">Definition&nbsp;9</a> describes only how the linear predictor varies across subpopulations, so it makes no causal claim. Interaction is also scale-dependent: <a href="#/def-interaction" class="quarto-xref">Definition&nbsp;9</a> is stated on the scale of the linear predictor <span class="math inline">\(\eta(\tilde{x})\)</span>, which can differ from the scale of the mean <span class="math inline">\(\mu(\tilde{x})\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1155,7 +1155,7 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="def-interaction-term" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9 (Interaction term)</strong></span> An <strong>interaction term</strong> is a term in the linear predictor formed by multiplying two (or more) covariates together, such as <span class="math inline">\(\beta_{jk} x_j x_k\)</span>; its coefficient <span class="math inline">\(\beta_{jk}\)</span> is called an <strong>interaction coefficient</strong>. A linear predictor with two covariates and their interaction term has the form:</p>
+<p><span class="theorem-title"><strong>Definition 10 (Interaction term)</strong></span> An <strong>interaction term</strong> is a term in the linear predictor formed by multiplying two (or more) covariates together, such as <span class="math inline">\(\beta_{jk} x_j x_k\)</span>; its coefficient <span class="math inline">\(\beta_{jk}\)</span> is called an <strong>interaction coefficient</strong>. A linear predictor with two covariates and their interaction term has the form:</p>
 <p><span class="math display">\[
 \eta(\tilde{x}) \stackrel{\text{def}}{=}\beta_0 + \beta_j x_j + \beta_k x_k + \beta_{jk} x_j x_k
 \]</span></p>
@@ -1208,7 +1208,7 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
 <p><span class="theorem-title"><strong>Exercise 5</strong></span> Suppose the outcome is a count or a binary variable. Why not model the mean <span class="math inline">\(\mu(\tilde{x})\)</span> as a linear function of the covariates, as in a Gaussian model?</p>
 </div>
 </section><section class="slide level2"><div id="sol-why-link" class="proof solution">
-<p><span class="proof-title"><em>Solution 3</em>. </span>A straight line for <span class="math inline">\(\mu(\tilde{x})\)</span> can leave the range of the outcome: it can predict a negative count, or a probability below 0 or above 1. We could try to repair this by transforming each covariate separately and adding interaction terms (<a href="#/def-interaction" class="quarto-xref">Definition&nbsp;8</a>) until the fitted curve stays in range, but that is hard to get right.</p>
+<p><span class="proof-title"><em>Solution 3</em>. </span>A straight line for <span class="math inline">\(\mu(\tilde{x})\)</span> can leave the range of the outcome: it can predict a negative count, or a probability below 0 or above 1. We could try to repair this by transforming each covariate separately and adding interaction terms (<a href="#/def-interaction" class="quarto-xref">Definition&nbsp;9</a>) until the fitted curve stays in range, but that is hard to get right.</p>
 <p>The link function offers a simpler route. We add all the covariate terms together first, to get the <a href="#/def-linear-predictor">linear predictor</a> <span class="math inline">\(\eta(\tilde{x})\)</span>, and then transform once, with the inverse link <span class="math inline">\(g^{-1}\)</span>. The link <span class="math inline">\(g\)</span> relates the mean to the linear predictor: <span class="math inline">\(g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} = \eta(\tilde{x})\)</span>. Applying <span class="math inline">\(g^{-1}\)</span> to both sides gives:</p>
 <p><span class="math display">\[\mu(\tilde{x}) = g^{-1}\mathopen{}\left(\eta(\tilde{x})\right)\mathclose{}\]</span></p>
 <p>Choosing the inverse link guarantees the model structure we want:</p>
@@ -1218,7 +1218,7 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
 </ul>
 </div>
 </section><section class="slide level2"><div id="rem-link-slope-interpretation" class="proof remark">
-<p><span class="proof-title"><em>Remark 2</em> (Slopes under a non-identity link). </span>With a non-identity link, interpreting a slope gets harder. A coefficient <span class="math inline">\(\beta_j\)</span> is the change in <span class="math inline">\(g(\mu)\)</span> per unit change in <span class="math inline">\(x_j\)</span>, not the change in <span class="math inline">\(\mu\)</span>. Even without any interaction terms (<a href="#/def-interaction" class="quarto-xref">Definition&nbsp;8</a>), the change in <span class="math inline">\(\mu\)</span> per unit change in <span class="math inline">\(x_j\)</span> depends on the values of the other covariates, because <span class="math inline">\(g^{-1}\)</span> is not linear.</p>
+<p><span class="proof-title"><em>Remark 2</em> (Slopes under a non-identity link). </span>With a non-identity link, interpreting a slope gets harder. A coefficient <span class="math inline">\(\beta_j\)</span> is the change in <span class="math inline">\(g(\mu)\)</span> per unit change in <span class="math inline">\(x_j\)</span>, not the change in <span class="math inline">\(\mu\)</span>. Even without any interaction terms (<a href="#/def-interaction" class="quarto-xref">Definition&nbsp;9</a>), the change in <span class="math inline">\(\mu\)</span> per unit change in <span class="math inline">\(x_j\)</span> depends on the values of the other covariates, because <span class="math inline">\(g^{-1}\)</span> is not linear.</p>
 </div>
 </section><section class="slide level2"><div id="exm-link-slope-numeric" class="theorem example">
 <p><span class="theorem-title"><strong>Example 11 (A logistic model with no interaction)</strong></span> Suppose the mean <span class="math inline">\(\mu\)</span> of a binary outcome, which is its probability, satisfies <span class="math inline">\(\operatorname{logit}(\mu) = -2 + 1 \cdot x + 1.5 \cdot z\)</span>, with <span class="math inline">\(z \in \{0, 1\}\)</span>. The coefficient of <span class="math inline">\(x\)</span> is the same at both values of <span class="math inline">\(z\)</span>, so the odds ratio for a one-unit increase in <span class="math inline">\(x\)</span> is <span class="math inline">\(e^1\)</span> at both values of <span class="math inline">\(z\)</span>. The code below computes the change in probability for the same increase in <span class="math inline">\(x\)</span>, from <span class="math inline">\(x = 0\)</span> to <span class="math inline">\(x = 1\)</span>.</p>
@@ -1236,13 +1236,19 @@ g\mathopen{}\left(\mu(\tilde{x})\right)\mathclose{} \stackrel{\text{def}}{=}\eta
 <span class="header-section-number">9</span> Canonical links</h1>
 
 </section><section class="slide level2"><p>The <a href="#/def-link-function">link functions</a> listed in the structure of a <a href="#/def-glm">GLM</a> are not all on the same footing. For each outcome distribution, the form of its density singles out one link. To say which, we need the density’s <em>natural parameter</em>.</p>
-</section><section class="slide level2"><div id="def-natural-parameter" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 10 (Exponential dispersion family and natural parameter)</strong></span> A distribution belongs to the <strong>exponential dispersion family</strong> if its <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density</a> (or <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pmf">probability mass function</a>) can be written as</p>
+</section><section class="slide level2"><div id="def-exponential-dispersion-family" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 11 (Exponential dispersion family)</strong></span> A distribution belongs to the <strong>exponential dispersion family</strong> if its <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pdf">density</a> (or <a href="https://morrison-lab.github.io/pds/random-variables.html#def-pmf">probability mass function</a>) can be written as</p>
 <p><span class="math display">\[
 f(y; \theta, \phi)
 = \operatorname{exp}\mathopen{}\left\{\frac{y\,\theta - b(\theta)}{\phi} + c(y, \phi)\right\}\mathclose{}
 \]</span></p>
-<p>for some functions <span class="math inline">\(b(\cdot)\)</span> and <span class="math inline">\(c(\cdot, \cdot)\)</span>. The parameter <span class="math inline">\(\theta\)</span> is the <strong>natural parameter</strong>, and <span class="math inline">\(\phi &gt; 0\)</span> is the <strong>dispersion parameter</strong> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
+<p>for some functions <span class="math inline">\(b(\cdot)\)</span> and <span class="math inline">\(c(\cdot, \cdot)\)</span> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
+</div>
+</section><section class="slide level2"><div id="def-natural-parameter" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 12 (Natural parameter)</strong></span> In an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>), the parameter <span class="math inline">\(\theta\)</span> is the <strong>natural parameter</strong> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
+</div>
+</section><section class="slide level2"><div id="def-dispersion-parameter" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 13 (Dispersion parameter)</strong></span> In an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>), the parameter <span class="math inline">\(\phi &gt; 0\)</span> is the <strong>dispersion parameter</strong> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-edf-poisson-bernoulli" class="theorem example">
 <p><span class="theorem-title"><strong>Example 12 (Poisson and Bernoulli distributions in exponential dispersion form)</strong></span> For a <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a> outcome with mean <span class="math inline">\(\mu\)</span>,</p>
@@ -1295,7 +1301,7 @@ f(y; \mu, \sigma^2)
 &amp;&amp; \text{(split the fraction)}
 \end{aligned}
 \]</span></p>
-<p>Matching this last line to <a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a> gives <span class="math inline">\(\theta \stackrel{\text{def}}{=}\mu\)</span>, <span class="math inline">\(b(\theta) \stackrel{\text{def}}{=}\theta^2/2\)</span>, <span class="math inline">\(\phi \stackrel{\text{def}}{=}\sigma^2\)</span>, and <span class="math inline">\(c(y, \phi) \stackrel{\text{def}}{=}-\frac{y^2}{2\phi} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{2\pi\phi\right\}\mathclose{}\)</span>.</p>
+<p>Matching this last line to <a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a> gives <span class="math inline">\(\theta \stackrel{\text{def}}{=}\mu\)</span>, <span class="math inline">\(b(\theta) \stackrel{\text{def}}{=}\theta^2/2\)</span>, <span class="math inline">\(\phi \stackrel{\text{def}}{=}\sigma^2\)</span>, and <span class="math inline">\(c(y, \phi) \stackrel{\text{def}}{=}-\frac{y^2}{2\phi} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{2\pi\phi\right\}\mathclose{}\)</span>.</p>
 <p>For instance, take <span class="math inline">\(\mu = 2\)</span>, <span class="math inline">\(\sigma^2 = 4\)</span>, and <span class="math inline">\(y = 3\)</span>. The first term of the exponent is</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1311,7 +1317,7 @@ f(y; \mu, \sigma^2)
 <p>and the second term is <span class="math inline">\(c(3, 4) = -\frac{9}{8} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{8\pi\right\}\mathclose{}\)</span>, so the exponent is <span class="math inline">\(-\frac{1}{8} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{8\pi\right\}\mathclose{}\)</span>. The Gaussian density’s own exponent is also <span class="math inline">\(-\frac{(3 - 2)^2}{8} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{8\pi\right\}\mathclose{} = -\frac{1}{8} - \frac{1}{2}\operatorname{log}\mathopen{}\left\{8\pi\right\}\mathclose{}\)</span>, and both forms give <span class="math inline">\(f(3) \approx 0.1760\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="thm-edf-mean-variance" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Mean and variance in an exponential dispersion family)</strong></span> Let <span class="math inline">\(Y\)</span> have the density <span class="math inline">\(f(y; \theta, \phi)\)</span> of <a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a>, and suppose that the support of <span class="math inline">\(Y\)</span> does not depend on <span class="math inline">\(\theta\)</span> and that <span class="math inline">\(b\)</span> is twice differentiable. Then</p>
+<p><span class="theorem-title"><strong>Theorem 1 (Mean and variance in an exponential dispersion family)</strong></span> Let <span class="math inline">\(Y\)</span> have the density <span class="math inline">\(f(y; \theta, \phi)\)</span> of <a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>, and suppose that the support of <span class="math inline">\(Y\)</span> does not depend on <span class="math inline">\(\theta\)</span> and that <span class="math inline">\(b\)</span> is twice differentiable. Then</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y\right]\mathclose{} &amp;= b'(\theta)
@@ -1397,7 +1403,7 @@ b'(\theta)
 <p>Each result matches the familiar mean and variance of that distribution.</p>
 </div>
 </section><section class="slide level2"><div id="def-variance-function" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 11 (Variance function)</strong></span> In an exponential dispersion family (<a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a>), <span class="math inline">\(V(\mu) \stackrel{\text{def}}{=}b''(\theta)\)</span>, written as a function of <span class="math inline">\(\mu \stackrel{\text{def}}{=}b'(\theta)\)</span>, is the <strong>variance function</strong>.</p>
+<p><span class="theorem-title"><strong>Definition 14 (Variance function)</strong></span> In an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>), <span class="math inline">\(V(\mu) \stackrel{\text{def}}{=}b''(\theta)\)</span>, written as a function of <span class="math inline">\(\mu \stackrel{\text{def}}{=}b'(\theta)\)</span>, is the <strong>variance function</strong>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-variance-function" class="theorem example">
 <p><span class="theorem-title"><strong>Example 15 (Variance functions of three families)</strong></span> Rewriting each <span class="math inline">\(b''(\theta)\)</span> from <a href="#/exm-edf-mean-variance" class="quarto-xref">Example&nbsp;14</a> as a function of the mean <span class="math inline">\(\mu = b'(\theta)\)</span> gives each family’s variance function:</p>
@@ -1457,25 +1463,25 @@ b'(\theta)
 <p>The Gaussian variance function is constant, so the variance does not depend on the mean. The Poisson variance function grows with the mean. The Bernoulli variance function is largest at <span class="math inline">\(\mu = 0.5\)</span> and shrinks toward 0 as <span class="math inline">\(\mu\)</span> approaches 0 or 1.</p>
 </div>
 </section><section class="slide level2"><div id="rem-variance-function-variance" class="proof remark">
-<p><span class="proof-title"><em>Remark 3</em> (The variance function and the variance). </span>By <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#/def-variance-function" class="quarto-xref">Definition&nbsp;11</a>, <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{} = \phi\, V(\mu)\)</span>.</p>
+<p><span class="proof-title"><em>Remark 3</em> (The variance function and the variance). </span>By <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#/def-variance-function" class="quarto-xref">Definition&nbsp;14</a>, <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{} = \phi\, V(\mu)\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="def-canonical-link" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 12 (Canonical link)</strong></span> In an exponential dispersion family (<a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a>), the <strong>canonical link</strong> is the link function <span class="math inline">\(g(\cdot)\)</span> (<a href="#/def-link-function" class="quarto-xref">Definition&nbsp;5</a>) that sets the <a href="#/def-linear-predictor">linear predictor</a> equal to the natural parameter: <span class="math inline">\(g(\mu) \stackrel{\text{def}}{=}\theta\)</span> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 15 (Canonical link)</strong></span> In an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>), the <strong>canonical link</strong> is the link function <span class="math inline">\(g(\cdot)\)</span> (<a href="#/def-link-function" class="quarto-xref">Definition&nbsp;5</a>) that sets the <a href="#/def-linear-predictor">linear predictor</a> equal to the natural parameter: <span class="math inline">\(g(\mu) \stackrel{\text{def}}{=}\theta\)</span> <span class="citation" data-cites="dobson4e dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dobson and Barnett 2018, chap. 3</a>; <a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 5</a>)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="thm-canonical-link-inverse" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (The canonical link inverts <span class="math inline">\(b'\)</span>)</strong></span> In an exponential dispersion family (<a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a>) that satisfies the conditions of <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>, with <span class="math inline">\(b''(\theta) &gt; 0\)</span> for every <span class="math inline">\(\theta\)</span>, the canonical link is the inverse of <span class="math inline">\(b'\)</span>:</p>
+<p><span class="theorem-title"><strong>Theorem 2 (The canonical link inverts <span class="math inline">\(b'\)</span>)</strong></span> In an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>) that satisfies the conditions of <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>, with <span class="math inline">\(b''(\theta) &gt; 0\)</span> for every <span class="math inline">\(\theta\)</span>, the canonical link is the inverse of <span class="math inline">\(b'\)</span>:</p>
 <p><span class="math display">\[
-g(\mu) = \mathopen{}\left(b'\right)^{-1}\mathclose{}(\mu)
+g(\mu) = {\mathopen{}\left(b'\right)\mathclose{}}^{-1}(\mu)
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(b''(\theta) &gt; 0\)</span> for every <span class="math inline">\(\theta\)</span>, <span class="math inline">\(b'\)</span> is strictly increasing, so it has an inverse <span class="math inline">\(\mathopen{}\left(b'\right)^{-1}\mathclose{}\)</span> on its range. By <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(b''(\theta) &gt; 0\)</span> for every <span class="math inline">\(\theta\)</span>, <span class="math inline">\(b'\)</span> is strictly increasing, so it has an inverse <span class="math inline">\({\mathopen{}\left(b'\right)\mathclose{}}^{-1}\)</span> on its range. By <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mu &amp;= b'(\theta)
 &amp;&amp; \text{(mean of an exponential dispersion family)}
-\\ \mathopen{}\left(b'\right)^{-1}\mathclose{}(\mu) &amp;= \theta
-&amp;&amp; \text{(apply } \mathopen{}\left(b'\right)^{-1}\mathclose{} \text{ to both sides)}
+\\ {\mathopen{}\left(b'\right)\mathclose{}}^{-1}(\mu) &amp;= \theta
+&amp;&amp; \text{(apply } {\mathopen{}\left(b'\right)\mathclose{}}^{-1} \text{ to both sides)}
 \\ &amp;= g(\mu)
 &amp;&amp; \text{(definition of the canonical link)}
 \end{aligned}
@@ -1495,7 +1501,7 @@ g(\mu) = \mathopen{}\left(b'\right)^{-1}\mathclose{}(\mu)
       }</style></aside></section><section class="slide level2"><div id="exm-canonical-links" class="theorem example">
 <p><span class="theorem-title"><strong>Example 16 (Canonical links of three families)</strong></span> We apply <a href="#/thm-canonical-link-inverse" class="quarto-xref">Theorem&nbsp;2</a>, using <span class="math inline">\(b'(\theta)\)</span> from <a href="#/exm-edf-mean-variance" class="quarto-xref">Example&nbsp;14</a>.</p>
 <ul>
-<li><p><strong>Gaussian</strong>: <span class="math inline">\(b'(\theta) = \theta\)</span>, so <span class="math inline">\(\mathopen{}\left(b'\right)^{-1}\mathclose{}(\mu) = \mu\)</span>, and the canonical link is the identity link <span class="math inline">\(g(\mu) = \mu\)</span>.</p></li>
+<li><p><strong>Gaussian</strong>: <span class="math inline">\(b'(\theta) = \theta\)</span>, so <span class="math inline">\({\mathopen{}\left(b'\right)\mathclose{}}^{-1}(\mu) = \mu\)</span>, and the canonical link is the identity link <span class="math inline">\(g(\mu) = \mu\)</span>.</p></li>
 <li><p><strong>Poisson</strong>: <span class="math inline">\(\mu = b'(\theta) = e^\theta\)</span>, so <span class="math inline">\(\theta = \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span>, and the canonical link is the log link <span class="math inline">\(g(\mu) = \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}\)</span>. At <span class="math inline">\(\mu = 3\)</span>, <span class="math inline">\(g(3) = \operatorname{log}\mathopen{}\left\{3\right\}\mathclose{} \approx 1.0986\)</span>.</p></li>
 </ul>
 <p>For the <strong>Bernoulli</strong> distribution, we solve <span class="math inline">\(\mu = b'(\theta) = \operatorname{expit}(\theta)\)</span> for <span class="math inline">\(\theta\)</span>:</p>
@@ -1526,7 +1532,7 @@ g(\mu) = \mathopen{}\left(b'\right)^{-1}\mathclose{}(\mu)
 <span class="header-section-number">9.1</span> The score function under a canonical link</h2>
 <!-- No slidebreak here: the heading shares its slide with the thm-canonical-score div. -->
 <div id="thm-canonical-score" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Score function of a GLM with a canonical link)</strong></span> Consider a GLM (<a href="#/def-glm" class="quarto-xref">Definition&nbsp;7</a>) for independent outcomes <span class="math inline">\(Y_1, \ldots, Y_n\)</span> with covariate vectors <span class="math inline">\(\tilde{x}_1, \ldots, \tilde{x}_n\)</span>, whose outcome distribution is an exponential dispersion family (<a href="#/def-natural-parameter" class="quarto-xref">Definition&nbsp;10</a>) satisfying the conditions of <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>, with natural parameters <span class="math inline">\(\theta_i\)</span> and a common dispersion parameter <span class="math inline">\(\phi\)</span>, and whose link is the canonical link (<a href="#/def-canonical-link" class="quarto-xref">Definition&nbsp;12</a>). Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y_i | \tilde{X}_i = \tilde{x}_i\right]\mathclose{}\)</span>. Then the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score">score function</a> for <span class="math inline">\(\tilde{\beta}\)</span> is</p>
+<p><span class="theorem-title"><strong>Theorem 3 (Score function of a GLM with a canonical link)</strong></span> Consider a GLM (<a href="#/def-glm" class="quarto-xref">Definition&nbsp;8</a>) for independent outcomes <span class="math inline">\(Y_1, \ldots, Y_n\)</span> with covariate vectors <span class="math inline">\(\tilde{x}_1, \ldots, \tilde{x}_n\)</span>, whose outcome distribution is an exponential dispersion family (<a href="#/def-exponential-dispersion-family" class="quarto-xref">Definition&nbsp;11</a>) satisfying the conditions of <a href="#/thm-edf-mean-variance" class="quarto-xref">Theorem&nbsp;1</a>, with natural parameters <span class="math inline">\(\theta_i\)</span> and a common dispersion parameter <span class="math inline">\(\phi\)</span>, and whose link is the canonical link (<a href="#/def-canonical-link" class="quarto-xref">Definition&nbsp;15</a>). Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y_i | \tilde{X}_i = \tilde{x}_i\right]\mathclose{}\)</span>. Then the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score">score function</a> for <span class="math inline">\(\tilde{\beta}\)</span> is</p>
 <p><span id="eq-canonical-score"><span class="math display">\[
 \tilde{\ell'}(\tilde{\beta})
 = \frac{1}{\phi} \sum_{i=1}^n\underbrace{\tilde{x}_i}_{(p+1) \times 1} \underbrace{(y_i - \mu_i)}_{1 \times 1}
@@ -1906,14 +1912,14 @@ e^{\beta_0} &amp;= \bar{y}_{\text{town}}
 <span class="header-section-number">10.4</span> Step 3: Checking model adequacy</h2>
 <p><span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018, sec. 2.3.4</a>)</span> describes checking a fitted model’s adequacy by examining <a href="../chapters/Linear-models-overview.html#def-resid-fitted">residuals</a>: summaries of how far each observation falls from its <a href="../chapters/Linear-models-overview.html#def-fitted-value">fitted value</a>. In a <a href="#/def-glm">generalized linear model</a> the outcome variance usually changes with the mean, so raw differences <span class="math inline">\(y_i - \hat{\mu}_i\)</span> are not on a common scale; dividing by an estimated <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-sd">standard deviation</a> puts them on one.</p>
 </section><section class="slide level2"><div id="def-pearson-residual-glm" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 13 (Pearson residual)</strong></span> For a generalized linear model with variance function <span class="math inline">\(V(\mu)\)</span> (<a href="#/def-variance-function" class="quarto-xref">Definition&nbsp;11</a>) and dispersion parameter <span class="math inline">\(\phi = 1\)</span>, the <strong>Pearson residual</strong> for observation <span class="math inline">\(i\)</span> is</p>
+<p><span class="theorem-title"><strong>Definition 16 (Pearson residual)</strong></span> For a generalized linear model with variance function <span class="math inline">\(V(\mu)\)</span> (<a href="#/def-variance-function" class="quarto-xref">Definition&nbsp;14</a>) and dispersion parameter <span class="math inline">\(\phi = 1\)</span>, the <strong>Pearson residual</strong> for observation <span class="math inline">\(i\)</span> is</p>
 <p><span class="math display">\[
 r_i \stackrel{\text{def}}{=}\frac{y_i - \hat{\mu}_i}{\sqrt{V(\hat{\mu}_i)}}.
 \]</span></p>
 <p><span class="citation" data-cites="dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 7</a> and 8)</span></p>
 </div>
 </section><section class="slide level2"><div id="def-pearson-chisq-glm" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 14 (Pearson chi-squared statistic)</strong></span> The <strong>Pearson chi-squared statistic</strong> of a generalized linear model (<a href="#/def-pearson-residual-glm" class="quarto-xref">Definition&nbsp;13</a>) is <span class="math inline">\(X^2 \stackrel{\text{def}}{=}\sum_{i=1}^n r_i^2\)</span> <span class="citation" data-cites="dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 7</a> and 8)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 17 (Pearson chi-squared statistic)</strong></span> The <strong>Pearson chi-squared statistic</strong> of a generalized linear model (<a href="#/def-pearson-residual-glm" class="quarto-xref">Definition&nbsp;16</a>) is <span class="math inline">\(X^2 \stackrel{\text{def}}{=}\sum_{i=1}^n r_i^2\)</span> <span class="citation" data-cites="dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 7</a> and 8)</span>.</p>
 </div>
 <aside class="notes"><p>If the model is adequate and the fitted means are not too small, <span class="math inline">\(X^2\)</span> is approximately <a href="https://morrison-lab.github.io/sds/inference.html#def-chi-square-dist">chi-squared distributed</a> with <span class="math inline">\(n - p\)</span> degrees of freedom, where <span class="math inline">\(p\)</span> is the number of regression coefficients, so <span class="math inline">\(X^2 / (n - p)\)</span> should be close to 1; a ratio well above 1 suggests <a href="../chapters/count-regression.html#def-overdispersion">overdispersion</a> <span class="citation" data-cites="dunn2018generalized">(<a href="#/references" role="doc-biblioref" onclick="">Dunn and Smyth 2018, chap. 7</a>)</span>. The <a href="../chapters/count-regression.html">count regression chapter</a> returns to overdispersion.</p>
 <style type="text/css">

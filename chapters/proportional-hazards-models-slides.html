@@ -2731,38 +2731,57 @@ Figure&nbsp;7: Kaplan-Meier Survival Curves for HOD/NHL and Allo/Auto Grafts
 <h3 id="cumulative-hazard-log-scale-curves">Cumulative hazard (log-scale) curves</h3>
 <p>Also known as “complementary log-log (clog-log) survival curves”.</p>
 <div class="cell">
-<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a>na_model <span class="ot">&lt;-</span> <span class="fu">survfit</span>(</span>
-<span id="cb23-2"><a aria-label="2"></a>  <span class="at">formula =</span> surv <span class="sc">~</span> dtype <span class="sc">+</span> gtype,</span>
-<span id="cb23-3"><a aria-label="3"></a>  <span class="at">data =</span> hodg2,</span>
-<span id="cb23-4"><a aria-label="4"></a>  <span class="at">type =</span> <span class="st">"fleming"</span></span>
-<span id="cb23-5"><a aria-label="5"></a>)</span>
-<span id="cb23-6"><a aria-label="6"></a></span>
-<span id="cb23-7"><a aria-label="7"></a>na_model <span class="sc">|&gt;</span></span>
-<span id="cb23-8"><a aria-label="8"></a>  survminer<span class="sc">::</span><span class="fu">ggsurvplot</span>(</span>
-<span id="cb23-9"><a aria-label="9"></a>    <span class="at">legend =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb23-10"><a aria-label="10"></a>    <span class="at">legend.title =</span> <span class="st">""</span>,</span>
-<span id="cb23-11"><a aria-label="11"></a>    <span class="at">ylab =</span> <span class="st">"log(Cumulative Hazard)"</span>,</span>
-<span id="cb23-12"><a aria-label="12"></a>    <span class="at">xlab =</span> <span class="st">"Time since transplant (days, log-scale)"</span>,</span>
-<span id="cb23-13"><a aria-label="13"></a>    <span class="at">fun =</span> <span class="st">"cloglog"</span>,</span>
-<span id="cb23-14"><a aria-label="14"></a>    <span class="at">size =</span> .<span class="dv">5</span>,</span>
-<span id="cb23-15"><a aria-label="15"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
-<span id="cb23-16"><a aria-label="16"></a>    <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb23-17"><a aria-label="17"></a>    <span class="at">censor =</span> <span class="cn">TRUE</span></span>
-<span id="cb23-18"><a aria-label="18"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb23-19"><a aria-label="19"></a>  magrittr<span class="sc">::</span><span class="fu">extract2</span>(<span class="st">"plot"</span>) <span class="sc">+</span></span>
-<span id="cb23-20"><a aria-label="20"></a>  <span class="fu">guides</span>(</span>
-<span id="cb23-21"><a aria-label="21"></a>    <span class="at">col =</span></span>
-<span id="cb23-22"><a aria-label="22"></a>      <span class="fu">guide_legend</span>(</span>
-<span id="cb23-23"><a aria-label="23"></a>        <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb23-24"><a aria-label="24"></a>        <span class="at">label.theme =</span> <span class="fu">element_text</span>(<span class="at">size =</span> legend_text_size)</span>
-<span id="cb23-25"><a aria-label="25"></a>      )</span>
-<span id="cb23-26"><a aria-label="26"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a><span class="co"># draw cumulative hazard against time, both on log-spaced axes,</span></span>
+<span id="cb23-2"><a aria-label="2"></a><span class="co"># so that the ticks are in days and in units of cumulative hazard</span></span>
+<span id="cb23-3"><a aria-label="3"></a><span class="co"># rather than in the logs of those quantities:</span></span>
+<span id="cb23-4"><a aria-label="4"></a><span class="co"># (`text_size` is the legend text size;</span></span>
+<span id="cb23-5"><a aria-label="5"></a><span class="co"># 9 matches `legend_text_size` in r-config)</span></span>
+<span id="cb23-6"><a aria-label="6"></a>plot_cloglog <span class="ot">&lt;-</span> <span class="cf">function</span>(curves, <span class="at">text_size =</span> <span class="dv">9</span>) {</span>
+<span id="cb23-7"><a aria-label="7"></a>  curves <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a aria-label="8"></a>    <span class="co"># log10(0) is not finite, so leave out the time-zero points</span></span>
+<span id="cb23-9"><a aria-label="9"></a>    <span class="fu">filter</span>(.data<span class="sc">$</span>time <span class="sc">&gt;</span> <span class="dv">0</span>, .data<span class="sc">$</span>cumhaz <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-10"><a aria-label="10"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-11"><a aria-label="11"></a>    <span class="fu">aes</span>(<span class="at">x =</span> .data<span class="sc">$</span>time, <span class="at">y =</span> .data<span class="sc">$</span>cumhaz, <span class="at">col =</span> .data<span class="sc">$</span>strata) <span class="sc">+</span></span>
+<span id="cb23-12"><a aria-label="12"></a>    <span class="fu">geom_step</span>(<span class="at">linewidth =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a aria-label="13"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-14"><a aria-label="14"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb23-15"><a aria-label="15"></a>      <span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb23-16"><a aria-label="16"></a>      <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">drop0trailing =</span> <span class="cn">TRUE</span>, <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb23-17"><a aria-label="17"></a>      <span class="at">name =</span> <span class="st">"Time since transplant (days, log scale)"</span></span>
+<span id="cb23-18"><a aria-label="18"></a>    ) <span class="sc">+</span></span>
+<span id="cb23-19"><a aria-label="19"></a>    <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb23-20"><a aria-label="20"></a>      <span class="at">trans =</span> <span class="st">"log10"</span>,</span>
+<span id="cb23-21"><a aria-label="21"></a>      <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">drop0trailing =</span> <span class="cn">TRUE</span>, <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb23-22"><a aria-label="22"></a>      <span class="at">name =</span> <span class="st">"Cumulative hazard H(t) (log scale)"</span></span>
+<span id="cb23-23"><a aria-label="23"></a>    ) <span class="sc">+</span></span>
+<span id="cb23-24"><a aria-label="24"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb23-25"><a aria-label="25"></a>    <span class="fu">guides</span>(</span>
+<span id="cb23-26"><a aria-label="26"></a>      <span class="at">col =</span></span>
+<span id="cb23-27"><a aria-label="27"></a>        <span class="fu">guide_legend</span>(</span>
+<span id="cb23-28"><a aria-label="28"></a>          <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb23-29"><a aria-label="29"></a>          <span class="at">label.theme =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size)</span>
+<span id="cb23-30"><a aria-label="30"></a>        )</span>
+<span id="cb23-31"><a aria-label="31"></a>    )</span>
+<span id="cb23-32"><a aria-label="32"></a>}</span>
+<span id="cb23-33"><a aria-label="33"></a></span>
+<span id="cb23-34"><a aria-label="34"></a>na_model <span class="ot">&lt;-</span> <span class="fu">survfit</span>(</span>
+<span id="cb23-35"><a aria-label="35"></a>  <span class="at">formula =</span> surv <span class="sc">~</span> dtype <span class="sc">+</span> gtype,</span>
+<span id="cb23-36"><a aria-label="36"></a>  <span class="at">data =</span> hodg2,</span>
+<span id="cb23-37"><a aria-label="37"></a>  <span class="at">type =</span> <span class="st">"fleming"</span></span>
+<span id="cb23-38"><a aria-label="38"></a>)</span>
+<span id="cb23-39"><a aria-label="39"></a></span>
+<span id="cb23-40"><a aria-label="40"></a>na_model <span class="sc">|&gt;</span></span>
+<span id="cb23-41"><a aria-label="41"></a>  <span class="fu">fortify</span>(<span class="at">fun =</span> <span class="st">"cumhaz"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-42"><a aria-label="42"></a>  <span class="co"># `fortify.survfit()` doesn't name cumhaz correctly:</span></span>
+<span id="cb23-43"><a aria-label="43"></a>  <span class="fu">rename</span>(<span class="at">cumhaz =</span> surv) <span class="sc">|&gt;</span></span>
+<span id="cb23-44"><a aria-label="44"></a>  <span class="fu">mutate</span>(<span class="at">strata =</span> <span class="fu">trimws</span>(strata)) <span class="sc">|&gt;</span></span>
+<span id="cb23-45"><a aria-label="45"></a>  <span class="fu">plot_cloglog</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div id="fig-cloglog-na" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-cloglog-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Complementary log-log survival curves - Nelson-Aalen estimates
+Figure&nbsp;8: Cumulative hazard curves, on log-spaced axes (complementary log-log survival curves) - Nelson-Aalen estimates
 </figcaption><div aria-describedby="fig-cloglog-na-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="proportional-hazards-models_files/figure-revealjs/fig-cloglog-na-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;8: Complementary log-log survival curves - Nelson-Aalen estimates"><img data-src="proportional-hazards-models_files/figure-revealjs/fig-cloglog-na-1.png" width="672"></a>
+<a href="proportional-hazards-models_files/figure-revealjs/fig-cloglog-na-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;8: Cumulative hazard curves, on log-spaced axes (complementary log-log survival curves) - Nelson-Aalen estimates"><img data-src="proportional-hazards-models_files/figure-revealjs/fig-cloglog-na-1.png" width="672"></a>
 </div>
 </figure>
 </div>
@@ -2771,32 +2790,14 @@ Figure&nbsp;8: Complementary log-log survival curves - Nelson-Aalen estimates
 <p>Let’s compare these empirical (i.e., non-parametric) curves with the fitted curves from our <code>coxph()</code> model:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-label="1"></a>cox_model <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a aria-label="2"></a>  survminer<span class="sc">::</span><span class="fu">ggsurvplot</span>(</span>
-<span id="cb24-3"><a aria-label="3"></a>    <span class="at">facet_by =</span> <span class="st">""</span>,</span>
-<span id="cb24-4"><a aria-label="4"></a>    <span class="at">legend =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb24-5"><a aria-label="5"></a>    <span class="at">legend.title =</span> <span class="st">""</span>,</span>
-<span id="cb24-6"><a aria-label="6"></a>    <span class="at">ylab =</span> <span class="st">"log(Cumulative Hazard)"</span>,</span>
-<span id="cb24-7"><a aria-label="7"></a>    <span class="at">xlab =</span> <span class="st">"Time since transplant (days, log-scale)"</span>,</span>
-<span id="cb24-8"><a aria-label="8"></a>    <span class="at">fun =</span> <span class="st">"cloglog"</span>,</span>
-<span id="cb24-9"><a aria-label="9"></a>    <span class="at">size =</span> .<span class="dv">5</span>,</span>
-<span id="cb24-10"><a aria-label="10"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_bw</span>(),</span>
-<span id="cb24-11"><a aria-label="11"></a>    <span class="at">censor =</span> <span class="cn">FALSE</span>, <span class="co"># doesn't make sense for cox model</span></span>
-<span id="cb24-12"><a aria-label="12"></a>    <span class="at">conf.int =</span> <span class="cn">FALSE</span></span>
-<span id="cb24-13"><a aria-label="13"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb24-14"><a aria-label="14"></a>  magrittr<span class="sc">::</span><span class="fu">extract2</span>(<span class="st">"plot"</span>) <span class="sc">+</span></span>
-<span id="cb24-15"><a aria-label="15"></a>  <span class="fu">guides</span>(</span>
-<span id="cb24-16"><a aria-label="16"></a>    <span class="at">col =</span></span>
-<span id="cb24-17"><a aria-label="17"></a>      <span class="fu">guide_legend</span>(</span>
-<span id="cb24-18"><a aria-label="18"></a>        <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb24-19"><a aria-label="19"></a>        <span class="at">label.theme =</span> <span class="fu">element_text</span>(<span class="at">size =</span> legend_text_size)</span>
-<span id="cb24-20"><a aria-label="20"></a>      )</span>
-<span id="cb24-21"><a aria-label="21"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-2"><a aria-label="2"></a>  <span class="fu">stack_surv_ph</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a aria-label="3"></a>  <span class="fu">plot_cloglog</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div id="fig-cloglog-ph" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-cloglog-ph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Complementary log-log survival curves - PH estimates
+Figure&nbsp;9: Cumulative hazard curves, on log-spaced axes (complementary log-log survival curves) - PH estimates
 </figcaption><div aria-describedby="fig-cloglog-ph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="proportional-hazards-models_files/figure-revealjs/fig-cloglog-ph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;9: Complementary log-log survival curves - PH estimates"><img data-src="proportional-hazards-models_files/figure-revealjs/fig-cloglog-ph-1.png" width="672"></a>
+<a href="proportional-hazards-models_files/figure-revealjs/fig-cloglog-ph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;9: Cumulative hazard curves, on log-spaced axes (complementary log-log survival curves) - PH estimates"><img data-src="proportional-hazards-models_files/figure-revealjs/fig-cloglog-ph-1.png" width="672"></a>
 </div>
 </figure>
 </div>

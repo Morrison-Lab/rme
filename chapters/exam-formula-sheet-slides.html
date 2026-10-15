@@ -265,7 +265,7 @@
 <p><span class="math display">\[\ell_{ij}''=
 \frac{\partial}{\partial \theta_i}\frac{\partial}{\partial \theta_j} \ell(\tilde{X}= \tilde{x}| \tilde{\theta})\]</span></p>
 <p><span class="math display">\[I\stackrel{\text{def}}{=}-\ell''(\tilde{x}|\tilde{\theta})\]</span> <span class="math display">\[\mathcal{I}\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[I(\tilde{x}|\theta)\right]\mathclose{}\]</span></p>
-<p><span class="math display">\[\hat\theta_{ML}\ \dot \sim\ \operatorname{N}\mathopen{}\left(\theta,\mathopen{}\left[\mathcal{I}(\tilde{\theta})\right]\mathclose{}^{-1}\right)\mathclose{}\]</span></p>
+<p><span class="math display">\[\hat\theta_{ML}\ \dot \sim\ \operatorname{N}\mathopen{}\left(\theta,{\mathopen{}\left[\mathcal{I}(\tilde{\theta})\right]\mathclose{}}^{-1}\right)\mathclose{}\]</span></p>
 <p>For one parameter <span class="math inline">\(\theta_k\)</span>:</p>
 <p><span class="math display">\[
 \text{CI}_{1-\alpha}(\theta_k)
@@ -399,7 +399,7 @@ t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
 <p><strong>Conditional odds</strong> (<a href="../chapters/binary-outcome-associations.html#def-c-odds">def</a>) <span class="math display">\[\omega(A|B) \stackrel{\text{def}}{=}\frac{\Pr(A|B)}{\Pr(\neg A|B)}\]</span></p>
 <p><strong>Odds function</strong> (<a href="../chapters/binary-outcome-associations.html#def-odds-fn">def</a>) <span class="math display">\[\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{} \stackrel{\text{def}}{=}\frac{\pi}{1-\pi}\]</span></p>
 <p><strong>Probability to odds</strong> (<a href="../chapters/binary-outcome-associations.html#thm-prob-to-odds">thm</a>, <a href="../chapters/binary-outcome-associations.html#cor-oddsf-to-odds">cor</a>) <span class="math display">\[\omega= \frac{\pi}{1-\pi} = \operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{}\]</span></p>
-<p><strong>Simplified odds expressions; odds of a non-event</strong> (<a href="../chapters/binary-outcome-associations.html#thm-odds-simplified">thm</a>, <a href="../chapters/binary-outcome-associations.html#cor-odds-neg">cor</a>) <span class="math display">\[\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{} = \frac{1}{\pi^{-1}-1} = \mathopen{}\left(\pi^{-1}-1\right)^{-1}\mathclose{},
+<p><strong>Simplified odds expressions; odds of a non-event</strong> (<a href="../chapters/binary-outcome-associations.html#thm-odds-simplified">thm</a>, <a href="../chapters/binary-outcome-associations.html#cor-odds-neg">cor</a>) <span class="math display">\[\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{} = \frac{1}{\pi^{-1}-1} = {\mathopen{}\left(\pi^{-1}-1\right)\mathclose{}}^{-1},
 \qquad \omega(\neg A) = \frac{1-\pi}{\pi} = \pi^{-1}-1\]</span></p>
 <p><strong>Odds ratio</strong> (<a href="../chapters/binary-outcome-associations.html#def-OR">def</a>) <span class="math display">\[\text{ϙ}(\omega_1, \omega_2) \stackrel{\text{def}}{=}\frac{\omega_1}{\omega_2}\]</span></p>
 <p><strong>OR as ratio of probability ratios</strong> (<a href="../chapters/binary-outcome-associations.html#thm-or-ratio-ratio">thm</a>) <span class="math display">\[\text{ϙ}(\omega_1, \omega_2)
@@ -471,12 +471,12 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
 \hline
 \pi
   &amp; 1
-  &amp; \mathopen{}\left(1+\omega\right)^2\mathclose{}
-  &amp; \dfrac{\mathopen{}\left(1+\omega\right)^2\mathclose{}}{\omega}
+  &amp; {\mathopen{}\left(1+\omega\right)\mathclose{}}^2
+  &amp; \dfrac{{\mathopen{}\left(1+\omega\right)\mathclose{}}^2}{\omega}
   &amp; \text{undef}
   &amp; \text{undef} \\[10pt]
 \omega
-  &amp; \mathopen{}\left(1-\pi\right)^2\mathclose{}
+  &amp; {\mathopen{}\left(1-\pi\right)\mathclose{}}^2
   &amp; 1
   &amp; \dfrac{1}{\omega}
   &amp; \text{undef}
@@ -523,7 +523,7 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
 <p>This estimating equation has no closed-form solution in general; <span class="math inline">\(\hat{\tilde{\beta}}\)</span> must be computed by numerical iteration.</p>
 <p><strong>Hessian</strong> (<a href="../chapters/logistic-regression.html#eq-logistic-hess">eq</a>) <span class="math display">\[\underbrace{\ell''(\tilde{\beta})}_{(p+1) \times (p+1)} = -\underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}, \qquad \mathbf{D} \stackrel{\text{def}}{=}\text{diag}(\operatorname{Var}\mathopen{}\left(Y_i|\tilde{X}_i=\tilde{x}_i\right)\mathclose{}) = \text{diag}(\pi_i(1-\pi_i))\]</span></p>
 <p><strong>Concavity</strong> (<a href="../chapters/logistic-regression.html#rem-hessian-nsd">rem</a>): the <a href="https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian">Hessian</a> is negative semi-definite for every <span class="math inline">\(\tilde{\beta}\)</span> (negative definite when <span class="math inline">\(\mathbf{X}\)</span> has full column rank), so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is <a href="https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex">concave</a> and every solution of the score equation is a global maximum.</p>
-<p><strong>Newton-Raphson update</strong> (<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson">Newton-Raphson method</a>) <span class="math display">\[\underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} \leftarrow \underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} - \underbrace{\mathopen{}\left(\ell''\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}\right)^{-1}\mathclose{}}_{(p+1) \times (p+1)} \underbrace{\ell'\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}}_{(p+1) \times 1}\]</span></p>
+<p><strong>Newton-Raphson update</strong> (<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson">Newton-Raphson method</a>) <span class="math display">\[\underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} \leftarrow \underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} - \underbrace{{\mathopen{}\left(\ell''\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}\right)\mathclose{}}^{-1}}_{(p+1) \times (p+1)} \underbrace{\ell'\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}}_{(p+1) \times 1}\]</span></p>
 <div style="column-count: 2; column-gap: 2em;">
 <p><strong>One-sample MLE for odds</strong> (<a href="../chapters/binary-outcome-associations.html#thm-est-odds">thm</a>) <span class="math display">\[\hat{\omega}= \frac{x}{n-x}\]</span></p>
 </div>

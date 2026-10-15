@@ -487,7 +487,7 @@ Y_{ij} \stackrel{\text{def}}{=}\mu + \alpha_i + \epsilon_{ij},
 <li>
 <span class="math inline">\(\mu\)</span> is a fixed overall mean;</li>
 <li>
-<span class="math inline">\(\alpha_1, \ldots, \alpha_a \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> are the <strong>random effects</strong> of the groups;</li>
+<span class="math inline">\(\alpha_1, \ldots, \alpha_a \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> are the <a href="#/def-random-effect">random effects</a> of the groups;</li>
 <li>
 <span class="math inline">\(\epsilon_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> are the within-group errors;</li>
 <li>the <span class="math inline">\(\alpha_i\)</span>s and the <span class="math inline">\(\epsilon_{ij}\)</span>s are <a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">mutually independent</a>.</li>
@@ -995,27 +995,31 @@ w_j
 </details>
 </div>
 </div>
-</section><section class="slide level2"><details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="fu">plot</span>(</span>
-<span id="cb12-2"><a aria-label="2"></a>  <span class="fu">as.vector</span>(radon_n), radon_ybar,</span>
-<span id="cb12-3"><a aria-label="3"></a>  <span class="at">log =</span> <span class="st">"x"</span>, <span class="at">pch =</span> <span class="dv">1</span>,</span>
-<span id="cb12-4"><a aria-label="4"></a>  <span class="at">xlab =</span> <span class="st">"Houses sampled in county (log scale)"</span>,</span>
-<span id="cb12-5"><a aria-label="5"></a>  <span class="at">ylab =</span> <span class="st">"Estimated county mean log radon"</span></span>
-<span id="cb12-6"><a aria-label="6"></a>)</span>
-<span id="cb12-7"><a aria-label="7"></a><span class="fu">points</span>(<span class="fu">as.vector</span>(radon_n), radon_pp, <span class="at">pch =</span> <span class="dv">19</span>)</span>
-<span id="cb12-8"><a aria-label="8"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">fixef</span>(radon_lmer0), <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb12-9"><a aria-label="9"></a><span class="fu">legend</span>(</span>
-<span id="cb12-10"><a aria-label="10"></a>  <span class="st">"topright"</span>,</span>
-<span id="cb12-11"><a aria-label="11"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"No pooling"</span>, <span class="st">"Partial pooling"</span>),</span>
-<span id="cb12-12"><a aria-label="12"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">19</span>)</span>
-<span id="cb12-13"><a aria-label="13"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section class="slide level2"><details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-label="1"></a><span class="co"># the fit works with log radon;</span></span>
+<span id="cb12-2"><a aria-label="2"></a><span class="co"># the y-axis ticks sit at the logs of round radon values, labelled in pCi/L</span></span>
+<span id="cb12-3"><a aria-label="3"></a>radon_ticks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">12</span>)</span>
+<span id="cb12-4"><a aria-label="4"></a><span class="fu">plot</span>(</span>
+<span id="cb12-5"><a aria-label="5"></a>  <span class="fu">as.vector</span>(radon_n), radon_ybar,</span>
+<span id="cb12-6"><a aria-label="6"></a>  <span class="at">log =</span> <span class="st">"x"</span>, <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">yaxt =</span> <span class="st">"n"</span>,</span>
+<span id="cb12-7"><a aria-label="7"></a>  <span class="at">xlab =</span> <span class="st">"Houses sampled in county (log scale)"</span>,</span>
+<span id="cb12-8"><a aria-label="8"></a>  <span class="at">ylab =</span> <span class="st">"County geometric-mean radon (pCi/L)"</span></span>
+<span id="cb12-9"><a aria-label="9"></a>)</span>
+<span id="cb12-10"><a aria-label="10"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">at =</span> <span class="fu">log</span>(radon_ticks), <span class="at">labels =</span> radon_ticks)</span>
+<span id="cb12-11"><a aria-label="11"></a><span class="fu">points</span>(<span class="fu">as.vector</span>(radon_n), radon_pp, <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb12-12"><a aria-label="12"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">fixef</span>(radon_lmer0), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb12-13"><a aria-label="13"></a><span class="fu">legend</span>(</span>
+<span id="cb12-14"><a aria-label="14"></a>  <span class="st">"topright"</span>,</span>
+<span id="cb12-15"><a aria-label="15"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"No pooling"</span>, <span class="st">"Partial pooling"</span>),</span>
+<span id="cb12-16"><a aria-label="16"></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">19</span>)</span>
+<span id="cb12-17"><a aria-label="17"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-radon-shrinkage" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate.
+Figure&nbsp;1: No-pooling and partial-pooling estimates of the county geometric-mean radon levels (the exponentials of the estimated county means of log radon); the dashed line is the complete-pooling estimate. The model is fit to log radon, so the radon axis is spaced logarithmically.
 </figcaption><div aria-describedby="fig-radon-shrinkage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><a href="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: No-pooling and partial-pooling estimates of the county mean log radon levels; the dashed line is the complete-pooling estimate."><img data-src="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" width="672"></a></p>
+<figure><p><a href="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: No-pooling and partial-pooling estimates of the county geometric-mean radon levels (the exponentials of the estimated county means of log radon); the dashed line is the complete-pooling estimate. The model is fit to log radon, so the radon axis is spaced logarithmically."><img data-src="intro-multilevel-models_files/figure-revealjs/radon-shrinkage-plot-1.png" width="672"></a></p>
 </figure>
 </div>
 </div>
