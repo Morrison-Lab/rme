@@ -143,7 +143,7 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Always add a noun phrase after "This", "That", and "Those" to clarify the referent (e.g., "This estimator", not "This")
 - Clearly distinguish **model structure** (how the data relate to the parameters — distributional family, link function, random effects, hierarchies, …) from **inference method** (how the parameters are estimated — MLE, Bayes, GEE, method of moments, …). The two are orthogonal: any model structure can be paired with any compatible inference method (e.g. a random-effects model can be fit by maximum likelihood *or* by Bayesian MCMC). Never write as if a structure belonged to one inference paradigm (avoid e.g. "the Bayesian version of random effects"); instead name the inference method being applied to the structure.
 - Track a useful resource (course, book or video) in every notes repo whose topic it covers, in addition to its primary home.
-  One that covers a topic rme teaches goes in that chapter's Further reading or reading box (Ezra, 2026-10-15).
+  One that covers a topic rme teaches goes in the Further reading section or reading box of the matching chapter (Ezra, 2026-10-15).
   Check each license: adapt with attribution only when the license allows it, and otherwise link.
   See [`track-useful-resources`](https://github.com/Morrison-Lab/ai-config/blob/main/shared/workflow/track-useful-resources.md).
 
