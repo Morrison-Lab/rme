@@ -1,0 +1,27 @@
+:::{#exm-diff-means-lincom}
+
+#### Difference in mean birthweight as a linear combination
+
+For the `birthweight` model with an interaction (`bw_lm2`),
+let $\vx$ be the covariate pattern for males and $\vxs$ the pattern for females, both at 40 weeks.
+The code below computes $\diffvx$,
+and compares $\dprodf{\diffvx}{\evb}$ with the difference in the two predicted means:
+
+```{r}
+#| label: exm-diff-means-lincom-calc
+#| code-fold: show
+ex_pair <- data.frame(
+  sex = factor(c("female", "male"), levels = levels(bw$sex)),
+  age = c(40, 40)
+)
+ex_design <- model.matrix(delete.response(terms(bw_lm2)), ex_pair)
+ex_delta_x <- ex_design[2, ] - ex_design[1, ]
+ex_lincom <- sum(ex_delta_x * coef(bw_lm2))
+ex_diff <- diff(predict(bw_lm2, newdata = ex_pair))
+```
+
+The linear combination is `r round(ex_lincom, 1)` grams,
+and the difference in predicted means is `r round(ex_diff, 1)` grams,
+so @thm-diff-means-lincom holds for the fitted coefficients.
+
+:::
