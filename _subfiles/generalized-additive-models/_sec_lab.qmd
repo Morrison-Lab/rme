@@ -350,11 +350,13 @@ plot(fit_logit_gam, shade = TRUE, seWithMean = TRUE,
 #| python.reticulate: false
 # Not run: the rme render has no Python environment.
 from pygam import LogisticGAM, s as gam_s, f as gam_f
+from scipy.special import expit
 
 mask = Wage["education"] != "1. < HS Grad"
 W2 = Wage[mask].copy()
 W2["high"] = (W2["wage"] > 250).astype(int)
-edu2 = W2["education"].cat.codes.values
+# drop the unused level so the codes run from 0, as pygam's factor term expects:
+edu2 = W2["education"].cat.remove_unused_categories().cat.codes.values
 
 X_log = np.column_stack([W2["year"].values,
                           W2["age"].values,
@@ -367,14 +369,21 @@ gam_log = LogisticGAM(
 
 print("Training accuracy:", (gam_log.predict(X_log) == y_log).mean())
 
+# pygam's partial effects are on the log-odds scale and leave out the intercept
+# (the last coefficient), so add it back before applying the inverse logit:
+intercept = gam_log.coef_[-1]
+
 fig, axes = plt.subplots(1, 3, figsize=(14, 4))
 titles = ["year", "age", "education"]
 for i, ax in enumerate(axes):
     XX = gam_log.generate_X_grid(term=i)
     pdep, confi = gam_log.partial_dependence(term=i, X=XX, width=0.95)
-    ax.plot(XX[:, i], pdep, linewidth=2)
-    ax.fill_between(XX[:, i], confi[:,0], confi[:,1], alpha=0.3)
-    ax.set_xlabel(titles[i]); ax.set_ylabel("Partial effect (log-odds)")
+    ax.plot(XX[:, i], expit(pdep + intercept), linewidth=2)
+    ax.fill_between(XX[:, i],
+                    expit(confi[:, 0] + intercept),
+                    expit(confi[:, 1] + intercept),
+                    alpha=0.3)
+    ax.set_xlabel(titles[i]); ax.set_ylabel("P(wage > 250k)")
 plt.tight_layout(); plt.show()
 ```
 :::
