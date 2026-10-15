@@ -245,6 +245,18 @@ callouty-theorem:
       type: remark
       appearance: minimal
       collapse: false # foldable, open by default
+  # Figures and tables are wrapped whole; the caption keeps its own
+  # "Figure 1" label, so there is no title override.
+  fig:
+    callout:
+      type: fig
+      appearance: minimal
+      collapse: false
+  tbl:
+    callout:
+      type: tbl
+      appearance: minimal
+      collapse: false
 
 # Color palette for theorem/proof environments.
 # The coatless-quarto/custom-callout extension reads this block and injects
@@ -271,6 +283,10 @@ custom-callout:
     color: "#4E342E"  # dark cocoa
   remark:
     color: "#AD1457"  # dark magenta
+  fig:
+    color: "#757575"  # neutral grey: a figure or table is not a result
+  tbl:
+    color: "#757575"
 
 format:
   html:
