@@ -1,0 +1,61 @@
+::: proof
+We write the proof with integrals;
+for a probability mass function, replace each integral with a sum.
+Because the support does not depend on $\theta$,
+we can differentiate under the integral sign.
+
+The derivative of the density with respect to $\theta$ is
+
+$$
+\ba
+\deriv{\theta} f(y; \theta, \phi)
+&= f(y; \theta, \phi)
+\deriv{\theta}\sb{\frac{y\theta - b(\theta)}{\phi} + c(y, \phi)}
+&& \text{(chain rule for the exponential)}
+\\ &= f(y; \theta, \phi) \frac{y - b'(\theta)}{\phi}
+&& \text{(differentiate term by term)}
+\ea
+$$
+
+Every density integrates to 1, for every value of $\theta$,
+so differentiating that identity once gives the mean:
+
+$$
+\ba
+0 &= \deriv{\theta} \int f(y; \theta, \phi)\, dy
+&& \text{(derivative of the constant 1)}
+\\ &= \int \deriv{\theta} f(y; \theta, \phi)\, dy
+&& \text{(differentiate under the integral)}
+\\ &= \int \frac{y - b'(\theta)}{\phi} f(y; \theta, \phi)\, dy
+&& \text{(derivative of the density)}
+\\ &= \frac{\E{Y} - b'(\theta)}{\phi}
+&& \text{(definition of expectation, and } \textstyle\int f = 1\text{)}
+\ea
+$$
+
+Multiplying both sides by $\phi > 0$ gives $\E{Y} = b'(\theta)$.
+
+{{< slidebreak >}}
+
+Differentiating the same identity a second time gives the variance:
+
+$$
+\ba
+0 &= \deriv{\theta} \int \frac{y - b'(\theta)}{\phi} f(y; \theta, \phi)\, dy
+&& \text{(derivative of the constant 0)}
+\\ &= \int \sb{-\frac{b''(\theta)}{\phi} f(y; \theta, \phi)
++ \frac{y - b'(\theta)}{\phi} \deriv{\theta} f(y; \theta, \phi)} dy
+&& \text{(product rule)}
+\\ &= \int \sb{-\frac{b''(\theta)}{\phi}
++ \frac{\paren{y - b'(\theta)}^2}{\phi^2}} f(y; \theta, \phi)\, dy
+&& \text{(derivative of the density)}
+\\ &= -\frac{b''(\theta)}{\phi} + \frac{\E{\paren{Y - b'(\theta)}^2}}{\phi^2}
+&& \text{(definition of expectation, and } \textstyle\int f = 1\text{)}
+\\ &= -\frac{b''(\theta)}{\phi} + \frac{\Varf{Y}}{\phi^2}
+&& \text{(} b'(\theta) = \E{Y}\text{, so this is the variance)}
+\ea
+$$
+
+Multiplying both sides by $\phi^2$ and rearranging gives
+$\Varf{Y} = \phi\, b''(\theta)$.
+:::

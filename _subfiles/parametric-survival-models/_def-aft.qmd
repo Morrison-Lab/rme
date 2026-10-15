@@ -1,0 +1,27 @@
+:::{#def-aft}
+#### Accelerated failure time model
+
+An **accelerated failure time (AFT) model**
+for an event time $T$ with covariate vector $\vx$
+assumes that
+
+$$
+\surv(t \mid \vx) \eqdef \surv_0\paren{ t \cdot \hazfactor(\vx) }
+$$ {#eq-aft-surv}
+
+where:
+
+- $\surv_0(t) \eqdef \P(T > t \mid \vx = \vzero)$ is the
+  [baseline survival function](proportional-hazards-models.qmd#def-baseline-surv),
+- $\hazfactor(\vx) \eqdef \expf{\eta(\vx)}$ is the **acceleration factor**, and
+- $\eta(\vx) \eqdef \beta_1 x_1 + \dots + \beta_p x_p$, with no intercept.
+
+:::
+
+::: notes
+An acceleration factor $\hazfactor(\vx) > 1$ makes time pass faster
+for a subject with covariates $\vx$ than at baseline,
+so events happen sooner;
+$\hazfactor(\vx) < 1$ slows time down,
+so events happen later.
+:::

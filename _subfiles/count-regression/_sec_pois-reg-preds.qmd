@@ -13,3 +13,38 @@ $$
 &\quad \text{(substituting estimated linear predictor } \est{\eta}(\vx)\text{)}
 \ea
 $$
+
+{{< slidebreak >}}
+
+:::{#exm-pois-two-group-pred}
+#### Predicted count for a new exposed cohort
+
+Using the two-cohort fit from @exm-pois-two-group-mle,
+the predicted number of events
+for a new exposed cohort ($x = 1$)
+followed for $t = 1000$ person-years is:
+
+$$
+\ba
+\ey
+&= \expf{\eb_0 + \eb_1} \cdot t
+&& \text{(fitted mean function)} \\
+&= \el(1) \cdot 1000
+&& \text{(fitted rate for } x = 1 \text{)} \\
+&= 0.006 \cdot 1000
+&& \text{(substitute the fitted rate)} \\
+&= 6
+&& \text{(multiply)}
+\ea
+$$
+
+```{r}
+#| code-fold: show
+predict(
+  fit_two_cohorts,
+  newdata = data.frame(exposed = 1, person_years = 1000),
+  type = "response"
+)
+```
+
+:::

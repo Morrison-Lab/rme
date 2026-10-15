@@ -1,0 +1,33 @@
+:::{#exm-poisson-rate-ratio}
+#### Rate ratio for a ten-year age difference
+
+Suppose a Poisson regression model for emergency-room visits
+includes age in years, $x_1$,
+with coefficient $\b_1 = 0.03$
+and no interactions involving age.
+By @thm-poisson-rate-ratio with $a = 60$ and $b = 50$,
+the rate ratio comparing a 60-year-old to a 50-year-old
+with the same values of every other covariate is:
+
+$$
+\ba
+\rateratio(x_1 = 60 : x_1 = 50)
+&= \expf{\b_1 (60 - 50)}
+&& \text{(rate ratio theorem)} \\
+&= \expf{0.03 \cdot 10}
+&& \text{(substitute } \b_1 \text{ and subtract)} \\
+&= \expf{0.3}
+&& \text{(multiply)} \\
+&\approx 1.350
+&& \text{(evaluate)}
+\ea
+$$
+
+A one-year age difference instead gives
+$\expf{0.03} \approx 1.030$,
+a 3% higher rate per year of age.
+The ten-year rate ratio is not ten times the one-year excess:
+$\expf{0.3} = \paren{\expf{0.03}}^{10}$,
+because rate ratios multiply across successive one-year steps.
+
+:::

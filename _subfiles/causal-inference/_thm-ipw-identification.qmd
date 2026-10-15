@@ -1,0 +1,38 @@
+:::{#thm-ipw-identification}
+#### Identification by inverse probability weighting
+
+For $a \in \cb{0, 1}$, write
+$\pi_a(\vec{l}) \eqdef \Pf{A = a \mid \vec{L} = \vec{l}}$,
+so that $\pi_1 = e$ and $\pi_0 = 1 - e$.
+If [consistency](#def-consistency),
+conditional [exchangeability](#def-exchangeability) given $\vec{L}$,
+and [positivity](#def-positivity) hold, then
+
+$$
+\E{Y(a)} = \E{\frac{\indicp{A = a} \, Y}{\pi_a(\vec{L})}}
+$$ {#eq-ipw-identification}
+
+:::
+
+::: proof
+$$
+\ba
+\E{\frac{\indicp{A = a} \, Y}{\pi_a(\vec{L})}}
+&= \E{\E{\frac{\indicp{A = a} \, Y}{\pi_a(\vec{L})} \mid \vec{L}}}
+&& \text{(law of total expectation)} \\
+&= \E{\frac{1}{\pi_a(\vec{L})} \E{\indicp{A = a} \, Y \mid \vec{L}}}
+&& \text{(pull out } 1 / \pi_a(\vec{L}) \text{, which positivity keeps finite)} \\
+&= \E{\frac{1}{\pi_a(\vec{L})} \E{\indicp{A = a} \, Y(a) \mid \vec{L}}}
+&& \text{(consistency: } Y = Y(a) \text{ when } A = a \text{)} \\
+&= \E{\frac{1}{\pi_a(\vec{L})} \E{\indicp{A = a} \mid \vec{L}} \E{Y(a) \mid \vec{L}}}
+&& \text{(conditional exchangeability: } A \ind Y(a) \mid \vec{L} \text{)} \\
+&= \E{\frac{1}{\pi_a(\vec{L})} \pi_a(\vec{L}) \E{Y(a) \mid \vec{L}}}
+&& \text{(} \E{\indicp{A = a} \mid \vec{L}} = \Pf{A = a \mid \vec{L}} \text{)} \\
+&= \E{\E{Y(a) \mid \vec{L}}}
+&& \text{(cancel } \pi_a(\vec{L}) \text{)} \\
+&= \E{Y(a)}
+&& \text{(law of total expectation)}
+\ea
+$$
+
+:::

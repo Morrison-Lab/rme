@@ -1,0 +1,98 @@
+:::{#thm-pois-two-group-se}
+#### Standard error of a two-group log rate ratio
+
+Under the conditions of @thm-pois-two-group-mle,
+the standard error of $\eb_1$ estimated from the inverse of the
+[observed information matrix](https://morrison-lab.github.io/sds/intro-MLEs.html#def-oinf)
+at $\evb$ is
+
+$$
+\ese{\eb_1} = \sqrt{\frac{1}{D_0} + \frac{1}{D_1}}
+$$ {#eq-pois-two-group-se}
+
+:::
+
+::: proof
+The observed information matrix is the negative Hessian of $\llik$,
+so by @eq-pois-two-group-hessian,
+evaluated at $\evb$:
+
+$$
+\underbrace{\oinff{\evb}}_{2 \times 2}
+= \underbrace{\begin{bmatrix}
+\emu_{\cdot 0} + \emu_{\cdot 1} & \emu_{\cdot 1} \\
+\emu_{\cdot 1} & \emu_{\cdot 1}
+\end{bmatrix}}_{2 \times 2}
+$$
+
+where $\emu_{\cdot k} \eqdef \sum_{i: x_i = k} t_i \el(k)$
+is group $k$'s total fitted count.
+By @thm-pois-two-group-mle,
+each group's total fitted count equals its observed count:
+
+$$
+\ba
+\emu_{\cdot k}
+&= \el(k) \sum_{i: x_i = k} t_i
+&& \text{(factor out the common rate)} \\
+&= \frac{D_k}{T_k} \cdot T_k
+&& \text{(fitted rate equals crude rate; definition of } T_k \text{)} \\
+&= D_k
+&& \text{(cancel } T_k \text{)}
+\ea
+$$
+
+so
+
+$$
+\underbrace{\oinff{\evb}}_{2 \times 2}
+= \underbrace{\begin{bmatrix}
+D_0 + D_1 & D_1 \\
+D_1 & D_1
+\end{bmatrix}}_{2 \times 2}
+$$
+
+Its determinant is
+
+$$
+\ba
+\det \oinff{\evb}
+&= (D_0 + D_1) D_1 - D_1^2
+&& \text{(} 2 \times 2 \text{ determinant formula)} \\
+&= D_0 D_1 + D_1^2 - D_1^2
+&& \text{(distribute)} \\
+&= D_0 D_1
+&& \text{(cancel)}
+\ea
+$$
+
+and the $2 \times 2$ inverse formula
+$\inv{\begin{bmatrix} a & b \\ c & d \end{bmatrix}}
+= \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$
+gives
+
+$$
+\underbrace{\inv{\oinff{\evb}}}_{2 \times 2}
+= \frac{1}{D_0 D_1}
+\underbrace{\begin{bmatrix}
+D_1 & -D_1 \\
+-D_1 & D_0 + D_1
+\end{bmatrix}}_{2 \times 2}
+$$
+
+The estimated variance of $\eb_1$ is the lower-right entry:
+
+$$
+\ba
+\ese{\eb_1}^2
+&= \frac{D_0 + D_1}{D_0 D_1}
+&& \text{(lower-right entry of the inverse)} \\
+&= \frac{D_0}{D_0 D_1} + \frac{D_1}{D_0 D_1}
+&& \text{(split the numerator)} \\
+&= \frac{1}{D_1} + \frac{1}{D_0}
+&& \text{(cancel)}
+\ea
+$$
+
+Taking the square root gives @eq-pois-two-group-se.
+:::

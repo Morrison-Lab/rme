@@ -1,0 +1,57 @@
+::: proof
+Maximizing $\llik(\beta) - \lambda \abs{\beta}$
+is the same as minimizing its negative with $c$ dropped.
+Expanding the sum of squares:
+
+$$
+\ba
+\frac{1}{2} \sumin (y_i - x_i \beta)^2 + \lambda \abs{\beta}
+&= \frac{1}{2} \sumin \paren{y_i^2 - 2 x_i y_i \beta + x_i^2 \beta^2} + \lambda \abs{\beta}
+&& \text{(expand the square)} \\
+&= \frac{1}{2} \sumin y_i^2 - \beta \sumin x_i y_i + \frac{\beta^2}{2} \sumin x_i^2 + \lambda \abs{\beta}
+&& \text{(distribute the sum)} \\
+&= \frac{1}{2} \sumin y_i^2 - z \beta + \frac{\beta^2}{2} + \lambda \abs{\beta}
+&& \text{(} z \eqdef \sumin x_i y_i \text{; } \sumin x_i^2 = 1 \text{)}
+\ea
+$$
+
+The first term does not depend on $\beta$,
+so $\eb_\lambda$ minimizes
+
+$$
+f(\beta) \eqdef \frac{1}{2} \beta^2 - z \beta + \lambda \abs{\beta}
+$$
+
+The function $f$ is strictly convex
+(a strictly convex quadratic plus the convex function $\lambda \abs{\beta}$),
+so it has exactly one minimizer.
+On each side of $0$, $f$ is a smooth quadratic:
+
+$$
+\ba
+f'(\beta) &= \beta - (z - \lambda)
+&& \text{for } \beta > 0
+&& \text{(} \abs{\beta} = \beta \text{)} \\
+f'(\beta) &= \beta - (z + \lambda)
+&& \text{for } \beta < 0
+&& \text{(} \abs{\beta} = -\beta \text{)}
+\ea
+$$
+
+- If $z > \lambda$,
+  then $z - \lambda > 0$ lies in the region $\beta > 0$,
+  and $f'(z - \lambda) = 0$ there,
+  so the unique minimizer is $\eb_\lambda = z - \lambda$.
+- If $z < -\lambda$,
+  then $z + \lambda < 0$ lies in the region $\beta < 0$,
+  and $f'(z + \lambda) = 0$ there,
+  so the unique minimizer is $\eb_\lambda = z + \lambda$.
+- If $\abs{z} \le \lambda$,
+  then $z - \lambda \le 0$ and $z + \lambda \ge 0$.
+  So $f'(\beta) = \beta - (z - \lambda) > 0$ for every $\beta > 0$,
+  and $f'(\beta) = \beta - (z + \lambda) < 0$ for every $\beta < 0$:
+  $f$ decreases up to $0$ and increases after it,
+  so the unique minimizer is $\eb_\lambda = 0$.
+
+Together, these three cases give @eq-lasso-soft-threshold.
+:::

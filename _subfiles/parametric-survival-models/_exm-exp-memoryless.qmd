@@ -1,0 +1,58 @@
+:::{#exm-exp-memoryless}
+#### Remaining survival after 10 event-free weeks
+
+Let $T$ be exponential with rate $\lambda = 0.1$ events per week.
+For a subject who has been event-free for $s = 10$ weeks,
+the probability of lasting at least $t = 5$ more weeks is:
+
+$$
+\ba
+\P(T > 15 \mid T > 10)
+&= \frac{\ef{-0.1 \cdot 15}}{\ef{-0.1 \cdot 10}}
+&& \text{(ratio of survival functions)} \\
+&= \frac{\ef{-1.5}}{\ef{-1}}
+&& \text{(multiply)} \\
+&= \ef{-0.5}
+&& \text{(quotient rule for exponentials)} \\
+&\approx 0.6065
+&& \text{(evaluate)}
+\ea
+$$
+
+This value equals $\P(T > 5) = \ef{-0.1 \cdot 5} = \ef{-0.5}$,
+the probability that a new subject lasts 5 weeks:
+the 10 weeks already survived do not change the outlook.
+
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-weibull-not-memoryless}
+#### A Weibull distribution with shape 2 is not memoryless (counterexample)
+
+Now let $T$ be Weibull with $\lambda = 0.1$ and $p = 2$,
+so $\surv(t) = \ef{-(0.1 t)^2}$ and the hazard increases over time.
+Then:
+
+$$
+\ba
+\P(T > 15 \mid T > 10)
+&= \frac{\ef{-(0.1 \cdot 15)^2}}{\ef{-(0.1 \cdot 10)^2}}
+&& \text{(ratio of survival functions)} \\
+&= \frac{\ef{-(1.5)^2}}{\ef{-(1)^2}}
+&& \text{(multiply)} \\
+&= \frac{\ef{-2.25}}{\ef{-1}}
+&& \text{(square)} \\
+&= \ef{-1.25}
+&& \text{(quotient rule for exponentials)} \\
+&\approx 0.2865
+&& \text{(evaluate)}
+\ea
+$$
+
+whereas $\P(T > 5) = \ef{-(0.5)^2} = \ef{-0.25} \approx 0.7788$.
+A subject who has already lasted 10 weeks is less likely to last 5 more weeks
+than a new subject is,
+because the hazard has risen in the meantime.
+
+:::

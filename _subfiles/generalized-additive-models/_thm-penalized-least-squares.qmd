@@ -1,0 +1,34 @@
+::::{#thm-penalized-least-squares}
+#### Penalized least squares has a closed-form solution
+
+Let $\mat{B}$ be an $n \times q$ basis matrix (built as in @def-basis-expansion),
+$\vy$ an $n \times 1$ outcome vector,
+$\mat{P}$ a symmetric, positive semidefinite $q \times q$ penalty matrix,
+and $\l \ge 0$,
+and suppose that $\tp{\mat{B}}\mat{B} + \l \mat{P}$ is invertible.
+Then the unique minimizer of the penalized residual sum of squares
+
+$$
+\text{PRSS}_\l(\vb)
+\eqdef \tp{(\vy - \mat{B}\vb)} (\vy - \mat{B}\vb) + \l \tp{\vb} \mat{P} \vb
+$$
+
+is
+
+$$
+\ub{\evb_\l}_{q \times 1}
+= \ub{\paren{\tp{\mat{B}}\mat{B} + \l \mat{P}}^{-1}}_{q \times q}
+\ub{\tp{\mat{B}}}_{q \times n} \ub{\vy}_{n \times 1},
+$$
+
+and the fitted values are $\est{\vy} = \mat{S}_\l \vy$, with smoother matrix
+
+$$
+\ub{\mat{S}_\l}_{n \times n}
+\eqdef \ub{\mat{B}}_{n \times q}
+\ub{\paren{\tp{\mat{B}}\mat{B} + \l \mat{P}}^{-1}}_{q \times q}
+\ub{\tp{\mat{B}}}_{q \times n}
+$$
+
+[@wood2017generalized, §4.2; @hastie2009esl2e, §5.4].
+::::

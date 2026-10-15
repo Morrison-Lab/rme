@@ -1,0 +1,18 @@
+:::{#exm-ols-resid-no-intercept}
+#### Without an intercept, the residuals need not add up to zero
+
+If we drop the intercept and regress birthweight on gestational age alone,
+$\mX$ has a single column, the ages,
+so @thm-ols-resid-orthogonal only guarantees $\sumin \text{age}_i \resid_i = 0$:
+
+```{r}
+#| label: bw-resid-no-intercept
+#| code-fold: show
+bw_lm0 <- lm(weight ~ 0 + age, data = bw)
+sum(resid(bw_lm0))
+sum(bw$age * resid(bw_lm0))
+```
+
+The age-weighted sum of the residuals is zero up to rounding error,
+but the residuals themselves do not add up to zero.
+:::

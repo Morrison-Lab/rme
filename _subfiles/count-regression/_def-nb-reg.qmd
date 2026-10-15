@@ -1,0 +1,20 @@
+:::{#def-nb-reg}
+#### Negative binomial regression model
+
+A **negative binomial regression model** for a count outcome $Y$
+with covariate vector $\vX$ and exposure magnitude $T$
+assumes that,
+given $\vX = \vx$ and $T = t$,
+$Y$ has a [negative binomial distribution](https://morrison-lab.github.io/pds/distributions.html#def-nb)
+with the same mean function as the [Poisson regression model](#def-poisson-reg),
+
+$$\E{Y \mid \vX = \vx, T = t} = \mu(\vx, t) \eqdef t \expf{\eta(\vx)}$$
+
+and with variance
+
+$$\Var{Y \mid \vX = \vx, T = t} = \mu(\vx, t) + \frac{\mu(\vx, t)^2}{\rho}$$ {#eq-nb-reg-var}
+
+for an overdispersion parameter $\rho > 0$
+that does not depend on $\vx$ or $t$.
+
+:::

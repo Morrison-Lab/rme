@@ -1,0 +1,65 @@
+::: proof
+With the canonical link,
+the natural parameter of observation $i$ is its linear predictor:
+
+$$
+\ba
+\theta_i &= g(\mu_i)
+&& \text{(definition of the canonical link)}
+\\ &= \eta(\vx_i)
+&& \text{(definition of the link function)}
+\\ &= \tp{\vx_i}\vb
+&& \text{(definition of the linear predictor)}
+\ea
+$$
+
+The log-likelihood contribution of observation $i$ is
+
+$$
+\llik_i(\vb)
+\eqdef \frac{y_i \theta_i - b(\theta_i)}{\phi} + c(y_i, \phi),
+$$
+
+and its derivative with respect to $\theta_i$ is
+
+$$
+\ba
+\deriv{\theta_i} \llik_i
+&= \frac{y_i - b'(\theta_i)}{\phi}
+&& \text{(differentiate term by term)}
+\\ &= \frac{y_i - \mu_i}{\phi}
+&& \text{(the mean is } b'(\theta_i)\text{)}
+\ea
+$$
+
+{{< slidebreak >}}
+
+The derivative of $\theta_i = \tp{\vx_i}\vb$ with respect to $\vb$ is the vector
+$\ub{\vx_i}_{(p+1) \times 1}$.
+So, by the chain rule:
+
+$$
+\ba
+\ub{\deriv{\vb} \llik_i}_{(p+1) \times 1}
+&= \ub{\deriv{\vb} \theta_i}_{(p+1) \times 1} \ub{\deriv{\theta_i} \llik_i}_{1 \times 1}
+&& \text{(chain rule)}
+\\ &= \vx_i \frac{y_i - \mu_i}{\phi}
+&& \text{(substitute both derivatives)}
+\ea
+$$
+
+The outcomes are independent,
+so the log-likelihood is the sum $\llik(\vb) = \sumin \llik_i(\vb)$, and:
+
+$$
+\ba
+\scorev(\vb)
+&= \sumin \deriv{\vb} \llik_i
+&& \text{(derivative of a sum)}
+\\ &= \sumin \vx_i \frac{y_i - \mu_i}{\phi}
+&& \text{(substitute each term)}
+\\ &= \frac{1}{\phi} \sumin \vx_i (y_i - \mu_i)
+&& \text{(factor out } 1/\phi\text{)}
+\ea
+$$
+:::

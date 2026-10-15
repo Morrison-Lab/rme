@@ -1,0 +1,54 @@
+::: proof
+Write $\mu_i \eqdef t_i \expf{\eta(\vx_i)}$ for observation $i$'s mean.
+Each $y_i$ has a Poisson distribution with mean $\mu_i$,
+so the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is
+
+$$
+\ba
+\llik(\vb)
+&= \sumin \logf{\frac{\mu_i^{y_i} \expf{-\mu_i}}{y_i!}}
+&& \text{(independence; Poisson PMF)} \\
+&= \sumin \paren{y_i \logf{\mu_i} - \mu_i - \logf{y_i!}}
+&& \text{(log of a product and quotient)} \\
+&= \sumin \paren{y_i \paren{\logf{t_i} + \sum_{k=0}^p x_{ik} \b_k} - \mu_i - \logf{y_i!}}
+&& \text{(substitute } \logf{\mu_i} \text{)}
+\ea
+$$
+
+Each mean has derivative
+$\deriv{\b_j} \mu_i = \mu_i x_{ij}$
+(chain rule for the exponential),
+so the partial derivative of $\llik$ with respect to $\b_j$ is:
+
+$$
+\ba
+\deriv{\b_j} \llik(\vb)
+&= \sumin \paren{y_i x_{ij} - \mu_i x_{ij}}
+&& \text{(differentiate term by term)} \\
+&= \sumin x_{ij} \, y_i - \sumin x_{ij} \, \mu_i
+&& \text{(split the sum)}
+\ea
+$$
+
+The maximum likelihood estimate $\evb$ maximizes $\llik$ over all of $\reals^{p+1}$,
+so it solves the [score equations](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation)
+$\deriv{\b_j} \llik(\evb) = 0$ for every $j$.
+At $\vb = \evb$, each $\mu_i$ equals $\emu_i$, so:
+
+$$
+\ba
+0
+&= \sumin x_{ij} \, y_i - \sumin x_{ij} \, \emu_i
+&& \text{(score equation at } \evb \text{)} \\
+\sumin x_{ij} \, \emu_i
+&= \sumin x_{ij} \, y_i
+&& \text{(add } \textstyle\sumin x_{ij} \, \emu_i \text{ to both sides)}
+\ea
+$$
+
+For $j = 0$, every $x_{i0} = 1$,
+which gives $\sumin y_i = \sumin \emu_i$.
+If $x_j$ is a group indicator,
+the terms with $x_{ij} = 0$ vanish from both sides,
+and the terms with $x_{ij} = 1$ are exactly the group's observations.
+:::

@@ -1,0 +1,32 @@
+:::{#exm-rct-identification-fails}
+#### Without exchangeability, the naive contrast is biased
+
+In the population of @exm-exchangeability-strata,
+treatment was not randomized,
+so @thm-rct-identification does not apply.
+The observed group means are
+
+$$
+\ba
+\E{Y \mid A = 1}
+&= \frac{120 \cdot 10 + 280 \cdot 20}{400}
+&& \text{(consistency; average over the treated)} \\
+&= \frac{1200 + 5600}{400}
+&& \text{(multiply)} \\
+&= 17
+&& \text{(add and divide)} \\
+\E{Y \mid A = 0}
+&= 10
+&& \text{(consistency; } \E{Y(0) \mid A = 0} = 10 \text{ in that population)}
+\ea
+$$
+
+so the naive contrast @eq-rct-ate would give $17 - 10 = 7$.
+But the treatment raises each patient's mean outcome by exactly 2
+in both strata
+($10 - 8 = 20 - 18 = 2$),
+so the true ATE is 2.
+The extra 5 units come from the severe patients' over-representation among the treated:
+[confounding](#def-confounding-obs) by $L$.
+
+:::

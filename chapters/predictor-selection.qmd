@@ -163,6 +163,18 @@ Lower values of AIC or BIC indicate a better model.
 BIC applies a larger penalty for model complexity,
 especially for large $n$.
 
+{{< slidebreak >}}
+
+{{< include _subfiles/predictor-selection/_exm-aic-bic-compare.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/predictor-selection/_thm-aic-lrt.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/predictor-selection/_exm-aic-lrt.qmd >}}
+
 ## Comparing models for LDL
 
 ::: {#tbl-model-comparison}
@@ -213,16 +225,14 @@ by shrinking small coefficients toward zero.
 
 ## The LASSO
 
-The **LASSO** (Least Absolute Shrinkage and Selection Operator)
-adds an $\lpnorm{1}$ penalty to the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik):
+<!-- No slidebreak here: the heading shares its slide with the def-lasso div. -->
 
-$$\hat\beta_\lambda = \arg\max_\beta \set{
-\est{\llik}(\beta) - \lambda \sum_{j=1}^p |\beta_j|
-}$$
+{{< include _subfiles/predictor-selection/_def-lasso.qmd >}}
 
 The [tuning parameter](https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter) $\lambda$ controls the strength of the penalty:
 
-- $\lambda = 0$: no penalty ([ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols)).
+- $\lambda = 0$: no penalty, so $\evb_0$ is the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle)
+  ([ordinary least squares](https://morrison-lab.github.io/sds/correlation-regression.html#def-ols) for a Gaussian linear model).
 - $\lambda \to \infty$: all coefficients shrink to zero.
 
 For intermediate values of $\lambda$,
@@ -230,6 +240,16 @@ some coefficients are exactly zero (excluded),
 while others are shrunk but non-zero.
 
 The optimal $\lambda$ is usually chosen by [cross-validation](#def-kfold).
+
+{{< slidebreak >}}
+
+{{< include _subfiles/predictor-selection/_thm-lasso-soft-threshold.qmd >}}
+
+{{< include _subfiles/predictor-selection/_prf-lasso-soft-threshold.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/predictor-selection/_exm-lasso-soft-threshold.qmd >}}
 
 ## Example: LASSO for LDL
 

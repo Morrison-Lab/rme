@@ -1,0 +1,111 @@
+:::{#def-subgroup-predictive-margin}
+
+#### Exposed-subgroup predictive margin
+
+The **exposed-subgroup predictive margin** averages the fitted risks
+only over the observations actually exposed to $A = a$,
+$S = \{i : A_i = a\}$,
+and we give it its own symbol $\hat\pi_a(a)$:
+
+$$
+\hat\pi_a(a) \eqdef \frac{1}{n_a} \sum_{i : A_i = a} \hat\pi_{a,i}
+$$
+
+where $n_a$ is the number of observations with $A_i = a$.
+The subscript records the treatment level the risks are predicted under,
+and the argument records the subgroup averaged over;
+the full-sample margin $\hat\pi_a$ averages over everyone instead.
+
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-subgroup-pm}
+
+#### Illustration: exposed-subgroup predictive margin
+
+Continuing @exm-observed-marginal-risk,
+where the exposed ($A = 1$) have
+$\Pr(Z = 1 \mid A = 1) = `r round(p_z1_a1, 3)`$
+and age-specific risks $\pi(1, 0) = `r round(pi1_z0, 3)`$
+and $\pi(1, 1) = `r round(pi1_z1, 3)`$,
+averaging the fitted risks over the exposed subgroup gives
+
+$$
+\hat\pi_1(1) = (1 - `r round(p_z1_a1, 3)`)(`r round(pi1_z0, 3)`)
++ (`r round(p_z1_a1, 3)`)(`r round(pi1_z1, 3)`)
+= `r round((1 - p_z1_a1) * pi1_z0 + p_z1_a1 * pi1_z1, 3)`,
+$$
+
+which coincides with the [observed marginal risk](#def-observed-marginal-risk)
+$\pi(1) = `r round(pi1_direct, 3)`$ (@exm-observed-marginal-risk),
+not the [causal marginal risk](#def-causal-marginal-risk)
+$\pi_1 = `r round((1 - p_z1_pop) * pi1_z0 + p_z1_pop * pi1_z1, 3)`$
+(@exm-causal-marginal-risk);
+@thm-subgroup-pm shows this agreement is no coincidence.
+
+:::
+
+{{< slidebreak >}}
+
+:::{#thm-subgroup-pm}
+
+#### Exposed-subgroup predictive margin estimates the observed marginal risk
+
+With the data $(Y_i, A_i, Z_i)$, $i = 1, \dots, n$, drawn [i.i.d.](https://morrison-lab.github.io/pds/independence.html#def-iid) from the population,
+under correct model specification,
+and with the predictor vectors uniformly bounded
+($\|x_{a,i}\| \le B < \infty$, as in @thm-g-computation-consistency),
+the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) is consistent
+for the observed marginal risk $\pi(a)$ (@def-observed-marginal-risk):
+
+$$\hat\pi_a(a) \overset{p}{\to} \pi(a)$$
+
+::: {.proof}
+
+Split the [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) into the average of the **true** conditional risks
+over the exposed subgroup plus an estimation-error term:
+
+$$
+\ba
+\hat\pi_a(a)
+&= \frac{1}{n_a} \sum_{i : A_i = a} \hat\pi(a, z_i)
+&& \text{[definition of the estimator]}
+\\
+&= \frac{1}{n_a} \sum_{i : A_i = a} \teal{\pi(a, z_i)}
++ \frac{1}{n_a} \sum_{i : A_i = a} \paren{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
+&& \text{[add and subtract the true risks]}
+\ea
+$$
+
+The estimation-error term converges to zero in probability
+by the same bounded-predictor Lipschitz bound as in @thm-g-computation-consistency:
+$\frac{1}{n_a}\sum_{i : A_i = a}\abs{\hat\pi(a, z_i) - \teal{\pi(a, z_i)}}
+\le \tfrac{B}{4}\,\|\hat\beta - \beta^*\| \overset{p}{\to} 0$.
+The observations with $A_i = a$ are an i.i.d. sample
+from the conditional distribution $f_{Z \mid A}(z \mid a)$,
+so the weak law of large numbers gives
+
+$$
+\frac{1}{n_a} \sum_{i : A_i = a} \teal{\pi(a, z_i)}
+\overset{p}{\to} \E{\teal{\pi(a, Z)} \mid A = a}.
+\qquad \text{[weak law of large numbers]}
+$$
+
+Finally, @thm-observed-marginal-risk identifies this [conditional expectation](https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation)
+with the [observed marginal risk](#def-observed-marginal-risk):
+
+$$
+\E{\teal{\pi(a, Z)} \mid A = a} = \pi(a).
+\qquad \text{[observed marginal risk theorem]}
+$$
+
+Combining the three steps, $\hat\pi_a(a) \overset{p}{\to} \pi(a)$.
+
+:::
+
+:::
+
+The WCGS exposed-subgroup predictive margin from @exm-subgroup-pm
+is therefore consistent for the observed marginal risk $\pi(1)$
+by @thm-subgroup-pm.

@@ -1,0 +1,47 @@
+:::{#exm-exchangeability-strata}
+#### A population where exchangeability holds only within strata
+
+Consider a large population of 1000 patients,
+with a binary covariate $L$ (disease severity: $L = 1$ for severe)
+and treatment $A$.
+Severe patients are more likely to be treated,
+and both potential outcomes are higher for severe patients
+(treating proportions as probabilities):
+
+| $L$ | patients | $\Pf{A = 1 \mid L}$ | treated | untreated | $\E{Y(1) \mid L}$ | $\E{Y(0) \mid L}$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 0 | 600 | 0.2 | 120 | 480 | 10 | 8 |
+| 1 | 400 | 0.7 | 280 | 120 | 20 | 18 |
+
+Within each severity stratum,
+suppose treatment was assigned as if at random,
+so that $A \ind (Y(0), Y(1)) \mid L$:
+conditional exchangeability (@def-exchangeability) holds with $\vec{L} = L$.
+
+Unconditional exchangeability (@def-unconditional-exchangeability) fails, though.
+Averaging $Y(0)$ over the strata in proportion to each treatment group's members:
+
+$$
+\ba
+\E{Y(0) \mid A = 1}
+&= \frac{120 \cdot 8 + 280 \cdot 18}{400}
+&& \text{(average over the 400 treated)} \\
+&= \frac{960 + 5040}{400}
+&& \text{(multiply)} \\
+&= 15
+&& \text{(add and divide)} \\
+\E{Y(0) \mid A = 0}
+&= \frac{480 \cdot 8 + 120 \cdot 18}{600}
+&& \text{(average over the 600 untreated)} \\
+&= \frac{3840 + 2160}{600}
+&& \text{(multiply)} \\
+&= 10
+&& \text{(add and divide)}
+\ea
+$$
+
+The treated group would have had a higher mean outcome even without treatment,
+because it contains more severe patients,
+so $A$ is not independent of $Y(0)$.
+
+:::

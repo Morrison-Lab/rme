@@ -1,0 +1,67 @@
+:::{#thm-aic-lrt}
+#### Information criteria as likelihood ratio thresholds
+
+Let model $M_0$ be nested in model $M_1$,
+with $M_1$ having $k$ more parameters than $M_0$,
+both fit by maximum likelihood to the same $n$ observations,
+and let
+$G^2 \eqdef 2\paren{\est{\llik}_1 - \est{\llik}_0}$
+be the [likelihood ratio test statistic](logistic-regression.qmd#def-lrt-statistic) comparing them.
+Then
+
+$$
+\text{AIC}_1 < \text{AIC}_0
+\quad \text{if and only if} \quad
+G^2 > 2k
+$$
+
+and
+
+$$
+\text{BIC}_1 < \text{BIC}_0
+\quad \text{if and only if} \quad
+G^2 > k \logf{n}
+$$
+
+:::
+
+::: proof
+Let $M_0$ have $p$ parameters, so $M_1$ has $p + k$.
+For AIC:
+
+$$
+\ba
+\text{AIC}_0 - \text{AIC}_1
+&= \paren{-2 \est{\llik}_0 + 2p} - \paren{-2 \est{\llik}_1 + 2(p + k)}
+&& \text{(AIC formula for each model)} \\
+&= 2 \est{\llik}_1 - 2 \est{\llik}_0 + 2p - 2p - 2k
+&& \text{(distribute the subtraction)} \\
+&= 2\paren{\est{\llik}_1 - \est{\llik}_0} - 2k
+&& \text{(cancel } 2p \text{; factor out 2)} \\
+&= G^2 - 2k
+&& \text{(definition of } G^2 \text{)}
+\ea
+$$
+
+so $\text{AIC}_1 < \text{AIC}_0$
+exactly when $G^2 - 2k > 0$,
+that is, when $G^2 > 2k$.
+The BIC calculation is the same
+with each penalty $2$ replaced by $\logf{n}$:
+
+$$
+\ba
+\text{BIC}_0 - \text{BIC}_1
+&= \paren{-2 \est{\llik}_0 + p \logf{n}} - \paren{-2 \est{\llik}_1 + (p + k) \logf{n}}
+&& \text{(BIC formula for each model)} \\
+&= 2 \est{\llik}_1 - 2 \est{\llik}_0 + p \logf{n} - p \logf{n} - k \logf{n}
+&& \text{(distribute the subtraction)} \\
+&= 2\paren{\est{\llik}_1 - \est{\llik}_0} - k \logf{n}
+&& \text{(cancel } p \logf{n} \text{; factor out 2)} \\
+&= G^2 - k \logf{n}
+&& \text{(definition of } G^2 \text{)}
+\ea
+$$
+
+so $\text{BIC}_1 < \text{BIC}_0$ exactly when $G^2 > k \logf{n}$.
+:::

@@ -1,0 +1,82 @@
+::: proof
+The sample mean of group $j$ is $\bar{y}_j = \mu + \alpha_j + \bar\epsilon_j$,
+where $\bar\epsilon_j \eqdef \frac{1}{n_j}\sum_{i=1}^{n_j}\epsilon_{ij}$
+has mean 0 and variance $\sigma^2 / n_j$
+and is independent of $\alpha_j$.
+The prediction error is
+
+$$
+\ba
+\tilde\mu_j(c) - \mu_j
+&= \mu + c\,(\alpha_j + \bar\epsilon_j) - (\mu + \alpha_j)
+&& \text{(substitute } \bar{y}_j \text{ and } \mu_j \text{)}
+\\
+&= \mu + c\,\alpha_j + c\,\bar\epsilon_j - \mu - \alpha_j
+&& \text{(distribute)}
+\\
+&= c\,\alpha_j + c\,\bar\epsilon_j - \alpha_j
+&& \text{(cancel } \mu \text{)}
+\\
+&= (c - 1)\,\alpha_j + c\,\bar\epsilon_j
+&& \text{(collect the } \alpha_j \text{ terms)}
+\ea
+$$
+
+Both terms have mean 0 and are independent, so
+
+$$
+\ba
+\MSE{c}
+&= \Var{(c - 1)\,\alpha_j + c\,\bar\epsilon_j}
+&& \text{(the error has mean 0)}
+\\
+&= (c - 1)^2 \sigma_\alpha^2 + c^2 \sigma^2 / n_j
+&& \text{(variance of a sum of independent terms)}
+\ea
+$$
+
+{{< slidebreak >}}
+
+Setting the derivative with respect to $c$ to zero:
+
+$$
+\ba
+0 &= 2 (c - 1) \sigma_\alpha^2 + 2 c\, \sigma^2 / n_j
+&& \text{(differentiate)}
+\\
+0 &= (c - 1) \sigma_\alpha^2 + c\, \sigma^2 / n_j
+&& \text{(divide by 2)}
+\\
+0 &= c\,\sigma_\alpha^2 - \sigma_\alpha^2 + c\, \sigma^2 / n_j
+&& \text{(distribute)}
+\\
+\sigma_\alpha^2 &= c\,\sigma_\alpha^2 + c\, \sigma^2 / n_j
+&& \text{(add } \sigma_\alpha^2 \text{ to both sides)}
+\\
+\sigma_\alpha^2 &= c\,\paren{\sigma_\alpha^2 + \sigma^2 / n_j}
+&& \text{(factor out } c \text{)}
+\\
+c &= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
+&& \text{(divide)}
+\ea
+$$
+
+The second derivative, $2\sigma_\alpha^2 + 2\sigma^2 / n_j$, is positive,
+so this value of $c$ is the minimizer.
+Dividing its numerator and denominator by $\sigma_\alpha^2 \sigma^2 / n_j$ gives
+
+$$
+\ba
+\frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
+&= \frac{\sigma_\alpha^2 / (\sigma_\alpha^2 \sigma^2 / n_j)}
+{\sigma_\alpha^2 / (\sigma_\alpha^2 \sigma^2 / n_j) + (\sigma^2 / n_j) / (\sigma_\alpha^2 \sigma^2 / n_j)}
+&& \text{(divide each term)}
+\\
+&= \frac{n_j / \sigma^2}{n_j / \sigma^2 + 1 / \sigma_\alpha^2}
+&& \text{(cancel)}
+\\
+&= w_j
+&& \text{(definition of } w_j \text{)}
+\ea
+$$
+:::
