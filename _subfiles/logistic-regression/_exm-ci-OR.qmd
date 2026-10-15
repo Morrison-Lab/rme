@@ -1,0 +1,26 @@
+:::{#exm-ci-OR}
+
+#### Confidence interval for a beetle odds ratio
+
+For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`),
+let $\vx = (1, 1.8)\'$ and $\vxs = (1, 1.7)\'$.
+The code below computes a 95% confidence interval for $\logf{\ror(\vx,\vxs)}$
+and exponentiates its endpoints as in @thm-ci-OR:
+
+```{r}
+#| label: exm-ci-OR-calc
+#| code-fold: show
+ex_dx <- c(0, 1.8 - 1.7)
+ex_logor <- sum(ex_dx * coef(beetles_glm_ungrouped))
+ex_se <- sqrt(drop(t(ex_dx) %*% vcov(beetles_glm_ungrouped) %*% ex_dx))
+ex_ci_logor <- ex_logor + c(-1, 1) * 1.96 * ex_se
+ex_ci_or <- exp(ex_ci_logor)
+```
+
+The estimated odds ratio is `r round(exp(ex_logor), 3)`,
+with 95% confidence interval
+(`r round(ex_ci_or[1], 3)`, `r round(ex_ci_or[2], 3)`).
+This interval is above 1,
+which reflects the higher odds of death at the higher dose.
+
+:::
