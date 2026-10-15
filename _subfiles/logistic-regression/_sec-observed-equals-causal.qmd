@@ -1,0 +1,82 @@
+:::{#cor-observed-equals-causal}
+
+#### Observed and causal marginal risks coincide without confounding
+
+Assume [Consistency](causal-inference.qmd#def-consistency),
+[Conditional Exchangeability](causal-inference.qmd#def-exchangeability),
+[Positivity](causal-inference.qmd#def-positivity),
+and $Z \ind A$.
+Then the observed and [causal marginal risks](#def-causal-marginal-risk) are equal:
+
+$$\pi(a) = \pi_a$$
+
+::: {.proof}
+
+When $Z \ind A$ the conditional and [marginal distributions](https://morrison-lab.github.io/pds/random-variables.html#def-marginal) of $Z$ coincide,
+$\red{f_{Z \mid A}(z \mid a)} = \red{f_Z(z)}$,
+so @thm-observed-marginal-risk and @thm-causal-marginal-risk give:
+
+$$
+\ba
+\pi(a)
+&= \E{\teal{\pi(a, Z)} \mid A = a}
+&& \text{[observed marginal risk theorem]}
+\\
+&= \E{\teal{\pi(a, Z)}}
+&& \text{[no confounding]}
+\\
+&= \pi_a
+&& \text{[causal marginal risk theorem]}
+\ea
+$$
+
+:::
+
+:::
+
+Under complete randomization of $A$,
+the design delivers $Z \ind A$ together with the other two identification assumptions
+as parallel consequences —
+conditional exchangeability (randomized $A$ is [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt) of the potential
+outcomes, hence also independent given $Z$) and positivity (every level has
+positive probability in each stratum) —
+so consistency and randomization alone suffice
+[@hernan2020causal, Chapters 2-3].
+(Marginal independence $Z \ind A$ on its own does not imply exchangeability;
+randomization is the stronger design assumption that yields all three.)
+
+{{< slidebreak >}}
+
+:::{#exm-observed-equals-causal}
+
+#### Illustration: coincidence under randomization
+
+Take the same age-specific risks $\pi(1, 0) = `r round(pi1_z0, 3)`$
+and $\pi(1, 1) = `r round(pi1_z1, 3)`$ of @exm-observed-marginal-risk,
+but now suppose $A$ had been randomized,
+so the exposed would carry the population's age distribution
+instead of the actual, older-skewing one:
+$\Pr(Z = 1 \mid A = 1) = \Pr(Z = 1) = `r round(p_z1_pop, 3)`$.
+Then the [observed marginal risk](#def-observed-marginal-risk) would be
+
+$$
+\ba
+\pi(1)
+&= \E{\pi(1, Z) \mid A = 1}
+&& \text{[observed marginal risk theorem]}
+\\
+&= (1 - `r round(p_z1_pop, 3)`)(`r round(pi1_z0, 3)`)
++ (`r round(p_z1_pop, 3)`)(`r round(pi1_z1, 3)`)
+&& \text{[substitute randomized weights]}
+\\
+&= `r round((1 - p_z1_pop) * pi1_z0 + p_z1_pop * pi1_z1, 3)`
+&& \text{[arithmetic]}
+\ea
+$$
+
+equal to the [causal marginal risk](#def-causal-marginal-risk)
+$\pi_1 = `r round((1 - p_z1_pop) * pi1_z0 + p_z1_pop * pi1_z1, 3)`$
+of @exm-causal-marginal-risk,
+exactly as @cor-observed-equals-causal predicts.
+
+:::
