@@ -406,6 +406,92 @@ text-align: center;
 <li>the way the cows ended up with their diets might matter: perhaps the bigger cows chased the smaller ones off the grass.</li>
 </ul>
 <p>We can answer causal questions of this kind, but we generally need to answer the descriptive questions first. Descriptive questions do not require <a href="../chapters/Intro-to-GLMs.html#def-predictors">covariates</a> that we <em>could</em> intervene on; they only require covariates that we can observe. This hypothetical example illustrates the distinction that the <a href="#/def-potential-outcomes">potential outcomes</a> framework of this chapter makes precise.</p>
+<p>The same distinction arises with binary outcomes, where the descriptive summary is often a <strong>risk difference</strong>: the difference between the proportions of two groups who experience the outcome.</p>
+</section><section class="slide level2"><div id="exm-crude-vs-stratified-rd" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (A crude risk difference that reverses within age groups)</strong></span> Consider a hypothetical population of 1000 adults, with a binary treatment <span class="math inline">\(A\)</span> (<span class="math inline">\(A = 1\)</span> for treated), a binary outcome <span class="math inline">\(Y\)</span> (<span class="math inline">\(Y = 1\)</span> for death within a year), and a binary covariate <span class="math inline">\(L\)</span> (<span class="math inline">\(L = 1\)</span> for age 65 or older). Older adults are more likely to be treated, and older adults are also more likely to die, whether or not they are treated:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;"><span class="math inline">\(L\)</span></th>
+<th style="text-align: center;">treated</th>
+<th style="text-align: center;">untreated</th>
+<th style="text-align: center;"><span class="math inline">\(\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1, L\right)\mathclose{}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0, L\right)\mathclose{}\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0 (younger)</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">500</td>
+<td style="text-align: center;">0.05</td>
+<td style="text-align: center;">0.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1 (older)</td>
+<td style="text-align: center;">300</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.30</td>
+<td style="text-align: center;">0.40</td>
+</tr>
+</tbody>
+</table>
+<p>Within each age group, the treated have lower risk than the untreated:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{RD}_{L = 0}
+&amp;\stackrel{\text{def}}{=}\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1, L = 0\right)\mathclose{} - \operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0, L = 0\right)\mathclose{}
+&amp;&amp; \text{(define the age-specific risk difference)} \\
+&amp;= 0.05 - 0.10
+&amp;&amp; \text{(substitute from the table)} \\
+&amp;= -0.05
+&amp;&amp; \text{(subtract)} \\
+\text{RD}_{L = 1}
+&amp;\stackrel{\text{def}}{=}\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1, L = 1\right)\mathclose{} - \operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0, L = 1\right)\mathclose{}
+&amp;&amp; \text{(define the age-specific risk difference)} \\
+&amp;= 0.30 - 0.40
+&amp;&amp; \text{(substitute from the table)} \\
+&amp;= -0.10
+&amp;&amp; \text{(subtract)}
+\end{aligned}
+\]</span></p>
+<p>Ignoring age, the risk in each treatment group averages the age-specific risks in proportion to that group’s own age distribution:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1\right)\mathclose{}
+&amp;= \frac{100 \cdot 0.05 + 300 \cdot 0.30}{400}
+&amp;&amp; \text{(average over the 400 treated)} \\
+&amp;= \frac{5 + 90}{400}
+&amp;&amp; \text{(multiply)} \\
+&amp;= \frac{95}{400}
+&amp;&amp; \text{(add)} \\
+&amp;= 0.2375
+&amp;&amp; \text{(divide)} \\
+\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0\right)\mathclose{}
+&amp;= \frac{500 \cdot 0.10 + 100 \cdot 0.40}{600}
+&amp;&amp; \text{(average over the 600 untreated)} \\
+&amp;= \frac{50 + 40}{600}
+&amp;&amp; \text{(multiply)} \\
+&amp;= \frac{90}{600}
+&amp;&amp; \text{(add)} \\
+&amp;= 0.15
+&amp;&amp; \text{(divide)} \\
+\text{RD}_{\text{crude}}
+&amp;\stackrel{\text{def}}{=}\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1\right)\mathclose{} - \operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0\right)\mathclose{}
+&amp;&amp; \text{(define the crude risk difference)} \\
+&amp;= 0.2375 - 0.15
+&amp;&amp; \text{(substitute)} \\
+&amp;= 0.0875
+&amp;&amp; \text{(subtract)}
+\end{aligned}
+\]</span></p>
+<p>The crude risk difference of <span class="math inline">\(+0.0875\)</span> is a correct <em>descriptive</em> answer: in this population, treated adults really did die more often than untreated adults. It is a misleading answer to the <em>causal</em> question “would treating someone raise or lower their risk?”, because 75% of the treated group is older, compared with about 17% of the untreated group. If age were the only factor that influenced both who was treated and who died, the age-specific risk differences (<span class="math inline">\(-0.05\)</span> and <span class="math inline">\(-0.10\)</span>) would compare like with like, and they say that treatment lowers risk. The rest of this chapter makes precise when a comparison of this kind has a causal interpretation.</p>
+</div>
 </section></section><section><section id="sec-causal-potential-outcomes" class="title-slide slide level1 center" data-number="2"><h1>
 <span class="header-section-number">2</span> Potential Outcomes</h1>
 
@@ -422,7 +508,7 @@ text-align: center;
           display:block!important;
       }</style></aside><p>The fundamental challenge in causal inference is that we can only observe one <a href="#/def-potential-outcomes">potential outcome</a> for each unit: the outcome under the treatment that actually occurred. This unobservability of counterfactual outcomes is called the <strong>fundamental problem of causal inference</strong> <span class="citation" data-cites="holland1986statistics">(<a href="#/references" role="doc-biblioref" onclick="">Holland 1986</a>)</span>.</p>
 </section><section class="slide level2"><div id="def-potential-outcomes" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Potential outcomes)</strong></span> For a binary treatment <span class="math inline">\(A \in \{0, 1\}\)</span>, the <strong>potential outcomes</strong> for unit <span class="math inline">\(i\)</span> are:</p>
+<p><span class="theorem-title"><strong>Definition 1 (Potential outcomes (counterfactual outcomes))</strong></span> For a binary treatment <span class="math inline">\(A \in \{0, 1\}\)</span>, the <strong>potential outcomes</strong> for unit <span class="math inline">\(i\)</span> are:</p>
 <ul>
 <li>
 <span class="math inline">\(Y_i(1)\)</span>: the outcome that would be observed if unit <span class="math inline">\(i\)</span> received treatment (<span class="math inline">\(A_i = 1\)</span>)</li>
@@ -441,7 +527,7 @@ text-align: center;
 <p><span class="theorem-title"><strong>Definition 3 (Individual causal effect)</strong></span> The <strong>individual causal effect</strong> for unit <span class="math inline">\(i\)</span> is the difference between that unit’s two potential outcomes: <span class="math display">\[\tau_i \stackrel{\text{def}}{=}Y_i(1) - Y_i(0)\]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-potential-outcomes-toy" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Potential outcomes and observed outcomes in a toy sample)</strong></span> Consider a <a href="https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample">sample</a> of three individuals being evaluated for a medication (<span class="math inline">\(A \in \{0, 1\}\)</span>) where the <a href="../chapters/Intro-to-GLMs.html#def-outcome">outcome</a> <span class="math inline">\(Y\)</span> is blood pressure reduction (mmHg):</p>
+<p><span class="theorem-title"><strong>Example 2 (Potential outcomes and observed outcomes in a toy sample)</strong></span> Consider a <a href="https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample">sample</a> of three individuals being evaluated for a medication (<span class="math inline">\(A \in \{0, 1\}\)</span>) where the <a href="../chapters/Intro-to-GLMs.html#def-outcome">outcome</a> <span class="math inline">\(Y\)</span> is blood pressure reduction (mmHg):</p>
 <table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 16%">
@@ -514,7 +600,7 @@ text-align: center;
 <p><span class="theorem-title"><strong>Definition 6 (Average Treatment Effect on the Untreated (ATU))</strong></span> The <strong>Average Treatment Effect on the Untreated</strong> is the expected difference in potential outcomes among units who did not receive treatment: <span class="math display">\[\text{ATU} \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y(1) - Y(0) \mid A = 0\right]\mathclose{} = \operatorname{E}\mathopen{}\left[Y(1) \mid A = 0\right]\mathclose{} - \operatorname{E}\mathopen{}\left[Y(0) \mid A = 0\right]\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2 scrollable"><div id="exm-causal-estimands-toy" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2 (Calculating population-level causal estimands in a toy population)</strong></span> Revisiting the three-unit population from <a href="#/exm-potential-outcomes-toy" class="quarto-xref">Example&nbsp;1</a>:</p>
+<p><span class="theorem-title"><strong>Example 3 (Calculating population-level causal estimands in a toy population)</strong></span> Revisiting the three-unit population from <a href="#/exm-potential-outcomes-toy" class="quarto-xref">Example&nbsp;2</a>:</p>
 <ul>
 <li>Individual 1 (<span class="math inline">\(A_1 = 1\)</span>): <span class="math inline">\(Y_1(0) = 5\)</span>, <span class="math inline">\(Y_1(1) = 15\)</span>, <span class="math inline">\(\tau_1 = +10\)</span>.</li>
 <li>Individual 2 (<span class="math inline">\(A_2 = 0\)</span>): <span class="math inline">\(Y_2(0) = 2\)</span>, <span class="math inline">\(Y_2(1) = 8\)</span>, <span class="math inline">\(\tau_2 = +6\)</span>.</li>
@@ -564,7 +650,7 @@ text-align: center;
 <span class="header-section-number">4.2</span> Exchangeability (No Unmeasured Confounding)</h2>
 <!-- No slidebreak here: the heading shares its slide with the def-exchangeability div. -->
 <div id="def-exchangeability" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (Exchangeability)</strong></span> <strong>Exchangeability</strong> (also called <em>no unmeasured <a href="#/def-confounding-obs">confounding</a></em> or <em>ignorability</em>) states that, conditional on observed covariates <span class="math inline">\(\tilde{L}\)</span>, treatment assignment is <a href="https://morrison-lab.github.io/pds/independence.html#def-cind">independent</a> of <a href="#/def-potential-outcomes">potential outcomes</a>: <span class="math display">\[A \perp\!\!\!\perp (Y(0), Y(1)) \mid \tilde{L}\]</span></p>
+<p><span class="theorem-title"><strong>Definition 8 (Exchangeability (no unmeasured confounding, ignorability))</strong></span> <strong>Exchangeability</strong> (also called <strong>no unmeasured <a href="#/def-confounding-obs">confounding</a></strong> or <strong>ignorability</strong>) states that, conditional on observed covariates <span class="math inline">\(\tilde{L}\)</span>, treatment assignment is <a href="https://morrison-lab.github.io/pds/independence.html#def-cind">independent</a> of <a href="#/def-potential-outcomes">potential outcomes</a>: <span class="math display">\[A \perp\!\!\!\perp (Y(0), Y(1)) \mid \tilde{L}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="rem-exchangeability-interpretation" class="proof remark">
 <p><span class="proof-title"><em>Remark 7</em> (Interpretation of exchangeability). </span>Intuitively, exchangeability means that among individuals with the same covariate values, treatment was assigned as if at random — there are no unmeasured common causes of treatment and outcome.</p>
@@ -573,7 +659,7 @@ text-align: center;
 <p><span class="theorem-title"><strong>Definition 9 (Unconditional exchangeability)</strong></span> <strong>Unconditional exchangeability</strong> (<span class="math inline">\(A \perp\!\!\!\perp (Y(0), Y(1))\)</span>) holds in perfectly <a href="#/sec-causal-rct">randomized trials</a>. Exchangeability conditional on <span class="math inline">\(\tilde{L}\)</span> (<a href="#/def-exchangeability" class="quarto-xref">Definition&nbsp;8</a>) requires adjusting for <span class="math inline">\(\tilde{L}\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-exchangeability-strata" class="theorem example">
-<p><span class="theorem-title"><strong>Example 3 (A population where exchangeability holds only within strata)</strong></span> Consider a large population of 1000 patients, with a binary covariate <span class="math inline">\(L\)</span> (disease severity: <span class="math inline">\(L = 1\)</span> for severe) and treatment <span class="math inline">\(A\)</span>. Severe patients are more likely to be treated, and both potential outcomes are higher for severe patients (treating proportions as probabilities):</p>
+<p><span class="theorem-title"><strong>Example 4 (A population where exchangeability holds only within strata)</strong></span> Consider a large population of 1000 patients, with a binary covariate <span class="math inline">\(L\)</span> (disease severity: <span class="math inline">\(L = 1\)</span> for severe) and treatment <span class="math inline">\(A\)</span>. Severe patients are more likely to be treated, and both potential outcomes are higher for severe patients (treating proportions as probabilities):</p>
 <table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 14%">
@@ -647,10 +733,10 @@ text-align: center;
 <p><span class="proof-title"><em>Remark 8</em> (Why positivity is needed). </span>Without positivity, some subgroups have no treated (or untreated) members, making it impossible to estimate the <a href="#/def-potential-outcomes">counterfactual outcome</a> for those subgroups.</p>
 </div>
 </section><section class="slide level2"><div id="def-positivity-violation" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 11 (Positivity violation)</strong></span> A failure of positivity is sometimes called a <strong>positivity violation</strong> or <strong>practical positivity violation</strong> when near-zero probabilities occur in small strata.</p>
+<p><span class="theorem-title"><strong>Definition 11 (Positivity violation)</strong></span> A failure of positivity is sometimes called a <strong>positivity violation</strong>. When near-zero probabilities occur in small strata, the failure is called a practical positivity violation.</p>
 </div>
 </section><section class="slide level2"><div id="exm-positivity" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4 (Checking positivity)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a>, <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = 1 \mid L = 0\right)\mathclose{} = 0.2\)</span> and <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = 1 \mid L = 1\right)\mathclose{} = 0.7\)</span>. Both probabilities lie strictly between 0 and 1, so positivity (<a href="#/def-positivity" class="quarto-xref">Definition&nbsp;10</a>) holds: each severity stratum contains both treated and untreated patients.</p>
+<p><span class="theorem-title"><strong>Example 5 (Checking positivity)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a>, <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = 1 \mid L = 0\right)\mathclose{} = 0.2\)</span> and <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = 1 \mid L = 1\right)\mathclose{} = 0.7\)</span>. Both probabilities lie strictly between 0 and 1, so positivity (<a href="#/def-positivity" class="quarto-xref">Definition&nbsp;10</a>) holds: each severity stratum contains both treated and untreated patients.</p>
 <p>If instead every severe patient were treated, then <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = 1 \mid L = 1\right)\mathclose{} = 1\)</span>, the population would contain no untreated severe patients, and the data could not tell us what <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y(0) \mid L = 1\right]\mathclose{}\)</span> is: a positivity violation (<a href="#/def-positivity-violation" class="quarto-xref">Definition&nbsp;11</a>).</p>
 </div>
 <aside class="notes"><p>These three assumptions — consistency, exchangeability, and positivity — are collectively sufficient to identify causal effects from observed data. They are sometimes summarized as “no interference, no unmeasured confounders, no positivity violations.”</p>
@@ -699,7 +785,7 @@ text-align: center;
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-rct-identification" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5 (Randomizing the severity example)</strong></span> Suppose the 1000 patients of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a> had instead been randomized, each treated with probability 0.5 regardless of severity. Then each treatment group has the population’s severity mix, 60% non-severe and 40% severe (treating proportions as probabilities), so by consistency</p>
+<p><span class="theorem-title"><strong>Example 6 (Randomizing the severity example)</strong></span> Suppose the 1000 patients of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a> had instead been randomized, each treated with probability 0.5 regardless of severity. Then each treatment group has the population’s severity mix, 60% non-severe and 40% severe (treating proportions as probabilities), so by consistency</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y \mid A = 1\right]\mathclose{}
@@ -717,7 +803,7 @@ text-align: center;
 <p>and <a href="#/eq-rct-ate" class="quarto-xref">Equation&nbsp;1</a> gives <span class="math inline">\(\text{ATE} = 14 - 12 = 2\)</span>, the treatment’s effect in every stratum.</p>
 </div>
 </section><section class="slide level2"><div id="exm-rct-identification-fails" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6 (Without exchangeability, the naive contrast is biased)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a>, treatment was not randomized, so <a href="#/thm-rct-identification" class="quarto-xref">Theorem&nbsp;1</a> does not apply. The observed group means are</p>
+<p><span class="theorem-title"><strong>Example 7 (Without exchangeability, the naive contrast is biased)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a>, treatment was not randomized, so <a href="#/thm-rct-identification" class="quarto-xref">Theorem&nbsp;1</a> does not apply. The observed group means are</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y \mid A = 1\right]\mathclose{}
@@ -823,9 +909,87 @@ text-align: center;
 <p><span class="proof-title"><em>Remark 9</em> (Confounding in the potential outcomes framework). </span>In the <a href="#/def-potential-outcomes">potential outcomes</a> framework, confounding means that treatment assignment is not <a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">independent</a> of potential outcomes: <span class="math display">\[A \not\perp\!\!\!\perp (Y(0), Y(1))\]</span></p>
 <p>As a result, the observed association between <span class="math inline">\(A\)</span> and <span class="math inline">\(Y\)</span> does not equal the causal effect of <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span>.</p>
 </div>
-<p><a href="#/sec-pred-sel-dag">Directed Acyclic Graphs (DAGs)</a> provide a formal graphical tool for representing causal assumptions and identifying <a href="#/def-confounder">confounders</a>, <a href="#/def-mediator">mediators</a>, <a href="#/def-collider">colliders</a>, and sufficient adjustment sets.</p>
-</section><section id="sec-pred-sel-dag" class="slide level2" data-number="6.2"><h2>
-<span class="header-section-number">6.2</span> Directed Acyclic Graphs (DAGs)</h2>
+</section><section class="slide level2"><div id="exm-confounding-coffee" class="theorem example">
+<p><span class="theorem-title"><strong>Example 8 (Confounding of coffee and lung cancer by smoking)</strong></span> Consider a hypothetical cohort of 1000 adults, with coffee drinking <span class="math inline">\(A\)</span> (<span class="math inline">\(A = 1\)</span> for daily coffee), lung cancer <span class="math inline">\(Y\)</span> (<span class="math inline">\(Y = 1\)</span> for diagnosis during follow-up), and smoking <span class="math inline">\(L\)</span> (<span class="math inline">\(L = 1\)</span> for smokers). Suppose coffee has <strong>no</strong> effect on lung cancer, so that <span class="math inline">\(Y_i(1) = Y_i(0)\)</span> for every individual, but smokers are both more likely to drink coffee and more likely to develop lung cancer:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;"><span class="math inline">\(L\)</span></th>
+<th style="text-align: center;">coffee</th>
+<th style="text-align: center;">no coffee</th>
+<th style="text-align: center;"><span class="math inline">\(\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1, L\right)\mathclose{}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0, L\right)\mathclose{}\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0 (nonsmokers)</td>
+<td style="text-align: center;">200</td>
+<td style="text-align: center;">500</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1 (smokers)</td>
+<td style="text-align: center;">200</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">0.10</td>
+<td style="text-align: center;">0.10</td>
+</tr>
+</tbody>
+</table>
+<p>Within each smoking stratum, the risk difference is <span class="math inline">\(0\)</span>, matching the true (null) causal effect. Ignoring smoking:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1\right)\mathclose{}
+&amp;= \frac{200 \cdot 0.01 + 200 \cdot 0.10}{400}
+&amp;&amp; \text{(average over the 400 coffee drinkers)} \\
+&amp;= \frac{2 + 20}{400}
+&amp;&amp; \text{(multiply)} \\
+&amp;= \frac{22}{400}
+&amp;&amp; \text{(add)} \\
+&amp;= 0.055
+&amp;&amp; \text{(divide)} \\
+\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0\right)\mathclose{}
+&amp;= \frac{500 \cdot 0.01 + 100 \cdot 0.10}{600}
+&amp;&amp; \text{(average over the 600 non-drinkers)} \\
+&amp;= \frac{5 + 10}{600}
+&amp;&amp; \text{(multiply)} \\
+&amp;= \frac{15}{600}
+&amp;&amp; \text{(add)} \\
+&amp;= 0.025
+&amp;&amp; \text{(divide)} \\
+\operatorname{P}\mathopen{}\left(Y = 1 \mid A = 1\right)\mathclose{} - \operatorname{P}\mathopen{}\left(Y = 1 \mid A = 0\right)\mathclose{}
+&amp;= 0.055 - 0.025
+&amp;&amp; \text{(substitute)} \\
+&amp;= 0.03
+&amp;&amp; \text{(subtract)}
+\end{aligned}
+\]</span></p>
+<p>The crude risk difference of <span class="math inline">\(0.03\)</span> suggests that coffee is harmful, even though coffee has no effect in this cohort. Because <span class="math inline">\(Y_i(0) = Y_i(1) = Y_i\)</span> for everyone here, the crude risks are also the mean <a href="#/def-potential-outcomes">potential outcomes</a> under no coffee in each group: <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y(0) \mid A = 1\right]\mathclose{} = 0.055 \neq 0.025 = \operatorname{E}\mathopen{}\left[Y(0) \mid A = 0\right]\mathclose{}\)</span>. So <span class="math inline">\(A \not\perp\!\!\!\perp Y(0)\)</span>, which is the failure of unconditional exchangeability described in <a href="#/rem-confounding-potential-outcomes" class="quarto-xref">Remark&nbsp;9</a>. Smoking <span class="math inline">\(L\)</span> is a <a href="#/def-confounder">confounder</a>: it is a common cause of <span class="math inline">\(A\)</span> and <span class="math inline">\(Y\)</span>.</p>
+</div>
+</section><section id="sec-causal-obs-harder" class="slide level2" data-number="6.2"><h2>
+<span class="header-section-number">6.2</span> Why observational studies are harder than randomized trials</h2>
+<p>In a <a href="#/sec-causal-rct">randomized experiment</a>, the investigator controls treatment assignment, so the identification assumptions hold by design <span class="citation" data-cites="hernan2020causal">(<a href="#/references" role="doc-biblioref" onclick="">Hernán and Robins 2020, chap. 3</a>)</span>:</p>
+<ul>
+<li>randomization makes the groups <a href="#/def-exchangeability">exchangeable</a> without conditioning on any covariates (<a href="#/def-unconditional-exchangeability" class="quarto-xref">Definition&nbsp;9</a>);</li>
+<li>the randomization probabilities are strictly between 0 and 1, so <a href="#/def-positivity">positivity</a> holds;</li>
+<li>the protocol specifies the treatment, which supports <a href="#/def-consistency">consistency</a>.</li>
+</ul>
+<p>In an observational study, none of these assumptions is guaranteed by design <span class="citation" data-cites="hernan2020causal">(<a href="#/references" role="doc-biblioref" onclick="">Hernán and Robins 2020, chap. 3</a>)</span>:</p>
+<ul>
+<li>exchangeability (<a href="#/def-exchangeability" class="quarto-xref">Definition&nbsp;8</a>) can hold at best conditionally on measured covariates <span class="math inline">\(\tilde{L}\)</span>, so we must measure and adjust for a sufficient set of confounders, and we cannot check from the data that no confounder is missing;</li>
+<li>positivity (<a href="#/def-positivity" class="quarto-xref">Definition&nbsp;10</a>) can fail when some covariate patterns, such as the most severe patients, are always (or never) treated;</li>
+<li>consistency (<a href="#/def-consistency" class="quarto-xref">Definition&nbsp;7</a>) requires a well-defined treatment, which is harder to ensure when “treatment” is a self-chosen exposure, such as “drinks coffee” in <a href="#/exm-confounding-coffee" class="quarto-xref">Example&nbsp;8</a>, that people can take up in many different ways.</li>
+</ul>
+<p><a href="#/sec-pred-sel-dag">Directed Acyclic Graphs (DAGs)</a> help with the first of these difficulties, by showing which covariates must be in <span class="math inline">\(\tilde{L}\)</span>. More generally, DAGs provide a formal graphical tool for representing causal assumptions and identifying <a href="#/def-confounder">confounders</a>, <a href="#/def-mediator">mediators</a>, <a href="#/def-collider">colliders</a>, and sufficient adjustment sets.</p>
+</section><section id="sec-pred-sel-dag" class="slide level2" data-number="6.3"><h2>
+<span class="header-section-number">6.3</span> Directed Acyclic Graphs (DAGs)</h2>
 <p>A <strong>Directed Acyclic Graph (DAG)</strong> is a graphical model that encodes assumed causal relationships among variables.</p>
 <p>In a DAG:</p>
 <ul>
@@ -840,8 +1004,8 @@ text-align: center;
 <li>Identify <strong><a href="#/def-confounder">confounders</a></strong> that must be adjusted for.</li>
 <li>Identify <strong><a href="#/def-mediator">mediators</a></strong> that should generally <em>not</em> be adjusted for when estimating the total causal effect.</li>
 <li>Identify <strong><a href="#/def-collider">colliders</a></strong> that should <em>not</em> be adjusted for (adjusting for a collider opens a non-causal path).</li>
-</ul></section><section id="sec-pred-sel-dag-concepts" class="slide level2" data-number="6.3"><h2>
-<span class="header-section-number">6.3</span> Key concepts from DAG theory</h2>
+</ul></section><section id="sec-pred-sel-dag-concepts" class="slide level2" data-number="6.4"><h2>
+<span class="header-section-number">6.4</span> Key concepts from DAG theory</h2>
 <div id="def-confounder" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 13 (Confounder)</strong></span> A <strong>confounder</strong> of the relationship between an exposure <span class="math inline">\(X\)</span> and <a href="../chapters/Intro-to-GLMs.html#def-outcome">outcome</a> <span class="math inline">\(Y\)</span> is a variable <span class="math inline">\(C\)</span> that is a common cause of both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 </div>
@@ -880,8 +1044,8 @@ text-align: center;
 </section><section class="slide level2"><div id="rem-backdoor-adjustment" class="proof remark">
 <p><span class="proof-title"><em>Remark 13</em> (Identification by backdoor adjustment). </span>If <span class="math inline">\(\tilde{L}\)</span> satisfies the backdoor criterion, then adjusting for <span class="math inline">\(\tilde{L}\)</span> identifies the causal effect of <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span>: <span class="math display">\[\operatorname{E}\mathopen{}\left[Y(a)\right]\mathclose{} = \sum_{\tilde{l}} \operatorname{E}\mathopen{}\left[Y \mid A = a, \tilde{L} = \tilde{l}\right]\mathclose{} \operatorname{P}\mathopen{}\left(\tilde{L} = \tilde{l}\right)\mathclose{}\]</span></p>
 </div>
-</section><section id="sec-pred-sel-hers-dag" class="slide level2" data-number="6.4"><h2>
-<span class="header-section-number">6.4</span> HERS study DAG</h2>
+</section><section id="sec-pred-sel-hers-dag" class="slide level2" data-number="6.5"><h2>
+<span class="header-section-number">6.5</span> HERS study DAG</h2>
 <p>The “heart and estrogen/progestin study” (HERS) was a clinical trial of hormone therapy for prevention of recurrent heart attacks and death among 2,763 post-menopausal women with existing coronary heart disease (CHD) <span class="citation" data-cites="HulleyStephen1998RToE">(<a href="#/references" role="doc-biblioref" onclick="">Hulley et al. 1998</a>)</span>.</p>
 <p>The trial was conducted at 20 US clinical centers. Participants were randomized to receive either conjugated equine estrogens (0.625 mg/day) plus medroxyprogesterone acetate (2.5 mg/day) or a matching placebo <span class="citation" data-cites="HulleyStephen1998RToE">(<a href="#/references" role="doc-biblioref" onclick="">Hulley et al. 1998</a>)</span>. Women were followed for an average of 4.1 years <span class="citation" data-cites="HulleyStephen1998RToE">(<a href="#/references" role="doc-biblioref" onclick="">Hulley et al. 1998</a>)</span>.</p>
 <p>The primary outcome was nonfatal myocardial infarction or CHD death <span class="citation" data-cites="HulleyStephen1998RToE">(<a href="#/references" role="doc-biblioref" onclick="">Hulley et al. 1998</a>)</span>.</p>
@@ -1031,8 +1195,8 @@ Figure&nbsp;1: Directed Acyclic Graph (DAG) for the HERS study. <code>HT</code> 
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside></section><section id="sec-pred-sel-hers-adjust" class="slide level2" data-number="6.5"><h2>
-<span class="header-section-number">6.5</span> What variables should we adjust for?</h2>
+      }</style></aside></section><section id="sec-pred-sel-hers-adjust" class="slide level2" data-number="6.6"><h2>
+<span class="header-section-number">6.6</span> What variables should we adjust for?</h2>
 <p>Using DAG theory, we can identify the minimum adjustment set needed to estimate the total causal effect of HT on CHD.</p>
 <div id="tbl-hers-adj" class="cell quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-hers-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1062,8 +1226,8 @@ Table&nbsp;2
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside></section><section id="sec-pred-sel-hers-ldl" class="slide level2" data-number="6.6"><h2>
-<span class="header-section-number">6.6</span> Analyzing LDL in the HERS study</h2>
+      }</style></aside></section><section id="sec-pred-sel-hers-ldl" class="slide level2" data-number="6.7"><h2>
+<span class="header-section-number">6.7</span> Analyzing LDL in the HERS study</h2>
 <aside class="notes"><p>The HERS baseline dataset includes LDL and HDL cholesterol, allowing us to examine the effect of hormone therapy on lipid levels.</p>
 <p>Here we build models to predict LDL cholesterol, illustrating how DAG thinking guides <a href="../chapters/predictor-selection.html#sec-pred-sel-strategies">predictor selection</a>.</p>
 <style type="text/css">
@@ -1106,23 +1270,23 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ubyabpcuyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ubyabpcuyh table {
+<div id="hoklfcvdnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hoklfcvdnx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ubyabpcuyh thead, #ubyabpcuyh tbody, #ubyabpcuyh tfoot, #ubyabpcuyh tr, #ubyabpcuyh td, #ubyabpcuyh th {
+#hoklfcvdnx thead, #hoklfcvdnx tbody, #hoklfcvdnx tfoot, #hoklfcvdnx tr, #hoklfcvdnx td, #hoklfcvdnx th {
   border-style: none;
 }
 
-#ubyabpcuyh p {
+#hoklfcvdnx p {
   margin: 0;
   padding: 0;
 }
 
-#ubyabpcuyh .gt_table {
+#hoklfcvdnx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1148,12 +1312,12 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-left-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_caption {
+#hoklfcvdnx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ubyabpcuyh .gt_title {
+#hoklfcvdnx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1165,7 +1329,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-width: 0;
 }
 
-#ubyabpcuyh .gt_subtitle {
+#hoklfcvdnx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1177,7 +1341,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-width: 0;
 }
 
-#ubyabpcuyh .gt_heading {
+#hoklfcvdnx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1189,13 +1353,13 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_bottom_border {
+#hoklfcvdnx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_col_headings {
+#hoklfcvdnx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1210,7 +1374,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_col_heading {
+#hoklfcvdnx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1230,7 +1394,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#ubyabpcuyh .gt_column_spanner_outer {
+#hoklfcvdnx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1242,15 +1406,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 4px;
 }
 
-#ubyabpcuyh .gt_column_spanner_outer:first-child {
+#hoklfcvdnx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ubyabpcuyh .gt_column_spanner_outer:last-child {
+#hoklfcvdnx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ubyabpcuyh .gt_column_spanner {
+#hoklfcvdnx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1262,11 +1426,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   width: 100%;
 }
 
-#ubyabpcuyh .gt_spanner_row {
+#hoklfcvdnx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ubyabpcuyh .gt_group_heading {
+#hoklfcvdnx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1292,7 +1456,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   text-align: left;
 }
 
-#ubyabpcuyh .gt_empty_group_heading {
+#hoklfcvdnx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1307,15 +1471,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: middle;
 }
 
-#ubyabpcuyh .gt_from_md > :first-child {
+#hoklfcvdnx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ubyabpcuyh .gt_from_md > :last-child {
+#hoklfcvdnx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ubyabpcuyh .gt_row {
+#hoklfcvdnx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1334,7 +1498,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#ubyabpcuyh .gt_stub {
+#hoklfcvdnx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1347,7 +1511,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#ubyabpcuyh .gt_stub_row_group {
+#hoklfcvdnx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1361,15 +1525,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: top;
 }
 
-#ubyabpcuyh .gt_row_group_first td {
+#hoklfcvdnx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ubyabpcuyh .gt_row_group_first th {
+#hoklfcvdnx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ubyabpcuyh .gt_summary_row {
+#hoklfcvdnx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1379,16 +1543,16 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#ubyabpcuyh .gt_first_summary_row {
+#hoklfcvdnx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_first_summary_row.thick {
+#hoklfcvdnx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ubyabpcuyh .gt_last_summary_row {
+#hoklfcvdnx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1562,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_grand_summary_row {
+#hoklfcvdnx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1408,7 +1572,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#ubyabpcuyh .gt_first_grand_summary_row {
+#hoklfcvdnx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1418,7 +1582,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_last_grand_summary_row_top {
+#hoklfcvdnx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1428,11 +1592,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_striped {
+#hoklfcvdnx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ubyabpcuyh .gt_table_body {
+#hoklfcvdnx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1441,7 +1605,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_footnotes {
+#hoklfcvdnx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1455,7 +1619,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_footnote {
+#hoklfcvdnx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1464,7 +1628,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#ubyabpcuyh .gt_sourcenotes {
+#hoklfcvdnx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1478,7 +1642,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#ubyabpcuyh .gt_sourcenote {
+#hoklfcvdnx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1486,72 +1650,72 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#ubyabpcuyh .gt_left {
+#hoklfcvdnx .gt_left {
   text-align: left;
 }
 
-#ubyabpcuyh .gt_center {
+#hoklfcvdnx .gt_center {
   text-align: center;
 }
 
-#ubyabpcuyh .gt_right {
+#hoklfcvdnx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ubyabpcuyh .gt_font_normal {
+#hoklfcvdnx .gt_font_normal {
   font-weight: normal;
 }
 
-#ubyabpcuyh .gt_font_bold {
+#hoklfcvdnx .gt_font_bold {
   font-weight: bold;
 }
 
-#ubyabpcuyh .gt_font_italic {
+#hoklfcvdnx .gt_font_italic {
   font-style: italic;
 }
 
-#ubyabpcuyh .gt_super {
+#hoklfcvdnx .gt_super {
   font-size: 65%;
 }
 
-#ubyabpcuyh .gt_footnote_marks {
+#hoklfcvdnx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ubyabpcuyh .gt_asterisk {
+#hoklfcvdnx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ubyabpcuyh .gt_indent_1 {
+#hoklfcvdnx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ubyabpcuyh .gt_indent_2 {
+#hoklfcvdnx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ubyabpcuyh .gt_indent_3 {
+#hoklfcvdnx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ubyabpcuyh .gt_indent_4 {
+#hoklfcvdnx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ubyabpcuyh .gt_indent_5 {
+#hoklfcvdnx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ubyabpcuyh .katex-display {
+#hoklfcvdnx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ubyabpcuyh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hoklfcvdnx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1646,23 +1810,23 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-unadj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="rkqaxlhtds" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rkqaxlhtds table {
+<div id="kpdxtejakb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kpdxtejakb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rkqaxlhtds thead, #rkqaxlhtds tbody, #rkqaxlhtds tfoot, #rkqaxlhtds tr, #rkqaxlhtds td, #rkqaxlhtds th {
+#kpdxtejakb thead, #kpdxtejakb tbody, #kpdxtejakb tfoot, #kpdxtejakb tr, #kpdxtejakb td, #kpdxtejakb th {
   border-style: none;
 }
 
-#rkqaxlhtds p {
+#kpdxtejakb p {
   margin: 0;
   padding: 0;
 }
 
-#rkqaxlhtds .gt_table {
+#kpdxtejakb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1688,12 +1852,12 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_caption {
+#kpdxtejakb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rkqaxlhtds .gt_title {
+#kpdxtejakb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1705,7 +1869,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#rkqaxlhtds .gt_subtitle {
+#kpdxtejakb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1717,7 +1881,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#rkqaxlhtds .gt_heading {
+#kpdxtejakb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1729,13 +1893,13 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_bottom_border {
+#kpdxtejakb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_col_headings {
+#kpdxtejakb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1750,7 +1914,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_col_heading {
+#kpdxtejakb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1770,7 +1934,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#rkqaxlhtds .gt_column_spanner_outer {
+#kpdxtejakb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1782,15 +1946,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#rkqaxlhtds .gt_column_spanner_outer:first-child {
+#kpdxtejakb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rkqaxlhtds .gt_column_spanner_outer:last-child {
+#kpdxtejakb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rkqaxlhtds .gt_column_spanner {
+#kpdxtejakb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1802,11 +1966,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#rkqaxlhtds .gt_spanner_row {
+#kpdxtejakb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rkqaxlhtds .gt_group_heading {
+#kpdxtejakb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1832,7 +1996,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#rkqaxlhtds .gt_empty_group_heading {
+#kpdxtejakb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1847,15 +2011,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#rkqaxlhtds .gt_from_md > :first-child {
+#kpdxtejakb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rkqaxlhtds .gt_from_md > :last-child {
+#kpdxtejakb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rkqaxlhtds .gt_row {
+#kpdxtejakb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1874,7 +2038,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#rkqaxlhtds .gt_stub {
+#kpdxtejakb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1887,7 +2051,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#rkqaxlhtds .gt_stub_row_group {
+#kpdxtejakb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1901,15 +2065,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#rkqaxlhtds .gt_row_group_first td {
+#kpdxtejakb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rkqaxlhtds .gt_row_group_first th {
+#kpdxtejakb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rkqaxlhtds .gt_summary_row {
+#kpdxtejakb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1919,16 +2083,16 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#rkqaxlhtds .gt_first_summary_row {
+#kpdxtejakb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_first_summary_row.thick {
+#kpdxtejakb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rkqaxlhtds .gt_last_summary_row {
+#kpdxtejakb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1938,7 +2102,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_grand_summary_row {
+#kpdxtejakb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1948,7 +2112,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#rkqaxlhtds .gt_first_grand_summary_row {
+#kpdxtejakb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1958,7 +2122,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_last_grand_summary_row_top {
+#kpdxtejakb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1968,11 +2132,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_striped {
+#kpdxtejakb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rkqaxlhtds .gt_table_body {
+#kpdxtejakb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1981,7 +2145,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_footnotes {
+#kpdxtejakb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1995,7 +2159,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_footnote {
+#kpdxtejakb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2004,7 +2168,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#rkqaxlhtds .gt_sourcenotes {
+#kpdxtejakb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2018,7 +2182,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#rkqaxlhtds .gt_sourcenote {
+#kpdxtejakb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2026,72 +2190,72 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#rkqaxlhtds .gt_left {
+#kpdxtejakb .gt_left {
   text-align: left;
 }
 
-#rkqaxlhtds .gt_center {
+#kpdxtejakb .gt_center {
   text-align: center;
 }
 
-#rkqaxlhtds .gt_right {
+#kpdxtejakb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rkqaxlhtds .gt_font_normal {
+#kpdxtejakb .gt_font_normal {
   font-weight: normal;
 }
 
-#rkqaxlhtds .gt_font_bold {
+#kpdxtejakb .gt_font_bold {
   font-weight: bold;
 }
 
-#rkqaxlhtds .gt_font_italic {
+#kpdxtejakb .gt_font_italic {
   font-style: italic;
 }
 
-#rkqaxlhtds .gt_super {
+#kpdxtejakb .gt_super {
   font-size: 65%;
 }
 
-#rkqaxlhtds .gt_footnote_marks {
+#kpdxtejakb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rkqaxlhtds .gt_asterisk {
+#kpdxtejakb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rkqaxlhtds .gt_indent_1 {
+#kpdxtejakb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rkqaxlhtds .gt_indent_2 {
+#kpdxtejakb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rkqaxlhtds .gt_indent_3 {
+#kpdxtejakb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rkqaxlhtds .gt_indent_4 {
+#kpdxtejakb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rkqaxlhtds .gt_indent_5 {
+#kpdxtejakb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rkqaxlhtds .katex-display {
+#kpdxtejakb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rkqaxlhtds div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kpdxtejakb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2154,23 +2318,23 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ofxstlcnbr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ofxstlcnbr table {
+<div id="jgkizxqctk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jgkizxqctk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ofxstlcnbr thead, #ofxstlcnbr tbody, #ofxstlcnbr tfoot, #ofxstlcnbr tr, #ofxstlcnbr td, #ofxstlcnbr th {
+#jgkizxqctk thead, #jgkizxqctk tbody, #jgkizxqctk tfoot, #jgkizxqctk tr, #jgkizxqctk td, #jgkizxqctk th {
   border-style: none;
 }
 
-#ofxstlcnbr p {
+#jgkizxqctk p {
   margin: 0;
   padding: 0;
 }
 
-#ofxstlcnbr .gt_table {
+#jgkizxqctk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2196,12 +2360,12 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_caption {
+#jgkizxqctk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ofxstlcnbr .gt_title {
+#jgkizxqctk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2213,7 +2377,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#ofxstlcnbr .gt_subtitle {
+#jgkizxqctk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2225,7 +2389,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#ofxstlcnbr .gt_heading {
+#jgkizxqctk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2237,13 +2401,13 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_bottom_border {
+#jgkizxqctk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_col_headings {
+#jgkizxqctk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2258,7 +2422,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_col_heading {
+#jgkizxqctk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2278,7 +2442,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#ofxstlcnbr .gt_column_spanner_outer {
+#jgkizxqctk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2290,15 +2454,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#ofxstlcnbr .gt_column_spanner_outer:first-child {
+#jgkizxqctk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ofxstlcnbr .gt_column_spanner_outer:last-child {
+#jgkizxqctk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ofxstlcnbr .gt_column_spanner {
+#jgkizxqctk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2310,11 +2474,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#ofxstlcnbr .gt_spanner_row {
+#jgkizxqctk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ofxstlcnbr .gt_group_heading {
+#jgkizxqctk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2340,7 +2504,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#ofxstlcnbr .gt_empty_group_heading {
+#jgkizxqctk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2355,15 +2519,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#ofxstlcnbr .gt_from_md > :first-child {
+#jgkizxqctk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ofxstlcnbr .gt_from_md > :last-child {
+#jgkizxqctk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ofxstlcnbr .gt_row {
+#jgkizxqctk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2382,7 +2546,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#ofxstlcnbr .gt_stub {
+#jgkizxqctk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2395,7 +2559,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ofxstlcnbr .gt_stub_row_group {
+#jgkizxqctk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2409,15 +2573,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#ofxstlcnbr .gt_row_group_first td {
+#jgkizxqctk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ofxstlcnbr .gt_row_group_first th {
+#jgkizxqctk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ofxstlcnbr .gt_summary_row {
+#jgkizxqctk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2427,16 +2591,16 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ofxstlcnbr .gt_first_summary_row {
+#jgkizxqctk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_first_summary_row.thick {
+#jgkizxqctk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ofxstlcnbr .gt_last_summary_row {
+#jgkizxqctk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2446,7 +2610,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_grand_summary_row {
+#jgkizxqctk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2456,7 +2620,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ofxstlcnbr .gt_first_grand_summary_row {
+#jgkizxqctk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2466,7 +2630,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_last_grand_summary_row_top {
+#jgkizxqctk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2476,11 +2640,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_striped {
+#jgkizxqctk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ofxstlcnbr .gt_table_body {
+#jgkizxqctk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2489,7 +2653,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_footnotes {
+#jgkizxqctk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2503,7 +2667,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_footnote {
+#jgkizxqctk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2512,7 +2676,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ofxstlcnbr .gt_sourcenotes {
+#jgkizxqctk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2526,7 +2690,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#ofxstlcnbr .gt_sourcenote {
+#jgkizxqctk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2534,72 +2698,72 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#ofxstlcnbr .gt_left {
+#jgkizxqctk .gt_left {
   text-align: left;
 }
 
-#ofxstlcnbr .gt_center {
+#jgkizxqctk .gt_center {
   text-align: center;
 }
 
-#ofxstlcnbr .gt_right {
+#jgkizxqctk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ofxstlcnbr .gt_font_normal {
+#jgkizxqctk .gt_font_normal {
   font-weight: normal;
 }
 
-#ofxstlcnbr .gt_font_bold {
+#jgkizxqctk .gt_font_bold {
   font-weight: bold;
 }
 
-#ofxstlcnbr .gt_font_italic {
+#jgkizxqctk .gt_font_italic {
   font-style: italic;
 }
 
-#ofxstlcnbr .gt_super {
+#jgkizxqctk .gt_super {
   font-size: 65%;
 }
 
-#ofxstlcnbr .gt_footnote_marks {
+#jgkizxqctk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ofxstlcnbr .gt_asterisk {
+#jgkizxqctk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ofxstlcnbr .gt_indent_1 {
+#jgkizxqctk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ofxstlcnbr .gt_indent_2 {
+#jgkizxqctk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ofxstlcnbr .gt_indent_3 {
+#jgkizxqctk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ofxstlcnbr .gt_indent_4 {
+#jgkizxqctk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ofxstlcnbr .gt_indent_5 {
+#jgkizxqctk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ofxstlcnbr .katex-display {
+#jgkizxqctk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ofxstlcnbr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jgkizxqctk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2695,8 +2859,8 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
 </figure>
 </div>
 <p>Note that <code>statins</code> is a strong predictor of LDL (statin medications are prescribed specifically to lower LDL). Including <code>statins</code> substantially reduces residual variability, improving precision of the HT coefficient.</p>
-</section><section id="sec-pred-sel-wcgs-dag" class="slide level2" data-number="6.7"><h2>
-<span class="header-section-number">6.7</span> An observational study example: WCGS</h2>
+</section><section id="sec-pred-sel-wcgs-dag" class="slide level2" data-number="6.8"><h2>
+<span class="header-section-number">6.8</span> An observational study example: WCGS</h2>
 <p>The HERS study is a randomized trial, so <a href="#/def-confounding-obs">confounding</a> of the treatment-outcome relationship is not a concern. To illustrate DAG-guided <a href="#/def-confounder">confounder</a> selection in an <strong>observational study</strong>, we use the Western Collaborative Group Study (WCGS).</p>
 <p>The WCGS was a prospective cohort study of 3,154 men employed by California companies, followed from 1960 to 1969 <span class="citation" data-cites="rosenman1975coronary">(<a href="#/references" role="doc-biblioref" onclick="">Rosenman et al. 1975</a>)</span>. The exposure of primary interest is <strong>Type A behavior pattern</strong> (a personality trait characterized by competitive drive, time urgency, and hostility), hypothesized to increase CHD <a href="../chapters/binary-outcome-associations.html#def-risk-epi">risk</a> independently of classic cardiovascular <a href="../chapters/Intro-to-GLMs.html#def-predictors">risk factors</a>.</p>
 <div id="tbl-wcgs-data-dictionary" class="quarto-float quarto-figure quarto-figure-center">
@@ -2863,7 +3027,7 @@ Figure&nbsp;2: Directed Acyclic Graph (DAG) for the WCGS study. <code>personalit
 <p>Positivity guarantees <span class="math inline">\(\operatorname{P}\mathopen{}\left(A = a \mid \tilde{L} = \tilde{l}\right)\mathclose{} &gt; 0\)</span> for every <span class="math inline">\(\tilde{l}\)</span> in the support, so each conditioning event <span class="math inline">\(\mathopen{}\left\{A = a, \tilde{L} = \tilde{l}\right\}\mathclose{}\)</span> has positive probability and every term in the second and third lines is defined.</p>
 </div>
 </section><section class="slide level2"><div id="exm-standardization" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7 (Standardizing over disease severity)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a>, <span class="math inline">\(\operatorname{P}\mathopen{}\left(L = 0\right)\mathclose{} = 600/1000 = 0.6\)</span> and <span class="math inline">\(\operatorname{P}\mathopen{}\left(L = 1\right)\mathclose{} = 0.4\)</span>, and by consistency the observed stratum means are <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid A = 1, L = l\right]\mathclose{} = \operatorname{E}\mathopen{}\left[Y(1) \mid L = l\right]\mathclose{}\)</span> and <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid A = 0, L = l\right]\mathclose{} = \operatorname{E}\mathopen{}\left[Y(0) \mid L = l\right]\mathclose{}\)</span>. By <a href="#/thm-standardization" class="quarto-xref">Theorem&nbsp;2</a>:</p>
+<p><span class="theorem-title"><strong>Example 9 (Standardizing over disease severity)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a>, <span class="math inline">\(\operatorname{P}\mathopen{}\left(L = 0\right)\mathclose{} = 600/1000 = 0.6\)</span> and <span class="math inline">\(\operatorname{P}\mathopen{}\left(L = 1\right)\mathclose{} = 0.4\)</span>, and by consistency the observed stratum means are <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid A = 1, L = l\right]\mathclose{} = \operatorname{E}\mathopen{}\left[Y(1) \mid L = l\right]\mathclose{}\)</span> and <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid A = 0, L = l\right]\mathclose{} = \operatorname{E}\mathopen{}\left[Y(0) \mid L = l\right]\mathclose{}\)</span>. By <a href="#/thm-standardization" class="quarto-xref">Theorem&nbsp;2</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}\mathopen{}\left[Y(1)\right]\mathclose{}
@@ -2887,7 +3051,7 @@ Figure&nbsp;2: Directed Acyclic Graph (DAG) for the WCGS study. <code>personalit
 &amp;&amp; \text{(subtract)}
 \end{aligned}
 \]</span></p>
-<p>Standardization recovers the true ATE of 2, whereas the naive contrast in <a href="#/exm-rct-identification-fails" class="quarto-xref">Example&nbsp;6</a> gave 7. Standardization weights both treatment groups’ stratum means by the same distribution of <span class="math inline">\(L\)</span>, the whole population’s, instead of each group’s own distribution of <span class="math inline">\(L\)</span>.</p>
+<p>Standardization recovers the true ATE of 2, whereas the naive contrast in <a href="#/exm-rct-identification-fails" class="quarto-xref">Example&nbsp;7</a> gave 7. Standardization weights both treatment groups’ stratum means by the same distribution of <span class="math inline">\(L\)</span>, the whole population’s, instead of each group’s own distribution of <span class="math inline">\(L\)</span>.</p>
 </div>
 </section><section id="sec-causal-g-computation" class="slide level2 scrollable" data-number="7.1"><h2>
 <span class="header-section-number">7.1</span> Direct standardization (G-computation)</h2>
@@ -2945,7 +3109,7 @@ Figure&nbsp;2: Directed Acyclic Graph (DAG) for the WCGS study. <code>personalit
           display:block!important;
       }</style></aside></section><section id="sec-causal-hers-ldl-adj" class="slide level2" data-number="7.3"><h2>
 <span class="header-section-number">7.3</span> Example: regression adjustment for LDL in HERS</h2>
-<p>The HERS study DAG (see <a href="#/sec-pred-sel-hers-dag" class="quarto-xref">Section&nbsp;6.4</a>) shows that <code>LDL</code> and <code>HDL</code> are <a href="#/def-mediator">mediators</a> of the HT → CHD pathway. For estimating the total causal effect of HT on CHD, we should not adjust for <code>LDL</code> or <code>HDL</code>.</p>
+<p>The HERS study DAG (see <a href="#/sec-pred-sel-hers-dag" class="quarto-xref">Section&nbsp;6.5</a>) shows that <code>LDL</code> and <code>HDL</code> are <a href="#/def-mediator">mediators</a> of the HT → CHD pathway. For estimating the total causal effect of HT on CHD, we should not adjust for <code>LDL</code> or <code>HDL</code>.</p>
 <p>However, to estimate the causal effect of <strong>HT on LDL</strong> itself, we use a separate regression model with <code>LDL</code> as the outcome. In this model, <code>LDL</code> is no longer a mediator but the outcome of interest.</p>
 <p>Since HT was randomized in HERS, no adjustment is needed for causal identification of HT → LDL. However, adjusting for strong <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictors</a> of LDL improves <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-precision">precision</a>:</p>
 <div class="cell">
@@ -2977,23 +3141,23 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 </figcaption><div aria-describedby="tbl-causal-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="qvpyqirbiw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qvpyqirbiw table {
+<div id="lgqsuuxnfe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lgqsuuxnfe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qvpyqirbiw thead, #qvpyqirbiw tbody, #qvpyqirbiw tfoot, #qvpyqirbiw tr, #qvpyqirbiw td, #qvpyqirbiw th {
+#lgqsuuxnfe thead, #lgqsuuxnfe tbody, #lgqsuuxnfe tfoot, #lgqsuuxnfe tr, #lgqsuuxnfe td, #lgqsuuxnfe th {
   border-style: none;
 }
 
-#qvpyqirbiw p {
+#lgqsuuxnfe p {
   margin: 0;
   padding: 0;
 }
 
-#qvpyqirbiw .gt_table {
+#lgqsuuxnfe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3019,12 +3183,12 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-left-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_caption {
+#lgqsuuxnfe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qvpyqirbiw .gt_title {
+#lgqsuuxnfe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3036,7 +3200,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-width: 0;
 }
 
-#qvpyqirbiw .gt_subtitle {
+#lgqsuuxnfe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3048,7 +3212,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-width: 0;
 }
 
-#qvpyqirbiw .gt_heading {
+#lgqsuuxnfe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3060,13 +3224,13 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_bottom_border {
+#lgqsuuxnfe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_col_headings {
+#lgqsuuxnfe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3081,7 +3245,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_col_heading {
+#lgqsuuxnfe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3101,7 +3265,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#qvpyqirbiw .gt_column_spanner_outer {
+#lgqsuuxnfe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3113,15 +3277,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 4px;
 }
 
-#qvpyqirbiw .gt_column_spanner_outer:first-child {
+#lgqsuuxnfe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qvpyqirbiw .gt_column_spanner_outer:last-child {
+#lgqsuuxnfe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qvpyqirbiw .gt_column_spanner {
+#lgqsuuxnfe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3133,11 +3297,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   width: 100%;
 }
 
-#qvpyqirbiw .gt_spanner_row {
+#lgqsuuxnfe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qvpyqirbiw .gt_group_heading {
+#lgqsuuxnfe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3163,7 +3327,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   text-align: left;
 }
 
-#qvpyqirbiw .gt_empty_group_heading {
+#lgqsuuxnfe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3178,15 +3342,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: middle;
 }
 
-#qvpyqirbiw .gt_from_md > :first-child {
+#lgqsuuxnfe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qvpyqirbiw .gt_from_md > :last-child {
+#lgqsuuxnfe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qvpyqirbiw .gt_row {
+#lgqsuuxnfe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3205,7 +3369,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#qvpyqirbiw .gt_stub {
+#lgqsuuxnfe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3218,7 +3382,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvpyqirbiw .gt_stub_row_group {
+#lgqsuuxnfe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3232,15 +3396,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: top;
 }
 
-#qvpyqirbiw .gt_row_group_first td {
+#lgqsuuxnfe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qvpyqirbiw .gt_row_group_first th {
+#lgqsuuxnfe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qvpyqirbiw .gt_summary_row {
+#lgqsuuxnfe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3250,16 +3414,16 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvpyqirbiw .gt_first_summary_row {
+#lgqsuuxnfe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_first_summary_row.thick {
+#lgqsuuxnfe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qvpyqirbiw .gt_last_summary_row {
+#lgqsuuxnfe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3269,7 +3433,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_grand_summary_row {
+#lgqsuuxnfe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3279,7 +3443,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvpyqirbiw .gt_first_grand_summary_row {
+#lgqsuuxnfe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3289,7 +3453,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_last_grand_summary_row_top {
+#lgqsuuxnfe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3299,11 +3463,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_striped {
+#lgqsuuxnfe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qvpyqirbiw .gt_table_body {
+#lgqsuuxnfe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3312,7 +3476,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_footnotes {
+#lgqsuuxnfe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3326,7 +3490,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_footnote {
+#lgqsuuxnfe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3335,7 +3499,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvpyqirbiw .gt_sourcenotes {
+#lgqsuuxnfe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3349,7 +3513,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#qvpyqirbiw .gt_sourcenote {
+#lgqsuuxnfe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3357,72 +3521,72 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#qvpyqirbiw .gt_left {
+#lgqsuuxnfe .gt_left {
   text-align: left;
 }
 
-#qvpyqirbiw .gt_center {
+#lgqsuuxnfe .gt_center {
   text-align: center;
 }
 
-#qvpyqirbiw .gt_right {
+#lgqsuuxnfe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qvpyqirbiw .gt_font_normal {
+#lgqsuuxnfe .gt_font_normal {
   font-weight: normal;
 }
 
-#qvpyqirbiw .gt_font_bold {
+#lgqsuuxnfe .gt_font_bold {
   font-weight: bold;
 }
 
-#qvpyqirbiw .gt_font_italic {
+#lgqsuuxnfe .gt_font_italic {
   font-style: italic;
 }
 
-#qvpyqirbiw .gt_super {
+#lgqsuuxnfe .gt_super {
   font-size: 65%;
 }
 
-#qvpyqirbiw .gt_footnote_marks {
+#lgqsuuxnfe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qvpyqirbiw .gt_asterisk {
+#lgqsuuxnfe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qvpyqirbiw .gt_indent_1 {
+#lgqsuuxnfe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qvpyqirbiw .gt_indent_2 {
+#lgqsuuxnfe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qvpyqirbiw .gt_indent_3 {
+#lgqsuuxnfe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qvpyqirbiw .gt_indent_4 {
+#lgqsuuxnfe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qvpyqirbiw .gt_indent_5 {
+#lgqsuuxnfe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qvpyqirbiw .katex-display {
+#lgqsuuxnfe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qvpyqirbiw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lgqsuuxnfe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3526,7 +3690,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 <p><span class="theorem-title"><strong>Definition 18 (Propensity score)</strong></span> The <strong>propensity score</strong> is the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob">conditional probability</a> of treatment given the observed <a href="../chapters/Intro-to-GLMs.html#def-predictors">covariates</a>: <span class="math display">\[e(\tilde{L}) \stackrel{\text{def}}{=}\operatorname{P}\mathopen{}\left(A = 1 \mid \tilde{L}\right)\mathclose{}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-propensity-score" class="theorem example">
-<p><span class="theorem-title"><strong>Example 8 (Propensity scores in the severity example)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a>, the propensity score (<a href="#/def-propensity-score" class="quarto-xref">Definition&nbsp;18</a>) takes two values: <span class="math inline">\(e(0) = \operatorname{P}\mathopen{}\left(A = 1 \mid L = 0\right)\mathclose{} = 120/600 = 0.2\)</span> and <span class="math inline">\(e(1) = \operatorname{P}\mathopen{}\left(A = 1 \mid L = 1\right)\mathclose{} = 280/400 = 0.7\)</span>. A severe patient is <span class="math inline">\(0.7 / 0.2 = 3.5\)</span> times as likely to be treated as a non-severe patient.</p>
+<p><span class="theorem-title"><strong>Example 10 (Propensity scores in the severity example)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a>, the propensity score (<a href="#/def-propensity-score" class="quarto-xref">Definition&nbsp;18</a>) takes two values: <span class="math inline">\(e(0) = \operatorname{P}\mathopen{}\left(A = 1 \mid L = 0\right)\mathclose{} = 120/600 = 0.2\)</span> and <span class="math inline">\(e(1) = \operatorname{P}\mathopen{}\left(A = 1 \mid L = 1\right)\mathclose{} = 280/400 = 0.7\)</span>. A severe patient is <span class="math inline">\(0.7 / 0.2 = 3.5\)</span> times as likely to be treated as a non-severe patient.</p>
 </div>
 </section><section class="slide level2"><div id="rem-propensity-score-balancing" class="proof remark">
 <p><span class="proof-title"><em>Remark 14</em> (Propensity scores and exchangeability). </span><span class="citation" data-cites="rosenbaum1983central">Rosenbaum and Rubin (<a href="#/references" role="doc-biblioref" onclick="">1983</a>)</span> showed that if <span class="math inline">\(A \perp\!\!\!\perp (Y(0), Y(1)) \mid \tilde{L}\)</span> (<a href="#/def-exchangeability">conditional exchangeability</a> given <span class="math inline">\(\tilde{L}\)</span>), then also: <span class="math display">\[A \perp\!\!\!\perp (Y(0), Y(1)) \mid e(\tilde{L})\]</span></p>
@@ -3585,7 +3749,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-ipw" class="theorem example">
-<p><span class="theorem-title"><strong>Example 9 (The pseudo-population in the severity example)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;3</a>, with the propensity scores of <a href="#/exm-propensity-score" class="quarto-xref">Example&nbsp;8</a>, the weights of <a href="#/def-ipw" class="quarto-xref">Definition&nbsp;20</a> are:</p>
+<p><span class="theorem-title"><strong>Example 11 (The pseudo-population in the severity example)</strong></span> In the population of <a href="#/exm-exchangeability-strata" class="quarto-xref">Example&nbsp;4</a>, with the propensity scores of <a href="#/exm-propensity-score" class="quarto-xref">Example&nbsp;10</a>, the weights of <a href="#/def-ipw" class="quarto-xref">Definition&nbsp;20</a> are:</p>
 <table class="caption-top">
 <thead><tr class="header">
 <th style="text-align: left;">Group</th>
@@ -3644,11 +3808,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 &amp;&amp; \text{(add and divide)}
 \end{aligned}
 \]</span></p>
-<p>These weighted means match <a href="#/exm-standardization" class="quarto-xref">Example&nbsp;7</a>, as <a href="#/thm-ipw-identification" class="quarto-xref">Theorem&nbsp;3</a> says they should, and their difference recovers the ATE of 2.</p>
+<p>These weighted means match <a href="#/exm-standardization" class="quarto-xref">Example&nbsp;9</a>, as <a href="#/thm-ipw-identification" class="quarto-xref">Theorem&nbsp;3</a> says they should, and their difference recovers the ATE of 2.</p>
 </div>
 </section><section id="sec-ps-wcgs" class="slide level2" data-number="8.3"><h2>
 <span class="header-section-number">8.3</span> Propensity score example: WCGS</h2>
-<p>In the WCGS study, we can use propensity score methods to estimate the causal effect of Type A behavior on CHD. We first fit a <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> model predicting Type A behavior from the <a href="#/def-confounder">confounders</a> identified by the DAG (<a href="#/sec-pred-sel-wcgs-dag" class="quarto-xref">Section&nbsp;6.7</a>):</p>
+<p>In the WCGS study, we can use propensity score methods to estimate the causal effect of Type A behavior on CHD. We first fit a <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> model predicting Type A behavior from the <a href="#/def-confounder">confounders</a> identified by the DAG (<a href="#/sec-pred-sel-wcgs-dag" class="quarto-xref">Section&nbsp;6.8</a>):</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb13-2"><a aria-label="2"></a></span>
@@ -3730,23 +3894,23 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
 </figcaption><div aria-describedby="tbl-ps-wcgs-ipw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="chtcvswkmx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#chtcvswkmx table {
+<div id="uqkkcngpwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uqkkcngpwf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#chtcvswkmx thead, #chtcvswkmx tbody, #chtcvswkmx tfoot, #chtcvswkmx tr, #chtcvswkmx td, #chtcvswkmx th {
+#uqkkcngpwf thead, #uqkkcngpwf tbody, #uqkkcngpwf tfoot, #uqkkcngpwf tr, #uqkkcngpwf td, #uqkkcngpwf th {
   border-style: none;
 }
 
-#chtcvswkmx p {
+#uqkkcngpwf p {
   margin: 0;
   padding: 0;
 }
 
-#chtcvswkmx .gt_table {
+#uqkkcngpwf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3772,12 +3936,12 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-left-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_caption {
+#uqkkcngpwf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#chtcvswkmx .gt_title {
+#uqkkcngpwf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3789,7 +3953,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-width: 0;
 }
 
-#chtcvswkmx .gt_subtitle {
+#uqkkcngpwf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3801,7 +3965,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-width: 0;
 }
 
-#chtcvswkmx .gt_heading {
+#uqkkcngpwf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3813,13 +3977,13 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_bottom_border {
+#uqkkcngpwf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_col_headings {
+#uqkkcngpwf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3834,7 +3998,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_col_heading {
+#uqkkcngpwf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3854,7 +4018,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#chtcvswkmx .gt_column_spanner_outer {
+#uqkkcngpwf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3866,15 +4030,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 4px;
 }
 
-#chtcvswkmx .gt_column_spanner_outer:first-child {
+#uqkkcngpwf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#chtcvswkmx .gt_column_spanner_outer:last-child {
+#uqkkcngpwf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#chtcvswkmx .gt_column_spanner {
+#uqkkcngpwf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3886,11 +4050,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   width: 100%;
 }
 
-#chtcvswkmx .gt_spanner_row {
+#uqkkcngpwf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#chtcvswkmx .gt_group_heading {
+#uqkkcngpwf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3916,7 +4080,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   text-align: left;
 }
 
-#chtcvswkmx .gt_empty_group_heading {
+#uqkkcngpwf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3931,15 +4095,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: middle;
 }
 
-#chtcvswkmx .gt_from_md > :first-child {
+#uqkkcngpwf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#chtcvswkmx .gt_from_md > :last-child {
+#uqkkcngpwf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#chtcvswkmx .gt_row {
+#uqkkcngpwf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3958,7 +4122,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#chtcvswkmx .gt_stub {
+#uqkkcngpwf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3971,7 +4135,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#chtcvswkmx .gt_stub_row_group {
+#uqkkcngpwf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3985,15 +4149,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: top;
 }
 
-#chtcvswkmx .gt_row_group_first td {
+#uqkkcngpwf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#chtcvswkmx .gt_row_group_first th {
+#uqkkcngpwf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#chtcvswkmx .gt_summary_row {
+#uqkkcngpwf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4003,16 +4167,16 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#chtcvswkmx .gt_first_summary_row {
+#uqkkcngpwf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_first_summary_row.thick {
+#uqkkcngpwf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#chtcvswkmx .gt_last_summary_row {
+#uqkkcngpwf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4022,7 +4186,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_grand_summary_row {
+#uqkkcngpwf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4032,7 +4196,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#chtcvswkmx .gt_first_grand_summary_row {
+#uqkkcngpwf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4042,7 +4206,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_last_grand_summary_row_top {
+#uqkkcngpwf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4052,11 +4216,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_striped {
+#uqkkcngpwf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#chtcvswkmx .gt_table_body {
+#uqkkcngpwf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4065,7 +4229,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_footnotes {
+#uqkkcngpwf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4079,7 +4243,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_footnote {
+#uqkkcngpwf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4088,7 +4252,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#chtcvswkmx .gt_sourcenotes {
+#uqkkcngpwf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4102,7 +4266,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#chtcvswkmx .gt_sourcenote {
+#uqkkcngpwf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4110,72 +4274,72 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#chtcvswkmx .gt_left {
+#uqkkcngpwf .gt_left {
   text-align: left;
 }
 
-#chtcvswkmx .gt_center {
+#uqkkcngpwf .gt_center {
   text-align: center;
 }
 
-#chtcvswkmx .gt_right {
+#uqkkcngpwf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#chtcvswkmx .gt_font_normal {
+#uqkkcngpwf .gt_font_normal {
   font-weight: normal;
 }
 
-#chtcvswkmx .gt_font_bold {
+#uqkkcngpwf .gt_font_bold {
   font-weight: bold;
 }
 
-#chtcvswkmx .gt_font_italic {
+#uqkkcngpwf .gt_font_italic {
   font-style: italic;
 }
 
-#chtcvswkmx .gt_super {
+#uqkkcngpwf .gt_super {
   font-size: 65%;
 }
 
-#chtcvswkmx .gt_footnote_marks {
+#uqkkcngpwf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#chtcvswkmx .gt_asterisk {
+#uqkkcngpwf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#chtcvswkmx .gt_indent_1 {
+#uqkkcngpwf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#chtcvswkmx .gt_indent_2 {
+#uqkkcngpwf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#chtcvswkmx .gt_indent_3 {
+#uqkkcngpwf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#chtcvswkmx .gt_indent_4 {
+#uqkkcngpwf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#chtcvswkmx .gt_indent_5 {
+#uqkkcngpwf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#chtcvswkmx .katex-display {
+#uqkkcngpwf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#chtcvswkmx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uqkkcngpwf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

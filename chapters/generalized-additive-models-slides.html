@@ -533,7 +533,7 @@ text-align: center;
 <li>
 <strong>Power loss.</strong> Within each bin, all variation in <span class="math inline">\(X\)</span> is treated as noise. Compared with a smooth fit that exploits the continuous structure, step functions waste information about where in the bin each observation falls.</li>
 <li>
-<strong>Effective parameter count.</strong> A step function with <span class="math inline">\(K\)</span> cutpoints uses <span class="math inline">\(K\)</span> parameters beyond the intercept. For a meaningful fit, <span class="math inline">\(K\)</span> has to be large enough to resolve the underlying shape — but every extra cutpoint costs a degree of freedom.</li>
+<strong>Effective parameter count.</strong> A step function with <span class="math inline">\(K\)</span> cutpoints uses <span class="math inline">\(K\)</span> parameters beyond the intercept. For a meaningful fit, <span class="math inline">\(K\)</span> has to be large enough to resolve the underlying shape — but every extra cutpoint adds a parameter to estimate.</li>
 </ul>
 <p>Step functions are most useful when bin boundaries are <strong>substantively meaningful</strong> (e.g.&nbsp;clinical BMI categories) and the goal is to communicate effects in those familiar categories rather than to estimate a smooth dose-response curve. For pure curve estimation, splines almost always do better.</p>
 </section><section id="step-functions-in-r" class="slide level2" data-number="3.3"><h2>
@@ -644,7 +644,7 @@ title-only slide. -->
 </div>
 </section><section id="continuity-and-smoothness-constraints" class="slide level2" data-number="5.2"><h2>
 <span class="header-section-number">5.2</span> Continuity and smoothness constraints</h2>
-<p>Splines pay for their flexibility by adding <strong>smoothness constraints</strong> at the knots.</p>
+<p>Splines limit the flexibility of piecewise polynomials by imposing <strong>smoothness constraints</strong> at the knots. Between knots, each piece is a polynomial, which is already smooth, so the knots are the only places where a constraint is needed.</p>
 </section><section class="slide level2"><div id="def-spline" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5 (Spline)</strong></span> A <strong>spline of degree <span class="math inline">\(d\)</span></strong> with knots <span class="math inline">\(\xi_1, \ldots, \xi_K\)</span> is a piecewise polynomial of degree <span class="math inline">\(d\)</span> that is continuous, has continuous first derivative, …, has continuous <span class="math inline">\((d-1)\)</span>-th derivative at every knot.</p>
 </div>
@@ -1517,8 +1517,8 @@ title-only slide. -->
 <p><span class="proof-title"><em>Remark 7</em> (What counts as a smooth function). </span>A “smooth function” in practice means a regression spline, smoothing spline, or other smoother — anything that can be written as a basis expansion <span class="math inline">\(f_j(x_j) = \sum_k \beta_{jk} b_{jk}(x_j)\)</span> with the coefficients <span class="math inline">\(\beta_{jk}\)</span> estimated jointly across all predictors.</p>
 </div>
 <p>The model class includes ordinary linear regression as a special case (every <span class="math inline">\(f_j\)</span> is just <span class="math inline">\(\beta_j x_j\)</span>) and ordinary GLMs as another special case (same — every <span class="math inline">\(f_j\)</span> linear, with the right link function). The point of the GAM extension is to let <em>some</em> <span class="math inline">\(f_j\)</span> be nonlinear while keeping the predictor contributions additive.</p>
-</section><section id="what-additive-buys-you" class="slide level2" data-number="9.2"><h2>
-<span class="header-section-number">9.2</span> What “additive” buys you</h2>
+</section><section id="what-the-additive-structure-gives-you" class="slide level2" data-number="9.2"><h2>
+<span class="header-section-number">9.2</span> What the additive structure gives you</h2>
 <p>The additive structure makes GAMs strictly less flexible than fully nonparametric models like</p>
 <p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = f(x_1, x_2, \ldots, x_p),\]</span></p>
 <p>which allow arbitrary interactions among predictors. In return, GAMs gain:</p>
@@ -1545,7 +1545,7 @@ title-only slide. -->
 <span id="cb14-7"><a aria-label="7"></a><span class="co">#&gt; chol ~ dibpat + s(age, by = dibpat)</span></span>
 <span id="cb14-8"><a aria-label="8"></a><span class="co">#&gt; </span></span>
 <span id="cb14-9"><a aria-label="9"></a><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.00 1.01  total = 4.01 </span></span>
+<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.02 1.03  total = 4.05 </span></span>
 <span id="cb14-11"><a aria-label="11"></a><span class="co">#&gt; </span></span>
 <span id="cb14-12"><a aria-label="12"></a><span class="co">#&gt; REML score: 16231.9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1666,9 +1666,9 @@ title-only slide. -->
 <pre><code>#&gt; 
 #&gt; Method: REML   Optimizer: outer newton
 #&gt; full convergence after 7 iterations.
-#&gt; Gradient range [-0.000358419,-2.1343e-05]
+#&gt; Gradient range [-0.000404069,-1.352e-05]
 #&gt; (score 821.975 &amp; scale 1).
-#&gt; Hessian positive definite, eigenvalue range [3.16164e-05,0.220195].
+#&gt; Hessian positive definite, eigenvalue range [1.35192e-05,0.220195].
 #&gt; Model rank =  29 / 29 
 #&gt; 
 #&gt; Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
@@ -1729,18 +1729,18 @@ title-only slide. -->
 <span id="cb19-4"><a aria-label="4"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> wcgs, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb19-5"><a aria-label="5"></a>sm_inf <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_inf)</span>
 <span id="cb19-6"><a aria-label="6"></a>sm_inf<span class="sc">$</span>p.table  <span class="co"># parametric coefficients</span></span>
-<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
-<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.97147   0.117513 -25.28619 4.53227e-141</span></span>
-<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.78173   0.141714   5.51627  3.46277e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;               Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
+<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.971461   0.117513 -25.28618 4.53331e-141</span></span>
+<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.781729   0.141714   5.51626  3.46292e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Read these exactly as you would GLM coefficients.</p>
 <h3 id="smooth-terms">Smooth terms</h3>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>sm_inf<span class="sc">$</span>s.table  <span class="co"># smooth terms</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq   p-value</span></span>
-<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00107 1.00214 36.4005 0.0000000</span></span>
-<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29959 1.54968 10.8386 0.0064354</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq    p-value</span></span>
+<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00156 1.00312 36.3980 0.00000000</span></span>
+<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29791 1.54685 10.8353 0.00641275</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Each column reports:</p>
@@ -1777,7 +1777,7 @@ title-only slide. -->
 <strong><code><a href="https://gavinsimpson.github.io/gratia/reference/compare_smooths.html">gratia::compare_smooths()</a></code></strong> (from the companion <code>gratia</code> package) — a more comprehensive comparison framework, including visual overlays of smooths and difference plots.</li>
 </ul></section><section id="when-to-prefer-a-glm-over-a-gam" class="slide level2 scrollable" data-number="11.4"><h2>
 <span class="header-section-number">11.4</span> When to prefer a GLM over a GAM</h2>
-<p>GAMs are strictly more flexible than GLMs, but that flexibility costs something:</p>
+<p>GAMs are strictly more flexible than GLMs, but that flexibility has drawbacks:</p>
 <ul>
 <li>
 <strong>Communication.</strong> A linear effect is easier to describe in a table of coefficients than a curve.</li>
@@ -1868,10 +1868,10 @@ title-only slide. -->
 <span id="cb23-20"><a aria-label="20"></a><span class="co">#&gt; </span></span>
 <span id="cb23-21"><a aria-label="21"></a><span class="co">#&gt; Approximate significance of smooth terms:</span></span>
 <span id="cb23-22"><a aria-label="22"></a><span class="co">#&gt;          edf Ref.df Chi.sq p-value    </span></span>
-<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 1.1e-06 ***</span></span>
+<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 5.8e-07 ***</span></span>
 <span id="cb23-24"><a aria-label="24"></a><span class="co">#&gt; s(bmi)  1.00   1.00   2.18    0.14    </span></span>
 <span id="cb23-25"><a aria-label="25"></a><span class="co">#&gt; s(chol) 1.61   2.02  56.48 &lt; 2e-16 ***</span></span>
-<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.4e-06 ***</span></span>
+<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.7e-06 ***</span></span>
 <span id="cb23-27"><a aria-label="27"></a><span class="co">#&gt; ---</span></span>
 <span id="cb23-28"><a aria-label="28"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb23-29"><a aria-label="29"></a><span class="co">#&gt; </span></span>
@@ -1970,7 +1970,7 @@ title-only slide. -->
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58585","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58571","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>

@@ -440,7 +440,7 @@ text-align: center;
 <p><span id="eq-def-cond-haz"><span class="math display">\[{\lambda}(t|\tilde{x}) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t, \tilde{X}= \tilde{x}) \tag{1}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="def-base-hazard" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (baseline hazard)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition 2 (baseline hazard (base hazard, reference hazard))</strong></span> &nbsp;</p>
 <aside class="notes"><p>The <strong>baseline hazard</strong>, <strong>base hazard</strong>, or <strong>reference hazard</strong>, denoted <span class="math inline">\({\lambda}_0(t)\)</span> or <span class="math inline">\(\lambda_0(t)\)</span>, is the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a> for the subpopulation of individuals whose covariates are all equal to their <a href="https://morrison-lab.github.io/sds/data.html#def-reference-level">reference levels</a>:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -477,7 +477,7 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside><div id="def-base-cuhaz" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (baseline cumulative hazard)</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Definition 3 (baseline cumulative hazard (base cumulative hazard, reference cumulative hazard))</strong></span> &nbsp;</p>
 <aside class="notes"><p>The <strong>baseline cumulative hazard</strong>, <strong>base cumulative hazard</strong>, or <strong>reference cumulative hazard</strong>, denoted <span class="math inline">\(H_0(t)\)</span> or <span class="math inline">\(\Lambda_0(t)\)</span>, is the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard function</a> for the subpopulation of individuals whose covariates are all equal to their reference levels:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -840,7 +840,7 @@ text-align: center;
 \tag{21}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="def-risk-score" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 12 (Risk Score)</strong></span> In a Cox proportional hazards model (see <a href="#/def-ph-model" class="quarto-xref">Definition&nbsp;11</a>) with coefficient vector <span class="math inline">\(\tilde{\beta}\)</span>, the <strong>risk score</strong> (also called the <strong>hazard multiplier</strong> or <strong>partial hazard</strong>) for a subject with covariate vector <span class="math inline">\(\tilde{x}\)</span> is:</p>
+<p><span class="theorem-title"><strong>Definition 12 (Risk Score (hazard multiplier, partial hazard))</strong></span> In a Cox proportional hazards model (see <a href="#/def-ph-model" class="quarto-xref">Definition&nbsp;11</a>) with coefficient vector <span class="math inline">\(\tilde{\beta}\)</span>, the <strong>risk score</strong> (also called the <strong>hazard multiplier</strong> or <strong>partial hazard</strong>) for a subject with covariate vector <span class="math inline">\(\tilde{x}\)</span> is:</p>
 <p><span class="math display">\[\theta_{{\lambda}}\mathopen{}\left(\tilde{x}\right)\mathclose{} \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\tilde{x}\cdot \tilde{\beta}\right\}\mathclose{}\]</span></p>
 </div>
 <aside class="notes"><p>The risk score <span class="math inline">\(\theta_{{\lambda}}\mathopen{}\left(\tilde{x}\right)\mathclose{}\)</span> is a theoretical quantity depending on the true (unknown) parameter <span class="math inline">\(\tilde{\beta}\)</span>.</p>
@@ -870,7 +870,7 @@ text-align: center;
 \end{aligned}
 \]</span></p>
 </div>
-<aside class="notes"><p>This model is <strong>semi-parametric</strong>, because the <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a> depends on estimated parameters but the <a href="#/def-base-hazard">base hazard function</a> is unspecified. There is no constant term in <span class="math inline">\(\eta(x)\)</span>, because it is absorbed in the base hazard.</p>
+<aside class="notes"><p>This model is <strong>semi-parametric</strong>, because the <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a> depends on estimated parameters but the <a href="#/def-base-hazard">base hazard function</a> is unspecified. There is no constant term in <span class="math inline">\(\Delta\eta(\tilde{x})\)</span>, because it is absorbed in the base hazard.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -882,7 +882,7 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><p>Alternatively, we could define <span class="math inline">\(\beta_0(t) = \operatorname{log}\mathopen{}\left\{{\lambda}_0(t)\right\}\mathclose{}\)</span>, and then:</p>
-<p><span class="math display">\[\eta(x,t) = \beta_0(t) + \beta_1x_1+\cdots+\beta_px_p\]</span></p>
+<p><span class="math display">\[\eta(t|\tilde{x}) = \beta_0(t) + \beta_1x_1+\cdots+\beta_px_p\]</span></p>
 </section><section class="slide level2"><aside class="notes"><p>For two different individuals with covariate patterns <span class="math inline">\(\tilde{x}_1\)</span> and <span class="math inline">\(\tilde{x}_2\)</span>, the ratio of the hazard functions (a.k.a. <strong>hazard ratio</strong>, a.k.a. <strong>relative hazard</strong>) is:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -972,8 +972,8 @@ text-align: center;
 \frac{{\lambda}(t|\tilde{x}_1)}{{\lambda}(t|\tilde{x}_2)}
 &amp;=\frac{{\lambda}_0(t)\theta_{{\lambda}}(\tilde{x}_1)}{{\lambda}_0(t)\theta_{{\lambda}}(\tilde{x}_2)} &amp;&amp; \text{(applying the PH hazard decomposition)} \\
 &amp;=\frac{\theta_{{\lambda}}(\tilde{x}_1)}{\theta_{{\lambda}}(\tilde{x}_2)} &amp;&amp; \text{(canceling baseline hazard } {\lambda}_0(t)\text{)} \\
-&amp;=\frac{\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}_1)\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}_2)\right\}\mathclose{}} &amp;&amp; \text{(hazard factor under proportional hazards)} \\
-&amp;=\operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}_1)-\eta(\tilde{x}_2)\right\}\mathclose{} &amp;&amp; \text{(quotient rule for exponentials)} \\
+&amp;=\frac{\operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x}_1)\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x}_2)\right\}\mathclose{}} &amp;&amp; \text{(hazard factor under proportional hazards)} \\
+&amp;=\operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x}_1)-\Delta\eta(\tilde{x}_2)\right\}\mathclose{} &amp;&amp; \text{(quotient rule for exponentials)} \\
 &amp;=\operatorname{exp}\mathopen{}\left\{{\tilde{x}_1}^{\top}\tilde{\beta}-{\tilde{x}_2}^{\top}\tilde{\beta}\right\}\mathclose{} &amp;&amp; \text{(substituting linear predictors)} \\
 &amp;=\operatorname{exp}\mathopen{}\left\{{(\tilde{x}_1 - \tilde{x}_2)}^{\top}\tilde{\beta}\right\}\mathclose{} &amp;&amp; \text{(factoring out } \tilde{\beta}\text{)}
 \end{aligned}
@@ -989,7 +989,7 @@ text-align: center;
 \\
 &amp;\stackrel{\text{def}}{=}\Delta\eta(t|\tilde{x}: \mathord{{\tilde{x}^*}}) &amp;&amp; \text{(definition of log-hazard difference)}
 \\
-&amp;= \eta(\tilde{x}) - \eta(\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(linear predictor form)}
+&amp;= \Delta\eta(\tilde{x}) - \Delta\eta(\mathord{{\tilde{x}^*}}) &amp;&amp; \text{(linear predictor form)}
 \\
 &amp;= \tilde{x} \cdot \tilde{\beta} - \mathord{{\tilde{x}^*}} \cdot \tilde{\beta} &amp;&amp; \text{(substituting linear predictors)}
 \\
@@ -997,7 +997,7 @@ text-align: center;
 \end{aligned}
 \tag{26}\]</span></span></p>
 </div>
-</section><section class="slide level2"><p>Applying the <a href="../chapters/Linear-models-overview.html#def-coef-interp-procedure">general procedure for interpreting a regression coefficient</a> to the log-hazard linear predictor <span class="math inline">\(\eta(\tilde{x}) = \Delta\eta(\tilde{x}) = \tilde{x}\cdot \tilde{\beta}\)</span> (differentiating or differencing with respect to <span class="math inline">\(x_j\)</span>, depending on whether <span class="math inline">\(x_j\)</span> is continuous or discrete, with all other covariates held fixed) yields the following interpretation of <span class="math inline">\(\beta_j\)</span>:</p>
+</section><section class="slide level2"><p>Applying the <a href="../chapters/Linear-models-overview.html#def-coef-interp-procedure">general procedure for interpreting a regression coefficient</a> to the log-hazard linear predictor <span class="math inline">\(\Delta\eta(\tilde{x}) = \tilde{x}\cdot \tilde{\beta}\)</span> (differentiating or differencing with respect to <span class="math inline">\(x_j\)</span>, depending on whether <span class="math inline">\(x_j\)</span> is continuous or discrete, with all other covariates held fixed) yields the following interpretation of <span class="math inline">\(\beta_j\)</span>:</p>
 <p>If only one covariate <span class="math inline">\(x_j\)</span> is changing, then:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -2395,13 +2395,13 @@ Figure&nbsp;6: Survival Functions for Three Groups by KM and Cox Model
 </section></section><section><section id="adjustment-for-ties-optional" class="title-slide slide level1 center" data-number="6"><h1>
 <span class="header-section-number">6</span> Adjustment for Ties (optional)</h1>
 
-</section><section class="slide level2"></section><section class="slide level2"><p>At each time <span class="math inline">\(t_i\)</span> at which more than one of the subjects has an event, let <span class="math inline">\(d_i\)</span> be the number of events at that time, <span class="math inline">\(D_i\)</span> the set of subjects with events at that time, and let <span class="math inline">\(s_i\)</span> be a <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-slr-covariate-vector">covariate vector</a> for an artificial subject obtained by adding up the covariate values for the subjects with an event at time <span class="math inline">\(t_i\)</span>. Let <span class="math display">\[\bar\eta_i = \beta_1s_{i1}+\cdots+\beta_ps_{ip}\]</span> and <span class="math inline">\(\bar\theta_i = \operatorname{exp}\mathopen{}\left\{\bar\eta_i\right\}\mathclose{}\)</span>.</p>
+</section><section class="slide level2"></section><section class="slide level2"><p>At each time <span class="math inline">\(t_i\)</span> at which more than one of the subjects has an event, let <span class="math inline">\(d_i\)</span> be the number of events at that time, <span class="math inline">\(D_i\)</span> the set of subjects with events at that time, and let <span class="math inline">\(s_i\)</span> be a <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-slr-covariate-vector">covariate vector</a> for an artificial subject obtained by adding up the covariate values for the subjects with an event at time <span class="math inline">\(t_i\)</span>. Let <span class="math display">\[\overline{\Delta\eta}_i = \beta_1s_{i1}+\cdots+\beta_ps_{ip}\]</span> and <span class="math inline">\(\bar\theta_i = \operatorname{exp}\mathopen{}\left\{\overline{\Delta\eta}_i\right\}\mathclose{}\)</span>.</p>
 <p>Note that</p>
 <p><span class="math display">\[
 \begin{aligned}
-\bar\eta_i &amp;=\sum_{j \in D_i}\beta_1x_{j1}+\cdots+\beta_px_{jp}\\
+\overline{\Delta\eta}_i &amp;=\sum_{j \in D_i}\beta_1x_{j1}+\cdots+\beta_px_{jp}\\
 &amp;= \beta_1s_{i1}+\cdots+\beta_ps_{ip}\\
-\bar\theta_i &amp;= \operatorname{exp}\mathopen{}\left\{\bar\eta_i\right\}\mathclose{}\\
+\bar\theta_i &amp;= \operatorname{exp}\mathopen{}\left\{\overline{\Delta\eta}_i\right\}\mathclose{}\\
 &amp;= \prod_{j \in D_i}\theta_i
 \end{aligned}
 \]</span></p>
@@ -2826,7 +2826,7 @@ y_i &amp;\sim N(\eta_i,\sigma^2)
 \]</span></p>
 <ul>
 <li>
-<span class="math inline">\(\hat y_i\)</span> estimates the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation">conditional mean</a> of <span class="math inline">\(y_i\)</span> given the covariate values <span class="math inline">\(\tilde{x}_i\)</span>. This together with the <a href="https://morrison-lab.github.io/sds/estimation.html#def-prediction-error">prediction error</a> says that we are predicting the distribution of values of <span class="math inline">\(y\)</span>.</li>
+<span class="math inline">\(\hat y_i\)</span> estimates the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation">conditional mean</a> of <span class="math inline">\(y_i\)</span> given the covariate values <span class="math inline">\(\tilde{x}_i\)</span>. This together with the <a href="https://morrison-lab.github.io/sds/prediction.html#def-prediction-error">prediction error</a> says that we are predicting the distribution of values of <span class="math inline">\(y\)</span>.</li>
 </ul>
 <h3 id="review-residuals-in-linear-regression">Review: Residuals in Linear Regression</h3>
 <ul>

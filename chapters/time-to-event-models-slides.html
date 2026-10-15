@@ -11,16 +11,16 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
-
-  <title>Regression Models for Epidemiology – Time to Event Models</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
-  <style>
+<link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+<title>Regression Models for Epidemiology – Time to Event Models</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+<style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
@@ -38,19 +38,100 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script>
-
-  <script type="text/plain" cookie-consent="tracking">
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-VLDZY2T3JF', { 'anonymize_ip': true});
-  </script>
-  
-  <script type="text/javascript" charset="UTF-8">
+  </script><script type="text/javascript" charset="UTF-8">
   document.addEventListener('DOMContentLoaded', function () {
   cookieconsent.run({
     "notice_banner_type":"simple",
@@ -65,26 +146,21 @@
   "language":"en"
     });
   });
-  </script> 
-    
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <script type="application/json" class="js-hypothesis-config">
+  </script><link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<script type="application/json" class="js-hypothesis-config">
   {
     "theme": "clean",
     "openSidebar": false,
     "enableExperimentalNewNoteButton": true
   }
-  </script>
-  <script async="" src="https://hypothes.is/embed.js"></script>
-  <script>
+  </script><script async="" src="https://hypothes.is/embed.js"></script><script>
     window.document.addEventListener("DOMContentLoaded", function (_event) {
       document.body.classList.add('hypothesis-enabled');
     });
-  </script>
-  <style type="text/css">
+  </script><style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -172,7 +248,7 @@
       margin-right: 0; 
     }
   </style>
-  <script>
+<script>
   // Colour themes for the slide decks. Reads the choice the website's theme
   // dropdown saved ("mln-theme"); a deck with nothing saved stays dark.
   (function () {
@@ -207,8 +283,7 @@
       document.body.appendChild(sel);
     });
   })();
-  </script>
-  <style>
+  </script><style>
   .deck-theme-picker {
     position: fixed; top: 4px; left: 4px; z-index: 30;
     font: 12px sans-serif; padding: 2px 4px; opacity: 0.55;
@@ -216,22 +291,176 @@
   .deck-theme-picker:hover, .deck-theme-picker:focus { opacity: 1; }
   @media print { .deck-theme-picker { display: none; } }
   </style>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Time to Event Models</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Time to Event Models</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section class="slide level2 scrollable">
-
+</section><section class="slide level2"><!-- ::: {.content-hidden when-format="revealjs"} --></section><section class="slide level2 scrollable"><h3 class="unnumbered" id="configuring-r">Configuring R</h3>
+<p>Functions from these packages will be used throughout this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rmarkdown) <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(pander) <span class="co"># format tables for markdown</span></span>
+<span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(ggplot2) <span class="co"># graphics</span></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="fu">library</span>(ggfortify) <span class="co"># help with graphics</span></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="fu">library</span>(dplyr) <span class="co"># manipulate data</span></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="fu">library</span>(tibble) <span class="co"># `tibble`s extend `data.frame`s</span></span>
+<span id="cb1-9"><a aria-label="9"></a><span class="fu">library</span>(magrittr) <span class="co"># `%&gt;%` and other additional piping tools</span></span>
+<span id="cb1-10"><a aria-label="10"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="fu">library</span>(knitr) <span class="co"># format R output for markdown</span></span>
+<span id="cb1-12"><a aria-label="12"></a><span class="fu">library</span>(tidyr) <span class="co"># Tools to help to create tidy data</span></span>
+<span id="cb1-13"><a aria-label="13"></a><span class="fu">library</span>(plotly) <span class="co"># interactive graphics</span></span>
+<span id="cb1-14"><a aria-label="14"></a><span class="fu">library</span>(dobson) <span class="co"># datasets from Dobson and Barnett 2018</span></span>
+<span id="cb1-15"><a aria-label="15"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for markdown</span></span>
+<span id="cb1-16"><a aria-label="16"></a><span class="fu">library</span>(haven) <span class="co"># import Stata files</span></span>
+<span id="cb1-17"><a aria-label="17"></a><span class="fu">library</span>(latex2exp) <span class="co"># use LaTeX in R code (for figures and tables)</span></span>
+<span id="cb1-18"><a aria-label="18"></a><span class="fu">library</span>(fs) <span class="co"># filesystem path manipulations</span></span>
+<span id="cb1-19"><a aria-label="19"></a><span class="fu">library</span>(survival) <span class="co"># survival analysis</span></span>
+<span id="cb1-20"><a aria-label="20"></a><span class="fu">library</span>(survminer) <span class="co"># survival analysis graphics</span></span>
+<span id="cb1-21"><a aria-label="21"></a><span class="fu">library</span>(KMsurv) <span class="co"># datasets from Klein and Moeschberger</span></span>
+<span id="cb1-22"><a aria-label="22"></a><span class="fu">library</span>(parameters) <span class="co"># format model output tables for</span></span>
+<span id="cb1-23"><a aria-label="23"></a><span class="fu">library</span>(webshot2) <span class="co"># convert interactive content to static for pdf</span></span>
+<span id="cb1-24"><a aria-label="24"></a><span class="fu">library</span>(forcats) <span class="co"># functions for categorical variables ("factors")</span></span>
+<span id="cb1-25"><a aria-label="25"></a><span class="fu">library</span>(stringr) <span class="co"># functions for dealing with strings</span></span>
+<span id="cb1-26"><a aria-label="26"></a><span class="fu">library</span>(lubridate) <span class="co"># functions for dealing with dates and times</span></span>
+<span id="cb1-27"><a aria-label="27"></a><span class="fu">library</span>(broom) <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom.helpers) <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Here are some R settings I use in this document:</p>
+<div class="cell">
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-label="1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># delete any data that's already loaded into R</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
+<span id="cb2-4"><a aria-label="4"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
+<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb2-6"><a aria-label="6"></a>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span id="cb2-7"><a aria-label="7"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb2-8"><a aria-label="8"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)))</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-12"><a aria-label="12"></a><span class="fu">options</span>(<span class="st">'digits'</span> <span class="ot">=</span> <span class="dv">6</span>)</span>
+<span id="cb2-13"><a aria-label="13"></a></span>
+<span id="cb2-14"><a aria-label="14"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb2-16"><a aria-label="16"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) <span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span id="cb2-18"><a aria-label="18"></a>legend_text_size <span class="ot">=</span> <span class="dv">9</span></span>
+<span id="cb2-19"><a aria-label="19"></a>run_graphs <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<!-- ::: -->
+<style>
+.quarto-figure-center > figure {
+text-align: center;
+}
+</style>
 <p>In many health sciences applications, <a href="https://morrison-lab.github.io/sds/data.html#def-binary-var">binary</a> <a href="../chapters/Intro-to-GLMs.html#def-outcome">outcomes</a> are <em>incompletely observed</em>. For example, if we are studying whether cancer patients experience a relapse after an initial remission, we may not be able to follow patients to the end of their lives; instead, we may only know whether each patient has relapsed before the end of the study. If a patient has not relapsed by that point, we might not know if they will relapse at some other date or if they will stay cancer-free for the rest of their lives. <sup>1</sup> Their recurrence status at end-of-life is <em>missing data</em>. If some study participants withdraw from a study before the scheduled end date, additional missing data arise. Standard <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> cannot handle such <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">right-censored</a> data directly without introducing <a href="https://morrison-lab.github.io/sds/estimation.html#def-bias">bias</a>.</p>
 <p>However, these outcome observations are not <em>entirely</em> missing. We know that those patients stayed relapse-free <em>at least</em> until the time point when they were last observed. If we also know the <em>time-to-event</em> for participants who experienced events while under study, we can analyze the <em>time-to-event-or-study-exit</em> alongside an event indicator using <em>survival analysis</em>. The survival analysis framework provides the foundation for the topics covered in this module.</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Binary outcomes are typically defined <em>for a specific time-point</em>. It is important to clearly define whether we are interested in outcome status at end of study, at end of life, or at some other time.</p></li></ol></aside></section><section><section id="why-censoring-matters" class="title-slide slide level1 center" data-number="1"><h1>
+<span class="header-section-number">1</span> Why censoring matters</h1>
+
+</section><section class="slide level2"><!-- No slidebreak here: the heading shares its slide with the exm-tte-overview-censoring-bias div. --><div id="exm-tte-overview-censoring-bias" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Six patients followed for relapse)</strong></span> Suppose a study follows six cancer patients in remission for up to 12 months, and we want to estimate the 12-month relapse risk, <span class="math inline">\(1 - \operatorname{S}\mathopen{}\left(12\right)\mathclose{}\)</span>, where <span class="math inline">\(\operatorname{S}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a> of time to relapse (in months). <a href="#/tbl-tte-overview-patients" class="quarto-xref">Table&nbsp;1</a> shows each patient’s observed follow-up time and event indicator (1 = relapse observed; 0 = <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">right-censored</a>).</p>
+<div id="tbl-tte-overview-patients" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tte-overview-patients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Hypothetical follow-up data for six patients
+</figcaption><div aria-describedby="tbl-tte-overview-patients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 31%">
+<col style="width: 21%">
+<col style="width: 36%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">Patient</th>
+<th style="text-align: center;">Follow-up time (months)</th>
+<th style="text-align: center;">Event indicator</th>
+<th style="text-align: left;">Relapse status at 12 months</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">relapsed</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">unknown (withdrew)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">relapsed</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">unknown (withdrew)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">E</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">relapse-free</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;">relapse-free</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>Naive approach 1: treat censored patients as event-free.</strong> Counting patients B and D as relapse-free gives <span class="math inline">\(2/6 \approx 0.333\)</span>. This approach can only <em>under</em>estimate the risk, because any relapses that B or D experienced after withdrawal are counted as non-relapses.</p>
+<p><strong>Naive approach 2: drop patients with unknown status.</strong> Discarding patients B and D gives <span class="math inline">\(2/4 = 0.5\)</span>. This approach throws away the information that B stayed relapse-free for 5 months and D for 9 months, so in this example it <em>over</em>estimates the risk.</p>
+<p><strong>Using the censored observations.</strong> The <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimator</a> keeps each censored patient in the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> until their censoring time <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 2</a>)</span>. Relapses occur at 3 months (6 patients at risk) and at 7 months (4 patients at risk: C, D, E, F), so</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(12\right)\mathclose{}
+&amp;= \mathopen{}\left(1 - \frac{1}{6}\right)\mathclose{} \cdot \mathopen{}\left(1 - \frac{1}{4}\right)\mathclose{}
+&amp;&amp; \text{(product over the event times 3 and 7)}
+\\
+&amp;= \frac{5}{6} \cdot \frac{3}{4}
+&amp;&amp; \text{(subtract inside each factor)}
+\\
+&amp;= \frac{15}{24}
+&amp;&amp; \text{(multiply numerators and denominators)}
+\\
+&amp;= 0.625
+&amp;&amp; \text{(divide)}
+\end{aligned}
+\]</span></p>
+<p>and the estimated 12-month risk is <span class="math inline">\(1 - 0.625 = 0.375\)</span>. That estimate lies between the two naive estimates, and it is valid under <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">non-informative censoring</a> <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 1</a>)</span>.</p>
+</div>
+</section></section><section><section id="module-roadmap" class="title-slide slide level1 center" data-number="2"><h1>
+<span class="header-section-number">2</span> Module roadmap</h1>
+
+</section><section class="slide level2 smaller scrollable" id="references"><p>This module has three chapters.</p>
+<ol type="1">
+<li><p><a href="../chapters/intro-to-survival-analysis.html">Introduction to Survival Analysis</a> defines the basic quantities for time-to-event data: <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">right censoring</a>, the <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival function</a>, the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard function</a>, and the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a>. It then covers nonparametric methods: the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimator</a>, the <a href="../chapters/intro-to-survival-analysis.html#def-logrank-test">log-rank test</a>, and the <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimator</a>.</p></li>
+<li><p><a href="../chapters/proportional-hazards-models.html">Proportional Hazards Models</a> introduces the <a href="../chapters/proportional-hazards-models.html#def-ph-model">Cox proportional hazards model</a>, which relates <a href="../chapters/Intro-to-GLMs.html#def-predictors">covariates</a> to a <a href="../chapters/proportional-hazards-models.html#def-base-hazard">baseline hazard</a> through <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratios</a>, and estimates its coefficients using the <a href="../chapters/proportional-hazards-models.html#def-ph-partial-lik">partial likelihood</a>. It also introduces <a href="../chapters/proportional-hazards-models.html#def-competing-risks">competing risks</a>.</p></li>
+<li><p><a href="../chapters/parametric-survival-models.html">Parametric Survival Models</a> assumes a specific distributional family for the event times, such as the <a href="../chapters/parametric-survival-models.html#def-exp-reg">exponential regression model</a> and the <a href="https://morrison-lab.github.io/pds/distributions.html#def-weibull">Weibull distribution</a>, and introduces <a href="../chapters/parametric-survival-models.html#def-aft">accelerated failure time models</a>.</p></li>
+</ol>
 
 
 <script>
@@ -485,9 +714,7 @@ window.addEventListener("load", function () {
   revealEquationHashTarget();
 });
 window.addEventListener("hashchange", revealEquationHashTarget);
-</script>
-
-<script>
+</script><script>
 (function () {
   var css = [
     "#revealjs-html-link {",
@@ -601,34 +828,20 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     initRevealJsHtmlLink();
   }
 })();
-</script>
-
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Binary outcomes are typically defined <em>for a specific time-point</em>. It is important to clearly define whether we are interested in outcome status at end of study, at end of life, or at some other time.</p></li></ol></aside></section>
-
-    </div>
+</script><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-kleinbaum2012survival" class="csl-entry" role="listitem">
+Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-6646-9">https://link.springer.com/book/10.1007/978-1-4419-6646-9</a>.
+</div>
+</div>
+</section></section>
+</div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -819,8 +1032,42 @@ window.addEventListener("hashchange", revealEquationHashTarget);
           RevealZoom
         ]
       });
-    </script>
-    <script id="quarto-html-after-body" type="application/javascript">
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
         tabsets.forEach(function(tabset) {
@@ -988,6 +1235,6 @@ window.addEventListener("hashchange", revealEquationHashTarget);
         }
       });
       </script>
-    
+
 
 </body></html>

@@ -366,17 +366,116 @@ text-align: center;
 <p><span class="proof-title"><em>Solution</em>. </span><span class="math display">\[\hat{\lambda}_{ML} \rightarrow_D N(\lambda, \lambda/n)\]</span></p>
 </div>
 <p><a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">Expectations</a> are means, not sums, despite the similarity of <span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(\text{E}\)</span>. Really, we should use <span class="math inline">\(\mu\)</span> instead of <span class="math inline">\(\text{E}\)</span>.</p>
-</section></section><section><section id="r" class="title-slide slide level1 center" data-number="2"><h1>
-<span class="header-section-number">2</span> R</h1>
+</section></section><section><section id="regression-modeling" class="title-slide slide level1 center" data-number="2"><h1>
+<span class="header-section-number">2</span> Regression modeling</h1>
 
-</section><section id="dont-copy-paste-code" class="slide level2" data-number="2.1"><h2>
-<span class="header-section-number">2.1</span> Don’t copy-paste code</h2>
+</section><section class="slide level2"><p>Each mistake in this section is shown in a warning callout, followed by a corrected version.</p>
+</section><section id="logistic-regression-coefficients-are-log-odds-ratios" class="slide level2" data-number="2.1"><h2>
+<span class="header-section-number">2.1</span> Logistic-regression coefficients are log odds ratios</h2>
+<p>In a logistic regression model, a coefficient <span class="math inline">\(\beta_j\)</span> is a difference in <a href="../chapters/binary-outcome-associations.html#def-logodds">log-odds</a>, so <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> is an <a href="../chapters/binary-outcome-associations.html#def-OR">odds ratio</a> (see the <a href="../chapters/logistic-regression.html#thm-logistic-OR">odds ratio theorem for logistic regression</a>), not a <a href="../chapters/binary-outcome-associations.html#def-RR">risk ratio</a>:</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Interpreting <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}\)</span> as a risk ratio</strong></p>
+</div>
+<div class="callout-content">
+<p>“<span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> makes the outcome 50% more likely.”</p>
+</div>
+</div>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span>“<span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> multiplies the <strong>odds</strong> of the outcome by 1.5, holding the other covariates fixed: <span class="math inline">\(\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) = 1.5\)</span> when <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span> differ by one unit in <span class="math inline">\(x_1\)</span> only.”</p>
+</div>
+</section><section id="odds-ratios-approximate-risk-ratios-only-for-rare-outcomes" class="slide level2" data-number="2.2"><h2>
+<span class="header-section-number">2.2</span> Odds ratios approximate risk ratios only for rare outcomes</h2>
+<p>The <a href="../chapters/binary-outcome-associations.html#def-OR">odds ratio</a> equals the <a href="../chapters/binary-outcome-associations.html#def-RR">risk ratio</a> times the correction factor <span class="math inline">\(\frac{1-\pi_2}{1-\pi_1}\)</span> (see the <a href="../chapters/binary-outcome-associations.html#thm-rare-disease-or-rr">odds ratio correction-factor theorem</a>). That correction factor is close to 1 only when both risks are small.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Reporting an odds ratio as a risk ratio for a common outcome</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\pi_1 = 0.4\)</span>, <span class="math inline">\(\pi_2 = 0.2\)</span>, odds ratio <span class="math inline">\(= 2.67\)</span>: “exposed participants had 2.67 times the risk of unexposed participants.”</p>
+</div>
+</div>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span>The risk ratio is <span class="math inline">\(\frac{\pi_1}{\pi_2} = \frac{0.4}{0.2} = 2\)</span>. The odds ratio is <span class="math inline">\(\frac{0.4/0.6}{0.2/0.8} = \frac{0.667}{0.25} = 2.67\)</span>, which equals <span class="math inline">\(2 \cdot \frac{0.8}{0.6}\)</span>. Report “2.67 times the odds”, or estimate the risk ratio directly.</p>
+</div>
+</section><section id="poisson-rate-models-need-an-offset" class="slide level2" data-number="2.3"><h2>
+<span class="header-section-number">2.3</span> Poisson rate models need an offset</h2>
+<p>When subjects have different amounts of follow-up time <span class="math inline">\(t\)</span>, a Poisson model for an event rate includes <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> as an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset</a> (see the <a href="../chapters/count-regression.html#eq-mean-poisson">Poisson rate model’s mean</a>). Without the offset term, the model describes expected counts, not rates, and <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> is a ratio of expected counts rather than a <a href="../chapters/count-regression.html#thm-poisson-rate-ratio">rate ratio</a>.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Omitting the offset</strong></p>
+</div>
+<div class="callout-content">
+<p>Group A: 10 events in 1000 person-years; group B: 10 events in 500 person-years. A Poisson model fit to the counts alone gives <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{} = 10/10 = 1\)</span>: “the groups have the same event rate.”</p>
+</div>
+</div>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span>Include <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> as an offset (in R, <code>offset(log(t))</code> in the model formula). The <a href="../chapters/intro-to-survival-analysis.html#def-incidence-rate">incidence rates</a> are <span class="math inline">\(10/1000 = 0.01\)</span> and <span class="math inline">\(10/500 = 0.02\)</span> events per person-year, so the rate ratio for A versus B is <span class="math inline">\(0.01/0.02 = 0.5\)</span>.</p>
+</div>
+</section><section id="hazard-ratios-are-not-ratios-of-survival-probabilities" class="slide level2" data-number="2.4"><h2>
+<span class="header-section-number">2.4</span> Hazard ratios are not ratios of survival probabilities</h2>
+<p>A <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> compares <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazards</a>, which are instantaneous event rates, not <a href="../chapters/intro-to-survival-analysis.html#def-surv-fn">survival probabilities</a>. Under proportional hazards, <span class="math inline">\(\operatorname{S}(t|\tilde{x}) = \mathopen{}\left[\operatorname{S}_0(t)\right]\mathclose{}^{\theta_{{\lambda}}(\tilde{x})}\)</span> (see the <a href="../chapters/proportional-hazards-models.html#thm-ph-surv">proportional hazards survival theorem</a>), so the hazard ratio enters the survival function as an exponent, not as a multiplier.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Interpreting a hazard ratio as a survival-probability ratio</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) = 2\)</span> and <span class="math inline">\(\operatorname{S}(t|\mathord{{\tilde{x}^*}}) = 0.8\)</span>: “the exposed group has half the probability of surviving to <span class="math inline">\(t\)</span>, <span class="math inline">\(\operatorname{S}(t|\tilde{x}) = 0.4\)</span>.”</p>
+</div>
+</div>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span><span class="math inline">\(\operatorname{S}(t|\tilde{x}) = 0.8^2 = 0.64\)</span>, so the ratio of survival probabilities is <span class="math inline">\(0.64/0.8 = 0.8\)</span>, and the ratio of cumulative risks is <span class="math inline">\(\frac{1-0.64}{1-0.8} = \frac{0.36}{0.2} = 1.8\)</span>. Neither ratio equals the hazard ratio of 2.</p>
+</div>
+</section><section id="censored-observations-are-not-event-free" class="slide level2" data-number="2.5"><h2>
+<span class="header-section-number">2.5</span> Censored observations are not event-free</h2>
+<p>A <a href="../chapters/intro-to-survival-analysis.html#def-right-censor">right-censored</a> observation tells us only that the event had not occurred by the end of that subject’s follow-up; the subject might have had the event later.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Treating censored observations as event-free</strong></p>
+</div>
+<div class="callout-content">
+<p>Of 100 participants, 20 had the event and 30 were censored before 5 years: “the 5-year risk is <span class="math inline">\(20/100 = 0.2\)</span>, since the censored participants did not have the event.”</p>
+</div>
+</div>
+</div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span>Counting censored participants as event-free for the whole period biases the estimated risk downward. Use a survival-analysis method that keeps each censored participant in the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> only until their censoring time, such as the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimator</a> or a proportional hazards model, under the assumption of <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">non-informative censoring</a>.</p>
+</div>
+</section></section><section><section id="r" class="title-slide slide level1 center" data-number="3"><h1>
+<span class="header-section-number">3</span> R</h1>
+
+</section><section id="dont-copy-paste-code" class="slide level2" data-number="3.1"><h2>
+<span class="header-section-number">3.1</span> Don’t copy-paste code</h2>
 <p>Successful programmers don’t use copy-paste! <a href="https://r4ds.hadley.nz/functions#introduction">Write functions instead.</a></p>
-</section></section><section><section id="quarto" class="title-slide slide level1 center" data-number="3"><h1>
-<span class="header-section-number">3</span> Quarto</h1>
+</section></section><section><section id="quarto" class="title-slide slide level1 center" data-number="4"><h1>
+<span class="header-section-number">4</span> Quarto</h1>
 
-</section><section id="separate-divs-and-slide-breaks" class="slide level2" data-number="3.1"><h2>
-<span class="header-section-number">3.1</span> Separate divs and slide breaks</h2>
+</section><section id="separate-divs-and-slide-breaks" class="slide level2" data-number="4.1"><h2>
+<span class="header-section-number">4.1</span> Separate divs and slide breaks</h2>
 <p>Make sure not to put a div <code>:::</code> on the next line after a slide break <code>---</code>:</p>
 <pre><code>---
 ::: notes
@@ -386,12 +485,12 @@ text-align: center;
 
 ::: notes
 :::</code></pre>
-</section><section id="libraryprintr-currently-breaks-df-print-paged" class="slide level2" data-number="3.2"><h2>
-<span class="header-section-number">3.2</span> <code>library(printr)</code> currently breaks <code>df-print: paged</code>
+</section><section id="libraryprintr-currently-breaks-df-print-paged" class="slide level2" data-number="4.2"><h2>
+<span class="header-section-number">4.2</span> <code>library(printr)</code> currently breaks <code>df-print: paged</code>
 </h2>
 <p>See <a href="https://github.com/yihui/printr/issues/41" class="uri">https://github.com/yihui/printr/issues/41</a></p>
-</section></section><section><section id="latex" class="title-slide slide level1 center" data-number="4"><h1>
-<span class="header-section-number">4</span> LaTeX</h1>
+</section></section><section><section id="latex" class="title-slide slide level1 center" data-number="5"><h1>
+<span class="header-section-number">5</span> LaTeX</h1>
 
 </section><section class="slide level2"><ul>
 <li>don’t use <code>align*</code> or <code>align*</code> in quarto; only <code>aligned</code>
