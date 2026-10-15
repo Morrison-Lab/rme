@@ -1545,7 +1545,7 @@ title-only slide. -->
 <span id="cb14-7"><a aria-label="7"></a><span class="co">#&gt; chol ~ dibpat + s(age, by = dibpat)</span></span>
 <span id="cb14-8"><a aria-label="8"></a><span class="co">#&gt; </span></span>
 <span id="cb14-9"><a aria-label="9"></a><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.02 1.03  total = 4.05 </span></span>
+<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.00 1.01  total = 4.01 </span></span>
 <span id="cb14-11"><a aria-label="11"></a><span class="co">#&gt; </span></span>
 <span id="cb14-12"><a aria-label="12"></a><span class="co">#&gt; REML score: 16231.9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1666,9 +1666,9 @@ title-only slide. -->
 <pre><code>#&gt; 
 #&gt; Method: REML   Optimizer: outer newton
 #&gt; full convergence after 7 iterations.
-#&gt; Gradient range [-0.000404069,-1.352e-05]
+#&gt; Gradient range [-0.000358419,-2.1343e-05]
 #&gt; (score 821.975 &amp; scale 1).
-#&gt; Hessian positive definite, eigenvalue range [1.35192e-05,0.220195].
+#&gt; Hessian positive definite, eigenvalue range [3.16164e-05,0.220195].
 #&gt; Model rank =  29 / 29 
 #&gt; 
 #&gt; Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
@@ -1729,18 +1729,18 @@ title-only slide. -->
 <span id="cb19-4"><a aria-label="4"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> wcgs, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb19-5"><a aria-label="5"></a>sm_inf <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_inf)</span>
 <span id="cb19-6"><a aria-label="6"></a>sm_inf<span class="sc">$</span>p.table  <span class="co"># parametric coefficients</span></span>
-<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;               Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
-<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.971461   0.117513 -25.28618 4.53331e-141</span></span>
-<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.781729   0.141714   5.51626  3.46292e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
+<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.97147   0.117513 -25.28619 4.53227e-141</span></span>
+<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.78173   0.141714   5.51627  3.46277e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Read these exactly as you would GLM coefficients.</p>
 <h3 id="smooth-terms">Smooth terms</h3>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>sm_inf<span class="sc">$</span>s.table  <span class="co"># smooth terms</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq    p-value</span></span>
-<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00156 1.00312 36.3980 0.00000000</span></span>
-<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29791 1.54685 10.8353 0.00641275</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq   p-value</span></span>
+<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00107 1.00214 36.4005 0.0000000</span></span>
+<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29959 1.54968 10.8386 0.0064354</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Each column reports:</p>
@@ -1868,10 +1868,10 @@ title-only slide. -->
 <span id="cb23-20"><a aria-label="20"></a><span class="co">#&gt; </span></span>
 <span id="cb23-21"><a aria-label="21"></a><span class="co">#&gt; Approximate significance of smooth terms:</span></span>
 <span id="cb23-22"><a aria-label="22"></a><span class="co">#&gt;          edf Ref.df Chi.sq p-value    </span></span>
-<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 5.8e-07 ***</span></span>
+<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 1.1e-06 ***</span></span>
 <span id="cb23-24"><a aria-label="24"></a><span class="co">#&gt; s(bmi)  1.00   1.00   2.18    0.14    </span></span>
 <span id="cb23-25"><a aria-label="25"></a><span class="co">#&gt; s(chol) 1.61   2.02  56.48 &lt; 2e-16 ***</span></span>
-<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.7e-06 ***</span></span>
+<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.4e-06 ***</span></span>
 <span id="cb23-27"><a aria-label="27"></a><span class="co">#&gt; ---</span></span>
 <span id="cb23-28"><a aria-label="28"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb23-29"><a aria-label="29"></a><span class="co">#&gt; </span></span>
@@ -1970,7 +1970,7 @@ title-only slide. -->
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58571","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58585","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -2512,6 +2512,42 @@ title-only slide. -->
 <p><strong>(b)</strong> As <span class="math inline">\(\lambda\to 0\)</span> there is no penalty; the minimizer interpolates every training point: <span class="math inline">\(g(x_i) = y_i\)</span> for all <span class="math inline">\(i\)</span>.</p>
 <p><strong>(c)</strong> Yes. Interpolation means training RSS <span class="math inline">\(= 0\)</span> – the overfit extreme.</p>
 </div>
+</section><section class="slide level2"><div id="thm-smoothing-spline-large-penalty" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Smoothing spline with an infinite penalty is the least-squares line)</strong></span> Let <span class="math inline">\((x_1, y_1), \ldots, (x_n, y_n)\)</span> be data with at least two distinct values of <span class="math inline">\(x_i\)</span>. For <span class="math inline">\(\lambda\ge 0\)</span>, let <span class="math inline">\(\hat{g}_\lambda\)</span> be the smoothing spline that minimizes</p>
+<p><span class="math display">\[\sum_{i=1}^n(y_i - g(x_i))^2 + \lambda\int g^{\prime\prime}(t)^2 \, dt.\]</span></p>
+<p>As <span class="math inline">\(\lambda\to \infty\)</span>, <span class="math inline">\(\hat{g}_\lambda\)</span> converges to the ordinary least-squares line <span class="math inline">\(g(x) = a + bx\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof is the solution to <a href="#/exr-smoothing-penalty" class="quarto-xref">Exercise&nbsp;2</a>, worked in <a href="#/sol-smoothing-penalty" class="quarto-xref">Solution&nbsp;2</a>.</p>
+</div>
+</section><section class="slide level2"><div id="exm-smoothing-spline-large-penalty" class="theorem example">
+<p><span class="theorem-title"><strong>Example 18 (A heavily penalized smoothing spline matches the least-squares line)</strong></span> In the built-in <code>cars</code> data, the code below fits a smoothing spline of stopping distance on speed with a very large penalty, and compares its fitted values with those of the least-squares line:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-label="1"></a>cars_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb46-2"><a aria-label="2"></a>cars_big_lambda <span class="ot">&lt;-</span> <span class="fu">smooth.spline</span>(cars<span class="sc">$</span>speed, cars<span class="sc">$</span>dist, <span class="at">lambda =</span> <span class="fl">1e6</span>)</span>
+<span id="cb46-3"><a aria-label="3"></a>max_gap <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">predict</span>(cars_big_lambda, cars<span class="sc">$</span>speed)<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">fitted</span>(cars_lm)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The largest gap between the two sets of fitted values is 0.00067, which is negligible next to stopping distances measured in feet, as <a href="#/thm-smoothing-spline-large-penalty" class="quarto-xref">Theorem&nbsp;4</a> says.</p>
+</div>
+</section><section class="slide level2"><div id="thm-smoothing-spline-zero-penalty" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5 (Smoothing spline with no penalty interpolates the training data)</strong></span> Let <span class="math inline">\((x_1, y_1), \ldots, (x_n, y_n)\)</span> be data with distinct values <span class="math inline">\(x_i\)</span>, and let <span class="math inline">\(\hat{g}_\lambda\)</span> be the smoothing spline of <a href="#/thm-smoothing-spline-large-penalty" class="quarto-xref">Theorem&nbsp;4</a>. As <span class="math inline">\(\lambda\to 0\)</span>, <span class="math inline">\(\hat{g}_\lambda\)</span> approaches a function that interpolates every training point, <span class="math inline">\(g(x_i) = y_i\)</span> for all <span class="math inline">\(i\)</span>, so the training residual sum of squares <span class="math inline">\(\sum_{i=1}^n(y_i - \hat{g}_\lambda(x_i))^2\)</span> approaches <span class="math inline">\(0\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>This proof is the solution to <a href="#/exr-smoothing-penalty" class="quarto-xref">Exercise&nbsp;2</a>, worked in <a href="#/sol-smoothing-penalty" class="quarto-xref">Solution&nbsp;2</a>.</p>
+</div>
+</section><section class="slide level2"><div id="exm-smoothing-spline-zero-penalty" class="theorem example">
+<p><span class="theorem-title"><strong>Example 19 (A barely penalized smoothing spline interpolates the data)</strong></span> The code below simulates 20 noisy observations of a sine curve at distinct values of <span class="math inline">\(x\)</span>, fits a smoothing spline with a tiny penalty, and computes its training residual sum of squares:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb47-2"><a aria-label="2"></a>sim_x <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">runif</span>(<span class="dv">20</span>))</span>
+<span id="cb47-3"><a aria-label="3"></a>sim_y <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> sim_x) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb47-4"><a aria-label="4"></a>sim_small_lambda <span class="ot">&lt;-</span> <span class="fu">smooth.spline</span>(sim_x, sim_y, <span class="at">lambda =</span> <span class="fl">1e-12</span>)</span>
+<span id="cb47-5"><a aria-label="5"></a>sim_rss <span class="ot">&lt;-</span> <span class="fu">sum</span>((sim_y <span class="sc">-</span> <span class="fu">predict</span>(sim_small_lambda, sim_x)<span class="sc">$</span>y)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The training residual sum of squares is 8.1e-11, which is essentially 0 even though the data have noise standard deviation 0.3, as <a href="#/thm-smoothing-spline-zero-penalty" class="quarto-xref">Theorem&nbsp;5</a> says.</p>
+</div>
 </section><section id="applied-exercises" class="slide level2" data-number="14.2"><h2>
 <span class="header-section-number">14.2</span> Applied exercises</h2>
 <aside class="notes"><p>Applied exercises adapted from <span class="citation" data-cites="james2021islr2e">James et al. (<a href="#/references" role="doc-biblioref" onclick="">2021, sec. 7.9</a>)</span> and <span class="citation" data-cites="hastie2009esl2e">Hastie et al. (<a href="#/references" role="doc-biblioref" onclick="">2009, sec. 9.1</a>)</span>.</p>
@@ -2546,19 +2582,19 @@ title-only slide. -->
 <div class="tab-content">
 <div id="tabset-8-1">
 <div class="cell">
-<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-label="1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb46-2"><a aria-label="2"></a><span class="fu">library</span>(boot)</span>
-<span id="cb46-3"><a aria-label="3"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb46-4"><a aria-label="4"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb46-5"><a aria-label="5"></a>cv_poly <span class="ot">&lt;-</span> <span class="fu">vapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="cf">function</span>(d) {</span>
-<span id="cb46-6"><a aria-label="6"></a>  <span class="fu">cv.glm</span>(Wage, <span class="fu">glm</span>(wage <span class="sc">~</span> <span class="fu">poly</span>(age, d), <span class="at">data =</span> Wage), <span class="at">K =</span> <span class="dv">10</span>)<span class="sc">$</span>delta[<span class="dv">1</span>]</span>
-<span id="cb46-7"><a aria-label="7"></a>}, <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb46-8"><a aria-label="8"></a>best_d <span class="ot">&lt;-</span> <span class="fu">which.min</span>(cv_poly)</span>
-<span id="cb46-9"><a aria-label="9"></a><span class="fu">cat</span>(<span class="st">"CV-selected degree:"</span>, best_d, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb46-10"><a aria-label="10"></a><span class="co">#&gt; CV-selected degree: 9</span></span>
-<span id="cb46-11"><a aria-label="11"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, cv_poly, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">xlab =</span> <span class="st">"Degree"</span>, <span class="at">ylab =</span> <span class="st">"CV MSE"</span>,</span>
-<span id="cb46-12"><a aria-label="12"></a>     <span class="at">main =</span> <span class="st">"Polynomial degree selection"</span>)</span>
-<span id="cb46-13"><a aria-label="13"></a><span class="fu">points</span>(best_d, cv_poly[best_d], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb48-2"><a aria-label="2"></a><span class="fu">library</span>(boot)</span>
+<span id="cb48-3"><a aria-label="3"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb48-4"><a aria-label="4"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb48-5"><a aria-label="5"></a>cv_poly <span class="ot">&lt;-</span> <span class="fu">vapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="cf">function</span>(d) {</span>
+<span id="cb48-6"><a aria-label="6"></a>  <span class="fu">cv.glm</span>(Wage, <span class="fu">glm</span>(wage <span class="sc">~</span> <span class="fu">poly</span>(age, d), <span class="at">data =</span> Wage), <span class="at">K =</span> <span class="dv">10</span>)<span class="sc">$</span>delta[<span class="dv">1</span>]</span>
+<span id="cb48-7"><a aria-label="7"></a>}, <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
+<span id="cb48-8"><a aria-label="8"></a>best_d <span class="ot">&lt;-</span> <span class="fu">which.min</span>(cv_poly)</span>
+<span id="cb48-9"><a aria-label="9"></a><span class="fu">cat</span>(<span class="st">"CV-selected degree:"</span>, best_d, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb48-10"><a aria-label="10"></a><span class="co">#&gt; CV-selected degree: 9</span></span>
+<span id="cb48-11"><a aria-label="11"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, cv_poly, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">xlab =</span> <span class="st">"Degree"</span>, <span class="at">ylab =</span> <span class="st">"CV MSE"</span>,</span>
+<span id="cb48-12"><a aria-label="12"></a>     <span class="at">main =</span> <span class="st">"Polynomial degree selection"</span>)</span>
+<span id="cb48-13"><a aria-label="13"></a><span class="fu">points</span>(best_d, cv_poly[best_d], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
 <figure><p><a href="generalized-additive-models_files/figure-revealjs/unnamed-chunk-29-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="generalized-additive-models_files/figure-revealjs/unnamed-chunk-29-1.png" width="672"></a></p>
@@ -2569,22 +2605,22 @@ title-only slide. -->
 </div>
 <div id="tabset-8-2">
 <div class="cell" data-python.reticulate="false">
-<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-label="1"></a><span class="co"># Not run: the rme render has no Python environment.</span></span>
-<span id="cb47-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb47-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb47-4"><a aria-label="4"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb47-5"><a aria-label="5"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb47-6"><a aria-label="6"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb47-7"><a aria-label="7"></a><span class="im">from</span> ISLP <span class="im">import</span> load_data</span>
-<span id="cb47-8"><a aria-label="8"></a>Wage <span class="op">=</span> load_data(<span class="st">"Wage"</span>)</span>
-<span id="cb47-9"><a aria-label="9"></a>X <span class="op">=</span> Wage[<span class="st">"age"</span>].values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb47-10"><a aria-label="10"></a>y <span class="op">=</span> Wage[<span class="st">"wage"</span>].values</span>
-<span id="cb47-11"><a aria-label="11"></a>cv_errs <span class="op">=</span> [<span class="op">-</span>cross_val_score(</span>
-<span id="cb47-12"><a aria-label="12"></a>    Pipeline([(<span class="st">"poly"</span>, PolynomialFeatures(d, include_bias<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb47-13"><a aria-label="13"></a>              (<span class="st">"reg"</span>, LinearRegression())]),</span>
-<span id="cb47-14"><a aria-label="14"></a>    X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>).mean() <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)]</span>
-<span id="cb47-15"><a aria-label="15"></a>best_d <span class="op">=</span> <span class="bu">int</span>(np.argmin(cv_errs)) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb47-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="ss">f"CV-selected degree: </span><span class="sc">{</span>best_d<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a><span class="co"># Not run: the rme render has no Python environment.</span></span>
+<span id="cb49-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb49-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb49-4"><a aria-label="4"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb49-5"><a aria-label="5"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb49-6"><a aria-label="6"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb49-7"><a aria-label="7"></a><span class="im">from</span> ISLP <span class="im">import</span> load_data</span>
+<span id="cb49-8"><a aria-label="8"></a>Wage <span class="op">=</span> load_data(<span class="st">"Wage"</span>)</span>
+<span id="cb49-9"><a aria-label="9"></a>X <span class="op">=</span> Wage[<span class="st">"age"</span>].values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb49-10"><a aria-label="10"></a>y <span class="op">=</span> Wage[<span class="st">"wage"</span>].values</span>
+<span id="cb49-11"><a aria-label="11"></a>cv_errs <span class="op">=</span> [<span class="op">-</span>cross_val_score(</span>
+<span id="cb49-12"><a aria-label="12"></a>    Pipeline([(<span class="st">"poly"</span>, PolynomialFeatures(d, include_bias<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb49-13"><a aria-label="13"></a>              (<span class="st">"reg"</span>, LinearRegression())]),</span>
+<span id="cb49-14"><a aria-label="14"></a>    X, y, cv<span class="op">=</span><span class="dv">10</span>, scoring<span class="op">=</span><span class="st">"neg_mean_squared_error"</span>).mean() <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)]</span>
+<span id="cb49-15"><a aria-label="15"></a>best_d <span class="op">=</span> <span class="bu">int</span>(np.argmin(cv_errs)) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb49-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="ss">f"CV-selected degree: </span><span class="sc">{</span>best_d<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -2625,51 +2661,51 @@ title-only slide. -->
 <div class="tab-content">
 <div id="tabset-9-1">
 <div class="cell">
-<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb48-2"><a aria-label="2"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb48-3"><a aria-label="3"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb48-4"><a aria-label="4"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb48-5"><a aria-label="5"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> x2 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb48-6"><a aria-label="6"></a>alpha_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb48-7"><a aria-label="7"></a>f1 <span class="ot">&lt;-</span> f2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
-<span id="cb48-8"><a aria-label="8"></a><span class="cf">for</span> (iter <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="dv">500</span>)) {</span>
-<span id="cb48-9"><a aria-label="9"></a>  r1 <span class="ot">&lt;-</span> y <span class="sc">-</span> alpha_hat <span class="sc">-</span> f2</span>
-<span id="cb48-10"><a aria-label="10"></a>  b1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(r1 <span class="sc">~</span> x1))[<span class="dv">2</span>]</span>
-<span id="cb48-11"><a aria-label="11"></a>  f1 <span class="ot">&lt;-</span> b1 <span class="sc">*</span> x1</span>
-<span id="cb48-12"><a aria-label="12"></a>  f1 <span class="ot">&lt;-</span> f1 <span class="sc">-</span> <span class="fu">mean</span>(f1)</span>
-<span id="cb48-13"><a aria-label="13"></a>  r2 <span class="ot">&lt;-</span> y <span class="sc">-</span> alpha_hat <span class="sc">-</span> f1</span>
-<span id="cb48-14"><a aria-label="14"></a>  b2 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(r2 <span class="sc">~</span> x2))[<span class="dv">2</span>]</span>
-<span id="cb48-15"><a aria-label="15"></a>  f2 <span class="ot">&lt;-</span> b2 <span class="sc">*</span> x2</span>
-<span id="cb48-16"><a aria-label="16"></a>  f2 <span class="ot">&lt;-</span> f2 <span class="sc">-</span> <span class="fu">mean</span>(f2)</span>
-<span id="cb48-17"><a aria-label="17"></a>}</span>
-<span id="cb48-18"><a aria-label="18"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2)</span>
-<span id="cb48-19"><a aria-label="19"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"Backfitting: b1=%.4f, b2=%.4f</span><span class="sc">\n</span><span class="st">"</span>, b1, b2))</span>
-<span id="cb48-20"><a aria-label="20"></a><span class="co">#&gt; Backfitting: b1=3.0106, b2=-1.5267</span></span>
-<span id="cb48-21"><a aria-label="21"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"lm():        b1=%.4f, b2=%.4f</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb48-22"><a aria-label="22"></a>            <span class="fu">coef</span>(lm_fit)[<span class="dv">2</span>], <span class="fu">coef</span>(lm_fit)[<span class="dv">3</span>]))</span>
-<span id="cb48-23"><a aria-label="23"></a><span class="co">#&gt; lm():        b1=3.0106, b2=-1.5267</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-label="1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb50-2"><a aria-label="2"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb50-3"><a aria-label="3"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb50-4"><a aria-label="4"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb50-5"><a aria-label="5"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> x2 <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb50-6"><a aria-label="6"></a>alpha_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb50-7"><a aria-label="7"></a>f1 <span class="ot">&lt;-</span> f2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span>
+<span id="cb50-8"><a aria-label="8"></a><span class="cf">for</span> (iter <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="dv">500</span>)) {</span>
+<span id="cb50-9"><a aria-label="9"></a>  r1 <span class="ot">&lt;-</span> y <span class="sc">-</span> alpha_hat <span class="sc">-</span> f2</span>
+<span id="cb50-10"><a aria-label="10"></a>  b1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(r1 <span class="sc">~</span> x1))[<span class="dv">2</span>]</span>
+<span id="cb50-11"><a aria-label="11"></a>  f1 <span class="ot">&lt;-</span> b1 <span class="sc">*</span> x1</span>
+<span id="cb50-12"><a aria-label="12"></a>  f1 <span class="ot">&lt;-</span> f1 <span class="sc">-</span> <span class="fu">mean</span>(f1)</span>
+<span id="cb50-13"><a aria-label="13"></a>  r2 <span class="ot">&lt;-</span> y <span class="sc">-</span> alpha_hat <span class="sc">-</span> f1</span>
+<span id="cb50-14"><a aria-label="14"></a>  b2 <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(r2 <span class="sc">~</span> x2))[<span class="dv">2</span>]</span>
+<span id="cb50-15"><a aria-label="15"></a>  f2 <span class="ot">&lt;-</span> b2 <span class="sc">*</span> x2</span>
+<span id="cb50-16"><a aria-label="16"></a>  f2 <span class="ot">&lt;-</span> f2 <span class="sc">-</span> <span class="fu">mean</span>(f2)</span>
+<span id="cb50-17"><a aria-label="17"></a>}</span>
+<span id="cb50-18"><a aria-label="18"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2)</span>
+<span id="cb50-19"><a aria-label="19"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"Backfitting: b1=%.4f, b2=%.4f</span><span class="sc">\n</span><span class="st">"</span>, b1, b2))</span>
+<span id="cb50-20"><a aria-label="20"></a><span class="co">#&gt; Backfitting: b1=3.0106, b2=-1.5267</span></span>
+<span id="cb50-21"><a aria-label="21"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"lm():        b1=%.4f, b2=%.4f</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb50-22"><a aria-label="22"></a>            <span class="fu">coef</span>(lm_fit)[<span class="dv">2</span>], <span class="fu">coef</span>(lm_fit)[<span class="dv">3</span>]))</span>
+<span id="cb50-23"><a aria-label="23"></a><span class="co">#&gt; lm():        b1=3.0106, b2=-1.5267</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
 <div id="tabset-9-2">
 <div class="cell" data-python.reticulate="false">
-<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a><span class="co"># Not run: the rme render has no Python environment.</span></span>
-<span id="cb49-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb49-3"><a aria-label="3"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
-<span id="cb49-4"><a aria-label="4"></a>n <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> x1 <span class="op">=</span> rng.standard_normal(n)<span class="op">;</span> x2 <span class="op">=</span> rng.standard_normal(n)</span>
-<span id="cb49-5"><a aria-label="5"></a>y <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x1 <span class="op">-</span> <span class="fl">1.5</span><span class="op">*</span>x2 <span class="op">+</span> rng.normal(<span class="dv">0</span>, <span class="fl">0.5</span>, n)</span>
-<span id="cb49-6"><a aria-label="6"></a>alpha_hat <span class="op">=</span> y.mean()<span class="op">;</span> f1 <span class="op">=</span> np.zeros(n)<span class="op">;</span> f2 <span class="op">=</span> np.zeros(n)</span>
-<span id="cb49-7"><a aria-label="7"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">500</span>):</span>
-<span id="cb49-8"><a aria-label="8"></a>    r1 <span class="op">=</span> y <span class="op">-</span> alpha_hat <span class="op">-</span> f2</span>
-<span id="cb49-9"><a aria-label="9"></a>    b1 <span class="op">=</span> <span class="bu">float</span>(np.cov(x1, r1)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x1, ddof<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb49-10"><a aria-label="10"></a>    f1 <span class="op">=</span> b1<span class="op">*</span>x1 <span class="op">-</span> (b1<span class="op">*</span>x1).mean()</span>
-<span id="cb49-11"><a aria-label="11"></a>    r2 <span class="op">=</span> y <span class="op">-</span> alpha_hat <span class="op">-</span> f1</span>
-<span id="cb49-12"><a aria-label="12"></a>    b2 <span class="op">=</span> <span class="bu">float</span>(np.cov(x2, r2)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x2, ddof<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb49-13"><a aria-label="13"></a>    f2 <span class="op">=</span> b2<span class="op">*</span>x2 <span class="op">-</span> (b2<span class="op">*</span>x2).mean()</span>
-<span id="cb49-14"><a aria-label="14"></a>X_ols <span class="op">=</span> np.column_stack([np.ones(n), x1, x2])</span>
-<span id="cb49-15"><a aria-label="15"></a>b_ols <span class="op">=</span> np.linalg.lstsq(X_ols, y, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
-<span id="cb49-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="ss">f"Backfitting: b1=</span><span class="sc">{</span>b1<span class="sc">:.4f}</span><span class="ss">, b2=</span><span class="sc">{</span>b2<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb49-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"OLS:         b1=</span><span class="sc">{</span>b_ols[<span class="dv">1</span>]<span class="sc">:.4f}</span><span class="ss">, b2=</span><span class="sc">{</span>b_ols[<span class="dv">2</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a aria-label="1"></a><span class="co"># Not run: the rme render has no Python environment.</span></span>
+<span id="cb51-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb51-3"><a aria-label="3"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
+<span id="cb51-4"><a aria-label="4"></a>n <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> x1 <span class="op">=</span> rng.standard_normal(n)<span class="op">;</span> x2 <span class="op">=</span> rng.standard_normal(n)</span>
+<span id="cb51-5"><a aria-label="5"></a>y <span class="op">=</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x1 <span class="op">-</span> <span class="fl">1.5</span><span class="op">*</span>x2 <span class="op">+</span> rng.normal(<span class="dv">0</span>, <span class="fl">0.5</span>, n)</span>
+<span id="cb51-6"><a aria-label="6"></a>alpha_hat <span class="op">=</span> y.mean()<span class="op">;</span> f1 <span class="op">=</span> np.zeros(n)<span class="op">;</span> f2 <span class="op">=</span> np.zeros(n)</span>
+<span id="cb51-7"><a aria-label="7"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">500</span>):</span>
+<span id="cb51-8"><a aria-label="8"></a>    r1 <span class="op">=</span> y <span class="op">-</span> alpha_hat <span class="op">-</span> f2</span>
+<span id="cb51-9"><a aria-label="9"></a>    b1 <span class="op">=</span> <span class="bu">float</span>(np.cov(x1, r1)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x1, ddof<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb51-10"><a aria-label="10"></a>    f1 <span class="op">=</span> b1<span class="op">*</span>x1 <span class="op">-</span> (b1<span class="op">*</span>x1).mean()</span>
+<span id="cb51-11"><a aria-label="11"></a>    r2 <span class="op">=</span> y <span class="op">-</span> alpha_hat <span class="op">-</span> f1</span>
+<span id="cb51-12"><a aria-label="12"></a>    b2 <span class="op">=</span> <span class="bu">float</span>(np.cov(x2, r2)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x2, ddof<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb51-13"><a aria-label="13"></a>    f2 <span class="op">=</span> b2<span class="op">*</span>x2 <span class="op">-</span> (b2<span class="op">*</span>x2).mean()</span>
+<span id="cb51-14"><a aria-label="14"></a>X_ols <span class="op">=</span> np.column_stack([np.ones(n), x1, x2])</span>
+<span id="cb51-15"><a aria-label="15"></a>b_ols <span class="op">=</span> np.linalg.lstsq(X_ols, y, rcond<span class="op">=</span><span class="va">None</span>)[<span class="dv">0</span>]</span>
+<span id="cb51-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="ss">f"Backfitting: b1=</span><span class="sc">{</span>b1<span class="sc">:.4f}</span><span class="ss">, b2=</span><span class="sc">{</span>b2<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb51-17"><a aria-label="17"></a><span class="bu">print</span>(<span class="ss">f"OLS:         b1=</span><span class="sc">{</span>b_ols[<span class="dv">1</span>]<span class="sc">:.4f}</span><span class="ss">, b2=</span><span class="sc">{</span>b_ols[<span class="dv">2</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
