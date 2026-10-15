@@ -123,6 +123,7 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Introduce concepts before using them — no forward references
 - Factual claims must have a specific citation
 - Variable definitions in exercises: use bullet points/table with symbol, meaning, and dataset column
+- **Define one term per `#def-` div** (Ezra, 2026-10-12; see "Definition Formatting" in `.github/copilot-instructions.md` and [Writing for teaching](https://morrison-lab.github.io/psw/chapters/teaching.html)): each new bolded term gets its own div and id, with the term as the title, and the later div links to the earlier; aliases ("also called ...") stay in one div, in bold and in the title; commentary goes in a `#rem-` div; a `#thm-`, `#lem-`, `#cor-` or `#prp-` div states one result
 - After every definition or concept, include a concrete example — preferably numerical — to illustrate the abstract idea; use a `{#exm-...}` div; if a counterexample is feasible, include one immediately after the example
 - After every theoretical claim (thm, cor, lem): when a proof is feasible and in scope, (1) immediately follow with a proof, then (2) immediately follow with an example utilizing the claim; when a proof is non-elementary or out of scope (e.g., `@thm-fubini`, `@thm-fubini-tonelli`), omit the proof block and proceed directly to the example
   - Narrow exception: an immediate corollary whose statement is itself a concrete instance of the result it follows needs no separate example — the corollary already is one.
