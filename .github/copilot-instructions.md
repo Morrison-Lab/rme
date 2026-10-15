@@ -416,6 +416,10 @@ When introducing or editing formal statistical definitions in `.qmd` files:
   (define a term before the definition that uses it).
   Aliases of one term ("also called ...") stay in the same div,
   in bold and in the div title.
+  Cite a source that uses an alias on the bold alias itself,
+  as in `**training error** [@hastie2009esl2e, sec. 7.2]`;
+  never write "the book uses that name",
+  because the citation already says so (Ezra, 2026-10-15).
   Put commentary in a separate `#rem-` div,
   and keep each example in an `#exm-` div after the definition it illustrates.
   The same goes for a `#thm-`, `#lem-`, `#cor-` or `#prp-` div:
