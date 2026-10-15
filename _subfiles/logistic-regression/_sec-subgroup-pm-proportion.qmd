@@ -1,0 +1,47 @@
+:::{#lem-subgroup-pm-proportion}
+
+#### Exposed-subgroup predictive margin reproduces the observed proportion
+
+If the fitted model includes the exposure $A$ as a [categorical covariate](https://morrison-lab.github.io/sds/data.html#def-categorical-var),
+the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) equals
+the observed event proportion in that subgroup **exactly**,
+in any finite sample:
+
+$$
+\hat\pi_a(a) = \bar Y_a
+\eqdef \frac{1}{n_a} \sum_{i : A_i = a} Y_i
+$$
+
+::: {.proof}
+
+The maximum-likelihood [score equations](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) for a logistic GLM
+set $\sum_{i} x_{ij} (Y_i - \hat\mu_i) = 0$ for each covariate column $x_{\cdot j}$,
+where $\hat\mu_i = \hat\pi(A_i, z_i)$ is observation $i$'s fitted risk.
+Because $A$ enters as a categorical covariate,
+the indicator column for level $a$ contributes the score equation
+
+$$
+\sum_{i : A_i = a} (Y_i - \hat\mu_i) = 0,
+\quad\text{i.e.}\quad
+\sum_{i : A_i = a} \hat\mu_i = \sum_{i : A_i = a} Y_i.
+$$
+
+(For the [reference level](https://morrison-lab.github.io/sds/data.html#def-reference-level), which has no indicator column of its own,
+the same identity follows by subtracting the non-reference indicator
+score equations from the intercept score equation
+$\sum_{i=1}^n (Y_i - \hat\mu_i) = 0$.)
+
+For an observation with $A_i = a$ we have $\hat\mu_i = \hat\pi(a, z_i)$,
+so dividing by $n_a$ gives
+$\hat\pi_a(a) = \frac{1}{n_a}\sum_{i : A_i = a}\hat\pi(a, z_i)
+= \frac{1}{n_a}\sum_{i : A_i = a} Y_i = \bar Y_a$.
+
+:::
+
+:::
+
+The following example applies these [predictive margins](#def-predictive-margins) to the same WCGS data.
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-wcgs-observed-marginal-risks.qmd >}}

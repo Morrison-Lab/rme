@@ -1,0 +1,125 @@
+Each mistake in this section is shown in a warning callout,
+followed by a corrected version.
+
+## Logistic-regression coefficients are log odds ratios
+
+In a logistic regression model,
+a coefficient $\beta_j$ is a difference in [log-odds](binary-outcome-associations.qmd#def-logodds),
+so $\expf{\beta_j}$ is an [odds ratio](binary-outcome-associations.qmd#def-OR)
+(see the [odds ratio theorem for logistic regression](logistic-regression.qmd#thm-logistic-OR)),
+not a [risk ratio](binary-outcome-associations.qmd#def-RR):
+
+:::{.callout-warning}
+
+## Interpreting $\expf{\beta_1}$ as a risk ratio
+
+"$\expf{\beta_1} = 1.5$,
+so a one-unit increase in $x_1$ makes the outcome 50% more likely."
+:::
+
+::::{.solution}
+"$\expf{\beta_1} = 1.5$,
+so a one-unit increase in $x_1$ multiplies the **odds** of the outcome by 1.5,
+holding the other covariates fixed:
+$\ror(\vx,\vxs) = 1.5$
+when $\vx$ and $\vxs$ differ by one unit in $x_1$ only."
+::::
+
+## Odds ratios approximate risk ratios only for rare outcomes
+
+The [odds ratio](binary-outcome-associations.qmd#def-OR) equals the [risk ratio](binary-outcome-associations.qmd#def-RR)
+times the correction factor $\frac{1-\pi_2}{1-\pi_1}$
+(see the [odds ratio correction-factor theorem](binary-outcome-associations.qmd#thm-rare-disease-or-rr)).
+That correction factor is close to 1 only when both risks are small.
+
+:::{.callout-warning}
+
+## Reporting an odds ratio as a risk ratio for a common outcome
+
+$\pi_1 = 0.4$, $\pi_2 = 0.2$, odds ratio $= 2.67$:
+"exposed participants had 2.67 times the risk of unexposed participants."
+:::
+
+::::{.solution}
+The risk ratio is $\frac{\pi_1}{\pi_2} = \frac{0.4}{0.2} = 2$.
+The odds ratio is
+$\frac{0.4/0.6}{0.2/0.8} = \frac{0.667}{0.25} = 2.67$,
+which equals $2 \cdot \frac{0.8}{0.6}$.
+Report "2.67 times the odds", or estimate the risk ratio directly.
+::::
+
+## Poisson rate models need an offset
+
+When subjects have different amounts of follow-up time $t$,
+a Poisson model for an event rate includes $\logf{t}$ as an [offset](https://morrison-lab.github.io/pds/distributions.html#def-offset)
+(see the [Poisson rate model's mean](count-regression.qmd#eq-mean-poisson)).
+Without the offset term,
+the model describes expected counts, not rates,
+and $\expf{\beta_j}$ is a ratio of expected counts rather than a [rate ratio](count-regression.qmd#thm-poisson-rate-ratio).
+
+:::{.callout-warning}
+
+## Omitting the offset
+
+Group A: 10 events in 1000 person-years;
+group B: 10 events in 500 person-years.
+A Poisson model fit to the counts alone gives $\expf{\hat{\beta}_1} = 10/10 = 1$:
+"the groups have the same event rate."
+:::
+
+::::{.solution}
+Include $\logf{t}$ as an offset (in R, `offset(log(t))` in the model formula).
+The [incidence rates](intro-to-survival-analysis.qmd#def-incidence-rate) are
+$10/1000 = 0.01$ and $10/500 = 0.02$ events per person-year,
+so the rate ratio for A versus B is $0.01/0.02 = 0.5$.
+::::
+
+## Hazard ratios are not ratios of survival probabilities
+
+A [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) compares [hazards](intro-to-survival-analysis.qmd#def-hazard),
+which are instantaneous event rates,
+not [survival probabilities](intro-to-survival-analysis.qmd#def-surv-fn).
+Under proportional hazards,
+$\surv(t|\vx) = \sb{\surv_0(t)}^{\hazfactor(\vx)}$
+(see the [proportional hazards survival theorem](proportional-hazards-models.qmd#thm-ph-surv)),
+so the hazard ratio enters the survival function as an exponent, not as a multiplier.
+
+:::{.callout-warning}
+
+## Interpreting a hazard ratio as a survival-probability ratio
+
+$\hr(t| \vx : \vxs) = 2$ and $\surv(t|\vxs) = 0.8$:
+"the exposed group has half the probability of surviving to $t$,
+$\surv(t|\vx) = 0.4$."
+:::
+
+::::{.solution}
+$\surv(t|\vx) = 0.8^2 = 0.64$,
+so the ratio of survival probabilities is $0.64/0.8 = 0.8$,
+and the ratio of cumulative risks is $\frac{1-0.64}{1-0.8} = \frac{0.36}{0.2} = 1.8$.
+Neither ratio equals the hazard ratio of 2.
+::::
+
+## Censored observations are not event-free
+
+A [right-censored](intro-to-survival-analysis.qmd#def-right-censor) observation
+tells us only that the event had not occurred by the end of that subject's follow-up;
+the subject might have had the event later.
+
+:::{.callout-warning}
+
+## Treating censored observations as event-free
+
+Of 100 participants, 20 had the event and 30 were censored before 5 years:
+"the 5-year risk is $20/100 = 0.2$,
+since the censored participants did not have the event."
+:::
+
+::::{.solution}
+Counting censored participants as event-free for the whole period
+biases the estimated risk downward.
+Use a survival-analysis method that keeps each censored participant in the [risk set](intro-to-survival-analysis.qmd#def-risk-set)
+only until their censoring time,
+such as the [Kaplan-Meier estimator](intro-to-survival-analysis.qmd#def-KM-estimator) or a proportional hazards model,
+under the assumption of [non-informative censoring](intro-to-survival-analysis.qmd#def-noninformative-censoring).
+::::
