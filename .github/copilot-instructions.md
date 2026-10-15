@@ -409,6 +409,18 @@ When introducing or editing formal statistical definitions in `.qmd` files:
   (for example, empirical CDF),
   ensure those terms also have formal `#def-` div definitions
   in the relevant scope before relying on them
+- Define one term per `#def-` div (Ezra, 2026-10-12).
+  Never combine two terms, such as a population and its distribution, in one definition.
+  Give each new bolded term its own div and its own id, with the term as its title,
+  and let the later div link to the earlier one
+  (define a term before the definition that uses it).
+  Aliases of one term ("also called ...") stay in the same div,
+  in bold and in the div title.
+  Put commentary in a separate `#rem-` div,
+  and keep each example in an `#exm-` div after the definition it illustrates.
+  The same goes for a `#thm-`, `#lem-`, `#cor-` or `#prp-` div:
+  state one result per div.
+  See [Writing for teaching](https://morrison-lab.github.io/psw/chapters/teaching.html).
 
 ## Slidebreaks Before Theorem-Type Divs
 
