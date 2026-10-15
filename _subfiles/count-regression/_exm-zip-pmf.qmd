@@ -1,0 +1,31 @@
+:::{#exm-zip-pmf}
+
+#### Zero-inflated Poisson probabilities for the first few counts
+
+Suppose that at some covariate pattern and exposure,
+a zero-inflated Poisson regression model (@def-zip-reg)
+has $\pi = 0.3$ and $\mu_0 = 2$.
+The code below applies @thm-zip-pmf to the counts 0 through 3,
+and compares the result with a direct mixture of the two arms:
+
+```{r}
+#| label: exm-zip-pmf-calc
+#| code-fold: show
+zip_pi <- 0.3
+zip_mu0 <- 2
+zip_y <- 0:3
+zip_pmf <- ifelse(
+  zip_y == 0,
+  zip_pi + (1 - zip_pi) * exp(-zip_mu0),
+  (1 - zip_pi) * zip_mu0^zip_y * exp(-zip_mu0) / factorial(zip_y)
+)
+zip_mixture <- zip_pi * (zip_y == 0) + (1 - zip_pi) * dpois(zip_y, zip_mu0)
+```
+
+The probabilities of 0, 1, 2 and 3 events are
+`r paste(round(zip_pmf, 3), collapse = ", ")`,
+and the direct mixture gives
+`r paste(round(zip_mixture, 3), collapse = ", ")`,
+so the two agree.
+
+:::
