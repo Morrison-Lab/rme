@@ -129,11 +129,11 @@ For an [ordinary least squares](https://morrison-lab.github.io/sds/correlation-r
 with [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) $\mX$,
 the **hat matrix** is
 
-$$H = \mX(\tp{\mX}\mX)^{-1}\tp{\mX}$$
+$$\hatmat = \mX(\tp{\mX}\mX)^{-1}\tp{\mX}$$
 
 so the [fitted values](#def-fitted-value) satisfy
 
-$$\hat{\vY} = H\vY$$
+$$\hat{\vY} = \hatmat\vY$$
 :::
 
 :::{#thm-resid-unbiased}
@@ -157,7 +157,7 @@ treating $\mX$ as fixed in this derivation,
 the residual moments are:
 
 $$\E{\vec{\resid} \mid \mX} = 0$$ {#eq-mean-resid-unbiased}
-$$\Var{\resid_i \mid \mX} = \ss(1-h_{ii})$$ {#eq-var-resid-leverage}
+$$\Var{\resid_i \mid \mX} = \ss(1-\leverage{ii})$$ {#eq-var-resid-leverage}
 
 The conditional mean result (@eq-mean-resid-unbiased)
 uses unbiasedness of fitted values.
@@ -166,7 +166,7 @@ uses the homoskedasticity condition
 with the OLS hat-matrix representation.
 
 When [leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage) is roughly uniform,
-$h_{ii} \approx k/n$,
+$\leverage{ii} \approx k/n$,
 where $k = \mathrm{rank}(\mX)$
 (so $k = p + 1$ for a full-rank model
 with an intercept and $p$ [predictors](Intro-to-GLMs.qmd#def-predictors)),
@@ -185,10 +185,10 @@ $$
 \ba
 \E{{\vec{\resid}} \mid \mX} &= \E{\vY - \hat{\vY} \mid \mX}
 \\ &= \E{\vY \mid \mX} - \E{\hat{\vY} \mid \mX}
-\\ &= \E{\vY \mid \mX} - \E{H\vY \mid \mX}
-\\ &= \E{\vY \mid \mX} - H\E{\vY \mid \mX}
-\\ &= \E{\vY \mid \mX} - H\mX\b
-\\ &= \mX\b - H\mX\b
+\\ &= \E{\vY \mid \mX} - \E{\hatmat\vY \mid \mX}
+\\ &= \E{\vY \mid \mX} - \hatmat\E{\vY \mid \mX}
+\\ &= \E{\vY \mid \mX} - \hatmat\mX\b
+\\ &= \mX\b - \hatmat\mX\b
 \\ &= \mX\b - \mX\b
 \\ &= \vec{0}
 \ea
@@ -198,17 +198,17 @@ $$
 
 $$
 \ba
-{\vec{\resid}} &= (\idmat_n-H)\vY
-\\ \Var{{\vec{\resid}} \mid \mX} &= \Var{(\idmat_n-H)\vY \mid \mX}
-\\ &= (\idmat_n-H)\Var{\vY \mid \mX}\tp{(\idmat_n-H)}
-\\ &= (\idmat_n-H)\ss \idmat_n\tp{(\idmat_n-H)}
-\\ &= \ss(\idmat_n-H)\tp{(\idmat_n-H)}
-\\ &= \ss(\idmat_n-H)^2
-\\ &= \ss(\idmat_n - 2H + H^2)
-\\ &= \ss(\idmat_n-H) \qquad (\text{since } H^2 = H)
+{\vec{\resid}} &= (\idmat_n-\hatmat)\vY
+\\ \Var{{\vec{\resid}} \mid \mX} &= \Var{(\idmat_n-\hatmat)\vY \mid \mX}
+\\ &= (\idmat_n-\hatmat)\Var{\vY \mid \mX}\tp{(\idmat_n-\hatmat)}
+\\ &= (\idmat_n-\hatmat)\ss \idmat_n\tp{(\idmat_n-\hatmat)}
+\\ &= \ss(\idmat_n-\hatmat)\tp{(\idmat_n-\hatmat)}
+\\ &= \ss(\idmat_n-\hatmat)^2
+\\ &= \ss(\idmat_n - 2\hatmat + \hatmat^2)
+\\ &= \ss(\idmat_n-\hatmat) \qquad (\text{since } \hatmat^2 = \hatmat)
 \\ \Var{\resid_i \mid \mX} &= \sb{\Var{{\vec{\resid}} \mid \mX}}_{ii}
-\\ &= \sb{\ss(\idmat_n-H)}_{ii}
-\\ &= \ss(1-h_{ii})
+\\ &= \sb{\ss(\idmat_n-\hatmat)}_{ii}
+\\ &= \ss(1-\leverage{ii})
 \ea
 $$
 
@@ -224,11 +224,11 @@ the [residuals](#def-resid-fitted) $\resid_i$,
 conditional on the design matrix $\mX$,
 are normally distributed:
 
-$$\resid_i \mid \mX \sim \Normal\paren{0,\; \ss(1 - h_{ii})}$$ {#eq-resid-dist-exact}
+$$\resid_i \mid \mX \sim \Normal\paren{0,\; \ss(1 - \leverage{ii})}$$ {#eq-resid-dist-exact}
 
-where $h_{ii}$ is the $i$-th diagonal element of the hat matrix (@def-hat-matrix).
+where $\leverage{ii}$ is the $i$-th diagonal element of the hat matrix (@def-hat-matrix).
 When leverage is roughly uniform,
-$\ss(1-h_{ii}) \approx \ss$ for large $n$;
+$\ss(1-\leverage{ii}) \approx \ss$ for large $n$;
 replacing the unknown $\ss$ with its estimate $\es^2$ gives:
 
 $$\resid_i \approx \Normal(0, \es^2)$$ {#eq-resid-dist-approx}
@@ -240,10 +240,10 @@ $$\resid_i \approx \Normal(0, \es^2)$$ {#eq-resid-dist-approx}
 :::{.proof}
 
 Using the [hat matrix](#def-hat-matrix) (@def-hat-matrix),
-the residual vector is $\vec{\resid} = (I-H)\vY$,
+the residual vector is $\vec{\resid} = (\idmat_n-\hatmat)\vY$,
 so the $i$-th residual is a [linear combination](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) of the observations:
 
-$$\resid_i = [(I-H)\vY]_i = \sum_{j=1}^n (\delta_{ij} - h_{ij})\, Y_j$$
+$$\resid_i = [(\idmat_n-\hatmat)\vY]_i = \sum_{j=1}^n (\delta_{ij} - \hatmat_{ij})\, Y_j$$
 
 where $\delta_{ij}$ is the Kronecker delta
 ($\delta_{ij} = 1$ if $i = j$, else $\delta_{ij} = 0$).
@@ -261,11 +261,11 @@ The mean and [variance](https://morrison-lab.github.io/pds/variance-covariance.h
 $$
 \ba
 \Ef{\resid_i \mid \mX} &= 0
-\\ \Var{\resid_i \mid \mX} &= \ss(1 - h_{ii})
+\\ \Var{\resid_i \mid \mX} &= \ss(1 - \leverage{ii})
 \ea
 $$
 
-Therefore $\resid_i \mid \mX \sim \Normal(0, \ss(1 - h_{ii}))$.
+Therefore $\resid_i \mid \mX \sim \Normal(0, \ss(1 - \leverage{ii}))$.
 
 :::
 
@@ -514,14 +514,14 @@ For an ordinary linear model,
 the estimated [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd) of the $i$th residual is
 
 $$
-\eSD{\resid_i} = \hat{\sigma}\sqrt{1-h_{ii}}
+\eSD{\resid_i} = \hat{\sigma}\sqrt{1-\leverage{ii}}
 $$
 
 so the standardized residual is
 
 $$
 \stdresid_i = \frac{\resid_i}{\eSD{\resid_i}}
-= \frac{\resid_i}{\hat{\sigma}\sqrt{1-h_{ii}}}
+= \frac{\resid_i}{\hat{\sigma}\sqrt{1-\leverage{ii}}}
 $$
 :::
 
@@ -534,15 +534,15 @@ $$
 $$
 
 but they are not [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
-If $H$ is the [hat matrix](#def-hat-matrix) with entries $h_{ij}$,
+If $\hatmat$ is the [hat matrix](#def-hat-matrix) with entries $\hatmat_{ij}$,
 then
 
 $$
 \Cov{\resid_i,\resid_j \mid \mX}
 =
 \begin{cases}
-\ss(1-h_{ii}), & i=j,\\
--\ss h_{ij}, & i\neq j,
+\ss(1-\leverage{ii}), & i=j,\\
+-\ss \hatmat_{ij}, & i\neq j,
 \end{cases}
 $$
 
@@ -553,7 +553,7 @@ $$
 \approx
 \begin{cases}
 1, & i=j,\\
-\dfrac{-h_{ij}}{\sqrt{(1-h_{ii})(1-h_{jj})}}, & i\neq j,
+\dfrac{-\hatmat_{ij}}{\sqrt{(1-\leverage{ii})(1-\leverage{jj})}}, & i\neq j,
 \end{cases}
 $$
 
