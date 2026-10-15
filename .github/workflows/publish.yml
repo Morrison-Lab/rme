@@ -105,11 +105,31 @@ jobs:
         # per-format split gha's `preview` composite uses, which is why the
         # PR preview builds fit comfortably under the same cap.
         # `--no-clean` keeps earlier formats' output in _site.
+        #
+        # A single format is itself too big for one process now: rme#1241
+        # shows `quarto render --to pdf` dying with "Fatal JavaScript out of
+        # memory" at a 12.1 GB heap, and with the PDFs split the whole-site
+        # docx render died the same way at page 15 of 26. So pdf, docx and
+        # revealjs render one page per invocation, resetting the heap for
+        # every page. The html render stays whole-site and runs last: it
+        # is the one that writes the site-wide search index and sitemap,
+        # and it already fits (the PR previews build it that way). The page
+        # list is read from the website profile's `render:` list, so new
+        # pages are picked up automatically.
         run: |
           set -euo pipefail
-          quarto render --to pdf
-          quarto render --to docx --no-clean
-          quarto render --to revealjs --no-clean
+          mapfile -t pages < <(
+            awk '/^  render:/ {in_render=1; next}
+                 in_render && /^    - / {sub(/^    - /, ""); sub(/[ \t]+#.*$/, ""); sub(/[ \t]+$/, ""); print; next}
+                 in_render && !/^[ \t]*(#.*)?$/ {in_render=0}' _quarto-website.yml
+          )
+          echo "Rendering ${#pages[@]} pages per format, one per invocation"
+          test "${#pages[@]}" -gt 0
+          for format in pdf docx revealjs; do
+            for page in "${pages[@]}"; do
+              quarto render "$page" --to "$format" --no-clean
+            done
+          done
           quarto render --to html --no-clean
 
       # We intentionally do NOT restore the cache before rendering on main, to
