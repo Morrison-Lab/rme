@@ -211,7 +211,7 @@ Selecting a model by maximizing $R^2$ alone can lead to [overfitting](predictor-
 
 With a training/test split,
 we estimate coefficients in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)
-and compute [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error) in held-out data:
+and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data:
 
 $$
 \hat\b_{\text{train}} =
@@ -611,7 +611,7 @@ for the chosen model
 
 Rather than one arbitrary split,
 [$k$-fold cross-validation](predictor-selection.qmd#def-kfold) repeatedly partitions the data into training and test folds.
-For each split we compute [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
+For each split we compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error),
 then summarize errors across folds and replications.
 The preferred model has lower prediction error,
 with simpler models favored when errors are similar.
@@ -704,7 +704,7 @@ and keep the best model of size $k$
 
 Best subset selection yields at most $p+1$ candidate models to compare across model sizes,
 using criteria such as
-cross-validated [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
+cross-validated [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error),
 $C_p$,
 [AIC](#def-aic)/BIC,
 or adjusted $R^2$.
@@ -783,7 +783,7 @@ So lasso both regularizes the model
 and performs variable selection.
 In practice,
 $\lambda$ is usually chosen by [cross-validation](predictor-selection.qmd#sec-pred-sel-cv)
-to minimize [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error).
+to minimize [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error).
 
 For [Gaussian linear models](#def-lm-general-form),
 the penalized least-squares forms are:

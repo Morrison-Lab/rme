@@ -43,6 +43,14 @@ $$\pi(\vx) \in (\expit(L), \expit(R))$${#eq-ci-prob-exp}
 
 {{< slidebreak >}}
 
+{{< include _subfiles/logistic-regression/_thm-ci-prob.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-prob.qmd >}}
+
+{{< slidebreak >}}
+
 :::{#exr-logodds-ci}
 
 Find a 95% confidence interval for the log-odds $\logodds(\vx) = \vx'\vb$.
@@ -62,6 +70,14 @@ $$\hat\logodds(\vx) \pm 1.96 * \teal{\HSE{\hat\logodds(\vx)}}$$
 where $\hat\logodds(\vx) = \vx'\eb$.
 
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_thm-ci-logodds.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-logodds.qmd >}}
 
 {{< slidebreak >}}
 
@@ -124,6 +140,14 @@ $$
 
 {{< slidebreak >}}
 
+{{< include _subfiles/logistic-regression/_thm-var-logodds.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-var-logodds.qmd >}}
+
+{{< slidebreak >}}
+
 Combining @eq-var-logodds with the invariance property of MLEs
 gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
@@ -143,7 +167,7 @@ $${#eq-est-se-logodds}
 :::
 
 ::: proof
-By @sol-se-logodds,
+By @thm-var-logodds,
 $\Var{\hat\logodds(\vx)} = \tp{\vx}\Sigma\vx$ (@eq-var-logodds).
 By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,

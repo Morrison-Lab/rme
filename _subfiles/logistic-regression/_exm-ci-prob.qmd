@@ -1,0 +1,28 @@
+:::{#exm-ci-prob}
+
+#### Confidence interval for a beetle mortality probability
+
+For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`),
+the code below first computes a 95% confidence interval for the log-odds at dose 1.8,
+then applies $\expit$ to its endpoints as in @thm-ci-prob:
+
+```{r}
+#| label: exm-ci-prob-calc
+#| code-fold: show
+ex_pred <- predict(
+  beetles_glm_ungrouped,
+  newdata = data.frame(dose = 1.8),
+  type = "link",
+  se.fit = TRUE
+)
+ex_ci_logodds <- ex_pred$fit + c(-1, 1) * 1.96 * ex_pred$se.fit
+ex_ci_prob <- plogis(ex_ci_logodds)
+```
+
+The 95% confidence interval for the log-odds is
+(`r round(ex_ci_logodds[1], 3)`, `r round(ex_ci_logodds[2], 3)`),
+so the 95% confidence interval for the probability of death is
+(`r round(ex_ci_prob[1], 3)`, `r round(ex_ci_prob[2], 3)`),
+which stays inside $(0, 1)$ and contains the estimate `r round(plogis(ex_pred$fit), 3)`.
+
+:::
