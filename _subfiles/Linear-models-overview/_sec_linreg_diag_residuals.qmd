@@ -245,7 +245,7 @@ Using the [hat matrix](#def-hat-matrix) (@def-hat-matrix),
 the residual vector is $\vec{\resid} = (\idmat_n-\hatmat)\vY$,
 so the $i$-th residual is a [linear combination](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) of the observations:
 
-$$\resid_i = [(\idmat_n-\hatmat)\vY]_i = \sum_{j=1}^n (\delta_{ij} - \hatmat_{ij})\, Y_j$$
+$$\resid_i = [(\idmat_n-\hatmat)\vY]_i = \sum_{j=1}^n (\delta_{ij} - \leverage{ij})\, Y_j$$
 
 where $\delta_{ij}$ is the Kronecker delta
 ($\delta_{ij} = 1$ if $i = j$, else $\delta_{ij} = 0$).
@@ -536,7 +536,7 @@ $$
 $$
 
 but they are not [independent](https://morrison-lab.github.io/pds/independence.html#def-indpt).
-If $\hatmat$ is the [hat matrix](#def-hat-matrix) with entries $\hatmat_{ij}$,
+If $\hatmat$ is the [hat matrix](#def-hat-matrix) with entries $\leverage{ij}$,
 then
 
 $$
@@ -544,7 +544,7 @@ $$
 =
 \begin{cases}
 \ss(1-\leverage{ii}), & i=j,\\
--\ss \hatmat_{ij}, & i\neq j,
+-\ss \leverage{ij}, & i\neq j,
 \end{cases}
 $$
 
@@ -555,7 +555,7 @@ $$
 \approx
 \begin{cases}
 1, & i=j,\\
-\dfrac{-\hatmat_{ij}}{\sqrt{(1-\leverage{ii})(1-\leverage{jj})}}, & i\neq j,
+\dfrac{-\leverage{ij}}{\sqrt{(1-\leverage{ii})(1-\leverage{jj})}}, & i\neq j,
 \end{cases}
 $$
 
