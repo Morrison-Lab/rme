@@ -1,0 +1,28 @@
+:::{#exm-wcgs-intercept}
+
+#### The fitted WCGS intercept as a log-odds
+
+The code below compares the intercept of the fitted model (`chd_glm_contrasts`) with the predicted log-odds for a type B participant at age 0,
+and compares $\expf{\hat\beta_0}$ with the corresponding predicted odds:
+
+```{r}
+#| label: exm-wcgs-intercept-calc
+#| code-fold: show
+ex_new <- data.frame(
+  dibpat = factor("Type B", levels = levels(wcgs$dibpat)),
+  age = 0
+)
+ex_eta <- predict(chd_glm_contrasts, newdata = ex_new, type = "link")
+ex_prob <- predict(chd_glm_contrasts, newdata = ex_new, type = "response")
+ex_odds <- ex_prob / (1 - ex_prob)
+ex_b0 <- unname(coef(chd_glm_contrasts)["(Intercept)"])
+```
+
+The intercept is `r round(ex_b0, 4)`
+and the predicted log-odds is `r round(unname(ex_eta), 4)`.
+Also, $\expf{\hat\beta_0}$ is `r signif(exp(ex_b0), 3)`
+and the predicted odds is `r signif(unname(ex_odds), 3)`.
+These values are tiny because age 0 lies far outside the observed ages,
+so the intercept is an extrapolation.
+
+:::

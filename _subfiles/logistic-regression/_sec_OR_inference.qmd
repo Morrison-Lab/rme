@@ -38,6 +38,14 @@ $$\ror(\vx,\vxs) \in (e^L, e^R)$${#eq-ci-OR-exp}
 
 {{< slidebreak >}}
 
+{{< include _subfiles/logistic-regression/_thm-ci-OR.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-OR.qmd >}}
+
+{{< slidebreak >}}
+
 :::{#exr-or-diff-logodds}
 
 Find a 95% confidence interval for the [natural logarithm](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of the odds ratio,
@@ -60,6 +68,14 @@ can be constructed as:
 $$\edifflogodds \pm 1.96 * \teal{\HSE{\edifflogodds}}$$
 
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_thm-ci-log-OR.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-log-OR.qmd >}}
 
 {{< slidebreak >}}
 
@@ -119,6 +135,14 @@ $$
 
 {{< slidebreak >}}
 
+{{< include _subfiles/logistic-regression/_thm-var-diff-logodds.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-var-diff-logodds.qmd >}}
+
+{{< slidebreak >}}
+
 Combining @eq-var-diff-logodds with the invariance property of MLEs
 gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
@@ -138,7 +162,7 @@ $${#eq-est-se-diff-logodds}
 :::
 
 ::: proof
-By @sol-se-diff-logodds,
+By @thm-var-diff-logodds,
 $\Var{\edifflogodds} = \tp{\diffvx}\Sigma(\diffvx)$ (@eq-var-diff-logodds).
 By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,

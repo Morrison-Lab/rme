@@ -1,0 +1,27 @@
+:::{#exm-var-logodds}
+
+#### Variance of an estimated beetle log-odds
+
+For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`),
+the code below applies @thm-var-logodds at $\vx = (1, 1.8)\'$,
+using the estimated covariance matrix of the coefficients in place of $\Sigma$,
+and compares the result with the squared standard error from `predict()`:
+
+```{r}
+#| label: exm-var-logodds-calc
+#| code-fold: show
+ex_x <- c(1, 1.8)
+ex_var_quadratic <- drop(t(ex_x) %*% vcov(beetles_glm_ungrouped) %*% ex_x)
+ex_se_predict <- predict(
+  beetles_glm_ungrouped,
+  newdata = data.frame(dose = 1.8),
+  type = "link",
+  se.fit = TRUE
+)$se.fit
+```
+
+The quadratic form gives `r round(ex_var_quadratic, 5)`,
+and the squared standard error from `predict()` is `r round(ex_se_predict^2, 5)`,
+so the two agree.
+
+:::

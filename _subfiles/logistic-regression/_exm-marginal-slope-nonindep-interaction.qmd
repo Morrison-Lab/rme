@@ -1,0 +1,31 @@
+:::{#exm-marginal-slope-nonindep-interaction}
+
+#### A marginal slope under an identity link with an interaction
+
+Take the parameter values of @exm-marginal-mean-nonindep-interaction.
+Because the marginal mean is now quadratic in $x$,
+its slope varies with $x$.
+The code below approximates the slope at $x = 2$ and $x = 4$ with a central difference,
+and compares it with the formula of @cor-marginal-slope-nonindep-interaction:
+
+```{r}
+#| label: exm-marginal-slope-nonindep-interaction-calc
+#| code-fold: show
+ex_marginal_mean <- function(x) {
+  (0.1 + 0.1 * 1) + (0.05 + 0.1 * 0.5 + 0.02 * 1) * x + 0.02 * 0.5 * x^2
+}
+ex_h <- 1e-4
+ex_slope_numeric <- sapply(
+  c(2, 4),
+  function(x) (ex_marginal_mean(x + ex_h) - ex_marginal_mean(x - ex_h)) / (2 * ex_h)
+)
+ex_slope_formula <- (0.05 + 0.1 * 0.5 + 0.02 * 1) + 2 * 0.02 * 0.5 * c(2, 4)
+```
+
+At $x = 2$ and $x = 4$,
+the central differences are `r round(ex_slope_numeric, 4)`
+and the formula gives `r round(ex_slope_formula, 4)`,
+so the two agree,
+and the slope increases with $x$.
+
+:::
