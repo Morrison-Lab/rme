@@ -64,12 +64,16 @@ max(abs(radon_pp - coef(radon_lmer0)$county[, 1]))
 ```{r}
 #| label: radon-shrinkage-plot
 #| code-fold: true
+# the fit works with log radon;
+# the y-axis ticks sit at the logs of round radon values, labelled in pCi/L
+radon_ticks <- c(0.5, 1, 1.5, 2, 3, 4, 6, 8, 12)
 plot(
   as.vector(radon_n), radon_ybar,
-  log = "x", pch = 1,
+  log = "x", pch = 1, yaxt = "n",
   xlab = "Houses sampled in county (log scale)",
-  ylab = "Estimated county mean log radon"
+  ylab = "County geometric-mean radon (pCi/L)"
 )
+axis(2, at = log(radon_ticks), labels = radon_ticks)
 points(as.vector(radon_n), radon_pp, pch = 19)
 abline(h = fixef(radon_lmer0), lty = 2)
 legend(
@@ -79,6 +83,9 @@ legend(
 )
 ```
 
-No-pooling and partial-pooling estimates of the county mean log radon levels;
+No-pooling and partial-pooling estimates of the county geometric-mean radon levels
+(the exponentials of the estimated county means of log radon);
 the dashed line is the complete-pooling estimate.
+The model is fit to log radon,
+so the radon axis is spaced logarithmically.
 :::
