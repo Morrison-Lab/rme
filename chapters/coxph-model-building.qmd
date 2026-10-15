@@ -286,7 +286,9 @@ Also known as "complementary log-log (clog-log) survival curves".
 # draw cumulative hazard against time, both on log-spaced axes,
 # so that the ticks are in days and in units of cumulative hazard
 # rather than in the logs of those quantities:
-plot_cloglog <- function(curves) {
+# (`text_size` is the legend text size;
+# 9 matches `legend_text_size` in r-config)
+plot_cloglog <- function(curves, text_size = 9) {
   curves |>
     # log10(0) is not finite, so leave out the time-zero points
     filter(.data$time > 0, .data$cumhaz > 0) |>
@@ -309,7 +311,7 @@ plot_cloglog <- function(curves) {
       col =
         guide_legend(
           ncol = 2,
-          label.theme = element_text(size = legend_text_size)
+          label.theme = element_text(size = text_size)
         )
     )
 }
