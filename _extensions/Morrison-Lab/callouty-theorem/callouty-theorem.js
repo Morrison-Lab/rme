@@ -73,11 +73,16 @@
   function patchPreviews() {
     document.querySelectorAll("a.quarto-xref").forEach(function (link) {
       var instance = link._tippy;
-      var href = link.getAttribute("href") || "";
-      if (!instance || href.charAt(0) !== "#" || !instance.props.onTrigger) {
+      if (!instance || !instance.props.onTrigger) {
         return;
       }
-      var target = document.getElementById(href.slice(1));
+      // On a served site Quarto's navigation script has already made the href
+      // absolute, so compare the resolved URL, not a leading "#".
+      var url = new URL(link.href, location.href);
+      if (url.origin + url.pathname !== location.origin + location.pathname || !url.hash) {
+        return;
+      }
+      var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
       var callout = target && target.closest(".callout");
       if (!callout) {
         return;
@@ -92,6 +97,20 @@
       });
     });
   }
+
+  // The popup is appended to the body, out of the link's tab order, so Tab from
+  // the link moves into the popup while it is open.
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Tab" || event.shiftKey) { return; }
+    var link = document.activeElement;
+    var instance = link && link._tippy;
+    if (!instance || !instance.state.isVisible) { return; }
+    var first = instance.popper.querySelector("a[href], button");
+    if (first) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
 
   // Quarto creates the previews in an inline script at the end of the page.
   window.addEventListener("load", patchPreviews);
