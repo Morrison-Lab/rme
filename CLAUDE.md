@@ -123,8 +123,11 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Introduce concepts before using them — no forward references
 - Factual claims must have a specific citation
 - Variable definitions in exercises: use bullet points/table with symbol, meaning, and dataset column
-- **Define one term per `#def-` div** (Ezra, 2026-10-12; see "Definition Formatting" in `.github/copilot-instructions.md` and [Writing for teaching](https://morrison-lab.github.io/psw/chapters/teaching.html)):
-  each new bolded term gets its own div and id, with the term as the title, and the later div links to the earlier;
+- **Define one term per `#def-` div** (Ezra, 2026-10-12).
+  See "Definition Formatting" in `.github/copilot-instructions.md`
+  and [Writing for teaching](https://morrison-lab.github.io/psw/chapters/teaching.html).
+  Each new bolded term gets its own div and id, with the term as the title,
+  and the later div links to the earlier;
   aliases ("also called ...") stay in one div, in bold and in the title;
   commentary goes in a `#rem-` div;
   a `#thm-`, `#lem-`, `#cor-` or `#prp-` div states one result
