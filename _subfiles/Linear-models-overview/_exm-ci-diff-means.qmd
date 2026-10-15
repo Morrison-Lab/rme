@@ -1,0 +1,37 @@
+:::{#exm-ci-diff-means}
+
+#### Confidence interval for the male-female birthweight difference at 40 weeks
+
+For the `birthweight` model with an interaction (`bw_lm2`),
+the code below applies @thm-ci-diff-means to the difference between males and females at 40 weeks,
+using the estimated covariance matrix of the coefficients.
+As a check, it refits the model with age centered at 40 weeks,
+where the `sex` coefficient is exactly this difference:
+
+```{r}
+#| label: exm-ci-diff-means-calc
+#| code-fold: show
+ex_pair <- data.frame(
+  sex = factor(c("female", "male"), levels = levels(bw$sex)),
+  age = c(40, 40)
+)
+ex_design <- model.matrix(delete.response(terms(bw_lm2)), ex_pair)
+ex_delta_x <- ex_design[2, ] - ex_design[1, ]
+ex_est <- sum(ex_delta_x * coef(bw_lm2))
+ex_se <- sqrt(drop(t(ex_delta_x) %*% vcov(bw_lm2) %*% ex_delta_x))
+ex_tcrit <- qt(0.975, df = bw_lm2$df.residual)
+ex_ci <- ex_est + c(-1, 1) * ex_tcrit * ex_se
+
+ex_bw_centered <- transform(bw, age_c = age - 40)
+ex_fit_centered <- lm(weight ~ sex + age_c + sex:age_c, data = ex_bw_centered)
+ex_ci_refit <- confint(ex_fit_centered)["sexmale", ]
+```
+
+The estimated difference is `r round(ex_est, 1)` grams,
+with 95% confidence interval
+(`r round(ex_ci[1], 1)`, `r round(ex_ci[2], 1)`).
+The refitted model gives
+(`r round(ex_ci_refit[1], 1)`, `r round(ex_ci_refit[2], 1)`),
+which agrees.
+
+:::

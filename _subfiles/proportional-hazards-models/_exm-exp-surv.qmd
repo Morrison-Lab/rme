@@ -1,0 +1,23 @@
+:::{#exm-exp-surv}
+
+#### Survival probability of an exponential time
+
+Suppose an event time $T$ is exponential with rate $\lambda = 0.1$ events per year.
+By @thm-exp-surv,
+the probability of surviving past 5 years is $\surv(5) = e^{-\lambda \cdot 5}$.
+The code below computes this value from the formula and from R's exponential distribution function:
+
+```{r}
+#| label: exm-exp-surv-calc
+#| code-fold: show
+exp_lambda <- 0.1
+exp_t <- 5
+surv_formula <- exp(-exp_lambda * exp_t)
+surv_pexp <- pexp(exp_t, rate = exp_lambda, lower.tail = FALSE)
+```
+
+The formula gives $\surv(5) =$ `r round(surv_formula, 4)`,
+and `pexp()` gives `r round(surv_pexp, 4)`,
+so the two agree.
+
+:::

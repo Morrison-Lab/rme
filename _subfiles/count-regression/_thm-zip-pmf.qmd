@@ -1,0 +1,25 @@
+:::{#thm-zip-pmf}
+
+#### Probability mass function of the zero-inflated Poisson model
+
+In a zero-inflated Poisson regression model (@def-zip-reg),
+let $\pi \eqdef \pi(\vx) = \P(Z=1 \mid \vX=\vx)$ be the probability of a structural zero,
+and let $\mu_0 \eqdef \E{Y \mid Z=0, \vX=\vx, T=t}$ be the mean count in the $Z=0$ arm.
+Then:
+
+$$
+\ba
+\P(Y=0 \mid \vX=\vx, T=t) &= \pi + (1-\pi) \expf{-\mu_0}
+\\
+\P(Y=y \mid \vX=\vx, T=t) &= (1-\pi) \frac{\mu_0^y \expf{-\mu_0}}{y!}
+\quad \text{for } y \geq 1
+\ea
+$$
+
+:::
+
+::: proof
+
+This proof is the solution to @exr-zinf-pmf, worked in @sol-zinf-pmf.
+
+:::
