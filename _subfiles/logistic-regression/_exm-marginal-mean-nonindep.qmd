@@ -1,0 +1,29 @@
+:::{#exm-marginal-mean-nonindep}
+
+#### A marginal mean under an identity link
+
+Suppose
+$\eta_0 = 0.1$, $\b_X = 0.05$ and $\b_C = 0.1$ in the identity-link model of @eq-or-objections-identity-model,
+and $\Ef{C|X=x} = 1 + 0.5 x$,
+so that $\gamma_0 = 1$ and $\gamma_x = 0.5$.
+The code below computes $\Ef{Y|X=2}$ by substituting $\Ef{C|X=2}$ into the model,
+and from the formula of @thm-marginal-mean-nonindep:
+
+```{r}
+#| label: exm-marginal-mean-nonindep-calc
+#| code-fold: show
+ex_eta0 <- 0.1
+ex_bX <- 0.05
+ex_bC <- 0.1
+ex_g0 <- 1
+ex_gx <- 0.5
+ex_x <- 2
+ex_direct <- ex_eta0 + ex_bX * ex_x + ex_bC * (ex_g0 + ex_gx * ex_x)
+ex_formula <- (ex_eta0 + ex_bC * ex_g0) + (ex_bX + ex_bC * ex_gx) * ex_x
+```
+
+The direct calculation gives `r ex_direct`
+and the formula gives `r ex_formula`,
+so the two agree.
+
+:::

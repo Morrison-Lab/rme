@@ -1,0 +1,9 @@
+<script>
+// The table-fit rule makes a page table a block box so it can scroll.
+// Some browsers then drop the table role, so give each one back.
+document.querySelectorAll("main table").forEach(function (t) {
+  if (!t.hasAttribute("role")) {
+    t.setAttribute("role", "table");
+  }
+});
+</script>

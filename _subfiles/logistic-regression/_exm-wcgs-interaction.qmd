@@ -1,0 +1,32 @@
+:::{#exm-wcgs-interaction}
+
+#### The fitted WCGS interaction coefficient
+
+The code below compares the interaction coefficient of the fitted model (`chd_glm_contrasts`) with the difference between the type A and type B changes in predicted log-odds from age 50 to age 51,
+and compares $\expf{\hat\beta_{PA}}$ with the ratio of the two odds ratios:
+
+```{r}
+#| label: exm-wcgs-interaction-calc
+#| code-fold: show
+ex_levels <- levels(wcgs$dibpat)
+ex_new <- data.frame(
+  dibpat = factor(c("Type B", "Type B", "Type A", "Type A"), levels = ex_levels),
+  age = c(50, 51, 50, 51)
+)
+ex_eta <- predict(chd_glm_contrasts, newdata = ex_new, type = "link")
+ex_prob <- predict(chd_glm_contrasts, newdata = ex_new, type = "response")
+ex_odds <- ex_prob / (1 - ex_prob)
+ex_or_B <- ex_odds[2] / ex_odds[1]
+ex_or_A <- ex_odds[4] / ex_odds[3]
+ex_slope_diff <- (ex_eta[4] - ex_eta[3]) - (ex_eta[2] - ex_eta[1])
+ex_bPA <- unname(coef(chd_glm_contrasts)["dibpatType A:age"])
+```
+
+The interaction coefficient is `r round(ex_bPA, 4)`
+and the difference in the changes in predicted log-odds is `r round(unname(ex_slope_diff), 4)`.
+Also, $\expf{\hat\beta_{PA}}$ is `r round(exp(ex_bPA), 4)`
+and the ratio of the odds ratio for type A (`r round(unname(ex_or_A), 4)`)
+to the odds ratio for type B (`r round(unname(ex_or_B), 4)`)
+is `r round(unname(ex_or_A / ex_or_B), 4)`.
+
+:::
