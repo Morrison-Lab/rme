@@ -168,10 +168,20 @@ main table col {
 
 /* A native <caption> is a table-caption box inside the block table, so on a
  * narrow table it wrapped into a column as wide as the table. Let it take its
- * natural width, up to the column and no wider than a comfortable line, so a
- * long caption does not stretch a narrow table across the whole column. */
+ * natural width, up to no wider than a comfortable line, so a long caption
+ * does not stretch a narrow table across the whole column. The width is flat
+ * `24em`, not `min(100%, 24em)`: a percentage inside `min()` resolves against
+ * the column while the table is being sized, which stretched it to the full
+ * column. On a phone, where 24em is wider than the column, the caption fills
+ * the table instead. */
 main table > caption {
   display: block;
   width: max-content;
-  max-width: min(100%, 24em);
+  max-width: 24em;
+}
+
+@media (max-width: 575.98px) {
+  main table > caption {
+    max-width: 100%;
+  }
 }
