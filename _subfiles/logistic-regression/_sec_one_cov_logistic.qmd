@@ -56,7 +56,10 @@ beetles <- BeetleMortality |>
 beetles
 ```
 
-Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide [@bliss1935beetles]
+Mortality rates of adult flour beetles after five hours’ exposure to gaseous carbon disulphide [@bliss1935beetles].
+The `dose` column holds the base-10 logarithm of the dose in mg/L,
+and the models use it as is;
+the figures show the dose itself, in mg/L, on a log-spaced axis.
 
 :::
 
@@ -68,9 +71,10 @@ Mortality rates of adult flour beetles after five hours’ exposure to gaseous c
 library(ggplot2)
 plot1 <-
   beetles |>
-  ggplot(aes(x = dose, y = pct)) +
+  ggplot(aes(x = 10^dose, y = pct)) +
   geom_point(aes(size = n)) +
-  xlab("Dose (log mg/L)") +
+  scale_x_log10(breaks = c(40, 50, 60, 70, 80, 100)) +
+  xlab("Dose of CS2 (mg/L)") +
   ylab("Mortality rate (%)") +
   scale_y_continuous(labels = scales::percent) +
   scale_size(range = c(1, 2)) +
@@ -98,10 +102,10 @@ beetles_long <- beetles |>
   ) |>
   as_tibble()
 
+# `dose` is log10 of the dose in mg/L, and the models use it as is;
+# the plot functions take mg/L and convert:
 lm1 <- beetles_long |> lm(formula = outcome ~ dose)
-f_linear <- function(x) predict(lm1, newdata = data.frame(dose = x))
-
-range1 <- range(beetles$dose) + c(-.2, .2)
+f_linear <- function(x) predict(lm1, newdata = data.frame(dose = log10(x)))
 
 plot2 <-
   plot1 +
@@ -123,7 +127,7 @@ Mortality rates of adult flour beetles after five hours' exposure to gaseous car
 :::{#fig-beetles_3}
 
 ```{r}
-(plot2 + expand_limits(x = c(1.6, 2))) |> print()
+(plot2 + expand_limits(x = c(40, 100))) |> print()
 ```
 
 Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide [@bliss1935beetles]
@@ -136,12 +140,12 @@ Mortality rates of adult flour beetles after five hours' exposure to gaseous car
 
 ```{r}
 lm2 <- beetles_long |> lm(formula = outcome ~ log(dose))
-f_linearlog <- function(x) predict(lm2, newdata = data.frame(dose = x))
+f_linearlog <- function(x) predict(lm2, newdata = data.frame(dose = log10(x)))
 
 plot3 <- plot2 +
-  expand_limits(x = c(1.6, 2)) +
+  expand_limits(x = c(40, 100)) +
   geom_function(fun = f_linearlog, aes(col = "Log-transform dose"))
-(plot3 + expand_limits(x = c(1.6, 2))) |> print()
+(plot3 + expand_limits(x = c(40, 100))) |> print()
 ```
 
 Mortality rates of adult flour beetles after five hours' exposure to gaseous carbon disulphide [@bliss1935beetles]
@@ -157,7 +161,7 @@ beetles_glm_grouped <- beetles |>
   glm(formula = cbind(died, survived) ~ dose, family = "binomial")
 f <- function(x) {
   beetles_glm_grouped |>
-    predict(newdata = data.frame(dose = x), type = "response")
+    predict(newdata = data.frame(dose = log10(x)), type = "response")
 }
 
 plot4 <- plot3 + geom_function(fun = f, aes(col = "Logistic regression"))
