@@ -531,14 +531,14 @@ text-align: center;
 <span id="cb3-35"><a aria-label="35"></a>    <span class="st">"Parsimonious model"</span>,</span>
 <span id="cb3-36"><a aria-label="36"></a>    <span class="fu">paste0</span>(<span class="st">"Overfit model (+"</span>, n_noise_predictors, <span class="st">" noise predictors)"</span>)</span>
 <span id="cb3-37"><a aria-label="37"></a>  ),</span>
-<span id="cb3-38"><a aria-label="38"></a>  <span class="at">Training_RMSE =</span> <span class="fu">c</span>(</span>
+<span id="cb3-38"><a aria-label="38"></a>  <span class="at">Training_sRMSE =</span> <span class="fu">c</span>(</span>
 <span id="cb3-39"><a aria-label="39"></a>    <span class="fu">rmse</span>(</span>
 <span id="cb3-40"><a aria-label="40"></a>      train_overfit<span class="sc">$</span>LDL,</span>
 <span id="cb3-41"><a aria-label="41"></a>      <span class="fu">predict</span>(model_parsimonious, <span class="at">newdata =</span> train_overfit)</span>
 <span id="cb3-42"><a aria-label="42"></a>    ),</span>
 <span id="cb3-43"><a aria-label="43"></a>    <span class="fu">rmse</span>(train_overfit<span class="sc">$</span>LDL, <span class="fu">predict</span>(model_overfit, <span class="at">newdata =</span> train_overfit))</span>
 <span id="cb3-44"><a aria-label="44"></a>  ),</span>
-<span id="cb3-45"><a aria-label="45"></a>  <span class="at">Validation_RMSE =</span> <span class="fu">c</span>(</span>
+<span id="cb3-45"><a aria-label="45"></a>  <span class="at">Validation_sRMSE =</span> <span class="fu">c</span>(</span>
 <span id="cb3-46"><a aria-label="46"></a>    <span class="fu">rmse</span>(</span>
 <span id="cb3-47"><a aria-label="47"></a>      valid_overfit<span class="sc">$</span>LDL,</span>
 <span id="cb3-48"><a aria-label="48"></a>      <span class="fu">predict</span>(model_parsimonious, <span class="at">newdata =</span> valid_overfit)</span>
@@ -547,7 +547,7 @@ text-align: center;
 <span id="cb3-51"><a aria-label="51"></a>  )</span>
 <span id="cb3-52"><a aria-label="52"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb3-53"><a aria-label="53"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb3-54"><a aria-label="54"></a>    dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(Training_RMSE, Validation_RMSE), <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="dv">2</span>))</span>
+<span id="cb3-54"><a aria-label="54"></a>    dplyr<span class="sc">::</span><span class="fu">across</span>(<span class="fu">c</span>(Training_sRMSE, Validation_sRMSE), <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="dv">2</span>))</span>
 <span id="cb3-55"><a aria-label="55"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="tbl-overfit-example" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-overfit-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -557,7 +557,7 @@ Table&nbsp;1: Numerical example showing overfitting: lower training error but wo
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["Model"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Training_RMSE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Validation_RMSE"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Parsimonious model","2":"36.97","3":"36.74"},{"1":"Overfit model (+20 noise predictors)","2":"36.86","3":"36.97"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Model"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Training_sRMSE"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Validation_sRMSE"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Parsimonious model","2":"36.97","3":"36.74"},{"1":"Overfit model (+20 noise predictors)","2":"36.86","3":"36.97"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -565,7 +565,7 @@ Table&nbsp;1: Numerical example showing overfitting: lower training error but wo
 </div>
 </figure>
 </div>
-<p>In this example, the overfit model usually has lower training <a href="https://morrison-lab.github.io/sds/estimation.html#def-rmse">RMSE</a> but higher validation RMSE, which is the defining pattern of <a href="#/def-overfitting">overfitting</a>.</p>
+<p>In this example, the overfit model usually has lower training <a href="https://morrison-lab.github.io/sds/estimation.html#def-rmse">sample root mean squared error (sRMSE)</a> but higher validation sRMSE, which is the defining pattern of <a href="#/def-overfitting">overfitting</a>.</p>
 </section><section id="sec-pred-sel-pe" class="slide level2" data-number="4.3"><h2>
 <span class="header-section-number">4.3</span> Measures of prediction error</h2>
 <p>To select a model that minimizes <a href="https://morrison-lab.github.io/sds/prediction.html#def-prediction-error">prediction error</a>, we need a measure of PE that does not simply increase with the number of predictors.</p>
@@ -625,7 +625,7 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
 <aside class="notes"><p>The two recommended values of <span class="math inline">\(\lambda\)</span> represent different points on the <a href="https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff">bias–variance trade-off</a>:</p>
 <ul>
 <li>
-<code>lambda.min</code> minimizes cross-validated MSE, yielding a model with good predictive accuracy.</li>
+<code>lambda.min</code> minimizes cross-validated sample mean squared error (sMSE), yielding a model with good predictive accuracy.</li>
 <li>
 <code>lambda.1se</code> uses a larger penalty (farther from zero, more shrinkage), resulting in a sparser, more conservative model that is often preferred for interpretability.</li>
 </ul><style type="text/css">
@@ -672,14 +672,14 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
 <span id="cb4-17"><a aria-label="17"></a>rmse_train <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">residuals</span>(model_train)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb4-18"><a aria-label="18"></a></span>
 <span id="cb4-19"><a aria-label="19"></a><span class="fu">cat</span>(</span>
-<span id="cb4-20"><a aria-label="20"></a>  <span class="st">"Training RMSE:"</span>, <span class="fu">round</span>(rmse_train, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb4-21"><a aria-label="21"></a>  <span class="st">"Validation RMSE:"</span>, <span class="fu">round</span>(rmse_valid, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span></span>
+<span id="cb4-20"><a aria-label="20"></a>  <span class="st">"Training sRMSE:"</span>, <span class="fu">round</span>(rmse_train, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb4-21"><a aria-label="21"></a>  <span class="st">"Validation sRMSE:"</span>, <span class="fu">round</span>(rmse_valid, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span></span>
 <span id="cb4-22"><a aria-label="22"></a>)</span>
-<span id="cb4-23"><a aria-label="23"></a><span class="co">#&gt; Training RMSE: 36.78 </span></span>
-<span id="cb4-24"><a aria-label="24"></a><span class="co">#&gt;  Validation RMSE: 36.85</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-23"><a aria-label="23"></a><span class="co">#&gt; Training sRMSE: 36.78 </span></span>
+<span id="cb4-24"><a aria-label="24"></a><span class="co">#&gt;  Validation sRMSE: 36.85</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<aside class="notes"><p>If the validation RMSE is much larger than the training RMSE, this discrepancy is a sign of overfitting. In well-specified models with adequate sample sizes, the two values are typically close.</p>
+<aside class="notes"><p>If the validation sRMSE is much larger than the training sRMSE, this discrepancy is a sign of overfitting. In well-specified models with adequate sample sizes, the two values are typically close.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
