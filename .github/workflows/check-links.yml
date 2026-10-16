@@ -1,10 +1,10 @@
 name: Check Links
 
 # Thin caller for the shared reusable workflow in Morrison-Lab/gha.
-# The reusable workflow reproduces the previous standalone behavior: lychee
-# link check over .qmd/.md/.html, a PR skip-label ("links checked by hand"),
-# and auto-filing an issue when links break on main. We pass our repo-local
-# lychee.toml so the repo-specific excludes (e.g. quarto.org) still apply.
+# The reusable workflow runs a lychee link check over .qmd/.md/.html, honours
+# a PR skip-label ("links checked by hand"), and auto-files an issue when
+# links break on main. We pass our repo-local lychee.toml so the repo-specific
+# excludes (e.g. quarto.org) apply.
 # See https://github.com/Morrison-Lab/gha for inputs and versioning.
 
 on:
@@ -19,8 +19,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Keep the job id (link-checker) matching the previous standalone workflow so
-  # the status-check context name doesn't change.
+  # The job id (link-checker) matches the sibling lab repositories, so the
+  # status-check context name is the same everywhere.
   link-checker:
     permissions:
       contents: read
