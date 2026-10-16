@@ -51,11 +51,14 @@
 
   function land() {
     if (place) {
+      // A block the reader has since collapsed or removed has no position to
+      // keep: leave the page alone until their next scroll picks a new one.
+      if (!place.el.isConnected || !place.el.getClientRects().length) return;
       var d = place.el.getBoundingClientRect().top - place.top;
-      if (Math.abs(d) >= 1) window.scrollBy(0, d);
+      if (Math.abs(d) >= 1) window.scrollBy({ top: d, behavior: "instant" });
     } else {
       var el = target();
-      if (el) el.scrollIntoView(text && !hash ? { block: "center" } : undefined);
+      if (el) el.scrollIntoView({ block: text && !hash ? "center" : "start", behavior: "instant" });
     }
     expectedY = window.scrollY;
   }
