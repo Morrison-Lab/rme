@@ -10,8 +10,10 @@ max_concurrency = 10
 # User agent string
 user_agent = "Mozilla/5.0 (compatible; Lychee/0.15; +https://github.com/lycheeverse/lychee)"
 
-# Accept these HTTP status codes as valid
-accept = [200, 201, 202, 203, 204, 206, 301, 302, 303, 307, 308, 429]
+# Accept these HTTP status codes as valid.
+# 403 is accepted because many university, forum and publisher sites refuse
+# automated clients with it, so it does not mean the link is dead.
+accept = [200, 201, 202, 203, 204, 206, 301, 302, 303, 307, 308, 403, 429]
 
 # Timeout per request (in seconds)
 timeout = 20
@@ -24,4 +26,12 @@ exclude = [
   "https://127.0.0.1.*",
   # quarto.org is a trusted site but may be unreachable from CI runners
   "https://quarto.org/.*",
+  # Links already dead (404 or an untrusted certificate) when this check was
+  # added. Fix each in its own content PR, then delete its line here.
+  "http://web1.sph.emory.edu/dkleinb/allDatasets.*",
+  "https://drtomasaragon.github.io/",
+  "https://www.r4epi.com/.*",
+  "https://online.stat.psu.edu/stat504/book/",
+  "https://resources.rstudio.com/webinars/a-gentle-introduction-to-tidy-statistics-in-r",
+  "https://www.routledge.com/Generalized-Linear-Mixed-Models-.*",
 ]
