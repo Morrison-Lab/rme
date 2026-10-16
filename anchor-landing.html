@@ -5,18 +5,21 @@
 // typeset the page, and keep doing so while the page height is still changing,
 // so the CSS scroll-margin-top in custom.scss places it mid-view.
 // A text fragment (#:~:text=...) is not in location.hash, so it is read from
-// the navigation entry and its first match is scrolled to the same way.
+// the navigation entry (a browser that strips it leaves only the id
+// behaviour) and its first match is scrolled to the same way.
 // The first wheel, key press, touch or click by the reader ends the re-landing.
 (function () {
-  var hash = location.hash.slice(1), text = null;
+  var hash = "", text = null;
+  try { hash = decodeURIComponent(location.hash.slice(1).replace(/:~:.*$/, "")); } catch (e) {}
   try {
     var nav = performance.getEntriesByType("navigation")[0];
     var m = nav && /#.*?:~:.*?\btext=([^&]*)/.exec(nav.name);
-    if (m) text = decodeURIComponent(m[1]).split(",").filter(function (s) {
+    // Split on the raw commas before decoding: an encoded comma (%2C) is text.
+    var term = m && m[1].split(",").filter(function (s) {
       return s && !/^-|-$/.test(s);
-    })[0] || null;
-    hash = decodeURIComponent(hash.replace(/:~:.*$/, ""));
-  } catch (e) { hash = ""; }
+    })[0];
+    if (term) text = decodeURIComponent(term);
+  } catch (e) {}
   if (!hash && !text) return;
 
   function findText() {
@@ -51,6 +54,7 @@
   // Land, then land again after each change in page height, until the height
   // has held still for 1.5 s (images, fonts, widgets) or 15 s have passed.
   function settle() {
+    if (stopped) return;
     land();
     if (stopped || !window.ResizeObserver) return;
     var done = false, timer;
