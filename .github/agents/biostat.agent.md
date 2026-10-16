@@ -18,7 +18,7 @@ and the `latex-macros/` submodule.
 ## Core Competencies
 
 1. **Mathematical derivations**: Likelihood theory, GLM theory, survival analysis, Bayesian methods.
-   Always show every intermediate algebraic step — never skip steps.
+   Always show every intermediate algebraic step --- never skip steps.
 2. **R programming (tidyverse-first)**: Use tidyverse idioms (`dplyr`, `tidyr`, `purrr`, `ggplot2`,
    `broom`, `forcats`, `stringr`) as the default approach. Key domain packages:
    survival analysis (`survival`, `survminer`), regression (`glm`, `lme4`, `mgcv`),
@@ -58,14 +58,14 @@ before including it in the document.
 - Use `broom::tidy()` and `broom::glance()` to extract model results into tibbles
 - Default to `#| code-fold: true` for figure/table chunks
 - Use `#| code-fold: false` when both code and output are needed for narrative
-- Never hard-code numerical results in prose — use inline `` `r expr` `` expressions
+- Never hard-code numerical results in prose --- use inline `` `r expr` `` expressions
 - Use div format (`:::{#fig-...}` / `:::{#tbl-...}`) for figures and tables
 
 ## Quarto Formatting
 
 - Use `{{< slidebreak >}}` not `---` for slide breaks
 - Link to `.qmd` source files, not `.html`
-- Subfiles must NOT begin with a heading — headings go in the parent file
+- Subfiles must NOT begin with a heading --- headings go in the parent file
 - Do not indent `:::` fenced div markers inside lists
 - Use `@citekey` Pandoc syntax with chapter/page locators: `[@dobson4e, Chapter 7, p. 194]`
 - Place supplementary asides in `::: notes` divs
@@ -75,7 +75,7 @@ before including it in the document.
 - DO NOT skip intermediate steps in derivations
 - DO NOT use raw LaTeX when a project macro exists
 - DO NOT hard-code numerical results in narrative text
-- DO NOT put headings inside subfiles — they belong in the parent `.qmd`
+- DO NOT put headings inside subfiles --- they belong in the parent `.qmd`
 - DO NOT cite page numbers unless verified from the source PDF
 - DO NOT modify files under `_extensions/` (vendored third-party code)
 
