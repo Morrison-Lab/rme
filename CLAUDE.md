@@ -45,7 +45,8 @@ Before committing any `.qmd`, `.R`, or config file change:
     because the sidebar order sets the previous/next page links.
     Home stays out of the sidebar unless the opt-in `page-navigation.html` include is on (see the comments in `_quarto-website.yml`).
   - `_quarto-book.yml` --- the book/PDF TOC: add to `book.chapters:` (directly or inside a `part:` grouping)
-  - `_quarto-handout.yml` --- a curated PDF-handout subset with its own `render:` list; add the page here too if it belongs in the handouts
+  - `_quarto-handout.yml` --- a curated PDF-handout subset with its own `render:` list;
+    add the page here too if it belongs in the handouts
 - `_quarto.yml` repeats the website profile's format names (`html`, `revealjs`, `pdf`, `docx`) so that Quarto can reuse its cached chapter indexes when it resolves cross-chapter `.qmd` links.
   Without that list, the site render runs out of memory.
   When adding or removing a format in `_quarto-website.yml`, change the list in `_quarto.yml` to match.
@@ -60,13 +61,16 @@ Before committing any `.qmd`, `.R`, or config file change:
     A comment written to instruct a bot goes stale when the bot changes;
     a comment stating the reason stays true regardless.
     (Decided 2026-09-28; `Morrison-Lab/pds` and `Morrison-Lab/sds` made the same change.)
-  - `{{< slidebreak >}}` and `---` are **not equivalent** and must not be combined: per `_extensions/slidebreak/slidebreak.lua`, the shortcode only renders a rule in the `revealjs` profile and is a no-op everywhere else, while a bare `---` renders a visible `<hr>` in *every* profile (book, website, PDF handout). When relocating an example/theorem div next to an existing `---` separator, replace that `---` with `{{< slidebreak >}}` rather than adding the shortcode alongside it --- leaving both introduces a stray `<hr>` in the non-slide renders.
+  - `{{< slidebreak >}}` and `---` are **not equivalent** and must not be combined: per `_extensions/slidebreak/slidebreak.lua`, the shortcode only renders a rule in the `revealjs` profile and is a no-op everywhere else, while a bare `---` renders a visible `<hr>` in *every* profile (book, website, PDF handout).
+    When relocating an example/theorem div next to an existing `---` separator, replace that `---` with `{{< slidebreak >}}` rather than adding the shortcode alongside it --- leaving both introduces a stray `<hr>` in the non-slide renders.
 - Default to `#| code-fold: true` for figure/table chunks
 - Use div format (`:::{#fig-...}`) for figures and tables, not chunk-option `fig-cap`/`tbl-cap`
 - Do not indent `:::` fenced div markers inside lists
 - One source line per major phrase in prose --- keeps git diffs readable and review easier
 - **Theorem-div headings** (`:::{#exm-...}`, `:::{#def-...}`, etc.): use `####` (level 4) or deeper for the name heading inside the div --- using `##` or `###` creates numbered section headings that disrupt document structure and break example/definition numbering.
-- **Parenthetical notes and asides** --- meta-commentary that isn't core to the main definition/derivation (e.g. "this doesn't actually need theorem X" or "note that X and Y aren't independent here") --- should usually go in a `::: notes` div rather than sitting inline in the main prose. `::: notes` renders as a plain aside in the book/website profiles and doubles as [Reveal.js speaker notes](https://quarto.org/docs/presentations/revealjs/presenting.html#speaker-view) in slide profiles, so writing the aside there rather than inline keeps the main text focused and gets slide-mode support for free. See `thm-lotus`'s existing `::: notes` div for precedent.
+- **Parenthetical notes and asides** --- meta-commentary that isn't core to the main definition/derivation (e.g. "this doesn't actually need theorem X" or "note that X and Y aren't independent here") --- should usually go in a `::: notes` div rather than sitting inline in the main prose.
+  `::: notes` renders as a plain aside in the book/website profiles and doubles as [Reveal.js speaker notes](https://quarto.org/docs/presentations/revealjs/presenting.html#speaker-view) in slide profiles, so writing the aside there rather than inline keeps the main text focused and gets slide-mode support for free.
+  See `thm-lotus`'s existing `::: notes` div for precedent.
 
 ### Cross-references
 - **Within-chapter** (`@id`): use Pandoc `@id` syntax for any element in the same rendered `.html` file --- includes the parent chapter and all its `{{< include >}}`d subfiles.
@@ -76,8 +80,10 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Use custom macros from `latex-macros/macros.qmd` instead of raw LaTeX
 - Key macros: `\E{Y|X=x}`, `\ba`/`\ea`, `\tp{v}`, `\b`, `\g`, `\a`, `\devn(...)`, `\erf{...}`
 - Color coding: `\red{...}` for focal/extra terms, `\teal{...}` for shared terms (use `\teal`, not `\blue` --- `\teal` reads better in dark mode)
-- Use `\eqdef` instead of `=` for any equality that holds **by definition** --- both the defining equation in a `{#def-...}` div and the first introduction of new local notation (e.g. the step in a proof where a symbol is first defined). When an equality holds by definition, annotate it with `\eqdef` even inside a proof.
-- Include every intermediate step in derivations --- do not skip steps. Give
+- Use `\eqdef` instead of `=` for any equality that holds **by definition** --- both the defining equation in a `{#def-...}` div and the first introduction of new local notation (e.g. the step in a proof where a symbol is first defined).
+  When an equality holds by definition, annotate it with `\eqdef` even inside a proof.
+- Include every intermediate step in derivations --- do not skip steps.
+  Give
   each algebraic step its own aligned line (one operation per step ---
   distribution, substitution, cancellation, approximation), and annotate
   each step with a short parenthetical explanation of the rule, definition,
@@ -97,7 +103,8 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Estimators of vector estimands: the estimator symbol (e.g. `\hat`) goes
   on top of the vector symbol, not inside it --- write `\hat{\vec{\mu}}`, not
   `\vec{\hat\mu}`. (Same for `\bar`, `\tilde`, etc.) Use `\v{}`, `\vec{}`, or
-  `\vecf{}` --- all three work. (`\v` was formerly broken because its
+  `\vecf{}` --- all three work.
+  (`\v` was formerly broken because its
   `\providecommand` definition was a no-op against the LaTeX built-in caron
   accent; it is now defined with `\renewcommand` in `macros.qmd`.)
 - Ratios vs. factors:
@@ -109,7 +116,8 @@ Before committing any `.qmd`, `.R`, or config file change:
   `\hskm`, …) now has a parallel `\e...`-prefixed counterpart (`\eb`, `\esurv`,
   `\ehazratio`, `\eskm`, …) composed through the new `\est` (renders `\hat`) /
   `\Est` (renders `\widehat`) indirection macros, instead of applying
-  `\hat`/`\widehat` directly. Prefer the `\e...` family in new content --- a
+  `\hat`/`\widehat` directly.
+  Prefer the `\e...` family in new content --- a
   future change to the estimator symbol only requires editing `\est`/`\Est`.
   The `\h...` family is unchanged and stays supported for existing content.
   See `latex-macros/CONTRIBUTING.md` for the full naming convention.
@@ -131,7 +139,9 @@ Before committing any `.qmd`, `.R`, or config file change:
   aliases ("also called ...") stay in one div, in bold and in the title;
   commentary goes in a `#rem-` div;
   a `#thm-`, `#lem-`, `#cor-` or `#prp-` div states one result
-- After every definition or concept, include a concrete example --- preferably numerical --- to illustrate the abstract idea; use a `{#exm-...}` div; if a counterexample is feasible, include one immediately after the example
+- After every definition or concept, include a concrete example --- preferably numerical --- to illustrate the abstract idea;
+  use a `{#exm-...}` div;
+  if a counterexample is feasible, include one immediately after the example
 - After every theoretical claim (thm, cor, lem): when a proof is feasible and in scope, (1) immediately follow with a proof, then (2) immediately follow with an example utilizing the claim; when a proof is non-elementary or out of scope (e.g., `@thm-fubini`, `@thm-fubini-tonelli`), omit the proof block and proceed directly to the example
   - Narrow exception: an immediate corollary whose statement is itself a concrete instance of the result it follows needs no separate example --- the corollary already is one.
     For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of expectation needs no further example: a filler example there would just restate the corollary in different symbols, costing the reader more than it teaches.
@@ -141,7 +151,10 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Always arrange divs and sections so that related items are adjacent: theorem → proof → example(s) → counterexample(s)
 - Never use "above" or "below" to refer to content --- cross-reference with `@label` syntax instead
 - Always add a noun phrase after "This", "That", and "Those" to clarify the referent (e.g., "This estimator", not "This")
-- Clearly distinguish **model structure** (how the data relate to the parameters --- distributional family, link function, random effects, hierarchies, …) from **inference method** (how the parameters are estimated --- MLE, Bayes, GEE, method of moments, …). The two are orthogonal: any model structure can be paired with any compatible inference method (e.g. a random-effects model can be fit by maximum likelihood *or* by Bayesian MCMC). Never write as if a structure belonged to one inference paradigm (avoid e.g. "the Bayesian version of random effects"); instead name the inference method being applied to the structure.
+- Clearly distinguish **model structure** (how the data relate to the parameters --- distributional family, link function, random effects, hierarchies, …) from **inference method** (how the parameters are estimated --- MLE, Bayes, GEE, method of moments, …).
+  The two are orthogonal: any model structure can be paired with any compatible inference method (e.g. a random-effects model can be fit by maximum likelihood *or* by Bayesian MCMC).
+  Never write as if a structure belonged to one inference paradigm (avoid e.g. "the Bayesian version of random effects");
+  instead name the inference method being applied to the structure.
 - Track a useful resource (course, book or video) in every notes repo whose topic it covers, in addition to its primary home.
   One that covers a topic rme teaches goes in the Further reading section or reading box of the matching chapter (Ezra, 2026-10-15).
   Link the resource, and adapt it with attribution only when its license allows adapting.
@@ -167,9 +180,16 @@ Before committing any `.qmd`, `.R`, or config file change:
   against source. If no preview has deployed yet for the changed page, render
   it locally instead (`quarto render <chapter.qmd> --to html`) rather than
   skipping the check.
-- This checkout is often shared by concurrent agent sessions --- the branch can switch under you, and commits land on PR branches from other sessions or the `@claude` bot. Work in an isolated `git worktree`: for **new** work `git worktree add -b <branch> <dir> origin/main`; to **resume** an existing PR branch `git worktree add -B <branch> <dir> origin/<branch>` (uppercase `-B` so it resets to the remote even if the local branch already exists; the `origin/<branch>` start point picks up the PR rather than starting a fresh branch from `main`). Then run `git submodule update --init` in the new worktree. Before every push, `git fetch` and reconcile `origin/<branch>` (merge or rebase) --- another session may have already pushed the same change
+- This checkout is often shared by concurrent agent sessions --- the branch can switch under you, and commits land on PR branches from other sessions or the `@claude` bot.
+  Work in an isolated `git worktree`: for **new** work `git worktree add -b <branch> <dir> origin/main`;
+  to **resume** an existing PR branch `git worktree add -B <branch> <dir> origin/<branch>` (uppercase `-B` so it resets to the remote even if the local branch already exists;
+  the `origin/<branch>` start point picks up the PR rather than starting a fresh branch from `main`).
+  Then run `git submodule update --init` in the new worktree.
+  Before every push, `git fetch` and reconcile `origin/<branch>` (merge or rebase) --- another session may have already pushed the same change
 - After opening (or when asked to watch) a PR, subscribe to its activity and keep watching until it is merged or closed: confirm CI results, surface review comments, and catch merge conflicts; re-arm a periodic check-in and only ping when something needs the author. Stop immediately if the author asks you to back off.
-- **Do not wait indefinitely for CI or review jobs.** When monitoring a PR, if a check has been `in_progress` for more than 5--10 minutes without completion, investigate immediately: check job logs for errors, look for blockers, and either fix issues or report what's stuck. Do not passively wait for slow or hung jobs to finish.
+- **Do not wait indefinitely for CI or review jobs.**
+  When monitoring a PR, if a check has been `in_progress` for more than 5--10 minutes without completion, investigate immediately: check job logs for errors, look for blockers, and either fix issues or report what's stuck.
+  Do not passively wait for slow or hung jobs to finish.
 
 ## Workflow Responsibility
 
