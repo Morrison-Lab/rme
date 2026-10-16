@@ -1,8 +1,8 @@
 ::: proof
 
 Adapted from [@klein2003survival, §8.3, Theoretical Note 1, p. 257].
-This proof draws on the discretized-likelihood building blocks assembled earlier in this section —
-@lem-censored-lik, @lem-surv-discretized, and @lem-lik-by-interval —
+This proof draws on the discretized-likelihood building blocks assembled earlier in this section ---
+@lem-censored-lik, @lem-surv-discretized, and @lem-lik-by-interval ---
 together with the proportional-hazards lemmas @lem-ph-single-subj-fail, @lem-ph-whether-failure, @lem-ph-event-chain-rule, and @lem-ph-which-subject.
 
 Assume [noninformative censoring](intro-to-survival-analysis.qmd#def-noninformative-censoring)
@@ -53,9 +53,9 @@ The partial likelihood keeps the first product, $\Lik^*(\vb)$,
 and drops the second, $\mathcal{B}(\vb, \haz_0)$.
 The discarded factor $\mathcal{B}(\vb, \haz_0)$ collects both the
 whether-a-failure-occurs factors and the entire between-event survival background,
-and it is the only place the baseline hazard $\blue{\haz_0(\cdot)}$ appears —
+and it is the only place the baseline hazard $\blue{\haz_0(\cdot)}$ appears ---
 equivalently, the shared $\blue{\haz_0(t_i)\,\Delta t}$ cancels from each kept factor
-in @eq-ph-which-subject — which is why maximizing $\Lik^*(\vb)$ alone
+in @eq-ph-which-subject --- which is why maximizing $\Lik^*(\vb)$ alone
 frees the estimator from $\haz_0(\cdot)$.
 The discarded factor is **not** free of $\vb$, however:
 it still depends on $\vb$ through the risk-set score totals $\red{S_i}$ and the survival background.
@@ -68,8 +68,8 @@ an exact decomposition of the joint probability:
 the factors are not formally independent
 (the risk set $R(t_{i+1})$ depends on who failed and was censored before $t_{i+1}$,
 and the discretization is exact only in the $\Delta t \to 0$ limit),
-but Cox showed that treating $\Lik^*(\vb)$ as a likelihood — i.e.,
-maximizing it as a function of $\vb$ — yields [estimators](https://morrison-lab.github.io/sds/estimation.html#def-estimator) with the
+but Cox showed that treating $\Lik^*(\vb)$ as a likelihood --- i.e.,
+maximizing it as a function of $\vb$ --- yields [estimators](https://morrison-lab.github.io/sds/estimation.html#def-estimator) with the
 usual large-sample properties
 (consistency, [asymptotic normality](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle), the standard [score](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) and [information](https://morrison-lab.github.io/sds/intro-MLEs.html#def-einf) identities;
 see also [@klein2003survival, §8.3, Theoretical Note 1]).
