@@ -13,6 +13,8 @@ user_agent = "Mozilla/5.0 (compatible; Lychee/0.15; +https://github.com/lycheeve
 # Accept these HTTP status codes as valid.
 # 403 is accepted because many university, forum and publisher sites refuse
 # automated clients with it, so it does not mean the link is dead.
+# 429 (too many requests) is accepted for the same reason: it reports our
+# request rate, not the link's state.
 accept = [200, 201, 202, 203, 204, 206, 301, 302, 303, 307, 308, 403, 429]
 
 # Timeout per request (in seconds)
@@ -34,6 +36,6 @@ exclude = [
   "https://online.stat.psu.edu/stat504/book/",
   "https://resources.rstudio.com/webinars/a-gentle-introduction-to-tidy-statistics-in-r",
   "https://www.routledge.com/Generalized-Linear-Mixed-Models-.*",
-  "https://regression.ucsf.edu/sites/g/files/?",
+  "https://regression.ucsf.edu/sites/g/files.*",
   "https://danieldsjoberg.com/ggsurvfit/",
 ]
