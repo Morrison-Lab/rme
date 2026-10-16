@@ -1,0 +1,26 @@
+name: Check Non-Standard Characters
+
+# Thin caller for the shared reusable workflow in Morrison-Lab/gha.
+# Detects non-ASCII punctuation (curly quotes, en/em dashes, the
+# multiplication sign) in the reusable workflow's default extension set,
+# currently .qmd, .R and .md. The `extensions` input is deliberately left
+# unset so the scope tracks gha's default; the lab convention bans these
+# glyphs in every tracked source file, Markdown included.
+# See https://github.com/Morrison-Lab/gha for inputs and versioning.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Keep the job id (check-chars) matching the previous standalone workflow so
+  # the status-check context name doesn't change. Re-declare the least-privilege
+  # token the standalone job had; the reusable workflow only needs contents:read.
+  check-chars:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-non-standard-chars.yml@v2
