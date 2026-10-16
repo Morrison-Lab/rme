@@ -69,6 +69,7 @@
     var line = window.innerHeight / 3;
     var at = document.elementFromPoint(window.innerWidth / 2, line);
     var el = at && at.closest(BLOCK);
+    if (el && el.closest("mjx-container, nav")) el = null;
     if (!el) { // the point fell in a margin: take the first block below the line
       var all = document.querySelectorAll(BLOCK);
       for (var i = 0; i < all.length && !el; i++) {
