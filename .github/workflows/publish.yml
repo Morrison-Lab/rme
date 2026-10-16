@@ -15,19 +15,20 @@ name: Quarto Publish
 # which an older one can overtake a newer one -- and republish a stale site,
 # with nothing red to show for it -- is very wide.
 #
-# cancel-in-progress is true rather than the false in gha's example stub. That
-# stub is written to be conservative for any consumer; here the workflow's only
-# job is to publish the current tip of main, so an intermediate commit's site
-# has no audience and rendering it for an hour is pure cost. Cancelling is safe
-# at the deploy step because the deploy is a single git push -- it either lands
-# whole or not at all -- and a cancelled run is superseded by the newer one
-# that cancelled it.
+# cancel-in-progress is false, as in gha's example stub. A run takes about 48
+# minutes and merges often land closer together than that, so with true each
+# run is cancelled by the next merge and the site never deploys.
 #
-# A cancelled run reports result == 'cancelled', not 'failure', so the
-# report-failure job below is unaffected.
+# With false, a new run waits instead of cancelling the one in progress, and
+# GitHub keeps at most one pending run per group -- a newer pending run
+# replaces an older one. So intermediate commits are still skipped, and the
+# newest tip of main is always deployed once the current run finishes.
+#
+# A pending run that gets replaced never starts a job, so the report-failure
+# job below is unaffected.
 concurrency:
   group: gh-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-deploy:
