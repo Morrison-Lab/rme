@@ -7,7 +7,8 @@
 // A text fragment (#:~:text=...) is not in location.hash, so it is read from
 // the navigation entry (a browser that strips it leaves only the id
 // behaviour) and its first match is scrolled to the same way.
-// The first wheel, key press, touch or click by the reader ends the re-landing.
+// The reader's first scroll (wheel, touch drag, or an arrow, page, Home, End or
+// space key) ends the landing; a tap or click does not.
 (function () {
   var hash = "", text = null;
   try { hash = decodeURIComponent(location.hash.slice(1).replace(/:~:.*$/, "")); } catch (e) {}
@@ -47,9 +48,13 @@
 
   var stopped = false;
   function stop() { stopped = true; }
-  ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) {
+  // Only an act of scrolling counts: a tap, click or modifier key does not.
+  ["wheel", "touchmove"].forEach(function (ev) {
     window.addEventListener(ev, stop, { once: true, passive: true });
   });
+  window.addEventListener("keydown", function (e) {
+    if (/^(Arrow|Page|Home$|End$| $)/.test(e.key)) stop();
+  }, { passive: true });
 
   // Land, then land again after each change in page height, until the height
   // has held still for 1.5 s (images, fonts, widgets) or 15 s have passed.
