@@ -172,6 +172,13 @@ Examples of attribution with page numbers
 Do **not** reproduce verbatim text from copyrighted sources without clear quotation marks and attribution.
 Paraphrase and summarize with a citation instead.
 
+## Useful resources go in every repo that covers their topic
+
+A course, book or video that covers a topic rme teaches goes in the Further reading section or reading box of the matching chapter,
+even when lds already lists it in a directory (Ezra, 2026-10-15).
+Link the resource, and adapt it with attribution only where its license allows adapting.
+See [`track-useful-resources`](https://github.com/Morrison-Lab/ai-config/blob/main/shared/workflow/track-useful-resources.md).
+
 ## Decomposing content into subfiles
 
 Quarto subfiles (files under `_subfiles/`) should **not** begin with a section heading.
