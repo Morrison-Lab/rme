@@ -74,14 +74,14 @@ tibble::tibble(
     "Parsimonious model",
     paste0("Overfit model (+", n_noise_predictors, " noise predictors)")
   ),
-  Training_RMSE = c(
+  Training_sRMSE = c(
     rmse(
       train_overfit$LDL,
       predict(model_parsimonious, newdata = train_overfit)
     ),
     rmse(train_overfit$LDL, predict(model_overfit, newdata = train_overfit))
   ),
-  Validation_RMSE = c(
+  Validation_sRMSE = c(
     rmse(
       valid_overfit$LDL,
       predict(model_parsimonious, newdata = valid_overfit)
@@ -90,7 +90,7 @@ tibble::tibble(
   )
 ) |>
   dplyr::mutate(
-    dplyr::across(c(Training_RMSE, Validation_RMSE), ~ round(.x, 2))
+    dplyr::across(c(Training_sRMSE, Validation_sRMSE), ~ round(.x, 2))
   )
 ```
 
@@ -277,8 +277,8 @@ rmse_valid <- sqrt(mean((hers_valid$LDL - pred_valid)^2, na.rm = TRUE))
 rmse_train <- sqrt(mean(residuals(model_train)^2))
 
 cat(
-  "Training RMSE:", round(rmse_train, 2), "\n",
-  "Validation RMSE:", round(rmse_valid, 2), "\n"
+  "Training sRMSE:", round(rmse_train, 2), "\n",
+  "Validation sRMSE:", round(rmse_valid, 2), "\n"
 )
 ```
 

@@ -212,7 +212,7 @@ Selecting a model by maximizing $R^2$ alone can lead to [overfitting](predictor-
 With a training/test split,
 we estimate coefficients in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)
 and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data.
-The root mean squared error in the held-out data is the **sample root mean squared error (sRMSE)**:
+The root mean squared error in the held-out data is the **[sample root mean squared error (sRMSE)](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)**:
 
 $$
 \hat\b_{\text{train}} =
@@ -231,7 +231,7 @@ y_{\text{test},i} -
 $$
 
 $$
-\text{RMSE} = \sqrt{
+\text{sRMSE} = \sqrt{
 \frac{1}{n_{\text{test}}}
 \sum_{i \in \text{test set}} (\hat e_{i,\text{test}})^2
 }
@@ -344,11 +344,11 @@ validation_results <- tibble::tibble(
   model = names(candidate_models)
 ) |>
   dplyr::mutate(
-    training_RMSE = purrr::map_dbl(
+    training_sRMSE = purrr::map_dbl(
       model,
       \(model_name) compute_rmse(candidate_models[[model_name]], train_dat)
     ),
-    validation_RMSE = purrr::map_dbl(
+    validation_sRMSE = purrr::map_dbl(
       model,
       \(model_name) compute_rmse(candidate_models[[model_name]], valid_dat)
     )
@@ -363,7 +363,7 @@ model_labels <- c(
 
 chosen_model_name <-
   validation_results |>
-  dplyr::arrange(validation_RMSE) |>
+  dplyr::arrange(validation_sRMSE) |>
   dplyr::slice(1) |>
   dplyr::pull(model)
 
@@ -375,7 +375,7 @@ chosen_model_validation_rmse <- compute_rmse(chosen_model, valid_dat)
 performance_comparison <- tibble::tibble(
   split = c("validation", "test"),
   model = chosen_model_name,
-  RMSE = c(
+  sRMSE = c(
     chosen_model_validation_rmse,
     compute_rmse(chosen_model, test_dat)
   )
@@ -668,7 +668,7 @@ cv_results |>
 
 ```{r}
 compare_results <- tribble(
-  ~model, ~cvRMSE, ~r.squared, ~adj.r.squared, ~trainRMSE, ~loglik,
+  ~model, ~cv_sRMSE, ~r.squared, ~adj.r.squared, ~train_sRMSE, ~loglik,
   "full",
   cv_full$cv,
   summary(full_model)$r.squared,
