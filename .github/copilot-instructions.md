@@ -763,7 +763,8 @@ Key macros to use:
 - **Estimators of vector estimands**: the estimator symbol (e.g. `\hat`,
   `\bar`, `\tilde`) goes on top of the vector symbol, not inside it ---
   write `\hat{\vec{\mu}}`, not `\vec{\hat\mu}`. The hat sits on top of the
-  already-vectorized symbol. Use `\v{}`, `\vec{}`, or `\vecf{}` --- all three
+  already-vectorized symbol.
+  Use `\v{}`, `\vec{}`, or `\vecf{}` --- all three
   work. (`\v` was formerly broken because `\providecommand` could not override
   the LaTeX built-in caron accent; it is now defined with `\renewcommand`
   in `macros.qmd`.)
@@ -804,7 +805,8 @@ Residual and deviation helper macros include:
   is needed to indicate which kind of ratio it is.
 - **Factors** compare **one** covariate pattern to the implicit baseline pattern. Use the
   type-subscripted factor macros (`\hazfactor`, `\oddsfactor`, …; function forms `\hazfactorf` /
-  `\hazff`, …) --- e.g. the Cox risk score `\hazfactor(\vx)`. Factors always take a covariate
+  `\hazff`, …) --- e.g. the Cox risk score `\hazfactor(\vx)`.
+  Factors always take a covariate
   pattern, so they keep their subscript.
 
 **Vector--scalar product ordering** (for dimensional clarity):
@@ -973,7 +975,8 @@ Some R packages require system-level libraries to compile from source:
 - `png` package requires `libpng-dev`
 - `jpeg` package requires `libjpeg-dev`
 - `systemfonts` package requires `libfontconfig1-dev`
-- `igraph` (used by `ggdag` for DAG figures such as `fig-dag-heat-deaths`) requires `libglpk40` (runtime dependency --- needed even when installing pre-compiled binaries) --- install with `sudo apt-get install -y libglpk40`; without it a local `quarto render` halts with `Error in dyn.load(...): libglpk.so.40: cannot open shared object file`
+- `igraph` (used by `ggdag` for DAG figures such as `fig-dag-heat-deaths`) requires `libglpk40` (runtime dependency --- needed even when installing pre-compiled binaries) --- install with `sudo apt-get install -y libglpk40`;
+  without it a local `quarto render` halts with `Error in dyn.load(...): libglpk.so.40: cannot open shared object file`
 - Consider using `rocker/verse` Docker image for workflows to reduce installation requirements
 
 ## JAGS Dependencies
