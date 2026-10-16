@@ -243,9 +243,9 @@
 </section><section class="slide level2"><div style="column-count: 2; column-gap: 2em;">
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(\tilde{a}\cdot \tilde{X}\right)\mathclose{}
+\operatorname{Var}\mathopen{}\left(\mathord{\underset{\sim}{a}}\cdot \mathord{\underset{\sim}{X}}\right)\mathclose{}
 &amp;= \operatorname{Var}\mathopen{}\left(\sum_{i=1}^na_i X_i\right)\mathclose{}
-\\ &amp;= \tilde{a}^{\top} \operatorname{Var}\mathopen{}\left(\tilde{X}\right)\mathclose{} \tilde{a}
+\\ &amp;= \mathord{\underset{\sim}{a}}^{\top} \operatorname{Var}\mathopen{}\left(\mathord{\underset{\sim}{X}}\right)\mathclose{} \mathord{\underset{\sim}{a}}
 \\ &amp;= \sum_{i=1}^n\sum_{j=1}^n a_i a_j \operatorname{Cov}\mathopen{}\left(X_i,X_j\right)\mathclose{}
 \end{aligned}
 \]</span></p>
@@ -258,14 +258,14 @@
 <span class="header-section-number">2</span> Epi 203: Statistical inference</h1>
 
 </section><section class="slide level2"><div style="column-count: 2; column-gap: 2em;">
-<p><span class="math display">\[\mathcal{L}(\theta) \stackrel{\text{def}}{=}\operatorname{p}(\tilde{X}= \tilde{x}| \Theta = \theta)\]</span></p>
-<p><span class="math display">\[\ell\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mathcal{L}(\tilde{x}|\theta)\right\}\mathclose{}\]</span></p>
-<p><span class="math display">\[\ell'\stackrel{\text{def}}{=}\frac{\partial}{\partial \theta} \ell(\tilde{x}|\theta)\]</span></p>
-<p><span class="math display">\[\ell''\stackrel{\text{def}}{=}\frac{\partial}{\partial \tilde{\theta}}\frac{\partial}{\partial \tilde{\theta}^{\top}} \ell(\tilde{x}| \tilde{\theta})\]</span></p>
+<p><span class="math display">\[\mathcal{L}(\theta) \stackrel{\text{def}}{=}\operatorname{p}(\mathord{\underset{\sim}{X}}= \mathord{\underset{\sim}{x}}| \Theta = \theta)\]</span></p>
+<p><span class="math display">\[\ell\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mathcal{L}(\mathord{\underset{\sim}{x}}|\theta)\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\ell'\stackrel{\text{def}}{=}\frac{\partial}{\partial \theta} \ell(\mathord{\underset{\sim}{x}}|\theta)\]</span></p>
+<p><span class="math display">\[\ell''\stackrel{\text{def}}{=}\frac{\partial}{\partial \mathord{\underset{\sim}{\theta}}}\frac{\partial}{\partial \mathord{\underset{\sim}{\theta}}^{\top}} \ell(\mathord{\underset{\sim}{x}}| \mathord{\underset{\sim}{\theta}})\]</span></p>
 <p><span class="math display">\[\ell_{ij}''=
-\frac{\partial}{\partial \theta_i}\frac{\partial}{\partial \theta_j} \ell(\tilde{X}= \tilde{x}| \tilde{\theta})\]</span></p>
-<p><span class="math display">\[I\stackrel{\text{def}}{=}-\ell''(\tilde{x}|\tilde{\theta})\]</span> <span class="math display">\[\mathcal{I}\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[I(\tilde{x}|\theta)\right]\mathclose{}\]</span></p>
-<p><span class="math display">\[\hat\theta_{ML}\ \dot \sim\ \operatorname{N}\mathopen{}\left(\theta,{\mathopen{}\left[\mathcal{I}(\tilde{\theta})\right]\mathclose{}}^{-1}\right)\mathclose{}\]</span></p>
+\frac{\partial}{\partial \theta_i}\frac{\partial}{\partial \theta_j} \ell(\mathord{\underset{\sim}{X}}= \mathord{\underset{\sim}{x}}| \mathord{\underset{\sim}{\theta}})\]</span></p>
+<p><span class="math display">\[I\stackrel{\text{def}}{=}-\ell''(\mathord{\underset{\sim}{x}}|\mathord{\underset{\sim}{\theta}})\]</span> <span class="math display">\[\mathcal{I}\stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[I(\mathord{\underset{\sim}{x}}|\theta)\right]\mathclose{}\]</span></p>
+<p><span class="math display">\[\hat\theta_{ML}\ \dot \sim\ \operatorname{N}\mathopen{}\left(\theta,{\mathopen{}\left[\mathcal{I}(\mathord{\underset{\sim}{\theta}})\right]\mathclose{}}^{-1}\right)\mathclose{}\]</span></p>
 <p>For one parameter <span class="math inline">\(\theta_k\)</span>:</p>
 <p><span class="math display">\[
 \text{CI}_{1-\alpha}(\theta_k)
@@ -334,18 +334,18 @@ p\text{-value}
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
-\text{CI}_{1-\alpha}\mathopen{}\left(\mu\mathopen{}\left(\mathord{{\tilde{x}^*}}\right)\mathclose{}\right)\mathclose{}
+\text{CI}_{1-\alpha}\mathopen{}\left(\mu\mathopen{}\left(\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}\right)\mathclose{}
 =
 \mathopen{}\left[
-\hat{\mu}\mathopen{}\left(\mathord{{\tilde{x}^*}}\right)\mathclose{}
+\hat{\mu}\mathopen{}\left(\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}
 \pm
 t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
-\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left(\mathord{{\tilde{x}^*}}\right)\mathclose{}\right)\mathclose{}
+\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left(\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}\right)\mathclose{}
 \right]\mathclose{}
 \]</span></p>
-<p><span class="math inline">\(Y^*\)</span> denotes a new observation (not in the training data), with corresponding covariate pattern <span class="math inline">\(\mathord{{\tilde{x}^*}}\)</span>. Let <span class="math inline">\(\hat{Y}^* \stackrel{\text{def}}{=}\hat{\mu}\mathopen{}\left(\mathord{{\tilde{x}^*}}\right)\mathclose{}\)</span>.</p>
+<p><span class="math inline">\(Y^*\)</span> denotes a new observation (not in the training data), with corresponding covariate pattern <span class="math inline">\(\mathord{{\mathord{\underset{\sim}{x}}^*}}\)</span>. Let <span class="math inline">\(\hat{Y}^* \stackrel{\text{def}}{=}\hat{\mu}\mathopen{}\left(\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}\)</span>.</p>
 <p><span class="math display">\[
-\text{PI}_{1-\alpha}\mathopen{}\left(Y^*|\mathord{{\tilde{x}^*}}\right)\mathclose{}
+\text{PI}_{1-\alpha}\mathopen{}\left(Y^*|\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}
 =
 \mathopen{}\left[
 \hat{Y}^*
@@ -357,19 +357,19 @@ t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
 <p><span class="math display">\[
 \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(Y^*-\hat{Y}^*\right)\mathclose{}
 =
-\hat{\sigma}\sqrt{1 + {(\mathord{{\tilde{x}^*}})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}\mathord{{\tilde{x}^*}}}
+\hat{\sigma}\sqrt{1 + {(\mathord{{\mathord{\underset{\sim}{x}}^*}})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}\mathord{{\mathord{\underset{\sim}{x}}^*}}}
 \]</span></p>
 <p><span class="math display">\[
 \operatorname{Var}\mathopen{}\left(Y^* - \hat{Y}^*\right)\mathclose{}
-= \sigma^2\mathopen{}\left(1 + {(\mathord{{\tilde{x}^*}})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}\mathord{{\tilde{x}^*}}\right)\mathclose{}
+= \sigma^2\mathopen{}\left(1 + {(\mathord{{\mathord{\underset{\sim}{x}}^*}})}^{\top}(\mathbf{X}'\mathbf{X})^{-1}\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}
 \]</span></p>
 <p>Let <span class="math inline">\(\hat{\Sigma} \stackrel{\text{def}}{=}\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat{\beta}\right)\mathclose{} = \hat{\sigma}^2(\mathbf{X}'\mathbf{X})^{-1}\)</span>.</p>
 <p><span class="math display">\[
-\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left(\tilde{x}\right)\mathclose{}\right)\mathclose{} = {\tilde{x}}^{\top}\hat{\Sigma}\tilde{x}
+\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat{\mu}\mathopen{}\left(\mathord{\underset{\sim}{x}}\right)\mathclose{}\right)\mathclose{} = {\mathord{\underset{\sim}{x}}}^{\top}\hat{\Sigma}\mathord{\underset{\sim}{x}}
 \]</span></p>
-<p>Let <span class="math inline">\(\Delta\mu\mathopen{}\left(\tilde{x}, \mathord{{\tilde{x}^*}}\right)\mathclose{} = \mu\mathopen{}\left(\tilde{x}\right)\mathclose{} - \mu\mathopen{}\left(\mathord{{\tilde{x}^*}}\right)\mathclose{}\)</span>, and let <span class="math inline">\(\Delta\tilde{x}= \tilde{x}- \mathord{{\tilde{x}^*}}\)</span>; then:</p>
+<p>Let <span class="math inline">\(\Delta\mu\mathopen{}\left(\mathord{\underset{\sim}{x}}, \mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{} = \mu\mathopen{}\left(\mathord{\underset{\sim}{x}}\right)\mathclose{} - \mu\mathopen{}\left(\mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}\)</span>, and let <span class="math inline">\(\Delta\mathord{\underset{\sim}{x}}= \mathord{\underset{\sim}{x}}- \mathord{{\mathord{\underset{\sim}{x}}^*}}\)</span>; then:</p>
 <p><span class="math display">\[
-\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta\mu}\mathopen{}\left(\tilde{x}, \mathord{{\tilde{x}^*}}\right)\mathclose{}\right)\mathclose{} = {\Delta\tilde{x}}^{\top}\hat{\Sigma}\Delta\tilde{x}
+\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta\mu}\mathopen{}\left(\mathord{\underset{\sim}{x}}, \mathord{{\mathord{\underset{\sim}{x}}^*}}\right)\mathclose{}\right)\mathclose{} = {\Delta\mathord{\underset{\sim}{x}}}^{\top}\hat{\Sigma}\Delta\mathord{\underset{\sim}{x}}
 \]</span></p>
 </div>
 </section></section><section><section id="epi-204-generalized-linear-models" class="title-slide slide level1 center" data-number="4"><h1>
@@ -377,11 +377,11 @@ t_{n-p}\mathopen{}\left(1-\frac{\alpha}{2}\right)\mathclose{}
 
 </section><section class="slide level2 scrollable"><p>Generalized linear models have three components:</p>
 <ol type="1">
-<li><p>The <strong>outcome distribution</strong> family: <span class="math inline">\(\operatorname{p}(Y|\mu(\tilde{x}))\)</span></p></li>
-<li><p>The <strong>link function</strong>: <span class="math inline">\(g(\mu(\tilde{x})) = \eta(\tilde{x})\)</span></p></li>
-<li><p>The <strong>linear component</strong>: <span class="math inline">\(\eta(\tilde{x}) = \tilde{x}\cdot \beta\)</span></p></li>
+<li><p>The <strong>outcome distribution</strong> family: <span class="math inline">\(\operatorname{p}(Y|\mu(\mathord{\underset{\sim}{x}}))\)</span></p></li>
+<li><p>The <strong>link function</strong>: <span class="math inline">\(g(\mu(\mathord{\underset{\sim}{x}})) = \eta(\mathord{\underset{\sim}{x}})\)</span></p></li>
+<li><p>The <strong>linear component</strong>: <span class="math inline">\(\eta(\mathord{\underset{\sim}{x}}) = \mathord{\underset{\sim}{x}}\cdot \beta\)</span></p></li>
 </ol>
-<p><span class="math display">\[\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{(\Delta\tilde{x}) \cdot \tilde{\beta}\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{(\Delta\mathord{\underset{\sim}{x}}) \cdot \mathord{\underset{\sim}{\beta}}\right\}\mathclose{}\]</span></p>
 </section><section id="estimates-of-odds-ratios-from-2x2-contingency-tables" class="slide level2" data-number="4.1"><h2>
 <span class="header-section-number">4.1</span> Estimates of odds ratios from 2x2 contingency tables</h2>
 <p><span class="math display">\[\hat{\theta}=\frac{ad}{bc}\]</span></p>
@@ -467,7 +467,7 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
 </section><section id="derivatives" class="slide level2 unnumbered"><h2>Derivatives</h2>
 <p><span class="math display">\[
 \begin{array}{r|ccccc}
-&amp; \pi&amp; \omega&amp; \eta&amp; \tilde{x}&amp; \tilde{\beta}\\
+&amp; \pi&amp; \omega&amp; \eta&amp; \mathord{\underset{\sim}{x}}&amp; \mathord{\underset{\sim}{\beta}}\\
 \hline
 \pi
   &amp; 1
@@ -487,16 +487,16 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
   &amp; 1
   &amp; \text{undef}
   &amp; \text{undef} \\[10pt]
-\tilde{x}
-  &amp; \underbrace{\tilde{\beta}\pi(1-\pi)}_{p \times 1}
-  &amp; \underbrace{\tilde{\beta}\omega}_{p \times 1}
-  &amp; \underbrace{\tilde{\beta}}_{p \times 1}
+\mathord{\underset{\sim}{x}}
+  &amp; \underbrace{\mathord{\underset{\sim}{\beta}}\pi(1-\pi)}_{p \times 1}
+  &amp; \underbrace{\mathord{\underset{\sim}{\beta}}\omega}_{p \times 1}
+  &amp; \underbrace{\mathord{\underset{\sim}{\beta}}}_{p \times 1}
   &amp; \underbrace{\mathbb{I}}_{p \times p}
   &amp; \mathbf{0}_{p \times p} \\[10pt]
-\tilde{\beta}
-  &amp; \underbrace{\tilde{x}\pi(1-\pi)}_{p \times 1}
-  &amp; \underbrace{\tilde{x}\omega}_{p \times 1}
-  &amp; \underbrace{\tilde{x}}_{p \times 1}
+\mathord{\underset{\sim}{\beta}}
+  &amp; \underbrace{\mathord{\underset{\sim}{x}}\pi(1-\pi)}_{p \times 1}
+  &amp; \underbrace{\mathord{\underset{\sim}{x}}\omega}_{p \times 1}
+  &amp; \underbrace{\mathord{\underset{\sim}{x}}}_{p \times 1}
   &amp; \mathbf{0}_{p \times p}
   &amp; \underbrace{\mathbb{I}}_{p \times p} \\
 \end{array}
@@ -507,23 +507,23 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
 </div>
 </section><section id="logistic-regression-model" class="slide level2 unnumbered"><h2>Logistic regression model</h2>
 <div style="column-count: 2; column-gap: 2em;">
-<p><strong>Logistic regression</strong> (<a href="../chapters/logistic-regression.html#def-logistic-regression">def</a>) <span class="math display">\[Y_i|\tilde{X}_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Ber}(\pi(\tilde{X}_i)), \qquad \operatorname{logit}\mathopen{}\left\{\pi(\tilde{x})\right\}\mathclose{} = {\tilde{x}}^{\top}\tilde{\beta}\]</span></p>
+<p><strong>Logistic regression</strong> (<a href="../chapters/logistic-regression.html#def-logistic-regression">def</a>) <span class="math display">\[Y_i|\mathord{\underset{\sim}{X}}_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Ber}(\pi(\mathord{\underset{\sim}{X}}_i)), \qquad \operatorname{logit}\mathopen{}\left\{\pi(\mathord{\underset{\sim}{x}})\right\}\mathclose{} = {\mathord{\underset{\sim}{x}}}^{\top}\mathord{\underset{\sim}{\beta}}\]</span></p>
 </div>
-<p>Throughout this summary, <span class="math inline">\(\tilde{\beta}= (\beta_0, \beta_1, \ldots, \beta_p)\)</span> is the <span class="math inline">\((p+1) \times 1\)</span> coefficient vector (including the intercept), <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(n \times (p+1)\)</span> design matrix whose <span class="math inline">\(i^{\text{th}}\)</span> row is <span class="math inline">\({\tilde{x}_i}^{\top}\)</span>, and <span class="math inline">\(\tilde{\varepsilon}\)</span> is the <span class="math inline">\(n \times 1\)</span> error vector with components <span class="math inline">\(\varepsilon_i \stackrel{\text{def}}{=}y_i - \pi_i\)</span>.</p>
+<p>Throughout this summary, <span class="math inline">\(\mathord{\underset{\sim}{\beta}}= (\beta_0, \beta_1, \ldots, \beta_p)\)</span> is the <span class="math inline">\((p+1) \times 1\)</span> coefficient vector (including the intercept), <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(n \times (p+1)\)</span> design matrix whose <span class="math inline">\(i^{\text{th}}\)</span> row is <span class="math inline">\({\mathord{\underset{\sim}{x}}_i}^{\top}\)</span>, and <span class="math inline">\(\mathord{\underset{\sim}{\varepsilon}}\)</span> is the <span class="math inline">\(n \times 1\)</span> error vector with components <span class="math inline">\(\varepsilon_i \stackrel{\text{def}}{=}y_i - \pi_i\)</span>.</p>
 </section><section id="log-likelihood-and-score-function" class="slide level2 unnumbered"><h2>Log-likelihood and score function</h2>
 <div style="column-count: 2; column-gap: 2em;">
 <p><strong>Log-likelihood component</strong> (<a href="../chapters/logistic-regression.html#lem-logistic-loglik-component">lem</a>) <span class="math display">\[\ell_i(\pi_i) = y_i \eta_i - \operatorname{log}\mathopen{}\left\{1+\omega_i\right\}\mathclose{}\]</span></p>
-<p><strong>Score function as sum of components</strong> (<a href="../chapters/logistic-regression.html#lem-score-logistic">lem</a>, <a href="../chapters/logistic-regression.html#thm-logistic-score-comp">thm</a>) <span class="math display">\[\tilde{\ell'}(\tilde{\beta}) = \sum_{i=1}^n\tilde{\ell'_i}(\tilde{\beta}),
-\qquad \ell_i'(\tilde{\beta}) = \tilde{x}_i \varepsilon_i\]</span></p>
+<p><strong>Score function as sum of components</strong> (<a href="../chapters/logistic-regression.html#lem-score-logistic">lem</a>, <a href="../chapters/logistic-regression.html#thm-logistic-score-comp">thm</a>) <span class="math display">\[\mathord{\underset{\sim}{\ell'}}(\mathord{\underset{\sim}{\beta}}) = \sum_{i=1}^n\mathord{\underset{\sim}{\ell'_i}}(\mathord{\underset{\sim}{\beta}}),
+\qquad \ell_i'(\mathord{\underset{\sim}{\beta}}) = \mathord{\underset{\sim}{x}}_i \varepsilon_i\]</span></p>
 </div>
-<p><strong><a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score">Score function</a></strong> (<a href="../chapters/logistic-regression.html#thm-logistic-score-fn">thm</a>) <span class="math display">\[\tilde{\ell'}(\tilde{\beta}) = \sum_{i=1}^n\tilde{x}_i\varepsilon_i
-= \underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n}\underbrace{\tilde{\varepsilon}}_{n \times 1}\]</span></p>
+<p><strong><a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score">Score function</a></strong> (<a href="../chapters/logistic-regression.html#thm-logistic-score-fn">thm</a>) <span class="math display">\[\mathord{\underset{\sim}{\ell'}}(\mathord{\underset{\sim}{\beta}}) = \sum_{i=1}^n\mathord{\underset{\sim}{x}}_i\varepsilon_i
+= \underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n}\underbrace{\mathord{\underset{\sim}{\varepsilon}}}_{n \times 1}\]</span></p>
 </section><section id="maximum-likelihood-estimation" class="slide level2 unnumbered"><h2>Maximum likelihood estimation</h2>
-<p><strong>Estimating equation</strong> (<a href="../chapters/logistic-regression.html#eq-score-logistic">eq</a>) The <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">MLE</a> <span class="math inline">\(\hat{\tilde{\beta}}\)</span> solves the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equation</a>: <span class="math display">\[\underbrace{\tilde{\ell'}(\hat{\tilde{\beta}})}_{(p+1) \times 1} = \sum_{i=1}^n\underbrace{\tilde{x}_i}_{(p+1) \times 1}\underbrace{\mathopen{}\left(y_i - \operatorname{expit}\mathopen{}\left\{{\tilde{x}_i}^{\top}\hat{\tilde{\beta}}\right\}\mathclose{}\right)\mathclose{}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}\]</span></p>
-<p>This estimating equation has no closed-form solution in general; <span class="math inline">\(\hat{\tilde{\beta}}\)</span> must be computed by numerical iteration.</p>
-<p><strong>Hessian</strong> (<a href="../chapters/logistic-regression.html#eq-logistic-hess">eq</a>) <span class="math display">\[\underbrace{\ell''(\tilde{\beta})}_{(p+1) \times (p+1)} = -\underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}, \qquad \mathbf{D} \stackrel{\text{def}}{=}\text{diag}(\operatorname{Var}\mathopen{}\left(Y_i|\tilde{X}_i=\tilde{x}_i\right)\mathclose{}) = \text{diag}(\pi_i(1-\pi_i))\]</span></p>
-<p><strong>Concavity</strong> (<a href="../chapters/logistic-regression.html#rem-hessian-nsd">rem</a>): the <a href="https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian">Hessian</a> is negative semi-definite for every <span class="math inline">\(\tilde{\beta}\)</span> (negative definite when <span class="math inline">\(\mathbf{X}\)</span> has full column rank), so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is <a href="https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex">concave</a> and every solution of the score equation is a global maximum.</p>
-<p><strong>Newton-Raphson update</strong> (<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson">Newton-Raphson method</a>) <span class="math display">\[\underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} \leftarrow \underbrace{{\widehat{\tilde{\beta}}}^*}_{(p+1) \times 1} - \underbrace{{\mathopen{}\left(\ell''\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}\right)\mathclose{}}^{-1}}_{(p+1) \times (p+1)} \underbrace{\ell'\mathopen{}\left(\tilde{y}; {\widehat{\tilde{\beta}}}^*\right)\mathclose{}}_{(p+1) \times 1}\]</span></p>
+<p><strong>Estimating equation</strong> (<a href="../chapters/logistic-regression.html#eq-score-logistic">eq</a>) The <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">MLE</a> <span class="math inline">\(\hat{\mathord{\underset{\sim}{\beta}}}\)</span> solves the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equation</a>: <span class="math display">\[\underbrace{\mathord{\underset{\sim}{\ell'}}(\hat{\mathord{\underset{\sim}{\beta}}})}_{(p+1) \times 1} = \sum_{i=1}^n\underbrace{\mathord{\underset{\sim}{x}}_i}_{(p+1) \times 1}\underbrace{\mathopen{}\left(y_i - \operatorname{expit}\mathopen{}\left\{{\mathord{\underset{\sim}{x}}_i}^{\top}\hat{\mathord{\underset{\sim}{\beta}}}\right\}\mathclose{}\right)\mathclose{}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}\]</span></p>
+<p>This estimating equation has no closed-form solution in general; <span class="math inline">\(\hat{\mathord{\underset{\sim}{\beta}}}\)</span> must be computed by numerical iteration.</p>
+<p><strong>Hessian</strong> (<a href="../chapters/logistic-regression.html#eq-logistic-hess">eq</a>) <span class="math display">\[\underbrace{\ell''(\mathord{\underset{\sim}{\beta}})}_{(p+1) \times (p+1)} = -\underbrace{{\mathbf{X}}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}, \qquad \mathbf{D} \stackrel{\text{def}}{=}\text{diag}(\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\underset{\sim}{X}}_i=\mathord{\underset{\sim}{x}}_i\right)\mathclose{}) = \text{diag}(\pi_i(1-\pi_i))\]</span></p>
+<p><strong>Concavity</strong> (<a href="../chapters/logistic-regression.html#rem-hessian-nsd">rem</a>): the <a href="https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian">Hessian</a> is negative semi-definite for every <span class="math inline">\(\mathord{\underset{\sim}{\beta}}\)</span> (negative definite when <span class="math inline">\(\mathbf{X}\)</span> has full column rank), so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is <a href="https://morrison-lab.github.io/mds/optimization.html#def-strictly-convex">concave</a> and every solution of the score equation is a global maximum.</p>
+<p><strong>Newton-Raphson update</strong> (<a href="https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson">Newton-Raphson method</a>) <span class="math display">\[\underbrace{{\widehat{\mathord{\underset{\sim}{\beta}}}}^*}_{(p+1) \times 1} \leftarrow \underbrace{{\widehat{\mathord{\underset{\sim}{\beta}}}}^*}_{(p+1) \times 1} - \underbrace{{\mathopen{}\left(\ell''\mathopen{}\left(\mathord{\underset{\sim}{y}}; {\widehat{\mathord{\underset{\sim}{\beta}}}}^*\right)\mathclose{}\right)\mathclose{}}^{-1}}_{(p+1) \times (p+1)} \underbrace{\ell'\mathopen{}\left(\mathord{\underset{\sim}{y}}; {\widehat{\mathord{\underset{\sim}{\beta}}}}^*\right)\mathclose{}}_{(p+1) \times 1}\]</span></p>
 <div style="column-count: 2; column-gap: 2em;">
 <p><strong>One-sample MLE for odds</strong> (<a href="../chapters/binary-outcome-associations.html#thm-est-odds">thm</a>) <span class="math display">\[\hat{\omega}= \frac{x}{n-x}\]</span></p>
 </div>
@@ -538,21 +538,21 @@ Figure&nbsp;1: Diagram of <a href="../chapters/logistic-regression.html#def-logi
 </div>
 </section><section id="odds-ratios-in-logistic-regression" class="slide level2 unnumbered"><h2>Odds ratios in logistic regression</h2>
 <div style="column-count: 2; column-gap: 2em;">
-<p><strong>General OR formula</strong> (<a href="../chapters/logistic-regression.html#lem-logistic-OR">lem</a>) <span class="math display">\[\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{\eta(\tilde{x}) - \eta(\mathord{{\tilde{x}^*}})\right\}\mathclose{}\]</span></p>
-<p><strong>Difference in log-odds; OR in terms of <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#def-difflogodds">def</a>, <a href="../chapters/logistic-regression.html#cor-logistic-OR">cor</a>) <span class="math display">\[\Delta\eta\stackrel{\text{def}}{=}\eta(\tilde{x}) - \eta(\mathord{{\tilde{x}^*}}),
-\qquad \text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta\right\}\mathclose{}\]</span></p>
-<p><strong><span class="math inline">\(\Delta\eta\)</span> from covariates</strong> (<a href="../chapters/logistic-regression.html#lem-diff-logodds">lem</a>) <span class="math display">\[\Delta\eta= (\tilde{x}- \mathord{{\tilde{x}^*}})\cdot\tilde{\beta}\]</span></p>
-<p><strong>Difference in covariate patterns; <span class="math inline">\(\Delta\eta\)</span> from <span class="math inline">\(\Delta\tilde{x}\)</span></strong> (<a href="../chapters/logistic-regression.html#def-diff-covs">def</a>, <a href="../chapters/logistic-regression.html#cor-diff-logodds">cor</a>) <span class="math display">\[\Delta\tilde{x}\stackrel{\text{def}}{=}\tilde{x}- \mathord{{\tilde{x}^*}},
-\qquad \Delta\eta= \Delta\tilde{x}\cdot \tilde{\beta}\]</span></p>
-<p><strong>OR in terms of <span class="math inline">\(\Delta\tilde{x}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-logistic-OR">thm</a>) <span class="math display">\[\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{(\Delta\tilde{x}) \cdot \tilde{\beta}\right\}\mathclose{}\]</span></p>
-<p><strong>Log OR equals <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#cor-log-or">cor</a>) <span class="math display">\[\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}})\right\}\mathclose{} = \Delta\eta\]</span></p>
+<p><strong>General OR formula</strong> (<a href="../chapters/logistic-regression.html#lem-logistic-OR">lem</a>) <span class="math display">\[\text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\underset{\sim}{x}}) - \eta(\mathord{{\mathord{\underset{\sim}{x}}^*}})\right\}\mathclose{}\]</span></p>
+<p><strong>Difference in log-odds; OR in terms of <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#def-difflogodds">def</a>, <a href="../chapters/logistic-regression.html#cor-logistic-OR">cor</a>) <span class="math display">\[\Delta\eta\stackrel{\text{def}}{=}\eta(\mathord{\underset{\sim}{x}}) - \eta(\mathord{{\mathord{\underset{\sim}{x}}^*}}),
+\qquad \text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta\right\}\mathclose{}\]</span></p>
+<p><strong><span class="math inline">\(\Delta\eta\)</span> from covariates</strong> (<a href="../chapters/logistic-regression.html#lem-diff-logodds">lem</a>) <span class="math display">\[\Delta\eta= (\mathord{\underset{\sim}{x}}- \mathord{{\mathord{\underset{\sim}{x}}^*}})\cdot\mathord{\underset{\sim}{\beta}}\]</span></p>
+<p><strong>Difference in covariate patterns; <span class="math inline">\(\Delta\eta\)</span> from <span class="math inline">\(\Delta\mathord{\underset{\sim}{x}}\)</span></strong> (<a href="../chapters/logistic-regression.html#def-diff-covs">def</a>, <a href="../chapters/logistic-regression.html#cor-diff-logodds">cor</a>) <span class="math display">\[\Delta\mathord{\underset{\sim}{x}}\stackrel{\text{def}}{=}\mathord{\underset{\sim}{x}}- \mathord{{\mathord{\underset{\sim}{x}}^*}},
+\qquad \Delta\eta= \Delta\mathord{\underset{\sim}{x}}\cdot \mathord{\underset{\sim}{\beta}}\]</span></p>
+<p><strong>OR in terms of <span class="math inline">\(\Delta\mathord{\underset{\sim}{x}}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-logistic-OR">thm</a>) <span class="math display">\[\text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{(\Delta\mathord{\underset{\sim}{x}}) \cdot \mathord{\underset{\sim}{\beta}}\right\}\mathclose{}\]</span></p>
+<p><strong>Log OR equals <span class="math inline">\(\Delta\eta\)</span></strong> (<a href="../chapters/logistic-regression.html#cor-log-or">cor</a>) <span class="math display">\[\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}})\right\}\mathclose{} = \Delta\eta\]</span></p>
 </div>
 </section><section id="inference-for-log-odds-and-odds-ratios" class="slide level2 unnumbered"><h2>Inference for log-odds and odds ratios</h2>
-<p><strong>Estimated SE of log-odds</strong> (<a href="../chapters/logistic-regression.html#thm-est-se-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\eta(\tilde{x})\right)\mathclose{} = \underbrace{{\tilde{x}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{\tilde{x}}_{(p+1) \times 1},
-\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\tilde{x})\right)\mathclose{} = \sqrt{{\tilde{x}}^{\top}\hat{\Sigma}\tilde{x}}\]</span></p>
-<p><strong>Estimated SE of <span class="math inline">\(\Delta\widehat{\eta}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-est-se-diff-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \underbrace{{\Delta\tilde{x}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{(\Delta\tilde{x})}_{(p+1) \times 1},
-\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \sqrt{{\Delta\tilde{x}}^{\top}\hat{\Sigma}(\Delta\tilde{x})}\]</span></p>
-<p><strong>CI for an odds ratio</strong> (<a href="../chapters/logistic-regression.html#eq-ci-OR-exp">eq</a>; details in <a href="../chapters/logistic-regression.html#sec-or-inference">sec</a>): exponentiate the endpoints of the CI for <span class="math inline">\(\Delta\eta\)</span>: <span class="math display">\[\text{ϙ}_{\omega}(\tilde{x},\mathord{{\tilde{x}^*}}) \in (e^L, e^R),
+<p><strong>Estimated SE of log-odds</strong> (<a href="../chapters/logistic-regression.html#thm-est-se-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\underset{\sim}{x}})\right)\mathclose{} = \underbrace{{\mathord{\underset{\sim}{x}}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{\mathord{\underset{\sim}{x}}}_{(p+1) \times 1},
+\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\underset{\sim}{x}})\right)\mathclose{} = \sqrt{{\mathord{\underset{\sim}{x}}}^{\top}\hat{\Sigma}\mathord{\underset{\sim}{x}}}\]</span></p>
+<p><strong>Estimated SE of <span class="math inline">\(\Delta\widehat{\eta}\)</span></strong> (<a href="../chapters/logistic-regression.html#thm-est-se-diff-logodds">thm</a>) <span class="math display">\[\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \underbrace{{\Delta\mathord{\underset{\sim}{x}}}^{\top}}_{1 \times (p+1)}\underbrace{\hat{\Sigma}}_{(p+1) \times (p+1)}\underbrace{(\Delta\mathord{\underset{\sim}{x}})}_{(p+1) \times 1},
+\qquad \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{} = \sqrt{{\Delta\mathord{\underset{\sim}{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\underset{\sim}{x}})}\]</span></p>
+<p><strong>CI for an odds ratio</strong> (<a href="../chapters/logistic-regression.html#eq-ci-OR-exp">eq</a>; details in <a href="../chapters/logistic-regression.html#sec-or-inference">sec</a>): exponentiate the endpoints of the CI for <span class="math inline">\(\Delta\eta\)</span>: <span class="math display">\[\text{ϙ}_{\omega}(\mathord{\underset{\sim}{x}},\mathord{{\mathord{\underset{\sim}{x}}^*}}) \in (e^L, e^R),
 \qquad (L, R) = \widehat{\Delta\eta}\mp 1.96 \cdot \mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}\]</span></p>
 </section><section id="odds-ratios-in-study-designs" class="slide level2 unnumbered"><h2>Odds ratios in study designs</h2>
 <p><strong>Disease and exposure odds ratios</strong> (<a href="../chapters/binary-outcome-associations.html#def-disease-OR">def</a>, <a href="../chapters/binary-outcome-associations.html#def-exposure-OR">def</a>) <span class="math display">\[\text{ϙ}_{\omega}(D|E) \stackrel{\text{def}}{=}\frac{\omega(D|E)}{\omega(D|\neg E)},
@@ -713,31 +713,31 @@ Table&nbsp;1: Probability distribution functions
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\({\lambda}(t\mid\tilde{x}) = {\lambda}_0(t)\cdot\theta_{{\lambda}}(\tilde{x})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\({\lambda}(t\mid\mathord{\underset{\sim}{x}}) = {\lambda}_0(t)\cdot\theta_{{\lambda}}(\mathord{\underset{\sim}{x}})\)</span></td>
 <td style="text-align: left;"><a href="../chapters/proportional-hazards-models.html#def-pha">Proportional hazards assumption</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\({\Lambda}(t\mid\tilde{x}) = {\Lambda}_0(t)\cdot\theta_{{\lambda}}(\tilde{x})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\({\Lambda}(t\mid\mathord{\underset{\sim}{x}}) = {\Lambda}_0(t)\cdot\theta_{{\lambda}}(\mathord{\underset{\sim}{x}})\)</span></td>
 <td style="text-align: left;"><a href="../chapters/proportional-hazards-models.html#thm-ph-cuhaz">Cumulative hazard factorization</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(\eta(t\mid\tilde{x}) = \eta_0(t) + \Delta\eta(\tilde{x})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\eta(t\mid\mathord{\underset{\sim}{x}}) = \eta_0(t) + \Delta\eta(\mathord{\underset{\sim}{x}})\)</span></td>
 <td style="text-align: left;"><a href="../chapters/proportional-hazards-models.html#thm-loghaz-decomp">Log-hazard decomposition</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\(\Delta\eta(\tilde{x}) = \tilde{x} \cdot \tilde{\beta} = \beta_1 x_1 + \cdots + \beta_p x_p\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Delta\eta(\mathord{\underset{\sim}{x}}) = \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} = \beta_1 x_1 + \cdots + \beta_p x_p\)</span></td>
 <td style="text-align: left;"><a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">Linear predictor</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x})\right\}\mathclose{}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\theta_{{\lambda}}(\mathord{\underset{\sim}{x}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\mathord{\underset{\sim}{x}})\right\}\mathclose{}\)</span></td>
 <td style="text-align: left;"><a href="../chapters/proportional-hazards-models.html#def-risk-score">Hazard multiplier</a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \tilde{x}: \mathord{{\tilde{x}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\tilde{x})}{{\lambda}(t|\mathord{{\tilde{x}^*}})}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{ϙ}_{{\lambda}}(t| \mathord{\underset{\sim}{x}}: \mathord{{\mathord{\underset{\sim}{x}}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\mathord{\underset{\sim}{x}})}{{\lambda}(t|\mathord{{\mathord{\underset{\sim}{x}}^*}})}\)</span></td>
 <td style="text-align: left;"><a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">Hazard ratio definition</a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(\text{ϙ}_{{\lambda}}(t\mid\tilde{x}:\mathord{{\tilde{x}^*}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde{x}) - \Delta\eta(\mathord{{\tilde{x}^*}})\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{(\tilde{x}-\mathord{{\tilde{x}^*}}) \cdot \tilde{\beta}\right\}\mathclose{}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{ϙ}_{{\lambda}}(t\mid\mathord{\underset{\sim}{x}}:\mathord{{\mathord{\underset{\sim}{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\mathord{\underset{\sim}{x}}) - \Delta\eta(\mathord{{\mathord{\underset{\sim}{x}}^*}})\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{(\mathord{\underset{\sim}{x}}-\mathord{{\mathord{\underset{\sim}{x}}^*}}) \cdot \mathord{\underset{\sim}{\beta}}\right\}\mathclose{}\)</span></td>
 <td style="text-align: left;"><a href="../chapters/proportional-hazards-models.html#thm-hazard-ratio-ph">Hazard ratio formula</a></td>
 </tr>
 </tbody>
@@ -746,10 +746,10 @@ Table&nbsp;1: Probability distribution functions
 <div id="def-ph-partial-lik" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Cox PH partial likelihood)</strong></span> <span class="math display">\[
 \begin{aligned}
-\mathcal{L}^*_i(\tilde{\beta}) &amp;\stackrel{\text{def}}{=}\frac{{\color{red}{\theta_{{\lambda}}(\tilde{x}_{(i)})}}}{\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(\tilde{x}_k)}}}
+\mathcal{L}^*_i(\mathord{\underset{\sim}{\beta}}) &amp;\stackrel{\text{def}}{=}\frac{{\color{red}{\theta_{{\lambda}}(\mathord{\underset{\sim}{x}}_{(i)})}}}{\sum_{k \in R(t_i)} {\color{red}{\theta_{{\lambda}}(\mathord{\underset{\sim}{x}}_k)}}}
 \\
-\mathcal{L}^*(\tilde{\beta}) &amp;\stackrel{\text{def}}{=}
-\prod_{\mathopen{}\left\{i:\ d_i = 1\right\}\mathclose{}} \mathcal{L}^*_i(\tilde{\beta})
+\mathcal{L}^*(\mathord{\underset{\sim}{\beta}}) &amp;\stackrel{\text{def}}{=}
+\prod_{\mathopen{}\left\{i:\ d_i = 1\right\}\mathclose{}} \mathcal{L}^*_i(\mathord{\underset{\sim}{\beta}})
 \end{aligned}
 \]</span></p>
 <p>where, for the distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> of the data set:</p>
@@ -761,13 +761,13 @@ Table&nbsp;1: Probability distribution functions
 <li>
 <span class="math inline">\(d_i\)</span> is the number of events at <span class="math inline">\(t_i\)</span> (so <span class="math inline">\(d_i = 1\)</span> when there are no ties);</li>
 <li>
-<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+<span class="math inline">\(\theta_{{\lambda}}(\mathord{\underset{\sim}{x}}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\mathord{\underset{\sim}{x}}}^{\top}\mathord{\underset{\sim}{\beta}}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\mathord{\underset{\sim}{x}}\)</span>.</li>
 </ul>
 </div>
 <h3 id="proportional-hazards-model-baseline-cumulative-hazard-estimator">Proportional hazards model baseline cumulative hazard estimator:</h3>
 <div id="def-breslow-baseline-cuhaz-est" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (Breslow estimator of the baseline cumulative hazard)</strong></span> <span class="math display">\[\hat {\Lambda}_0(t) \stackrel{\text{def}}{=}
-\sum_{t_i \le t} \frac{d_i}{\sum_{k\in R(t_i)} \theta_{{\lambda}}(\tilde{x}_k)}\]</span></p>
+\sum_{t_i \le t} \frac{d_i}{\sum_{k\in R(t_i)} \theta_{{\lambda}}(\mathord{\underset{\sim}{x}}_k)}\]</span></p>
 <p>where, for the distinct event times <span class="math inline">\(t_1 &lt; \cdots &lt; t_K\)</span> of the data set:</p>
 <ul>
 <li>
@@ -775,11 +775,11 @@ Table&nbsp;1: Probability distribution functions
 <li>
 <span class="math inline">\(R(t_i) \stackrel{\text{def}}{=}\mathopen{}\left\{j : Y_j \ge t_i\right\}\mathclose{}\)</span> is the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> at <span class="math inline">\(t_i\)</span> (where <span class="math inline">\(Y_j = \min(T_j, C_j)\)</span> is subject <span class="math inline">\(j\)</span>’s observed follow-up time) — the subjects still under observation just before <span class="math inline">\(t_i\)</span>;</li>
 <li>
-<span class="math inline">\(\theta_{{\lambda}}(\tilde{x}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\tilde{x}}^{\top}\tilde{\beta}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\tilde{x}\)</span>.</li>
+<span class="math inline">\(\theta_{{\lambda}}(\mathord{\underset{\sim}{x}}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{{\mathord{\underset{\sim}{x}}}^{\top}\mathord{\underset{\sim}{\beta}}\right\}\mathclose{}\)</span> is the hazard ratio (<a href="../chapters/proportional-hazards-models.html#def-risk-score">risk score</a>) for covariate pattern <span class="math inline">\(\mathord{\underset{\sim}{x}}\)</span>.</li>
 </ul>
 </div>
 <div id="exm-breslow-baseline-cuhaz-est" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Breslow estimator with two event times)</strong></span> Suppose there are two distinct event times <span class="math inline">\(t_1 = 2\)</span> and <span class="math inline">\(t_2 = 4\)</span> (no ties, <span class="math inline">\(d_1 = d_2 = 1\)</span>), with risk-set-weighted totals <span class="math inline">\(\sum_{k \in R(2)} \theta_{{\lambda}}(\tilde{x}_k) = 10\)</span> and <span class="math inline">\(\sum_{k \in R(4)} \theta_{{\lambda}}(\tilde{x}_k) = 6\)</span>. Then</p>
+<p><span class="theorem-title"><strong>Example 1 (Breslow estimator with two event times)</strong></span> Suppose there are two distinct event times <span class="math inline">\(t_1 = 2\)</span> and <span class="math inline">\(t_2 = 4\)</span> (no ties, <span class="math inline">\(d_1 = d_2 = 1\)</span>), with risk-set-weighted totals <span class="math inline">\(\sum_{k \in R(2)} \theta_{{\lambda}}(\mathord{\underset{\sim}{x}}_k) = 10\)</span> and <span class="math inline">\(\sum_{k \in R(4)} \theta_{{\lambda}}(\mathord{\underset{\sim}{x}}_k) = 6\)</span>. Then</p>
 <p><span class="math display">\[
 \hat{\Lambda}_0(4) = \frac{1}{10} + \frac{1}{6} \approx 0.267 .
 \]</span></p>

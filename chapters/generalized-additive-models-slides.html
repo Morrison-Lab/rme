@@ -848,18 +848,18 @@ title-only slide. -->
 <span class="header-section-number">6.2</span> The penalized least-squares solution</h2>
 <!-- No slidebreak here: the heading shares its slide with the thm-penalized-least-squares div. -->
 <div id="thm-penalized-least-squares" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Penalized least squares has a closed-form solution)</strong></span> Let <span class="math inline">\(\mathbf{B}\)</span> be an <span class="math inline">\(n \times q\)</span> basis matrix (built as in <a href="#/def-basis-expansion" class="quarto-xref">Definition&nbsp;3</a>), <span class="math inline">\(\tilde{y}\)</span> an <span class="math inline">\(n \times 1\)</span> outcome vector, <span class="math inline">\(\mathbf{P}\)</span> a symmetric, positive semidefinite <span class="math inline">\(q \times q\)</span> penalty matrix, and <span class="math inline">\(\lambda\ge 0\)</span>, and suppose that <span class="math inline">\({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\)</span> is invertible. Then the unique minimizer of the penalized residual sum of squares</p>
+<p><span class="theorem-title"><strong>Theorem 2 (Penalized least squares has a closed-form solution)</strong></span> Let <span class="math inline">\(\mathbf{B}\)</span> be an <span class="math inline">\(n \times q\)</span> basis matrix (built as in <a href="#/def-basis-expansion" class="quarto-xref">Definition&nbsp;3</a>), <span class="math inline">\(\mathord{\underset{\sim}{y}}\)</span> an <span class="math inline">\(n \times 1\)</span> outcome vector, <span class="math inline">\(\mathbf{P}\)</span> a symmetric, positive semidefinite <span class="math inline">\(q \times q\)</span> penalty matrix, and <span class="math inline">\(\lambda\ge 0\)</span>, and suppose that <span class="math inline">\({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\)</span> is invertible. Then the unique minimizer of the penalized residual sum of squares</p>
 <p><span class="math display">\[
-\text{PRSS}_\lambda(\tilde{\beta})
-\stackrel{\text{def}}{=}{(\tilde{y}- \mathbf{B}\tilde{\beta})}^{\top} (\tilde{y}- \mathbf{B}\tilde{\beta}) + \lambda{\tilde{\beta}}^{\top} \mathbf{P} \tilde{\beta}
+\text{PRSS}_\lambda(\mathord{\underset{\sim}{\beta}})
+\stackrel{\text{def}}{=}{(\mathord{\underset{\sim}{y}}- \mathbf{B}\mathord{\underset{\sim}{\beta}})}^{\top} (\mathord{\underset{\sim}{y}}- \mathbf{B}\mathord{\underset{\sim}{\beta}}) + \lambda{\mathord{\underset{\sim}{\beta}}}^{\top} \mathbf{P} \mathord{\underset{\sim}{\beta}}
 \]</span></p>
 <p>is</p>
 <p><span class="math display">\[
-\underbrace{\hat{\tilde{\beta}}_\lambda}_{q \times 1}
+\underbrace{\hat{\mathord{\underset{\sim}{\beta}}}_\lambda}_{q \times 1}
 = \underbrace{\mathopen{}\left({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\right)\mathclose{}^{-1}}_{q \times q}
-\underbrace{{\mathbf{B}}^{\top}}_{q \times n} \underbrace{\tilde{y}}_{n \times 1},
+\underbrace{{\mathbf{B}}^{\top}}_{q \times n} \underbrace{\mathord{\underset{\sim}{y}}}_{n \times 1},
 \]</span></p>
-<p>and the fitted values are <span class="math inline">\(\hat{\tilde{y}} = \mathbf{S}_\lambda\tilde{y}\)</span>, with smoother matrix</p>
+<p>and the fitted values are <span class="math inline">\(\hat{\mathord{\underset{\sim}{y}}} = \mathbf{S}_\lambda\mathord{\underset{\sim}{y}}\)</span>, with smoother matrix</p>
 <p><span class="math display">\[
 \underbrace{\mathbf{S}_\lambda}_{n \times n}
 \stackrel{\text{def}}{=}\underbrace{\mathbf{B}}_{n \times q}
@@ -872,60 +872,60 @@ title-only slide. -->
 <p><span class="proof-title"><em>Proof</em>. </span>Expand the penalized residual sum of squares:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{PRSS}_\lambda(\tilde{\beta})
-&amp;= {\tilde{y}}^{\top}\tilde{y}- {\tilde{y}}^{\top}\mathbf{B}\tilde{\beta}- {\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\tilde{y}
-+ {\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\mathbf{B}\tilde{\beta}+ \lambda{\tilde{\beta}}^{\top}\mathbf{P}\tilde{\beta}
+\text{PRSS}_\lambda(\mathord{\underset{\sim}{\beta}})
+&amp;= {\mathord{\underset{\sim}{y}}}^{\top}\mathord{\underset{\sim}{y}}- {\mathord{\underset{\sim}{y}}}^{\top}\mathbf{B}\mathord{\underset{\sim}{\beta}}- {\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
++ {\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathbf{B}\mathord{\underset{\sim}{\beta}}+ \lambda{\mathord{\underset{\sim}{\beta}}}^{\top}\mathbf{P}\mathord{\underset{\sim}{\beta}}
 &amp;&amp; \text{(distribute the product)}
-\\ &amp;= {\tilde{y}}^{\top}\tilde{y}- 2{\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\tilde{y}
-+ {\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\mathbf{B}\tilde{\beta}+ \lambda{\tilde{\beta}}^{\top}\mathbf{P}\tilde{\beta}
+\\ &amp;= {\mathord{\underset{\sim}{y}}}^{\top}\mathord{\underset{\sim}{y}}- 2{\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
++ {\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathbf{B}\mathord{\underset{\sim}{\beta}}+ \lambda{\mathord{\underset{\sim}{\beta}}}^{\top}\mathbf{P}\mathord{\underset{\sim}{\beta}}
 &amp;&amp; \text{(a scalar equals its transpose)}
-\\ &amp;= {\tilde{y}}^{\top}\tilde{y}- 2{\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\tilde{y}
-+ {\tilde{\beta}}^{\top}\mathopen{}\left({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\right)\mathclose{}\tilde{\beta}
+\\ &amp;= {\mathord{\underset{\sim}{y}}}^{\top}\mathord{\underset{\sim}{y}}- 2{\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
++ {\mathord{\underset{\sim}{\beta}}}^{\top}\mathopen{}\left({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\right)\mathclose{}\mathord{\underset{\sim}{\beta}}
 &amp;&amp; \text{(collect the quadratic terms)}
 \end{aligned}
 \]</span></p>
-<p>Write <span class="math inline">\(\mathbf{A} \stackrel{\text{def}}{=}{\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\)</span>, a symmetric <span class="math inline">\(q \times q\)</span> matrix. The gradient with respect to <span class="math inline">\(\tilde{\beta}\)</span> is</p>
+<p>Write <span class="math inline">\(\mathbf{A} \stackrel{\text{def}}{=}{\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P}\)</span>, a symmetric <span class="math inline">\(q \times q\)</span> matrix. The gradient with respect to <span class="math inline">\(\mathord{\underset{\sim}{\beta}}\)</span> is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\underbrace{\frac{\partial}{\partial \tilde{\beta}}\text{PRSS}_\lambda(\tilde{\beta})}_{q \times 1}
-&amp;= \frac{\partial}{\partial \tilde{\beta}}\mathopen{}\left(-2{\tilde{\beta}}^{\top}{\mathbf{B}}^{\top}\tilde{y}\right)\mathclose{} + \frac{\partial}{\partial \tilde{\beta}}\mathopen{}\left({\tilde{\beta}}^{\top}\mathbf{A}\tilde{\beta}\right)\mathclose{}
-&amp;&amp; \text{(} {\tilde{y}}^{\top}\tilde{y}\text{ does not depend on } \tilde{\beta}\text{)}
-\\ &amp;= -2{\mathbf{B}}^{\top}\tilde{y}+ \frac{\partial}{\partial \tilde{\beta}}\mathopen{}\left({\tilde{\beta}}^{\top}\mathbf{A}\tilde{\beta}\right)\mathclose{}
-&amp;&amp; \text{(gradient of a linear form: } \frac{\partial}{\partial \tilde{\beta}}{\tilde{\beta}}^{\top}\tilde{c} = \tilde{c}\text{)}
-\\ &amp;= -2{\mathbf{B}}^{\top}\tilde{y}+ 2\mathbf{A}\tilde{\beta}
+\underbrace{\frac{\partial}{\partial \mathord{\underset{\sim}{\beta}}}\text{PRSS}_\lambda(\mathord{\underset{\sim}{\beta}})}_{q \times 1}
+&amp;= \frac{\partial}{\partial \mathord{\underset{\sim}{\beta}}}\mathopen{}\left(-2{\mathord{\underset{\sim}{\beta}}}^{\top}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}\right)\mathclose{} + \frac{\partial}{\partial \mathord{\underset{\sim}{\beta}}}\mathopen{}\left({\mathord{\underset{\sim}{\beta}}}^{\top}\mathbf{A}\mathord{\underset{\sim}{\beta}}\right)\mathclose{}
+&amp;&amp; \text{(} {\mathord{\underset{\sim}{y}}}^{\top}\mathord{\underset{\sim}{y}}\text{ does not depend on } \mathord{\underset{\sim}{\beta}}\text{)}
+\\ &amp;= -2{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}+ \frac{\partial}{\partial \mathord{\underset{\sim}{\beta}}}\mathopen{}\left({\mathord{\underset{\sim}{\beta}}}^{\top}\mathbf{A}\mathord{\underset{\sim}{\beta}}\right)\mathclose{}
+&amp;&amp; \text{(gradient of a linear form: } \frac{\partial}{\partial \mathord{\underset{\sim}{\beta}}}{\mathord{\underset{\sim}{\beta}}}^{\top}\mathord{\underset{\sim}{c}} = \mathord{\underset{\sim}{c}}\text{)}
+\\ &amp;= -2{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}+ 2\mathbf{A}\mathord{\underset{\sim}{\beta}}
 &amp;&amp; \text{(gradient of a symmetric quadratic form)}
 \end{aligned}
 \]</span></p>
 <p>Setting the gradient to <span class="math inline">\(\mathbf{0}_{q \times 1}\)</span> gives the penalized normal equations:</p>
 <p><span class="math display">\[
 \begin{aligned}
--2{\mathbf{B}}^{\top}\tilde{y}+ 2\mathbf{A}\tilde{\beta}&amp;= \mathbf{0}_{q \times 1}
+-2{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}+ 2\mathbf{A}\mathord{\underset{\sim}{\beta}}&amp;= \mathbf{0}_{q \times 1}
 &amp;&amp; \text{(set the gradient to zero)}
-\\ 2\mathbf{A}\tilde{\beta}&amp;= 2{\mathbf{B}}^{\top}\tilde{y}
-&amp;&amp; \text{(add } 2{\mathbf{B}}^{\top}\tilde{y}\text{ to both sides)}
-\\ \mathbf{A}\tilde{\beta}&amp;= {\mathbf{B}}^{\top}\tilde{y}
+\\ 2\mathbf{A}\mathord{\underset{\sim}{\beta}}&amp;= 2{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
+&amp;&amp; \text{(add } 2{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}\text{ to both sides)}
+\\ \mathbf{A}\mathord{\underset{\sim}{\beta}}&amp;= {\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
 &amp;&amp; \text{(divide by 2)}
-\\ \tilde{\beta}&amp;= \mathbf{A}^{-1}{\mathbf{B}}^{\top}\tilde{y}
+\\ \mathord{\underset{\sim}{\beta}}&amp;= \mathbf{A}^{-1}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
 &amp;&amp; \text{(multiply on the left by } \mathbf{A}^{-1}\text{)}
 \end{aligned}
 \]</span></p>
 <hr>
-<p>This stationary point is the unique minimizer because the Hessian <span class="math inline">\(2\mathbf{A}\)</span> is positive definite: for any <span class="math inline">\(\tilde{v} \ne \mathbf{0}_{q \times 1}\)</span>, <span class="math inline">\({\tilde{v}}^{\top}\mathbf{A}\tilde{v}
-= {(\mathbf{B}\tilde{v})}^{\top}(\mathbf{B}\tilde{v}) + \lambda{\tilde{v}}^{\top}\mathbf{P}\tilde{v} \ge 0\)</span>, since both terms are nonnegative. If equality held, then <span class="math inline">\(\mathbf{A}\tilde{v} = \mathbf{0}_{q \times 1}\)</span>, because <span class="math inline">\({\tilde{v}}^{\top}\mathbf{A}\tilde{v} = 0\)</span> implies <span class="math inline">\(\mathbf{A}\tilde{v} = \mathbf{0}_{q \times 1}\)</span> for a positive semidefinite matrix <span class="math inline">\(\mathbf{A}\)</span>; that would contradict the invertibility of <span class="math inline">\(\mathbf{A}\)</span>. So <span class="math inline">\({\tilde{v}}^{\top}\mathbf{A}\tilde{v} &gt; 0\)</span>.</p>
+<p>This stationary point is the unique minimizer because the Hessian <span class="math inline">\(2\mathbf{A}\)</span> is positive definite: for any <span class="math inline">\(\mathord{\underset{\sim}{v}} \ne \mathbf{0}_{q \times 1}\)</span>, <span class="math inline">\({\mathord{\underset{\sim}{v}}}^{\top}\mathbf{A}\mathord{\underset{\sim}{v}}
+= {(\mathbf{B}\mathord{\underset{\sim}{v}})}^{\top}(\mathbf{B}\mathord{\underset{\sim}{v}}) + \lambda{\mathord{\underset{\sim}{v}}}^{\top}\mathbf{P}\mathord{\underset{\sim}{v}} \ge 0\)</span>, since both terms are nonnegative. If equality held, then <span class="math inline">\(\mathbf{A}\mathord{\underset{\sim}{v}} = \mathbf{0}_{q \times 1}\)</span>, because <span class="math inline">\({\mathord{\underset{\sim}{v}}}^{\top}\mathbf{A}\mathord{\underset{\sim}{v}} = 0\)</span> implies <span class="math inline">\(\mathbf{A}\mathord{\underset{\sim}{v}} = \mathbf{0}_{q \times 1}\)</span> for a positive semidefinite matrix <span class="math inline">\(\mathbf{A}\)</span>; that would contradict the invertibility of <span class="math inline">\(\mathbf{A}\)</span>. So <span class="math inline">\({\mathord{\underset{\sim}{v}}}^{\top}\mathbf{A}\mathord{\underset{\sim}{v}} &gt; 0\)</span>.</p>
 <p>Finally, the fitted values are</p>
 <p><span class="math display">\[
 \begin{aligned}
-\hat{\tilde{y}}
-&amp;= \mathbf{B}\hat{\tilde{\beta}}_\lambda
+\hat{\mathord{\underset{\sim}{y}}}
+&amp;= \mathbf{B}\hat{\mathord{\underset{\sim}{\beta}}}_\lambda
 &amp;&amp; \text{(fitted values of a basis expansion)}
-\\ &amp;= \mathbf{B}\mathbf{A}^{-1}{\mathbf{B}}^{\top}\tilde{y}
-&amp;&amp; \text{(substitute } \hat{\tilde{\beta}}_\lambda\text{)}
-\\ &amp;= \mathbf{S}_\lambda\tilde{y}
+\\ &amp;= \mathbf{B}\mathbf{A}^{-1}{\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
+&amp;&amp; \text{(substitute } \hat{\mathord{\underset{\sim}{\beta}}}_\lambda\text{)}
+\\ &amp;= \mathbf{S}_\lambda\mathord{\underset{\sim}{y}}
 &amp;&amp; \text{(definition of } \mathbf{S}_\lambda\text{)}
 \end{aligned}
 \]</span></p>
 </div>
-<aside class="notes"><p>The smoothing spline of <a href="#/def-smoothing-spline" class="quarto-xref">Definition&nbsp;6</a> is a special case. By <a href="#/rem-smoothing-spline-natural-cubic" class="quarto-xref">Remark&nbsp;4</a>, its minimizer is a natural cubic spline, so it can be written <span class="math inline">\(g(x) = \sum_k \beta_k b_k(x)\)</span> in a natural cubic spline basis, and its penalty is <span class="math inline">\(\int g''(t)^2\,dt = {\tilde{\beta}}^{\top}\mathbf{P}\tilde{\beta}\)</span> with <span class="math inline">\(P_{jk} \stackrel{\text{def}}{=}\int b_j''(t)\, b_k''(t)\,dt\)</span>.</p>
+<aside class="notes"><p>The smoothing spline of <a href="#/def-smoothing-spline" class="quarto-xref">Definition&nbsp;6</a> is a special case. By <a href="#/rem-smoothing-spline-natural-cubic" class="quarto-xref">Remark&nbsp;4</a>, its minimizer is a natural cubic spline, so it can be written <span class="math inline">\(g(x) = \sum_k \beta_k b_k(x)\)</span> in a natural cubic spline basis, and its penalty is <span class="math inline">\(\int g''(t)^2\,dt = {\mathord{\underset{\sim}{\beta}}}^{\top}\mathbf{P}\mathord{\underset{\sim}{\beta}}\)</span> with <span class="math inline">\(P_{jk} \stackrel{\text{def}}{=}\int b_j''(t)\, b_k''(t)\,dt\)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -945,7 +945,7 @@ title-only slide. -->
 &amp;&amp; \text{(columns } 1 \text{ and } x\text{)}
 \\ &amp;= \begin{bmatrix}3 &amp; 0 \\ 0 &amp; 2\end{bmatrix}
 &amp;&amp; \text{(} \textstyle\sum x_i = 0,\ \sum x_i^2 = 2\text{)}
-\\ {\mathbf{B}}^{\top}\tilde{y}
+\\ {\mathbf{B}}^{\top}\mathord{\underset{\sim}{y}}
 &amp;= \begin{bmatrix}\sum y_i \\ \sum x_i y_i\end{bmatrix}
 &amp;&amp; \text{(columns } 1 \text{ and } x\text{)}
 \\ &amp;= \begin{bmatrix}3 \\ 1\end{bmatrix}
@@ -955,7 +955,7 @@ title-only slide. -->
 <p>so <span class="math inline">\({\mathbf{B}}^{\top}\mathbf{B} + \lambda\mathbf{P} = \begin{bmatrix}3 &amp; 0 \\ 0 &amp; 2 + \lambda\end{bmatrix}\)</span>, which is diagonal, and</p>
 <p><span class="math display">\[
 \begin{aligned}
-\hat{\tilde{\beta}}_\lambda
+\hat{\mathord{\underset{\sim}{\beta}}}_\lambda
 &amp;= \begin{bmatrix}1/3 &amp; 0 \\ 0 &amp; 1/(2 + \lambda)\end{bmatrix} \begin{bmatrix}3 \\ 1\end{bmatrix}
 &amp;&amp; \text{(invert the diagonal matrix)}
 \\ &amp;= \begin{bmatrix}1 \\ 1/(2 + \lambda)\end{bmatrix}
@@ -971,7 +971,7 @@ title-only slide. -->
 </div>
 </section><section id="effective-degrees-of-freedom" class="slide level2" data-number="6.3"><h2>
 <span class="header-section-number">6.3</span> Effective degrees of freedom</h2>
-<p>By <a href="#/thm-penalized-least-squares" class="quarto-xref">Theorem&nbsp;2</a>, the smoothing spline fit can be written as <span class="math inline">\(\hat{\tilde{y}} = \mathbf{S}_\lambda\tilde{y}\)</span> for a smoother matrix <span class="math inline">\(\mathbf{S}_\lambda\)</span> that depends on <span class="math inline">\(\lambda\)</span> and the <span class="math inline">\(x_i\)</span> values. Because the function is penalized rather than projected onto a low-dimensional subspace, the usual “number of parameters” count doesn’t apply.</p>
+<p>By <a href="#/thm-penalized-least-squares" class="quarto-xref">Theorem&nbsp;2</a>, the smoothing spline fit can be written as <span class="math inline">\(\hat{\mathord{\underset{\sim}{y}}} = \mathbf{S}_\lambda\mathord{\underset{\sim}{y}}\)</span> for a smoother matrix <span class="math inline">\(\mathbf{S}_\lambda\)</span> that depends on <span class="math inline">\(\lambda\)</span> and the <span class="math inline">\(x_i\)</span> values. Because the function is penalized rather than projected onto a low-dimensional subspace, the usual “number of parameters” count doesn’t apply.</p>
 <p>The standard replacement is the <strong>effective degrees of freedom</strong> (EDF):</p>
 </section><section class="slide level2"><div id="def-effective-degrees-of-freedom" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 7 (Effective degrees of freedom)</strong></span> <span class="math display">\[\text{EDF}(\lambda) \stackrel{\text{def}}{=}\text{tr}(\mathbf{S}_\lambda)

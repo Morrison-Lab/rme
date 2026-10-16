@@ -437,8 +437,8 @@ text-align: center;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="exm-mixed-model-random-intercept" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4 (Linear mixed model with a random intercept)</strong></span> For example, a linear mixed model with a random intercept for each group is <span class="math display">\[
-Y_{ij} \stackrel{\text{def}}{=}{\tilde{x}_{ij}}^{\top}\tilde{\beta}+ \alpha_i + \epsilon_{ij},
-\]</span> where <span class="math inline">\(\tilde{\beta}\)</span> is a vector of fixed effects, <span class="math inline">\(\alpha_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> is the random effect of group <span class="math inline">\(i\)</span>, and <span class="math inline">\(\epsilon_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> is independent of the <span class="math inline">\(\alpha_i\)</span>s.</p>
+Y_{ij} \stackrel{\text{def}}{=}{\mathord{\underset{\sim}{x}}_{ij}}^{\top}\mathord{\underset{\sim}{\beta}}+ \alpha_i + \epsilon_{ij},
+\]</span> where <span class="math inline">\(\mathord{\underset{\sim}{\beta}}\)</span> is a vector of fixed effects, <span class="math inline">\(\alpha_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}\)</span> is the random effect of group <span class="math inline">\(i\)</span>, and <span class="math inline">\(\epsilon_{ij} \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span> is independent of the <span class="math inline">\(\alpha_i\)</span>s.</p>
 </div>
 </section><section class="slide level2"><div id="exm-mixed-model" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5 (Drug trial with repeated measurements)</strong></span> Combining <a href="#/exm-fixed-effect" class="quarto-xref">Example&nbsp;1</a> and <a href="#/exm-random-effect" class="quarto-xref">Example&nbsp;2</a>, suppose that each patient in the drug trial has blood pressure measured several times, and that <span class="math display">\[
@@ -1071,7 +1071,7 @@ w_j = \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}.
 <p>Both terms have mean 0 and are independent, so</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{MSE}\mathopen{}\left(c\right)\mathclose{}
+\operatorname{pMSE}\mathopen{}\left(c\right)\mathclose{}
 &amp;= \operatorname{Var}\mathopen{}\left((c - 1)\,\alpha_j + c\,\bar\epsilon_j\right)\mathclose{}
 &amp;&amp; \text{(the error has mean 0)}
 \\
@@ -1119,7 +1119,7 @@ c &amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-partial-pooling-blp" class="theorem example">
-<p><span class="theorem-title"><strong>Example 16 (Mean squared errors for Aitkin County)</strong></span> Use the estimates from <a href="#/exm-radon-shrinkage" class="quarto-xref">Example&nbsp;15</a> as if they were the true values: <span class="math inline">\(\sigma_\alpha^2 = 0.0886\)</span>, <span class="math inline">\(\sigma^2 = 0.587\)</span>, and <span class="math inline">\(n_j = 4\)</span>, so <span class="math inline">\(\sigma^2 / n_j = 0.14675\)</span>. By <a href="#/lem-partial-pooling-blp" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(\operatorname{MSE}\mathopen{}\left(c\right)\mathclose{} = (c - 1)^2 \cdot 0.0886 + c^2 \cdot 0.14675\)</span>:</p>
+<p><span class="theorem-title"><strong>Example 16 (Mean squared errors for Aitkin County)</strong></span> Use the estimates from <a href="#/exm-radon-shrinkage" class="quarto-xref">Example&nbsp;15</a> as if they were the true values: <span class="math inline">\(\sigma_\alpha^2 = 0.0886\)</span>, <span class="math inline">\(\sigma^2 = 0.587\)</span>, and <span class="math inline">\(n_j = 4\)</span>, so <span class="math inline">\(\sigma^2 / n_j = 0.14675\)</span>. By <a href="#/lem-partial-pooling-blp" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(\operatorname{pMSE}\mathopen{}\left(c\right)\mathclose{} = (c - 1)^2 \cdot 0.0886 + c^2 \cdot 0.14675\)</span>:</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1129,7 +1129,7 @@ c &amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
 <thead><tr class="header">
 <th>Predictor</th>
 <th><span class="math inline">\(c\)</span></th>
-<th><span class="math inline">\(\operatorname{MSE}\mathopen{}\left(c\right)\mathclose{}\)</span></th>
+<th><span class="math inline">\(\operatorname{pMSE}\mathopen{}\left(c\right)\mathclose{}\)</span></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1243,7 +1243,7 @@ c &amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
 
 </section><section class="slide level2"><p><a href="#/def-random-effect">Random effects</a> can be added to any generalized linear model. A <strong>generalized linear mixed model</strong> (GLMM) adds random effects to the linear predictor, so for a <a href="https://morrison-lab.github.io/sds/data.html#def-binary">binary outcome</a> with random intercepts,</p>
 <p><span id="eq-glmm"><span class="math display">\[
-\operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mathclose{} = {\tilde{x}_{ij}}^{\top}\tilde{\beta}+ \alpha_j,
+\operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mathclose{} = {\mathord{\underset{\sim}{x}}_{ij}}^{\top}\mathord{\underset{\sim}{\beta}}+ \alpha_j,
 \qquad
 \alpha_j \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma_\alpha^2\right)\mathclose{}
 \tag{22}\]</span></span></p>

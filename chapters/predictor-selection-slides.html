@@ -1501,10 +1501,10 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
 <span class="header-section-number">9.1</span> The LASSO</h2>
 <!-- No slidebreak here: the heading shares its slide with the def-lasso div. -->
 <div id="def-lasso" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (LASSO estimate)</strong></span> The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) estimate of the coefficients <span class="math inline">\(\tilde{\beta}= {(\beta_1, \dots, \beta_p)}^{\top}\)</span> maximizes the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> minus an <span class="math inline">\(\ell_{1}\)</span> penalty:</p>
+<p><span class="theorem-title"><strong>Definition 3 (LASSO estimate)</strong></span> The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) estimate of the coefficients <span class="math inline">\(\mathord{\underset{\sim}{\beta}}= {(\beta_1, \dots, \beta_p)}^{\top}\)</span> maximizes the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> minus an <span class="math inline">\(\ell_{1}\)</span> penalty:</p>
 <p><span id="eq-lasso"><span class="math display">\[
-\hat{\tilde{\beta}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\tilde{\beta}} \mathopen{}\left\{
-\ell(\tilde{\beta}) - \lambda \sum_{j=1}^p \mathopen{}\left|\beta_j\right|\mathclose{}
+\hat{\mathord{\underset{\sim}{\beta}}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\mathord{\underset{\sim}{\beta}}} \mathopen{}\left\{
+\ell(\mathord{\underset{\sim}{\beta}}) - \lambda \sum_{j=1}^p \mathopen{}\left|\beta_j\right|\mathclose{}
 \right\}\mathclose{}
 \tag{1}\]</span></span></p>
 <p>where <span class="math inline">\(\lambda \ge 0\)</span> is a <a href="https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter">tuning parameter</a>. The intercept, if any, is not penalized.</p>
@@ -1512,7 +1512,7 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
 <p>The <a href="https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter">tuning parameter</a> <span class="math inline">\(\lambda\)</span> controls the strength of the penalty:</p>
 <ul>
 <li>
-<span class="math inline">\(\lambda = 0\)</span>: no penalty, so <span class="math inline">\(\hat{\tilde{\beta}}_0\)</span> is the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> (<a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">ordinary least squares</a> for a Gaussian linear model).</li>
+<span class="math inline">\(\lambda = 0\)</span>: no penalty, so <span class="math inline">\(\hat{\mathord{\underset{\sim}{\beta}}}_0\)</span> is the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> (<a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">ordinary least squares</a> for a Gaussian linear model).</li>
 <li>
 <span class="math inline">\(\lambda \to \infty\)</span>: all coefficients shrink to zero.</li>
 </ul>
