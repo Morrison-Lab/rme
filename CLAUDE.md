@@ -99,7 +99,7 @@ Before committing any `.qmd`, `.R`, or config file change:
 - **Matrix dimensions**: always verify dimension compatibility for every matrix expression -- dimensions of each operand must be consistent with the operation
 - **Annotate matrix dimensions with underbraces** in display math: use `\underbrace{M}_{m \times n}` for each matrix or vector
 - **Zero matrices**: never write bare `\mathbf{0}` in a matrix equation -- subscript dimensions: `\mathbf{0}_{m \times n}`
-- **Jacobian**: `\deriv{\vb} \vx` where both are p-vectors produces a p x p Jacobian matrix (not a vector)
+- **Jacobian**: `\deriv{\vb} \vx` where both are p-vectors produces a p-by-p Jacobian matrix (not a vector)
 - Estimators of vector estimands: the estimator symbol (e.g. `\hat`) goes
   on top of the vector symbol, not inside it --- write `\hat{\vec{\mu}}`, not
   `\vec{\hat\mu}`. (Same for `\bar`, `\tilde`, etc.) Use `\v{}`, `\vec{}`, or
