@@ -1,20 +1,70 @@
 <script>
 // A link to #target scrolls the browser to the target before MathJax and the
 // images have set their final heights. Equations above the target then grow
-// and push it up out of view. Scroll to the target again once the page has
-// settled, so the CSS scroll-margin-top in custom.scss places it mid-view.
+// and push it up out of view. Scroll to the target again once MathJax has
+// typeset the page, and keep doing so while the page height is still changing,
+// so the CSS scroll-margin-top in custom.scss places it mid-view.
+// A text fragment (#:~:text=...) is not in location.hash, so it is read from
+// the navigation entry and its first match is scrolled to the same way.
+// The first wheel, key press, touch or click by the reader ends the re-landing.
 (function () {
-  function land() {
-    var id;
-    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
-    var el = id && document.getElementById(id);
-    if (el) el.scrollIntoView();
+  var hash = location.hash.slice(1), text = null;
+  try {
+    var nav = performance.getEntriesByType("navigation")[0];
+    var m = nav && /#.*?:~:.*?\btext=([^&]*)/.exec(nav.name);
+    if (m) text = decodeURIComponent(m[1]).split(",").filter(function (s) {
+      return s && !/^-|-$/.test(s);
+    })[0] || null;
+    hash = decodeURIComponent(hash.replace(/:~:.*$/, ""));
+  } catch (e) { hash = ""; }
+  if (!hash && !text) return;
+
+  function findText() {
+    var needle = text.replace(/\s+/g, " ").toLowerCase();
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        var p = n.parentElement;
+        return p && !p.closest("script, style, mjx-container, nav")
+          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    for (var n = walker.nextNode(); n; n = walker.nextNode()) {
+      if (n.data.replace(/\s+/g, " ").toLowerCase().indexOf(needle) >= 0) return n.parentElement;
+    }
+    return null;
   }
-  if (!location.hash) return;
+  function target() {
+    var el = hash && document.getElementById(hash);
+    return el || (text && findText());
+  }
+  function land() {
+    var el = target();
+    if (el) el.scrollIntoView(text && !hash ? { block: "center" } : undefined);
+  }
+
+  var stopped = false;
+  function stop() { stopped = true; }
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) {
+    window.addEventListener(ev, stop, { once: true, passive: true });
+  });
+
+  // Land, then land again after each change in page height, until the height
+  // has held still for 1.5 s (images, fonts, widgets) or 15 s have passed.
+  function settle() {
+    land();
+    if (stopped || !window.ResizeObserver) return;
+    var done = false, timer;
+    var ro = new ResizeObserver(function () { if (!stopped) land(); quiet(); });
+    function finish() { done = true; ro.disconnect(); }
+    function quiet() { clearTimeout(timer); timer = setTimeout(finish, 1500); }
+    ro.observe(document.body);
+    quiet();
+    setTimeout(function () { if (!done) finish(); }, 15000);
+  }
   function afterMath() {
     var mj = window.MathJax;
     var ready = mj && mj.startup && mj.startup.promise;
-    (ready || Promise.resolve()).then(land, land);
+    (ready || Promise.resolve()).then(settle, settle);
   }
   if (document.readyState === "complete") afterMath();
   else window.addEventListener("load", afterMath);
