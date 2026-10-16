@@ -1,0 +1,23 @@
+name: Check Bibliography DOIs
+
+# Thin caller for the shared reusable workflow in Morrison-Lab/gha.
+# The reusable workflow (and its bundled composite) reproduce the previous
+# standalone behavior: scan every *.bib in the repo and validate each DOI
+# resolves and matches its CrossRef metadata.
+# See https://github.com/Morrison-Lab/gha for inputs and versioning.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # Keep the job id (check-dois) matching the previous standalone workflow so
+  # the status-check context name doesn't change. Re-declare the least-privilege
+  # token the standalone job had; the reusable workflow only needs contents:read.
+  check-dois:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-bibliography-dois.yml@v2
