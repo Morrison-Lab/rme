@@ -1,14 +1,15 @@
 <script>
-// A link to #target scrolls the browser to the target before MathJax and the
-// images have set their final heights. Equations above the target then grow
-// and push it up out of view. Scroll to the target again once MathJax has
-// typeset the page, and keep doing so while the page height is still changing,
-// so the CSS scroll-margin-top in custom.scss places it mid-view.
-// A text fragment (#:~:text=...) is not in location.hash, so it is read from
-// the navigation entry (a browser that strips it leaves only the id
-// behaviour) and its first match is scrolled to the same way.
-// The reader's first scroll (wheel, touch drag, or an arrow, page, Home, End or
-// space key) ends the landing; a tap or click does not.
+// Typesetting equations and loading images change the height of everything
+// above the reader and push the text they were reading out of view. Keep the
+// reader's place: until they scroll, that is the link target (#id or a text
+// fragment, #:~:text=...); once they scroll, it is the block of text at about
+// a third of the way down the window. Each time the page height changes, put
+// that place back where it was in the window, until the height has held still
+// for 1.5 s after MathJax finishes (or 30 s have passed). The CSS
+// scroll-margin-top in custom.scss places a link target in the upper-middle.
+// A text fragment is not in location.hash, so it is read from the navigation
+// entry (a browser that strips it leaves only the id behaviour).
+// Following another in-page link ends this: the browser's jump is the new place.
 (function () {
   var hash = "", text = null;
   try { hash = decodeURIComponent(location.hash.slice(1).replace(/:~:.*$/, "")); } catch (e) {}
@@ -23,7 +24,6 @@
     if (parts.length > 1 && /^-/.test(parts[parts.length - 1])) parts.pop();
     if (parts[0]) text = decodeURIComponent(parts[0]);
   } catch (e) {}
-  if (!hash && !text) return;
 
   function findText() {
     var needle = text.replace(/\s+/g, " ").toLowerCase();
@@ -43,41 +43,66 @@
     var el = hash && document.getElementById(hash);
     return el || (text && findText());
   }
+
+  // The reader's place: null means the link target; otherwise a block of text
+  // and where its top sat in the window when the reader last scrolled.
+  var place = null, expectedY = null, engaged = false, queued = false, stopped = false;
+  var BLOCK = "p, li, h1, h2, h3, h4, h5, h6, figcaption, td, th, pre, blockquote";
+
   function land() {
-    var el = target();
-    if (el) el.scrollIntoView(text && !hash ? { block: "center" } : undefined);
+    if (place) {
+      var d = place.el.getBoundingClientRect().top - place.top;
+      if (Math.abs(d) >= 1) window.scrollBy(0, d);
+    } else {
+      var el = target();
+      if (el) el.scrollIntoView(text && !hash ? { block: "center" } : undefined);
+    }
+    expectedY = window.scrollY;
+  }
+  function track() {
+    queued = false;
+    if (stopped || Math.abs(window.scrollY - expectedY) < 1) return; // our own landing
+    expectedY = window.scrollY;
+    var line = window.innerHeight / 3;
+    var at = document.elementFromPoint(window.innerWidth / 2, line);
+    var el = at && at.closest(BLOCK);
+    if (!el) { // the point fell in a margin: take the first block below the line
+      var all = document.querySelectorAll(BLOCK);
+      for (var i = 0; i < all.length && !el; i++) {
+        if (all[i].getBoundingClientRect().bottom > line && !all[i].closest("mjx-container, nav")) el = all[i];
+      }
+    }
+    if (el) place = { el: el, top: el.getBoundingClientRect().top };
   }
 
-  var stopped = false;
-  function stop() { stopped = true; }
-  // Only an act of scrolling counts: a tap, click or modifier key does not.
-  ["wheel", "touchmove"].forEach(function (ev) {
-    window.addEventListener(ev, stop, { once: true, passive: true });
+  // Only the reader's own input makes a scroll theirs: the browser's jump to
+  // #id on load is not.
+  function engage() { engaged = true; }
+  ["wheel", "touchstart", "pointerdown"].forEach(function (ev) {
+    window.addEventListener(ev, engage, { passive: true });
   });
-  // Following another in-page link (a contents entry, say) ends it too.
-  window.addEventListener("hashchange", stop, { once: true });
   window.addEventListener("keydown", function (e) {
-    if (/^(Arrow|Page|Home$|End$| $)/.test(e.key)) stop();
+    if (/^(Arrow|Page|Home$|End$| $)/.test(e.key)) engage();
+  }, { passive: true });
+  window.addEventListener("scroll", function () {
+    if (engaged && !queued) { queued = true; requestAnimationFrame(track); }
   }, { passive: true });
 
-  // Land, then land again after each change in page height, until the height
-  // has held still for 1.5 s (images, fonts, widgets) or 15 s have passed.
-  function settle() {
-    if (stopped) return;
-    land();
-    if (stopped || !window.ResizeObserver) return;
-    var done = false, timer;
-    var ro = new ResizeObserver(function () { if (!stopped) land(); quiet(); });
-    function finish() { done = true; ro.disconnect(); }
-    function quiet() { clearTimeout(timer); timer = setTimeout(finish, 1500); }
+  var ro, timer, ready = false;
+  function finish() { stopped = true; if (ro) ro.disconnect(); }
+  function quiet() { clearTimeout(timer); if (ready) timer = setTimeout(finish, 1500); }
+  window.addEventListener("hashchange", finish, { once: true });
+  setTimeout(finish, 30000);
+
+  if (window.ResizeObserver) {
+    ro = new ResizeObserver(function () { if (!stopped) { land(); quiet(); } });
     ro.observe(document.body);
-    quiet();
-    setTimeout(function () { if (!done) finish(); }, 15000);
   }
   function afterMath() {
     var mj = window.MathJax;
-    var ready = mj && mj.startup && mj.startup.promise;
-    (ready || Promise.resolve()).then(settle, settle);
+    var p = mj && mj.startup && mj.startup.promise;
+    function done() { ready = true; if (!stopped) { land(); quiet(); } }
+    (p || Promise.resolve()).then(done, done);
   }
   if (document.readyState === "complete") afterMath();
   else window.addEventListener("load", afterMath);
