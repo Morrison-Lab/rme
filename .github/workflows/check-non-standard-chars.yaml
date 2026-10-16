@@ -17,9 +17,9 @@ on:
       - main
 
 jobs:
-  # Keep the job id (check-chars) matching the previous standalone workflow so
-  # the status-check context name doesn't change. Re-declare the least-privilege
-  # token the standalone job had; the reusable workflow only needs contents:read.
+  # The job id (check-chars) matches the sibling lab repositories, so the
+  # status-check context name is the same everywhere. The token is
+  # least-privilege; the reusable workflow only needs contents:read.
   check-chars:
     permissions:
       contents: read
