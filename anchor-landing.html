@@ -16,10 +16,12 @@
     var nav = performance.getEntriesByType("navigation")[0];
     var m = nav && /#.*?:~:.*?\btext=([^&]*)/.exec(nav.name);
     // Split on the raw commas before decoding: an encoded comma (%2C) is text.
-    var term = m && m[1].split(",").filter(function (s) {
-      return s && !/^-|-$/.test(s);
-    })[0];
-    if (term) text = decodeURIComponent(term);
+    // The form is [prefix-,]start[,end][,-suffix]: drop a prefix or suffix
+    // only when there are other parts, so a lone term may start or end in "-".
+    var parts = m ? m[1].split(",") : [];
+    if (parts.length > 1 && /-$/.test(parts[0])) parts.shift();
+    if (parts.length > 1 && /^-/.test(parts[parts.length - 1])) parts.pop();
+    if (parts[0]) text = decodeURIComponent(parts[0]);
   } catch (e) {}
   if (!hash && !text) return;
 
@@ -52,6 +54,8 @@
   ["wheel", "touchmove"].forEach(function (ev) {
     window.addEventListener(ev, stop, { once: true, passive: true });
   });
+  // Following another in-page link (a contents entry, say) ends it too.
+  window.addEventListener("hashchange", stop, { once: true });
   window.addEventListener("keydown", function (e) {
     if (/^(Arrow|Page|Home$|End$| $)/.test(e.key)) stop();
   }, { passive: true });
