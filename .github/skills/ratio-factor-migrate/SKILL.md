@@ -1,6 +1,6 @@
 ---
 name: ratio-factor-migrate
-description: Apply the ratio-vs-factor macro convention to rme math notation — generic \ratio when inputs are the quantities themselves, type-subscripted \ror/\hr/etc. only for covariate-pattern inputs, and \hazfactor/\oddsfactor/etc. for one-pattern-vs-baseline factors. Use when editing .qmd math that compares odds/hazards/rates/risks, or when asked to apply the ratio/factor convention.
+description: Apply the ratio-vs-factor macro convention to rme math notation --- generic \ratio when inputs are the quantities themselves, type-subscripted \ror/\hr/etc. only for covariate-pattern inputs, and \hazfactor/\oddsfactor/etc. for one-pattern-vs-baseline factors. Use when editing .qmd math that compares odds/hazards/rates/risks, or when asked to apply the ratio/factor convention.
 argument-hint: Optionally provide a chapter or subfile path to migrate
 ---
 
@@ -17,22 +17,22 @@ Classify each occurrence, then edit to the matching macro.
 
 Pick the macro by **what the inputs are**:
 
-1. **Generic ratio `\ratio` — inputs are the quantities themselves.**
+1. **Generic ratio `\ratio` --- inputs are the quantities themselves.**
    When the two things divided are the actual odds/hazards/rates
    (not covariate patterns), use the generic macro:
    `\ratio(\odds_1, \odds_2)`, `\ratiof{...}`.
    The type of ratio is already clear from the inputs,
-   so do **not** subscript it —
+   so do **not** subscript it ---
    write `\ratio(\odds_1, \odds_2)`, **not** `\ror(\odds_1, \odds_2)`.
 
-2. **Type-subscripted ratio `\ror`/`\hr`/… — inputs are covariate patterns.**
+2. **Type-subscripted ratio `\ror`/`\hr`/… --- inputs are covariate patterns.**
    When the inputs are covariate patterns (e.g. `\vx`, `\vxs`),
    the subscript is needed to say which kind of ratio it is:
-   - `\ror(\vx, \vxs)` — odds ratio
-   - `\hr(t \mid \vx : \vxs)` / `\hazratio` — hazard ratio
-   - `\rateratio`, `\riskratio`, `\prevratio`, `\cuhazratio` — likewise.
+   - `\ror(\vx, \vxs)` --- odds ratio
+   - `\hr(t \mid \vx : \vxs)` / `\hazratio` --- hazard ratio
+   - `\rateratio`, `\riskratio`, `\prevratio`, `\cuhazratio` --- likewise.
 
-3. **Factor `\hazfactor`/`\oddsfactor`/… — one pattern vs. the implicit baseline.**
+3. **Factor `\hazfactor`/`\oddsfactor`/… --- one pattern vs. the implicit baseline.**
    A factor compares **one** covariate pattern to the implicit baseline pattern
    (e.g. the Cox risk score `\hazfactor(\vx)`).
    Always use the subscripted factor macros:
@@ -86,7 +86,7 @@ group (e.g. `'\\(def|providecommand)\{?\\(...)'`) to catch both.
    The most common fix is `\ror(\odds_1, \odds_2)` → `\ratio(\odds_1, \odds_2)`
    (inputs are odds, not patterns).
 3. **Edit** with the appropriate macro.
-   Don't touch `macros.qmd` itself unless a needed macro is missing —
+   Don't touch `macros.qmd` itself unless a needed macro is missing ---
    and **never add comments to `macros.qmd`**
    (`%` breaks the macros-table parser;
    HTML comments break the LaTeX/PDF render).
