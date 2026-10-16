@@ -193,7 +193,7 @@ its scientific meaning
 
 ### Mean squared error
 
-We might want to minimize the **[mean squared error](https://morrison-lab.github.io/sds/estimation.html#def-mse)**,
+We might want to minimize the **[population mean squared error (pMSE)](https://morrison-lab.github.io/sds/estimation.html#def-mse)**,
 $\E{(y-\hat y)^2}$,
 for new observations
 that weren't in our data set when we fit the model.
@@ -211,7 +211,8 @@ Selecting a model by maximizing $R^2$ alone can lead to [overfitting](predictor-
 
 With a training/test split,
 we estimate coefficients in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)
-and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data:
+and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data.
+The root mean squared error in the held-out data is the **[sample root mean squared error (sRMSE)](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)**:
 
 $$
 \hat\b_{\text{train}} =
@@ -230,7 +231,7 @@ y_{\text{test},i} -
 $$
 
 $$
-\text{RMSE} = \sqrt{
+\text{sRMSE} = \sqrt{
 \frac{1}{n_{\text{test}}}
 \sum_{i \in \text{test set}} (\hat e_{i,\text{test}})^2
 }
@@ -282,7 +283,7 @@ and quartic models
 `mpg ~ wt + I(wt^2) + I(wt^3)`,
 and `mpg ~ wt + I(wt^2) + I(wt^3) + I(wt^4)`)
 on a validation set,
-then reports the chosen model's test [RMSE](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)
+then reports the chosen model's test [sRMSE](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)
 on untouched test data
 [@james2021islr2e, p. 213].
 
@@ -343,11 +344,11 @@ validation_results <- tibble::tibble(
   model = names(candidate_models)
 ) |>
   dplyr::mutate(
-    training_RMSE = purrr::map_dbl(
+    training_sRMSE = purrr::map_dbl(
       model,
       \(model_name) compute_rmse(candidate_models[[model_name]], train_dat)
     ),
-    validation_RMSE = purrr::map_dbl(
+    validation_sRMSE = purrr::map_dbl(
       model,
       \(model_name) compute_rmse(candidate_models[[model_name]], valid_dat)
     )
@@ -362,7 +363,7 @@ model_labels <- c(
 
 chosen_model_name <-
   validation_results |>
-  dplyr::arrange(validation_RMSE) |>
+  dplyr::arrange(validation_sRMSE) |>
   dplyr::slice(1) |>
   dplyr::pull(model)
 
@@ -374,7 +375,7 @@ chosen_model_validation_rmse <- compute_rmse(chosen_model, valid_dat)
 performance_comparison <- tibble::tibble(
   split = c("validation", "test"),
   model = chosen_model_name,
-  RMSE = c(
+  sRMSE = c(
     chosen_model_validation_rmse,
     compute_rmse(chosen_model, test_dat)
   )
@@ -587,19 +588,19 @@ legend(
 validation_results
 ```
 
-Training and validation RMSE for candidate models
+Training and validation sRMSE for candidate models
 :::
 
 The chosen model is
 the `r chosen_model_label`,
-because it has the lower validation RMSE.
+because it has the lower validation sRMSE.
 
 :::{#tbl-train-validation-test-rmse}
 ```{r}
 performance_comparison
 ```
 
-Validation and test RMSE
+Validation and test sRMSE
 for the chosen model
 :::
 
@@ -667,7 +668,7 @@ cv_results |>
 
 ```{r}
 compare_results <- tribble(
-  ~model, ~cvRMSE, ~r.squared, ~adj.r.squared, ~trainRMSE, ~loglik,
+  ~model, ~cv_sRMSE, ~r.squared, ~adj.r.squared, ~train_sRMSE, ~loglik,
   "full",
   cv_full$cv,
   summary(full_model)$r.squared,
