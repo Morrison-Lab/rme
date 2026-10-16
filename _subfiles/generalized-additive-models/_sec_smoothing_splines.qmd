@@ -1,8 +1,8 @@
 ::: notes
-Adapted from @james2021islr2e [§7.5] and @wood2017generalized [§5–6].
+Adapted from @james2021islr2e [§7.5] and @wood2017generalized [§5--6].
 :::
 
-Regression splines force the modeler to make several choices — basis type, number of knots, knot locations — that affect the result.
+Regression splines force the modeler to make several choices --- basis type, number of knots, knot locations --- that affect the result.
 **Smoothing splines** sidestep that decision tree by taking a different route: they place a knot at every data point and then **penalize wiggliness** to control overfitting.
 
 {{< slidebreak >}}
@@ -56,9 +56,9 @@ The optimal $\est{\l}$ is selected automatically by
 The trade-off is controlled by $\l$:
 
 - $\l \to 0$: the function passes through every data point ($g(x_i) = y_i$).
-  No penalty for wiggling — pure interpolation, badly overfits.
+  No penalty for wiggling --- pure interpolation, badly overfits.
 - $\l \to \infty$: the integrated squared second derivative is forced to zero, so $g$ is a straight line.
-  Maximum smoothness — reduces to ordinary linear regression.
+  Maximum smoothness --- reduces to ordinary linear regression.
 - Intermediate $\l$: a smooth nonparametric fit.
 ::::
 
@@ -118,16 +118,16 @@ For the **full smoothing-spline model** (intercept + smooth term), EDF ranges fr
 - $\text{EDF} \approx n$ when $\l \to 0$ (model interpolates every data
   point).
 
-When reading `mgcv::summary.gam()` output later in this chapter, the column labeled `edf` reports a **per-smooth EDF that excludes the global model intercept**, so a smooth that has been penalized down to a straight line shows up as EDF $\approx 1$ — *not* 2.
+When reading `mgcv::summary.gam()` output later in this chapter, the column labeled `edf` reports a **per-smooth EDF that excludes the global model intercept**, so a smooth that has been penalized down to a straight line shows up as EDF $\approx 1$ --- *not* 2.
 The two conventions are consistent (the intercept is counted once, outside the per-smooth column);
 they just split the parameter count differently.
 An EDF of 1 in `summary()` output therefore means "this smooth has collapsed to a line";
-5–8 means a moderately wiggly curve; larger EDFs indicate more local features.
+5--8 means a moderately wiggly curve; larger EDFs indicate more local features.
 ::::
 
 ## Choosing $\l$ automatically
 
-We don't pick $\l$ by hand — we pick it from the data using one
+We don't pick $\l$ by hand --- we pick it from the data using one
 of:
 
 - **Cross-validation** (typically leave-one-out for smoothing splines,
@@ -157,7 +157,7 @@ effective smoothness automatically.
 The "inference" row reflects the typical software pairings shown in the last row, not a fundamental property of the bases.
 Regression splines fit via `splines::ns()` + `lm()` / `glm()` use the usual linear-model machinery;
 smoothing splines fit via `mgcv::s()` + `mgcv::gam()` use Bayesian posterior intervals.
-A regression spline fit through `mgcv::gam()` with a fixed penalty (`sp = 0`) gets the Bayesian intervals too — the table is about software defaults, not the underlying bases.
+A regression spline fit through `mgcv::gam()` with a fixed penalty (`sp = 0`) gets the Bayesian intervals too --- the table is about software defaults, not the underlying bases.
 
 The two approaches **span the same function space** (piecewise cubic polynomials with continuity constraints) and often produce very similar fitted curves.
 The practical difference is who picks the smoothness:
@@ -193,6 +193,6 @@ summary(m_ss)  # reports EDF of the s(age) term
 plot(m_ss)     # plots the fitted smooth with CI band
 ```
 
-We'll return to `mgcv::s()` in @sec-gam-fitting — the
+We'll return to `mgcv::s()` in @sec-gam-fitting --- the
 same `s()` syntax extends to multi-predictor additive models with
 no additional machinery.
