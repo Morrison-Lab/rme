@@ -193,7 +193,7 @@ its scientific meaning
 
 ### Mean squared error
 
-We might want to minimize the **[mean squared error](https://morrison-lab.github.io/sds/estimation.html#def-mse)**,
+We might want to minimize the **[population mean squared error (pMSE)](https://morrison-lab.github.io/sds/estimation.html#def-mse)**,
 $\E{(y-\hat y)^2}$,
 for new observations
 that weren't in our data set when we fit the model.
@@ -211,7 +211,8 @@ Selecting a model by maximizing $R^2$ alone can lead to [overfitting](predictor-
 
 With a training/test split,
 we estimate coefficients in the [training data](https://morrison-lab.github.io/sds/model-validation.html#def-training-set)
-and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data:
+and compute [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error) in held-out data.
+The root mean squared error in the held-out data is the **sample root mean squared error (sRMSE)**:
 
 $$
 \hat\b_{\text{train}} =
@@ -282,7 +283,7 @@ and quartic models
 `mpg ~ wt + I(wt^2) + I(wt^3)`,
 and `mpg ~ wt + I(wt^2) + I(wt^3) + I(wt^4)`)
 on a validation set,
-then reports the chosen model's test [RMSE](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)
+then reports the chosen model's test [sRMSE](https://morrison-lab.github.io/sds/model-validation.html#def-prediction-rmse)
 on untouched test data
 [@james2021islr2e, p. 213].
 
@@ -587,19 +588,19 @@ legend(
 validation_results
 ```
 
-Training and validation RMSE for candidate models
+Training and validation sRMSE for candidate models
 :::
 
 The chosen model is
 the `r chosen_model_label`,
-because it has the lower validation RMSE.
+because it has the lower validation sRMSE.
 
 :::{#tbl-train-validation-test-rmse}
 ```{r}
 performance_comparison
 ```
 
-Validation and test RMSE
+Validation and test sRMSE
 for the chosen model
 :::
 

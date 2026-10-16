@@ -9,7 +9,7 @@ four common tests are:
   (the Fligner--Killeen test).
 - Levene / Brown--Forsythe test
   (a median-centered Levene variant,
-  where standard Levene centers on group means,
+  where standard Levene centers on group sample means,
   and Brown--Forsythe centers on group medians for more robustness;
   e.g., via `car::leveneTest(..., center = median)` or equivalent code).
 - `lmtest::bptest()` for error variance that changes with the [covariates](Intro-to-GLMs.qmd#def-predictors)
@@ -48,7 +48,7 @@ z_{gi} = |e_{gi} - c_g|,
 $$
 where $c_g$ is the group center.
 
-Classical Levene uses the group mean for $c_g$.
+Classical Levene uses the group sample mean for $c_g$.
 Brown--Forsythe uses the group median,
 which is more robust.
 
@@ -86,7 +86,7 @@ t_{\text{BF}} \approx t_{n_{1}+n_{2}-2}
 $$
 Here,
 $\bar z_{1}$ and $\bar z_{2}$
-are the means of the $z_{ij}$ values
+are the sample means of the $z_{ij}$ values
 in groups $i=1$ and $i=2$,
 $s_p$ is their pooled [standard deviation](https://morrison-lab.github.io/pds/variance-covariance.html#def-sd),
 and $n_{1}, n_{2}$ are the two group sample sizes.
