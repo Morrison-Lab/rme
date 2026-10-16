@@ -13,7 +13,7 @@ First, parse `$ARGUMENTS`: the first whitespace-delimited token is the **slug** 
 
 Steps:
 
-1. Create `chapters/<slug>.qmd` with YAML frontmatter containing the `title:` **and** a `format:` block that renames the `revealjs`, `pdf`, and `docx` outputs. The website profile renders every render-list page to all four project formats, and `revealjs` defaults its output to `<slug>.html` — the *same* path as the HTML page — which collides and breaks the publish workflow (see #966). Mirror the sibling appendices exactly:
+1. Create `chapters/<slug>.qmd` with YAML frontmatter containing the `title:` **and** a `format:` block that renames the `revealjs`, `pdf`, and `docx` outputs. The website profile renders every render-list page to all four project formats, and `revealjs` defaults its output to `<slug>.html` --- the *same* path as the HTML page --- which collides and breaks the publish workflow (see #966). Mirror the sibling appendices exactly:
 
    ```yaml
    ---
@@ -29,7 +29,7 @@ Steps:
    ---
    ```
 
-   Do NOT set `date:` — the book sets `date: last-modified` globally, and a per-page `date:` would override it. Do NOT add a top-level `#` heading in the body — Quarto renders the frontmatter `title:` as the page heading. If the page should be HTML-only (e.g. an interactive-diagram appendix), use `format:` with just `html: default` instead — that renders only HTML and cannot collide. Either way, `check-render-headers` CI enforces that every render-list page carries a collision-safe `format:` block.
+   Do NOT set `date:` --- the book sets `date: last-modified` globally, and a per-page `date:` would override it. Do NOT add a top-level `#` heading in the body --- Quarto renders the frontmatter `title:` as the page heading. If the page should be HTML-only (e.g. an interactive-diagram appendix), use `format:` with just `html: default` instead --- that renders only HTML and cannot collide. Either way, `check-render-headers` CI enforces that every render-list page carries a collision-safe `format:` block.
 2. Register the chapter in the `book.chapters:` list in `_quarto-book.yml` at a logical position (read the file first).
    If it belongs to an existing `part:`, nest it under that part.
    **Also** add an entry to the appropriate navbar dropdown (`Chapters` or `Appendices`) in `_quarto-website.yml`, and ensure the file is in the `render:` list.

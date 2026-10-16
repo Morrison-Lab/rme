@@ -85,7 +85,7 @@ Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 
 ## The risk set shrinks by the number of subjects who *leave* {#sec-risk-set}
 
-*Exam reference: **Exercise 1.1** (6 points) — compute the KM and Nelson-Aalen estimates of $S(t)$.*
+*Exam reference: **Exercise 1.1** (6 points) --- compute the KM and Nelson-Aalen estimates of $S(t)$.*
 
 ::: {.callout-warning}
 
@@ -99,7 +99,7 @@ instead of $4$.
 
 ::: {.solution}
 The number at risk $n_j$ is the number of subjects still under observation
-*just before* time $t_j$ — that is, everyone who has neither had the event nor
+*just before* time $t_j$ --- that is, everyone who has neither had the event nor
 been censored yet.
 
 Track the cohort of 7:
@@ -121,7 +121,7 @@ from all later risk sets.
 
 ## Nelson-Aalen estimates the *cumulative hazard* first, then exponentiates {#sec-na-exp}
 
-*Exam reference: **Exercise 1.1** (6 points) — compute the KM and Nelson-Aalen estimates of $S(t)$.*
+*Exam reference: **Exercise 1.1** (6 points) --- compute the KM and Nelson-Aalen estimates of $S(t)$.*
 
 ::: {.callout-warning}
 
@@ -171,7 +171,7 @@ or reporting $\hat\Lambda$ where $\esnaa$ was asked for, loses credit.
 
 ## Survival estimates are *step functions*: use the most recent event time {#sec-step-function}
 
-*Exam reference: **Exercise 1.3** (1 point) — the KM and NA survival estimates for $t = 17$ months.*
+*Exam reference: **Exercise 1.3** (1 point) --- the KM and NA survival estimates for $t = 17$ months.*
 
 ::: {.callout-warning}
 
@@ -197,7 +197,7 @@ Give the actual numbers, not just "it's flat."
 
 ## Median survival time is read off the curve, not modeled {#sec-median}
 
-*Exam reference: **Exercise 1.4** (1 point) — the KM and NA estimates of [median survival time](intro-to-survival-analysis.qmd#def-median-survival).*
+*Exam reference: **Exercise 1.4** (1 point) --- the KM and NA estimates of [median survival time](intro-to-survival-analysis.qmd#def-median-survival).*
 
 ::: {.callout-warning}
 
@@ -230,13 +230,13 @@ We can confirm this in R:
 quantile(KM_est, p = 0.5)$quantile
 ```
 
-No distributional assumption (exponential or otherwise) is used: the [Kaplan–Meier estimator](intro-to-survival-analysis.qmd#def-KM-estimator) is a
+No distributional assumption (exponential or otherwise) is used: the [Kaplan--Meier estimator](intro-to-survival-analysis.qmd#def-KM-estimator) is a
 nonparametric read-off of the estimated curve.
 :::
 
 ## How censored times are used: denominator yes, numerator no {#sec-censoring-role}
 
-*Exam reference: **Exercise 1.5** (2 points) — describe how the censored time(s) are utilized in the Kaplan-Meier estimate.*
+*Exam reference: **Exercise 1.5** (2 points) --- describe how the censored time(s) are utilized in the Kaplan-Meier estimate.*
 
 ::: {.callout-warning}
 
@@ -270,7 +270,7 @@ overweight ($B$), and high cholesterol ($C$).
 
 | Characteristic       | $\log(\widehat{HR})$ | $\widehat{HR}$ | 95% CI for HR | $p$ |
 |:---------------------|:--------------------:|:--------------:|:-------------:|:---:|
-| nonsmoker (ref.)     | –        | –    | –            | –       |
+| nonsmoker (ref.)     | --        | --    | --            | --       |
 | light smoker ($L$)   | 0.36     | 1.43 | (1.05, 1.95) | 0.023   |
 | heavy smoker ($H$)   | 0.78     | 2.18 | (1.63, 2.91) | < 0.001 |
 | age per decade ($A$) | 0.66     | 1.94 | (1.56, 2.40) | < 0.001 |
@@ -291,7 +291,7 @@ $$\V(\hat\beta_L) = 0.024840,
 
 ## Writing the model: name every assumption and show where it is used {#sec-write-model}
 
-*Exam reference: **Exercise 2.1** (10 points) — write the mathematical form of the proportional hazards model corresponding to Table 1.*
+*Exam reference: **Exercise 2.1** (10 points) --- write the mathematical form of the proportional hazards model corresponding to Table 1.*
 
 ::: {.callout-warning}
 
@@ -361,12 +361,12 @@ $$\Delta\loghaz(\tilde x) = \tilde x \cdot \tilde\beta
 = \beta_L\, l + \beta_H\, h + \beta_A\, a + \beta_P\, p + \beta_B\, b + \beta_C\, c$$
 
 Notice that the baseline hazard $\lambda_0(t)$ is carried along symbolically the
-whole time — we never assume a shape for it.
+whole time --- we never assume a shape for it.
 :::
 
 ## Interpreting a hazard ratio: magnitude, reference, adjustment, *and* significance {#sec-interpret}
 
-*Exam reference: **Exercise 2.2** (4 points) — summarize how baseline smoking category is associated with hazard of incident CHD.*
+*Exam reference: **Exercise 2.2** (4 points) --- summarize how baseline smoking category is associated with hazard of incident CHD.*
 
 ::: {.callout-warning}
 
@@ -405,7 +405,7 @@ reference, rather than lumping them together.
 
 ## A hazard ratio for a non-unit change: exponentiate {#sec-hr-multiunit}
 
-*Exam reference: **Exercise 2.3** (2 points) — the hazard ratio associated with a 7.5-year increase in age.*
+*Exam reference: **Exercise 2.3** (2 points) --- the hazard ratio associated with a 7.5-year increase in age.*
 
 ::: {.callout-warning}
 
@@ -414,7 +414,7 @@ reference, rather than lumping them together.
 For the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) associated with a **7.5-year** increase in age (with the
 table reporting the HR per **decade**), the errors were:
 
-- Multiplying: $1.94 \times 0.75 = 1.46$. **Wrong** — the HR for a multi-unit
+- Multiplying: $1.94 \times 0.75 = 1.46$. **Wrong** --- the HR for a multi-unit
   change is *not* linear in the HR.
 - Arithmetic slips that produced answers like 2.08.
 :::
@@ -438,7 +438,7 @@ multiplication.
 
 ## Comparing two coefficients: variance of a *difference* {#sec-wald}
 
-*Exam reference: **Exercise 2.4** (2 points) — test whether the hazard of incident CHD differs between heavy and light smokers;
+*Exam reference: **Exercise 2.4** (2 points) --- test whether the hazard of incident CHD differs between heavy and light smokers;
 compute the [z-statistic](https://morrison-lab.github.io/sds/inference.html#def-test-statistic) and two-sided [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value).*
 
 ::: {.callout-warning}
@@ -470,7 +470,7 @@ entries of the [covariance matrix](https://morrison-lab.github.io/pds/variance-c
 $$\V(\hat\beta_H - \hat\beta_L)
 = \V(\hat\beta_H) + \V(\hat\beta_L) - 2\,\Covt(\hat\beta_H, \hat\beta_L)$$
 
-The $-2\,\Covt$ term is essential — its sign is **minus** for a difference.
+The $-2\,\Covt$ term is essential --- its sign is **minus** for a difference.
 Plugging in:
 
 ```{r}
@@ -504,7 +504,7 @@ covariance cell as the variance gave a wildly wrong SE and an absurd $z$.
 
 ## A confidence interval for a hazard ratio: build it on the log scale, then exponentiate {#sec-ci-hr}
 
-*Exam reference: **Exercise 2.5** (2 points) — a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) comparing heavy to light smokers.*
+*Exam reference: **Exercise 2.5** (2 points) --- a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the [hazard ratio](intro-to-survival-analysis.qmd#def-hazard-ratio) comparing heavy to light smokers.*
 
 ::: {.callout-warning}
 
@@ -549,10 +549,10 @@ hypothesis test agree.
 | 1 | 1.1 | Risk set after censoring (@sec-risk-set) | Remove **everyone** who has an event *or* is censored from later risk sets. |
 | 2 | 1.1 | Nelson-Aalen (@sec-na-exp) | Sum hazards $d_j/n_j$, then $\esnaa = \exp{-\hat\Lambda}$. |
 | 3 | 1.3 | Reading $\hat S(t)$ (@sec-step-function) | Step function: use the most recent event time $\le t$; give the number. |
-| 4 | 1.4 | Median survival (@sec-median) | First $t$ with $\hat S(t) \le 0.5$ — not a mean, not an exponential fit. |
+| 4 | 1.4 | Median survival (@sec-median) | First $t$ with $\hat S(t) \le 0.5$ --- not a mean, not an exponential fit. |
 | 5 | 1.5 | Role of censoring (@sec-censoring-role) | Denominator until censoring; never the event numerator. |
 | 6 | 2.1 | Writing the model (@sec-write-model) | Name **and** apply every assumption; baseline hazard stays unspecified. |
 | 7 | 2.2 | Interpreting an HR (@sec-interpret) | Magnitude + reference + adjustment + significance; HR $\ne$ risk/odds. |
-| 8 | 2.3 | HR for a non-unit change (@sec-hr-multiunit) | $HR^{\,c} = \exp{c\beta}$ — exponentiate, don't multiply. |
+| 8 | 2.3 | HR for a non-unit change (@sec-hr-multiunit) | $HR^{\,c} = \exp{c\beta}$ --- exponentiate, don't multiply. |
 | 9 | 2.4 | Comparing two coefficients (@sec-wald) | $\V(\hat\beta_H - \hat\beta_L) = \V_H + \V_L - 2\,\Covt$. |
 | 10 | 2.5 | CI for an HR (@sec-ci-hr) | Build on the log scale, then exponentiate the endpoints. |

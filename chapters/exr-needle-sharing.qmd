@@ -52,7 +52,7 @@ needles <-
 ## Introduction
 
 This example, from @vittinghoff2e [§8.3.1],
-models *risky drug-use behavior* — needle sharing — among
+models *risky drug-use behavior* --- needle sharing --- among
 injection drug users (IDUs),
 a behavior of public-health interest because shared syringes can transmit
 blood-borne infections.
@@ -234,7 +234,7 @@ Demographic variables (`age`, `sex`, `ethn`, darker grey) are fixed at
 with arrows into the time-varying covariates, injection frequency, and the outcome.
 Because every other covariate is measured at the same single interview,
 we cannot order the time-varying covariates (lighter grey) causally among themselves;
-their mutual associations — from shared, unobserved earlier circumstances —
+their mutual associations --- from shared, unobserved earlier circumstances ---
 are drawn as dashed, non-directional edges.
 Each time-varying covariate may still affect injection frequency and the 30-day
 outcome, shown as solid arrows into `nivdu` and `shared_syr`.
@@ -246,7 +246,7 @@ conditioning on it can induce associations among them (selection bias).
 
 ::: notes
 We treat **homelessness as the exposure of interest**
-and ask how it affects the number of shared syringes —
+and ask how it affects the number of shared syringes ---
 following @vittinghoff2e [§8.3.1], who model this outcome on `homeless`.
 
 Injection frequency `nivdu` is a **[mediator](causal-inference.qmd#def-mediator)**:
@@ -266,8 +266,8 @@ and adjust for the measured covariates to control the [confounding](causal-infer
 A single fitted coefficient is therefore an **adjusted association**,
 not an isolated causal effect.
 
-Conditioning on study inclusion (`selected`) is unavoidable —
-we only observe people who were sampled —
+Conditioning on study inclusion (`selected`) is unavoidable ---
+we only observe people who were sampled ---
 but because several covariates influence who is sampled,
 it can induce **selection bias** that no covariate adjustment removes.
 :::
@@ -411,8 +411,8 @@ Why not use `nivdu` as an [offset](https://morrison-lab.github.io/pds/distributi
 We avoid an offset here for two reasons:
 
 - **`nivdu` is a [mediator](causal-inference.qmd#def-mediator), not an exposure window.**
-An offset is appropriate when its variable is a known denominator —
-person-time or population at risk — that is external to the causal
+An offset is appropriate when its variable is a known denominator ---
+person-time or population at risk --- that is external to the causal
 question. Injection frequency is instead on the causal path from
 homelessness to sharing (@fig-needles-dag): being homeless can raise
 sharing partly by raising how often a person injects. Conditioning on it
@@ -427,9 +427,9 @@ one-for-one with injecting, which the data need not support.
 Vittinghoff's analysis uses neither an offset nor `nivdu` as a covariate.
 
 ::: {.callout-tip title="Rule of thumb"}
-An offset's exposure is usually something fixed by the *study design* —
+An offset's exposure is usually something fixed by the *study design* ---
 person-time of follow-up, population at risk, area surveyed, number of
-trials — a known denominator that remains *exogenous* to the question
+trials --- a known denominator that remains *exogenous* to the question
 (not caused by the predictors of interest).
 When the candidate denominator is instead something the participants
 *did*, and the predictors also influence it (here, how often they inject),
@@ -438,9 +438,9 @@ directly instead of dividing by it.
 :::
 
 We adjust for the measured covariates to control the confounding they carry
-in @fig-needles-dag — demographic (`age`, `sex`, `ethn`),
+in @fig-needles-dag --- demographic (`age`, `sex`, `ethn`),
 social (`polydrug`), serostatus (`hivstat`), and trauma/mental-health
-(`sexabuse`, hopelessness score `hplsns`) — using **main effects only**.
+(`sexabuse`, hopelessness score `hplsns`) --- using **main effects only**.
 We exclude the mediator `nivdu` (discussed in @exr-nivdu-offset) and the depression indicator
 `dprsn_dx`, whose `1`/`5` coding is undocumented in the source data and
 so cannot be interpreted.
@@ -589,7 +589,7 @@ count by `r round(irr[["hplsns"]], 2)`,
 adjusting for the other covariates.
 
 ::: {.callout-warning title="Overdispersion caveat"}
-These data are highly [overdispersed](#def-overdispersion) — the variance far exceeds the mean —
+These data are highly [overdispersed](#def-overdispersion) --- the variance far exceeds the mean ---
 so the model-based Poisson [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) are too small.
 @vittinghoff2e [§8.3.1] recommends robust standard errors or a
 [negative-binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) model for this example.

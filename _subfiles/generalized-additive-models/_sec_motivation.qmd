@@ -26,8 +26,8 @@ A linear model in $\text{age}$ would average those regimes into a single slope, 
 ::::{#exm-bmi-mortality}
 #### BMI and mortality
 
-BMI–mortality curves are **J-** or **U-shaped**: very low and very high
-BMI both carry excess risk, with the minimum somewhere in the 22–25
+BMI--mortality curves are **J-** or **U-shaped**: very low and very high
+BMI both carry excess risk, with the minimum somewhere in the 22--25
 kg/m² range [@aune2016bmi].
 A linear or even quadratic fit misses the asymmetry between the
 underweight and obese tails.
@@ -39,7 +39,7 @@ underweight and obese tails.
 #### Outdoor temperature and daily mortality
 
 Time-series studies of mortality and daily temperature consistently show a **smooth nonlinear "bathtub"** relationship: both very cold and very hot days raise short-term mortality risk, with a location-specific optimum in between [@gasparrini2015mortality].
-The optimum and the steepness of the cold/heat slopes vary by city, season, and population — features that no single linear term can capture.
+The optimum and the steepness of the cold/heat slopes vary by city, season, and population --- features that no single linear term can capture.
 ::::
 
 The pattern in @exm-age-mortality, @exm-bmi-mortality, and @exm-temperature-mortality is general: many epidemiologic exposures have an effect on outcome that is **smooth but not monotone**.
@@ -59,14 +59,14 @@ The linear predictor remains additive across predictors (so each predictor's con
 
 The rest of this chapter builds up to GAMs in stages:
 
-1. **Polynomial regression** and **step functions** — the simplest
+1. **Polynomial regression** and **step functions** --- the simplest
    ways to introduce nonlinearity, useful but limited.
-2. **Basis functions** — the general framework that polynomial and
+2. **Basis functions** --- the general framework that polynomial and
    step expansions both fit into, and the route to splines.
-3. **Regression splines** and **smoothing splines** — the smoothers
+3. **Regression splines** and **smoothing splines** --- the smoothers
    most commonly used inside GAMs.
-4. **Local regression (LOESS)** — an alternative smoother family.
-5. **GAMs** — additive combinations of any of the smoothers listed in this section,
+4. **Local regression (LOESS)** --- an alternative smoother family.
+5. **GAMs** --- additive combinations of any of the smoothers listed in this section,
    fit via penalized likelihood with automatic smoothness selection.
 
 We'll fit GAMs in R using the `mgcv` package [@wood2017generalized],

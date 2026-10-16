@@ -55,15 +55,15 @@ $$b_k(X) = \indicp{c_{k-1} < X \le c_k}, \quad k = 1, \ldots, K+1.$$
 Once we see polynomial and step-function regression as instances of the same template, we can ask: *which other basis functions might be worth trying?*
 Two answers turn out to be especially useful:
 
-- **Truncated power basis functions** — $b_k(X) = (X - \xi_k)_+^d$ for chosen knots $\xi_k$.
+- **Truncated power basis functions** --- $b_k(X) = (X - \xi_k)_+^d$ for chosen knots $\xi_k$.
   These give the **regression spline** family, which enforces piecewise-polynomial structure with continuity and smoothness constraints at the knots (developed in the next section).
-- **B-spline basis functions** — a numerically well-conditioned
+- **B-spline basis functions** --- a numerically well-conditioned
   alternative basis that spans the same space of piecewise
   polynomials as the truncated power basis, but with locally
   supported basis functions (each $b_k$ is nonzero only on a small
   region of the $x$-axis).
 
-Both of these are still **linear** in the coefficients, so all of the GLM machinery — likelihood, standard errors, Wald tests, AIC, etc. — applies unchanged.
+Both of these are still **linear** in the coefficients, so all of the GLM machinery --- likelihood, standard errors, Wald tests, AIC, etc. --- applies unchanged.
 The only thing that changes is the design matrix: each row $i$ of the design matrix has entries $1, b_1(x_i), \ldots, b_K(x_i)$ instead of $1, x_i$.
 
 ## The general estimation recipe
@@ -83,7 +83,7 @@ $b_1(\cdot), \ldots, b_K(\cdot)$:
 
 2. **Fit by least squares (or MLE for a GLM).**
    The OLS estimator $\eb = (\tp{\mat{B}} \mat{B})^{-1} \tp{\mat{B}} \mat{y}$
-   minimizes the residual sum of squares — exactly the linear
+   minimizes the residual sum of squares --- exactly the linear
    regression machinery from earlier chapters, just with a different
    design matrix.
 
@@ -91,6 +91,6 @@ $b_1(\cdot), \ldots, b_K(\cdot)$:
    For a dense grid of $x$ values, compute $\est{y}(x) = \eb_0 + \sum_k \eb_k b_k(x)$ and plot.
    Standard errors and pointwise confidence bands come from the usual linear model formulas applied to $\mat{B}$.
 
-The remaining design decision is **which basis functions to use** —
+The remaining design decision is **which basis functions to use** ---
 and that choice is what distinguishes regression splines from
 smoothing splines from local regression from GAMs.
