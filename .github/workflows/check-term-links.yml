@@ -1,0 +1,23 @@
+# Thin caller of Morrison-Lab/gha's reusable term-link check.
+# It flags a defined term whose first use in a div, or in a paragraph outside
+# a div, is not linked to its definition (terms are defined and linked at first use).
+# Warn-only and diff-scoped: it reports only lines a PR adds.
+# No `push` trigger: with no PR base to diff against, the reusable workflow
+# skips, so a push run would report success having checked nothing.
+name: Check term links
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-term-links.yml@v3
+    with:
+      # `**`, not `*`: gha's matcher stops a single `*` at a `/`.
+      paths-ignore: '_extensions/**'
+      # A manual run has no PR to diff against, and would otherwise skip
+      # having examined nothing; make it report the whole tree instead.
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
