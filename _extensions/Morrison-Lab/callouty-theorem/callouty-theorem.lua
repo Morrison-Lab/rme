@@ -110,7 +110,7 @@ local function read_meta(meta)
   callouty_meta = stringify_meta(meta['callouty-theorem'])
   quarto.doc.add_html_dependency({
     name = 'callouty-theorem',
-    version = '1.2.2',
+    version = '1.3.0',
     stylesheets = {'callouty-theorem.css'},
     scripts = {'callouty-theorem.js'}
   })
@@ -194,6 +194,26 @@ local function apply_div_callout_overrides(callout_tbl, source_attr)
   end
 end
 
+-- LaTeX cannot nest tcolorbox callouts: Quarto prints an inner one as a block quote
+-- headed by its type name ("Tbl"), so in PDF a float already inside a callout
+-- (an example, say) stays plain.
+-- A callout is seen before its content, so it can mark the floats inside it.
+local nested_floats = {}
+
+local function mark_nested_floats(blocks)
+  if not blocks or not quarto.doc.is_format("latex") then
+    return
+  end
+  -- Inside a callout's content a custom node is still its serialized Div.
+  pandoc.Blocks(blocks):walk({
+    Div = function(div)
+      if div.attributes["__quarto_custom_type"] == "FloatRefTarget" then
+        nested_floats[div.attributes["__quarto_custom_id"]] = true
+      end
+    end
+  })
+end
+
 local function calloutify(el, is_proof)
   local typ, my_types, theorem_ctor
   if is_proof then
@@ -261,15 +281,58 @@ local function calloutify(el, is_proof)
     callout_tbl.attr = pandoc.Attr('', {'callouty-titled'})
   end
 
+  mark_nested_floats((el.div and el.div.content) or el.content)
   callout_tbl.content = theorem_ctor(el)
   return quarto.Callout(callout_tbl)
 end
 
--- Run in two passes so we process metadata
+-- Figures and tables: Quarto parses a `::: {#fig-x}` div and a `: caption {#tbl-x}`
+-- table into a FloatRefTarget node, which is neither a theorem nor a proof.
+-- The callout only wraps it, so Quarto still numbers it and resolves `@fig-x`.
+-- The caption already carries "Figure 1", so there is no title override or `title-ref`.
+local float_types = { fig = true, tbl = true }
+
+local function calloutify_float(el)
+  local typ = refType(el.identifier)
+  if not typ or not float_types[typ] then
+    return el
+  end
+  if not callouty_meta or not callouty_meta[typ] then
+    return el
+  end
+  -- Quarto moves a margin float out of its container, which would leave the
+  -- callout empty in the main column, so a margin float stays as it is.
+  if el.classes and el.classes:includes("column-margin") then
+    return el
+  end
+  local node = el.__quarto_custom_node
+  if not node or nested_floats[node.attributes["__quarto_custom_id"]] then
+    return el
+  end
+  local callout_tbl = {type = "note"}
+  if type(callouty_meta[typ]) == "table" and type(callouty_meta[typ]["callout"]) == "table" then
+    callout_tbl = shallow_copy(callouty_meta[typ]["callout"])
+  end
+  apply_div_callout_overrides(callout_tbl, {attributes = el.attributes})
+
+  -- The filter receives the node's data table; the node itself, which carries every
+  -- field (caption, subfigures, layout), is its `__quarto_custom_node`.
+  -- Rebuilding it field by field would drop whatever the list missed.
+  callout_tbl.content = pandoc.Blocks({el.__quarto_custom_node})
+  -- Top-down, and do not descend: a subfigure ("(a)" in a panel) stays plain
+  -- inside its panel's callout.
+  return quarto.Callout(callout_tbl), false
+end
+
+-- Run in three passes so we process metadata
 -- and then process the divs
 return {
   { Meta = read_meta },
   { Theorem = function(el) return calloutify(el, false) end,
     Proof = function(el) return calloutify(el, true) end
+  },
+  { traverse = 'topdown',
+    Callout = function(callout) mark_nested_floats(callout.content) end,
+    FloatRefTarget = calloutify_float
   }
 }
