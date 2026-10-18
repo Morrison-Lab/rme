@@ -108,6 +108,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -433,7 +434,7 @@ Table&nbsp;1: Hypothetical follow-up data for six patients
 </div>
 <p><strong>Naive approach 1: treat censored patients as event-free.</strong> Counting patients B and D as relapse-free gives <span class="math inline">\(2/6 \approx 0.333\)</span>. This approach can only <em>under</em>estimate the risk, because any relapses that B or D experienced after withdrawal are counted as non-relapses.</p>
 <p><strong>Naive approach 2: drop patients with unknown status.</strong> Discarding patients B and D gives <span class="math inline">\(2/4 = 0.5\)</span>. This approach throws away the information that B stayed relapse-free for 5 months and D for 9 months, so in this example it <em>over</em>estimates the risk.</p>
-<p><strong>Using the censored observations.</strong> The <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimator</a> keeps each censored patient in the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> until their censoring time <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 2</a>)</span>. Relapses occur at 3 months (6 patients at risk) and at 7 months (4 patients at risk: C, D, E, F), so</p>
+<p><strong>Using the censored observations.</strong> The <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier estimator</a> keeps each censored patient in the <a href="../chapters/intro-to-survival-analysis.html#def-risk-set">risk set</a> until their censoring time <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 2]</a></span>. Relapses occur at 3 months (6 patients at risk) and at 7 months (4 patients at risk: C, D, E, F), so</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(12\right)\mathclose{}
@@ -450,7 +451,7 @@ Table&nbsp;1: Hypothetical follow-up data for six patients
 &amp;&amp; \text{(divide)}
 \end{aligned}
 \]</span></p>
-<p>and the estimated 12-month risk is <span class="math inline">\(1 - 0.625 = 0.375\)</span>. That estimate lies between the two naive estimates, and it is valid under <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">non-informative censoring</a> <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 1</a>)</span>.</p>
+<p>and the estimated 12-month risk is <span class="math inline">\(1 - 0.625 = 0.375\)</span>. That estimate lies between the two naive estimates, and it is valid under <a href="../chapters/intro-to-survival-analysis.html#def-noninformative-censoring">non-informative censoring</a> <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 1]</a></span>.</p>
 </div>
 </section></section><section><section id="module-roadmap" class="title-slide slide level1 center" data-number="2"><h1>
 <span class="header-section-number">2</span> Module roadmap</h1>
@@ -828,9 +829,11 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     initRevealJsHtmlLink();
   }
 })();
-</script><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</script><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-kleinbaum2012survival" class="csl-entry" role="listitem">
-Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-6646-9">https://link.springer.com/book/10.1007/978-1-4419-6646-9</a>.
+<div class="csl-left-margin">[1] </div>
+<div class="csl-right-inline">D. G. Kleinbaum and M. Klein, <em>Survival analysis: A self-learning text</em>, 3rd ed. Springer, 2012. Available: <a href="https://link.springer.com/book/10.1007/978-1-4419-6646-9">https://link.springer.com/book/10.1007/978-1-4419-6646-9</a>
+</div>
 </div>
 </div>
 </section></section>

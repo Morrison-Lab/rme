@@ -111,6 +111,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -372,8 +373,8 @@ text-align: center;
 
 </section><section class="slide level2"><p>This content is adapted from:</p>
 <ul>
-<li><span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 10</a>)</span></li>
-<li><span class="citation" data-cites="heinze2018variable">(<a href="#/references" role="doc-biblioref" onclick="">Heinze et al. 2018</a>)</span></li>
+<li><span class="citation" data-cites="vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 10]</a></span></li>
+<li><span class="citation" data-cites="heinze2018variable"><a href="#/references" role="doc-biblioref" onclick="">[2]</a></span></li>
 </ul></section></section><section><section id="sec-pred-sel-intro" class="title-slide slide level1 center" data-number="1"><h1>
 <span class="header-section-number">1</span> Introduction</h1>
 
@@ -396,7 +397,7 @@ text-align: center;
 <strong>Reduced power</strong>: failing to adjust for strong predictors of the outcome can reduce statistical power.</li>
 </ul></section><section id="sec-pred-sel-strategies" class="slide level2 scrollable" data-number="1.2"><h2>
 <span class="header-section-number">1.2</span> Strategies for predictor selection</h2>
-<p><span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, chap. 10</a>)</span> describes several general approaches to predictor selection:</p>
+<p><span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 10]</a></span> describes several general approaches to predictor selection:</p>
 <ol type="1">
 <li><p><strong>Science-driven (purposeful) selection</strong>: Use subject-matter knowledge and a <a href="../chapters/causal-inference.html#sec-pred-sel-dag">causal diagram (DAG)</a> to identify which variables to include. Science-driven selection is the preferred approach when the goal is causal inference.</p></li>
 <li><p><strong>Testing-based selection</strong>: Use statistical tests to decide which predictors to include. Examples include forward selection, backward elimination, and stepwise selection. These methods have well-known problems and should be used with caution (see <a href="#/sec-pred-sel-stepwise" class="quarto-xref">Section&nbsp;7</a>).</p></li>
@@ -428,23 +429,23 @@ text-align: center;
 
 </section><section class="slide level2"></section><section id="sec-pred-sel-goals" class="slide level2" data-number="2.1"><h2>
 <span class="header-section-number">2.1</span> Three inferential goals</h2>
-<p>The appropriate strategy for predictor selection depends on the inferential goal of the analysis. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, chap. 10</a>)</span> distinguishes three distinct goals:</p>
+<p>The appropriate strategy for predictor selection depends on the inferential goal of the analysis. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 10]</a></span> distinguishes three distinct goals:</p>
 <h3 id="sec-pred-sel-goal-pred">Goal 1: Prediction</h3>
 <p>The primary aim is to minimize <a href="https://morrison-lab.github.io/sds/prediction.html#def-prediction-error">prediction error</a> for new observations. The predictors’ individual causal interpretations are secondary.</p>
 <div id="exm-pred-sel-goal-pred" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1</strong></span> <em>Example</em>: <span class="citation" data-cites="Walter2001">Walter et al. (<a href="#/references" role="doc-biblioref" onclick="">2001</a>)</span> developed a model to identify older adults at high risk of death following hospitalization, using backward selection on a development set and validating predictions in an independent hospital.</p>
+<p><span class="theorem-title"><strong>Example 1</strong></span> <em>Example</em>: <span class="citation" data-cites="Walter2001">Walter et al. <a href="#/references" role="doc-biblioref" onclick="">[3]</a></span> developed a model to identify older adults at high risk of death following hospitalization, using backward selection on a development set and validating predictions in an independent hospital.</p>
 </div>
 <p>For this goal, we use measures of <strong>prediction error</strong> (PE) to choose among candidate models. <a href="#/def-overfitting">Overfitting</a> — the tendency of flexible models to fit noise — is the central concern. Strategies such as <a href="#/def-kfold">cross-validation</a> and penalized regression (see <a href="#/sec-pred-sel-prediction" class="quarto-xref">Section&nbsp;4</a> and <a href="#/sec-pred-sel-lasso" class="quarto-xref">Section&nbsp;9</a>) protect against overfitting.</p>
 <h3 id="sec-pred-sel-goal-eval">Goal 2: Evaluating a predictor of primary interest</h3>
 <p>The aim is to obtain a valid, minimally confounded estimate of the association between a specific exposure and the outcome.</p>
 <div id="exm-pred-sel-goal-eval" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2</strong></span> <em>Example</em>: <span class="citation" data-cites="Grodstein2001">Grodstein et al. (<a href="#/references" role="doc-biblioref" onclick="">2001</a>)</span> estimated the effect of hormone therapy on CHD risk in the Nurses’ Health Study (NHS), controlling for a wide range of known CHD risk factors to minimize confounding.</p>
+<p><span class="theorem-title"><strong>Example 2</strong></span> <em>Example</em>: <span class="citation" data-cites="Grodstein2001">Grodstein et al. <a href="#/references" role="doc-biblioref" onclick="">[4]</a></span> estimated the effect of hormone therapy on CHD risk in the Nurses’ Health Study (NHS), controlling for a wide range of known CHD risk factors to minimize confounding.</p>
 </div>
 <p>In observational studies, <a href="../chapters/causal-inference.html#def-confounding-obs">confounding</a> is the primary concern. In randomized trials (like HERS), treatment is already unconfounded by design, but adjusting for strong prognostic covariates can improve precision. DAGs (see the <a href="../chapters/causal-inference.html#sec-pred-sel-dag">causal inference chapter</a>) are especially useful for this goal.</p>
 <h3 id="sec-pred-sel-goal-id">Goal 3: Identifying the important predictors of an outcome</h3>
 <p>The aim is to discover which predictors are independently associated with the outcome.</p>
 <div id="exm-pred-sel-goal-id" class="theorem example">
-<p><span class="theorem-title"><strong>Example 3</strong></span> <em>Example</em>: <span class="citation" data-cites="Orwoll1996">Orwoll et al. (<a href="#/references" role="doc-biblioref" onclick="">1996</a>)</span> examined independent predictors of bone mass in the Study of Osteoporotic Fractures (SOF), including all predictors <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">statistically significant</a> at <span class="math inline">\(p &lt; 0.05\)</span> in age-adjusted models.</p>
+<p><span class="theorem-title"><strong>Example 3</strong></span> <em>Example</em>: <span class="citation" data-cites="Orwoll1996">Orwoll et al. <a href="#/references" role="doc-biblioref" onclick="">[5]</a></span> examined independent predictors of bone mass in the Study of Osteoporotic Fractures (SOF), including all predictors <a href="https://morrison-lab.github.io/sds/inference.html#def-statistically-significant">statistically significant</a> at <span class="math inline">\(p &lt; 0.05\)</span> in age-adjusted models.</p>
 </div>
 <p>Identifying important predictors is the most challenging goal because inferences about multiple predictors are of direct interest, making false-positive findings and unstable selections particular concerns. Inclusive models with cautious interpretation are preferred (see <a href="#/sec-pred-sel-multiple" class="quarto-xref">Section&nbsp;6.1</a>).</p>
 <aside class="notes"><p>In practice, these goals often overlap. For example, an analysis can estimate the causal effect of treatment (Goal 2) while also selecting additional prognostic covariates to improve individualized risk prediction performance (Goal 1) in the same model-building workflow.</p>
@@ -479,7 +480,7 @@ text-align: center;
 <p><strong>Video lecture</strong></p>
 </div>
 <div class="callout-content">
-<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-20.mp4"><em>Prediction and Classification</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-6%20Measures%20of%20Classification%20Success.pdf">slides</a>) covers sensitivity, <a href="https://morrison-lab.github.io/sds/classification.html#def-specificity">specificity</a>, predictive values, and ROC curves for classifying outcomes with a fitted <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic model</a> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-20.mp4"><em>Prediction and Classification</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-6%20Measures%20of%20Classification%20Success.pdf">slides</a>) covers sensitivity, <a href="https://morrison-lab.github.io/sds/classification.html#def-specificity">specificity</a>, predictive values, and ROC curves for classifying outcomes with a fitted <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic model</a> <span class="citation" data-cites="rocke2021epi204"><a href="#/references" role="doc-biblioref" onclick="">[6]</a></span>.</p>
 </div>
 </div>
 </div>
@@ -721,7 +722,7 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
 <li>Stop when all remaining predictors meet the retention criterion.</li>
 </ol>
 <p>The liberal threshold (<span class="math inline">\(p &gt; 0.2\)</span> rather than <span class="math inline">\(p &gt; 0.05\)</span>) is important for confounding control: in small samples, even important confounders may have large p-values, and removing them could introduce <a href="https://morrison-lab.github.io/sds/estimation.html#def-bias">bias</a>.</p>
-<p>An alternative retention criterion is the <strong>10% change-in-estimate rule</strong> <span class="citation" data-cites="kleinbaum2010logistic vittinghoff2e MickeyGreenland1989 Greenland1989Modeling">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2010, chap. 8</a>, pp.&nbsp;194–212; <a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 10</a>, pp.&nbsp;257–275; <a href="#/references" role="doc-biblioref" onclick="">Mickey and Greenland 1989, 125</a>; <a href="#/references" role="doc-biblioref" onclick="">Greenland 1989, 340</a>)</span>:</p>
+<p>An alternative retention criterion is the <strong>10% change-in-estimate rule</strong> <span class="citation" data-cites="kleinbaum2010logistic vittinghoff2e MickeyGreenland1989 Greenland1989Modeling"><a href="#/references" role="doc-biblioref" onclick="">[7, Ch. 8]</a>, pp.&nbsp;194–212, <a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 10]</a>, pp.&nbsp;257–275, <a href="#/references" role="doc-biblioref" onclick="">[8, p. 125]</a>, <a href="#/references" role="doc-biblioref" onclick="">[9, p. 340]</a></span>:</p>
 <p>Retain a candidate confounder <span class="math inline">\(C\)</span> in the model if dropping it changes the estimated coefficient for the primary predictor by more than 10–15%.</p>
 <p>More precisely, let <span class="math inline">\(\hat\beta\)</span> be the estimated coefficient for the exposure from the <strong>full model</strong> (including <span class="math inline">\(C\)</span>), and let <span class="math inline">\(\hat\beta_0\)</span> be the estimate from the <strong>reduced model</strong> (dropping <span class="math inline">\(C\)</span>). Then <span class="math inline">\(C\)</span> is judged a meaningful confounder if:</p>
 <p><span class="math display">\[\mathopen{}\left| \frac{\hat\beta - \hat\beta_0}{\hat\beta} \right|\mathclose{} &gt; 0.10\]</span></p>
@@ -735,7 +736,7 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The 10% change-in-estimate rule focuses on <strong>bias</strong> rather than <strong>statistical significance</strong>. A variable can be a meaningful confounder even if it is not statistically significant (because of small sample size or measurement error), and conversely, a statistically significant variable may cause negligible confounding. The p-value criterion and the change-in-estimate rule can disagree, and <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> recommends using both as complementary checks.</p>
+<p>The 10% change-in-estimate rule focuses on <strong>bias</strong> rather than <strong>statistical significance</strong>. A variable can be a meaningful confounder even if it is not statistically significant (because of small sample size or measurement error), and conversely, a statistically significant variable may cause negligible confounding. The p-value criterion and the change-in-estimate rule can disagree, and <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[1]</a></span> recommends using both as complementary checks.</p>
 </div>
 </div>
 </div>
@@ -752,7 +753,7 @@ I(\hat{\pi}_i &gt; \hat{\pi}_j)
           overflow: hidden!important;
           display:block!important;
       }</style></aside><p>In the WCGS study, the exposure of interest is Type A behavior pattern (<code>dibpat</code>), and the outcome is CHD incidence (<code>chd69</code>). We fit <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> models and apply the 10% change-in-estimate rule to assess whether age, cholesterol, SBP, and BMI are meaningful confounders of the Type A → CHD relationship, while also examining smoking as an additional covariate.</p>
-<aside class="notes"><p>Adapted from <span class="citation" data-cites="kleinbaum2010logistic">Kleinbaum and Klein (<a href="#/references" role="doc-biblioref" onclick="">2010, chap. 8</a>)</span>, which describes the change-in-estimate procedure for logistic regression models.</p>
+<aside class="notes"><p>Adapted from <span class="citation" data-cites="kleinbaum2010logistic">Kleinbaum and Klein <a href="#/references" role="doc-biblioref" onclick="">[7, Ch. 8]</a></span>, which describes the change-in-estimate procedure for logistic regression models.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1034,7 +1035,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 </div>
 </figure>
 </div>
-<p>For further reading on model selection strategies in epidemiologic analyses, see <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012, chap. 10</a>, pp.&nbsp;257–275)</span>, <span class="citation" data-cites="kleinbaum2010logistic">Kleinbaum and Klein (<a href="#/references" role="doc-biblioref" onclick="">2010, chaps. 6–8</a>)</span>, and <span class="citation" data-cites="me4">Rothman et al. (<a href="#/references" role="doc-biblioref" onclick="">2021, chap. 21</a>, section “Model Selection”)</span>.</p>
+<p>For further reading on model selection strategies in epidemiologic analyses, see <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[1, Ch. 10]</a>, pp.&nbsp;257–275</span>, <span class="citation" data-cites="kleinbaum2010logistic">Kleinbaum and Klein <a href="#/references" role="doc-biblioref" onclick="">[7, Ch. 6–8]</a></span>, and <span class="citation" data-cites="me4">Rothman et al. <a href="#/references" role="doc-biblioref" onclick="">[10, Ch. 21]</a>, section “Model Selection”</span>.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1160,7 +1161,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 <p>The same strategies recommended for Goal 2 (face validity, backward selection with liberal criterion) also apply here. However, cautious interpretation of novel and borderline findings becomes even more important.</p>
 </section><section id="sec-pred-sel-allen-cady" class="slide level2 scrollable" data-number="6.2"><h2>
 <span class="header-section-number">6.2</span> Allen–Cady modified backward selection</h2>
-<p>A modified backward selection procedure due to Allen and Cady <span class="citation" data-cites="AllenCady1982">(<a href="#/references" role="doc-biblioref" onclick="">Allen and Cady 1982</a>)</span> limits false-positive findings while still allowing variable selection.</p>
+<p>A modified backward selection procedure due to Allen and Cady <span class="citation" data-cites="AllenCady1982"><a href="#/references" role="doc-biblioref" onclick="">[11]</a></span> limits false-positive findings while still allowing variable selection.</p>
 <p>The procedure works as follows:</p>
 <ol type="1">
 <li>
@@ -1192,7 +1193,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 <li>Acknowledge inflated type-I error as a study limitation.</li>
 </ul></section><section id="sec-pred-sel-chd-risk-factors" class="slide level2" data-number="6.4"><h2>
 <span class="header-section-number">6.4</span> Example: risk factors for CHD in HERS</h2>
-<p><span class="citation" data-cites="Vittinghoff2003">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span> identified independent CHD risk factors in the HERS cohort using a multipredictor <a href="../chapters/proportional-hazards-models.html#def-ph-model">Cox model</a>. The large number of outcome events (<span class="math inline">\(n = 361\)</span>) allowed all previously identified risk factors with <span class="math inline">\(p &lt; 0.2\)</span> in unadjusted models to be included.</p>
+<p><span class="citation" data-cites="Vittinghoff2003">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[12]</a></span> identified independent CHD risk factors in the HERS cohort using a multipredictor <a href="../chapters/proportional-hazards-models.html#def-ph-model">Cox model</a>. The large number of outcome events (<span class="math inline">\(n = 361\)</span>) allowed all previously identified risk factors with <span class="math inline">\(p &lt; 0.2\)</span> in unadjusted models to be included.</p>
 <p>Among 11 predictors retained as important on both substantive and statistical grounds were: ethnicity, exercise habits, diabetes, angina, congestive heart failure, prior heart attacks, blood pressure, LDL, HDL, Lp(a), and creatinine clearance.</p>
 <p>The model also controlled for age, smoking, alcohol use, and obesity (not statistically significant after adjustment) to rule out confounding and ensure face validity.</p>
 </section></section><section><section id="sec-pred-sel-stepwise" class="title-slide slide level1 center" data-number="7"><h1>
@@ -1208,7 +1209,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 <p><strong>Video lecture</strong></p>
 </div>
 <div class="callout-content">
-<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-08.mp4"><em>Variable Selection and Model Choice</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-4%20Variable%20Selection%20and%20Model%20Choice.pdf">slides</a>) covers comparing logistic models with <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code>, <code><a href="https://rdrr.io/r/stats/add1.html">add1()</a></code>, <a href="../chapters/Linear-models-overview.html#def-aic">AIC</a>, and <a href="../chapters/Linear-models-overview.html#def-bic">BIC</a>, stepwise selection with <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code>, and how heavy variable selection produces spurious findings and <a href="#/def-overfitting">overfitting</a> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-08.mp4"><em>Variable Selection and Model Choice</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-4%20Variable%20Selection%20and%20Model%20Choice.pdf">slides</a>) covers comparing logistic models with <code><a href="https://rdrr.io/r/stats/add1.html">drop1()</a></code>, <code><a href="https://rdrr.io/r/stats/add1.html">add1()</a></code>, <a href="../chapters/Linear-models-overview.html#def-aic">AIC</a>, and <a href="../chapters/Linear-models-overview.html#def-bic">BIC</a>, stepwise selection with <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code>, and how heavy variable selection produces spurious findings and <a href="#/def-overfitting">overfitting</a> <span class="citation" data-cites="rocke2021epi204"><a href="#/references" role="doc-biblioref" onclick="">[6]</a></span>.</p>
 </div>
 </div>
 </div>
@@ -1243,7 +1244,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 <li>It ignores model uncertainty.</li>
 <li>Results can be unstable across different samples.</li>
 </ul>
-<p>Consider using subject-matter knowledge (<a href="../chapters/causal-inference.html#sec-pred-sel-dag">DAGs</a>), <a href="#/def-kfold">cross-validation</a>, or penalized methods (such as <a href="#/sec-pred-sel-lasso">LASSO</a>) instead. See <span class="citation" data-cites="heinze2018variable">Heinze et al. (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> for a thorough review.</p>
+<p>Consider using subject-matter knowledge (<a href="../chapters/causal-inference.html#sec-pred-sel-dag">DAGs</a>), <a href="#/def-kfold">cross-validation</a>, or penalized methods (such as <a href="#/sec-pred-sel-lasso">LASSO</a>) instead. See <span class="citation" data-cites="heinze2018variable">Heinze et al. <a href="#/references" role="doc-biblioref" onclick="">[2]</a></span> for a thorough review.</p>
 </div>
 </div>
 </div>
@@ -1501,10 +1502,10 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
 <span class="header-section-number">9.1</span> The LASSO</h2>
 <!-- No slidebreak here: the heading shares its slide with the def-lasso div. -->
 <div id="def-lasso" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (LASSO estimate)</strong></span> The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) estimate of the coefficients <span class="math inline">\(\mathord{\underset{\sim}{\beta}}= {(\beta_1, \dots, \beta_p)}^{\top}\)</span> maximizes the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> minus an <span class="math inline">\(\ell_{1}\)</span> penalty:</p>
+<p><span class="theorem-title"><strong>Definition 3 (LASSO estimate)</strong></span> The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) estimate of the coefficients <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= {(\beta_1, \dots, \beta_p)}^{\top}\)</span> maximizes the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> minus an <span class="math inline">\(\ell_{1}\)</span> penalty:</p>
 <p><span id="eq-lasso"><span class="math display">\[
-\hat{\mathord{\underset{\sim}{\beta}}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\mathord{\underset{\sim}{\beta}}} \mathopen{}\left\{
-\ell(\mathord{\underset{\sim}{\beta}}) - \lambda \sum_{j=1}^p \mathopen{}\left|\beta_j\right|\mathclose{}
+\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}} \mathopen{}\left\{
+\ell(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}) - \lambda \sum_{j=1}^p \mathopen{}\left|\beta_j\right|\mathclose{}
 \right\}\mathclose{}
 \tag{1}\]</span></span></p>
 <p>where <span class="math inline">\(\lambda \ge 0\)</span> is a <a href="https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter">tuning parameter</a>. The intercept, if any, is not penalized.</p>
@@ -1512,7 +1513,7 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
 <p>The <a href="https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter">tuning parameter</a> <span class="math inline">\(\lambda\)</span> controls the strength of the penalty:</p>
 <ul>
 <li>
-<span class="math inline">\(\lambda = 0\)</span>: no penalty, so <span class="math inline">\(\hat{\mathord{\underset{\sim}{\beta}}}_0\)</span> is the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> (<a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">ordinary least squares</a> for a Gaussian linear model).</li>
+<span class="math inline">\(\lambda = 0\)</span>: no penalty, so <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}_0\)</span> is the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> (<a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">ordinary least squares</a> for a Gaussian linear model).</li>
 <li>
 <span class="math inline">\(\lambda \to \infty\)</span>: all coefficients shrink to zero.</li>
 </ul>
@@ -1842,42 +1843,57 @@ Table&nbsp;5: LASSO coefficients at two values of the regularization parameter. 
 <li><p><strong>Articulate how model selection complicates inference</strong> and describe best practices for reporting in each inferential context.</p></li>
 </ol></section></section><section><section id="references" class="title-slide slide level1 unnumbered center"><h1>References</h1>
 
-</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-AllenCady1982" class="csl-entry" role="listitem">
-Allen, David M., and Frederick B. Cady. 1982. <em>Analyzing Experimental Data by Regression</em>. Lifetime Learning Publications.
+</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-vittinghoff2e" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div>
+<div class="csl-right-inline">E. Vittinghoff, D. V. Glidden, S. C. Shiboski, and C. E. McCulloch, <em>Regression methods in biostatistics: Linear, logistic, survival, and repeated measures models</em>, 2nd ed. Springer, 2012. Available: <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>
 </div>
-<div id="ref-Greenland1989Modeling" class="csl-entry" role="listitem">
-Greenland, Sander. 1989. <span>“Modeling and Variable Selection in Epidemiologic Analysis.”</span> <em>American Journal of Public Health</em> 79 (3): 340–49. <a href="https://doi.org/10.2105/AJPH.79.3.340">https://doi.org/10.2105/AJPH.79.3.340</a>.
-</div>
-<div id="ref-Grodstein2001" class="csl-entry" role="listitem">
-Grodstein, Francine, JoAnn E. Manson, Meir J. Stampfer, et al. 2001. <span>“Postmenopausal Hormone Use and Secondary Prevention of Coronary Events in the <span>Nurses’ Health Study</span>: A Prospective, Observational Study.”</span> <em>Annals of Internal Medicine</em> 135 (1): 1–8. <a href="https://doi.org/10.7326/0003-4819-135-1-200107030-00007">https://doi.org/10.7326/0003-4819-135-1-200107030-00007</a>.
 </div>
 <div id="ref-heinze2018variable" class="csl-entry" role="listitem">
-Heinze, Georg, Christine Wallisch, and Daniela Dunkler. 2018. <span>“Variable Selection – <span>A</span> Review and Recommendations for the Practicing Statistician.”</span> <em>Biometrical Journal</em> 60 (3): 431–49. <a href="https://doi.org/10.1002/bimj.201700067">https://doi.org/10.1002/bimj.201700067</a>.
-</div>
-<div id="ref-kleinbaum2010logistic" class="csl-entry" role="listitem">
-Kleinbaum, David G, and Mitchel Klein. 2010. <em>Logistic Regression: A Self-Learning Text</em>. 3rd ed. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-1742-3">https://link.springer.com/book/10.1007/978-1-4419-1742-3</a>.
-</div>
-<div id="ref-MickeyGreenland1989" class="csl-entry" role="listitem">
-Mickey, Ruth M., and Sander Greenland. 1989. <span>“The Impact of Confounder Selection Criteria on Effect Estimation.”</span> <em>American Journal of Epidemiology</em> 129 (1): 125–37. <a href="https://doi.org/10.1093/oxfordjournals.aje.a115101">https://doi.org/10.1093/oxfordjournals.aje.a115101</a>.
-</div>
-<div id="ref-Orwoll1996" class="csl-entry" role="listitem">
-Orwoll, Eric S., Douglas C. Bauer, Thomas M. Vogt, Kathleen M. Fox, and Study of Osteoporotic Fractures Research Group. 1996. <span>“Axial Bone Mass in Older Women.”</span> <em>Annals of Internal Medicine</em> 124 (3): 187–96.
-</div>
-<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
-Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
-</div>
-<div id="ref-me4" class="csl-entry" role="listitem">
-Rothman, Kenneth J., Timothy L. Lash, Tyler J. VanderWeele, and Sebastien Haneuse. 2021. <em>Modern Epidemiology</em>. Fourth edition. Wolters Kluwer.
-</div>
-<div id="ref-vittinghoff2e" class="csl-entry" role="listitem">
-Vittinghoff, Eric, David V Glidden, Stephen C Shiboski, and Charles E McCulloch. 2012. <em>Regression Methods in Biostatistics: Linear, Logistic, Survival, and Repeated Measures Models</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>.
-</div>
-<div id="ref-Vittinghoff2003" class="csl-entry" role="listitem">
-Vittinghoff, Eric, Michael G. Shlipak, Peter D. Varosy, et al. 2003. <span>“Risk Factors and Secondary Prevention in Women with Heart Disease: The <span class="nocase">Heart and Estrogen/progestin Replacement Study</span>.”</span> <em>Annals of Internal Medicine</em> 139 (4): 274–81. <a href="https://doi.org/10.7326/0003-4819-139-4-200308190-00006">https://doi.org/10.7326/0003-4819-139-4-200308190-00006</a>.
+<div class="csl-left-margin">[2] </div>
+<div class="csl-right-inline">G. Heinze, C. Wallisch, and D. Dunkler, <span>“Variable selection – <span>A</span> review and recommendations for the practicing statistician,”</span> <em>Biometrical Journal</em>, vol. 60, no. 3, pp. 431–449, 2018, doi: <a href="https://doi.org/10.1002/bimj.201700067">10.1002/bimj.201700067</a>.</div>
 </div>
 <div id="ref-Walter2001" class="csl-entry" role="listitem">
-Walter, Louise C., Richard J. Brand, Steven R. Counsell, et al. 2001. <span>“Development and Validation of a Prognostic Index for 1-Year Mortality in Older Adults After Hospitalization.”</span> <em>JAMA</em> 285 (23): 2987–94. <a href="https://doi.org/10.1001/jama.285.23.2987">https://doi.org/10.1001/jama.285.23.2987</a>.
+<div class="csl-left-margin">[3] </div>
+<div class="csl-right-inline">L. C. Walter <em>et al.</em>, <span>“Development and validation of a prognostic index for 1-year mortality in older adults after hospitalization,”</span> <em>JAMA</em>, vol. 285, no. 23, pp. 2987–2994, 2001, doi: <a href="https://doi.org/10.1001/jama.285.23.2987">10.1001/jama.285.23.2987</a>.</div>
+</div>
+<div id="ref-Grodstein2001" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div>
+<div class="csl-right-inline">F. Grodstein <em>et al.</em>, <span>“Postmenopausal hormone use and secondary prevention of coronary events in the <span>Nurses’ Health Study</span>: A prospective, observational study,”</span> <em>Annals of Internal Medicine</em>, vol. 135, no. 1, pp. 1–8, 2001, doi: <a href="https://doi.org/10.7326/0003-4819-135-1-200107030-00007">10.7326/0003-4819-135-1-200107030-00007</a>.</div>
+</div>
+<div id="ref-Orwoll1996" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div>
+<div class="csl-right-inline">E. S. Orwoll, D. C. Bauer, T. M. Vogt, K. M. Fox, and S. of Osteoporotic Fractures Research Group, <span>“Axial bone mass in older women,”</span> <em>Annals of Internal Medicine</em>, vol. 124, no. 3, pp. 187–196, 1996.</div>
+</div>
+<div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div>
+<div class="csl-right-inline">D. M. Rocke, <span>“<span>Epi</span> 204 lecture notes, <span>Spring</span> 2021.”</span> University of California, Davis, 2021. Available: <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>
+</div>
+</div>
+<div id="ref-kleinbaum2010logistic" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div>
+<div class="csl-right-inline">D. G. Kleinbaum and M. Klein, <em>Logistic regression: A self-learning text</em>, 3rd ed. Springer, 2010. Available: <a href="https://link.springer.com/book/10.1007/978-1-4419-1742-3">https://link.springer.com/book/10.1007/978-1-4419-1742-3</a>
+</div>
+</div>
+<div id="ref-MickeyGreenland1989" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div>
+<div class="csl-right-inline">R. M. Mickey and S. Greenland, <span>“The impact of confounder selection criteria on effect estimation,”</span> <em>American Journal of Epidemiology</em>, vol. 129, no. 1, pp. 125–137, Jan. 1989, doi: <a href="https://doi.org/10.1093/oxfordjournals.aje.a115101">10.1093/oxfordjournals.aje.a115101</a>.</div>
+</div>
+<div id="ref-Greenland1989Modeling" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div>
+<div class="csl-right-inline">S. Greenland, <span>“Modeling and variable selection in epidemiologic analysis,”</span> <em>American Journal of Public Health</em>, vol. 79, no. 3, pp. 340–349, Mar. 1989, doi: <a href="https://doi.org/10.2105/AJPH.79.3.340">10.2105/AJPH.79.3.340</a>.</div>
+</div>
+<div id="ref-me4" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div>
+<div class="csl-right-inline">K. J. Rothman, T. L. Lash, T. J. VanderWeele, and S. Haneuse, <em>Modern epidemiology</em>, Fourth edition. Philadelphia: Wolters Kluwer, 2021.</div>
+</div>
+<div id="ref-AllenCady1982" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div>
+<div class="csl-right-inline">D. M. Allen and F. B. Cady, <em>Analyzing experimental data by regression</em>. Belmont, CA: Lifetime Learning Publications, 1982.</div>
+</div>
+<div id="ref-Vittinghoff2003" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div>
+<div class="csl-right-inline">E. Vittinghoff <em>et al.</em>, <span>“Risk factors and secondary prevention in women with heart disease: The <span class="nocase">Heart and Estrogen/progestin Replacement Study</span>,”</span> <em>Annals of Internal Medicine</em>, vol. 139, no. 4, pp. 274–281, 2003, doi: <a href="https://doi.org/10.7326/0003-4819-139-4-200308190-00006">10.7326/0003-4819-139-4-200308190-00006</a>.</div>
 </div>
 </div>
 

@@ -111,6 +111,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -380,7 +381,7 @@ text-align: center;
 <p><strong>Video lecture</strong></p>
 </div>
 <div class="callout-content">
-<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-27.mp4"><em>Introduction to Survival Analysis</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture9IntroductionSurvivalAnalysis.pdf">slides</a>) covers censoring, survival, density, and hazard functions, the exponential model and its <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a>, the <a href="#/def-KM-estimator">Kaplan-Meier estimator</a>, and the <a href="#/def-logrank-test">log-rank test</a> <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-04-27.mp4"><em>Introduction to Survival Analysis</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture9IntroductionSurvivalAnalysis.pdf">slides</a>) covers censoring, survival, density, and hazard functions, the exponential model and its <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a>, the <a href="#/def-KM-estimator">Kaplan-Meier estimator</a>, and the <a href="#/def-logrank-test">log-rank test</a> <span class="citation" data-cites="rocke2021epi204"><a href="#/references" role="doc-biblioref" onclick="">[1]</a></span>.</p>
 </div>
 </div>
 </div>
@@ -629,7 +630,7 @@ Figure&nbsp;1: Exponential Survival Functions
 <p><span class="math display">\[\operatorname{E}\mathopen{}\left[T\right]\mathclose{} = \int_{t=0}^{\infty} \operatorname{S}(t)\,dt\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Adapted from the StatProofBook proof “Mean of non-negative random variable” <span class="citation" data-cites="statproofbook">(<a href="#/references" role="doc-biblioref" onclick="">Soch 2023</a>)</span> at <a href="https://statproofbook.github.io/P/mean-nnrvar.html" class="uri">https://statproofbook.github.io/P/mean-nnrvar.html</a>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Adapted from the StatProofBook proof “Mean of non-negative random variable” <span class="citation" data-cites="statproofbook"><a href="#/references" role="doc-biblioref" onclick="">[2]</a></span> at <a href="https://statproofbook.github.io/P/mean-nnrvar.html" class="uri">https://statproofbook.github.io/P/mean-nnrvar.html</a>.</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-2"><a aria-label="2"></a>u_max <span class="ot">&lt;-</span> <span class="dv">6</span></span>
 <span id="cb4-3"><a aria-label="3"></a>tri_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> <span class="fu">c</span>(<span class="dv">0</span>, u_max, <span class="dv">0</span>), <span class="at">u =</span> <span class="fu">c</span>(<span class="dv">0</span>, u_max, u_max))</span>
@@ -779,7 +780,7 @@ Figure&nbsp;3: Exponential inverse survival function <span class="math inline">\
 </section><section class="slide level2"><div id="def-median-survival" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6 (Median survival time)</strong></span> Given a random time-to-event variable <span class="math inline">\(T\)</span> with survival function <span class="math inline">\(\operatorname{S}(t)\)</span> (<a href="#/def-surv-fn" class="quarto-xref">Definition&nbsp;4</a>) and inverse survival function <span class="math inline">\(\operatorname{S}^{-1}(p)\)</span> (<a href="#/def-inv-surv-fn" class="quarto-xref">Definition&nbsp;5</a>), the <strong>median survival time</strong> <span class="math inline">\(t_{\text{med}}\)</span> is the earliest time by which the survival probability has fallen to or below one half:</p>
 <p><span class="math display">\[t_{\text{med}} \stackrel{\text{def}}{=}\operatorname{S}^{-1}(0.5) = \inf\mathopen{}\left\{t \ge 0 : \operatorname{S}(t) \le 0.5\right\}\mathclose{}.\]</span></p>
-<p><span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, chap. 2</a>)</span></p>
+<p><span class="citation" data-cites="klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Ch. 2]</a></span></p>
 </div>
 <aside class="notes"><p>When <span class="math inline">\(\operatorname{S}(t)\)</span> is continuous and strictly decreasing, <span class="math inline">\(t_{\text{med}}\)</span> is the unique time at which <span class="math inline">\(\operatorname{S}(t_{\text{med}}) = 0.5\)</span>: half of the population has experienced the event by <span class="math inline">\(t_{\text{med}}\)</span>, and half has not.</p>
 <style type="text/css">
@@ -966,7 +967,7 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
           display:block!important;
       }</style></aside><p><span class="math display">\[{\lambda}(t) \stackrel{\text{def}}{=}\operatorname{p}(T=t|T\ge t)\]</span></p>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>for example in <span class="citation" data-cites="dobson4e">Dobson and Barnett (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>, <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span>, <span class="citation" data-cites="klein2003survival">Klein and Moeschberger (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span>, and <span class="citation" data-cites="kleinbaum2012survival">Kleinbaum and Klein (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></p></li><li id="fn2"><p>for example, in <span class="citation" data-cites="me4">Rothman et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="kalbfleisch2011statistical">Kalbfleisch and Prentice (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span></p></li></ol></aside></section><section class="slide level2"><div id="rem-hazard-interpretation" class="proof remark">
+<aside><ol class="aside-footnotes"><li id="fn1"><p>for example in <span class="citation" data-cites="dobson4e">Dobson and Barnett <a href="#/references" role="doc-biblioref" onclick="">[4]</a></span>, <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[5]</a></span>, <span class="citation" data-cites="klein2003survival">Klein and Moeschberger <a href="#/references" role="doc-biblioref" onclick="">[3]</a></span>, and <span class="citation" data-cites="kleinbaum2012survival">Kleinbaum and Klein <a href="#/references" role="doc-biblioref" onclick="">[6]</a></span></p></li><li id="fn2"><p>for example, in <span class="citation" data-cites="me4">Rothman et al. <a href="#/references" role="doc-biblioref" onclick="">[7]</a></span> and <span class="citation" data-cites="kalbfleisch2011statistical">Kalbfleisch and Prentice <a href="#/references" role="doc-biblioref" onclick="">[8]</a></span></p></li></ol></aside></section><section class="slide level2"><div id="rem-hazard-interpretation" class="proof remark">
 <p><span class="proof-title"><em>Remark 1</em> (Interpretation of the hazard function). </span>If <span class="math inline">\(T\)</span> represents the time at which an event occurs, then <span class="math inline">\({\lambda}(t)\)</span> is the probability that the event occurs at time <span class="math inline">\(t\)</span>, given that it has not occurred prior to time <span class="math inline">\(t\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="rem-hazard-naming" class="proof remark">
@@ -1097,7 +1098,7 @@ Figure&nbsp;5: Examples of hazard functions for exponential distributions
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="def-hazard-ratio" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9 (hazard ratio)</strong></span> <span class="math display">\[\text{ϙ}_{{\lambda}}(t| \mathord{\underset{\sim}{x}}: \mathord{{\mathord{\underset{\sim}{x}}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\mathord{\underset{\sim}{x}})}{{\lambda}(t|\mathord{{\mathord{\underset{\sim}{x}}^*}})}\]</span></p>
+<p><span class="theorem-title"><strong>Definition 9 (hazard ratio)</strong></span> <span class="math display">\[\text{ϙ}_{{\lambda}}(t| \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \stackrel{\text{def}}{=}\frac{{\lambda}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}{{\lambda}(t|\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="def-kappa" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 10 (Conditional survival probability at an event time)</strong></span> At event time <span class="math inline">\(t_i\)</span>, the <strong>conditional survival probability</strong> is</p>
@@ -1338,7 +1339,7 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 <p><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\]</span></p>
 </section><section id="hazard-versus-risk" class="slide level2" data-number="4.8"><h2>
 <span class="header-section-number">4.8</span> Hazard versus risk</h2>
-<p>In discrete time, where follow-up is split into intervals, the hazard and the risk are easy to confuse, because both are probabilities of an event during follow-up. The risk is cumulative from baseline, while the <a href="#/def-discrete-haz-risk">discrete-time hazard</a> concerns a single interval (unlike the <a href="#/def-hazard">continuous-time hazard</a>, which is a <a href="https://morrison-lab.github.io/mds/algebra-sums.html#def-rate">rate</a>, not a probability). They answer different questions <span class="citation" data-cites="hernan2020causal">(<a href="#/references" role="doc-biblioref" onclick="">Hernán and Robins 2020, chap. 17</a>, Section 17.2)</span>:</p>
+<p>In discrete time, where follow-up is split into intervals, the hazard and the risk are easy to confuse, because both are probabilities of an event during follow-up. The risk is cumulative from baseline, while the <a href="#/def-discrete-haz-risk">discrete-time hazard</a> concerns a single interval (unlike the <a href="#/def-hazard">continuous-time hazard</a>, which is a <a href="https://morrison-lab.github.io/mds/algebra-sums.html#def-rate">rate</a>, not a probability). They answer different questions <span class="citation" data-cites="hernan2020causal"><a href="#/references" role="doc-biblioref" onclick="">[9, Ch. 17]</a>, Section 17.2</span>:</p>
 <blockquote>
 <p>The risk and the hazard are different measures. The denominator of the risk—the number of individuals at baseline—is constant across times <span class="math inline">\(k\)</span> and its numerator—all events between baseline and <span class="math inline">\(k\)</span>—is cumulative. That is, the risk will stay flat or increase as <span class="math inline">\(k\)</span> increases. On the other hand, the denominator of the hazard—the number of individuals alive at <span class="math inline">\(k\)</span>—varies over time <span class="math inline">\(t\)</span> and its numerator includes only recent events—those during interval <span class="math inline">\(k\)</span>. That is, the hazard may increase or decrease over time.</p>
 </blockquote>
@@ -1528,9 +1529,9 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 <li>
 <span class="math inline">\(\theta_T\)</span> and <span class="math inline">\(\theta_C\)</span> share no parameters, so that the distribution of <span class="math inline">\(C\)</span> carries no information about <span class="math inline">\(\theta_T\)</span>.</li>
 </ol>
-<p><span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, chap. 3</a>)</span></p>
+<p><span class="citation" data-cites="klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Ch. 3]</a></span></p>
 </div>
-<aside class="notes"><p>Terminology varies across textbooks: some authors call condition 1 <em>independent censoring</em> and reserve <em>non-informative censoring</em> for condition 2 <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 1</a>)</span>. In this chapter, “non-informative censoring” means both conditions together, since the likelihood factorization in this section uses both.</p>
+<aside class="notes"><p>Terminology varies across textbooks: some authors call condition 1 <em>independent censoring</em> and reserve <em>non-informative censoring</em> for condition 2 <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, Ch. 1]</a></span>. In this chapter, “non-informative censoring” means both conditions together, since the likelihood factorization in this section uses both.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1969,7 +1970,7 @@ Var(t) &amp;= {\lambda}^{-2}
 </ul></section><section class="slide level2"><div id="exm-6mp-leukemia" class="theorem example">
 <p><span class="theorem-title"><strong>Example 19 (Clinical Trial for Pediatric Acute Leukemia)</strong></span> &nbsp;</p>
 <h5 class="smaller" id="overview-of-study">Overview of study</h5>
-<p>This dataset originates from a clinical trial in 1963 for 6-MP treatment vs.&nbsp;placebo for acute leukemia in 42 children <span class="citation" data-cites="freireich1963effect">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Freireich et al.</span> 1963</a>)</span>.</p>
+<p>This dataset originates from a clinical trial in 1963 for 6-MP treatment vs.&nbsp;placebo for acute leukemia in 42 children <span class="citation" data-cites="freireich1963effect"><a href="#/references" role="doc-biblioref" onclick="">[10]</a></span>.</p>
 <ul>
 <li><p>Pairs of children:</p></li>
 <li><p>matched by remission status at the time of treatment (<code>remstat</code>: <code>1</code> = partial, <code>2</code> = complete)</p></li>
@@ -2945,7 +2946,7 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 <p><span class="theorem-title"><strong>Theorem 14 (Greenwood’s estimator for variance of Kaplan-Meier survival estimator)</strong></span> <span id="eq-var-est-surv"><span class="math display">\[
 \mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
 \tag{12}\]</span></span></p>
-<p><span class="citation" data-cites="klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, sec. 4.2</a>, eq. (4.2.2))</span></p>
+<p><span class="citation" data-cites="klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Sec. 4.2]</a>, eq. (4.2.2)</span></p>
 </div>
 <p>We can use <a href="#/eq-var-est-surv" class="quarto-xref">Equation&nbsp;12</a> for <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">confidence intervals</a> for a survival function or a difference of <a href="#/def-surv-fn">survival functions</a>.</p>
 </section><section class="slide level2"><h3 id="understanding-greenwoods-formula-optional">Understanding Greenwood’s formula (optional)</h3>
@@ -3675,7 +3676,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </section><section class="slide level2"><div id="sol-compare-surv-ests" class="proof solution">
 <p><span class="proof-title"><em>Solution 11</em>. </span>One option is the <strong>log-rank test</strong>, which compares the <a href="#/def-KM-estimator">Kaplan-Meier estimates</a> of the <a href="#/def-surv-fn">survival functions</a> of those groups.</p>
 </div>
-</section><section class="slide level2"><aside class="notes"><p>Adapted from <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, sec. IV</a>, pp.&nbsp;67–68)</span>:</p>
+</section><section class="slide level2"><aside class="notes"><p>Adapted from <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, Sec. IV]</a>, pp.&nbsp;67–68</span>:</p>
 <ul>
 <li><p>The log-rank test is a large-sample <a href="https://morrison-lab.github.io/sds/inference.html#def-chi-square-dist">chi-square</a> test.</p></li>
 <li><p>The log-rank test uses a <a href="https://morrison-lab.github.io/sds/inference.html#def-test-statistic">test statistic</a> that compares KM curves between groups across all survival times.</p></li>
@@ -3727,14 +3728,14 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </tbody>
 </table>
 <p>This notation matches the <span class="math inline">\((d_i, r_i)\)</span> notation used for the <a href="#/def-KM-estimator">Kaplan-Meier estimator</a> elsewhere in this chapter; here we additionally split each count by group.</p>
-<p>Kleinbaum <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">2012, 67–69</a>)</span> uses <span class="math inline">\(m_{if}\)</span> and <span class="math inline">\(n_{if}\)</span> in place of <span class="math inline">\(d_{gi}\)</span> and <span class="math inline">\(r_{gi}\)</span>; we changed letters here to stay consistent with the <span class="math inline">\((d_i, r_i)\)</span> already used throughout this chapter.</p>
+<p>Kleinbaum <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, pp. 67–69]</a></span> uses <span class="math inline">\(m_{if}\)</span> and <span class="math inline">\(n_{if}\)</span> in place of <span class="math inline">\(d_{gi}\)</span> and <span class="math inline">\(r_{gi}\)</span>; we changed letters here to stay consistent with the <span class="math inline">\((d_i, r_i)\)</span> already used throughout this chapter.</p>
 </section><section id="expected-counts-under-the-null" class="slide level2" data-number="9.2"><h2>
 <span class="header-section-number">9.2</span> Expected counts under the null</h2>
 <p>The <a href="https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis">null hypothesis</a> is</p>
 <p><span class="math display">\[H_0:\; \text{all $G$ groups have the same survival function.}\]</span></p>
 <p>Under <span class="math inline">\(H_0\)</span>, the pooled marginal <a href="#/def-hazard">hazard</a> estimate at time <span class="math inline">\(t_i\)</span> is</p>
 <p><span class="math display">\[\hat{{\lambda}}_i = \frac{d_i}{r_i}.\]</span></p>
-<p>The <strong>expected</strong> number of failures in group <span class="math inline">\(g\)</span> at time <span class="math inline">\(t_i\)</span> under <span class="math inline">\(H_0\)</span> is the pooled hazard applied to that group’s <a href="#/def-risk-set">risk set</a> <span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, 68</a>, “expected-cell-counts” box)</span>:</p>
+<p>The <strong>expected</strong> number of failures in group <span class="math inline">\(g\)</span> at time <span class="math inline">\(t_i\)</span> under <span class="math inline">\(H_0\)</span> is the pooled hazard applied to that group’s <a href="#/def-risk-set">risk set</a> <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, p. 68]</a>, “expected-cell-counts” box</span>:</p>
 <p><span id="eq-logrank-expected"><span class="math display">\[
 e_{gi}
 \;=\; r_{gi}\,\hat{{\lambda}}_i
@@ -3760,7 +3761,7 @@ e_{gi}
    \frac{r_{1i}\, r_{2i}\, d_i\, (r_i - d_i)}{r_i^2\,(r_i - 1)}.
 \tag{15}\]</span></span></p>
 <p>For two groups, the variance is the same whether computed for group 1 or group 2.</p>
-<p><span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, 69–70</a>, two-group variance formula)</span></p>
+<p><span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, pp. 69–70]</a>, two-group variance formula</span></p>
 </div>
 <aside class="notes"><p><a href="#/eq-logrank-var-2grp" class="quarto-xref">Equation&nbsp;15</a> is the hypergeometric variance for the count of failures from group 1 at <span class="math inline">\(t_i\)</span> conditional on <span class="math inline">\((d_i, r_{1i}, r_{2i})\)</span>, summed over failure times. Each summand has the form <span class="math inline">\(r_{1i} r_{2i} d_i (r_i - d_i) / [r_i^2 (r_i - 1)]\)</span>.</p>
 <style type="text/css">
@@ -3779,7 +3780,7 @@ e_{gi}
 <p>where <span class="math inline">\(\operatorname{S}_g(t)\)</span> is the survival function of group <span class="math inline">\(g\)</span> (the <span class="math inline">\(G = 2\)</span> case of the null hypothesis in <a href="#/sec-logrank-notation" class="quarto-xref">Section&nbsp;9.1</a>), that uses the log-rank statistic <span class="math inline">\(\chi^2_{\text{LR}}\)</span> (<a href="#/eq-logrank-stat-2grp" class="quarto-xref">Equation&nbsp;14</a>) as its test statistic and the <span class="math inline">\(\chi^2_1\)</span> distribution (<a href="#/thm-logrank-two-group" class="quarto-xref">Theorem&nbsp;15</a>) as its large-sample reference distribution. Its p-value is</p>
 <p><span class="math display">\[p \stackrel{\text{def}}{=}\Pr\mathopen{}\left(X \ge \chi^2_{\text{LR}}\right)\mathclose{}, \quad X \sim \chi^2_1,\]</span></p>
 <p>and at significance level <span class="math inline">\(\alpha\)</span> the test rejects <span class="math inline">\(H_0\)</span> when <span class="math inline">\(\chi^2_{\text{LR}}\)</span> exceeds the <span class="math inline">\((1 - \alpha)\)</span> quantile of <span class="math inline">\(\chi^2_1\)</span>.</p>
-<p><span class="citation" data-cites="kleinbaum2012survival klein2003survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, chap. 2</a>; <a href="#/references" role="doc-biblioref" onclick="">Klein and Moeschberger 2003, chap. 7</a>)</span></p>
+<p><span class="citation" data-cites="kleinbaum2012survival klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Ch. 7]</a>, <a href="#/references" role="doc-biblioref" onclick="">[6, Ch. 2]</a></span></p>
 </div>
 </section><section class="slide level2"><div id="exm-logrank-test" class="theorem example">
 <p><span class="theorem-title"><strong>Example 28 (A log-rank test by hand)</strong></span> Group 1 has two participants, with events at times 1 and 2. Group 2 has two participants, one with an event at time 3 and one censored at time 4. The distinct failure times in the pooled data are <span class="math inline">\(t_1 = 1\)</span>, <span class="math inline">\(t_2 = 2\)</span>, and <span class="math inline">\(t_3 = 3\)</span>, with the counts (<a href="#/sec-logrank-notation" class="quarto-xref">Section&nbsp;9.1</a>) in <a href="#/tbl-logrank-hand" class="quarto-xref">Table&nbsp;6</a>.</p>
@@ -3901,7 +3902,7 @@ E_1
 \;\stackrel{H_0}{\sim}\; \chi^2_{G - 1}
 \]</span></p>
 <p>where <span class="math inline">\(\widehat\Sigma\)</span> is the estimated variance–covariance matrix of <span class="math inline">\(\mathbf{O} - \mathbf{E}\)</span> and <span class="math inline">\(\widehat\Sigma^{-}\)</span> is a generalized inverse (any <span class="math inline">\(G - 1\)</span> of the rows/columns suffice, since the scores sum to zero).</p>
-<p><span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, 71–72</a> and Chapter 2 Appendix for the matrix formula)</span></p>
+<p><span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, pp. 71–72]</a> and Chapter 2 Appendix for the matrix formula</span></p>
 <aside class="notes"><p>In practice we don’t compute this by hand — every standard survival package (<code><a href="https://rdrr.io/pkg/survival/man/survdiff.html">survival::survdiff</a></code> in R, <code>sts test</code> in Stata, <code>LIFETEST</code> in SAS) returns the exact log-rank statistic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3918,7 +3919,7 @@ E_1
 <p>When only <span class="math inline">\((O_g, E_g)\)</span> are available — e.g., from a printed summary — the variance–covariance matrix can be replaced by the diagonal <span class="math inline">\(E_g\)</span> entries to yield the classic Pearson-style approximation:</p>
 <p><span class="math display">\[X^2 \;\approx\; \sum_{g=1}^{G} \frac{(O_g - E_g)^2}{E_g}.\]</span></p>
 <p>This approximate statistic is what some textbooks call “the log-rank test”; it is approximately equal to the exact statistic.</p>
-<p><span class="citation" data-cites="kleinbaum2012survival">(<a href="#/references" role="doc-biblioref" onclick="">Kleinbaum and Klein 2012, 70</a> (approximate formula))</span></p>
+<p><span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, p. 70]</a> (approximate formula)</span></p>
 </section><section id="the-survdiff-function" class="slide level2" data-number="9.6"><h2>
 <span class="header-section-number">9.6</span> The <code>survdiff</code> function</h2>
 <div class="cell" data-printr.help.sections="[&quot;description&quot;,&quot;usage&quot;]">
@@ -4161,10 +4162,10 @@ Table&nbsp;8: Sums of observed and expected events for the 6-MP data.
       }</style></aside>
 </div>
 </section><section class="slide level2"><div id="exm-bmt" class="theorem example">
-<p><span class="theorem-title"><strong>Example 30 (Bone Marrow Transplant Data)</strong></span> Data from <span class="citation" data-cites="copelan1991treatment">Copelan et al. (<a href="#/references" role="doc-biblioref" onclick="">1991</a>)</span></p>
+<p><span class="theorem-title"><strong>Example 30 (Bone Marrow Transplant Data)</strong></span> Data from <span class="citation" data-cites="copelan1991treatment">Copelan et al. <a href="#/references" role="doc-biblioref" onclick="">[11]</a></span></p>
 <div id="fig-bmt-mst" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-bmt-mst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: Recovery process from a bone marrow transplant (Fig. 1.1 from <span class="citation" data-cites="klein2003survival">Klein and Moeschberger (<a href="#/references" role="doc-biblioref" onclick="">2003</a>)</span>)
+Figure&nbsp;14: Recovery process from a bone marrow transplant (Fig. 1.1 from <span class="citation" data-cites="klein2003survival">Klein and Moeschberger <a href="#/references" role="doc-biblioref" onclick="">[3]</a></span>)
 </figcaption><div aria-describedby="fig-bmt-mst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="../images/bone marrow multi-stage model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Figure&nbsp;14: Recovery process from a bone marrow transplant (Fig. 1.1 from @klein2003survival)"><img data-src="../images/bone marrow multi-stage model.png"></a>
 </div>
@@ -4307,7 +4308,7 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 <p><strong>Video lecture</strong></p>
 </div>
 <div class="callout-content">
-<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-04.mp4"><em>Survival Regression with the Cox Model I</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture10ProportionalHazardsModel.pdf">slides</a>) covers <a href="#/thm-greenwood">Greenwood’s variance</a> for the <a href="#/def-KM-estimator">Kaplan-Meier estimator</a>, the <a href="#/def-cuhaz">cumulative hazard</a>, and the <a href="#/def-na-cuhaz-est">Nelson-Aalen estimator</a>, using the <code>bmt</code> data <span class="citation" data-cites="rocke2021epi204">(<a href="#/references" role="doc-biblioref" onclick="">Rocke 2021</a>)</span>.</p>
+<p>David Rocke’s Epi 204 lecture <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-2021-05-04.mp4"><em>Survival Regression with the Cox Model I</em></a> (<a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/Lecture10ProportionalHazardsModel.pdf">slides</a>) covers <a href="#/thm-greenwood">Greenwood’s variance</a> for the <a href="#/def-KM-estimator">Kaplan-Meier estimator</a>, the <a href="#/def-cuhaz">cumulative hazard</a>, and the <a href="#/def-na-cuhaz-est">Nelson-Aalen estimator</a>, using the <code>bmt</code> data <span class="citation" data-cites="rocke2021epi204"><a href="#/references" role="doc-biblioref" onclick="">[1]</a></span>.</p>
 </div>
 </div>
 </div>
@@ -5016,7 +5017,7 @@ Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(
 </section><section class="slide level2"></section></section><section><section id="interval-censoring-1" class="title-slide slide level1 center" data-number="12"><h1>
 <span class="header-section-number">12</span> Interval Censoring</h1>
 
-</section><section class="slide level2"><p>This section is adapted from <span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 6</a>)</span>.</p>
+</section><section class="slide level2"><p>This section is adapted from <span class="citation" data-cites="vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[5, Ch. 6]</a></span>.</p>
 <p>Standard survival analysis assumes that the time of events occurring during the study is known more or less exactly. This situation is almost always the case for well-documented events like:</p>
 <ul>
 <li>Death</li>
@@ -5038,7 +5039,7 @@ Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(
 <span class="header-section-number">12.3</span> Approaches to Interval Censoring</h2>
 <p><strong>When intervals are regularly spaced:</strong></p>
 <ul>
-<li>Pooled <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> <span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, sec. 5.5.2</a>)</span> can handle <a href="#/def-interval-censoring">interval censoring</a> when intervals arise from a regular study follow-up schedule</li>
+<li>Pooled <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> <span class="citation" data-cites="vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[5, Sec. 5.5.2]</a></span> can handle <a href="#/def-interval-censoring">interval censoring</a> when intervals arise from a regular study follow-up schedule</li>
 </ul>
 <p><strong>When intervals are irregular:</strong></p>
 <ul>
@@ -5047,7 +5048,7 @@ Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(
 <li>Requires specialized methods beyond the scope of these notes</li>
 </ul></section><section id="numerical-example-mira-hsv-2-study" class="slide level2" data-number="12.4"><h2>
 <span class="header-section-number">12.4</span> Numerical Example: MIRA HSV-2 Study</h2>
-<p>The <code>mira_hsv</code> dataset from the <code>rmb</code> package contains data from the MIRA <a href="../chapters/causal-inference.html#sec-causal-rct">randomized trial</a> evaluating HIV prevention <span class="citation" data-cites="debruyn2011mira">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Bruyn et al.</span> 2011</a>)</span>. Participants were tested for HSV-2 antibodies every 3 months.</p>
+<p>The <code>mira_hsv</code> dataset from the <code>rmb</code> package contains data from the MIRA <a href="../chapters/causal-inference.html#sec-causal-rct">randomized trial</a> evaluating HIV prevention <span class="citation" data-cites="debruyn2011mira"><a href="#/references" role="doc-biblioref" onclick="">[12]</a></span>. Participants were tested for HSV-2 antibodies every 3 months.</p>
 <p>The data have a <strong>panel structure</strong>: one row per participant per visit, with the HSV-2 test result at each visit.</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-label="1"></a><span class="fu">library</span>(rmb)</span>
 <span id="cb60-2"><a aria-label="2"></a></span>
@@ -5199,16 +5200,16 @@ Table&nbsp;10: HSV-2 test results for three example participants in the MIRA stu
 </tr>
 </tbody>
 </table>
-<p>Since visits occur every 3 months, the infection time is known to within a 3-month window. This regular spacing allows pooled <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> to handle the interval censoring, as described in <span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, sec. 5.5.2</a>)</span>.</p>
+<p>Since visits occur every 3 months, the infection time is known to within a 3-month window. This regular spacing allows pooled <a href="../chapters/logistic-regression.html#def-logistic-regression">logistic regression</a> to handle the interval censoring, as described in <span class="citation" data-cites="vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[5, Sec. 5.5.2]</a></span>.</p>
 </section></section><section><section id="left-truncation" class="title-slide slide level1 center" data-number="13"><h1>
 <span class="header-section-number">13</span> Left-Truncation</h1>
 
-</section><section class="slide level2"><p>This section is adapted from <span class="citation" data-cites="vittinghoff2e">(<a href="#/references" role="doc-biblioref" onclick="">Vittinghoff et al. 2012, chap. 6</a>)</span>.</p>
+</section><section class="slide level2"><p>This section is adapted from <span class="citation" data-cites="vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[5, Ch. 6]</a></span>.</p>
 </section><section id="choosing-the-time-origin" class="slide level2" data-number="13.1"><h2>
 <span class="header-section-number">13.1</span> Choosing the Time Origin</h2>
 <p>Survival times are measured from some initial time, with more than one possible choice of origin.</p>
 <div id="exm-pbc-time-origin" class="theorem example">
-<p><span class="theorem-title"><strong>Example 32 (Time origin choice in the PBC study)</strong></span> In the <span class="citation" data-cites="dickson1989prognosis">Dickson et al. (<a href="#/references" role="doc-biblioref" onclick="">1989</a>)</span> Primary Biliary Cholangitis (PBC) study, survival time could be measured from:</p>
+<p><span class="theorem-title"><strong>Example 32 (Time origin choice in the PBC study)</strong></span> In the <span class="citation" data-cites="dickson1989prognosis">Dickson et al. <a href="#/references" role="doc-biblioref" onclick="">[13]</a></span> Primary Biliary Cholangitis (PBC) study, survival time could be measured from:</p>
 <ul>
 <li>
 <strong>Cohort enrollment</strong>: time from when the patient entered the study</li>
@@ -5303,7 +5304,7 @@ Table&nbsp;10: HSV-2 test results for three example participants in the MIRA stu
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb62-1"><a aria-label="1"></a><span class="kw">stset</span> years_since_diag, failure(status) entry(disease_dur)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section><section id="numerical-example-pbc-study" class="slide level2 scrollable" data-number="13.8"><h2>
 <span class="header-section-number">13.8</span> Numerical Example: PBC Study</h2>
-<p>The <code>pbc</code> dataset from the <code>rmb</code> package contains data from a clinical trial of D-penicillamine treatment in primary biliary cholangitis (PBC) <span class="citation" data-cites="dickson1989prognosis">(<a href="#/references" role="doc-biblioref" onclick="">Dickson et al. 1989</a>)</span>.</p>
+<p>The <code>pbc</code> dataset from the <code>rmb</code> package contains data from a clinical trial of D-penicillamine treatment in primary biliary cholangitis (PBC) <span class="citation" data-cites="dickson1989prognosis"><a href="#/references" role="doc-biblioref" onclick="">[13]</a></span>.</p>
 <p>Here we demonstrate the effect of <a href="#/def-left-truncation">left-truncation</a> by comparing analyses using two different time scales:</p>
 <ol type="1">
 <li>Time from enrollment (standard approach, no truncation)</li>
@@ -5420,45 +5421,67 @@ Figure&nbsp;19: <a href="#/def-KM-estimator">Kaplan-Meier</a> survival curves fo
 <p><strong>Example:</strong> A fecundability study that excludes couples who never conceive exhibits right-truncation.</p>
 </section></section><section><section id="references" class="title-slide slide level1 unnumbered center"><h1>References</h1>
 
-</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-debruyn2011mira" class="csl-entry" role="listitem">
-<span class="nocase">Bruyn, G. de et al.</span> 2011. <span>“Safety and Effectiveness of the Diaphragm Used with Lubricant Gel for Prevention of <span>HIV</span> Acquisition in Southern African Women: A Randomised Controlled Trial.”</span> <em>Sexually Transmitted Infections</em> 87 (4): 309–15. <a href="https://doi.org/10.1136/sti.2010.044990">https://doi.org/10.1136/sti.2010.044990</a>.
-</div>
-<div id="ref-copelan1991treatment" class="csl-entry" role="listitem">
-Copelan, Edward A, James C Biggs, James M Thompson, et al. 1991. <em>Treatment for Acute Myelocytic Leukemia with Allogeneic Bone Marrow Transplantation Following Preparation with <span>BuCy2</span></em>. <a href="https://doi.org/10.1182/blood.V78.3.838.838">https://doi.org/10.1182/blood.V78.3.838.838</a>.
-</div>
-<div id="ref-dickson1989prognosis" class="csl-entry" role="listitem">
-Dickson, E. R., P. M. Grambsch, T. R. Fleming, L. D. Fisher, and A. Langworthy. 1989. <span>“Prognosis in Primary Biliary Cirrhosis: Model for Decision Making.”</span> <em>Hepatology</em> 10 (1): 1–7. <a href="https://doi.org/10.1002/hep.1840100102">https://doi.org/10.1002/hep.1840100102</a>.
-</div>
-<div id="ref-dobson4e" class="csl-entry" role="listitem">
-Dobson, Annette J, and Adrian G Barnett. 2018. <em>An Introduction to Generalized Linear Models</em>. 4th ed. CRC press. <a href="https://doi.org/10.1201/9781315182780">https://doi.org/10.1201/9781315182780</a>.
-</div>
-<div id="ref-freireich1963effect" class="csl-entry" role="listitem">
-<span class="nocase">Freireich, Emil J. et al.</span> 1963. <span>“The Effect of 6-Mercaptopurine on the Duration of Steroid-Induced Remissions in Acute Leukemia.”</span> <em>Blood</em> 21: 699–716.
-</div>
-<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
-Hernán, Miguel A., and James M. Robins. 2020. <em>Causal Inference: What If</em>. Chapman &amp; Hall/CRC. <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/</a>.
-</div>
-<div id="ref-kalbfleisch2011statistical" class="csl-entry" role="listitem">
-Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. John Wiley &amp; Sons.
-</div>
-<div id="ref-klein2003survival" class="csl-entry" role="listitem">
-Klein, John P, and Melvin L Moeschberger. 2003. <em>Survival Analysis: Techniques for Censored and Truncated Data</em>. Vol. 1230. Springer. <a href="https://link.springer.com/book/10.1007/b97377">https://link.springer.com/book/10.1007/b97377</a>.
-</div>
-<div id="ref-kleinbaum2012survival" class="csl-entry" role="listitem">
-Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer. <a href="https://link.springer.com/book/10.1007/978-1-4419-6646-9">https://link.springer.com/book/10.1007/978-1-4419-6646-9</a>.
-</div>
+</section><section class="slide level2 smaller scrollable" id="references"><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-rocke2021epi204" class="csl-entry" role="listitem">
-Rocke, David M. 2021. <em><span>Epi</span> 204 Lecture Notes, <span>Spring</span> 2021</em>. University of California, Davis. <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>.
+<div class="csl-left-margin">[1] </div>
+<div class="csl-right-inline">D. M. Rocke, <span>“<span>Epi</span> 204 lecture notes, <span>Spring</span> 2021.”</span> University of California, Davis, 2021. Available: <a href="https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html">https://dmrocke.ucdavis.edu/Class/EPI204-Spring-2021/EPI204-Spring-2021.html</a>
 </div>
-<div id="ref-me4" class="csl-entry" role="listitem">
-Rothman, Kenneth J., Timothy L. Lash, Tyler J. VanderWeele, and Sebastien Haneuse. 2021. <em>Modern Epidemiology</em>. Fourth edition. Wolters Kluwer.
 </div>
 <div id="ref-statproofbook" class="csl-entry" role="listitem">
-Soch, Joram, ed. 2023. <em>The Book of Statistical Proofs</em>. Zenodo. <a href="https://doi.org/10.5281/ZENODO.4305949">https://doi.org/10.5281/ZENODO.4305949</a>.
+<div class="csl-left-margin">[2] </div>
+<div class="csl-right-inline">J. Soch, Ed., <em>The book of statistical proofs</em>. Zenodo, 2023. Available: <a href="https://doi.org/10.5281/ZENODO.4305949">https://doi.org/10.5281/ZENODO.4305949</a>
+</div>
+</div>
+<div id="ref-klein2003survival" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div>
+<div class="csl-right-inline">J. P. Klein and M. L. Moeschberger, <em>Survival analysis: Techniques for censored and truncated data</em>, vol. 1230. Springer, 2003. Available: <a href="https://link.springer.com/book/10.1007/b97377">https://link.springer.com/book/10.1007/b97377</a>
+</div>
+</div>
+<div id="ref-dobson4e" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div>
+<div class="csl-right-inline">A. J. Dobson and A. G. Barnett, <em>An introduction to generalized linear models</em>, 4th ed. CRC press, 2018. Available: <a href="https://doi.org/10.1201/9781315182780">https://doi.org/10.1201/9781315182780</a>
+</div>
 </div>
 <div id="ref-vittinghoff2e" class="csl-entry" role="listitem">
-Vittinghoff, Eric, David V Glidden, Stephen C Shiboski, and Charles E McCulloch. 2012. <em>Regression Methods in Biostatistics: Linear, Logistic, Survival, and Repeated Measures Models</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>.
+<div class="csl-left-margin">[5] </div>
+<div class="csl-right-inline">E. Vittinghoff, D. V. Glidden, S. C. Shiboski, and C. E. McCulloch, <em>Regression methods in biostatistics: Linear, logistic, survival, and repeated measures models</em>, 2nd ed. Springer, 2012. Available: <a href="https://doi.org/10.1007/978-1-4614-1353-0">https://doi.org/10.1007/978-1-4614-1353-0</a>
+</div>
+</div>
+<div id="ref-kleinbaum2012survival" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div>
+<div class="csl-right-inline">D. G. Kleinbaum and M. Klein, <em>Survival analysis: A self-learning text</em>, 3rd ed. Springer, 2012. Available: <a href="https://link.springer.com/book/10.1007/978-1-4419-6646-9">https://link.springer.com/book/10.1007/978-1-4419-6646-9</a>
+</div>
+</div>
+<div id="ref-me4" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div>
+<div class="csl-right-inline">K. J. Rothman, T. L. Lash, T. J. VanderWeele, and S. Haneuse, <em>Modern epidemiology</em>, Fourth edition. Philadelphia: Wolters Kluwer, 2021.</div>
+</div>
+<div id="ref-kalbfleisch2011statistical" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div>
+<div class="csl-right-inline">J. D. Kalbfleisch and R. L. Prentice, <em>The statistical analysis of failure time data</em>. John Wiley &amp; Sons, 2011.</div>
+</div>
+<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div>
+<div class="csl-right-inline">M. A. Hernán and J. M. Robins, <em>Causal inference: What if</em>. Chapman &amp; Hall/CRC, 2020. Available: <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/</a>
+</div>
+</div>
+<div id="ref-freireich1963effect" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div>
+<div class="csl-right-inline">
+<span class="nocase">E. J. Freireich <em>et al.</em></span>, <span>“The effect of 6-mercaptopurine on the duration of steroid-induced remissions in acute leukemia,”</span> <em>Blood</em>, vol. 21, pp. 699–716, 1963.</div>
+</div>
+<div id="ref-copelan1991treatment" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div>
+<div class="csl-right-inline">E. A. Copelan <em>et al.</em>, <span>“Treatment for acute myelocytic leukemia with allogeneic bone marrow transplantation following preparation with <span>BuCy2</span>,”</span> 1991, doi: <a href="https://doi.org/10.1182/blood.V78.3.838.838">10.1182/blood.V78.3.838.838</a>.</div>
+</div>
+<div id="ref-debruyn2011mira" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div>
+<div class="csl-right-inline">
+<span class="nocase">G. de Bruyn <em>et al.</em></span>, <span>“Safety and effectiveness of the diaphragm used with lubricant gel for prevention of <span>HIV</span> acquisition in southern african women: A randomised controlled trial,”</span> <em>Sexually Transmitted Infections</em>, vol. 87, no. 4, pp. 309–315, 2011, doi: <a href="https://doi.org/10.1136/sti.2010.044990">10.1136/sti.2010.044990</a>.</div>
+</div>
+<div id="ref-dickson1989prognosis" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div>
+<div class="csl-right-inline">E. R. Dickson, P. M. Grambsch, T. R. Fleming, L. D. Fisher, and A. Langworthy, <span>“Prognosis in primary biliary cirrhosis: Model for decision making,”</span> <em>Hepatology</em>, vol. 10, no. 1, pp. 1–7, 1989, doi: <a href="https://doi.org/10.1002/hep.1840100102">10.1002/hep.1840100102</a>.</div>
 </div>
 </div>
 

@@ -383,16 +383,16 @@ text-align: center;
 <li>Survival models: log link</li>
 <li>Gaussian models: identity link</li>
 </ul>
-<p><a href="#/fig-model-diagrams" class="quarto-xref">Figure&nbsp;1</a> shows how the various models we have studied have analogous structures: each row uses model-specific transformations to connect the modeled quantity to a <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a> <span class="math inline">\(\eta(\mathord{\underset{\sim}{x}}) = \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \eta_0\)</span>.</p>
+<p><a href="#/fig-model-diagrams" class="quarto-xref">Figure&nbsp;1</a> shows how the various models we have studied have analogous structures: each row uses model-specific transformations to connect the modeled quantity to a <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a> <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \eta_0\)</span>.</p>
 <div id="fig-model-diagrams" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-model-diagrams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Parallel structures of <a href="../chapters/Intro-to-GLMs.html#def-glm">GLMs</a> and survival models. Each row shows the transformation chain from the modeled quantity to the linear predictor <span class="math inline">\(\eta(\mathord{\underset{\sim}{x}}) = \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \eta_0\)</span>, where <span class="math inline">\(\eta_0\)</span> denotes the model-specific intercept term, and <span class="math inline">\(\eta_0(t)\)</span> denotes the Cox PH baseline log-hazard term.
+Figure&nbsp;1: Parallel structures of <a href="../chapters/Intro-to-GLMs.html#def-glm">GLMs</a> and survival models. Each row shows the transformation chain from the modeled quantity to the linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \eta_0\)</span>, where <span class="math inline">\(\eta_0\)</span> denotes the model-specific intercept term, and <span class="math inline">\(\eta_0(t)\)</span> denotes the Cox PH baseline log-hazard term.
 </figcaption><div aria-describedby="fig-model-diagrams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><a href="../chapters/Linear-models-overview.html#def-lm-general-form">Linear</a> (Gaussian):</p>
 <p><span class="math display">\[\underbrace{\mu}_{\text{mean}}
 \underset{\xleftarrow[]{=}}{\xrightarrow[]{=}}
-\underbrace{\eta(\mathord{\underset{\sim}{x}}) }_{\substack{\text{linear}\\\text{predictor}}}
-= \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \mu(0)
+\underbrace{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) }_{\substack{\text{linear}\\\text{predictor}}}
+= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \mu(0)
 \]</span></p>
 <p><a href="../chapters/logistic-regression.html#def-logistic-regression">Logistic</a> (Binomial):</p>
 <p><span class="math display">\[\underbrace{\mu}_{\text{mean}}
@@ -413,7 +413,7 @@ Figure&nbsp;1: Parallel structures of <a href="../chapters/Intro-to-GLMs.html#de
 }{
   \xrightarrow{\operatorname{log}\mathopen{}\left\{\omega\right\}\mathclose{}}
 }
-\underbrace{\eta}_{\text{log-odds}} = \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \eta(0)
+\underbrace{\eta}_{\text{log-odds}} = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \eta(0)
 \]</span></p>
 <p>Count (<a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a>):</p>
 <p><span class="math display">\[\underbrace{\mu}_{\text{mean}}
@@ -429,31 +429,31 @@ Figure&nbsp;1: Parallel structures of <a href="../chapters/Intro-to-GLMs.html#de
   \xrightarrow{\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}}
 }
 \underbrace{\eta}_{\text{log-rate}}
-= \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \operatorname{log}\mathopen{}\left\{{\lambda}(0)\right\}\mathclose{}
+= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \operatorname{log}\mathopen{}\left\{{\lambda}(0)\right\}\mathclose{}
 \]</span></p>
 <p>Survival (<a href="../chapters/proportional-hazards-models.html#def-ph-model">Cox PH</a>):</p>
 <p><span class="math display">\[\underbrace{\mu}_{\text{mean}}
-\xleftarrow[\int_{t=0}^{\infty}{\operatorname{S}(t|\mathord{\underset{\sim}{x}})dt}]{}
-\underbrace{\operatorname{S}(t|\mathord{\underset{\sim}{x}})}_{\text{survival}}
+\xleftarrow[\int_{t=0}^{\infty}{\operatorname{S}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})dt}]{}
+\underbrace{\operatorname{S}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}_{\text{survival}}
 \underset{
-  \xleftarrow[\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t|\mathord{\underset{\sim}{x}})\right\}\mathclose{}]{}
+  \xleftarrow[\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}]{}
 }{
-  \xrightarrow{-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t|\mathord{\underset{\sim}{x}})\right\}\mathclose{}}
+  \xrightarrow{-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}
 }
-\underbrace{{\Lambda}(t|\mathord{\underset{\sim}{x}})}_{\text{cumulative hazard}}
+\underbrace{{\Lambda}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}_{\text{cumulative hazard}}
 \underset{
-  \xleftarrow[\int_0^t {\lambda}(u|\mathord{\underset{\sim}{x}})\,du]{}
+  \xleftarrow[\int_0^t {\lambda}(u|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\,du]{}
 }{
-  \xrightarrow{{\Lambda}'(t|\mathord{\underset{\sim}{x}})}
+  \xrightarrow{{\Lambda}'(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}
 }
-\underbrace{{\lambda}(t|\mathord{\underset{\sim}{x}})}_{\text{hazard}}
+\underbrace{{\lambda}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}_{\text{hazard}}
 \underset{
-  \xleftarrow[\operatorname{exp}\mathopen{}\left\{\eta(t|\mathord{\underset{\sim}{x}})\right\}\mathclose{}]{}
+  \xleftarrow[\operatorname{exp}\mathopen{}\left\{\eta(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}]{}
 }{
-  \xrightarrow{\operatorname{log}\mathopen{}\left\{{\lambda}(t|\mathord{\underset{\sim}{x}})\right\}\mathclose{}}
+  \xrightarrow{\operatorname{log}\mathopen{}\left\{{\lambda}(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}
 }
-\underbrace{\eta(t|\mathord{\underset{\sim}{x}})}_{\text{log-hazard}}
-= \mathord{\underset{\sim}{x}} \cdot \mathord{\underset{\sim}{\beta}} + \eta_0(t)
+\underbrace{\eta(t|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}_{\text{log-hazard}}
+= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}} + \eta_0(t)
 \]</span></p>
 </div>
 </figure>
