@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: _site
+  # Writes chapters/dependency-graph.json for chapters/dependency-graph.js (#1388).
+  pre-render: python3 tools/build_dependency_graph.py --out chapters/dependency-graph.json
+  resources:
+    - chapters/dependency-graph.js
+    - chapters/dependency-graph.json
   render:
     # Only render the files that were in the original book
     - chapters/index.qmd
@@ -291,6 +296,7 @@ format:
       - _mobile-toc.html
       - anchor-landing.html
       - table-roles.html
+      - text: '<script src="dependency-graph.js" defer></script>'
       # Opt-in: floating previous/next arrows in the page margins, and navbar
       # highlighting that works when Home is in the sidebar.
       # - page-navigation.html
