@@ -3,7 +3,8 @@
 
 Builds a tiny site and pins: an `@id` edge, a `page.qmd#id` edge, a cross-site
 URL edge (with an external stub node), an edge from a subfile, a forward
-reference, a cycle, and that a reference to an example div adds no edge.
+reference, a cycle, that a reference to an example div adds no edge, and that
+reference syntax inside a code block adds no edge and follows no include.
 
 Run it directly with ``python3`` (from the repository root, giving its path). Needs no pytest.
 """
@@ -28,6 +29,10 @@ title: A
 Uses @def-one and [b](b.qmd#thm-b)
 and [a definition elsewhere](https://morrison-lab.github.io/pds/expectation.html#def-expectation).
 See @exm-skipped.
+
+```markdown
+Example syntax: @def-late and {{< include _subfiles/a/_missing.qmd >}}
+```
 
 ::: {.callout-note}
 A nested non-definition div.
@@ -79,6 +84,7 @@ def main() -> int:
     check("cross-site URL keeps its own host",
           nodes["mds/vectors#def-vector"]["url"] == "https://example.org/mds/vectors.html#def-vector")
     check("example reference adds no edge", not any("exm" in b for _, b in edge_set))
+    check("syntax shown in a code block is not a reference", ("t/a#def-two", "t/a#def-late") not in edge_set)
     check("forward reference", ("t/a#def-early", "t/a#def-late") in forward)
     check("cycle", cycles == [["t/a#def-early", "t/a#def-late"]])
     check("pages at the root with --pages .", set(root_nodes) == set(nodes))

@@ -32,8 +32,11 @@ HEADING = re.compile(r"^#{2,6}\s+(.*?)\s*(?:\{.*\})?\s*$")
 
 def expand(path, seen=()):
     """Yield (line, source_path) of a .qmd with includes expanded in place."""
+    in_code = False
     for line in path.read_text(encoding="utf-8").splitlines():
-        m = INCLUDE.search(line)
+        if line.lstrip().startswith("```"):
+            in_code = not in_code
+        m = None if in_code else INCLUDE.search(line)
         if m and not line.lstrip().startswith("<!--"):
             # Quarto resolves a nested include against the page, not the subfile.
             sub = (path.parent / m.group(1)).resolve()
@@ -55,9 +58,7 @@ def parse_page(qmd, site):
     for line, src in expand(qmd, (qmd.resolve(),)):
         if line.lstrip().startswith("```"):
             in_code = not in_code
-        if in_code:
-            if cur is not None:
-                cur["text"].append(line)
+        if in_code:  # example syntax in a code block is not a reference
             continue
         m = DIV_OPEN.match(line)
         if m:
