@@ -265,8 +265,10 @@ plt.tight_layout(); plt.show()
 ## GAMs: continuous outcome {.unnumbered}
 
 Fit three GAMs for `wage` on the `Wage` data and compare them with [AIC](Linear-models-overview.qmd#def-aic).
-The book's lab [@james2021islr2e, §7.8.3] uses the `gam` package, with [smoothing splines](#def-smoothing-spline) `s(year, 4)` and `s(age, 5)` of 4 and 5 degrees of freedom,
-and compares a model without `year`, a model with `year` entering as a straight line and a model with `year` smooth by `anova()`.
+The book's lab [@james2021islr2e, §7.8.3] uses the `gam` package,
+with [smoothing splines](#def-smoothing-spline) `s(year, 4)` and `s(age, 5)` of 4 and 5 degrees of freedom.
+It compares, using `anova()`, a model without `year`, a model with `year` entering as a straight line,
+and a model with `year` smooth.
 This lab uses `mgcv` instead, so the smooths `s(year, k = 4)` and `s(age, k = 5)` have basis dimension 4 and 5,
 which is not the same as 4 and 5 degrees of freedom,
 and `mgcv` chooses the amount of smoothing itself.
@@ -287,7 +289,7 @@ gam3 <- gam(wage ~ s(year, k = 4) + poly(age, 4) + education,
 
 AIC(gam1, gam2, gam3)
 
-# The book's question: does `year` belong in the model, and does it need a smooth?
+# Book's question: does year belong, and does it need a smooth?
 gam0 <- gam(wage ~ s(age, k = 5) + education, data = Wage)
 anova(gam0, gam2, gam1, test = "F")
 
