@@ -14,7 +14,7 @@
   var NAME = { def: "Definition", thm: "Theorem", lem: "Lemma", cor: "Corollary", prp: "Proposition" };
   var script = document.currentScript;
   var base = script ? script.src.replace(/[^/]*$/, "") : "";
-  var page = location.pathname.split("/").pop().replace(/\.html$/, "");
+  var page = location.pathname.split("/").pop().replace(/\.html$/, "") || "index";
 
   function el(tag, attrs, parent) {
     var e = document.createElementNS(NS, tag);

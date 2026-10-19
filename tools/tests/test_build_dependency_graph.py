@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Self-test for build-dependency-graph/build_dependency_graph.py.
+"""Self-test for build_dependency_graph.py.
 
 Builds a tiny site and pins: an `@id` edge, a `page.qmd#id` edge, a cross-site
 URL edge (with an external stub node), an edge from a subfile, a forward
 reference, a cycle, and that a reference to an example div adds no edge.
 
-Run with ``python3 build-dependency-graph/tests/test_build_dependency_graph.py``. Needs no pytest.
+Run it directly with ``python3`` (from the repository root, giving its path). Needs no pytest.
 """
 
 from __future__ import annotations

@@ -12,7 +12,7 @@ Writes JSON (default `<root>/dependency-graph.json`) and prints cycles and
 forward references (a div that uses one defined later on the same page).
 Stdlib only, so it can run in any notes repo's pre-render step.
 
-    python3 tools/build_dependency_graph.py [--root .] [--out FILE] [--site lds] [--fail]
+    python3 tools/build_dependency_graph.py [--root .] [--pages chapters] [--out FILE] [--site lds] [--fail]
 """
 import argparse
 import json
