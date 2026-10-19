@@ -131,7 +131,7 @@ def build(root, site, pages_dir="chapters"):
                     continue
                 if tk not in nodes:
                     if t_site == site:
-                        continue  # a dangling local reference is check_site.py's business
+                        continue  # a dangling local reference is not a graph edge; the link checkers report it
                     nodes[tk] = {"id": tk, "site": t_site, "page": t_page, "div": ref, "kind": ref.split("-")[0],
                                  "title": ref.split("-", 1)[1].replace("-", " "), "external": True,
                                  "url": url}

@@ -24,7 +24,6 @@
   }
   function href(n, g) {
     if (n.url) return n.url;
-    if (n.site !== g.site) return "https://morrison-lab.github.io/" + n.site + "/" + n.page + ".html#" + n.div;
     return (n.page === page ? "" : n.page + ".html") + "#" + n.div;
   }
   function clip(s) { return s.length > 30 ? s.slice(0, 29) + "…" : s; }
