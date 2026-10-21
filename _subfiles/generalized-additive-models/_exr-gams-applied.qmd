@@ -72,8 +72,8 @@ A step function with $K$ cut-points has $K + 1$ intervals, so `cut(age, K + 1)` 
 ```{r}
 #| code-fold: true
 cv_step <- vapply(1:9, function(K) {
-  Wage_cut <- transform(Wage, age_cut = cut(age, K + 1))
-  cv.glm(Wage_cut, glm(wage ~ age_cut, data = Wage_cut), K = 10)$delta[1]
+  wage_cut <- transform(Wage, age_cut = cut(age, K + 1))
+  cv.glm(wage_cut, glm(wage ~ age_cut, data = wage_cut), K = 10)$delta[1]
 }, numeric(1))
 best_K <- which.min(cv_step)
 cat("CV-selected number of cut-points:", best_K, "\n")
