@@ -1,0 +1,25 @@
+# Thin caller of Morrison-Lab/gha's reusable self-credits check.
+#
+# The lab does not formally acknowledge content borrowed from its own sites
+# and works (Ezra, 2026-10-16). A link to another of our sites is fine; a
+# `Source:` line, an "adapted from" sentence or a citation of an entry for the
+# group's own work is flagged on the lines a PR adds. The lists of own works
+# are in .github/own-works.yml. Warn-only: a credit phrase beside an own name
+# is sometimes right.
+name: Check Self-Credits
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - '**.qmd'
+      - '.github/own-works.yml'
+  workflow_dispatch:
+
+jobs:
+  check-self-credits:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-self-credits.yml@v3
+    with:
+      paths-ignore: '_extensions/**,latex-macros/**'
