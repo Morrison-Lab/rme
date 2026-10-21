@@ -4,7 +4,7 @@
 <!-- No slidebreak here: the heading shares its slide with the def-deviance-test div. -->
 :::{#def-deviance-test}
 
-#### Deviance goodness-of-fit test
+#### Deviance goodness-of-fit test (deviance test)
 
 We can compare the maximized [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) of our model,
 $\llik(\hat\beta; \mathbf x)$,
@@ -23,7 +23,9 @@ With enough data,
 $D \dot \sim \chi^2(q - p)$,
 where $q$ is the number of distinct covariate patterns
 and $p$ is the number of $\beta$ parameters in our model.
-The **deviance test** compares $D$ to that $\chi^2(q-p)$ distribution.
+The **deviance goodness-of-fit test**
+(or **deviance test**)
+compares $D$ to that $\chi^2(q-p)$ distribution.
 :::
 
 {{< slidebreak >}}
@@ -129,7 +131,7 @@ probability together, and so on; $g=10$ categories in all.
 Then we can construct a statistic
 $$X^2 \eqdef \sum_{c=1}^g \frac{(o_c - e_c)^2}{e_c}$$ where $o_c$ is the
 number of events *observed* in group $c$, and $e_c$ is the number of
-events expected in group $c$ (based on the sum of the [fitted values](https://morrison-lab.github.io/sds/estimation.html#def-fitted-value)
+events expected in group $c$ (based on the sum of the [fitted values](https://morrison-lab.github.io/sds/prediction.html#def-fitted-value)
 $\hat\pi_i$ for observations in group $c$).
 
 If each group has enough observations in it, you can compare $X^2$ to a

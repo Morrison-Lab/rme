@@ -30,17 +30,17 @@ Because refitting the model $n$ times is expensive,
 that uses only quantities from the full-data fit:
 
 $$
-D_i = \frac{(\stdresid_i)^2}{p} \cdot \frac{h_{ii}}{1-h_{ii}}
+D_i = \frac{(\stdresid_i)^2}{p} \cdot \frac{\leverage{ii}}{1-\leverage{ii}}
 $$ {#eq-cooks-distance-formula}
 
 where $\stdresid_i$ is the [standardized residual](#def-stred) (@def-stred)
-and $h_{ii}$ is the leverage (diagonal of the [hat matrix](#def-hat-matrix), @def-hat-matrix).
+and $\leverage{ii}$ is the leverage (diagonal of the [hat matrix](#def-hat-matrix), @def-hat-matrix).
 
 {{< slidebreak >}}
 
 :::{#exm-cooks-distance}
 Consider a regression with $p = 2$ parameters.
-Suppose observation $i$ has standardized residual $\stdresid_i = 2$ and leverage $h_{ii} = 0.3$.
+Suppose observation $i$ has standardized residual $\stdresid_i = 2$ and leverage $\leverage{ii} = 0.3$.
 Applying @eq-cooks-distance-formula,
 
 $$
@@ -54,7 +54,7 @@ $$
 
 - **Residual size** ($(\stdresid_i)^2$):
   a poorly fitted observation pushes $D_i$ up regardless of its leverage.
-- **Leverage** ($h_{ii}/(1-h_{ii})$):
+- **Leverage** ($\leverage{ii}/(1-\leverage{ii})$):
   high leverage amplifies the effect of even a moderate residual.
 
 An observation must be both unusual in its predictor values *and* poorly fitted to have a large Cook's distance.

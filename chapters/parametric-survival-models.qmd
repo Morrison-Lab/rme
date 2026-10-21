@@ -429,6 +429,14 @@ Rather than multiplying the hazard rate, covariates accelerate or decelerate the
 
 {{< slidebreak >}}
 
+{{< include _subfiles/parametric-survival-models/_def-acceleration-factor.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/parametric-survival-models/_exm-acceleration-factor.qmd >}}
+
+{{< slidebreak >}}
+
 {{< include _subfiles/parametric-survival-models/_def-aft.qmd >}}
 
 {{< slidebreak >}}
@@ -679,13 +687,36 @@ In the exponential model, $\eb_{\text{AFT}} = -\eb_{\text{PH}}$, so the AFT coef
 To check whether a Weibull [proportional hazards assumption](proportional-hazards-models.qmd#def-pha) is reasonable, we inspect the complementary log-log transformation of the [Kaplan-Meier survival curves](intro-to-survival-analysis.qmd#def-KM-estimator), $\log(-\log \esurv(t)) = p \log \lambda + p \log t$:
 
 ```{r}
-#| fig-cap: "Complementary log-log survival curves by treatment group"
-library(survminer)
+#| fig-cap: >
+#|   Cumulative hazard curves by treatment group, on log-spaced axes
+#|   (complementary log-log survival curves)
+# plot the cumulative hazard H(t) = -log(S(t)) against time on log-spaced axes,
+# so that the ticks are in weeks and in units of cumulative hazard,
+# rather than in the logs of those quantities;
+# log10 is not finite at 0, so leave out the points where H(t) = 0
+# (before the first event) and where S(t) = 0 (so that H(t) is infinite):
 survfit(
   formula = surv ~ rx,
   data = anderson
 ) |>
-  ggsurvplot(fun = "cloglog")
+  broom::tidy() |>
+  dplyr::mutate(cumhaz = -log(estimate)) |>
+  dplyr::filter(time > 0, cumhaz > 0, is.finite(cumhaz)) |>
+  ggplot() +
+  aes(x = time, y = cumhaz, col = strata) +
+  geom_step() +
+  theme_bw() +
+  scale_x_continuous(
+    trans = "log10",
+    labels = scales::label_number(drop0trailing = TRUE, big.mark = ","),
+    name = "Time (weeks, log scale)"
+  ) +
+  scale_y_continuous(
+    trans = "log10",
+    labels = scales::label_number(drop0trailing = TRUE, big.mark = ","),
+    name = "Cumulative hazard H(t) (log scale)"
+  ) +
+  theme(legend.position = "bottom", legend.title = element_blank())
 ```
 
 If the complementary log-log curves are approximately linear and parallel across treatment groups, then a Weibull proportional hazards model is appropriate.

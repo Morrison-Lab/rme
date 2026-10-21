@@ -33,10 +33,10 @@ can introduce [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias
 
 <!-- No slidebreak here: the heading shares its slide with the def-exchangeability div. -->
 :::{#def-exchangeability}
-#### Exchangeability
+#### Exchangeability (no unmeasured confounding, ignorability)
 
-**Exchangeability** (also called *no unmeasured [confounding](#def-confounding-obs)*
-or *ignorability*) states that,
+**Exchangeability** (also called **no unmeasured [confounding](#def-confounding-obs)**
+or **ignorability**) states that,
 conditional on observed covariates $\vec{L}$,
 treatment assignment is [independent](https://morrison-lab.github.io/pds/independence.html#def-cind) of [potential outcomes](#def-potential-outcomes):
 $$A \perp\!\!\!\perp (Y(0), Y(1)) \mid \vec{L}$$
@@ -49,7 +49,7 @@ $$A \perp\!\!\!\perp (Y(0), Y(1)) \mid \vec{L}$$
 
 Intuitively, exchangeability means that among individuals with the same
 covariate values,
-treatment was assigned as if at random —
+treatment was assigned as if at random ---
 there are no unmeasured common causes of treatment and outcome.
 :::
 
@@ -76,7 +76,7 @@ Exchangeability conditional on $\vec{L}$ (@def-exchangeability) requires adjusti
 The **positivity** assumption states that
 every individual has a positive probability of receiving
 each treatment level,
-at every covariate value $\vec{l}$ in the [support](https://morrison-lab.github.io/mds/notation.html#def-support) of $\vec{L}$:
+at every covariate value $\vec{l}$ in the [support](https://morrison-lab.github.io/mds/indicator-functions.html#def-support) of $\vec{L}$:
 $$0 < \Pf{A = 1 \mid \vec{L} = \vec{l}} < 1
 \quad \text{for all } \vec{l} \text{ in the support of } \vec{L}$$
 :::
@@ -97,9 +97,9 @@ for those subgroups.
 :::{#def-positivity-violation}
 #### Positivity violation
 
-A failure of positivity is sometimes called a **positivity violation** or
-**practical positivity violation**
-when near-zero probabilities occur in small strata.
+A failure of positivity is sometimes called a **positivity violation**.
+When near-zero probabilities occur in small strata,
+the failure is called a practical positivity violation.
 :::
 
 {{< slidebreak >}}
@@ -108,8 +108,8 @@ when near-zero probabilities occur in small strata.
 
 ::: notes
 
-These three assumptions —
-consistency, exchangeability, and positivity —
+These three assumptions ---
+consistency, exchangeability, and positivity ---
 are collectively sufficient to identify causal effects
 from observed data.
 They are sometimes summarized as

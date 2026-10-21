@@ -1,9 +1,9 @@
 ::: notes
-Adapted from @james2021islr2e [§7.7] and @wood2017generalized [§4–7].
+Adapted from @james2021islr2e [§7.7] and @wood2017generalized [§4--7].
 :::
 
 We're now ready to assemble the **generalized additive model**.
-The idea is to take any of the nonlinear smoothers we've built up — regression splines, smoothing splines, local regression — and let **each predictor have its own smoother**, with the smoother contributions added together on the link scale.
+The idea is to take any of the nonlinear smoothers we've built up --- regression splines, smoothing splines, local regression --- and let **each predictor have its own smoother**, with the smoother contributions added together on the link scale.
 
 {{< slidebreak >}}
 
@@ -24,7 +24,7 @@ $$g(\E{Y \mid X = x}) = \b_0 + f_1(x_1) + f_2(x_2) + \cdots + f_p(x_p),$$
 where:
 
 - $g$ is a link function (identity for Gaussian, logit for binary,
-  log for Poisson — same as in a GLM).
+  log for Poisson --- same as in a GLM).
 - Each $f_j$ is a **smooth function** of the $j$-th predictor,
   estimated from the data.
 - $\b_0$ is an intercept (sometimes absorbed into one of the $f_j$'s
@@ -52,15 +52,15 @@ The three partial-effect curves can be plotted separately, revealing, for exampl
 #### What counts as a smooth function
 
 A "smooth function" in practice means a regression spline,
-smoothing spline, or other smoother — anything that can be written
+smoothing spline, or other smoother --- anything that can be written
 as a basis expansion $f_j(x_j) = \sum_k \b_{jk} b_{jk}(x_j)$ with
 the coefficients $\b_{jk}$ estimated jointly across all predictors.
 ::::
 
-The model class includes ordinary linear regression as a special case (every $f_j$ is just $\b_j x_j$) and ordinary GLMs as another special case (same — every $f_j$ linear, with the right link function).
+The model class includes ordinary linear regression as a special case (every $f_j$ is just $\b_j x_j$) and ordinary GLMs as another special case (same --- every $f_j$ linear, with the right link function).
 The point of the GAM extension is to let *some* $f_j$ be nonlinear while keeping the predictor contributions additive.
 
-## What "additive" buys you
+## What the additive structure gives you
 
 The additive structure makes GAMs strictly less flexible than fully
 nonparametric models like
@@ -78,7 +78,7 @@ In return, GAMs gain:
   fitting it in $p$ dimensions jointly takes $O(n^p)$ data.
   Additivity is a structural assumption that makes the problem tractable even with several predictors.
 - **Direct extension of GLM workflow.**
-  The link function $g$, exponential-family likelihood, residual diagnostics, and AIC comparisons all work essentially unchanged — GAMs are GLMs in spline coordinates.
+  The link function $g$, exponential-family likelihood, residual diagnostics, and AIC comparisons all work essentially unchanged --- GAMs are GLMs in spline coordinates.
 
 ## Adding interactions and tensor smooths
 
@@ -86,7 +86,7 @@ The strict-additivity restriction can be relaxed when needed.
 The two standard escape hatches are:
 
 - **Predictor-by-factor interactions.**
-  A smooth that varies by category — e.g. an age effect that's different for Type A and Type B behavior patterns (`dibpat`) — is fit as $f_j(X_j) + f_{j,\text{by}}(X_j) \cdot \indicp{\text{dibpat} = \text{Type A}}$ via `s(age, by = dibpat)` in `mgcv`.
+  A smooth that varies by category --- e.g. an age effect that's different for Type A and Type B behavior patterns (`dibpat`) --- is fit as $f_j(X_j) + f_{j,\text{by}}(X_j) \cdot \indicp{\text{dibpat} = \text{Type A}}$ via `s(age, by = dibpat)` in `mgcv`.
   When `dibpat` is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else);
   the correct idiom is:
   ```{r}
@@ -95,11 +95,11 @@ The two standard escape hatches are:
   The result is still additive in the *factors*, but allows
   separate smooth shapes within each level.
 - **Tensor-product smooths.**
-  A genuine two-dimensional smooth surface in two continuous predictors — e.g. $f(\text{age}, \text{bmi})$ — fit via `te(age, bmi)` in `mgcv`.
-  The smoothing penalty is applied separately to wiggliness in each marginal direction, so the smooth doesn't assume the two predictors are on comparable scales — the right choice when predictors have different units (e.g. age in years, BMI in kg/m²).
+  A genuine two-dimensional smooth surface in two continuous predictors --- e.g. $f(\text{age}, \text{bmi})$ --- fit via `te(age, bmi)` in `mgcv`.
+  The smoothing penalty is applied separately to wiggliness in each marginal direction, so the smooth doesn't assume the two predictors are on comparable scales --- the right choice when predictors have different units (e.g. age in years, BMI in kg/m²).
   An isotropic 2D smooth (`s(age, bmi)`) would penalize the same amount of "wiggliness per year of age" as per "unit of BMI", which is rarely substantively defensible.
 
 For routine epidemiology work, the additive model is usually the
 right starting point; tensor smooths come up mainly when interactions
 between continuous predictors are scientifically central (e.g.
-space–time models, age–calendar-time mortality surfaces).
+space--time models, age--calendar-time mortality surfaces).

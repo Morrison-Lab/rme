@@ -1,7 +1,7 @@
 :::{#lem-ph-breslow-point-mass}
 #### Point-mass optimality of the profile baseline hazard
 
-Fix $\vb$ and maximize the [censored-data likelihood](#lem-censored-lik) @eq-ph-breslow-full-lik over $\haz_0(\cdot)$.
+Take the coefficient vector $\vb$ as given and maximize the [censored-data likelihood](#lem-censored-lik) @eq-ph-breslow-full-lik over the [baseline hazard](#def-base-hazard) $\haz_0(\cdot)$.
 The maximizing $\haz_0(\cdot)$ places mass only at the $K$ distinct event times $t_1 < \cdots < t_K$,
 as a discrete hazard measure with point masses $\blue{h_{0i}} \eqdef \blue{\haz_0(t_i)}$:
 
@@ -20,7 +20,7 @@ Subjects with $\delta_j = 0$ contribute only the survival term $\expf{-\blue{\cu
 to @eq-ph-breslow-full-lik, since $\blue{\haz_0(\tilde{T}_j)}^{\delta_j} = \blue{\haz_0(\tilde{T}_j)}^0 = 1$ regardless of $\haz_0$.
 Adding mass to $\haz_0$ at any non-event time $t$ increases $\blue{\cuhaz_0(\tilde{T}_j)}$
 for every subject with $\tilde{T}_j \ge t$, penalizing their survival terms in @eq-ph-breslow-full-lik
-without any compensating gain in a hazard-density factor —
+without any compensating gain in a hazard-density factor ---
 so no mass should be placed away from the $K$ event times.
 
 For an event subject $j$ with $\delta_j = 1$ whose failure occurs at $t_i$,
@@ -44,8 +44,8 @@ Suppose a total mass of $0.1$ is available to place near an event time $t_1$.
 Concentrating it exactly at $t_1$ gives $\blue{\haz_0(t_1)} = \blue{h_{01}} = 0.1$,
 contributing a hazard-density factor of $0.1$ to @eq-ph-breslow-full-lik
 for the subject failing at $t_1$.
-Splitting the same total mass into two halves —
-$0.05$ exactly at $t_1$ and $0.05$ at a nearby non-event point —
+Splitting the same total mass into two halves ---
+$0.05$ exactly at $t_1$ and $0.05$ at a nearby non-event point ---
 leaves only $\blue{\haz_0(t_1)} = 0.05$ at $t_1$ itself, *half* the hazard-density factor,
 while the cumulative hazard $\blue{\cuhaz_0(\tilde T_j)}$ (and hence every survival term)
 is unchanged, since both allocations place the same total mass $0.1$ at or prior to any $\tilde T_j \ge t_1$.

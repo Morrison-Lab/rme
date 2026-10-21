@@ -1,0 +1,22 @@
+:::{#exm-bernoulli-loglik-general}
+
+#### Log-likelihood of three binary outcomes
+
+Take $\vy$ and $\vpi$ from @exm-bernoulli-lik-general.
+The code below computes the log-likelihood from the formula of @thm-bernoulli-loglik-general,
+and as the logarithm of the likelihood:
+
+```{r}
+#| label: exm-bernoulli-loglik-general-calc
+#| code-fold: show
+ex_y <- c(1, 0, 1)
+ex_pi <- c(0.8, 0.3, 0.6)
+ex_llik_formula <- sum(ex_y * log(ex_pi) + (1 - ex_y) * log(1 - ex_pi))
+ex_llik_log <- log(prod(ex_pi^ex_y * (1 - ex_pi)^(1 - ex_y)))
+```
+
+The formula gives `r round(ex_llik_formula, 4)`
+and the logarithm of the likelihood is `r round(ex_llik_log, 4)`,
+so the two agree.
+
+:::

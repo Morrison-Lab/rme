@@ -1,0 +1,27 @@
+:::{#exm-marginal-slope-nonindep}
+
+#### A marginal slope under an identity link
+
+Take the parameter values of @exm-marginal-mean-nonindep.
+Because the marginal mean is linear in $x$,
+the change in $\Ef{Y|X=x}$ from $x = 2$ to $x = 3$ equals its slope.
+The code below computes that change,
+and the slope from @cor-marginal-slope-nonindep:
+
+```{r}
+#| label: exm-marginal-slope-nonindep-calc
+#| code-fold: show
+ex_marginal_mean <- function(x) {
+  (0.1 + 0.1 * 1) + (0.05 + 0.1 * 0.5) * x
+}
+ex_change <- ex_marginal_mean(3) - ex_marginal_mean(2)
+ex_slope <- 0.05 + 0.1 * 0.5
+```
+
+The change is `r round(ex_change, 4)`
+and the slope formula gives `r ex_slope`,
+so the two agree.
+The slope exceeds the conditional slope $\b_X = 0.05$,
+because $\b_C \gamma_x = 0.05$ is positive.
+
+:::

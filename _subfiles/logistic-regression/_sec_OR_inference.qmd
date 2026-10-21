@@ -19,8 +19,8 @@ By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro
 a 95% confidence interval for $\ror(\vx,\vxs)$
 can be constructed as:
 
-$$\hat\ror \pm 1.96 * \HSE{\hat\ror}$${#eq-ci-OR-direct}
-However, $\HSE{\hat\ror}$ seems difficult to compute;
+$$\eror \pm 1.96 * \HSE{\eror}$${#eq-ci-OR-direct}
+However, $\HSE{\eror}$ seems difficult to compute;
 doing so would require using the 
 [delta method](https://en.wikipedia.org/wiki/Delta_method).
 
@@ -35,6 +35,14 @@ and then exponentiate the endpoints of that log-odds-scale confidence interval:
 $$\ror(\vx,\vxs) \in (e^L, e^R)$${#eq-ci-OR-exp}
 
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_thm-ci-OR.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-OR.qmd >}}
 
 {{< slidebreak >}}
 
@@ -60,6 +68,14 @@ can be constructed as:
 $$\edifflogodds \pm 1.96 * \teal{\HSE{\edifflogodds}}$$
 
 :::
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_thm-ci-log-OR.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-ci-log-OR.qmd >}}
 
 {{< slidebreak >}}
 
@@ -119,6 +135,14 @@ $$
 
 {{< slidebreak >}}
 
+{{< include _subfiles/logistic-regression/_thm-var-diff-logodds.qmd >}}
+
+{{< slidebreak >}}
+
+{{< include _subfiles/logistic-regression/_exm-var-diff-logodds.qmd >}}
+
+{{< slidebreak >}}
+
 Combining @eq-var-diff-logodds with the invariance property of MLEs
 gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
@@ -138,7 +162,7 @@ $${#eq-est-se-diff-logodds}
 :::
 
 ::: proof
-By @sol-se-diff-logodds,
+By @thm-var-diff-logodds,
 $\Var{\edifflogodds} = \tp{\diffvx}\Sigma(\diffvx)$ (@eq-var-diff-logodds).
 By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle),
 we estimate $\Sigma$ with $\eS \eqdef \widehat{\Covt}(\eb)$,
@@ -189,7 +213,7 @@ The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/infer
 $(`r ci_diff[1]`, `r ci_diff[2]`)$,
 so by @eq-ci-OR-exp
 the estimated [odds ratio](binary-outcome-associations.qmd#def-OR) and its 95% confidence interval are
-$\hat\ror(\vx,\vxs) = e^{`r diff_logodds_hat`} = `r exp(diff_logodds_hat)`$,
+$\eror(\vx,\vxs) = e^{`r diff_logodds_hat`} = `r exp(diff_logodds_hat)`$,
 with CI $(`r exp(ci_diff[1])`, `r exp(ci_diff[2])`)$.
 
 :::

@@ -1,0 +1,23 @@
+::::{#exm-smoothing-spline-zero-penalty}
+
+#### A barely penalized smoothing spline interpolates the data
+
+The code below simulates 20 noisy observations of a sine curve at distinct values of $x$,
+fits a smoothing spline with a tiny penalty,
+and computes its training residual sum of squares:
+
+```{r}
+#| label: exm-ss-zero-penalty
+#| code-fold: show
+set.seed(1)
+sim_x <- sort(runif(20))
+sim_y <- sin(2 * pi * sim_x) + rnorm(20, sd = 0.3)
+sim_small_lambda <- smooth.spline(sim_x, sim_y, lambda = 1e-12)
+sim_rss <- sum((sim_y - predict(sim_small_lambda, sim_x)$y)^2)
+```
+
+The training residual sum of squares is `r format(sim_rss, digits = 2, scientific = TRUE)`,
+which is essentially 0 even though the data have noise standard deviation 0.3,
+as @thm-smoothing-spline-zero-penalty says.
+
+::::

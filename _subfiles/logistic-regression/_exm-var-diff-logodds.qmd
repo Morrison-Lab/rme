@@ -1,0 +1,25 @@
+:::{#exm-var-diff-logodds}
+
+#### Variance of an estimated difference in beetle log-odds
+
+For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`),
+let $\vx = (1, 1.8)\'$ and $\vxs = (1, 1.7)\'$,
+so that $\diffvx = (0, 0.1)\'$.
+The code below applies @thm-var-diff-logodds,
+using the estimated covariance matrix of the coefficients in place of $\Sigma$:
+
+```{r}
+#| label: exm-var-diff-logodds-calc
+#| code-fold: show
+ex_dx <- c(0, 1.8 - 1.7)
+ex_sigma <- vcov(beetles_glm_ungrouped)
+ex_var_quadratic <- drop(t(ex_dx) %*% ex_sigma %*% ex_dx)
+ex_var_slope <- 0.1^2 * ex_sigma["dose", "dose"]
+```
+
+The quadratic form gives `r round(ex_var_quadratic, 6)`.
+Because $\diffvx$ has a zero in the intercept position,
+the variance should equal $0.1^2$ times the estimated variance of the dose coefficient,
+which is `r round(ex_var_slope, 6)`.
+
+:::

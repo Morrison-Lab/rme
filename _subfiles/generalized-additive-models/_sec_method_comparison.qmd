@@ -50,14 +50,14 @@ grid$linear <- predict_with(fit_lin)
 fit_poly2 <- lm(y ~ poly(x, 2), data = demo_data)
 grid$poly2 <- predict_with(fit_poly2)
 
-# (3) Degree-12 polynomial — deliberately high degree to surface
+# (3) Degree-12 polynomial --- deliberately high degree to surface
 # Runge-style boundary swinging.
 fit_poly12 <- lm(y ~ poly(x, 12), data = demo_data)
 grid$poly12 <- predict_with(fit_poly12)
 
 # (4) Step function with 5 bins on equal-quantile cuts. Pin the
 # outer breakpoints to x_lim so the grid endpoints don't fall
-# outside breaks[1] / breaks[length(breaks)] — otherwise cut()
+# outside breaks[1] / breaks[length(breaks)] --- otherwise cut()
 # returns NA at the boundaries, leaving the step line truncated.
 breaks <- quantile(demo_data$x, probs = seq(0, 1, length.out = 6))
 breaks[c(1L, length(breaks))] <- x_lim
@@ -140,7 +140,7 @@ ggplot(grid, aes(x = x)) +
 ```
 
 Step function with 5 quantile-spaced bins.
-Captures the broad shape but is discontinuous at each cutpoint — almost never the right model for a continuous exposure.
+Captures the broad shape but is discontinuous at each cutpoint --- almost never the right model for a continuous exposure.
 :::
 
 :::{#fig-method-comparison-splines}
@@ -201,7 +201,7 @@ ggplot(grid, aes(x = x)) +
 ```
 
 LOESS with the default 50% span.
-Similar shape to the splines but without a global closed-form parametric representation — the curve is computed on demand at any evaluation point rather than stored as a parametric formula.
+Similar shape to the splines but without a global closed-form parametric representation --- the curve is computed on demand at any evaluation point rather than stored as a parametric formula.
 :::
 
 Comparison of nonlinear regression methods on synthetic data $y = \sin(x) + 0.3\sin(3x) + \eps$, $\eps \sim \ndist{0, 0.4^2}$, $n = `r n`$.
@@ -212,9 +212,9 @@ degree-12 polynomial overfits and swings at boundaries.
 
 ## Takeaways
 
-- **Polynomials beyond degree 3–4 are usually a bad idea.**
+- **Polynomials beyond degree 3--4 are usually a bad idea.**
   The degree-12 fit is a clean illustration: it's interpolating noise in the middle of the data and swinging beyond the data range.
-  With 13 parameters (intercept + 12 polynomial terms) it has more flexibility than the natural cubic spline (`df = 6`), yet uses that flexibility on noise rather than on the curve's shape — a reminder that global polynomials concentrate their degrees of freedom in the wrong places.
+  With 13 parameters (intercept + 12 polynomial terms) it has more flexibility than the natural cubic spline (`df = 6`), yet uses that flexibility on noise rather than on the curve's shape --- a reminder that global polynomials concentrate their degrees of freedom in the wrong places.
 - **Splines and LOESS are essentially indistinguishable on this example.**
   Both produce smooth curves close to the truth.
   The practical differences are in how easily they extend to multi- predictor settings (splines do, LOESS doesn't beyond 2-D) and in how inference works (splines have full Wald/Bayesian machinery, LOESS doesn't).

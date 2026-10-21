@@ -1,6 +1,6 @@
 {{< include latex-macros/macros.qmd >}}
 
-## Bias–variance trade-off and overfitting {#sec-pred-sel-bias-var}
+## Bias--variance trade-off and overfitting {#sec-pred-sel-bias-var}
 
 When building a prediction model,
 adding more predictors generally **reduces [bias](https://morrison-lab.github.io/sds/estimation.html#def-bias)**:
@@ -19,8 +19,8 @@ relative to the effective sample size.
 
 :::
 
-A good prediction model minimizes the sum of bias and variance —
-the **[bias–variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff)**.
+A good prediction model minimizes the sum of bias and variance ---
+the **[bias--variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff)**.
 Adding a predictor helps only if
 the reduction in bias outweighs the increase in variance.
 
@@ -74,14 +74,14 @@ tibble::tibble(
     "Parsimonious model",
     paste0("Overfit model (+", n_noise_predictors, " noise predictors)")
   ),
-  Training_RMSE = c(
+  Training_sRMSE = c(
     rmse(
       train_overfit$LDL,
       predict(model_parsimonious, newdata = train_overfit)
     ),
     rmse(train_overfit$LDL, predict(model_overfit, newdata = train_overfit))
   ),
-  Validation_RMSE = c(
+  Validation_sRMSE = c(
     rmse(
       valid_overfit$LDL,
       predict(model_parsimonious, newdata = valid_overfit)
@@ -90,7 +90,7 @@ tibble::tibble(
   )
 ) |>
   dplyr::mutate(
-    dplyr::across(c(Training_RMSE, Validation_RMSE), ~ round(.x, 2))
+    dplyr::across(c(Training_sRMSE, Validation_sRMSE), ~ round(.x, 2))
   )
 ```
 
@@ -100,13 +100,13 @@ lower training error but worse validation error.
 :::
 
 In this example,
-the overfit model usually has lower training [RMSE](https://morrison-lab.github.io/sds/estimation.html#def-rmse)
-but higher validation RMSE,
+the overfit model usually has lower training [sample root mean squared error (sRMSE)](https://morrison-lab.github.io/sds/estimation.html#def-rmse)
+but higher validation sRMSE,
 which is the defining pattern of [overfitting](#def-overfitting).
 
 ## Measures of prediction error {#sec-pred-sel-pe}
 
-To select a model that minimizes [prediction error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-error),
+To select a model that minimizes [prediction error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-error),
 we need a measure of PE that does not simply increase
 with the number of predictors.
 
@@ -215,7 +215,7 @@ to select the [penalty parameter](https://morrison-lab.github.io/sds/model-valid
 that minimizes prediction error.
 The `cv.glmnet` function implements 10-fold cross-validation,
 fitting the LASSO for a grid of $\lambda$ values and evaluating
-[mean squared error](https://morrison-lab.github.io/sds/estimation.html#def-prediction-mse) on held-out folds.
+[mean squared error](https://morrison-lab.github.io/sds/prediction.html#def-prediction-mse) on held-out folds.
 The fitted object provides two key $\lambda$ values:
 `lambda.min` (minimizes CV mean squared error) and
 `lambda.1se` (largest $\lambda$ within [one standard error](https://morrison-lab.github.io/sds/model-validation.html#def-one-se-rule) of the minimum).
@@ -225,9 +225,9 @@ with coefficient paths and CV results.
 ::: notes
 
 The two recommended values of $\lambda$ represent different
-points on the [bias–variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff):
+points on the [bias--variance trade-off](https://morrison-lab.github.io/sds/model-validation.html#def-bias-variance-tradeoff):
 
-- `lambda.min` minimizes cross-validated MSE,
+- `lambda.min` minimizes cross-validated sample mean squared error (sMSE),
   yielding a model with good predictive accuracy.
 - `lambda.1se` uses a larger penalty
   (farther from zero, more shrinkage),
@@ -277,14 +277,14 @@ rmse_valid <- sqrt(mean((hers_valid$LDL - pred_valid)^2, na.rm = TRUE))
 rmse_train <- sqrt(mean(residuals(model_train)^2))
 
 cat(
-  "Training RMSE:", round(rmse_train, 2), "\n",
-  "Validation RMSE:", round(rmse_valid, 2), "\n"
+  "Training sRMSE:", round(rmse_train, 2), "\n",
+  "Validation sRMSE:", round(rmse_valid, 2), "\n"
 )
 ```
 
 ::: notes
 
-If the validation RMSE is much larger than the training RMSE,
+If the validation sRMSE is much larger than the training sRMSE,
 this discrepancy is a sign of overfitting.
 In well-specified models with adequate sample sizes,
 the two values are typically close.

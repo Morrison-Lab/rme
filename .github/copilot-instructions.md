@@ -29,7 +29,7 @@
 > - **NEVER rely on CI to discover rendering, lint, or spelling errors** - that's your job
 > - **ALWAYS address rendering warnings** - they indicate problems that will cause issues in different output formats
 > - **Only render HTML format** (`--to html`) unless specifically fixing a non-HTML format issue
-> - **Only render edited chapters** — run `quarto render <chapter.qmd> --to html` on the parent `.qmd` that includes each edited subfile; do not render the full book
+> - **Only render edited chapters** --- run `quarto render <chapter.qmd> --to html` on the parent `.qmd` that includes each edited subfile; do not render the full book
 > - **Only fix lint/spell issues in code YOU changed** - don't fix unrelated pre-existing issues
 > - **This is a hard requirement - no exceptions, no excuses**
 
@@ -76,19 +76,19 @@ strive for **straightforward narrative flow**:
 - If two sections are closely related
   (e.g., an "Observational Studies" section that relies on DAG concepts),
   place the foundational section first.
-- **After every definition or concept, include a concrete example** —
-  preferably numerical — to illustrate the abstract idea.
+- **After every definition or concept, include a concrete example** ---
+  preferably numerical --- to illustrate the abstract idea.
   Use a `{#exm-...}` div immediately following the `{#def-...}` div.
   The example should show specific numbers or a small dataset,
   not just repeat the definition in different words.
   - Narrow exception: an immediate corollary whose statement is itself
-    a concrete instance of the result it follows needs no separate example —
+    a concrete instance of the result it follows needs no separate example ---
     the corollary already is one.
     For instance, $\E{aX+c} = a\E{X}+c$ stated right after linearity of
     expectation needs no further example:
     a filler example there would just restate the corollary in different
     symbols, costing the reader more than it teaches.
-    This exemption is narrow — it covers only a corollary whose own statement
+    This exemption is narrow --- it covers only a corollary whose own statement
     already instantiates the preceding result;
     definitions and theorems still require a genuine example,
     and a corollary that adds new content of its own still needs one.
@@ -100,7 +100,7 @@ The `_extensions/` directory contains Quarto extensions installed from external 
 (e.g., via `quarto add`).
 These files are third-party code managed upstream.
 **Do not review or suggest changes to files under `_extensions/`.**
-Treat them as vendored dependencies — read them for context if needed,
+Treat them as vendored dependencies --- read them for context if needed,
 but do not flag issues or request modifications in those files.
 
 ## Pull Request Guidelines
@@ -172,20 +172,27 @@ Examples of attribution with page numbers
 Do **not** reproduce verbatim text from copyrighted sources without clear quotation marks and attribution.
 Paraphrase and summarize with a citation instead.
 
+## Useful resources go in every repo that covers their topic
+
+A course, book or video that covers a topic rme teaches goes in the Further reading section or reading box of the matching chapter,
+even when lds already lists it in a directory (Ezra, 2026-10-15).
+Link the resource, and adapt it with attribution only where its license allows adapting.
+See [`track-useful-resources`](https://github.com/Morrison-Lab/ai-config/blob/main/shared/workflow/track-useful-resources.md).
+
 ## Decomposing content into subfiles
 
 Quarto subfiles (files under `_subfiles/`) should **not** begin with a section heading.
 The heading for a subfile's content should be placed in the **parent** file that includes the subfile,
 immediately before the `{{< include ... >}}` shortcode.
 
-**Correct** — heading in the parent file:
+**Correct** --- heading in the parent file:
 ```markdown
 ## My Section Title {#sec-my-section}
 
 {{< include _subfiles/chapter/_sec_my_content.qmd >}}
 ```
 
-**Incorrect** — heading inside the subfile:
+**Incorrect** --- heading inside the subfile:
 ```markdown
 <!-- inside _subfiles/chapter/_sec_my_content.qmd -->
 ## My Section Title {#sec-my-section}
@@ -204,7 +211,7 @@ Do **not** combine multiple independent subtopics in a single subfile.
 If a topic naturally splits into distinct subtopics,
 create one subfile per subtopic and include each separately in the parent file.
 
-**Correct** — separate subfiles per subtopic:
+**Correct** --- separate subfiles per subtopic:
 ```markdown
 ## Interval Censoring {#sec-interval-censoring}
 
@@ -215,7 +222,7 @@ create one subfile per subtopic and include each separately in the parent file.
 {{< include _subfiles/chapter/_sec_left_truncation.qmd >}}
 ```
 
-**Incorrect** — both subtopics in one subfile:
+**Incorrect** --- both subtopics in one subfile:
 ```markdown
 ## Interval Censoring and Left-Truncation
 
@@ -362,12 +369,12 @@ then reference them with inline `` `r expr` `` expressions.
 Wrap content in `::: notes` divs in two situations:
 
 1. **Parenthetical references and short asides** that are supplementary
-   (for example, `c.f. @dunn2018generalized §2.10.3`) —
+   (for example, `c.f. @dunn2018generalized §2.10.3`) ---
    place them in a `::: notes` div
    instead of leaving them inline in the main narrative.
 
-2. **Large explanatory text blocks** — multi-sentence prose that provides
-   intuition, context, or derivation details —
+2. **Large explanatory text blocks** --- multi-sentence prose that provides
+   intuition, context, or derivation details ---
    should be wrapped in `::: notes` when the surrounding content is
    structured for slide presentation.
    Use `::: notes` for any block that would overflow or distract on a slide;
@@ -409,6 +416,22 @@ When introducing or editing formal statistical definitions in `.qmd` files:
   (for example, empirical CDF),
   ensure those terms also have formal `#def-` div definitions
   in the relevant scope before relying on them
+- Define one term per `#def-` div (Ezra, 2026-10-12).
+  Never combine two terms, such as a population and its distribution, in one definition.
+  Give each new bolded term its own div and its own id, with the term as its title,
+  and let the later div link to the earlier one
+  (define a term before the definition that uses it).
+  Aliases of one term ("also called ...") stay in the same div,
+  in bold and in the div title.
+  Cite a source that uses an alias on the bold alias itself,
+  as in `**training error** [@hastie2009esl2e, sec. 7.2]`;
+  never write "the book uses that name",
+  because the citation already says so (Ezra, 2026-10-15).
+  Put commentary in a separate `#rem-` div,
+  and keep each example in an `#exm-` div after the definition it illustrates.
+  The same goes for a `#thm-`, `#lem-`, `#cor-` or `#prp-` div:
+  state one result per div.
+  See [Writing for teaching](https://morrison-lab.github.io/psw/chapters/teaching.html).
 
 ## Slidebreaks Before Theorem-Type Divs
 
@@ -423,10 +446,10 @@ Theorem-type div types (per [Quarto cross-reference docs](https://quarto.org/doc
 
 When a subfile's **first** content is a theorem-type div,
 place the `{{< slidebreak >}}` in the **including** (parent) file,
-immediately before the `{{< include >}}` shortcode —
+immediately before the `{{< include >}}` shortcode ---
 **not** at the start of the included subfile itself.
 
-**Correct** — slidebreak in the including file:
+**Correct** --- slidebreak in the including file:
 ```qmd
 <!-- in the parent file -->
 {{< slidebreak >}}
@@ -435,7 +458,7 @@ immediately before the `{{< include >}}` shortcode —
 ```
 
 ```qmd
-<!-- in _exm-my-example.qmd — no leading slidebreak -->
+<!-- in _exm-my-example.qmd --- no leading slidebreak -->
 :::{#exm-my-example}
 
 #### My example title
@@ -445,14 +468,14 @@ Content...
 :::
 ```
 
-**Incorrect** — slidebreak inside the included file:
+**Incorrect** --- slidebreak inside the included file:
 ```qmd
-<!-- in the parent file — no slidebreak -->
+<!-- in the parent file --- no slidebreak -->
 {{< include _subfiles/chapter/_exm-my-example.qmd >}}
 ```
 
 ```qmd
-<!-- in _exm-my-example.qmd — do NOT put slidebreak here -->
+<!-- in _exm-my-example.qmd --- do NOT put slidebreak here -->
 {{< slidebreak >}}
 
 :::{#exm-my-example}
@@ -497,8 +520,8 @@ so the heading shares its slide with the div,
 rather than producing a title-only slide.
 Mark the intentional omission with an inline HTML comment
 that states the reason,
-addressed to whoever edits the page next rather than to the review bot —
-e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` —
+addressed to whoever edits the page next rather than to the review bot ---
+e.g. `<!-- No slidebreak here: the heading shares its slide with the def-collapsibility div. -->` ---
 not `<!-- ... do not re-flag -->`.
 A comment written to instruct a bot goes stale when the bot changes;
 a comment stating the reason stays true regardless.
@@ -693,7 +716,7 @@ Use this for newly added or substantially revised figures and tables in `.qmd` f
 Only use `fig-` or `tbl-` chunk/div label prefixes when the chunk or div **actually renders a cross-referenceable figure or table**.
 Do **not** use these prefixes for setup, computation-only, or helper chunks that produce no visible output.
 
-**Correct** — `fig-` label on a div that produces a cross-referenceable figure:
+**Correct** --- `fig-` label on a div that produces a cross-referenceable figure:
 ````qmd
 ::: {#fig-my-plot}
 
@@ -706,7 +729,7 @@ Caption text here.
 :::
 ````
 
-**Correct** — setup chunk that only computes values (no figure/table produced):
+**Correct** --- setup chunk that only computes values (no figure/table produced):
 ````qmd
 ```{r}
 #| label: my-setup-chunk
@@ -715,7 +738,7 @@ my_value <- compute_something()
 ```
 ````
 
-**Incorrect** — `tbl-` label on a chunk that only computes values:
+**Incorrect** --- `tbl-` label on a chunk that only computes values:
 ````qmd
 ```{r}
 #| label: tbl-my-values   # wrong: no table is rendered
@@ -738,9 +761,10 @@ Key macros to use:
 - **Formatting**: Use `\red{...}` and `\teal{...}` for colored text in math
 - **Deviation/error notation**: Use `\erf{...}` for deviations of estimates/estimators from their estimands; use `\devn(...)` for all other deviations (e.g., observations from population means)
 - **Estimators of vector estimands**: the estimator symbol (e.g. `\hat`,
-  `\bar`, `\tilde`) goes on top of the vector symbol, not inside it —
+  `\bar`, `\tilde`) goes on top of the vector symbol, not inside it ---
   write `\hat{\vec{\mu}}`, not `\vec{\hat\mu}`. The hat sits on top of the
-  already-vectorized symbol. Use `\v{}`, `\vec{}`, or `\vecf{}` — all three
+  already-vectorized symbol.
+  Use `\v{}`, `\vec{}`, or `\vecf{}` --- all three
   work. (`\v` was formerly broken because `\providecommand` could not override
   the LaTeX built-in caron accent; it is now defined with `\renewcommand`
   in `macros.qmd`.)
@@ -772,7 +796,7 @@ Residual and deviation helper macros include:
 **Ratio vs. factor macros**:
 
 - **Ratios** compare two quantities. Use the *generic* `\ratio` / `\ratiof` macro when the
-  inputs are the **quantities themselves** (the odds, hazards, rates, etc.) — the type of ratio
+  inputs are the **quantities themselves** (the odds, hazards, rates, etc.) --- the type of ratio
   is clear from the inputs. For example, an odds ratio of two odds is `\ratio(\odds_1, \odds_2)`,
   **not** `\ror(\odds_1, \odds_2)`.
 - Use the *type-subscripted* ratio macros (`\ror` for odds ratios, `\hazratio`/`\hr` for hazard
@@ -781,10 +805,11 @@ Residual and deviation helper macros include:
   is needed to indicate which kind of ratio it is.
 - **Factors** compare **one** covariate pattern to the implicit baseline pattern. Use the
   type-subscripted factor macros (`\hazfactor`, `\oddsfactor`, …; function forms `\hazfactorf` /
-  `\hazff`, …) — e.g. the Cox risk score `\hazfactor(\vx)`. Factors always take a covariate
+  `\hazff`, …) --- e.g. the Cox risk score `\hazfactor(\vx)`.
+  Factors always take a covariate
   pattern, so they keep their subscript.
 
-**Vector–scalar product ordering** (for dimensional clarity):
+**Vector--scalar product ordering** (for dimensional clarity):
 
 - When multiplying a **column vector** `\vb` by a scalar `s`, write the **vector on the left**:
   use `\vb s` not `s \vb`.
@@ -821,7 +846,7 @@ read access to `https://github.com/ucdavis/epi202` (Epi 202 course
 materials, taught alongside this Epi 204 course). Use it on demand
 when you need to look up course content from that repo. If
 `EPI202_TOKEN` is empty in your environment, the repo is not
-available for this session — say so rather than guessing.
+available for this session --- say so rather than guessing.
 
 ```bash
 # Clone the whole repo:
@@ -845,7 +870,7 @@ The `EPI204_TOKEN` environment variable holds a fine-grained PAT with
 read access to `https://github.com/ucdavis/epi204` (Epi 204 homework
 and solutions for this course). Use it on demand when you need to look
 up homework or solution content from that repo. If `EPI204_TOKEN` is
-empty in your environment, the repo is not available for this session —
+empty in your environment, the repo is not available for this session ---
 say so rather than guessing.
 
 ```bash
@@ -867,7 +892,7 @@ job-level `env:` mapping in `.github/workflows/claude.yml`).
 ## Color Coding Strategy for Math Expressions
 
 Use `\red{...}` and `\teal{...}` purposefully and consistently to help readers
-(`\teal`, not `\blue` — `\teal` reads better in dark mode):
+(`\teal`, not `\blue` --- `\teal` reads better in dark mode):
 
 1. **Focal coefficient**: Use `\red{...}` for the coefficient being interpreted or derived in the current context.
    This draws the reader's eye to the quantity that the surrounding text is about.
@@ -950,7 +975,8 @@ Some R packages require system-level libraries to compile from source:
 - `png` package requires `libpng-dev`
 - `jpeg` package requires `libjpeg-dev`
 - `systemfonts` package requires `libfontconfig1-dev`
-- `igraph` (used by `ggdag` for DAG figures such as `fig-dag-heat-deaths`) requires `libglpk40` (runtime dependency — needed even when installing pre-compiled binaries) — install with `sudo apt-get install -y libglpk40`; without it a local `quarto render` halts with `Error in dyn.load(...): libglpk.so.40: cannot open shared object file`
+- `igraph` (used by `ggdag` for DAG figures such as `fig-dag-heat-deaths`) requires `libglpk40` (runtime dependency --- needed even when installing pre-compiled binaries) --- install with `sudo apt-get install -y libglpk40`;
+  without it a local `quarto render` halts with `Error in dyn.load(...): libglpk.so.40: cannot open shared object file`
 - Consider using `rocker/verse` Docker image for workflows to reduce installation requirements
 
 ## JAGS Dependencies
@@ -1005,12 +1031,12 @@ print(latex(score))   # \frac{x - \mu}{\sigma^{2}}
 ```
 
 Common SymPy operations:
-- `diff(expr, x)` — symbolic derivative
-- `integrate(expr, x)` — symbolic integral
-- `solve(expr, x)` — solve equation for x
-- `simplify(expr)` — algebraic simplification
-- `latex(expr)` — convert to LaTeX string for use in `.qmd` files
-- `factor(expr)` / `expand(expr)` — factor or expand polynomials
+- `diff(expr, x)` --- symbolic derivative
+- `integrate(expr, x)` --- symbolic integral
+- `solve(expr, x)` --- solve equation for x
+- `simplify(expr)` --- algebraic simplification
+- `latex(expr)` --- convert to LaTeX string for use in `.qmd` files
+- `factor(expr)` / `expand(expr)` --- factor or expand polynomials
 
 ### Maxima
 
@@ -1042,7 +1068,7 @@ maxima --very-quiet --batch=/tmp/cas_check.mac
 
 **CRITICAL REQUIREMENTS** before requesting code review:
 
-1. **Run `quarto render <chapter.qmd> --to html`** on each chapter whose subfiles you edited — do NOT render the full book, and do NOT render all formats unless you are specifically fixing a non-HTML format issue
+1. **Run `quarto render <chapter.qmd> --to html`** on each chapter whose subfiles you edited --- do NOT render the full book, and do NOT render all formats unless you are specifically fixing a non-HTML format issue
 2. **Verify it completes successfully** (exit code 0, no errors)
 3. **Do NOT rely solely on CI workflows** to catch rendering issues
 4. **Test the actual command and wait for completion** - do not assume success

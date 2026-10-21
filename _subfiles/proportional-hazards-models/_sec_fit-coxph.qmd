@@ -40,7 +40,7 @@ Over a short interval of width $\Delta t$,
 the probability that an at-risk subject $j$ fails at $t_i$ is approximately its hazard times the interval width,
 $\haz(t_i \mid \vx_j)\,\Delta t = \blue{\haz_0(t_i)\,\Delta t}\,\red{\hazfactor(\vx_j)}$.
 So, conditional on exactly one failure at $t_i$ among the risk set $R(t_i)$,
-the probability that the subject who failed is subject $(i)$ is that subject's share of the total —
+the probability that the subject who failed is subject $(i)$ is that subject's share of the total ---
 and the shared baseline factor $\blue{\haz_0(t_i)\,\Delta t}$ cancels:
 :::
 
@@ -64,7 +64,7 @@ Multiplying these probabilities across the $K$ event times gives the **partial l
 
 ::: notes
 To prove that this partial likelihood is free of the baseline hazard,
-we first assemble a chain of general discretized-likelihood building blocks —
+we first assemble a chain of general discretized-likelihood building blocks ---
 used only by this proof, so we develop them here rather than in the
 [Intro to Survival Analysis](intro-to-survival-analysis.qmd) chapter.
 One piece carries over from that chapter:
@@ -123,7 +123,7 @@ and finally the assembly that cancels the baseline hazard.
 {{< include _subfiles/proportional-hazards-models/_lem-ph-which-subject.qmd >}}
 
 ::: notes
-With the lemmas in hand, the proof assembles them and shows the baseline cancels —
+With the lemmas in hand, the proof assembles them and shows the baseline cancels ---
 confirming that the product is free of $\haz_0$:
 :::
 
@@ -140,8 +140,8 @@ Crucially, the baseline hazard never enters, so we obtain $\evb$ without estimat
 
 ::: notes
 **Stage 2: estimating the baseline hazard.**
-Once we have the coefficient estimates $\evb = (\hat\beta_1, \ldots, \hat\beta_p)$ —
-and hence $\hat\diffloghaz(\vx)$ and $\hat\hazfactor(\vx)$ —
+Once we have the coefficient estimates $\evb = (\hat\beta_1, \ldots, \hat\beta_p)$ ---
+and hence $\hat\diffloghaz(\vx)$ and $\hat\hazfactor(\vx)$ ---
 the baseline cumulative hazard is estimated by the Breslow estimator:
 :::
 
@@ -164,13 +164,13 @@ $$ {#eq-ph-breslow-full-lik}
 
 ::: notes
 where $\delta_j$ is the event [indicator](https://morrison-lab.github.io/sds/data.html#def-indicator-variable) and $\tilde{T}_j$ the observed time for subject $j$
-— the same quantities denoted $D_j$ and $Y_j$ in the censored-data likelihood lemma,
-so $\tilde{T}_j = Y_j = \min(T_j, C_j)$ and $\delta_j = D_j$ —
+--- the same quantities denoted $D_j$ and $Y_j$ in the censored-data likelihood lemma,
+so $\tilde{T}_j = Y_j = \min(T_j, C_j)$ and $\delta_j = D_j$ ---
 using $\haz(t \mid \vx) = \blue{\haz_0(t)}\,\red{\hazfactor(\vx)}$ (@thm-ph-haz-decomp)
 and $\surv(t \mid \vx) = \expf{-\blue{\cuhaz_0(t)}\,\red{\hazfactor(\vx)}}$
 (by @thm-ph-cuhaz, using $\surv(t) = \expf{-\cuhaz(t)}$ from the
 [survival/cumulative hazard relationship](intro-to-survival-analysis.qmd#cor-surv-int-haz)).
-Fix $\vb$ and maximize over $\haz_0(\cdot)$.
+Take the coefficient vector $\vb$ as given and maximize over the [baseline hazard](#def-base-hazard) $\haz_0(\cdot)$.
 We build up to the Breslow estimator's profile-likelihood justification through a chain of lemmas:
 the [point-mass form](#lem-ph-breslow-point-mass) of the maximizing hazard, the [resulting profile likelihood](#lem-ph-breslow-profile-lik),
 the [maximizer of each point mass](#lem-ph-breslow-mle), and the [assembly that recovers the partial likelihood](#lem-ph-breslow-closes-loop).

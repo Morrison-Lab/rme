@@ -1,0 +1,26 @@
+:::{#exm-wcgs-age-slope}
+
+#### The fitted WCGS age coefficient for type B participants
+
+The code below compares the age coefficient of the fitted model (`chd_glm_contrasts`) with the change in predicted log-odds between ages 50 and 51 for type B participants,
+and compares $\expf{\hat\beta_A}$ with the corresponding ratio of predicted odds:
+
+```{r}
+#| label: exm-wcgs-age-slope-calc
+#| code-fold: show
+ex_new <- data.frame(
+  dibpat = factor("Type B", levels = levels(wcgs$dibpat)),
+  age = c(50, 51)
+)
+ex_eta <- predict(chd_glm_contrasts, newdata = ex_new, type = "link")
+ex_prob <- predict(chd_glm_contrasts, newdata = ex_new, type = "response")
+ex_odds <- ex_prob / (1 - ex_prob)
+ex_bA <- unname(coef(chd_glm_contrasts)["age"])
+```
+
+The age coefficient is `r round(ex_bA, 4)`
+and the difference in predicted log-odds is `r round(unname(diff(ex_eta)), 4)`.
+Also, $\expf{\hat\beta_A}$ is `r round(exp(ex_bA), 4)`
+and the ratio of predicted odds is `r round(unname(ex_odds[2] / ex_odds[1]), 4)`.
+
+:::

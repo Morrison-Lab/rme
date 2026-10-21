@@ -1,0 +1,81 @@
+:::{#def-causal-marginal-risk}
+
+#### Causal marginal risk (potential probability, potential marginal risk)
+
+For a [binary outcome](https://morrison-lab.github.io/sds/data.html#def-binary-var) $Y \in \{0, 1\}$,
+the potential mean (@def-potential-mean) is a probability,
+which we call the **causal marginal risk**
+(also: **potential probability**, **potential marginal risk**)
+under exposure level $a$:
+
+$$\pi_a \eqdef \Pr(Y^a = 1)$$
+
+:::
+
+We use the term **causal marginal risk** throughout.
+
+{{< slidebreak >}}
+
+:::{#exm-causal-marginal-risk-illustration}
+
+#### Illustration: causal marginal risk
+
+Continuing @exm-potential-mean,
+under that same supposition
+the [causal marginal risk](#def-causal-marginal-risk) is
+$\pi_1 = \Pr(Y^1 = 1) = `r round(pi1_direct, 3)`$ ---
+the fraction who would develop CHD
+if every man in the cohort had Type A behavior pattern.
+
+:::
+
+{{< slidebreak >}}
+
+:::{#thm-causal-marginal-risk-equals-mean}
+
+#### Causal marginal risk equals potential mean
+
+The matching values in @exm-potential-mean and @exm-causal-marginal-risk-illustration
+are no coincidence:
+the causal marginal risk (@def-causal-marginal-risk)
+is a special case of the potential mean (@def-potential-mean):
+
+$$\pi_a = \E{Y^a}$$
+
+::: {.proof}
+
+Since $Y^a$ is binary ($Y^a \in \{0, 1\}$):
+
+$$
+\ba
+\E{Y^a}
+&= 1 \cdot \Pr(Y^a = 1) + 0 \cdot \Pr(Y^a = 0)
+&& \text{[expectation of a binary variable]}
+\\
+&= \Pr(Y^a = 1)
+&& \text{[arithmetic]}
+\\
+&= \pi_a
+&& \text{[definition of causal marginal risk]}
+\ea
+$$
+
+:::
+
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-causal-marginal-risk-as-mean}
+
+#### Illustration: causal marginal risk equals potential mean
+
+With $\pi_1 = `r round(pi1_direct, 3)`$ as in @exm-causal-marginal-risk-illustration,
+reading the [potential mean](#def-potential-mean) as an [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation) gives the same value:
+
+$$
+\E{Y^1} = 1 \cdot `r round(pi1_direct, 3)` + 0 \cdot `r round(1 - pi1_direct, 3)`
+= `r round(pi1_direct, 3)` = \pi_1.
+$$
+
+:::

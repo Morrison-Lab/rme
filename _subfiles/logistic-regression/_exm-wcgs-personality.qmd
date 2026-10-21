@@ -1,0 +1,26 @@
+:::{#exm-wcgs-personality}
+
+#### The fitted WCGS personality coefficient
+
+The code below compares the personality coefficient of the fitted model (`chd_glm_contrasts`) with the difference in predicted log-odds between type A and type B participants at age 0,
+and compares $\expf{\hat\beta_P}$ with the corresponding ratio of predicted odds:
+
+```{r}
+#| label: exm-wcgs-personality-calc
+#| code-fold: show
+ex_new <- data.frame(
+  dibpat = factor(c("Type B", "Type A"), levels = levels(wcgs$dibpat)),
+  age = 0
+)
+ex_eta <- predict(chd_glm_contrasts, newdata = ex_new, type = "link")
+ex_prob <- predict(chd_glm_contrasts, newdata = ex_new, type = "response")
+ex_odds <- ex_prob / (1 - ex_prob)
+ex_bP <- unname(coef(chd_glm_contrasts)["dibpatType A"])
+```
+
+The personality coefficient is `r round(ex_bP, 4)`
+and the difference in predicted log-odds is `r round(unname(diff(ex_eta)), 4)`.
+Also, $\expf{\hat\beta_P}$ is `r round(exp(ex_bP), 4)`
+and the ratio of predicted odds is `r round(unname(ex_odds[2] / ex_odds[1]), 4)`.
+
+:::

@@ -1,0 +1,22 @@
+:::{#exm-bernoulli-lik-general}
+
+#### Likelihood of three binary outcomes
+
+Suppose $\vy = (1, 0, 1)$ with event probabilities $\vpi = (0.8, 0.3, 0.6)$.
+The code below computes the likelihood from the formula of @thm-bernoulli-lik-general,
+and as the product of the three Bernoulli probabilities from `dbinom()`:
+
+```{r}
+#| label: exm-bernoulli-lik-general-calc
+#| code-fold: show
+ex_y <- c(1, 0, 1)
+ex_pi <- c(0.8, 0.3, 0.6)
+ex_lik_formula <- prod(ex_pi^ex_y * (1 - ex_pi)^(1 - ex_y))
+ex_lik_dbinom <- prod(dbinom(ex_y, size = 1, prob = ex_pi))
+```
+
+The formula gives `r round(ex_lik_formula, 4)`
+and `dbinom()` gives `r round(ex_lik_dbinom, 4)`,
+so the two agree.
+
+:::
