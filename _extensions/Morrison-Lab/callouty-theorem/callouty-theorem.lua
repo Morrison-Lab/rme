@@ -110,7 +110,7 @@ local function read_meta(meta)
   callouty_meta = stringify_meta(meta['callouty-theorem'])
   quarto.doc.add_html_dependency({
     name = 'callouty-theorem',
-    version = '1.3.0',
+    version = '1.4.2',
     stylesheets = {'callouty-theorem.css'},
     scripts = {'callouty-theorem.js'}
   })
@@ -234,17 +234,24 @@ local function calloutify(el, is_proof)
     return el
   end
 
-  local override_title = false
+  -- Defaults: the type, number and name sit on a title bar, apart from the body,
+  -- and the callout folds (open) -- unless the metadata says otherwise.
+  local override_title = true
   local title_ref = false
   local callout_tbl = {type = "note"}
   if type(callouty_meta[typ]) == "table" then
-    override_title = callouty_meta[typ]["override-title"] or override_title
+    local ot = callouty_meta[typ]["override-title"]
+    if ot ~= nil then
+      override_title = ot == true or ot == "true"
+    end
     title_ref = callouty_meta[typ]["title-ref"] == true
       or callouty_meta[typ]["title-ref"] == "true"
     if type(callouty_meta[typ]["callout"]) == "table" then
       callout_tbl = shallow_copy(callouty_meta[typ]["callout"])
     end
   end
+  if callout_tbl.appearance == nil then callout_tbl.appearance = "default" end
+  if callout_tbl.collapse == nil then callout_tbl.collapse = false end
 
   local source_attr = (el.div and el.div.attr) or el.attr
   -- Numbered elements (theorem types, and proofs, remarks and solutions that
@@ -253,9 +260,14 @@ local function calloutify(el, is_proof)
   -- other id ({.solution #my-answer}) stays an unnumbered element.
   local ref_prefix = refType(el.identifier)
   local numbered_id = ref_prefix and numbered_prefixes[ref_prefix] and el.identifier or nil
-  if override_title and my_types[typ] then
-    -- Outside HTML the header keeps the plain type label: the stylesheet that hides
-    -- the body's repeat of the number has no PDF or Word counterpart.
+  if my_types[typ] and not is_proof and not quarto.doc.is_format('html') then
+    -- Outside HTML a theorem-type body prints its own "Definition 1.1 (name)" line,
+    -- and the stylesheet that hides it has no PDF or Word counterpart. A title bar
+    -- would repeat it, and any other appearance would draw a bar with a default
+    -- "Note" title above it, so the callout is always a minimal box with the body's
+    -- heading, whatever the metadata sets for appearance or override-title.
+    callout_tbl.appearance = "minimal"
+  elseif override_title and my_types[typ] then
     local header_id = quarto.doc.is_format('html') and numbered_id or nil
     callout_tbl.title = spawn_callout_title(my_types[typ].title, el.name, header_id)
   elseif title_ref and numbered_id and quarto.doc.is_format('html') then
@@ -275,6 +287,16 @@ local function calloutify(el, is_proof)
 
   apply_div_callout_overrides(callout_tbl, source_attr)
 
+  -- Per-div attributes cannot bring back a bar that has nothing to say:
+  -- outside HTML a theorem-type body prints its own heading, and a callout with no
+  -- title (override-title off, no title-ref) would draw a bar titled "Note" over the
+  -- body's own heading. Both stay a minimal box, whatever the div sets.
+  local outside_html_theorem = my_types[typ] and not is_proof and not quarto.doc.is_format('html')
+  if outside_html_theorem
+    or (not callout_tbl.title and callout_tbl.appearance ~= "simple") then
+    callout_tbl.appearance = "minimal"
+  end
+
   -- The header now names the element, so mark the callout for the stylesheet
   -- to drop the body's repeat of it.
   if callout_tbl.title then
@@ -293,6 +315,12 @@ end
 local float_types = { fig = true, tbl = true }
 
 local function calloutify_float(el)
+  -- In LaTeX the callout is a tcolorbox, and footnotes inside one (a table of links
+  -- with links-as-notes) run the footnote counter past 26 with "Counter too large".
+  -- A figure or table already stands out by its caption, so PDF keeps it plain.
+  if quarto.doc.is_format("latex") then
+    return el
+  end
   local typ = refType(el.identifier)
   if not typ or not float_types[typ] then
     return el
