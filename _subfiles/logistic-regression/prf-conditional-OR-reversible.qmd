@@ -1,0 +1,63 @@
+Condition every probability, [odds](#def-odds) and [odds ratio](#def-OR) on $C$.
+The probabilities given $C$ obey the same rules as unconditional probabilities,
+so the steps in the proof of @thm-or-swap apply to them.
+Using @def-OR,
+@def-c-odds,
+the [law of conditional probability](https://morrison-lab.github.io/pds/probability-basics.html#thm-law-conditional-prob),
+and the [definition of conditional probability](https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob),
+each for the distribution given $C$:
+
+$$
+\ba
+\ror(A|B, C) &\eqdef \frac{\odds(A|B, C)}{\odds(A|\neg B, C)}
+&& \text{(definition of odds ratio)}
+\\ &= \frac
+{\paren{\frac{\p(A|B, C)}{\p(\neg A|B, C)}}}
+{\paren{\frac{\p(A|\neg B, C)}{\p(\neg A| \neg B, C)}}}
+&& \text{(definition of conditional odds)}
+\\ &=
+\paren{\frac{\p(A|B, C)}{\p(\neg A|B, C)}}
+\inv{\frac{\p(A|\neg B, C)}{\p(\neg A| \neg B, C)}}
+&& \text{(division is multiplication by the reciprocal)}
+\\ &=
+\paren{\frac{\p(A|B, C)}{\p(\neg A|B, C)}}
+\paren{\frac{\p(\neg A| \neg B, C)}{\p(A|\neg B, C)}}
+&& \text{(the reciprocal of a fraction flips it)}
+\\ &=
+\paren{\frac{\p(A|B, C)}{\p(\neg A|B, C)} \cd \frac{\p(B \mid C)}{\p(B \mid C)}}
+\paren{\frac{\p(\neg A| \neg B, C)}{\p(A|\neg B, C)} \cd \frac{\p(\neg B \mid C)}{\p(\neg B \mid C)}}
+&& \text{(multiply each factor by 1)}
+\\ &=
+\paren{\frac{\p(A,B \mid C)}{\p(\neg A,B \mid C)}}
+\paren{\frac{\p(\neg A, \neg B \mid C)}{\p(A, \neg B \mid C)}}
+&& \text{(law of conditional probability, in each of the four terms)}
+\\ &=
+\paren{\frac{\p(B,A \mid C)}{\red{\p(B,\neg A \mid C)}}}
+\paren{\frac{\p(\neg B, \neg A \mid C)}{\teal{\p(\neg B, A \mid C)}}}
+&& \text{(joint probabilities are symmetric in their arguments)}
+\\ &=
+\paren{\frac{\p(B,A \mid C)}{\teal{\p(\neg B, A \mid C)}}}
+\paren{\frac{\p(\neg B, \neg A \mid C)}{\red{\p(B,\neg A \mid C)}}}
+&& \text{(swap the two highlighted denominators)}
+\\ &=
+\paren{\frac{\p(B,A \mid C) / \p(A \mid C)}{\p(\neg B, A \mid C) / \p(A \mid C)}}
+\paren{\frac{\p(\neg B, \neg A \mid C) / \p(\neg A \mid C)}{\p(B,\neg A \mid C) / \p(\neg A \mid C)}}
+&& \text{(divide the top and bottom of each factor by the same quantity)}
+\\ &=
+\paren{\frac{\p(B|A, C)}{\p(\neg B|A, C)}}
+\paren{\frac{\p(\neg B| \neg A, C)}{\p(B|\neg A, C)}}
+&& \text{(definition of conditional probability, in each of the four terms)}
+\\ &=
+\paren{\frac{\p(B|A, C)}{\p(\neg B|A, C)}}
+\inv{\frac{\p(B|\neg A, C)}{\p(\neg B| \neg A, C)}}
+&& \text{(a flipped fraction is the reciprocal of the original)}
+\\ &= \frac
+{\paren{\frac{\p(B|A, C)}{\p(\neg B|A, C)}}}
+{\paren{\frac{\p(B|\neg A, C)}{\p(\neg B| \neg A, C)}}}
+&& \text{(multiplication by the reciprocal is division)}
+\\ &= \frac{\odds(B|A, C)}{\odds(B|\neg A, C)}
+&& \text{(definition of conditional odds)}
+\\ &\eqdef \ror(B|A, C)
+&& \text{(definition of odds ratio)}
+\ea
+$$
