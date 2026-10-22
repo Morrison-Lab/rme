@@ -264,10 +264,16 @@ plt.tight_layout(); plt.show()
 
 ## GAMs: continuous outcome {.unnumbered}
 
-Fit three nested GAMs for `wage` on the `Wage` data and compare with AIC [@james2021islr2e, §7.7].
-This lab follows the ISLRv2 code, which uses the `mgcv` default
-`method = "GCV.Cp"` for smoothness selection; for new analyses prefer
-`method = "REML"` (see @sec-smoothing-splines and @sec-gam-fitting).
+Fit three GAMs for `wage` on the `Wage` data and compare them with [AIC](Linear-models-overview.qmd#def-aic).
+The book's lab [@james2021islr2e, §7.8.3] uses the `gam` package,
+with [smoothing splines](#def-smoothing-spline) `s(year, 4)` and `s(age, 5)` of 4 and 5 degrees of freedom.
+It compares, using `anova()`, a model without `year`, a model with `year` entering as a straight line,
+and a model with `year` smooth.
+This lab uses `mgcv` instead, so the smooths `s(year, k = 4)` and `s(age, k = 5)` have basis dimension 4 and 5,
+which is not the same as 4 and 5 degrees of freedom,
+and `mgcv` chooses the amount of smoothing itself.
+It uses the `mgcv` default `method = "GCV.Cp"` for smoothness selection;
+for new analyses prefer `method = "REML"` (see @sec-smoothing-splines and @sec-gam-fitting).
 
 :::{.panel-tabset}
 #### R
@@ -282,6 +288,10 @@ gam3 <- gam(wage ~ s(year, k = 4) + poly(age, 4) + education,
             data = Wage)
 
 AIC(gam1, gam2, gam3)
+
+# Book's question: does year belong, and does it need a smooth?
+gam0 <- gam(wage ~ s(age, k = 5) + education, data = Wage)
+anova(gam0, gam2, gam1, test = "F")
 
 par(mfrow = c(1, 3))
 plot(gam1, shade = TRUE, seWithMean = TRUE,
@@ -321,7 +331,9 @@ plt.tight_layout(); plt.show()
 ## GAMs: binary outcome {.unnumbered}
 
 Predict whether a worker earns more than \$250k using a logistic GAM.
-We subset to workers with at least some college education, following @james2021islr2e [§7.7].
+We subset to workers with at least some college education, as the book's lab does [@james2021islr2e, §7.8.3].
+The book keeps `year` as a straight line in this model.
+Here `year` is smooth, as in the continuous-outcome GAMs.
 
 :::{.panel-tabset}
 #### R
