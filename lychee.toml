@@ -31,6 +31,10 @@ exclude = [
   # support.bioconductor.org times out from CI runners, so every run fails
   # although no link is broken
   "https://support.bioconductor.org/.*",
+  # oeis.org returned 503 on two consecutive runs on 2026-10-21 for the
+  # LaTeX symbol guide linked from intro-to-R.qmd, so every PR fails
+  # although no link in the PR changed
+  "https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols",
   # Links already dead (404 or an untrusted certificate) when this check was
   # added. Fix each in its own content PR, then delete its line here.
   "http://web1.sph.emory.edu/dkleinb/allDatasets.*",
