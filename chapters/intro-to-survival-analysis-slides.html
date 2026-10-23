@@ -623,11 +623,11 @@ Figure&nbsp;1: Exponential Survival Functions
 </div>
 </section><section class="slide level2"><div id="thm-surv-fn-as-mean-status" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2 (Survival function as expected survival status)</strong></span> If <span class="math inline">\(A_t\)</span> represents survival status at time <span class="math inline">\(t\)</span>, with <span class="math inline">\(A_t = 1\)</span> denoting alive at time <span class="math inline">\(t\)</span> and <span class="math inline">\(A_t = 0\)</span> denoting deceased at time <span class="math inline">\(t\)</span>, then:</p>
-<p><span class="math display">\[\operatorname{S}(t) = \operatorname{P}(A_t=1) = \operatorname{E}\mathopen{}\left[A_t\right]\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{S}(t) = \mathbb{P}(A_t=1) = {\mathbb{E}\mathopen{}\left[A_t\right]\mathclose{}}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-surv-and-mean" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3 (Mean as the integral of the survival function)</strong></span> If <span class="math inline">\(T\)</span> is a nonnegative <a href="https://morrison-lab.github.io/pds/random-variables.html#def-random-variable">random variable</a>, then:</p>
-<p><span class="math display">\[\operatorname{E}\mathopen{}\left[T\right]\mathclose{} = \int_{t=0}^{\infty} \operatorname{S}(t)\,dt\]</span></p>
+<p><span class="math display">\[{\mathbb{E}\mathopen{}\left[T\right]\mathclose{}} = \int_{t=0}^{\infty} \operatorname{S}(t)\,dt\]</span></p>
 </div>
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Adapted from the StatProofBook proof “Mean of non-negative random variable” <span class="citation" data-cites="statproofbook"><a href="#/references" role="doc-biblioref" onclick="">[2]</a></span> at <a href="https://statproofbook.github.io/P/mean-nnrvar.html" class="uri">https://statproofbook.github.io/P/mean-nnrvar.html</a>.</p>
@@ -709,12 +709,12 @@ Figure&nbsp;2: The same triangular region in the <span class="math inline">\((t,
 <p><a href="#/fig-surv-and-mean-integration-bounds" class="quarto-xref">Figure&nbsp;2</a> shows the same integration region under the two equivalent orderings. Since <span class="math inline">\(\operatorname{f}(u) \ge 0\)</span>, the third equality step swaps the order of integration by <a href="https://morrison-lab.github.io/mds/calculus-double-integrals.html#thm-fubini-tonelli">Tonelli’s theorem</a> (see the Fubini–Tonelli proof of the <a href="https://morrison-lab.github.io/pds/expectation.html#thm-surv-mean">survival-function mean theorem</a> in the probability chapter for the formal argument):</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[T\right]\mathclose{}
+{\mathbb{E}\mathopen{}\left[T\right]\mathclose{}}
 &amp;= \int_{u=0}^{\infty} u\operatorname{f}(u)\,du\\
 &amp;= \int_{u=0}^{\infty}\mathopen{}\left(\int_{t=0}^{u} 1\,dt\right)\mathclose{}\operatorname{f}(u)\,du\\
 &amp;= \int_{u=0}^{\infty}\int_{t=0}^{u} \operatorname{f}(u)\,dt\,du\\
 &amp;= \int_{t=0}^{\infty}\int_{u=t}^{\infty} \operatorname{f}(u)\,du\,dt\\
-&amp;= \int_{t=0}^{\infty}\operatorname{P}(T&gt;t)\,dt\\
+&amp;= \int_{t=0}^{\infty}\mathbb{P}(T&gt;t)\,dt\\
 &amp;= \int_{t=0}^{\infty}\operatorname{S}(t)\,dt.
 \end{aligned}
 \]</span></p>
@@ -731,12 +731,12 @@ Figure&nbsp;2: The same triangular region in the <span class="math inline">\((t,
 <p><span class="math display">\[
 \begin{aligned}
 \text{e}^{-{\lambda}t} &amp;= p\\
--{\lambda}t &amp;= \operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}\\
-t &amp;= \frac{-\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}{{\lambda}},
+-{\lambda}t &amp;= {\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}\\
+t &amp;= \frac{-{\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}}{{\lambda}},
 \end{aligned}
 \]</span></p>
 <p>so the inverse survival function of the exponential distribution is:</p>
-<p><span class="math display">\[\operatorname{S}^{-1}(p) = \frac{-\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}{{\lambda}}.\]</span></p>
+<p><span class="math display">\[\operatorname{S}^{-1}(p) = \frac{-{\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}}{{\lambda}}.\]</span></p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb5-2"><a aria-label="2"></a></span>
 <span id="cb5-3"><a aria-label="3"></a>p_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
@@ -802,14 +802,14 @@ t_{\text{med}}
 &amp;= \operatorname{S}^{-1}(0.5)
 &amp;&amp; \text{(definition of median survival time)}
 \\
-&amp;= \frac{-\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}}{2}
+&amp;= \frac{-{\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}}}{2}
 &amp;&amp; \text{(exponential inverse survival function with ${\lambda}= 2$)}
 \\
-&amp;= \frac{\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}{2}
-&amp;&amp; \text{($-\operatorname{log}\mathopen{}\left\{1/2\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}$)}
+&amp;= \frac{{\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}}{2}
+&amp;&amp; \text{($-{\operatorname{log}\mathopen{}\left\{1/2\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}$)}
 \\
 &amp;\approx \frac{0.693}{2}
-&amp;&amp; \text{($\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \approx 0.693$)}
+&amp;&amp; \text{(${\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \approx 0.693$)}
 \\
 &amp;\approx 0.347 \text{ years.}
 &amp;&amp; \text{(arithmetic)}
@@ -1031,13 +1031,13 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
       }</style></aside><div id="lem-joint-prob-same-var" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 1 (Joint probability of a variable with itself)</strong></span> <span class="math display">\[\operatorname{p}(T=t, T\ge t) = \operatorname{p}(T=t)\]</span></p>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\(\Pr\mathopen{}\left(A \cap B\right)\mathclose{} = \Pr\mathopen{}\left(A\right)\mathclose{}\)</span>. In this chapter, the comma notation <span class="math inline">\(\operatorname{p}(A, B)\)</span> means the joint probability <span class="math inline">\(\Pr\mathopen{}\left(A \cap B\right)\mathclose{}\)</span>, and <span class="math inline">\(\operatorname{p}(A)\)</span> means <span class="math inline">\(\Pr\mathopen{}\left(A\right)\mathclose{}\)</span>. Since <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>By the <a href="https://morrison-lab.github.io/pds/probability-basics.html#thm-prob-subset">subset property</a>, if <span class="math inline">\(A\subseteq B\)</span> then <span class="math inline">\({\Pr\mathopen{}\left(A \cap B\right)\mathclose{}} = {\Pr\mathopen{}\left(A\right)\mathclose{}}\)</span>. In this chapter, the comma notation <span class="math inline">\(\operatorname{p}(A, B)\)</span> means the joint probability <span class="math inline">\({\Pr\mathopen{}\left(A \cap B\right)\mathclose{}}\)</span>, and <span class="math inline">\(\operatorname{p}(A)\)</span> means <span class="math inline">\({\Pr\mathopen{}\left(A\right)\mathclose{}}\)</span>. Since <span class="math inline">\(\{T=t\} \subseteq \{T\geq t\}\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{p}(T=t, T\ge t)
-&amp;\stackrel{\text{def}}{=}\Pr\mathopen{}\left(\{T=t\} \cap \{T\ge t\}\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}{\Pr\mathopen{}\left(\{T=t\} \cap \{T\ge t\}\right)\mathclose{}}
 &amp;&amp; \text{(comma notation for joint probability)}
-\\ &amp;= \Pr\mathopen{}\left(\{T=t\}\right)\mathclose{}
+\\ &amp;= {\Pr\mathopen{}\left(\{T=t\}\right)\mathclose{}}
 &amp;&amp; \text{(subset property, since } \{T=t\} \subseteq \{T\ge t\} \text{)}
 \\ &amp;\stackrel{\text{def}}{=}\operatorname{p}(T=t)
 &amp;&amp; \text{(notation for } \Pr \text{)}
@@ -1231,7 +1231,7 @@ Figure&nbsp;8: Survival Curve in 2004 for US Females
 <span class="header-section-number">4.6</span> The Cumulative Hazard Function</h2>
 <p>Since <span class="math inline">\({\lambda}(t) = \frac{\partial}{\partial t}\mathopen{}\left\{-\log{\operatorname{S}(t)}\right\}\mathclose{}\)</span> (see <a href="#/thm-h-logS" class="quarto-xref">Theorem&nbsp;7</a>), we also have:</p>
 <div id="cor-surv-int-haz" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Survival function from the cumulative hazard)</strong></span> <span id="eq-surv-int-haz"><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\int_{u=0}^t {\lambda}(u)du\right\}\mathclose{} \tag{4}\]</span></span></p>
+<p><span class="theorem-title"><strong>Corollary 1 (Survival function from the cumulative hazard)</strong></span> <span id="eq-surv-int-haz"><span class="math display">\[\operatorname{S}(t) = {\operatorname{exp}\mathopen{}\left\{-\int_{u=0}^t {\lambda}(u)du\right\}\mathclose{}} \tag{4}\]</span></span></p>
 </div>
 </section><section class="slide level2"><aside class="notes"><p>The <a href="https://morrison-lab.github.io/mds/calculus-integration.html#def-riemann-integral">integral</a> in <a href="#/eq-surv-int-haz" class="quarto-xref">Equation&nbsp;4</a> is important enough to have its own name: <strong>cumulative hazard</strong>.</p>
 <style type="text/css">
@@ -1275,11 +1275,11 @@ Figure&nbsp;9: Examples of exponential cumulative hazard functions
 \operatorname{f}(t)
 \xleftarrow[\operatorname{S}(t){\lambda}(t)]{-S'(t)}
 \operatorname{S}(t)
-\xleftarrow[]{\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}
+\xleftarrow[]{{\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}}
 {\Lambda}(t)
 \xleftarrow[]{\int_{u=0}^t {\lambda}(u)du}
 {\lambda}(t)
-\xleftarrow[]{\operatorname{exp}\mathopen{}\left\{\eta(t)\right\}\mathclose{}}
+\xleftarrow[]{{\operatorname{exp}\mathopen{}\left\{\eta(t)\right\}\mathclose{}}}
 \eta(t)
 \]</span></p>
 <p><span class="math display">\[
@@ -1290,16 +1290,16 @@ Figure&nbsp;9: Examples of exponential cumulative hazard functions
 {\Lambda}(t)
 \xrightarrow[{\Lambda}'(t)]{}
 {\lambda}(t)
-\xrightarrow[\operatorname{log}\mathopen{}\left\{{\lambda}(t)\right\}\mathclose{}]{}
+\xrightarrow[{\operatorname{log}\mathopen{}\left\{{\lambda}(t)\right\}\mathclose{}}]{}
 \eta(t)
 \]</span></p>
 </section><section class="slide level2"><h4 id="identities">Identities:</h4>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{S}(t) &amp;= 1 - \operatorname{F}(t)\\
-&amp;= \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}\\
 \operatorname{S}'(t) &amp;= -f(t)\\
-{\Lambda}(t) &amp;= -\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}\\
+{\Lambda}(t) &amp;= -{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}\\
 {\Lambda}'(t) &amp;= {\lambda}(t)\\
 {\lambda}(t) &amp;= \frac{\operatorname{f}(t)}{\operatorname{S}(t)}\\
 &amp;= -\frac{\partial}{\partial t}\log{\operatorname{S}(t)} \\
@@ -1316,7 +1316,7 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 \]</span></p>
 </section><section class="slide level2"><p><span class="math display">\[
 \begin{aligned}
-\frac{\partial}{\partial t}\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}
+\frac{\partial}{\partial t}{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}
 &amp;= \frac{\operatorname{S}'(t)}{\operatorname{S}(t)}\\
 &amp;= -\frac{\operatorname{f}(t)}{\operatorname{S}(t)}\\
 &amp;= -{\lambda}(t)\\
@@ -1326,17 +1326,17 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 \begin{aligned}
 {\Lambda}(t)
 &amp;\stackrel{\text{def}}{=}\int_{u=0}^t {\lambda}(u) du\\
-&amp;= \int_0^t -\frac{\partial}{\partial u}\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{} du\\
-&amp;= \mathopen{}\left[-\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{}\right]\mathclose{}_{u=0}^{u=t}\\
-&amp;= \mathopen{}\left[\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{}\right]\mathclose{}_{u=t}^{u=0}\\
-&amp;= \operatorname{log}\mathopen{}\left\{\operatorname{S}(0)\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}\\
-&amp;= \operatorname{log}\mathopen{}\left\{1\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}\\
-&amp;= 0 - \operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}\\
-&amp;=-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}
+&amp;= \int_0^t -\frac{\partial}{\partial u}{\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{}} du\\
+&amp;= \mathopen{}\left[-{\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{}}\right]\mathclose{}_{u=0}^{u=t}\\
+&amp;= \mathopen{}\left[{\operatorname{log}\mathopen{}\left\{\operatorname{S}(u)\right\}\mathclose{}}\right]\mathclose{}_{u=t}^{u=0}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{\operatorname{S}(0)\right\}\mathclose{}} - {\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{1\right\}\mathclose{}} - {\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}\\
+&amp;= 0 - {\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}\\
+&amp;=-{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><p>Corollary:</p>
-<p><span class="math display">\[\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{S}(t) = {\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}\]</span></p>
 </section><section id="hazard-versus-risk" class="slide level2" data-number="4.8"><h2>
 <span class="header-section-number">4.8</span> Hazard versus risk</h2>
 <p>In discrete time, where follow-up is split into intervals, the hazard and the risk are easy to confuse, because both are probabilities of an event during follow-up. The risk is cumulative from baseline, while the <a href="#/def-discrete-haz-risk">discrete-time hazard</a> concerns a single interval (unlike the <a href="#/def-hazard">continuous-time hazard</a>, which is a <a href="https://morrison-lab.github.io/mds/algebra-sums.html#def-rate">rate</a>, not a probability). They answer different questions <span class="citation" data-cites="hernan2020causal"><a href="#/references" role="doc-biblioref" onclick="">[9, Ch. 17]</a>, Section 17.2</span>:</p>
@@ -1483,10 +1483,10 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 &amp;\stackrel{\text{def}}{=}\operatorname{f}_T(t)\\
 &amp;= {\lambda}_T(t)\operatorname{S}_T(t)\\
 \ell(t)
-&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mathcal{L}(t)\right\}\mathclose{}\\
-&amp;= \operatorname{log}\mathopen{}\left\{{\lambda}_T(t) \operatorname{S}_T(t)\right\}\mathclose{}\\
-&amp;= \operatorname{log}\mathopen{}\left\{{\lambda}_T(t)\right\}\mathclose{} + \operatorname{log}\mathopen{}\left\{\operatorname{S}_T(t)\right\}\mathclose{}\\
-&amp;= \operatorname{log}\mathopen{}\left\{{\lambda}_T(t)\right\}\mathclose{} - {\Lambda}_T(t)\\
+&amp;\stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{\mathcal{L}(t)\right\}\mathclose{}}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{{\lambda}_T(t) \operatorname{S}_T(t)\right\}\mathclose{}}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{{\lambda}_T(t)\right\}\mathclose{}} + {\operatorname{log}\mathopen{}\left\{\operatorname{S}_T(t)\right\}\mathclose{}}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{{\lambda}_T(t)\right\}\mathclose{}} - {\Lambda}_T(t)\\
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><p>If instead the event time <span class="math inline">\(T\)</span> is <a href="#/def-right-censor">censored</a> and only known to be after time <span class="math inline">\(y\)</span>, then the likelihood of that censored observation is instead the <a href="#/def-surv-fn">survival function</a> evaluated at the censoring time:</p>
@@ -1496,13 +1496,13 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 &amp;=p_T(T&gt;y)\\
 &amp;\stackrel{\text{def}}{=}\operatorname{S}_T(y)\\
 \ell(y)
-&amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{\mathcal{L}(y)\right\}\mathclose{}\\
-&amp;=\operatorname{log}\mathopen{}\left\{\operatorname{S}(y)\right\}\mathclose{}\\
+&amp;\stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{\mathcal{L}(y)\right\}\mathclose{}}\\
+&amp;={\operatorname{log}\mathopen{}\left\{\operatorname{S}(y)\right\}\mathclose{}}\\
 &amp;=-{\Lambda}(y)\\
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><aside class="notes"><p>The simplified likelihood formulation is incomplete because it omits the censoring mechanism. We also observed whether or not the observation was censored. Let <span class="math inline">\(C\)</span> denote the time when censoring would occur (if the event did not occur first); let <span class="math inline">\(f_C(y)\)</span> and <span class="math inline">\(S_C(y)\)</span> be the corresponding density and survival functions for the censoring event.</p>
-<p>Let <span class="math inline">\(Y\)</span> denote the time when observation ended (either by censoring or by the event of interest occurring), and let <span class="math inline">\(D\)</span> be an <a href="https://morrison-lab.github.io/sds/data.html#def-indicator-variable">indicator</a> variable for the event occurring at <span class="math inline">\(Y\)</span> (so <span class="math inline">\(D=0\)</span> represents a censored observation and <span class="math inline">\(D=1\)</span> represents an uncensored observation). In other words, let <span class="math inline">\(Y \stackrel{\text{def}}{=}\min(T,C)\)</span> and <span class="math inline">\(D \stackrel{\text{def}}{=}\mathbb{1}\mathopen{}\left\{T \le C\right\}\mathclose{}\)</span>.</p>
+<p>Let <span class="math inline">\(Y\)</span> denote the time when observation ended (either by censoring or by the event of interest occurring), and let <span class="math inline">\(D\)</span> be an <a href="https://morrison-lab.github.io/sds/data.html#def-indicator-variable">indicator</a> variable for the event occurring at <span class="math inline">\(Y\)</span> (so <span class="math inline">\(D=0\)</span> represents a censored observation and <span class="math inline">\(D=1\)</span> represents an uncensored observation). In other words, let <span class="math inline">\(Y \stackrel{\text{def}}{=}\min(T,C)\)</span> and <span class="math inline">\(D \stackrel{\text{def}}{=}{\mathbb{1}\mathopen{}\left\{T \le C\right\}\mathclose{}}\)</span>.</p>
 <p>Then the complete likelihood of the observed data <span class="math inline">\((Y,D)\)</span> is:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1637,16 +1637,16 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
       }</style></aside><p><span class="math display">\[
 \begin{aligned}
 \ell(y,d)
-&amp;= \operatorname{log}\mathopen{}\left\{\mathcal{L}(y,d)\right\}\mathclose{}\\
-&amp;= \operatorname{log}\mathopen{}\left\{
+&amp;= {\operatorname{log}\mathopen{}\left\{\mathcal{L}(y,d)\right\}\mathclose{}}\\
+&amp;= {\operatorname{log}\mathopen{}\left\{
 \mathopen{}\left(f_T(y)^d \cdot S_T(y)^{1-d}\right)\mathclose{}
 \cdot
 \mathopen{}\left(f_C(y)^{1-d} \cdot S_C(y)^{d}\right)\mathclose{}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \\
-&amp;= \operatorname{log}\mathopen{}\left\{f_T(y)^d \cdot S_T(y)^{1-d}\right\}\mathclose{}
+&amp;= {\operatorname{log}\mathopen{}\left\{f_T(y)^d \cdot S_T(y)^{1-d}\right\}\mathclose{}}
 +
-\operatorname{log}\mathopen{}\left\{f_C(y)^{1-d} \cdot S_C(y)^{d}\right\}\mathclose{}
+{\operatorname{log}\mathopen{}\left\{f_C(y)^{1-d} \cdot S_C(y)^{d}\right\}\mathclose{}}
 \end{aligned}
 \]</span> Let</p>
 <ul>
@@ -1672,24 +1672,24 @@ f(t) &amp;= {\lambda}(t)\cdot \operatorname{S}(t)\\
 \ell'(y,d)
 &amp;= \frac{\partial}{\partial \theta}
 \mathopen{}\left[
-\operatorname{log}\mathopen{}\left\{f_T(y)^d \cdot S_T(y)^{1-d}\right\}\mathclose{}
+{\operatorname{log}\mathopen{}\left\{f_T(y)^d \cdot S_T(y)^{1-d}\right\}\mathclose{}}
 +
-\operatorname{log}\mathopen{}\left\{f_C(y)^{1-d} \cdot S_C(y)^{d}\right\}\mathclose{}
+{\operatorname{log}\mathopen{}\left\{f_C(y)^{1-d} \cdot S_C(y)^{d}\right\}\mathclose{}}
 \right]\mathclose{}
 \\
 &amp;=
 \mathopen{}\left(
 \frac{\partial}{\partial \theta}
-\operatorname{log}\mathopen{}\left\{
+{\operatorname{log}\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \right)\mathclose{}
 +
 \mathopen{}\left(
 \frac{\partial}{\partial \theta}
-\operatorname{log}\mathopen{}\left\{
+{\operatorname{log}\mathopen{}\left\{
 f_C(y)^{1-d} \cdot S_C(y)^{d}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \right)\mathclose{}
 \end{aligned}
 \]</span></p>
@@ -1711,29 +1711,29 @@ f_C(y)^{1-d} \cdot S_C(y)^{d}
 &amp;=
 \mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\mathopen{}\left\{
+\text{log}{\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \right)\mathclose{}
 +
 \mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\mathopen{}\left\{
+\text{log}{\mathopen{}\left\{
 f_C(y)^{1-d} \cdot S_C(y)^{d}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \right)\mathclose{}\\
 &amp;=
 \mathopen{}\left(
 \frac{\partial}{\partial \theta_T}
-\text{log}\mathopen{}\left\{
+\text{log}{\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \right)\mathclose{} + 0\\
 &amp;=
 \frac{\partial}{\partial \theta_T}
-\text{log}\mathopen{}\left\{
+\text{log}{\mathopen{}\left\{
 f_T(y)^d \cdot S_T(y)^{1-d}
-\right\}\mathclose{}\\
+\right\}\mathclose{}}\\
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><aside class="notes"><p>Thus, the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">MLE</a> for <span class="math inline">\(\theta_T\)</span> won’t depend on <span class="math inline">\(\theta_C\)</span>, and we can ignore the distribution of <span class="math inline">\(C\)</span> when estimating the parameters of <span class="math inline">\(f_T(t)=p(T=t)\)</span>.</p>
@@ -1783,11 +1783,11 @@ f_T(y)^d \cdot S_T(y)^{1-d}
       }</style></aside><p><span class="math display">\[
 \begin{aligned}
 \ell(y,d)
-&amp;=\text{log}\mathopen{}\left\{\mathcal{L}(y,d)\right\}\mathclose{}\\
-&amp;= \text{log}\mathopen{}\left\{S_T(y) \cdot h_T(y)^d\right\}\mathclose{}\\
-&amp;= \text{log}\mathopen{}\left\{S_T(y)\right\}\mathclose{} + \text{log}\mathopen{}\left\{h_T(y)^d\right\}\mathclose{}\\
-&amp;= \text{log}\mathopen{}\left\{S_T(y)\right\}\mathclose{} + d\cdot \text{log}\mathopen{}\left\{h_T(y)\right\}\mathclose{}\\
-&amp;= -H_T(y) + d\cdot \text{log}\mathopen{}\left\{h_T(y)\right\}\mathclose{}\\
+&amp;=\text{log}{\mathopen{}\left\{\mathcal{L}(y,d)\right\}\mathclose{}}\\
+&amp;= \text{log}{\mathopen{}\left\{S_T(y) \cdot h_T(y)^d\right\}\mathclose{}}\\
+&amp;= \text{log}{\mathopen{}\left\{S_T(y)\right\}\mathclose{}} + \text{log}{\mathopen{}\left\{h_T(y)^d\right\}\mathclose{}}\\
+&amp;= \text{log}{\mathopen{}\left\{S_T(y)\right\}\mathclose{}} + d\cdot \text{log}{\mathopen{}\left\{h_T(y)\right\}\mathclose{}}\\
+&amp;= -H_T(y) + d\cdot \text{log}{\mathopen{}\left\{h_T(y)\right\}\mathclose{}}\\
 \end{aligned}
 \]</span></p>
 <aside class="notes"><p>In other words, the log-likelihood contribution from a single observation <span class="math inline">\((Y,D) = (y,d)\)</span> is equal to the negative <a href="#/def-cuhaz">cumulative hazard</a> at <span class="math inline">\(y\)</span>, plus the log of the hazard at <span class="math inline">\(y\)</span> if the event occurred at time <span class="math inline">\(y\)</span>.</p>
@@ -1819,20 +1819,20 @@ f(t) &amp;= {\lambda}\text{e}^{-{\lambda}t}
 \\
 F(t) &amp;= 1-\text{e}^{-{\lambda}t}\\
 \operatorname{S}(t)&amp;= \text{e}^{-{\lambda}t}\\
-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}&amp;=-{\lambda}t\\
+{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}}&amp;=-{\lambda}t\\
 {\lambda}(t) &amp;= \frac{f(t)}{\operatorname{S}(t)} = \frac{{\lambda}\text{e}^{-{\lambda}t}}{\text{e}^{-{\lambda}t}}={\lambda}
 \\
 E(t) &amp;= {\lambda}^{-1}
 \\
 Var(t) &amp;= {\lambda}^{-2}
 \\
-\operatorname{log}\mathopen{}\left\{f(t)\right\}\mathclose{} &amp;= \operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{} - {\lambda}t
+{\operatorname{log}\mathopen{}\left\{f(t)\right\}\mathclose{}} &amp;= {\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}} - {\lambda}t
 \\
-\frac{\partial}{\partial {\lambda}} \operatorname{log}\mathopen{}\left\{f(t)\right\}\mathclose{} &amp;= {\lambda}^{-1} - t
+\frac{\partial}{\partial {\lambda}} {\operatorname{log}\mathopen{}\left\{f(t)\right\}\mathclose{}} &amp;= {\lambda}^{-1} - t
 \\
-&amp;= \operatorname{E}\mathopen{}\left[t\right]\mathclose{} - t
+&amp;= {\mathbb{E}\mathopen{}\left[t\right]\mathclose{}} - t
 \\
-&amp;= -(\operatorname{E}\mathopen{}\left[t\right]\mathclose{} - t)
+&amp;= -({\mathbb{E}\mathopen{}\left[t\right]\mathclose{}} - t)
 \\
 &amp;= -\varepsilon
 \end{aligned}
@@ -1892,12 +1892,12 @@ Var(t) &amp;= {\lambda}^{-2}
 <li><p>For the moment we will assume that the survival distribution is exponential and that all the subjects have the same parameter <span class="math inline">\({\lambda}\)</span>.</p></li>
 </ul>
 <p>We have <span class="math inline">\(m\)</span> exponential survival times of <span class="math inline">\(t_1, t_2,\ldots,t_m\)</span> and <span class="math inline">\(k\)</span> right-censored values at <span class="math inline">\(u_1,u_2,\ldots,u_k\)</span>. The <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> of an observed survival time <span class="math inline">\(t_i\)</span> is <span class="math display">\[
-\operatorname{log}\mathopen{}\left\{{\lambda}\text{e}^{-{\lambda}t_i}\right\}\mathclose{} =
-\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}-{\lambda}t_i
+{\operatorname{log}\mathopen{}\left\{{\lambda}\text{e}^{-{\lambda}t_i}\right\}\mathclose{}} =
+{\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}}-{\lambda}t_i
 \]</span> and the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik-obs">likelihood</a> of a censored value is the probability of that outcome (survival greater than <span class="math inline">\(u_j\)</span>) so the log-likelihood is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\ell_j({\lambda}) &amp;= \operatorname{log}\mathopen{}\left\{\text{e}^{-{\lambda}u_j}\right\}\mathclose{}
+\ell_j({\lambda}) &amp;= {\operatorname{log}\mathopen{}\left\{\text{e}^{-{\lambda}u_j}\right\}\mathclose{}}
 \\ &amp;= -{\lambda}u_j
 \end{aligned}
 \]</span></p>
@@ -1910,8 +1910,8 @@ Var(t) &amp;= {\lambda}^{-2}
 </section><section class="slide level2"><div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
 \begin{aligned}
-\ell({\lambda}) &amp;= \sum_{i=1}^m(\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}-{\lambda}t_i) + \sum_{j=1}^k (-{\lambda}u_j)\\
-&amp;= m \operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{} -(T+U){\lambda}\\
+\ell({\lambda}) &amp;= \sum_{i=1}^m({\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}}-{\lambda}t_i) + \sum_{j=1}^k (-{\lambda}u_j)\\
+&amp;= m {\operatorname{log}\mathopen{}\left\{{\lambda}\right\}\mathclose{}} -(T+U){\lambda}\\
 \ell'({\lambda})
 &amp;=m{\lambda}^{-1} -(T+U)\\
 \hat{{\lambda}} &amp;= \frac{m}{T+U}
@@ -1929,17 +1929,17 @@ Var(t) &amp;= {\lambda}^{-2}
 </section><section class="slide level2"><h4 id="fisher-information-and-standard-error">Fisher Information and Standard Error</h4>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[-\ell''\right]\mathclose{}
+{\mathbb{E}\mathopen{}\left[-\ell''\right]\mathclose{}}
 &amp; = m/{\lambda}^2\\
-\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}
-&amp;\approx {\mathopen{}\left(\operatorname{E}\mathopen{}\left[-\ell''\right]\mathclose{}\right)\mathclose{}}^{-1}\\
+{\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}}
+&amp;\approx {\mathopen{}\left({\mathbb{E}\mathopen{}\left[-\ell''\right]\mathclose{}}\right)\mathclose{}}^{-1}\\
 &amp;={\lambda}^2/m\\
 \text{SE}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}
-&amp;= \sqrt{\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}}\\
+&amp;= \sqrt{{\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}}}\\
 &amp;\approx {\lambda}/\sqrt{m}
 \end{aligned}
 \]</span></p>
-<aside class="notes"><p><span class="math inline">\(\hat{\lambda}\)</span> depends on the censoring times of the censored observations, but <span class="math inline">\(\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}\)</span> only depends on the number of uncensored observations, <span class="math inline">\(m\)</span>, and not on the number of censored observations (<span class="math inline">\(k\)</span>).</p>
+<aside class="notes"><p><span class="math inline">\(\hat{\lambda}\)</span> depends on the censoring times of the censored observations, but <span class="math inline">\({\operatorname{Var}\mathopen{}\left(\hat{\lambda}\right)\mathclose{}}\)</span> only depends on the number of uncensored observations, <span class="math inline">\(m\)</span>, and not on the number of censored observations (<span class="math inline">\(k\)</span>).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2150,17 +2150,17 @@ q_j(\tau) \stackrel{\text{def}}{=}\Pr\mathopen{}\left[j \text{ fails in } [\tau,
 \]</span></p>
 </div>
 <div id="exm-cond-surv-ratio" class="theorem example">
-<p><span class="theorem-title"><strong>Example 20 (Conditional survival ratio for an exponential lifetime)</strong></span> Let <span class="math inline">\(T \sim \mathrm{Exponential}(\lambda)\)</span>, so <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}\)</span>. The probability of surviving past <span class="math inline">\(\tau_2\)</span> given survival past <span class="math inline">\(\tau_1 &lt; \tau_2\)</span> is</p>
+<p><span class="theorem-title"><strong>Example 20 (Conditional survival ratio for an exponential lifetime)</strong></span> Let <span class="math inline">\(T \sim \mathrm{Exponential}(\lambda)\)</span>, so <span class="math inline">\(\operatorname{S}(t) = {\operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}}\)</span>. The probability of surviving past <span class="math inline">\(\tau_2\)</span> given survival past <span class="math inline">\(\tau_1 &lt; \tau_2\)</span> is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \Pr(T &gt; \tau_2 \mid T &gt; \tau_1)
 &amp;= \frac{\operatorname{S}(\tau_2)}{\operatorname{S}(\tau_1)}
 &amp;&amp; \text{(conditional survival ratio)}
 \\
-&amp;= \frac{\operatorname{exp}\mathopen{}\left\{-\lambda \tau_2\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{-\lambda \tau_1\right\}\mathclose{}}
+&amp;= \frac{{\operatorname{exp}\mathopen{}\left\{-\lambda \tau_2\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{-\lambda \tau_1\right\}\mathclose{}}}
 &amp;&amp; \text{(substitute the exponential survival function)}
 \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\lambda(\tau_2 - \tau_1)\right\}\mathclose{} ,
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\lambda(\tau_2 - \tau_1)\right\}\mathclose{}} ,
 &amp;&amp; \text{(quotient of exponentials)}
 \end{aligned}
 \]</span></p>
@@ -2180,20 +2180,20 @@ q_j(4.0)
 &amp;= 1 - \frac{\operatorname{S}(4.5)}{\operatorname{S}(4.0)}
 &amp;&amp; \text{(conditional survival ratio)}
 \\
-&amp;= 1 - \frac{\operatorname{exp}\mathopen{}\left\{-\int_{0}^{4.5} {\lambda}(u)\,du\right\}\mathclose{}}
-            {\operatorname{exp}\mathopen{}\left\{-\int_{0}^{4.0} {\lambda}(u)\,du\right\}\mathclose{}}
+&amp;= 1 - \frac{{\operatorname{exp}\mathopen{}\left\{-\int_{0}^{4.5} {\lambda}(u)\,du\right\}\mathclose{}}}
+            {{\operatorname{exp}\mathopen{}\left\{-\int_{0}^{4.0} {\lambda}(u)\,du\right\}\mathclose{}}}
 &amp;&amp; \text{(survival from cumulative hazard)}
 \\
-&amp;= 1 - \operatorname{exp}\mathopen{}\left\{-\int_{4.0}^{4.5} {\lambda}(u)\,du\right\}\mathclose{}
+&amp;= 1 - {\operatorname{exp}\mathopen{}\left\{-\int_{4.0}^{4.5} {\lambda}(u)\,du\right\}\mathclose{}}
 &amp;&amp; \text{(quotient of exponentials)}
 \\
-&amp;= 1 - \operatorname{exp}\mathopen{}\left\{-\int_{4.0}^{4.5} 0.1 \,du\right\}\mathclose{}
+&amp;= 1 - {\operatorname{exp}\mathopen{}\left\{-\int_{4.0}^{4.5} 0.1 \,du\right\}\mathclose{}}
 &amp;&amp; \text{(substitute } {\lambda}(u) = 0.1\text{)}
 \\
-&amp;= 1 - \operatorname{exp}\mathopen{}\left\{-0.1 \times 0.5\right\}\mathclose{}
+&amp;= 1 - {\operatorname{exp}\mathopen{}\left\{-0.1 \times 0.5\right\}\mathclose{}}
 &amp;&amp; \text{(constant integrand over width } \Delta t = 0.5\text{)}
 \\
-&amp;= 1 - \operatorname{exp}\mathopen{}\left\{-0.05\right\}\mathclose{}
+&amp;= 1 - {\operatorname{exp}\mathopen{}\left\{-0.05\right\}\mathclose{}}
 &amp;&amp; \text{(arithmetic)}
 \\
 &amp;\approx 0.0488 .
@@ -2227,7 +2227,7 @@ q_j(4.0)
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside><p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits(t) \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n\mathbb{1}\mathopen{}\left(Y_i &gt; t\right)\mathclose{}\]</span></p>
+      }</style></aside><p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits(t) \stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n{\mathbb{1}\mathopen{}\left(Y_i &gt; t\right)\mathclose{}}\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-emp-surv-cdf" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 11 (Empirical survival function and empirical CDF)</strong></span> Without censoring, the empirical survival function equals one minus the <a href="https://morrison-lab.github.io/sds/nonparametric-models.html#def-empirical-cdf">empirical CDF</a> <span class="math inline">\(\mathop{\hat{\operatorname{F}}}\nolimits(t)\)</span> of the event times:</p>
@@ -2237,10 +2237,10 @@ q_j(4.0)
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
 \begin{aligned}
 \mathop{\hat{\operatorname{S}}}\nolimits(t)
-&amp;\stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n\mathbb{1}\mathopen{}\left(Y_i &gt; t\right)\mathclose{}
-\\ &amp;= \frac{1}{n}\sum_{i=1}^n\mathopen{}\left[1 - \mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}\right]\mathclose{}
-\\ &amp;= \frac{1}{n}\sum_{i=1}^n1 - \frac{1}{n}\sum_{i=1}^n\mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}
-\\ &amp;= 1 - \frac{1}{n}\sum_{i=1}^n\mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}
+&amp;\stackrel{\text{def}}{=}\frac{1}{n}\sum_{i=1}^n{\mathbb{1}\mathopen{}\left(Y_i &gt; t\right)\mathclose{}}
+\\ &amp;= \frac{1}{n}\sum_{i=1}^n\mathopen{}\left[1 - {\mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}}\right]\mathclose{}
+\\ &amp;= \frac{1}{n}\sum_{i=1}^n1 - \frac{1}{n}\sum_{i=1}^n{\mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}}
+\\ &amp;= 1 - \frac{1}{n}\sum_{i=1}^n{\mathbb{1}\mathopen{}\left(Y_i \le t\right)\mathclose{}}
 \\ &amp;= 1 - \mathop{\hat{\operatorname{F}}}\nolimits(t)
 \end{aligned}
 \]</span></p>
@@ -2456,7 +2456,7 @@ Figure&nbsp;11: Cartoon risk-set view showing individual follow-up lines. Filled
 <p><span class="theorem-title"><strong>Definition 19 (Kaplan-Meier Product-Limit Estimator of Survival Function)</strong></span> If a time-to-event data set contains <span class="math inline">\(k\)</span> event times <span class="math inline">\(t_i\)</span>, (<span class="math inline">\(i \in {1:k}\)</span>), where <span class="math inline">\(r_i\)</span> is the <a href="#/def-number-at-risk">number of individuals at risk</a> at time <span class="math inline">\(t_i\)</span> and <span class="math inline">\(d_i\)</span> is the number of events at time <span class="math inline">\(t_i\)</span>, then the <strong>Kaplan-Meier Product-Limit Estimator</strong> of the <a href="#/def-surv-fn">survival function</a> is:</p>
 <p><span class="math display">\[\hat{{\lambda}}_i = \frac{d_i}{r_i}\]</span></p>
 <p><span class="math display">\[\hat{\kappa}_i = 1 - \hat{{\lambda}}_i = \frac{r_i - d_i}{r_i}\]</span></p>
-<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} \stackrel{\text{def}}{=}\prod_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}} \hat{\kappa}_i\]</span></p>
+<p><span class="math display">\[{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}} \stackrel{\text{def}}{=}\prod_{{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}}} \hat{\kappa}_i\]</span></p>
 </div>
 </section><section class="slide level2"><p>To see why multiplying the conditional survival factors estimates marginal survival, write the ordered distinct exit times as <span class="math inline">\(y_1 &lt; y_2 &lt; \cdots &lt; y_m\)</span>. Here <span class="math inline">\(Y\)</span> denotes exit time (either event time or censoring time), while <span class="math inline">\(T\)</span> denotes the underlying event time, which is not always observed.</p>
 <p>Because <span class="math inline">\(y_{j-1}\)</span> and <span class="math inline">\(y_j\)</span> are consecutive distinct exit times, there are no exits between them. Therefore the <a href="https://morrison-lab.github.io/pds/probability-basics.html#def-conditional-prob">conditional probability</a> of surviving between these two times is 1:</p>
@@ -2506,13 +2506,13 @@ Figure&nbsp;11: Cartoon risk-set view showing individual follow-up lines. Filled
 &amp;= \Pr(Y &gt; y_j \mid Y &gt; y_{j-1})
 &amp;&amp; \text{(definition of conditional probability)}
 \\
-&amp;= \frac{\operatorname{S}\mathopen{}\left(y_j\right)\mathclose{}}{\operatorname{S}\mathopen{}\left(y_{j-1}\right)\mathclose{}} ,
+&amp;= \frac{{\operatorname{S}\mathopen{}\left(y_j\right)\mathclose{}}}{{\operatorname{S}\mathopen{}\left(y_{j-1}\right)\mathclose{}}} ,
 &amp;&amp; \text{(conditional survival ratio)}
 \end{aligned}
 \]</span></p>
 <p>so, rearranging, the marginal survival through <span class="math inline">\(y_j\)</span> is written recursively:</p>
 <p><span class="math display">\[
-\operatorname{S}\mathopen{}\left(y_j\right)\mathclose{} = \kappa(y_j)\,\operatorname{S}\mathopen{}\left(y_{j-1}\right)\mathclose{}.
+{\operatorname{S}\mathopen{}\left(y_j\right)\mathclose{}} = \kappa(y_j)\,{\operatorname{S}\mathopen{}\left(y_{j-1}\right)\mathclose{}}.
 \]</span></p>
 <p>The same recursion can be applied repeatedly. If <span class="math inline">\(S_j = \Pr(Y &gt; y_j)\)</span> and <span class="math inline">\(S_0 = 1\)</span>, then:</p>
 <p><span class="math display">\[
@@ -2533,7 +2533,7 @@ S_3
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\Pr}(T &gt; t)
-&amp;= \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\\
+&amp;= {\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}}\\
 &amp;= \prod_{k:\, y_k \leq t} \hat{\Pr}(T &gt; y_k \mid T \geq y_k)\\
 &amp;= \prod_{k:\, y_k \leq t} \hat{\kappa}_k\\
 &amp;= \prod_{k:\, y_k \leq t} \frac{r_k - d_k}{r_k}
@@ -2656,7 +2656,7 @@ Table&nbsp;4: Simulated survival data for <a href="#/exr-km-curve-by-hand" class
 <li>
 <span class="math inline">\(\hat{{\lambda}}(y) = \hat{\Pr}(T = y \mid T \geq y) = \frac{d(y)}{r(y)} = 1 - \hat{\kappa}(y)\)</span>: estimated <a href="#/def-discrete-haz-risk">discrete hazard</a>;</li>
 <li>
-<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y\right)\mathclose{} = \prod_{k:\, y_k \leq y} \hat{\kappa}(y_k)\)</span>: Kaplan-Meier survival estimate. At each exit time <span class="math inline">\(y_k\)</span>, update the previous estimate: <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_k\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_{k-1}\right)\mathclose{} \cdot \hat{\kappa}(y_k)\)</span>, with <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_0\right)\mathclose{} \stackrel{\text{def}}{=}1\)</span>.</li>
+<span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y\right)\mathclose{}} = \prod_{k:\, y_k \leq y} \hat{\kappa}(y_k)\)</span>: Kaplan-Meier survival estimate. At each exit time <span class="math inline">\(y_k\)</span>, update the previous estimate: <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_k\right)\mathclose{}} = {\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_{k-1}\right)\mathclose{}} \cdot \hat{\kappa}(y_k)\)</span>, with <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y_0\right)\mathclose{}} \stackrel{\text{def}}{=}1\)</span>.</li>
 </ul>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-label="1"></a><span class="fu">library</span>(pander)</span>
 <span id="cb19-2"><a aria-label="2"></a><span class="fu">library</span>(tidyverse)</span>
@@ -2749,7 +2749,7 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 <th style="text-align: center;"><span class="math inline">\(r^*(y)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\(\hat{\kappa}(y)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\(\hat{{\lambda}}(y)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y\right)\mathclose{}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(y\right)\mathclose{}}\)</span></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -2944,13 +2944,13 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 <p>The estimated <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-variance">variance</a> of <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> at a single time point <span class="math inline">\(t\)</span> is given by <strong>Greenwood’s formula</strong>:</p>
 <div id="thm-greenwood" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 14 (Greenwood’s estimator for variance of Kaplan-Meier survival estimator)</strong></span> <span id="eq-var-est-surv"><span class="math display">\[
-\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
+{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{}} = \mathop{\hat{\operatorname{S}}}\nolimits(t)^2\sum_{t_i \le t}\frac{d_i}{r_i(r_i-d_i)}
 \tag{12}\]</span></span></p>
 <p><span class="citation" data-cites="klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Sec. 4.2]</a>, eq. (4.2.2)</span></p>
 </div>
 <p>We can use <a href="#/eq-var-est-surv" class="quarto-xref">Equation&nbsp;12</a> for <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">confidence intervals</a> for a survival function or a difference of <a href="#/def-surv-fn">survival functions</a>.</p>
 </section><section class="slide level2"><h3 id="understanding-greenwoods-formula-optional">Understanding Greenwood’s formula (optional)</h3>
-<aside class="notes"><p>To see where Greenwood’s formula comes from, let <span class="math inline">\(x_i = r_i - d_i\)</span>. We approximate the solution treating each time as <a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">independent</a>, with <span class="math inline">\(r_i\)</span> fixed and ignore randomness in times of failure and we treat <span class="math inline">\(x_i\)</span> as independent <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">binomials</a> <span class="math inline">\(\operatorname{Bin}\mathopen{}\left(r_i, p_i\right)\mathclose{}\)</span>. Letting <span class="math inline">\(\operatorname{S}(t)\)</span> be the “true” survival function</p>
+<aside class="notes"><p>To see where Greenwood’s formula comes from, let <span class="math inline">\(x_i = r_i - d_i\)</span>. We approximate the solution treating each time as <a href="https://morrison-lab.github.io/pds/independence.html#def-indpt">independent</a>, with <span class="math inline">\(r_i\)</span> fixed and ignore randomness in times of failure and we treat <span class="math inline">\(x_i\)</span> as independent <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">binomials</a> <span class="math inline">\({\operatorname{Bin}\mathopen{}\left(r_i, p_i\right)\mathclose{}}\)</span>. Letting <span class="math inline">\(\operatorname{S}(t)\)</span> be the “true” survival function</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2978,14 +2978,14 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 \]</span></p>
 </section><section class="slide level2"><p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(\frac{\mathop{\hat{\operatorname{S}}}\nolimits(t)}{\operatorname{S}(t)}\right)\mathclose{}
-&amp;\approx \operatorname{Var}\mathopen{}\left(1+\sum_{t_i \le t} \frac{\hat p_i-p_i}{p_i}\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left(\frac{\mathop{\hat{\operatorname{S}}}\nolimits(t)}{\operatorname{S}(t)}\right)\mathclose{}}
+&amp;\approx {\operatorname{Var}\mathopen{}\left(1+\sum_{t_i \le t} \frac{\hat p_i-p_i}{p_i}\right)\mathclose{}}
 \\ &amp;=\sum_{t_i \le t} \frac{1}{p_i^2}\frac{p_i(1-p_i)}{r_i}
 \\ &amp;= \sum_{t_i \le t} \frac{(1-p_i)}{p_i r_i}
 \\ &amp;\approx\sum_{t_i \le t} \frac{(1-x_i/r_i)}{x_i}
 \\ &amp;=\sum_{t_i \le t} \frac{r_i-x_i}{x_i r_i}
 \\ &amp;=\sum_{t_i \le t} \frac{d_i}{r_i(r_i-d_i)}
-\\ \therefore\operatorname{Var}\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{}
+\\ \therefore{\operatorname{Var}\mathopen{}\left(\mathop{\hat{\operatorname{S}}}\nolimits(t)\right)\mathclose{}}
 &amp;\approx \mathop{\hat{\operatorname{S}}}\nolimits(t)^2\sum_{t_i \le t} \frac{d_i}{r_i(r_i-d_i)}
 \end{aligned}
 \]</span></p>
@@ -3751,12 +3751,12 @@ e_{gi}
 <p><span class="theorem-title"><strong>Theorem 15 (Log-rank statistic, two groups)</strong></span> For either <span class="math inline">\(g \in \{1, 2\}\)</span>,</p>
 <p><span id="eq-logrank-stat-2grp"><span class="math display">\[
 \chi^2_{\text{LR}}
-\;=\; \frac{(O_g - E_g)^2}{\widehat{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}}
+\;=\; \frac{(O_g - E_g)^2}{\widehat{{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}}}
 \;\stackrel{H_0}{\sim}\; \chi^2_1
 \tag{14}\]</span></span></p>
 <p>where <span class="math inline">\(r_{1i}\)</span> and <span class="math inline">\(r_{2i}\)</span> are the at-risk counts for groups 1 and 2 at time <span class="math inline">\(t_i\)</span> (i.e., <span class="math inline">\(r_{gi}\)</span> from <a href="#/sec-logrank-notation" class="quarto-xref">Section&nbsp;9.1</a> for <span class="math inline">\(g = 1, 2\)</span>), and the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-variance">variance</a> estimate is</p>
 <p><span id="eq-logrank-var-2grp"><span class="math display">\[
-\widehat{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}
+\widehat{{\operatorname{Var}\mathopen{}\left(O_g - E_g\right)\mathclose{}}}
 \;=\; \sum_{i=1}^{k}
    \frac{r_{1i}\, r_{2i}\, d_i\, (r_i - d_i)}{r_i^2\,(r_i - 1)}.
 \tag{15}\]</span></span></p>
@@ -3778,7 +3778,7 @@ e_{gi}
 <p><span class="theorem-title"><strong>Definition 20 (Log-rank test (Mantel-Cox test))</strong></span> The <strong>log-rank test</strong> (also called the <strong>Mantel-Cox test</strong>) for two groups is the hypothesis test of</p>
 <p><span class="math display">\[H_0:\; \operatorname{S}_1(t) = \operatorname{S}_2(t) \text{ for all } t \ge 0,\]</span></p>
 <p>where <span class="math inline">\(\operatorname{S}_g(t)\)</span> is the survival function of group <span class="math inline">\(g\)</span> (the <span class="math inline">\(G = 2\)</span> case of the null hypothesis in <a href="#/sec-logrank-notation" class="quarto-xref">Section&nbsp;9.1</a>), that uses the log-rank statistic <span class="math inline">\(\chi^2_{\text{LR}}\)</span> (<a href="#/eq-logrank-stat-2grp" class="quarto-xref">Equation&nbsp;14</a>) as its test statistic and the <span class="math inline">\(\chi^2_1\)</span> distribution (<a href="#/thm-logrank-two-group" class="quarto-xref">Theorem&nbsp;15</a>) as its large-sample reference distribution. Its p-value is</p>
-<p><span class="math display">\[p \stackrel{\text{def}}{=}\Pr\mathopen{}\left(X \ge \chi^2_{\text{LR}}\right)\mathclose{}, \quad X \sim \chi^2_1,\]</span></p>
+<p><span class="math display">\[p \stackrel{\text{def}}{=}{\Pr\mathopen{}\left(X \ge \chi^2_{\text{LR}}\right)\mathclose{}}, \quad X \sim \chi^2_1,\]</span></p>
 <p>and at significance level <span class="math inline">\(\alpha\)</span> the test rejects <span class="math inline">\(H_0\)</span> when <span class="math inline">\(\chi^2_{\text{LR}}\)</span> exceeds the <span class="math inline">\((1 - \alpha)\)</span> quantile of <span class="math inline">\(\chi^2_1\)</span>.</p>
 <p><span class="citation" data-cites="kleinbaum2012survival klein2003survival"><a href="#/references" role="doc-biblioref" onclick="">[3, Ch. 7]</a>, <a href="#/references" role="doc-biblioref" onclick="">[6, Ch. 2]</a></span></p>
 </div>
@@ -3851,7 +3851,7 @@ E_1
 <p>so <span class="math inline">\(O_1 - E_1 = 2 - 5/6 = 7/6\)</span>. The variance estimate (<a href="#/eq-logrank-var-2grp" class="quarto-xref">Equation&nbsp;15</a>) is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(O_1 - E_1\right)\mathclose{}
+{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(O_1 - E_1\right)\mathclose{}}
 &amp;= \sum_{i=1}^{3}
    \frac{r_{1i}\, r_{2i}\, d_i\, (r_i - d_i)}{r_i^2\,(r_i - 1)}
 &amp;&amp; \text{(@eq-logrank-var-2grp)}
@@ -3875,7 +3875,7 @@ E_1
 <p><span class="math display">\[
 \begin{aligned}
 \chi^2_{\text{LR}}
-&amp;= \frac{(O_1 - E_1)^2}{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(O_1 - E_1\right)\mathclose{}}
+&amp;= \frac{(O_1 - E_1)^2}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(O_1 - E_1\right)\mathclose{}}}
 &amp;&amp; \text{(@eq-logrank-stat-2grp)}
 \\
 &amp;= \frac{(7/6)^2}{17/36}
@@ -4271,7 +4271,7 @@ Figure&nbsp;15: Disease-Free Survival by Disease Group
 </details>
 </div>
 <h5 id="exm-bmt-cuhaz">Cumulative Hazard Curves for Bone-Marrow Transplant (<code>bmt</code>) data</h5>
-<p>The cumulative hazard <span class="math inline">\({\Lambda}(t)\)</span> is defined in <a href="#/def-cuhaz" class="quarto-xref">Definition&nbsp;11</a>, and the Kaplan-Meier (product-limit) estimator <span class="math inline">\(\hat{\Lambda}(t) = -\operatorname{log}\mathopen{}\left\{\mathop{\hat{\operatorname{S}}}\nolimits(t)\right\}\mathclose{}\)</span> is discussed in <a href="#/sec-nelson-aalen" class="quarto-xref">Section&nbsp;10</a> alongside the <a href="#/def-na-cuhaz-est">Nelson-Aalen estimator</a>.</p>
+<p>The cumulative hazard <span class="math inline">\({\Lambda}(t)\)</span> is defined in <a href="#/def-cuhaz" class="quarto-xref">Definition&nbsp;11</a>, and the Kaplan-Meier (product-limit) estimator <span class="math inline">\(\hat{\Lambda}(t) = -{\operatorname{log}\mathopen{}\left\{\mathop{\hat{\operatorname{S}}}\nolimits(t)\right\}\mathclose{}}\)</span> is discussed in <a href="#/sec-nelson-aalen" class="quarto-xref">Section&nbsp;10</a> alongside the <a href="#/def-na-cuhaz-est">Nelson-Aalen estimator</a>.</p>
 <hr>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a aria-label="1"></a><span class="fu">autoplot</span>(</span>
@@ -4326,7 +4326,7 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside><p><span class="math display">\[\hat{{\Lambda}}_{NA}(t) \stackrel{\text{def}}{=}\sum_{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}}\hat{{\lambda}}_i\]</span></p>
+      }</style></aside><p><span class="math display">\[\hat{{\Lambda}}_{NA}(t) \stackrel{\text{def}}{=}\sum_{{\mathopen{}\left\{i:\ t_i \le t\right\}\mathclose{}}}\hat{{\lambda}}_i\]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-var-NA-est" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 16 (Variance of Nelson-Aalen estimator)</strong></span> &nbsp;</p>
@@ -4349,22 +4349,22 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 \end{aligned}
 \tag{16}\]</span></span></p>
 </div>
-</section><section class="slide level2"><p>Since <span class="math inline">\(\operatorname{S}(t)=\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span>, the Nelson-Aalen cumulative hazard estimate can be converted into an alternate estimate of the <a href="#/def-surv-fn">survival function</a>:</p>
+</section><section class="slide level2"><p>Since <span class="math inline">\(\operatorname{S}(t)={\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}\)</span>, the Nelson-Aalen cumulative hazard estimate can be converted into an alternate estimate of the <a href="#/def-surv-fn">survival function</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}
-&amp;= \operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}\\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\sum_{t_i \le t}\frac{d_i}{r_i}\right\}\mathclose{}\\
-&amp;= \prod_{t_i \le t}\operatorname{exp}\mathopen{}\left\{-\frac{d_i}{r_i}\right\}\mathclose{}\\
+{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}}\\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\sum_{t_i \le t}\frac{d_i}{r_i}\right\}\mathclose{}}\\
+&amp;= \prod_{t_i \le t}{\operatorname{exp}\mathopen{}\left\{-\frac{d_i}{r_i}\right\}\mathclose{}}\\
 &amp;= \prod_{t_i \le t}\hat{\kappa}^{NA}_i
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\hat{\kappa}^{NA}_i = \operatorname{exp}\mathopen{}\left\{-\hat{{\lambda}}_i\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{-d_i/r_i\right\}\mathclose{}\)</span> is the Nelson-Aalen conditional survival factor (compare with the KM factor <span class="math inline">\(\hat{\kappa}^{KM}_i = 1 - d_i/r_i\)</span>).</p>
+<p>where <span class="math inline">\(\hat{\kappa}^{NA}_i = {\operatorname{exp}\mathopen{}\left\{-\hat{{\lambda}}_i\right\}\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-d_i/r_i\right\}\mathclose{}}\)</span> is the Nelson-Aalen conditional survival factor (compare with the KM factor <span class="math inline">\(\hat{\kappa}^{KM}_i = 1 - d_i/r_i\)</span>).</p>
 </section><section class="slide level2"><p>Compare these with the corresponding Kaplan-Meier estimates:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\hat{{\Lambda}}_{KM}(t) &amp;= -\sum_{t_i \le t}\operatorname{log}\mathopen{}\left\{1-\frac{d_i}{r_i}\right\}\mathclose{}\\
-\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} &amp;= \prod_{t_i \le t}\mathopen{}\left[1-\frac{d_i}{r_i}\right]\mathclose{}
+\hat{{\Lambda}}_{KM}(t) &amp;= -\sum_{t_i \le t}{\operatorname{log}\mathopen{}\left\{1-\frac{d_i}{r_i}\right\}\mathclose{}}\\
+{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}} &amp;= \prod_{t_i \le t}\mathopen{}\left[1-\frac{d_i}{r_i}\right]\mathclose{}
 \end{aligned}
 \]</span></p>
 <aside class="notes"><p>The product limit estimate and the Nelson-Aalen estimate often do not differ by much. The latter is considered more accurate in small samples and also directly estimates the cumulative hazard. The <code>"fleming-harrington"</code> method for <code>survfit()</code> reduces to Nelson-Aalen when the data are unweighted. We can also estimate the cumulative hazard as the negative log of the KM survival function estimate.</p>
@@ -4445,11 +4445,11 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 <li>
 <span class="math inline">\(\hat{{\lambda}}(y) = \frac{d(y)}{r(y)}\)</span>: Nelson-Aalen hazard increment;</li>
 <li>
-<span class="math inline">\(\hat{\kappa}(y) = \operatorname{exp}\mathopen{}\left\{-\hat{{\lambda}}(y)\right\}\mathclose{}\)</span>: Nelson-Aalen conditional survival factor;</li>
+<span class="math inline">\(\hat{\kappa}(y) = {\operatorname{exp}\mathopen{}\left\{-\hat{{\lambda}}(y)\right\}\mathclose{}}\)</span>: Nelson-Aalen conditional survival factor;</li>
 <li>
 <span class="math inline">\(\hat{{\Lambda}}_{NA}(y) = \sum_{k:\, y_k \leq y} \hat{{\lambda}}(y_k)\)</span>: Nelson-Aalen cumulative hazard estimate; at each exit time <span class="math inline">\(y_k\)</span>, update the previous estimate: <span class="math inline">\(\hat{{\Lambda}}_{NA}(y_k) = \hat{{\Lambda}}_{NA}(y_{k-1}) + \hat{{\lambda}}(y_k)\)</span>, with <span class="math inline">\(\hat{{\Lambda}}_{NA}(y_0) \stackrel{\text{def}}{=}0\)</span>;</li>
 <li>
-<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(y\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(y)\right\}\mathclose{} = \prod_{k:\, y_k \leq y} \hat{\kappa}(y_k)\)</span>: Nelson-Aalen survival estimate.</li>
+<span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(y\right)\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(y)\right\}\mathclose{}} = \prod_{k:\, y_k \leq y} \hat{\kappa}(y_k)\)</span>: Nelson-Aalen survival estimate.</li>
 </ul>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-label="1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb51-2"><a aria-label="2"></a>na_curve <span class="ot">&lt;-</span></span>
@@ -4549,7 +4549,7 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <th style="text-align: center;"><span class="math inline">\(\hat{{\lambda}}(y)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\(\hat{\kappa}(y)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\(\hat{{\Lambda}}_{NA}(y)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(y\right)\mathclose{}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(y\right)\mathclose{}}\)</span></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -4561,9 +4561,9 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">9</td>
 <td style="text-align: center;">8</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{9} = 0.1111\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{1}{9}\right\}\mathclose{} = 0.8948\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{1}{9}\right\}\mathclose{}} = 0.8948\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{9} = 0.1111\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.1111\right\}\mathclose{} = 0.8948\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.1111\right\}\mathclose{}} = 0.8948\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">3</td>
@@ -4574,10 +4574,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">8</td>
 <td style="text-align: center;">7</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{8} = 0.125\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{1}{8}\right\}\mathclose{} = 0.8825\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{1}{8}\right\}\mathclose{}} = 0.8825\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.1111 + \frac{1}{8} =
 0.2361\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.2361\right\}\mathclose{} = 0.7897\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.2361\right\}\mathclose{}} = 0.7897\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">7</td>
@@ -4588,9 +4588,9 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">6</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{7} = 0.1429\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{1}{7}\right\}\mathclose{} = 0.8669\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{1}{7}\right\}\mathclose{}} = 0.8669\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.2361 + \frac{1}{7} = 0.379\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.379\right\}\mathclose{} = 0.6846\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.379\right\}\mathclose{}} = 0.6846\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">10</td>
@@ -4601,9 +4601,9 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">6</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{6} = 0.1667\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{1}{6}\right\}\mathclose{} = 0.8465\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{1}{6}\right\}\mathclose{}} = 0.8465\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.379 + \frac{1}{6} = 0.5456\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.5456\right\}\mathclose{} = 0.5795\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.5456\right\}\mathclose{}} = 0.5795\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">13</td>
@@ -4614,10 +4614,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{0}{5} = 0\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{0}{5}\right\}\mathclose{} = 1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{0}{5}\right\}\mathclose{}} = 1\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.5456 + \frac{0}{5} =
 0.5456\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.5456\right\}\mathclose{} = 0.5795\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.5456\right\}\mathclose{}} = 0.5795\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">15</td>
@@ -4628,10 +4628,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{1}{4} = 0.25\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{1}{4}\right\}\mathclose{} = 0.7788\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{1}{4}\right\}\mathclose{}} = 0.7788\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.5456 + \frac{1}{4} =
 0.7956\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.7956\right\}\mathclose{} = 0.4513\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.7956\right\}\mathclose{}} = 0.4513\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">16</td>
@@ -4642,10 +4642,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;"><span class="math inline">\(\frac{0}{3} = 0\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\frac{0}{3}\right\}\mathclose{} = 1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\frac{0}{3}\right\}\mathclose{}} = 1\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0.7956 + \frac{0}{3} =
 0.7956\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-0.7956\right\}\mathclose{} = 0.4513\)</span></td>
+<td style="text-align: center;"><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-0.7956\right\}\mathclose{}} = 0.4513\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -4737,15 +4737,15 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p) \stackrel{\text{def}}{=}\inf\mathopen{}\left\{t \ge 0 : \mathop{\hat{\operatorname{S}}}\nolimits(t) \le p\right\}\mathclose{}, \quad 0 &lt; p &lt; 1.\]</span></p>
 </div>
 </section><section class="slide level2"><p>Since <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits(t)\)</span> is a non-increasing step function, <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> equals the smallest observed event time at which the estimated survival probability has dropped to or below <span class="math inline">\(p\)</span>.</p>
-<p><strong>From the Kaplan-Meier estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> from <a href="#/def-KM-estimator" class="quarto-xref">Definition&nbsp;19</a>:</p>
+<p><strong>From the Kaplan-Meier estimator.</strong> Substituting <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}}\)</span> from <a href="#/def-KM-estimator" class="quarto-xref">Definition&nbsp;19</a>:</p>
 <p><span class="math display">\[
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}^{-1}(p)
 = \inf\mathopen{}\left\{t \ge 0 : \prod_{t_i \le t}\mathopen{}\left[1 - \frac{d_i}{r_i}\right]\mathclose{} \le p\right\}\mathclose{}.
 \]</span></p>
-<p><strong>From the Nelson-Aalen estimator.</strong> Substituting <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}\)</span> from <a href="#/def-na-cuhaz-est" class="quarto-xref">Definition&nbsp;21</a>:</p>
+<p><strong>From the Nelson-Aalen estimator.</strong> Substituting <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-\hat{{\Lambda}}_{NA}(t)\right\}\mathclose{}}\)</span> from <a href="#/def-na-cuhaz-est" class="quarto-xref">Definition&nbsp;21</a>:</p>
 <p><span class="math display">\[
 \mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}^{-1}(p)
-= \inf\mathopen{}\left\{t \ge 0 : \operatorname{exp}\mathopen{}\left\{-\sum_{t_i \le t}\frac{d_i}{r_i}\right\}\mathclose{} \le p\right\}\mathclose{}.
+= \inf\mathopen{}\left\{t \ge 0 : {\operatorname{exp}\mathopen{}\left\{-\sum_{t_i \le t}\frac{d_i}{r_i}\right\}\mathclose{}} \le p\right\}\mathclose{}.
 \]</span></p>
 <p>In R, both estimators are computed from a <code>survfit()</code> object using <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code>.</p>
 </section><section class="slide level2"><div id="exm-emp-isf-drug6mp" class="theorem example">
@@ -4793,8 +4793,8 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 </th>
 <th style="text-align: right;">Events <span class="math inline">\(d_i\)</span>
 </th>
-<th style="text-align: right;"><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}}\)</span></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -4978,8 +4978,8 @@ Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(
 <p>The empirical <a href="#/def-median-survival">median survival time</a> is the smallest event time <span class="math inline">\(t\)</span> at which the estimated survival probability falls to or below 0.5.</p>
 <p>From the table:</p>
 <ul>
-<li><p><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(22\right)\mathclose{} \approx 0.538 &gt; 0.5\)</span> and <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(23\right)\mathclose{} \approx 0.448 \le 0.5\)</span>, so <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}^{-1}(0.5) = 23\)</span> months.</p></li>
-<li><p><span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(22\right)\mathclose{} \approx 0.557 &gt; 0.5\)</span> and <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(23\right)\mathclose{} \approx 0.471 \le 0.5\)</span>, so <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}^{-1}(0.5) = 23\)</span> months.</p></li>
+<li><p><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(22\right)\mathclose{}} \approx 0.538 &gt; 0.5\)</span> and <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(23\right)\mathclose{}} \approx 0.448 \le 0.5\)</span>, so <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}^{-1}(0.5) = 23\)</span> months.</p></li>
+<li><p><span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(22\right)\mathclose{}} \approx 0.557 &gt; 0.5\)</span> and <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(23\right)\mathclose{}} \approx 0.471 \le 0.5\)</span>, so <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}^{-1}(0.5) = 23\)</span> months.</p></li>
 </ul>
 <p>In R:</p>
 <div class="cell">

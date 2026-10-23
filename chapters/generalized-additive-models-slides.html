@@ -383,7 +383,7 @@ text-align: center;
           overflow: hidden!important;
           display:block!important;
       }</style></aside><p>So far the regression models in this book have assumed that each continuous predictor enters the linear predictor through a single coefficient:</p>
-<p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p\]</span></p>
+<p><span class="math display">\[g({\mathbb{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p\]</span></p>
 <p>This linearity forces the effect of every predictor to be <strong>monotone</strong>: if <span class="math inline">\(\beta_j &gt; 0\)</span>, raising <span class="math inline">\(x_j\)</span> always increases the predicted response on the link scale; if <span class="math inline">\(\beta_j &lt; 0\)</span>, it always decreases it. Many real epidemiologic exposures don’t behave that way.</p>
 </section><section class="slide level2"><div id="exm-age-mortality" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1 (Age and all-cause mortality)</strong></span> All-cause mortality is <strong>U-shaped</strong> in age: high in infancy, low through young adulthood, then rising steeply in old age <span class="citation" data-cites="me4"><a href="#/references" role="doc-biblioref" onclick="">[3]</a></span>. A linear model in <span class="math inline">\(\text{age}\)</span> would average those regimes into a single slope, badly misrepresenting risk at both ends.</p>
@@ -396,9 +396,9 @@ text-align: center;
 </div>
 <p>The pattern in <a href="#/exm-age-mortality" class="quarto-xref">Example&nbsp;1</a>, <a href="#/exm-bmi-mortality" class="quarto-xref">Example&nbsp;2</a>, and <a href="#/exm-temperature-mortality" class="quarto-xref">Example&nbsp;3</a> is general: many epidemiologic exposures have an effect on outcome that is <strong>smooth but not monotone</strong>. We need a regression framework that lets the response depend on a continuous predictor through an arbitrary smooth function, while keeping the GLM machinery (link function, likelihood, inference) we have already built up.</p>
 <p><strong>Generalized additive models</strong> (GAMs) provide exactly this. A GAM replaces the linear predictor</p>
-<p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = \beta_0 + \sum_{j=1}^p \beta_j x_j\]</span></p>
+<p><span class="math display">\[g({\mathbb{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}}) = \beta_0 + \sum_{j=1}^p \beta_j x_j\]</span></p>
 <p>with an <strong>additive</strong> sum of smooth functions</p>
-<p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = \beta_0 + \sum_{j=1}^p f_j(x_j),\]</span></p>
+<p><span class="math display">\[g({\mathbb{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}}) = \beta_0 + \sum_{j=1}^p f_j(x_j),\]</span></p>
 <p>where each <span class="math inline">\(f_j\)</span> is estimated nonparametrically from the data. The linear predictor remains additive across predictors (so each predictor’s contribution is still interpretable on its own), but the shape of each <span class="math inline">\(f_j\)</span> is no longer constrained to be linear.</p>
 <p>The rest of this chapter builds up to GAMs in stages:</p>
 <ol type="1">
@@ -432,11 +432,11 @@ text-align: center;
 </section><section class="slide level2"><div id="def-polynomial-regression" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Polynomial regression)</strong></span> For a continuous predictor <span class="math inline">\(X\)</span> and degree <span class="math inline">\(d \ge 1\)</span>, the <strong>polynomial regression model</strong> is</p>
 <p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \cdots + \beta_d x_i^d + \varepsilon_i\]</span></p>
-<p>with <span class="math inline">\(\varepsilon_i \ \sim_{\operatorname{iid}}\ \operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}\)</span>.</p>
+<p>with <span class="math inline">\(\varepsilon_i \ \sim_{\operatorname{iid}}\ {\operatorname{N}\mathopen{}\left(0, \sigma^2\right)\mathclose{}}\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-polynomial-quadratic" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4 (Quadratic fit to a U-shaped exposure)</strong></span> For BMI–mortality, a degree-2 polynomial</p>
-<p><span class="math display">\[\operatorname{logit}\mathopen{}\left\{\Pr(Y = 1 \mid \text{BMI} = b)\right\}\mathclose{} = \beta_0 + \beta_1 b + \beta_2 b^2\]</span></p>
+<p><span class="math display">\[{\operatorname{logit}\mathopen{}\left\{\Pr(Y = 1 \mid \text{BMI} = b)\right\}\mathclose{}} = \beta_0 + \beta_1 b + \beta_2 b^2\]</span></p>
 <p>can capture a single-minimum U-shape, with the minimum-risk BMI at <span class="math inline">\(-\beta_1 / (2 \beta_2)\)</span> (assuming <span class="math inline">\(\beta_2 &gt; 0\)</span>, i.e., the parabola opens upward). A quadratic is the lowest-degree polynomial that admits a turning point, so it’s a natural first step beyond a linear fit.</p>
 </div>
 </section><section class="slide level2"><div id="rem-polynomial-regression-linear" class="proof remark">
@@ -507,7 +507,7 @@ text-align: center;
       }</style></aside><p><strong>Step functions</strong> are the opposite extreme from polynomials: instead of letting the response depend smoothly on <span class="math inline">\(X\)</span>, they cut the range of <span class="math inline">\(X\)</span> into bins and fit a separate constant within each bin. The fit is piecewise-constant — a staircase rather than a curve.</p>
 </section><section class="slide level2"><div id="def-step-function-regression" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (Step-function regression)</strong></span> Choose <strong>cutpoints</strong> <span class="math inline">\(c_1 &lt; c_2 &lt; \cdots &lt; c_K\)</span> on the support of <span class="math inline">\(X\)</span>, producing <span class="math inline">\(K+1\)</span> bins: <span class="math inline">\((-\infty, c_1]\)</span>, <span class="math inline">\((c_1, c_2]\)</span>, …, <span class="math inline">\((c_K, \infty)\)</span>. Using the conventions <span class="math inline">\(c_0 = -\infty\)</span> and <span class="math inline">\(c_{K+1} = \infty\)</span>, define indicator variables</p>
-<p><span class="math display">\[C_k(X) \stackrel{\text{def}}{=}\mathbb{1}\mathopen{}\left(c_{k-1} &lt; X \le c_k\right)\mathclose{}, \quad k = 1, \ldots, K+1.\]</span></p>
+<p><span class="math display">\[C_k(X) \stackrel{\text{def}}{=}{\mathbb{1}\mathopen{}\left(c_{k-1} &lt; X \le c_k\right)\mathclose{}}, \quad k = 1, \ldots, K+1.\]</span></p>
 <p>Because <span class="math inline">\(\sum_{k=1}^{K+1} C_k(X) = 1\)</span> for every <span class="math inline">\(X\)</span> (exactly one indicator is “on”), the full set of <span class="math inline">\(K+1\)</span> indicators plus an intercept is linearly dependent. One bin is therefore dropped as the <strong>reference category</strong>. Taking bin <span class="math inline">\(1\)</span> as the reference and using <span class="math inline">\(C_2, \ldots, C_{K+1}\)</span>, the identified step-function regression model is</p>
 <p><span class="math display">\[y_i = \beta_0 + \beta_2 C_2(x_i) + \beta_3 C_3(x_i) + \cdots + \beta_{K+1} C_{K+1}(x_i) + \varepsilon_i,\]</span></p>
 <p>with <span class="math inline">\(K\)</span> free slope parameters (one per non-reference bin) plus the intercept. <span class="math inline">\(\beta_0\)</span> is the expected response in the reference bin and <span class="math inline">\(\beta_k\)</span> (<span class="math inline">\(k \ge 2\)</span>) is the contrast in mean response between bin <span class="math inline">\(k\)</span> and the reference bin.</p>
@@ -583,11 +583,11 @@ text-align: center;
 <p><span class="math display">\[b_k(X) = X^k, \quad k = 1, \ldots, d.\]</span></p>
 </div>
 </section><section class="slide level2"><div id="rem-basis-expansion-estimation" class="proof remark">
-<p><span class="proof-title"><em>Remark 2</em> (How a basis-expansion model is fit). </span>The basis functions <span class="math inline">\(b_k(\cdot)\)</span> are chosen ahead of time; the coefficients <span class="math inline">\(\beta_k\)</span> are estimated by least squares (or, more generally, by maximum likelihood for a GLM with link <span class="math inline">\(g(\operatorname{E}\mathopen{}\left[Y \mid X\right]\mathclose{}) = \beta_0 + \sum_k \beta_k b_k(X)\)</span>).</p>
+<p><span class="proof-title"><em>Remark 2</em> (How a basis-expansion model is fit). </span>The basis functions <span class="math inline">\(b_k(\cdot)\)</span> are chosen ahead of time; the coefficients <span class="math inline">\(\beta_k\)</span> are estimated by least squares (or, more generally, by maximum likelihood for a GLM with link <span class="math inline">\(g({\mathbb{E}\mathopen{}\left[Y \mid X\right]\mathclose{}}) = \beta_0 + \sum_k \beta_k b_k(X)\)</span>).</p>
 </div>
 </section><section class="slide level2"><div id="exm-basis-step" class="theorem example">
 <p><span class="theorem-title"><strong>Example 7 (Step-function regression as a basis expansion)</strong></span> For step-function regression with cutpoints <span class="math inline">\(c_1 &lt; \cdots &lt; c_K\)</span> (<a href="#/def-step-function-regression" class="quarto-xref">Definition&nbsp;2</a>), the basis functions are the bin indicators</p>
-<p><span class="math display">\[b_k(X) = \mathbb{1}\mathopen{}\left(c_{k-1} &lt; X \le c_k\right)\mathclose{}, \quad k = 1, \ldots, K+1.\]</span></p>
+<p><span class="math display">\[b_k(X) = {\mathbb{1}\mathopen{}\left(c_{k-1} &lt; X \le c_k\right)\mathclose{}}, \quad k = 1, \ldots, K+1.\]</span></p>
 </div>
 </section><section id="why-the-basis-function-abstraction-matters" class="slide level2" data-number="4.1"><h2>
 <span class="header-section-number">4.1</span> Why the basis-function abstraction matters</h2>
@@ -1159,7 +1159,7 @@ title-only slide. -->
 <ol type="1">
 <li>Choose a <strong>bandwidth</strong> <span class="math inline">\(s \in (0, 1]\)</span>, also called the <strong>span</strong>. Take the fraction <span class="math inline">\(s\)</span> of training observations with <span class="math inline">\(x_i\)</span> closest to <span class="math inline">\(x_0\)</span> — this is the <strong>local neighborhood</strong>.</li>
 <li>
-<strong>Weight</strong> the neighborhood observations using a kernel that gives higher weight to points closer to <span class="math inline">\(x_0\)</span> and zero weight to points outside the neighborhood. The tricube kernel <span class="math inline">\(K(u) = (1 - |u|^3)^3 \mathbb{1}\mathopen{}\left(|u| \le 1\right)\mathclose{}\)</span> is the standard choice.</li>
+<strong>Weight</strong> the neighborhood observations using a kernel that gives higher weight to points closer to <span class="math inline">\(x_0\)</span> and zero weight to points outside the neighborhood. The tricube kernel <span class="math inline">\(K(u) = (1 - |u|^3)^3 {\mathbb{1}\mathopen{}\left(|u| \le 1\right)\mathclose{}}\)</span> is the standard choice.</li>
 <li>
 <strong>Fit a low-degree polynomial</strong> (constant, linear, or quadratic) by weighted least squares to the neighborhood, using the kernel weights. The fitted value at <span class="math inline">\(x_0\)</span> is the prediction <span class="math inline">\(\hat{f}(x_0)\)</span>.</li>
 </ol>
@@ -1192,7 +1192,7 @@ Q'(a)
 \\ &amp;= \sum_{i=1}^n \mathopen{}\left(-2 w_i y_i + 2 a w_i\right)\mathclose{}
 &amp;&amp; \text{(distribute)}
 \\ &amp;= -2 \sum_{i=1}^n w_i y_i + 2 a \sum_{i=1}^n w_i
-&amp;&amp; \text{(split the sum)}
+&amp;&amp; \text{(distribute the sum over the terms)}
 \end{aligned}
 \]</span></p>
 <p>Setting <span class="math inline">\(Q'(a) = 0\)</span>:</p>
@@ -1317,7 +1317,7 @@ Q'(a)
 <p>The fitted curves are shown in <a href="#/fig-method-comparison-overlay" class="quarto-xref">Figure&nbsp;1</a>.</p>
 <div id="fig-method-comparison-overlay" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-method-comparison-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Comparison of nonlinear regression methods on synthetic data <span class="math inline">\(y = \sin(x) + 0.3\sin(3x) + \varepsilon\)</span>, <span class="math inline">\(\varepsilon\sim \operatorname{N}\mathopen{}\left(0, 0.4^2\right)\mathclose{}\)</span>, <span class="math inline">\(n = 200\)</span>. Splines (both regression and smoothing) and LOESS track the truth closely; quadratic polynomial underfits the multi- modal structure; degree-12 polynomial overfits and swings at boundaries.
+Figure&nbsp;1: Comparison of nonlinear regression methods on synthetic data <span class="math inline">\(y = \sin(x) + 0.3\sin(3x) + \varepsilon\)</span>, <span class="math inline">\(\varepsilon\sim {\operatorname{N}\mathopen{}\left(0, 0.4^2\right)\mathclose{}}\)</span>, <span class="math inline">\(n = 200\)</span>. Splines (both regression and smoothing) and LOESS track the truth closely; quadratic polynomial underfits the multi- modal structure; degree-12 polynomial overfits and swings at boundaries.
 </figcaption><div aria-describedby="fig-method-comparison-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-method-comparison-overlay" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -1498,7 +1498,7 @@ slide; the heading and this div intentionally share that slide to avoid a
 title-only slide. -->
 <div id="def-gam" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 9 (Generalized additive model)</strong></span> Let <span class="math inline">\(Y\)</span> be a response variable with conditional distribution from an exponential family (Gaussian, <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">binomial</a>, Poisson, etc.), and let <span class="math inline">\(X = (X_1, \ldots, X_p)\)</span> be predictors. A <strong>generalized additive model</strong> (GAM) specifies</p>
-<p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = \beta_0 + f_1(x_1) + f_2(x_2) + \cdots + f_p(x_p),\]</span></p>
+<p><span class="math display">\[g({\mathbb{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}}) = \beta_0 + f_1(x_1) + f_2(x_2) + \cdots + f_p(x_p),\]</span></p>
 <p>where:</p>
 <ul>
 <li>
@@ -1510,7 +1510,7 @@ title-only slide. -->
 </div>
 </section><section class="slide level2"><div id="exm-gam" class="theorem example">
 <p><span class="theorem-title"><strong>Example 17 (GAM for CHD risk)</strong></span> For the WCGS data with continuous predictors age, systolic blood pressure, and cholesterol, a GAM for CHD on the logit scale is</p>
-<p><span class="math display">\[\operatorname{logit}\mathopen{}\left\{\Pr(\text{chd69} = 1 \mid \text{age}, \text{sbp}, \text{chol})\right\}\mathclose{}
+<p><span class="math display">\[{\operatorname{logit}\mathopen{}\left\{\Pr(\text{chd69} = 1 \mid \text{age}, \text{sbp}, \text{chol})\right\}\mathclose{}}
 = \beta_0 + f_1(\text{age}) + f_2(\text{sbp}) + f_3(\text{chol}),\]</span></p>
 <p>where each <span class="math inline">\(f_j\)</span> is a smoothing spline estimated by REML. The three partial-effect curves can be plotted separately, revealing, for example, whether CHD risk rises linearly with age or accelerates nonlinearly.</p>
 </div>
@@ -1521,7 +1521,7 @@ title-only slide. -->
 </section><section id="what-the-additive-structure-gives-you" class="slide level2" data-number="9.2"><h2>
 <span class="header-section-number">9.2</span> What the additive structure gives you</h2>
 <p>The additive structure makes GAMs strictly less flexible than fully nonparametric models like</p>
-<p><span class="math display">\[g(\operatorname{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}) = f(x_1, x_2, \ldots, x_p),\]</span></p>
+<p><span class="math display">\[g({\mathbb{E}\mathopen{}\left[Y \mid X = x\right]\mathclose{}}) = f(x_1, x_2, \ldots, x_p),\]</span></p>
 <p>which allow arbitrary interactions among predictors. In return, GAMs gain:</p>
 <ul>
 <li>
@@ -1535,7 +1535,7 @@ title-only slide. -->
 <p>The strict-additivity restriction can be relaxed when needed. The two standard escape hatches are:</p>
 <ul>
 <li>
-<p><strong>Predictor-by-factor interactions.</strong> A smooth that varies by category — e.g.&nbsp;an age effect that’s different for Type A and Type B behavior patterns (<code>dibpat</code>) — is fit as <span class="math inline">\(f_j(X_j) + f_{j,\text{by}}(X_j) \cdot \mathbb{1}\mathopen{}\left(\text{dibpat} = \text{Type A}\right)\mathclose{}\)</span> via <code>s(age, by = dibpat)</code> in <code>mgcv</code>. When <code>dibpat</code> is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else); the correct idiom is:</p>
+<p><strong>Predictor-by-factor interactions.</strong> A smooth that varies by category — e.g.&nbsp;an age effect that’s different for Type A and Type B behavior patterns (<code>dibpat</code>) — is fit as <span class="math inline">\(f_j(X_j) + f_{j,\text{by}}(X_j) \cdot {\mathbb{1}\mathopen{}\left(\text{dibpat} = \text{Type A}\right)\mathclose{}}\)</span> via <code>s(age, by = dibpat)</code> in <code>mgcv</code>. When <code>dibpat</code> is a factor, this syntax requires an accompanying parametric main effect for identifiability (the smooth is centered to mean zero in each level, so the level-specific intercepts have to come from somewhere else); the correct idiom is:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-label="1"></a><span class="fu">gam</span>(chol <span class="sc">~</span> dibpat <span class="sc">+</span> <span class="fu">s</span>(age, <span class="at">by =</span> dibpat), <span class="at">data =</span> wcgs, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb14-2"><a aria-label="2"></a><span class="co">#&gt; </span></span>
@@ -1546,7 +1546,7 @@ title-only slide. -->
 <span id="cb14-7"><a aria-label="7"></a><span class="co">#&gt; chol ~ dibpat + s(age, by = dibpat)</span></span>
 <span id="cb14-8"><a aria-label="8"></a><span class="co">#&gt; </span></span>
 <span id="cb14-9"><a aria-label="9"></a><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.02 1.03  total = 4.05 </span></span>
+<span id="cb14-10"><a aria-label="10"></a><span class="co">#&gt; 1.00 1.01  total = 4.01 </span></span>
 <span id="cb14-11"><a aria-label="11"></a><span class="co">#&gt; </span></span>
 <span id="cb14-12"><a aria-label="12"></a><span class="co">#&gt; REML score: 16231.9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1667,9 +1667,9 @@ title-only slide. -->
 <pre><code>#&gt; 
 #&gt; Method: REML   Optimizer: outer newton
 #&gt; full convergence after 7 iterations.
-#&gt; Gradient range [-0.000404069,-1.352e-05]
+#&gt; Gradient range [-0.000358419,-2.1343e-05]
 #&gt; (score 821.975 &amp; scale 1).
-#&gt; Hessian positive definite, eigenvalue range [1.35192e-05,0.220195].
+#&gt; Hessian positive definite, eigenvalue range [3.16164e-05,0.220195].
 #&gt; Model rank =  29 / 29 
 #&gt; 
 #&gt; Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
@@ -1700,7 +1700,7 @@ title-only slide. -->
 </div>
 </div>
 </div>
-<p>produces a panel of partial-effect plots — one per smooth term — with a 2-SE pointwise confidence band. The y-axis is on the <strong>linear predictor scale</strong> by default, centered to mean zero (the smooth’s contribution to <span class="math inline">\(g(\operatorname{E}\mathopen{}\left[Y\right]\mathclose{})\)</span> above its mean), not on the response scale.</p>
+<p>produces a panel of partial-effect plots — one per smooth term — with a 2-SE pointwise confidence band. The y-axis is on the <strong>linear predictor scale</strong> by default, centered to mean zero (the smooth’s contribution to <span class="math inline">\(g({\mathbb{E}\mathopen{}\left[Y\right]\mathclose{}})\)</span> above its mean), not on the response scale.</p>
 <p>For a publication-quality plot on the response scale, use <code>predict(m, type = "response", se.fit = TRUE)</code> on a grid of <span class="math inline">\(X\)</span> values with the other predictors held at typical values.</p>
 </section></section><section><section id="sec-gam-inference" class="title-slide slide level1 center" data-number="11"><h1>
 <span class="header-section-number">11</span> Inference and model selection</h1>
@@ -1730,18 +1730,18 @@ title-only slide. -->
 <span id="cb19-4"><a aria-label="4"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> wcgs, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb19-5"><a aria-label="5"></a>sm_inf <span class="ot">&lt;-</span> <span class="fu">summary</span>(m_inf)</span>
 <span id="cb19-6"><a aria-label="6"></a>sm_inf<span class="sc">$</span>p.table  <span class="co"># parametric coefficients</span></span>
-<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;               Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
-<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.971461   0.117513 -25.28618 4.53331e-141</span></span>
-<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.781729   0.141714   5.51626  3.46292e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error   z value     Pr(&gt;|z|)</span></span>
+<span id="cb19-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept)  -2.97147   0.117513 -25.28619 4.53227e-141</span></span>
+<span id="cb19-9"><a aria-label="9"></a><span class="co">#&gt; dibpatType A  0.78173   0.141714   5.51627  3.46277e-08</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Read these exactly as you would GLM coefficients.</p>
 <h3 id="smooth-terms">Smooth terms</h3>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a>sm_inf<span class="sc">$</span>s.table  <span class="co"># smooth terms</span></span>
-<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq    p-value</span></span>
-<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00156 1.00312 36.3980 0.00000000</span></span>
-<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29791 1.54685 10.8353 0.00641275</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-2"><a aria-label="2"></a><span class="co">#&gt;            edf  Ref.df  Chi.sq   p-value</span></span>
+<span id="cb20-3"><a aria-label="3"></a><span class="co">#&gt; s(age) 1.00107 1.00214 36.4005 0.0000000</span></span>
+<span id="cb20-4"><a aria-label="4"></a><span class="co">#&gt; s(bmi) 1.29959 1.54968 10.8386 0.0064354</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Each column reports:</p>
@@ -1869,10 +1869,10 @@ title-only slide. -->
 <span id="cb23-20"><a aria-label="20"></a><span class="co">#&gt; </span></span>
 <span id="cb23-21"><a aria-label="21"></a><span class="co">#&gt; Approximate significance of smooth terms:</span></span>
 <span id="cb23-22"><a aria-label="22"></a><span class="co">#&gt;          edf Ref.df Chi.sq p-value    </span></span>
-<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 5.8e-07 ***</span></span>
+<span id="cb23-23"><a aria-label="23"></a><span class="co">#&gt; s(age)  1.00   1.00  26.55 1.1e-06 ***</span></span>
 <span id="cb23-24"><a aria-label="24"></a><span class="co">#&gt; s(bmi)  1.00   1.00   2.18    0.14    </span></span>
 <span id="cb23-25"><a aria-label="25"></a><span class="co">#&gt; s(chol) 1.61   2.02  56.48 &lt; 2e-16 ***</span></span>
-<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.7e-06 ***</span></span>
+<span id="cb23-26"><a aria-label="26"></a><span class="co">#&gt; s(sbp)  1.00   1.00  22.83 1.4e-06 ***</span></span>
 <span id="cb23-27"><a aria-label="27"></a><span class="co">#&gt; ---</span></span>
 <span id="cb23-28"><a aria-label="28"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb23-29"><a aria-label="29"></a><span class="co">#&gt; </span></span>
@@ -1971,7 +1971,7 @@ title-only slide. -->
 </details><div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58571","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"5.00000","2":"1645.45","_rn_":"m_lin"},{"1":"7.58585","2":"1645.51","_rn_":"m_gam_ml"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>

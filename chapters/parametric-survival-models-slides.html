@@ -392,7 +392,7 @@ text-align: center;
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{f}(t) &amp;\stackrel{\text{def}}{=}\lambda \text{e}^{-\lambda t} &amp;&amp; \text{(probability density function definition for $t \ge 0$)} \\
-\operatorname{log}\mathopen{}\left\{\operatorname{f}(t)\right\}\mathclose{} &amp;= \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} - \lambda t &amp;&amp; \text{(taking natural logarithm of density)} \\
+{\operatorname{log}\mathopen{}\left\{\operatorname{f}(t)\right\}\mathclose{}} &amp;= {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} - \lambda t &amp;&amp; \text{(taking natural logarithm of density)} \\
 \operatorname{F}(t) &amp;\stackrel{\text{def}}{=}\int_{0}^{t} \operatorname{f}(u) du &amp;&amp; \text{(cumulative distribution function definition)} \\
 &amp;= \int_{0}^{t} \lambda \text{e}^{-\lambda u} du &amp;&amp; \text{(substituting probability density function)} \\
 &amp;= \mathopen{}\left[ -\text{e}^{-\lambda u} \right]\mathclose{}_{0}^{t} &amp;&amp; \text{(evaluating antiderivative)} \\
@@ -400,13 +400,13 @@ text-align: center;
 \operatorname{S}(t) &amp;\stackrel{\text{def}}{=}1 - \operatorname{F}(t) &amp;&amp; \text{(survival function definition)} \\
 &amp;= 1 - \mathopen{}\left(1 - \text{e}^{-\lambda t}\right)\mathclose{} &amp;&amp; \text{(substituting cumulative distribution function)} \\
 &amp;= \text{e}^{-\lambda t} &amp;&amp; \text{(simplifying terms)} \\
-{\Lambda}(t) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
-&amp;= -\operatorname{log}\mathopen{}\left\{\text{e}^{-\lambda t}\right\}\mathclose{} &amp;&amp; \text{(substituting survival function)} \\
+{\Lambda}(t) &amp;\stackrel{\text{def}}{=}-{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}} &amp;&amp; \text{(cumulative hazard function definition)} \\
+&amp;= -{\operatorname{log}\mathopen{}\left\{\text{e}^{-\lambda t}\right\}\mathclose{}} &amp;&amp; \text{(substituting survival function)} \\
 &amp;= \lambda t &amp;&amp; \text{(simplifying logarithm of exponential)} \\
 {\lambda}(t) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} {\Lambda}(t) &amp;&amp; \text{(hazard function definition as derivative of cumulative hazard)} \\
 &amp;= \frac{\partial}{\partial t} (\lambda t) &amp;&amp; \text{(substituting cumulative hazard)} \\
 &amp;= \lambda &amp;&amp; \text{(differentiating linear term)} \\
-\operatorname{E}\mathopen{}\left[T\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative continuous random variable)} \\
+{\mathbb{E}\mathopen{}\left[T\right]\mathclose{}} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative continuous random variable)} \\
 &amp;= \int_{0}^{\infty} \text{e}^{-\lambda t} dt &amp;&amp; \text{(substituting survival function)} \\
 &amp;= \mathopen{}\left[ -\frac{1}{\lambda} \text{e}^{-\lambda t} \right]\mathclose{}_{0}^{\infty} &amp;&amp; \text{(evaluating antiderivative)} \\
 &amp;= \lambda^{-1} &amp;&amp; \text{(evaluating limits of integration)}
@@ -415,16 +415,16 @@ text-align: center;
 </section><section class="slide level2"><div id="thm-exp-memoryless" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (The exponential distribution is memoryless)</strong></span> If <span class="math inline">\(T\)</span> has an exponential distribution with rate <span class="math inline">\(\lambda &gt; 0\)</span>, then for all <span class="math inline">\(s \ge 0\)</span> and <span class="math inline">\(t \ge 0\)</span>,</p>
 <p><span class="math display">\[
-\operatorname{P}(T &gt; s + t \mid T &gt; s) = \operatorname{P}(T &gt; t).
+\mathbb{P}(T &gt; s + t \mid T &gt; s) = \mathbb{P}(T &gt; t).
 \]</span></p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(T &gt; s + t \mid T &gt; s)
-&amp;= \frac{\operatorname{P}(T &gt; s + t,\ T &gt; s)}{\operatorname{P}(T &gt; s)}
+\mathbb{P}(T &gt; s + t \mid T &gt; s)
+&amp;= \frac{\mathbb{P}(T &gt; s + t,\ T &gt; s)}{\mathbb{P}(T &gt; s)}
 &amp;&amp; \text{(definition of conditional probability)} \\
-&amp;= \frac{\operatorname{P}(T &gt; s + t)}{\operatorname{P}(T &gt; s)}
+&amp;= \frac{\mathbb{P}(T &gt; s + t)}{\mathbb{P}(T &gt; s)}
 &amp;&amp; \text{(the event } T &gt; s + t \text{ implies } T &gt; s \text{)} \\
 &amp;= \frac{\operatorname{S}(s + t)}{\operatorname{S}(s)}
 &amp;&amp; \text{(definition of the survival function)} \\
@@ -434,7 +434,7 @@ text-align: center;
 &amp;&amp; \text{(quotient rule for exponentials)} \\
 &amp;= \text{e}^{-\lambda t}
 &amp;&amp; \text{(cancel } \lambda s \text{)} \\
-&amp;= \operatorname{P}(T &gt; t)
+&amp;= \mathbb{P}(T &gt; t)
 &amp;&amp; \text{(exponential survival function)}
 \end{aligned}
 \]</span></p>
@@ -443,7 +443,7 @@ text-align: center;
 <p><span class="theorem-title"><strong>Example 1 (Remaining survival after 10 event-free weeks)</strong></span> Let <span class="math inline">\(T\)</span> be exponential with rate <span class="math inline">\(\lambda = 0.1\)</span> events per week. For a subject who has been event-free for <span class="math inline">\(s = 10\)</span> weeks, the probability of lasting at least <span class="math inline">\(t = 5\)</span> more weeks is:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(T &gt; 15 \mid T &gt; 10)
+\mathbb{P}(T &gt; 15 \mid T &gt; 10)
 &amp;= \frac{\text{e}^{-0.1 \cdot 15}}{\text{e}^{-0.1 \cdot 10}}
 &amp;&amp; \text{(ratio of survival functions)} \\
 &amp;= \frac{\text{e}^{-1.5}}{\text{e}^{-1}}
@@ -454,13 +454,13 @@ text-align: center;
 &amp;&amp; \text{(evaluate)}
 \end{aligned}
 \]</span></p>
-<p>This value equals <span class="math inline">\(\operatorname{P}(T &gt; 5) = \text{e}^{-0.1 \cdot 5} = \text{e}^{-0.5}\)</span>, the probability that a new subject lasts 5 weeks: the 10 weeks already survived do not change the outlook.</p>
+<p>This value equals <span class="math inline">\(\mathbb{P}(T &gt; 5) = \text{e}^{-0.1 \cdot 5} = \text{e}^{-0.5}\)</span>, the probability that a new subject lasts 5 weeks: the 10 weeks already survived do not change the outlook.</p>
 </div>
 </section><section class="slide level2"><div id="exm-weibull-not-memoryless" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2 (A Weibull distribution with shape 2 is not memoryless (counterexample))</strong></span> Now let <span class="math inline">\(T\)</span> be Weibull with <span class="math inline">\(\lambda = 0.1\)</span> and <span class="math inline">\(p = 2\)</span>, so <span class="math inline">\(\operatorname{S}(t) = \text{e}^{-(0.1 t)^2}\)</span> and the hazard increases over time. Then:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(T &gt; 15 \mid T &gt; 10)
+\mathbb{P}(T &gt; 15 \mid T &gt; 10)
 &amp;= \frac{\text{e}^{-(0.1 \cdot 15)^2}}{\text{e}^{-(0.1 \cdot 10)^2}}
 &amp;&amp; \text{(ratio of survival functions)} \\
 &amp;= \frac{\text{e}^{-(1.5)^2}}{\text{e}^{-(1)^2}}
@@ -473,7 +473,7 @@ text-align: center;
 &amp;&amp; \text{(evaluate)}
 \end{aligned}
 \]</span></p>
-<p>whereas <span class="math inline">\(\operatorname{P}(T &gt; 5) = \text{e}^{-(0.5)^2} = \text{e}^{-0.25} \approx 0.7788\)</span>. A subject who has already lasted 10 weeks is less likely to last 5 more weeks than a new subject is, because the hazard has risen in the meantime.</p>
+<p>whereas <span class="math inline">\(\mathbb{P}(T &gt; 5) = \text{e}^{-(0.5)^2} = \text{e}^{-0.25} \approx 0.7788\)</span>. A subject who has already lasted 10 weeks is less likely to last 5 more weeks than a new subject is, because the hazard has risen in the meantime.</p>
 </div>
 </section><section id="weibull-distribution" class="slide level2" data-number="1.2"><h2>
 <span class="header-section-number">1.2</span> Weibull Distribution</h2>
@@ -489,17 +489,17 @@ text-align: center;
 \operatorname{S}(t) &amp;\stackrel{\text{def}}{=}1 - \operatorname{F}(t) &amp;&amp; \text{(survival function definition)} \\
 &amp;= 1 - \mathopen{}\left(1 - \text{e}^{-(\lambda t)^p}\right)\mathclose{} &amp;&amp; \text{(substituting cumulative distribution function)} \\
 &amp;= \text{e}^{-(\lambda t)^p} &amp;&amp; \text{(simplifying terms)} \\
-{\Lambda}(t) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
-&amp;= -\operatorname{log}\mathopen{}\left\{\text{e}^{-(\lambda t)^p}\right\}\mathclose{} &amp;&amp; \text{(substituting survival function)} \\
+{\Lambda}(t) &amp;\stackrel{\text{def}}{=}-{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t)\right\}\mathclose{}} &amp;&amp; \text{(cumulative hazard function definition)} \\
+&amp;= -{\operatorname{log}\mathopen{}\left\{\text{e}^{-(\lambda t)^p}\right\}\mathclose{}} &amp;&amp; \text{(substituting survival function)} \\
 &amp;= (\lambda t)^p &amp;&amp; \text{(simplifying logarithm of exponential)} \\
-\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{} &amp;= \operatorname{log}\mathopen{}\left\{(\lambda t)^p\right\}\mathclose{} &amp;&amp; \text{(taking natural logarithm of cumulative hazard)} \\
-&amp;= p \operatorname{log}\mathopen{}\left\{\lambda t\right\}\mathclose{} &amp;&amp; \text{(applying exponent rule for logarithms)} \\
-&amp;= p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} + p \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} &amp;&amp; \text{(applying product rule for logarithms)} \\
+{\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{}} &amp;= {\operatorname{log}\mathopen{}\left\{(\lambda t)^p\right\}\mathclose{}} &amp;&amp; \text{(taking natural logarithm of cumulative hazard)} \\
+&amp;= p {\operatorname{log}\mathopen{}\left\{\lambda t\right\}\mathclose{}} &amp;&amp; \text{(applying exponent rule for logarithms)} \\
+&amp;= p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} + p {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} &amp;&amp; \text{(applying product rule for logarithms)} \\
 {\lambda}(t) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} {\Lambda}(t) &amp;&amp; \text{(hazard function definition)} \\
 &amp;= \frac{\partial}{\partial t} \mathopen{}\left( (\lambda t)^p \right)\mathclose{} &amp;&amp; \text{(substituting cumulative hazard)} \\
 &amp;= p (\lambda t)^{p-1} \cdot \lambda &amp;&amp; \text{(applying power and chain rules of differentiation)} \\
 &amp;= \lambda p (\lambda t)^{p-1} &amp;&amp; \text{(rearranging factors)} \\
-\operatorname{E}\mathopen{}\left[T\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
+{\mathbb{E}\mathopen{}\left[T\right]\mathclose{}} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
 &amp;= \int_{0}^{\infty} \text{e}^{-(\lambda t)^p} dt &amp;&amp; \text{(substituting survival function)} \\
 &amp;= \frac{1}{\lambda p} \int_{0}^{\infty} u^{\frac{1}{p}-1} \text{e}^{-u} du &amp;&amp; \text{(substituting $u = (\lambda t)^p \implies t = \lambda^{-1} u^{1/p}$)} \\
 &amp;= \lambda^{-1} \cdot \Gamma\mathopen{}\left(1 + \frac{1}{p}\right)\mathclose{} &amp;&amp; \text{(applying definition of Gamma function $\Gamma(z)$)}
@@ -609,11 +609,11 @@ text-align: center;
 <li><p><strong>Decreasing hazard when <span class="math inline">\(p &lt; 1\)</span></strong>: Using the derivative <span class="math inline">\({\lambda}'(t) = \lambda^p p (p-1) t^{p-2}\)</span>: When <span class="math inline">\(p &lt; 1\)</span>, <span class="math inline">\((p-1) &lt; 0\)</span>, so <span class="math inline">\({\lambda}'(t) &lt; 0\)</span> for all <span class="math inline">\(t &gt; 0\)</span>, meaning the hazard function is strictly decreasing over time.</p></li>
 <li><p><strong>Linear relationship between <span class="math inline">\(\log {\Lambda}(t)\)</span> and <span class="math inline">\(\log t\)</span></strong>: Taking the <a href="https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log">natural logarithm</a> of the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard function</a> <span class="math inline">\({\Lambda}(t) = (\lambda t)^p\)</span>: <span class="math display">\[
 \begin{aligned}
-\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{} &amp;\stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{(\lambda t)^p\right\}\mathclose{} &amp;&amp; \text{(substituting Weibull cumulative hazard)} \\
-&amp;= p \operatorname{log}\mathopen{}\left\{\lambda t\right\}\mathclose{} &amp;&amp; \text{(applying logarithm exponent rule $\log(a^b) = b \log a$)} \\
-&amp;= p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} + p \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} &amp;&amp; \text{(applying logarithm product rule $\log(ab) = \log a + \log b$)}
+{\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{}} &amp;\stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{(\lambda t)^p\right\}\mathclose{}} &amp;&amp; \text{(substituting Weibull cumulative hazard)} \\
+&amp;= p {\operatorname{log}\mathopen{}\left\{\lambda t\right\}\mathclose{}} &amp;&amp; \text{(applying logarithm exponent rule $\log(a^b) = b \log a$)} \\
+&amp;= p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} + p {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} &amp;&amp; \text{(applying logarithm product rule $\log(ab) = \log a + \log b$)}
 \end{aligned}
-\]</span> Defining <span class="math inline">\(y \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{}\)</span> and <span class="math inline">\(x \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span>, this equation takes the linear form <span class="math inline">\(y = a + b x\)</span> with intercept <span class="math inline">\(a = p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}\)</span> and slope <span class="math inline">\(b = p\)</span>.</p></li>
+\]</span> Defining <span class="math inline">\(y \stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{{\Lambda}(t)\right\}\mathclose{}}\)</span> and <span class="math inline">\(x \stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}}\)</span>, this equation takes the linear form <span class="math inline">\(y = a + b x\)</span> with intercept <span class="math inline">\(a = p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}}\)</span> and slope <span class="math inline">\(b = p\)</span>.</p></li>
 </ol>
 </div>
 </section><section class="slide level2 scrollable"><div id="exm-weibull-props" class="theorem example">
@@ -764,23 +764,23 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <div id="def-exp-reg" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Exponential regression model)</strong></span> An <strong>exponential regression model</strong> for an event time <span class="math inline">\(T\)</span> with <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictor</a> vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> assumes that, given <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span>, <span class="math inline">\(T\)</span> has an <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential distribution</a> whose <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazard rate</a> is the exponentiated <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a>:</p>
 <p><span id="eq-exp-reg-haz"><span class="math display">\[
-{\lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{},
+{\lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}},
 \quad \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
 \tag{1}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="exm-exp-reg" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4 (Exponential regression with one binary covariate)</strong></span> Let <span class="math inline">\(x_1 = 1\)</span> for patients on a standard treatment and <span class="math inline">\(x_1 = 0\)</span> for patients on a new treatment, and suppose <span class="math inline">\(\beta_0 = \operatorname{log}\mathopen{}\left\{0.025\right\}\mathclose{}\)</span> and <span class="math inline">\(\beta_1 = \operatorname{log}\mathopen{}\left\{4\right\}\mathclose{}\)</span>, with time measured in weeks. By <a href="#/eq-exp-reg-haz" class="quarto-xref">Equation&nbsp;1</a>:</p>
+<p><span class="theorem-title"><strong>Example 4 (Exponential regression with one binary covariate)</strong></span> Let <span class="math inline">\(x_1 = 1\)</span> for patients on a standard treatment and <span class="math inline">\(x_1 = 0\)</span> for patients on a new treatment, and suppose <span class="math inline">\(\beta_0 = {\operatorname{log}\mathopen{}\left\{0.025\right\}\mathclose{}}\)</span> and <span class="math inline">\(\beta_1 = {\operatorname{log}\mathopen{}\left\{4\right\}\mathclose{}}\)</span>, with time measured in weeks. By <a href="#/eq-exp-reg-haz" class="quarto-xref">Equation&nbsp;1</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 {\lambda}(t \mid x_1 = 0)
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
 &amp;&amp; \text{(exponential regression hazard with } x_1 = 0 \text{)} \\
 &amp;= 0.025
-&amp;&amp; \text{(} \operatorname{exp}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{0.025\right\}\mathclose{}\right\}\mathclose{} = 0.025 \text{)} \\
+&amp;&amp; \text{(} {\operatorname{exp}\mathopen{}\left\{{\operatorname{log}\mathopen{}\left\{0.025\right\}\mathclose{}}\right\}\mathclose{}} = 0.025 \text{)} \\
 {\lambda}(t \mid x_1 = 1)
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}
 &amp;&amp; \text{(exponential regression hazard with } x_1 = 1 \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} \cdot \operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}} \cdot {\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}
 &amp;&amp; \text{(product rule for exponentials)} \\
 &amp;= 0.025 \cdot 4
 &amp;&amp; \text{(evaluate each factor)} \\
@@ -794,18 +794,18 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p><span class="math display">\[
 \begin{aligned}
 {\lambda}_0(t) &amp;\stackrel{\text{def}}{=}{\lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}) &amp;&amp; \text{(baseline hazard rate definition at $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}$)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}})\right\}\mathclose{} &amp;&amp; \text{(substituting $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}$ into hazard function)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0 + (\beta_1 \cdot 0 + \dots + \beta_p \cdot 0)\right\}\mathclose{} &amp;&amp; \text{(evaluating linear predictor at zero vector)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} &amp;&amp; \text{(simplifying exponent)}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}})\right\}\mathclose{}} &amp;&amp; \text{(substituting $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}$ into hazard function)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0 + (\beta_1 \cdot 0 + \dots + \beta_p \cdot 0)\right\}\mathclose{}} &amp;&amp; \text{(evaluating linear predictor at zero vector)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}} &amp;&amp; \text{(simplifying exponent)}
 \end{aligned}
 \]</span></p>
-<p>When there are no additional <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictors</a> (<span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}\)</span>), the <a href="../chapters/proportional-hazards-models.html#def-base-hazard">baseline hazard</a> is constant: <span class="math inline">\(\lambda = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>. This model uses a log link as in a <a href="../chapters/Intro-to-GLMs.html#def-glm">generalized linear model</a> for <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a> or rate outcomes. Because the hazard rate does not depend on time <span class="math inline">\(t\)</span>, the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> comparing two covariate vectors <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}\)</span> is constant over time:</p>
+<p>When there are no additional <a href="../chapters/Intro-to-GLMs.html#def-predictors">predictors</a> (<span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}\)</span>), the <a href="../chapters/proportional-hazards-models.html#def-base-hazard">baseline hazard</a> is constant: <span class="math inline">\(\lambda = {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\)</span>. This model uses a log link as in a <a href="../chapters/Intro-to-GLMs.html#def-glm">generalized linear model</a> for <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a> or rate outcomes. Because the hazard rate does not depend on time <span class="math inline">\(t\)</span>, the <a href="../chapters/intro-to-survival-analysis.html#def-hazard-ratio">hazard ratio</a> comparing two covariate vectors <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}\)</span> is constant over time:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{ϙ}_{{\lambda}}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) &amp;\stackrel{\text{def}}{=}\frac{{\lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}{{\lambda}(t \mid \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})} &amp;&amp; \text{(hazard ratio definition)} \\
-&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}} &amp;&amp; \text{(substituting exponential regression hazard rates)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) - \eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{} &amp;&amp; \text{(applying quotient rule for exponentials)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}- \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{} &amp;&amp; \text{(expressing difference in linear predictors)}
+&amp;= \frac{{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}} &amp;&amp; \text{(substituting exponential regression hazard rates)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) - \eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}} &amp;&amp; \text{(applying quotient rule for exponentials)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}- \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}} &amp;&amp; \text{(expressing difference in linear predictors)}
 \end{aligned}
 \]</span></p>
 <p>Thus, exponential regression models possess <a href="../chapters/proportional-hazards-models.html#def-pha">proportional hazards</a> trivially.</p>
@@ -818,9 +818,9 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 {\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}\int_{0}^{t} {\lambda}(u \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) du &amp;&amp; \text{(cumulative hazard function definition)} \\
 &amp;= \int_{0}^{t} {\lambda}_0(u) \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) du &amp;&amp; \text{(substituting proportional hazard rate)} \\
 &amp;= \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot {\Lambda}_0(t) &amp;&amp; \text{(factoring constant hazard multiplier out of integral)} \\
-\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} &amp;&amp; \text{(survival function in terms of cumulative hazard)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot {\Lambda}_0(t)\right\}\mathclose{} &amp;&amp; \text{(substituting cumulative hazard)} \\
-&amp;= \mathopen{}\left[ \operatorname{exp}\mathopen{}\left\{-{\Lambda}_0(t)\right\}\mathclose{} \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(applying exponent laws)} \\
+\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} &amp;&amp; \text{(survival function in terms of cumulative hazard)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot {\Lambda}_0(t)\right\}\mathclose{}} &amp;&amp; \text{(substituting cumulative hazard)} \\
+&amp;= \mathopen{}\left[ {\operatorname{exp}\mathopen{}\left\{-{\Lambda}_0(t)\right\}\mathclose{}} \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(applying exponent laws)} \\
 &amp;= \mathopen{}\left[ \operatorname{S}_0(t) \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(substituting baseline survival function $\operatorname{S}_0(t)$)}
 \end{aligned}
 \]</span></p>
@@ -828,22 +828,22 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 </section><section class="slide level2"><div id="def-acceleration-factor" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2 (Acceleration factor)</strong></span> For a covariate vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and coefficients <span class="math inline">\(\beta_1, \dots, \beta_p\)</span>, let <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\beta_1 x_1 + \dots + \beta_p x_p\)</span>, with no intercept. The <strong>acceleration factor</strong> is</p>
 <p><span class="math display">\[
-\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}.
+\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}.
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-acceleration-factor" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5 (Computing an acceleration factor)</strong></span> Suppose there is one covariate, with coefficient <span class="math inline">\(\beta_1 = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}\)</span>, and a subject has <span class="math inline">\(x_1 = 2\)</span>. Then:</p>
+<p><span class="theorem-title"><strong>Example 5 (Computing an acceleration factor)</strong></span> Suppose there is one covariate, with coefficient <span class="math inline">\(\beta_1 = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}\)</span>, and a subject has <span class="math inline">\(x_1 = 2\)</span>. Then:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}
 &amp;&amp; \text{(definition of the acceleration factor)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_1 x_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_1 x_1\right\}\mathclose{}}
 &amp;&amp; \text{(one covariate, no intercept)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{2 \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}\right\}\mathclose{}
-&amp;&amp; \text{(substitute } \beta_1 = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \text{ and } x_1 = 2 \text{)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{2 {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}\right\}\mathclose{}}
+&amp;&amp; \text{(substitute } \beta_1 = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \text{ and } x_1 = 2 \text{)} \\
 &amp;= 4
-&amp;&amp; \text{(} \operatorname{exp}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{a\right\}\mathclose{}\right\}\mathclose{} = a \text{, and } 2 \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{4\right\}\mathclose{} \text{)}
+&amp;&amp; \text{(} {\operatorname{exp}\mathopen{}\left\{{\operatorname{log}\mathopen{}\left\{a\right\}\mathclose{}}\right\}\mathclose{}} = a \text{, and } 2 {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{4\right\}\mathclose{}} \text{)}
 \end{aligned}
 \]</span></p>
 </div>
@@ -855,7 +855,7 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 <p>where:</p>
 <ul>
 <li>
-<span class="math inline">\(\operatorname{S}_0(t) \stackrel{\text{def}}{=}\operatorname{P}(T &gt; t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}})\)</span> is the <a href="../chapters/proportional-hazards-models.html#def-baseline-surv">baseline survival function</a>, and</li>
+<span class="math inline">\(\operatorname{S}_0(t) \stackrel{\text{def}}{=}\mathbb{P}(T &gt; t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}})\)</span> is the <a href="../chapters/proportional-hazards-models.html#def-baseline-surv">baseline survival function</a>, and</li>
 <li>
 <span class="math inline">\(\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> is the acceleration factor (<a href="#/def-acceleration-factor" class="quarto-xref">Definition&nbsp;2</a>).</li>
 </ul>
@@ -872,7 +872,7 @@ Figure&nbsp;2: Survival functions for Weibull distribution
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="exm-aft" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6 (An acceleration factor of 4)</strong></span> Suppose the baseline survival function is exponential with mean 40 weeks, <span class="math inline">\(\operatorname{S}_0(t) = \operatorname{exp}\mathopen{}\left\{-t/40\right\}\mathclose{}\)</span>, and a covariate pattern <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> has acceleration factor <span class="math inline">\(\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = 4\)</span>. By <a href="#/eq-aft-surv" class="quarto-xref">Equation&nbsp;2</a>, the probability that a subject with covariates <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> is still event-free at 10 weeks is:</p>
+<p><span class="theorem-title"><strong>Example 6 (An acceleration factor of 4)</strong></span> Suppose the baseline survival function is exponential with mean 40 weeks, <span class="math inline">\(\operatorname{S}_0(t) = {\operatorname{exp}\mathopen{}\left\{-t/40\right\}\mathclose{}}\)</span>, and a covariate pattern <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> has acceleration factor <span class="math inline">\(\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = 4\)</span>. By <a href="#/eq-aft-surv" class="quarto-xref">Equation&nbsp;2</a>, the probability that a subject with covariates <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> is still event-free at 10 weeks is:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{S}(10 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})
@@ -880,9 +880,9 @@ Figure&nbsp;2: Survival functions for Weibull distribution
 &amp;&amp; \text{(AFT survival function with } t = 10 \text{ and } \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = 4 \text{)} \\
 &amp;= \operatorname{S}_0(40)
 &amp;&amp; \text{(multiply)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-40/40\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-40/40\right\}\mathclose{}}
 &amp;&amp; \text{(substitute the baseline survival function)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}
 &amp;&amp; \text{(divide)} \\
 &amp;\approx 0.368
 &amp;&amp; \text{(evaluate)}
@@ -917,17 +917,17 @@ t_q(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphant
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="exm-aft-quantiles" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7 (Median event times with an acceleration factor of 4)</strong></span> In <a href="#/exm-aft" class="quarto-xref">Example&nbsp;6</a>, the baseline survival function is <span class="math inline">\(\operatorname{S}_0(t) = \operatorname{exp}\mathopen{}\left\{-t/40\right\}\mathclose{}\)</span>. Its median (<span class="math inline">\(q = 0.5\)</span>) solves <span class="math inline">\(\operatorname{S}_0(t_{0.5}^0) = 0.5\)</span>:</p>
+<p><span class="theorem-title"><strong>Example 7 (Median event times with an acceleration factor of 4)</strong></span> In <a href="#/exm-aft" class="quarto-xref">Example&nbsp;6</a>, the baseline survival function is <span class="math inline">\(\operatorname{S}_0(t) = {\operatorname{exp}\mathopen{}\left\{-t/40\right\}\mathclose{}}\)</span>. Its median (<span class="math inline">\(q = 0.5\)</span>) solves <span class="math inline">\(\operatorname{S}_0(t_{0.5}^0) = 0.5\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{exp}\mathopen{}\left\{-t_{0.5}^0 / 40\right\}\mathclose{} &amp;= 0.5
+{\operatorname{exp}\mathopen{}\left\{-t_{0.5}^0 / 40\right\}\mathclose{}} &amp;= 0.5
 &amp;&amp; \text{(definition of the median)} \\
--t_{0.5}^0 / 40 &amp;= \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
+-t_{0.5}^0 / 40 &amp;= {\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}}
 &amp;&amp; \text{(take logs)} \\
-t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
+t_{0.5}^0 &amp;= -40 {\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}}
 &amp;&amp; \text{(multiply by } -40 \text{)} \\
-&amp;= 40 \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}
-&amp;&amp; \text{(} -\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{1/0.5\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \text{)} \\
+&amp;= 40 {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}
+&amp;&amp; \text{(} -{\operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{1/0.5\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \text{)} \\
 &amp;\approx 27.73
 &amp;&amp; \text{(evaluate)}
 \end{aligned}
@@ -937,19 +937,19 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 </section><section class="slide level2"><p>We derive the expected survival time under the AFT model using change-of-variables integration:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\right]\mathclose{} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
+{\mathbb{E}\mathopen{}\left[T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\right]\mathclose{}} &amp;\stackrel{\text{def}}{=}\int_{0}^{\infty} \operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) dt &amp;&amp; \text{(expectation formula for non-negative random variable)} \\
 &amp;= \int_{0}^{\infty} \operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \right)\mathclose{} dt &amp;&amp; \text{(substituting AFT survival function)} \\
 &amp;= \int_{0}^{\infty} \operatorname{S}_0(u) \cdot \frac{du}{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(substituting $u = t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \implies dt = \frac{du}{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}$)} \\
 &amp;= \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})^{-1} \cdot \int_{0}^{\infty} \operatorname{S}_0(u) du &amp;&amp; \text{(factoring constant $\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})^{-1}$ out of integral)} \\
-&amp;= \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})^{-1} \cdot \operatorname{E}\mathopen{}\left[T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}\right]\mathclose{} &amp;&amp; \text{(substituting baseline expectation formula)}
+&amp;= \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})^{-1} \cdot {\mathbb{E}\mathopen{}\left[T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{0}}\vphantom{0}}\right]\mathclose{}} &amp;&amp; \text{(substituting baseline expectation formula)}
 \end{aligned}
 \]</span></p>
-<p>Thus, the mean survival time for a subject with covariates <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> equals the baseline mean survival time divided by the acceleration factor <span class="math inline">\(\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span>.</p>
+<p>Thus, the mean survival time for a subject with covariates <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> equals the baseline mean survival time divided by the acceleration factor <span class="math inline">\(\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span>.</p>
 <p>We also derive the cumulative hazard and hazard rate functions under the AFT formulation:</p>
 <p><span class="math display">\[
 \begin{aligned}
-{\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} &amp;&amp; \text{(cumulative hazard function definition)} \\
-&amp;= -\operatorname{log}\mathopen{}\left\{\operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \right)\mathclose{}\right\}\mathclose{} &amp;&amp; \text{(substituting AFT survival function)} \\
+{\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}-{\operatorname{log}\mathopen{}\left\{\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} &amp;&amp; \text{(cumulative hazard function definition)} \\
+&amp;= -{\operatorname{log}\mathopen{}\left\{\operatorname{S}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \right)\mathclose{}\right\}\mathclose{}} &amp;&amp; \text{(substituting AFT survival function)} \\
 &amp;= {\Lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \right)\mathclose{} &amp;&amp; \text{(substituting baseline cumulative hazard)} \\
 {\lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}\frac{\partial}{\partial t} {\Lambda}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;&amp; \text{(hazard function definition)} \\
 &amp;= \frac{\partial}{\partial t} \mathopen{}\left( {\Lambda}_0\mathopen{}\left( t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \right)\mathclose{} \right)\mathclose{} &amp;&amp; \text{(substituting AFT cumulative hazard)} \\
@@ -959,18 +959,18 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 \end{aligned}
 \]</span></p>
 <h3 id="relationship-between-ph-and-aft-models">Relationship between PH and AFT models</h3>
-<p>If the baseline distribution is exponential with parameter <span class="math inline">\(\lambda\)</span>, substituting <span class="math inline">\(\operatorname{S}_0(t) = \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}\)</span> into the AFT model yields:</p>
+<p>If the baseline distribution is exponential with parameter <span class="math inline">\(\lambda\)</span>, substituting <span class="math inline">\(\operatorname{S}_0(t) = {\operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}}\)</span> into the AFT model yields:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;= \operatorname{exp}\mathopen{}\left\{-\lambda \cdot t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} &amp;&amp; \text{(substituting exponential baseline into AFT formula)} \\
-&amp;= \mathopen{}\left[ \operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{} \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(applying exponent laws)} \\
+\operatorname{S}(t \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;= {\operatorname{exp}\mathopen{}\left\{-\lambda \cdot t \cdot \theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} &amp;&amp; \text{(substituting exponential baseline into AFT formula)} \\
+&amp;= \mathopen{}\left[ {\operatorname{exp}\mathopen{}\left\{-\lambda t\right\}\mathclose{}} \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(applying exponent laws)} \\
 &amp;= \mathopen{}\left[ \operatorname{S}_0(t) \right]\mathclose{}^{\theta_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} &amp;&amp; \text{(substituting exponential baseline survival function)}
 \end{aligned}
 \]</span></p>
 <p>This derivation demonstrates that the exponential AFT model is mathematically identical to the exponential PH model.</p>
 <p>The Weibull distribution has the same property.</p>
 </section><section class="slide level2"><div id="thm-weibull-ph-aft" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (A Weibull proportional hazards model is an AFT model)</strong></span> Let <span class="math inline">\(\operatorname{S}_0(t) = \operatorname{exp}\mathopen{}\left\{-(\lambda t)^p\right\}\mathclose{}\)</span> be a Weibull baseline survival function with scale <span class="math inline">\(\lambda &gt; 0\)</span> and shape <span class="math inline">\(p &gt; 0\)</span>. If subject <span class="math inline">\(i\)</span> has hazard <span class="math inline">\({\lambda}_0(t) \cdot \theta_i\)</span> for a constant <span class="math inline">\(\theta_i &gt; 0\)</span>, then subject <span class="math inline">\(i\)</span>’s survival function is</p>
+<p><span class="theorem-title"><strong>Theorem 4 (A Weibull proportional hazards model is an AFT model)</strong></span> Let <span class="math inline">\(\operatorname{S}_0(t) = {\operatorname{exp}\mathopen{}\left\{-(\lambda t)^p\right\}\mathclose{}}\)</span> be a Weibull baseline survival function with scale <span class="math inline">\(\lambda &gt; 0\)</span> and shape <span class="math inline">\(p &gt; 0\)</span>. If subject <span class="math inline">\(i\)</span> has hazard <span class="math inline">\({\lambda}_0(t) \cdot \theta_i\)</span> for a constant <span class="math inline">\(\theta_i &gt; 0\)</span>, then subject <span class="math inline">\(i\)</span>’s survival function is</p>
 <p><span class="math display">\[
 \operatorname{S}_i(t) = \operatorname{S}_0\mathopen{}\left( t \cdot \theta_i^{1/p} \right)\mathclose{},
 \]</span></p>
@@ -980,15 +980,15 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
 \begin{aligned}
 \operatorname{S}_i(t)
-&amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{-\int_0^t {\lambda}_0(u) \cdot \theta_i \, du\right\}\mathclose{}
+&amp;\stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{-\int_0^t {\lambda}_0(u) \cdot \theta_i \, du\right\}\mathclose{}}
 &amp;&amp; \text{(survival function in terms of the hazard)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\theta_i \cdot {\Lambda}_0(t)\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\theta_i \cdot {\Lambda}_0(t)\right\}\mathclose{}}
 &amp;&amp; \text{(factor the constant $\theta_i$ out of the integral)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda t)^p\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda t)^p\right\}\mathclose{}}
 &amp;&amp; \text{(Weibull cumulative hazard ${\Lambda}_0(t) = (\lambda t)^p$)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\mathopen{}\left(\theta_i^{1/p}\right)\mathclose{}^p (\lambda t)^p\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\mathopen{}\left(\theta_i^{1/p}\right)\mathclose{}^p (\lambda t)^p\right\}\mathclose{}}
 &amp;&amp; \text{(write $\theta_i = \mathopen{}\left(\theta_i^{1/p}\right)\mathclose{}^p$)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\mathopen{}\left(\lambda \cdot t \cdot \theta_i^{1/p}\right)\mathclose{}^p\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\mathopen{}\left(\lambda \cdot t \cdot \theta_i^{1/p}\right)\mathclose{}^p\right\}\mathclose{}}
 &amp;&amp; \text{(combine the $p$-th powers)} \\
 &amp;= \operatorname{S}_0\mathopen{}\left( t \cdot \theta_i^{1/p} \right)\mathclose{}
 &amp;&amp; \text{(Weibull baseline survival function at $t \cdot \theta_i^{1/p}$)}
@@ -1010,23 +1010,23 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 <p><span class="math display">\[
 \begin{aligned}
 \mathopen{}\left[\operatorname{S}_0(10)\right]\mathclose{}^{\theta_i}
-&amp;= \mathopen{}\left[\operatorname{exp}\mathopen{}\left\{-(0.05 \cdot 10)^2\right\}\mathclose{}\right]\mathclose{}^{4}
+&amp;= \mathopen{}\left[{\operatorname{exp}\mathopen{}\left\{-(0.05 \cdot 10)^2\right\}\mathclose{}}\right]\mathclose{}^{4}
 &amp;&amp; \text{(proportional hazards form)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-4 \cdot 0.25\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-4 \cdot 0.25\right\}\mathclose{}}
 &amp;&amp; \text{(} (0.5)^2 = 0.25 \text{; exponent laws)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}
 &amp;&amp; \text{(multiply)} \\
 \operatorname{S}_0(10 \cdot 2)
-&amp;= \operatorname{exp}\mathopen{}\left\{-(0.05 \cdot 20)^2\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-(0.05 \cdot 20)^2\right\}\mathclose{}}
 &amp;&amp; \text{(AFT form with acceleration factor 2)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}
 &amp;&amp; \text{(} (1)^2 = 1 \text{)}
 \end{aligned}
 \]</span></p>
-<p>Both forms give <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{} \approx 0.368\)</span>: a four-fold hazard means that subject <span class="math inline">\(i\)</span> ages twice as fast as baseline.</p>
+<p>Both forms give <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}} \approx 0.368\)</span>: a four-fold hazard means that subject <span class="math inline">\(i\)</span> ages twice as fast as baseline.</p>
 </div>
 </section><section class="slide level2"><div id="thm-weibull-log-linear" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5 (The Weibull model is a log-linear model for event times)</strong></span> Suppose subject <span class="math inline">\(i\)</span> has the Weibull proportional hazards survival function <span class="math inline">\(\operatorname{S}_i(t) = \operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda t)^p\right\}\mathclose{}\)</span> of <a href="#/thm-weibull-ph-aft" class="quarto-xref">Theorem&nbsp;4</a>, with <span class="math inline">\(\theta_i \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\eta_i\right\}\mathclose{}\)</span> for a linear predictor <span class="math inline">\(\eta_i\)</span>. Define <span class="math inline">\(\alpha \stackrel{\text{def}}{=}-\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}\)</span> and <span class="math inline">\(\sigma \stackrel{\text{def}}{=}1/p\)</span>, and let <span class="math inline">\(W\)</span> have the standard (minimum) Gumbel distribution, <span class="math inline">\(\operatorname{P}(W &gt; w) = \operatorname{exp}\mathopen{}\left\{-\text{e}^{w}\right\}\mathclose{}\)</span>. Then the log event time <span class="math inline">\(Y_i \stackrel{\text{def}}{=}\operatorname{log}\mathopen{}\left\{T_i\right\}\mathclose{}\)</span> has the same distribution as</p>
+<p><span class="theorem-title"><strong>Theorem 5 (The Weibull model is a log-linear model for event times)</strong></span> Suppose subject <span class="math inline">\(i\)</span> has the Weibull proportional hazards survival function <span class="math inline">\(\operatorname{S}_i(t) = {\operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda t)^p\right\}\mathclose{}}\)</span> of <a href="#/thm-weibull-ph-aft" class="quarto-xref">Theorem&nbsp;4</a>, with <span class="math inline">\(\theta_i \stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{\eta_i\right\}\mathclose{}}\)</span> for a linear predictor <span class="math inline">\(\eta_i\)</span>. Define <span class="math inline">\(\alpha \stackrel{\text{def}}{=}-{\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}}\)</span> and <span class="math inline">\(\sigma \stackrel{\text{def}}{=}1/p\)</span>, and let <span class="math inline">\(W\)</span> have the standard (minimum) Gumbel distribution, <span class="math inline">\(\mathbb{P}(W &gt; w) = {\operatorname{exp}\mathopen{}\left\{-\text{e}^{w}\right\}\mathclose{}}\)</span>. Then the log event time <span class="math inline">\(Y_i \stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{T_i\right\}\mathclose{}}\)</span> has the same distribution as</p>
 <p><span id="eq-weibull-log-linear"><span class="math display">\[
 \alpha - \sigma \eta_i + \sigma W.
 \tag{3}\]</span></span></p>
@@ -1035,35 +1035,35 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 <p><span class="proof-title"><em>Proof</em>. </span>For any real <span class="math inline">\(y\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y_i &gt; y)
-&amp;= \operatorname{P}(T_i &gt; \text{e}^{y})
+\mathbb{P}(Y_i &gt; y)
+&amp;= \mathbb{P}(T_i &gt; \text{e}^{y})
 &amp;&amp; \text{(} \log \text{ is increasing)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda \text{e}^{y})^p\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\theta_i (\lambda \text{e}^{y})^p\right\}\mathclose{}}
 &amp;&amp; \text{(Weibull PH survival function at } \text{e}^{y} \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} (\lambda \text{e}^{y})^p\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} (\lambda \text{e}^{y})^p\right\}\mathclose{}}
 &amp;&amp; \text{(} \theta_i = \text{e}^{\eta_i} \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} \lambda^p \text{e}^{p y}\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} \lambda^p \text{e}^{p y}\right\}\mathclose{}}
 &amp;&amp; \text{(power of a product)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} \text{e}^{p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} \text{e}^{p y}\right\}\mathclose{}
-&amp;&amp; \text{(} \lambda^p = \text{e}^{p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i + p \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} + p y}\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i} \text{e}^{p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}}} \text{e}^{p y}\right\}\mathclose{}}
+&amp;&amp; \text{(} \lambda^p = \text{e}^{p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}}} \text{)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i + p {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} + p y}\right\}\mathclose{}}
 &amp;&amp; \text{(product rule for exponentials)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i + (y - \alpha)/\sigma}\right\}\mathclose{}
-&amp;&amp; \text{(substitute } p = 1/\sigma,\ \operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{} = -\alpha \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\text{e}^{(y - \alpha + \sigma \eta_i)/\sigma}\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{\eta_i + (y - \alpha)/\sigma}\right\}\mathclose{}}
+&amp;&amp; \text{(substitute } p = 1/\sigma,\ {\operatorname{log}\mathopen{}\left\{\lambda\right\}\mathclose{}} = -\alpha \text{)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-\text{e}^{(y - \alpha + \sigma \eta_i)/\sigma}\right\}\mathclose{}}
 &amp;&amp; \text{(common denominator } \sigma \text{)} \\
-&amp;= \operatorname{P}\mathopen{}\left(W &gt; \frac{y - \alpha + \sigma \eta_i}{\sigma}\right)\mathclose{}
+&amp;= {\mathbb{P}\mathopen{}\left(W &gt; \frac{y - \alpha + \sigma \eta_i}{\sigma}\right)\mathclose{}}
 &amp;&amp; \text{(Gumbel survival function)} \\
-&amp;= \operatorname{P}\mathopen{}\left(\sigma W &gt; y - \alpha + \sigma \eta_i\right)\mathclose{}
+&amp;= {\mathbb{P}\mathopen{}\left(\sigma W &gt; y - \alpha + \sigma \eta_i\right)\mathclose{}}
 &amp;&amp; \text{(multiply both sides by } \sigma &gt; 0 \text{)} \\
-&amp;= \operatorname{P}\mathopen{}\left(\alpha - \sigma \eta_i + \sigma W &gt; y\right)\mathclose{}
+&amp;= {\mathbb{P}\mathopen{}\left(\alpha - \sigma \eta_i + \sigma W &gt; y\right)\mathclose{}}
 &amp;&amp; \text{(add } \alpha - \sigma \eta_i \text{ to both sides)}
 \end{aligned}
 \]</span></p>
 <p>The two random variables have the same survival function, so they have the same distribution.</p>
 </div>
 </section><section class="slide level2"><div id="exm-weibull-log-linear" class="theorem example">
-<p><span class="theorem-title"><strong>Example 9 (Median event times from the log-linear form)</strong></span> Take <span class="math inline">\(\lambda = 0.1\)</span> and <span class="math inline">\(p = 2\)</span>, so <span class="math inline">\(\alpha = -\operatorname{log}\mathopen{}\left\{0.1\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{10\right\}\mathclose{} \approx 2.3026\)</span> and <span class="math inline">\(\sigma = 0.5\)</span>. The median of <span class="math inline">\(W\)</span> solves <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{-\text{e}^{w}\right\}\mathclose{} = 0.5\)</span>, so <span class="math inline">\(\text{e}^{w} = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}\)</span> and <span class="math inline">\(w = \operatorname{log}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}\right\}\mathclose{} \approx -0.3665\)</span>. Because <span class="math inline">\(\alpha - \sigma \eta + \sigma W\)</span> is an increasing function of <span class="math inline">\(W\)</span>, the median of <span class="math inline">\(Y\)</span> is that function evaluated at the median of <span class="math inline">\(W\)</span>.</p>
+<p><span class="theorem-title"><strong>Example 9 (Median event times from the log-linear form)</strong></span> Take <span class="math inline">\(\lambda = 0.1\)</span> and <span class="math inline">\(p = 2\)</span>, so <span class="math inline">\(\alpha = -{\operatorname{log}\mathopen{}\left\{0.1\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{10\right\}\mathclose{}} \approx 2.3026\)</span> and <span class="math inline">\(\sigma = 0.5\)</span>. The median of <span class="math inline">\(W\)</span> solves <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{-\text{e}^{w}\right\}\mathclose{}} = 0.5\)</span>, so <span class="math inline">\(\text{e}^{w} = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}\)</span> and <span class="math inline">\(w = {\operatorname{log}\mathopen{}\left\{{\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}}\right\}\mathclose{}} \approx -0.3665\)</span>. Because <span class="math inline">\(\alpha - \sigma \eta + \sigma W\)</span> is an increasing function of <span class="math inline">\(W\)</span>, the median of <span class="math inline">\(Y\)</span> is that function evaluated at the median of <span class="math inline">\(W\)</span>.</p>
 <p>For a baseline subject (<span class="math inline">\(\eta = 0\)</span>):</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1076,8 +1076,8 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 &amp;&amp; \text{(subtract)}
 \end{aligned}
 \]</span></p>
-<p>so the median event time is <span class="math inline">\(\text{e}^{2.1193} \approx 8.33\)</span>. Directly, <span class="math inline">\(\operatorname{S}_0(8.33) = \operatorname{exp}\mathopen{}\left\{-(0.833)^2\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{-0.694\right\}\mathclose{} \approx 0.5\)</span>.</p>
-<p>For a subject with hazard ratio <span class="math inline">\(\theta = 4\)</span>, so <span class="math inline">\(\eta = \operatorname{log}\mathopen{}\left\{4\right\}\mathclose{} \approx 1.3863\)</span>, the median of <span class="math inline">\(Y\)</span> shifts by <span class="math inline">\(-\sigma \eta = -0.5 \cdot 1.3863 \approx -0.6931\)</span>, so the median event time is multiplied by <span class="math inline">\(\text{e}^{-0.6931} = 0.5\)</span>, giving <span class="math inline">\(8.33 \cdot 0.5 \approx 4.16\)</span>.</p>
+<p>so the median event time is <span class="math inline">\(\text{e}^{2.1193} \approx 8.33\)</span>. Directly, <span class="math inline">\(\operatorname{S}_0(8.33) = {\operatorname{exp}\mathopen{}\left\{-(0.833)^2\right\}\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-0.694\right\}\mathclose{}} \approx 0.5\)</span>.</p>
+<p>For a subject with hazard ratio <span class="math inline">\(\theta = 4\)</span>, so <span class="math inline">\(\eta = {\operatorname{log}\mathopen{}\left\{4\right\}\mathclose{}} \approx 1.3863\)</span>, the median of <span class="math inline">\(Y\)</span> shifts by <span class="math inline">\(-\sigma \eta = -0.5 \cdot 1.3863 \approx -0.6931\)</span>, so the median event time is multiplied by <span class="math inline">\(\text{e}^{-0.6931} = 0.5\)</span>, giving <span class="math inline">\(8.33 \cdot 0.5 \approx 4.16\)</span>.</p>
 </div>
 </section><section class="slide level2"><p>By <a href="#/eq-weibull-log-linear" class="quarto-xref">Equation&nbsp;3</a>, the estimated AFT regression coefficients <span class="math inline">\(\hat{\beta}_{\text{AFT}}\)</span> produced by R’s <code>survreg()</code> function relate directly to the PH regression coefficients <span class="math inline">\(\hat{\beta}_{\text{PH}}\)</span> produced by <code>coxph()</code> via the identity <span class="math inline">\(\hat{\beta}_{\text{AFT}} = -\sigma \hat{\beta}_{\text{PH}}\)</span>.</p>
 <p>The exponential and Weibull distributions are the only continuous distributions that are simultaneously proportional hazards models and accelerated failure time models. Other parametric families commonly used for survival data (log-logistic, log-normal, and generalized gamma) are AFT families rather than PH families; the log-logistic distribution is additionally a proportional-odds model.</p>
@@ -1232,18 +1232,18 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 <p>For the new treatment, 9 relapses over 359 weeks of follow-up give <span class="math inline">\(\hat{{\lambda}}_{\text{new}} = 9/359 \approx 0.0251\)</span> relapses per week; for the standard treatment, 21 relapses over 182 weeks give <span class="math inline">\(\hat{{\lambda}}_{\text{standard}} = 21/182 \approx 0.1154\)</span>. The estimated log hazard ratio is then:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{log}\mathopen{}\left\{\frac{\hat{{\lambda}}_{\text{standard}}}{\hat{{\lambda}}_{\text{new}}}\right\}\mathclose{}
-&amp;= \operatorname{log}\mathopen{}\left\{\frac{21/182}{9/359}\right\}\mathclose{}
+{\operatorname{log}\mathopen{}\left\{\frac{\hat{{\lambda}}_{\text{standard}}}{\hat{{\lambda}}_{\text{new}}}\right\}\mathclose{}}
+&amp;= {\operatorname{log}\mathopen{}\left\{\frac{21/182}{9/359}\right\}\mathclose{}}
 &amp;&amp; \text{(substitute the rate estimates)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\frac{21 \cdot 359}{182 \cdot 9}\right\}\mathclose{}
+&amp;= {\operatorname{log}\mathopen{}\left\{\frac{21 \cdot 359}{182 \cdot 9}\right\}\mathclose{}}
 &amp;&amp; \text{(divide fractions)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\frac{7539}{1638}\right\}\mathclose{}
+&amp;= {\operatorname{log}\mathopen{}\left\{\frac{7539}{1638}\right\}\mathclose{}}
 &amp;&amp; \text{(multiply)} \\
 &amp;\approx 1.527
 &amp;&amp; \text{(evaluate)}
 \end{aligned}
 \]</span></p>
-<p>The <code>survreg()</code> fit’s <code>rxstandard</code> coefficient, <span class="math inline">\(-1.527\)</span>, is the negative of this log hazard ratio, as the exponential AFT model predicts, and its intercept, <span class="math inline">\(3.686\)</span>, is <span class="math inline">\(\operatorname{log}\mathopen{}\left\{359/9\right\}\mathclose{}\)</span>, the log of the estimated mean remission time on the new treatment.</p>
+<p>The <code>survreg()</code> fit’s <code>rxstandard</code> coefficient, <span class="math inline">\(-1.527\)</span>, is the negative of this log hazard ratio, as the exponential AFT model predicts, and its intercept, <span class="math inline">\(3.686\)</span>, is <span class="math inline">\({\operatorname{log}\mathopen{}\left\{359/9\right\}\mathclose{}}\)</span>, the log of the estimated mean remission time on the new treatment.</p>
 </div>
 <h3 id="diagnostic-complementary-log-log-survival-plot">Diagnostic: complementary log-log survival plot</h3>
 <p>To check whether a Weibull <a href="../chapters/proportional-hazards-models.html#def-pha">proportional hazards assumption</a> is reasonable, we inspect the complementary log-log transformation of the <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier survival curves</a>, <span class="math inline">\(\log(-\log \mathop{\hat{\operatorname{S}}}\nolimits(t)) = p \log \lambda + p \log t\)</span>:</p>
@@ -1293,7 +1293,7 @@ t_{0.5}^0 &amp;= -40 \operatorname{log}\mathopen{}\left\{0.5\right\}\mathclose{}
 <p>— Terry Therneau, <a href="https://stat.ethz.ch/pipermail/r-help/2015-August/431733.html">R-help, August 31, 2015</a></p>
 </blockquote>
 <p>In particular, <code>coxph()</code> constructs risk sets dynamically at each observed failure time <span class="math inline">\(t_j\)</span> using counting process format (<code>time1 = entry</code>, <code>time2 = exit</code>), enabling seamless handling of left-truncation. However, because <a href="../chapters/proportional-hazards-models.html#def-ph-partial-lik">partial likelihood</a> relies on ordered exact failure times, standard Cox models cannot easily accommodate interval-censored data.</p>
-<p>Conversely, <code>survreg()</code> accommodates interval-censored outcomes via <code>Surv(time1 = L, time2 = R, type = "interval")</code> by maximizing the interval parametric <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a> <span class="math inline">\(\operatorname{P}(L_i &lt; T_i \le R_i) = \operatorname{F}_0(R_i) - \operatorname{F}_0(L_i)\)</span>. However, standard <code>survreg()</code> assumes all subjects enter observation at time 0, and does not condition likelihood terms on surviving past a delayed entry time <span class="math inline">\(L_{\text{entry}}\)</span>.</p>
+<p>Conversely, <code>survreg()</code> accommodates interval-censored outcomes via <code>Surv(time1 = L, time2 = R, type = "interval")</code> by maximizing the interval parametric <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a> <span class="math inline">\(\mathbb{P}(L_i &lt; T_i \le R_i) = \operatorname{F}_0(R_i) - \operatorname{F}_0(L_i)\)</span>. However, standard <code>survreg()</code> assumes all subjects enter observation at time 0, and does not condition likelihood terms on surviving past a delayed entry time <span class="math inline">\(L_{\text{entry}}\)</span>.</p>
 <p>When a study contains both delayed entry and interval-censored event times, specialized tooling is needed. Among the following R packages, only <code>flexsurv</code> handles both features together; the other two are listed because they cover interval censoring well and are the usual starting points, not because they solve the truncation half:</p>
 <ul>
 <li>

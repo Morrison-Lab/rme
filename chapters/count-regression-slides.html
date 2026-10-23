@@ -410,7 +410,7 @@ text-align: center;
 </div>
 </div>
 </div>
-<aside class="notes"><p>This chapter presents models for <a href="https://morrison-lab.github.io/sds/data.html#sec-count-vars">count data</a> outcomes. With covariates, the <a href="https://morrison-lab.github.io/pds/distributions.html#def-event-rate">event rate</a> <span class="math inline">\(\lambda\)</span> becomes a function of the covariate vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= {(X_1, \dots, X_p)}^{\top} \in \mathbb{R}^p\)</span>. Typically, count data models use a <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\right\}\mathclose{}\)</span> <a href="../chapters/Intro-to-GLMs.html#sec-why-link">link function</a>, and thus an <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\right\}\mathclose{}\)</span> inverse-link function.</p>
+<aside class="notes"><p>This chapter presents models for <a href="https://morrison-lab.github.io/sds/data.html#sec-count-vars">count data</a> outcomes. With covariates, the <a href="https://morrison-lab.github.io/pds/distributions.html#def-event-rate">event rate</a> <span class="math inline">\(\lambda\)</span> becomes a function of the covariate vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= {(X_1, \dots, X_p)}^{\top} \in \mathbb{R}^p\)</span>. Typically, count data models use a <span class="math inline">\({\operatorname{log}\mathopen{}\left\{\right\}\mathclose{}}\)</span> <a href="../chapters/Intro-to-GLMs.html#sec-why-link">link function</a>, and thus an <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\right\}\mathclose{}}\)</span> inverse-link function.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -427,26 +427,26 @@ text-align: center;
 <p>whose mean is the event rate <span class="math inline">\(\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> multiplied by the exposure, with the log of the event rate equal to a <a href="../chapters/Intro-to-GLMs.html#def-linear-predictor">linear predictor</a>:</p>
 <p><span id="eq-mean-poisson"><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{} &amp;= \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},t) \\
+{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}} &amp;= \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},t) \\
 \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},t) &amp;\stackrel{\text{def}}{=}\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\cdot t \\
-\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} \\
+\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} \\
 \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &amp;\stackrel{\text{def}}{=}\beta_0 + \beta_1 x_1 + \dots + \beta_p x_p
 \end{aligned}
 \tag{1}\]</span></span></p>
 </div>
 </section><section class="slide level2"><div id="exm-poisson-reg" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Poisson regression with one binary covariate)</strong></span> Let <span class="math inline">\(x_1 = 1\)</span> for smokers and <span class="math inline">\(x_1 = 0\)</span> for non-smokers, and suppose a Poisson regression model for hospitalizations has <span class="math inline">\(\beta_0 = \operatorname{log}\mathopen{}\left\{0.002\right\}\mathclose{}\)</span> and <span class="math inline">\(\beta_1 = \operatorname{log}\mathopen{}\left\{1.5\right\}\mathclose{}\)</span>, with exposure measured in person-years. By <a href="#/eq-mean-poisson" class="quarto-xref">Equation&nbsp;1</a>, the event rates are:</p>
+<p><span class="theorem-title"><strong>Example 1 (Poisson regression with one binary covariate)</strong></span> Let <span class="math inline">\(x_1 = 1\)</span> for smokers and <span class="math inline">\(x_1 = 0\)</span> for non-smokers, and suppose a Poisson regression model for hospitalizations has <span class="math inline">\(\beta_0 = {\operatorname{log}\mathopen{}\left\{0.002\right\}\mathclose{}}\)</span> and <span class="math inline">\(\beta_1 = {\operatorname{log}\mathopen{}\left\{1.5\right\}\mathclose{}}\)</span>, with exposure measured in person-years. By <a href="#/eq-mean-poisson" class="quarto-xref">Equation&nbsp;1</a>, the event rates are:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \lambda(x_1 = 0)
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
 &amp;&amp; \text{(rate function with } x_1 = 0 \text{)} \\
 &amp;= 0.002
-&amp;&amp; \text{(} \operatorname{exp}\mathopen{}\left\{\operatorname{log}\mathopen{}\left\{0.002\right\}\mathclose{}\right\}\mathclose{} = 0.002 \text{)} \\
+&amp;&amp; \text{(} {\operatorname{exp}\mathopen{}\left\{{\operatorname{log}\mathopen{}\left\{0.002\right\}\mathclose{}}\right\}\mathclose{}} = 0.002 \text{)} \\
 \lambda(x_1 = 1)
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}
 &amp;&amp; \text{(rate function with } x_1 = 1 \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} \cdot \operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}} \cdot {\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}
 &amp;&amp; \text{(product rule for exponentials)} \\
 &amp;= 0.002 \cdot 1.5
 &amp;&amp; \text{(evaluate each factor)} \\
@@ -469,10 +469,10 @@ text-align: center;
 <p>and the probability that this group has no hospitalizations is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y = 0 \mid x_1 = 0, t = 500)
-&amp;= \frac{1^0 \operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}{0!}
+\mathbb{P}(Y = 0 \mid x_1 = 0, t = 500)
+&amp;= \frac{1^0 {\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}}{0!}
 &amp;&amp; \text{(Poisson PMF with mean 1)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-1\right\}\mathclose{}}
 &amp;&amp; \text{(} 1^0 = 0! = 1 \text{)} \\
 &amp;\approx 0.368
 &amp;&amp; \text{(evaluate)}
@@ -499,22 +499,22 @@ text-align: center;
           display:block!important;
       }</style></aside><p><span class="math display">\[
 \begin{aligned}
-\operatorname{log}\mathopen{}\left\{\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}\right\}\mathclose{}
-&amp;= \operatorname{log}\mathopen{}\left\{\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\right\}\mathclose{} \\
+{\operatorname{log}\mathopen{}\left\{{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}}\right\}\mathclose{}}
+&amp;= {\operatorname{log}\mathopen{}\left\{\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\right\}\mathclose{}} \\
 &amp;\quad \text{(definition of the conditional mean)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot t\right\}\mathclose{} \\
+&amp;= {\operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot t\right\}\mathclose{}} \\
 &amp;\quad \text{(substituting the rate relationship)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} + \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} \\
+&amp;= {\operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} + {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} \\
 &amp;\quad \text{(logarithmic product rule)} \\
-&amp;= \operatorname{log}\mathopen{}\left\{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\right\}\mathclose{} + \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} \\
+&amp;= {\operatorname{log}\mathopen{}\left\{{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\right\}\mathclose{}} + {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} \\
 &amp;\quad \text{(substituting the rate function)} \\
-&amp;= \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) + \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} \\
+&amp;= \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) + {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} \\
 &amp;\quad \text{(by inverse relationship of log and exp)} \\
-&amp;= (\beta_0 + \beta_1 x_1 + \dots + \beta_p x_p) + \operatorname{log}\mathopen{}\left\{t\right\}\mathclose{} \\
+&amp;= (\beta_0 + \beta_1 x_1 + \dots + \beta_p x_p) + {\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}} \\
 &amp;\quad \text{(expanding the linear predictor } \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\text{)}
 \end{aligned}
 \]</span></p>
-<aside class="notes"><p>In contrast with the other covariates (represented by <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span>), <span class="math inline">\(t\)</span> enters this expression with a <span class="math inline">\(\log{}\)</span> transformation and without an estimated <span class="math inline">\(\beta\)</span> coefficient; in other words, <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> is an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset term</a>.</p>
+<aside class="notes"><p>In contrast with the other covariates (represented by <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span>), <span class="math inline">\(t\)</span> enters this expression with a <span class="math inline">\(\log{}\)</span> transformation and without an estimated <span class="math inline">\(\beta\)</span> coefficient; in other words, <span class="math inline">\({\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}}\)</span> is an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset term</a>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -550,7 +550,7 @@ text-align: center;
 </section></section><section><section id="interpreting-poisson-regression-models" class="title-slide slide level1 smaller center" data-number="2"><h1>
 <span class="header-section-number">2</span> Interpreting Poisson regression models</h1>
 
-</section><section class="slide level2"><p>Applying the <a href="../chapters/Linear-models-overview.html#def-coef-interp-procedure">general procedure for interpreting a regression coefficient</a> to the log-rate linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span> shows that <span class="math inline">\(\beta_j\)</span> is the difference in log-rates per one-unit increase in <span class="math inline">\(x_j\)</span>, holding all other covariates fixed (and equal to their reference values when interactions are present).</p>
+</section><section class="slide level2"><p>Applying the <a href="../chapters/Linear-models-overview.html#def-coef-interp-procedure">general procedure for interpreting a regression coefficient</a> to the log-rate linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = {\operatorname{log}\mathopen{}\left\{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span> shows that <span class="math inline">\(\beta_j\)</span> is the difference in log-rates per one-unit increase in <span class="math inline">\(x_j\)</span>, holding all other covariates fixed (and equal to their reference values when interactions are present).</p>
 <aside class="notes"><p>Differences on the log-rate scale become ratios on the rate scale, because exponentiating a difference yields a quotient:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -562,7 +562,7 @@ text-align: center;
           width: 1px!important;
           overflow: hidden!important;
           display:block!important;
-      }</style></aside><p><span class="math display">\[\operatorname{exp}\mathopen{}\left\{a-b\right\}\mathclose{} = \frac{\operatorname{exp}\mathopen{}\left\{a\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{b\right\}\mathclose{}}\]</span></p>
+      }</style></aside><p><span class="math display">\[{\operatorname{exp}\mathopen{}\left\{a-b\right\}\mathclose{}} = \frac{{\operatorname{exp}\mathopen{}\left\{a\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{b\right\}\mathclose{}}}\]</span></p>
 <p>(recall from <a href="https://morrison-lab.github.io/mds/algebra-exponentials.html#cor-exp-sum">Algebra 2</a>)</p>
 <p>So Poisson regression coefficients are naturally interpreted through rate ratios.</p>
 </section><section class="slide level2"><div id="def-rate-ratio-patterns" class="theorem definition">
@@ -586,7 +586,7 @@ text-align: center;
 </div>
 </section><section class="slide level2"><div id="thm-poisson-rate-ratio" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Rate ratios in Poisson regression)</strong></span> In a Poisson regression model (<a href="#/def-poisson-reg" class="quarto-xref">Definition&nbsp;1</a>), suppose covariate <span class="math inline">\(x_j\)</span> enters the linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> only through the single term <span class="math inline">\(\beta_j x_j\)</span> (no interactions or transformations involving <span class="math inline">\(x_j\)</span>). Let <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}\)</span> be two covariate patterns that are identical except that <span class="math inline">\(x_j = a\)</span> and <span class="math inline">\(x^*_j = b\)</span>. Then</p>
-<p><span id="eq-poisson-rate-ratio"><span class="math display">\[\text{ϙ}_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = \operatorname{exp}\mathopen{}\left\{\beta_j (a - b)\right\}\mathclose{} \tag{2}\]</span></span></p>
+<p><span id="eq-poisson-rate-ratio"><span class="math display">\[\text{ϙ}_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = {\operatorname{exp}\mathopen{}\left\{\beta_j (a - b)\right\}\mathclose{}} \tag{2}\]</span></span></p>
 <p>and for any common exposure magnitude <span class="math inline">\(t &gt; 0\)</span>, the ratio of expected counts equals the same rate ratio:</p>
 <p><span class="math display">\[\frac{\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)}{\mu(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}, t)} = \text{ϙ}_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\]</span></p>
 </div>
@@ -610,11 +610,11 @@ text-align: center;
 \text{ϙ}_{{\lambda}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}: \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})
 &amp;= \frac{\lambda(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}{\lambda(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})}
 &amp;&amp; \text{(definition of rate ratio)} \\
-&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}
+&amp;= \frac{{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{\eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}}
 &amp;&amp; \text{(Poisson regression rate function)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) - \eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) - \eta(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}
 &amp;&amp; \text{(quotient rule for exponentials)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_j (a - b)\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_j (a - b)\right\}\mathclose{}}
 &amp;&amp; \text{(substitute the difference of linear predictors)}
 \end{aligned}
 \]</span></p>
@@ -636,17 +636,17 @@ text-align: center;
 <p><span class="math display">\[
 \begin{aligned}
 \text{ϙ}_{{\lambda}}(x_1 = 60 : x_1 = 50)
-&amp;= \operatorname{exp}\mathopen{}\left\{\beta_1 (60 - 50)\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\beta_1 (60 - 50)\right\}\mathclose{}}
 &amp;&amp; \text{(rate ratio theorem)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{0.03 \cdot 10\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{0.03 \cdot 10\right\}\mathclose{}}
 &amp;&amp; \text{(substitute } \beta_1 \text{ and subtract)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{0.3\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{0.3\right\}\mathclose{}}
 &amp;&amp; \text{(multiply)} \\
 &amp;\approx 1.350
 &amp;&amp; \text{(evaluate)}
 \end{aligned}
 \]</span></p>
-<p>A one-year age difference instead gives <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{0.03\right\}\mathclose{} \approx 1.030\)</span>, a 3% higher rate per year of age. The ten-year rate ratio is not ten times the one-year excess: <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{0.3\right\}\mathclose{} = \mathopen{}\left(\operatorname{exp}\mathopen{}\left\{0.03\right\}\mathclose{}\right)\mathclose{}^{10}\)</span>, because rate ratios multiply across successive one-year steps.</p>
+<p>A one-year age difference instead gives <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{0.03\right\}\mathclose{}} \approx 1.030\)</span>, a 3% higher rate per year of age. The ten-year rate ratio is not ten times the one-year excess: <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{0.3\right\}\mathclose{}} = \mathopen{}\left({\operatorname{exp}\mathopen{}\left\{0.03\right\}\mathclose{}}\right)\mathclose{}^{10}\)</span>, because rate ratios multiply across successive one-year steps.</p>
 </div>
 </section></section><section><section id="example-needle-sharing" class="title-slide slide level1 center" data-number="3"><h1>
 <span class="header-section-number">3</span> Example: needle-sharing</h1>
@@ -814,23 +814,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="fzkeqvefmg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fzkeqvefmg table {
+<div id="joqbyshtxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#joqbyshtxo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fzkeqvefmg thead, #fzkeqvefmg tbody, #fzkeqvefmg tfoot, #fzkeqvefmg tr, #fzkeqvefmg td, #fzkeqvefmg th {
+#joqbyshtxo thead, #joqbyshtxo tbody, #joqbyshtxo tfoot, #joqbyshtxo tr, #joqbyshtxo td, #joqbyshtxo th {
   border-style: none;
 }
 
-#fzkeqvefmg p {
+#joqbyshtxo p {
   margin: 0;
   padding: 0;
 }
 
-#fzkeqvefmg .gt_table {
+#joqbyshtxo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -856,12 +856,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_caption {
+#joqbyshtxo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fzkeqvefmg .gt_title {
+#joqbyshtxo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -873,7 +873,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#fzkeqvefmg .gt_subtitle {
+#joqbyshtxo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -885,7 +885,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#fzkeqvefmg .gt_heading {
+#joqbyshtxo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -897,13 +897,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_bottom_border {
+#joqbyshtxo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_col_headings {
+#joqbyshtxo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -918,7 +918,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_col_heading {
+#joqbyshtxo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -938,7 +938,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#fzkeqvefmg .gt_column_spanner_outer {
+#joqbyshtxo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -950,15 +950,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#fzkeqvefmg .gt_column_spanner_outer:first-child {
+#joqbyshtxo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fzkeqvefmg .gt_column_spanner_outer:last-child {
+#joqbyshtxo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fzkeqvefmg .gt_column_spanner {
+#joqbyshtxo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -970,11 +970,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#fzkeqvefmg .gt_spanner_row {
+#joqbyshtxo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fzkeqvefmg .gt_group_heading {
+#joqbyshtxo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1000,7 +1000,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#fzkeqvefmg .gt_empty_group_heading {
+#joqbyshtxo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1015,15 +1015,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#fzkeqvefmg .gt_from_md > :first-child {
+#joqbyshtxo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fzkeqvefmg .gt_from_md > :last-child {
+#joqbyshtxo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fzkeqvefmg .gt_row {
+#joqbyshtxo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1042,7 +1042,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#fzkeqvefmg .gt_stub {
+#joqbyshtxo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1055,7 +1055,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#fzkeqvefmg .gt_stub_row_group {
+#joqbyshtxo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1069,15 +1069,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#fzkeqvefmg .gt_row_group_first td {
+#joqbyshtxo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fzkeqvefmg .gt_row_group_first th {
+#joqbyshtxo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fzkeqvefmg .gt_summary_row {
+#joqbyshtxo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1087,16 +1087,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#fzkeqvefmg .gt_first_summary_row {
+#joqbyshtxo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_first_summary_row.thick {
+#joqbyshtxo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fzkeqvefmg .gt_last_summary_row {
+#joqbyshtxo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1106,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_grand_summary_row {
+#joqbyshtxo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1116,7 +1116,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#fzkeqvefmg .gt_first_grand_summary_row {
+#joqbyshtxo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1126,7 +1126,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_last_grand_summary_row_top {
+#joqbyshtxo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,11 +1136,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_striped {
+#joqbyshtxo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fzkeqvefmg .gt_table_body {
+#joqbyshtxo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1149,7 +1149,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_footnotes {
+#joqbyshtxo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1163,7 +1163,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_footnote {
+#joqbyshtxo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1172,7 +1172,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#fzkeqvefmg .gt_sourcenotes {
+#joqbyshtxo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1186,7 +1186,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#fzkeqvefmg .gt_sourcenote {
+#joqbyshtxo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1194,72 +1194,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#fzkeqvefmg .gt_left {
+#joqbyshtxo .gt_left {
   text-align: left;
 }
 
-#fzkeqvefmg .gt_center {
+#joqbyshtxo .gt_center {
   text-align: center;
 }
 
-#fzkeqvefmg .gt_right {
+#joqbyshtxo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fzkeqvefmg .gt_font_normal {
+#joqbyshtxo .gt_font_normal {
   font-weight: normal;
 }
 
-#fzkeqvefmg .gt_font_bold {
+#joqbyshtxo .gt_font_bold {
   font-weight: bold;
 }
 
-#fzkeqvefmg .gt_font_italic {
+#joqbyshtxo .gt_font_italic {
   font-style: italic;
 }
 
-#fzkeqvefmg .gt_super {
+#joqbyshtxo .gt_super {
   font-size: 65%;
 }
 
-#fzkeqvefmg .gt_footnote_marks {
+#joqbyshtxo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fzkeqvefmg .gt_asterisk {
+#joqbyshtxo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fzkeqvefmg .gt_indent_1 {
+#joqbyshtxo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fzkeqvefmg .gt_indent_2 {
+#joqbyshtxo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fzkeqvefmg .gt_indent_3 {
+#joqbyshtxo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fzkeqvefmg .gt_indent_4 {
+#joqbyshtxo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fzkeqvefmg .gt_indent_5 {
+#joqbyshtxo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fzkeqvefmg .katex-display {
+#joqbyshtxo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fzkeqvefmg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#joqbyshtxo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1915,20 +1915,20 @@ Figure&nbsp;4: Fitted Poisson model: expected sharing by age and housing status
 </div>
 </section><section id="interpreting-the-coefficients" class="slide level2 smaller" data-number="3.4"><h2>
 <span class="header-section-number">3.4</span> Interpreting the coefficients</h2>
-<p>For a Poisson model with a log link, exponentiating a coefficient turns it into a <em>ratio of expected counts</em> (an <strong>incidence rate ratio</strong>, IRR, in <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2]</a></span>’s terminology): <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> is the multiplicative change in the expected number of shared syringes per one-unit increase in <span class="math inline">\(x_j\)</span>, holding the other covariates fixed. Our <strong>focal estimate is the IRR for homelessness</strong>; the remaining coefficients are adjustments for <a href="../chapters/causal-inference.html#def-confounding-obs">confounding</a>, not effects of separate interest. Because we do not condition on the <a href="../chapters/causal-inference.html#def-mediator">mediator</a> <code>nivdu</code>, the homelessness IRR is a <em>total</em> effect. The fitted ratios are reported in <a href="#/tbl-needles-pois" class="quarto-xref">Table&nbsp;5</a>.</p>
+<p>For a Poisson model with a log link, exponentiating a coefficient turns it into a <em>ratio of expected counts</em> (an <strong>incidence rate ratio</strong>, IRR, in <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2]</a></span>’s terminology): <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}}\)</span> is the multiplicative change in the expected number of shared syringes per one-unit increase in <span class="math inline">\(x_j\)</span>, holding the other covariates fixed. Our <strong>focal estimate is the IRR for homelessness</strong>; the remaining coefficients are adjustments for <a href="../chapters/causal-inference.html#def-confounding-obs">confounding</a>, not effects of separate interest. Because we do not condition on the <a href="../chapters/causal-inference.html#def-mediator">mediator</a> <code>nivdu</code>, the homelessness IRR is a <em>total</em> effect. The fitted ratios are reported in <a href="#/tbl-needles-pois" class="quarto-xref">Table&nbsp;5</a>.</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-label="1"></a>irr <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(glm1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><strong>Baseline (intercept).</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_0\right\}\mathclose{} = 3.69\)</span> is the expected count of shared syringes for the reference participant (male, not homeless, White, one drug used, HIV-negative, no sexual-abuse history, hopelessness score 0), extrapolated to age 0. Age 0 is outside the data, so the intercept is a mathematical anchor rather than a directly interpretable quantity.</p>
-<p><strong>Age.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{age}}\right\}\mathclose{} = 0.957\)</span> per year: essentially no association between age and the expected count.</p>
-<p><strong>Sex.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{sexF}}\right\}\mathclose{} = 2.42\)</span>: women’s expected count of shared syringes is about 2.42 times men’s, adjusting for the other covariates.</p>
-<p><strong>Homelessness (the focal exposure).</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{homeless}}\right\}\mathclose{} = 6.04\)</span>: homeless participants share syringes about 6.04 times as often as the non-homeless, adjusting for the other covariates. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 8.3.1]</a></span> reports an <em>unadjusted</em> IRR of about 3.3 for homelessness in a single-predictor model; adjusting for the confounder-proxies here moves the estimate to about 6.</p>
-<p><strong>Multiple-drug use.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{polydrug}}\right\}\mathclose{} = 0.19\)</span>: multiple-drug users have a <em>lower</em> expected count than single-drug users, though only 19 participants used multiple drugs, so this estimate is imprecise.</p>
-<p><strong>HIV serostatus.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{hivstatHIV+}}\right\}\mathclose{} = 0.11\)</span>: HIV-positive participants have a lower expected count of shared syringes than HIV-negative participants, adjusting for the other covariates. Only 8 participants are HIV+ in this sample, so this estimate is imprecise.</p>
+<p><strong>Baseline (intercept).</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_0\right\}\mathclose{}} = 3.69\)</span> is the expected count of shared syringes for the reference participant (male, not homeless, White, one drug used, HIV-negative, no sexual-abuse history, hopelessness score 0), extrapolated to age 0. Age 0 is outside the data, so the intercept is a mathematical anchor rather than a directly interpretable quantity.</p>
+<p><strong>Age.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{age}}\right\}\mathclose{}} = 0.957\)</span> per year: essentially no association between age and the expected count.</p>
+<p><strong>Sex.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{sexF}}\right\}\mathclose{}} = 2.42\)</span>: women’s expected count of shared syringes is about 2.42 times men’s, adjusting for the other covariates.</p>
+<p><strong>Homelessness (the focal exposure).</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{homeless}}\right\}\mathclose{}} = 6.04\)</span>: homeless participants share syringes about 6.04 times as often as the non-homeless, adjusting for the other covariates. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 8.3.1]</a></span> reports an <em>unadjusted</em> IRR of about 3.3 for homelessness in a single-predictor model; adjusting for the confounder-proxies here moves the estimate to about 6.</p>
+<p><strong>Multiple-drug use.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{polydrug}}\right\}\mathclose{}} = 0.19\)</span>: multiple-drug users have a <em>lower</em> expected count than single-drug users, though only 19 participants used multiple drugs, so this estimate is imprecise.</p>
+<p><strong>HIV serostatus.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{hivstatHIV+}}\right\}\mathclose{}} = 0.11\)</span>: HIV-positive participants have a lower expected count of shared syringes than HIV-negative participants, adjusting for the other covariates. Only 8 participants are HIV+ in this sample, so this estimate is imprecise.</p>
 <p><strong>Ethnicity.</strong> The <code>ethn</code> coefficients compare each retained group to the White reference (small groups were lumped into “Other”); they adjust for any confounding of the homelessness effect by ethnicity but are not of separate interest.</p>
-<p><strong>Sexual-abuse history.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{sexabuse}}\right\}\mathclose{} = 0.23\)</span>: participants with a history of sexual abuse share syringes about 0.23 times as often as those without, adjusting for the other covariates.</p>
-<p><strong>Hopelessness.</strong> <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{hplsns}}\right\}\mathclose{} = 0.97\)</span> per point: each one-point increase in the hopelessness score multiplies the expected count by 0.97, adjusting for the other covariates.</p>
+<p><strong>Sexual-abuse history.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{sexabuse}}\right\}\mathclose{}} = 0.23\)</span>: participants with a history of sexual abuse share syringes about 0.23 times as often as those without, adjusting for the other covariates.</p>
+<p><strong>Hopelessness.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{hplsns}}\right\}\mathclose{}} = 0.97\)</span> per point: each one-point increase in the hopelessness score multiplies the expected count by 0.97, adjusting for the other covariates.</p>
 <div title="Overdispersion caveat">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -1958,29 +1958,29 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 \]</span></p>
 <p>be the group’s total event count and total exposure, and suppose <span class="math inline">\(D_0 &gt; 0\)</span>, <span class="math inline">\(D_1 &gt; 0\)</span>, <span class="math inline">\(T_0 &gt; 0\)</span>, and <span class="math inline">\(T_1 &gt; 0\)</span>. Then the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimates</a> of the two event rates are the groups’ crude event rates:</p>
 <p><span class="math display">\[
-\hat{\lambda}(0) = \operatorname{exp}\mathopen{}\left\{\hat{\beta}_0\right\}\mathclose{} = \frac{D_0}{T_0},
+\hat{\lambda}(0) = {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0\right\}\mathclose{}} = \frac{D_0}{T_0},
 \qquad
-\hat{\lambda}(1) = \operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{} = \frac{D_1}{T_1}
+\hat{\lambda}(1) = {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{}} = \frac{D_1}{T_1}
 \]</span></p>
 <p>so the estimated rate ratio is the ratio of the crude rates:</p>
 <p><span id="eq-pois-two-group-rr"><span class="math display">\[
-\hat{\text{ϙ}}_{{\lambda}}(1 : 0) = \operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{} = \frac{D_1 / T_1}{D_0 / T_0}
+\hat{\text{ϙ}}_{{\lambda}}(1 : 0) = {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{}} = \frac{D_1 / T_1}{D_0 / T_0}
 \tag{3}\]</span></span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}t_i \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{}\)</span> for observation <span class="math inline">\(i\)</span>’s mean. Each <span class="math inline">\(y_i\)</span> has a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>, so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}t_i {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{}}\)</span> for observation <span class="math inline">\(i\)</span>’s mean. Each <span class="math inline">\(y_i\)</span> has a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>, so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \ell(\beta_0, \beta_1)
-&amp;= \sum_{i=1}^n\operatorname{log}\mathopen{}\left\{\frac{\mu_i^{y_i} \operatorname{exp}\mathopen{}\left\{-\mu_i\right\}\mathclose{}}{y_i!}\right\}\mathclose{}
+&amp;= \sum_{i=1}^n{\operatorname{log}\mathopen{}\left\{\frac{\mu_i^{y_i} {\operatorname{exp}\mathopen{}\left\{-\mu_i\right\}\mathclose{}}}{y_i!}\right\}\mathclose{}}
 &amp;&amp; \text{(independence; Poisson PMF)} \\
-&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right)\mathclose{}
+&amp;= \sum_{i=1}^n\mathopen{}\left(y_i {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} - \mu_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(log of a product and quotient)} \\
-&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \mathopen{}\left(\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{} + \beta_0 + \beta_1 x_i\right)\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right)\mathclose{}
-&amp;&amp; \text{(} \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{} + \beta_0 + \beta_1 x_i \text{)}
+&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \mathopen{}\left({\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{}} + \beta_0 + \beta_1 x_i\right)\mathclose{} - \mu_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right)\mathclose{}
+&amp;&amp; \text{(} {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{}} + \beta_0 + \beta_1 x_i \text{)}
 \end{aligned}
 \]</span></p>
-<p>Each mean has derivatives <span class="math inline">\(\frac{\partial}{\partial \beta_0} \mu_i = \mu_i\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1} \mu_i = \mu_i x_i\)</span> (chain rule for <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\cdot\right\}\mathclose{}\)</span>), so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equations</a> are:</p>
+<p>Each mean has derivatives <span class="math inline">\(\frac{\partial}{\partial \beta_0} \mu_i = \mu_i\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1} \mu_i = \mu_i x_i\)</span> (chain rule for <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\cdot\right\}\mathclose{}}\)</span>), so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equations</a> are:</p>
 <p><span class="math display">\[
 \begin{aligned}
 0 = \frac{\partial}{\partial \beta_0} \ell
@@ -1991,30 +1991,30 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 &amp;&amp; \text{(differentiate term by term)}
 \end{aligned}
 \]</span></p>
-<p>In the second score equation, the terms with <span class="math inline">\(x_i = 0\)</span> vanish, and every remaining term has mean <span class="math inline">\(\mu_i = t_i \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}\)</span>:</p>
+<p>In the second score equation, the terms with <span class="math inline">\(x_i = 0\)</span> vanish, and every remaining term has mean <span class="math inline">\(\mu_i = t_i {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 0
-&amp;= \sum_{i: x_i = 1} \mathopen{}\left(y_i - t_i \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}\right)\mathclose{}
+&amp;= \sum_{i: x_i = 1} \mathopen{}\left(y_i - t_i {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(drop the } x_i = 0 \text{ terms)} \\
-&amp;= D_1 - T_1 \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}
+&amp;= D_1 - T_1 {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}
 &amp;&amp; \text{(definitions of } D_1 \text{ and } T_1 \text{)} \\
-\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}
+{\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}
 &amp;= \frac{D_1}{T_1}
-&amp;&amp; \text{(solve for } \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{} \text{)}
+&amp;&amp; \text{(solve for } {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}} \text{)}
 \end{aligned}
 \]</span></p>
-<p>Subtracting the second score equation from the first leaves the terms with <span class="math inline">\(x_i = 0\)</span>, whose means are <span class="math inline">\(\mu_i = t_i \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>:</p>
+<p>Subtracting the second score equation from the first leaves the terms with <span class="math inline">\(x_i = 0\)</span>, whose means are <span class="math inline">\(\mu_i = t_i {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 0
-&amp;= \sum_{i: x_i = 0} \mathopen{}\left(y_i - t_i \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\right)\mathclose{}
+&amp;= \sum_{i: x_i = 0} \mathopen{}\left(y_i - t_i {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(first equation minus second)} \\
-&amp;= D_0 - T_0 \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}
+&amp;= D_0 - T_0 {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
 &amp;&amp; \text{(definitions of } D_0 \text{ and } T_0 \text{)} \\
-\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}
+{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
 &amp;= \frac{D_0}{T_0}
-&amp;&amp; \text{(solve for } \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} \text{)}
+&amp;&amp; \text{(solve for } {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}} \text{)}
 \end{aligned}
 \]</span></p>
 <p>Both solutions are positive because <span class="math inline">\(D_k &gt; 0\)</span>, so the logarithm gives a unique stationary point <span class="math inline">\((\hat{\beta}_0, \hat{\beta}_1)\)</span>. That stationary point is the maximum, because <span class="math inline">\(\ell\)</span> is strictly concave. To see this concavity, write <span class="math inline">\(x_{i0} \stackrel{\text{def}}{=}1\)</span> and <span class="math inline">\(x_{i1} \stackrel{\text{def}}{=}x_i\)</span>, so that both score equations read <span class="math inline">\(\frac{\partial}{\partial \beta_j} \ell= \sum_{i=1}^nx_{ij} \mathopen{}\left(y_i - \mu_i\right)\mathclose{}\)</span>. Differentiating again:</p>
@@ -2067,9 +2067,9 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 \hat{\text{ϙ}}_{{\lambda}}(1 : 0)
 &amp;= \frac{\hat{\lambda}(1)}{\hat{\lambda}(0)}
 &amp;&amp; \text{(definition of rate ratio)} \\
-&amp;= \frac{\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0\right\}\mathclose{}}
+&amp;= \frac{{\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0\right\}\mathclose{}}}
 &amp;&amp; \text{(fitted rate function)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{}}
 &amp;&amp; \text{(quotient rule for exponentials)} \\
 &amp;= \frac{D_1 / T_1}{D_0 / T_0}
 &amp;&amp; \text{(substitute the two solutions)}
@@ -2101,7 +2101,7 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 &amp;&amp; \text{(divide)}
 \end{aligned}
 \]</span></p>
-<p>so <span class="math inline">\(\hat{\beta}_0 = \operatorname{log}\mathopen{}\left\{0.003\right\}\mathclose{} \approx -5.809\)</span> and <span class="math inline">\(\hat{\beta}_1 = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \approx 0.693\)</span>. Fitting the same model in R (with <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{}\)</span> as an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset</a>) gives the same estimates:</p>
+<p>so <span class="math inline">\(\hat{\beta}_0 = {\operatorname{log}\mathopen{}\left\{0.003\right\}\mathclose{}} \approx -5.809\)</span> and <span class="math inline">\(\hat{\beta}_1 = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \approx 0.693\)</span>. Fitting the same model in R (with <span class="math inline">\({\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{}}\)</span> as an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset</a>) gives the same estimates:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-label="1"></a>two_cohorts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb16-2"><a aria-label="2"></a>  <span class="at">exposed =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
@@ -2125,23 +2125,23 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 <h3 id="fitted-totals">Fitted totals</h3>
 <!-- No slidebreak here: the heading shares its slide with the thm-pois-fitted-totals div. -->
 <div id="thm-pois-fitted-totals" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Poisson regression reproduces observed totals)</strong></span> Suppose we fit the Poisson regression model (<a href="#/def-poisson-reg" class="quarto-xref">Definition&nbsp;1</a>) with linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p\)</span> to independent observations <span class="math inline">\((y_i, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i, t_i)\)</span>, <span class="math inline">\(i = 1, \ldots, n\)</span>, and that the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> exists. Write <span class="math inline">\(x_{i0} \stackrel{\text{def}}{=}1\)</span> for the intercept’s covariate, and <span class="math inline">\(\hat{\mu}_i \stackrel{\text{def}}{=}t_i \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i)\right\}\mathclose{}\)</span> evaluated at <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> for the fitted mean of observation <span class="math inline">\(i\)</span>. Then, for every <span class="math inline">\(j \in \mathopen{}\left\{0, 1, \ldots, p\right\}\mathclose{}\)</span>:</p>
+<p><span class="theorem-title"><strong>Theorem 3 (Poisson regression reproduces observed totals)</strong></span> Suppose we fit the Poisson regression model (<a href="#/def-poisson-reg" class="quarto-xref">Definition&nbsp;1</a>) with linear predictor <span class="math inline">\(\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p\)</span> to independent observations <span class="math inline">\((y_i, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i, t_i)\)</span>, <span class="math inline">\(i = 1, \ldots, n\)</span>, and that the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> exists. Write <span class="math inline">\(x_{i0} \stackrel{\text{def}}{=}1\)</span> for the intercept’s covariate, and <span class="math inline">\(\hat{\mu}_i \stackrel{\text{def}}{=}t_i {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i)\right\}\mathclose{}}\)</span> evaluated at <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> for the fitted mean of observation <span class="math inline">\(i\)</span>. Then, for every <span class="math inline">\(j \in \mathopen{}\left\{0, 1, \ldots, p\right\}\mathclose{}\)</span>:</p>
 <p><span id="eq-pois-fitted-totals"><span class="math display">\[
 \sum_{i=1}^nx_{ij} \, y_i = \sum_{i=1}^nx_{ij} \, \hat{\mu}_i
 \tag{5}\]</span></span></p>
 <p>In particular, taking <span class="math inline">\(j = 0\)</span>, the fitted event counts add up to the observed event count: <span class="math inline">\(\sum_{i=1}^ny_i = \sum_{i=1}^n\hat{\mu}_i\)</span>. If <span class="math inline">\(x_j\)</span> is the <a href="https://morrison-lab.github.io/sds/data.html#def-indicator-variable">indicator variable</a> for a group, then the fitted event counts in that group add up to the group’s observed event count.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}t_i \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i)\right\}\mathclose{}\)</span> for observation <span class="math inline">\(i\)</span>’s mean. Each <span class="math inline">\(y_i\)</span> has a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>, so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\mu_i \stackrel{\text{def}}{=}t_i {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i)\right\}\mathclose{}}\)</span> for observation <span class="math inline">\(i\)</span>’s mean. Each <span class="math inline">\(y_i\)</span> has a Poisson distribution with mean <span class="math inline">\(\mu_i\)</span>, so the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> is</p>
 <p><span class="math display">\[
 \begin{aligned}
 \ell(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})
-&amp;= \sum_{i=1}^n\operatorname{log}\mathopen{}\left\{\frac{\mu_i^{y_i} \operatorname{exp}\mathopen{}\left\{-\mu_i\right\}\mathclose{}}{y_i!}\right\}\mathclose{}
+&amp;= \sum_{i=1}^n{\operatorname{log}\mathopen{}\left\{\frac{\mu_i^{y_i} {\operatorname{exp}\mathopen{}\left\{-\mu_i\right\}\mathclose{}}}{y_i!}\right\}\mathclose{}}
 &amp;&amp; \text{(independence; Poisson PMF)} \\
-&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right)\mathclose{}
+&amp;= \sum_{i=1}^n\mathopen{}\left(y_i {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} - \mu_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(log of a product and quotient)} \\
-&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \mathopen{}\left(\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{} + \sum_{k=0}^p x_{ik} \beta_k\right)\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right)\mathclose{}
-&amp;&amp; \text{(substitute } \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} \text{)}
+&amp;= \sum_{i=1}^n\mathopen{}\left(y_i \mathopen{}\left({\operatorname{log}\mathopen{}\left\{t_i\right\}\mathclose{}} + \sum_{k=0}^p x_{ik} \beta_k\right)\mathclose{} - \mu_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right)\mathclose{}
+&amp;&amp; \text{(substitute } {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} \text{)}
 \end{aligned}
 \]</span></p>
 <p>Each mean has derivative <span class="math inline">\(\frac{\partial}{\partial \beta_j} \mu_i = \mu_i x_{ij}\)</span> (chain rule for the exponential), so the partial derivative of <span class="math inline">\(\ell\)</span> with respect to <span class="math inline">\(\beta_j\)</span> is:</p>
@@ -2151,7 +2151,7 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 &amp;= \sum_{i=1}^n\mathopen{}\left(y_i x_{ij} - \mu_i x_{ij}\right)\mathclose{}
 &amp;&amp; \text{(differentiate term by term)} \\
 &amp;= \sum_{i=1}^nx_{ij} \, y_i - \sum_{i=1}^nx_{ij} \, \mu_i
-&amp;&amp; \text{(split the sum)}
+&amp;&amp; \text{(distribute the sum over the terms)}
 \end{aligned}
 \]</span></p>
 <p>The maximum likelihood estimate <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> maximizes <span class="math inline">\(\ell\)</span> over all of <span class="math inline">\(\mathbb{R}^{p+1}\)</span>, so it solves the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equations</a> <span class="math inline">\(\frac{\partial}{\partial \beta_j} \ell(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}) = 0\)</span> for every <span class="math inline">\(j\)</span>. At <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span>, each <span class="math inline">\(\mu_i\)</span> equals <span class="math inline">\(\hat{\mu}_i\)</span>, so:</p>
@@ -2168,7 +2168,7 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 <p>For <span class="math inline">\(j = 0\)</span>, every <span class="math inline">\(x_{i0} = 1\)</span>, which gives <span class="math inline">\(\sum_{i=1}^ny_i = \sum_{i=1}^n\hat{\mu}_i\)</span>. If <span class="math inline">\(x_j\)</span> is a group indicator, the terms with <span class="math inline">\(x_{ij} = 0\)</span> vanish from both sides, and the terms with <span class="math inline">\(x_{ij} = 1\)</span> are exactly the group’s observations.</p>
 </div>
 </section><section class="slide level2"><div id="exm-pois-fitted-totals" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5 (Fitted totals for automobile insurance claims)</strong></span> The <code>Insurance</code> data distributed with the <code>MASS</code> R package <span class="citation" data-cites="venables2002modern"><a href="#/references" role="doc-biblioref" onclick="">[7]</a></span> count the automobile insurance claims (<code>Claims</code>) among the policyholders (<code>Holders</code>) in each combination of <code>District</code> (4 levels), car <code>Group</code>, and driver <code>Age</code> (4 levels). We fit a Poisson regression model for the claim rate per policyholder, with district and age as categorical covariates and <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\text{Holders}\right\}\mathclose{}\)</span> as the offset:</p>
+<p><span class="theorem-title"><strong>Example 5 (Fitted totals for automobile insurance claims)</strong></span> The <code>Insurance</code> data distributed with the <code>MASS</code> R package <span class="citation" data-cites="venables2002modern"><a href="#/references" role="doc-biblioref" onclick="">[7]</a></span> count the automobile insurance claims (<code>Claims</code>) among the policyholders (<code>Holders</code>) in each combination of <code>District</code> (4 levels), car <code>Group</code>, and driver <code>Age</code> (4 levels). We fit a Poisson regression model for the claim rate per policyholder, with district and age as categorical covariates and <span class="math inline">\({\operatorname{log}\mathopen{}\left\{\text{Holders}\right\}\mathclose{}}\)</span> as the offset:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-label="1"></a>ins <span class="ot">&lt;-</span> MASS<span class="sc">::</span>Insurance</span>
 <span id="cb17-2"><a aria-label="2"></a>ins<span class="sc">$</span>Age <span class="ot">&lt;-</span> <span class="fu">factor</span>(ins<span class="sc">$</span>Age, <span class="at">ordered =</span> <span class="cn">FALSE</span>)</span>
@@ -2239,27 +2239,27 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 <h3 id="confidence-intervals-for-regression-coefficients-and-rate-ratios">Confidence intervals for regression coefficients and rate ratios</h3>
 <p>A <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-ci">Wald 95% confidence interval</a> for a single coefficient <span class="math inline">\(\beta_j\)</span> is:</p>
 <p><span class="math display">\[
-\beta_j \in \mathopen{}\left[\hat{\beta}_j \pm z_{1 - \frac{\alpha}{2}}\cdot \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}\right]\mathclose{}
+\beta_j \in \mathopen{}\left[\hat{\beta}_j \pm z_{1 - \frac{\alpha}{2}}\cdot {\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}}\right]\mathclose{}
 \]</span></p>
 <p>where <span class="math inline">\(z_{1-\alpha/2} \approx 1.96\)</span> for <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<p>Because the log-rate scale is related to the rate scale by exponentiation, we obtain a confidence interval for the rate ratio <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> by exponentiating both endpoints:</p>
+<p>Because the log-rate scale is related to the rate scale by exponentiation, we obtain a confidence interval for the rate ratio <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}}\)</span> by exponentiating both endpoints:</p>
 <p><span class="math display">\[
-\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{} \in
+{\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}} \in
   \mathopen{}\left[
-    \operatorname{exp}\mathopen{}\left\{\hat{\beta}_j - z_{1 - \frac{\alpha}{2}}\cdot \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}\right\}\mathclose{},\;
-    \operatorname{exp}\mathopen{}\left\{\hat{\beta}_j + z_{1 - \frac{\alpha}{2}}\cdot \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}\right\}\mathclose{}
+    {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_j - z_{1 - \frac{\alpha}{2}}\cdot {\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}}\right\}\mathclose{}},\;
+    {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_j + z_{1 - \frac{\alpha}{2}}\cdot {\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}}\right\}\mathclose{}}
   \right]\mathclose{}
 \]</span></p>
 </section><section class="slide level2"><div id="thm-pois-two-group-se" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 4 (Standard error of a two-group log rate ratio)</strong></span> Under the conditions of <a href="#/thm-pois-two-group-mle" class="quarto-xref">Theorem&nbsp;2</a>, the standard error of <span class="math inline">\(\hat{\beta}_1\)</span> estimated from the inverse of the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-oinf">observed information matrix</a> at <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> is</p>
 <p><span id="eq-pois-two-group-se"><span class="math display">\[
-\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{} = \sqrt{\frac{1}{D_0} + \frac{1}{D_1}}
+{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}} = \sqrt{\frac{1}{D_0} + \frac{1}{D_1}}
 \tag{6}\]</span></span></p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>The observed information matrix is the negative Hessian of <span class="math inline">\(\ell\)</span>, so by <a href="#/eq-pois-two-group-hessian" class="quarto-xref">Equation&nbsp;4</a>, evaluated at <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span>:</p>
 <p><span class="math display">\[
-\underbrace{I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}_{2 \times 2}
+\underbrace{{I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}}_{2 \times 2}
 = \underbrace{\begin{bmatrix}
 \hat{\mu}_{\cdot 0} + \hat{\mu}_{\cdot 1} &amp; \hat{\mu}_{\cdot 1} \\
 \hat{\mu}_{\cdot 1} &amp; \hat{\mu}_{\cdot 1}
@@ -2279,7 +2279,7 @@ T_k \stackrel{\text{def}}{=}\sum_{i: x_i = k} t_i
 \]</span></p>
 <p>so</p>
 <p><span class="math display">\[
-\underbrace{I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}_{2 \times 2}
+\underbrace{{I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}}_{2 \times 2}
 = \underbrace{\begin{bmatrix}
 D_0 + D_1 &amp; D_1 \\
 D_1 &amp; D_1
@@ -2288,7 +2288,7 @@ D_1 &amp; D_1
 <p>Its determinant is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\det I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}
+\det {I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}
 &amp;= (D_0 + D_1) D_1 - D_1^2
 &amp;&amp; \text{(} 2 \times 2 \text{ determinant formula)} \\
 &amp;= D_0 D_1 + D_1^2 - D_1^2
@@ -2300,7 +2300,7 @@ D_1 &amp; D_1
 <p>and the <span class="math inline">\(2 \times 2\)</span> inverse formula <span class="math inline">\({\mathopen{}\left(\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\right)\mathclose{}}^{-1}
 = \frac{1}{ad - bc} \begin{bmatrix} d &amp; -b \\ -c &amp; a \end{bmatrix}\)</span> gives</p>
 <p><span class="math display">\[
-\underbrace{{\mathopen{}\left(I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}\right)\mathclose{}}^{-1}}_{2 \times 2}
+\underbrace{{\mathopen{}\left({I\mathopen{}\left(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right)\mathclose{}}\right)\mathclose{}}^{-1}}_{2 \times 2}
 = \frac{1}{D_0 D_1}
 \underbrace{\begin{bmatrix}
 D_1 &amp; -D_1 \\
@@ -2310,7 +2310,7 @@ D_1 &amp; -D_1 \\
 <p>The estimated variance of <span class="math inline">\(\hat{\beta}_1\)</span> is the lower-right entry:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}^2
+{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}}^2
 &amp;= \frac{D_0 + D_1}{D_0 D_1}
 &amp;&amp; \text{(lower-right entry of the inverse)} \\
 &amp;= \frac{D_0}{D_0 D_1} + \frac{D_1}{D_0 D_1}
@@ -2322,10 +2322,10 @@ D_1 &amp; -D_1 \\
 <p>Taking the square root gives <a href="#/eq-pois-two-group-se" class="quarto-xref">Equation&nbsp;6</a>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-pois-two-group-ci" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7 (Confidence interval for a two-cohort rate ratio)</strong></span> In <a href="#/exm-pois-two-group-mle" class="quarto-xref">Example&nbsp;4</a>, <span class="math inline">\(D_0 = 12\)</span>, <span class="math inline">\(D_1 = 15\)</span>, and <span class="math inline">\(\hat{\beta}_1 = \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \approx 0.693\)</span>. By <a href="#/thm-pois-two-group-se" class="quarto-xref">Theorem&nbsp;4</a>:</p>
+<p><span class="theorem-title"><strong>Example 7 (Confidence interval for a two-cohort rate ratio)</strong></span> In <a href="#/exm-pois-two-group-mle" class="quarto-xref">Example&nbsp;4</a>, <span class="math inline">\(D_0 = 12\)</span>, <span class="math inline">\(D_1 = 15\)</span>, and <span class="math inline">\(\hat{\beta}_1 = {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \approx 0.693\)</span>. By <a href="#/thm-pois-two-group-se" class="quarto-xref">Theorem&nbsp;4</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}
+{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}}
 &amp;= \sqrt{\frac{1}{12} + \frac{1}{15}}
 &amp;&amp; \text{(two-group standard error formula)} \\
 &amp;= \sqrt{0.0833 + 0.0667}
@@ -2339,7 +2339,7 @@ D_1 &amp; -D_1 \\
 <p>The Wald 95% confidence interval for <span class="math inline">\(\beta_1\)</span> is then</p>
 <p><span class="math display">\[
 \begin{aligned}
-\hat{\beta}_1 \pm 1.96 \cdot \mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}
+\hat{\beta}_1 \pm 1.96 \cdot {\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}}
 &amp;= 0.693 \pm 1.96 \cdot 0.387
 &amp;&amp; \text{(substitute)} \\
 &amp;= 0.693 \pm 0.759
@@ -2348,7 +2348,7 @@ D_1 &amp; -D_1 \\
 &amp;&amp; \text{(add and subtract)}
 \end{aligned}
 \]</span></p>
-<p>and exponentiating both endpoints gives a 95% confidence interval for the rate ratio of <span class="math inline">\(\mathopen{}\left[\operatorname{exp}\mathopen{}\left\{-0.066\right\}\mathclose{}, \operatorname{exp}\mathopen{}\left\{1.452\right\}\mathclose{}\right]\mathclose{} \approx \mathopen{}\left[0.94, 4.27\right]\mathclose{}\)</span>. The point estimate doubles the rate, but with only 27 events in total the interval still includes 1.</p>
+<p>and exponentiating both endpoints gives a 95% confidence interval for the rate ratio of <span class="math inline">\(\mathopen{}\left[{\operatorname{exp}\mathopen{}\left\{-0.066\right\}\mathclose{}}, {\operatorname{exp}\mathopen{}\left\{1.452\right\}\mathclose{}}\right]\mathclose{} \approx \mathopen{}\left[0.94, 4.27\right]\mathclose{}\)</span>. The point estimate doubles the rate, but with only 27 events in total the interval still includes 1.</p>
 <p>R’s <code><a href="https://rdrr.io/r/stats/confint.html">confint.default()</a></code>, which computes Wald intervals from the observed information, reproduces this interval:</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="fu">exp</span>(<span class="fu">confint.default</span>(fit_two_cohorts, <span class="at">parm =</span> <span class="st">"exposed"</span>))</span>
@@ -2360,15 +2360,15 @@ D_1 &amp; -D_1 \\
 <h3 id="hypothesis-tests-for-regression-coefficients">Hypothesis tests for regression coefficients</h3>
 <p>To test <span class="math inline">\(H_0: \beta_j = \beta_{j,0}\)</span> against a one- or <a href="https://morrison-lab.github.io/sds/inference.html#def-two-sided-alternative">two-sided alternative</a>, compute the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-wald-test">Wald <span class="math inline">\(z\)</span>-statistic</a>:</p>
 <p><span class="math display">\[
-z = \frac{\hat{\beta}_j - \beta_{j,0}}{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}}
+z = \frac{\hat{\beta}_j - \beta_{j,0}}{{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_j\right)\mathclose{}}}
 \]</span></p>
 <p>and compare <span class="math inline">\(z\)</span> (one-sided) or <span class="math inline">\(|z|\)</span> (two-sided) to the tails of the <a href="https://morrison-lab.github.io/pds/random-variables.html#def-std-normal">standard Gaussian distribution</a>. The most common <a href="https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis">null hypothesis</a> is <span class="math inline">\(H_0: \beta_j = 0\)</span>, i.e., that covariate <span class="math inline">\(j\)</span> has no association with the outcome rate.</p>
 </section><section class="slide level2"><div id="exm-pois-two-group-wald" class="theorem example">
-<p><span class="theorem-title"><strong>Example 8 (Wald test for a two-cohort rate ratio)</strong></span> To test <span class="math inline">\(H_0: \beta_1 = 0\)</span> (equal event rates in the two cohorts of <a href="#/exm-pois-two-group-mle" class="quarto-xref">Example&nbsp;4</a>), use <span class="math inline">\(\hat{\beta}_1 \approx 0.693\)</span> and <span class="math inline">\(\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{} \approx 0.387\)</span> from <a href="#/exm-pois-two-group-ci" class="quarto-xref">Example&nbsp;7</a>:</p>
+<p><span class="theorem-title"><strong>Example 8 (Wald test for a two-cohort rate ratio)</strong></span> To test <span class="math inline">\(H_0: \beta_1 = 0\)</span> (equal event rates in the two cohorts of <a href="#/exm-pois-two-group-mle" class="quarto-xref">Example&nbsp;4</a>), use <span class="math inline">\(\hat{\beta}_1 \approx 0.693\)</span> and <span class="math inline">\({\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}} \approx 0.387\)</span> from <a href="#/exm-pois-two-group-ci" class="quarto-xref">Example&nbsp;7</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 z
-&amp;= \frac{\hat{\beta}_1 - 0}{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}}
+&amp;= \frac{\hat{\beta}_1 - 0}{{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(\hat{\beta}_1\right)\mathclose{}}}
 &amp;&amp; \text{(Wald } z \text{-statistic with } \beta_{1,0} = 0 \text{)} \\
 &amp;= \frac{0.693}{0.387}
 &amp;&amp; \text{(substitute)} \\
@@ -2376,7 +2376,7 @@ z
 &amp;&amp; \text{(divide)}
 \end{aligned}
 \]</span></p>
-<p>The two-sided <span class="math inline">\(p\)</span>-value is <span class="math inline">\(2 \cdot \operatorname{P}(Z &gt; 1.79) \approx 0.074\)</span>, where <span class="math inline">\(Z\)</span> has a standard Gaussian distribution, so at the 5% level these data do not reject equal rates. That conclusion agrees with the 95% confidence interval for the rate ratio in <a href="#/exm-pois-two-group-ci" class="quarto-xref">Example&nbsp;7</a>, which includes 1.</p>
+<p>The two-sided <span class="math inline">\(p\)</span>-value is <span class="math inline">\(2 \cdot \mathbb{P}(Z &gt; 1.79) \approx 0.074\)</span>, where <span class="math inline">\(Z\)</span> has a standard Gaussian distribution, so at the 5% level these data do not reject equal rates. That conclusion agrees with the 95% confidence interval for the rate ratio in <a href="#/exm-pois-two-group-ci" class="quarto-xref">Example&nbsp;7</a>, which includes 1.</p>
 </div>
 <h3 id="comparing-nested-models">Comparing nested models</h3>
 <p>To compare a smaller model <span class="math inline">\(M_0\)</span> (with <span class="math inline">\(p_0\)</span> parameters) to a larger model <span class="math inline">\(M_1\)</span> (with <span class="math inline">\(p_1 &gt; p_0\)</span> parameters), use the <a href="../chapters/logistic-regression.html#def-lrt-statistic">likelihood ratio test statistic</a>:</p>
@@ -2392,15 +2392,15 @@ G^2 = 2\mathopen{}\left[\hat{\ell}_1 - \hat{\ell}_0\right]\mathclose{}
 </section><section class="slide level2"><p><span class="math display">\[
 \begin{aligned}
 \hat{y}
-&amp;\stackrel{\text{def}}{=}\mathop{\hat{\operatorname{E}}}\nolimits\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{} \\
+&amp;\stackrel{\text{def}}{=}{\mathop{\hat{\mathbb{E}}}\nolimits\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}} \\
 &amp;\quad \text{(definition of estimated conditional expectation)} \\
 &amp;= \hat{\mu}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \\
 &amp;\quad \text{(estimated mean count function)} \\
 &amp;= \hat{\lambda}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \cdot t \\
 &amp;\quad \text{(substituting the estimated rate relation)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\hat{\eta}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} \cdot t \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{\hat{\eta}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} \cdot t \\
 &amp;\quad \text{(substituting the inverse link function)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1 x_1 + \dots + \hat{\beta}_p x_p\right\}\mathclose{} \cdot t \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1 x_1 + \dots + \hat{\beta}_p x_p\right\}\mathclose{}} \cdot t \\
 &amp;\quad \text{(substituting estimated linear predictor } \hat{\eta}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\text{)}
 \end{aligned}
 \]</span></p>
@@ -2409,7 +2409,7 @@ G^2 = 2\mathopen{}\left[\hat{\ell}_1 - \hat{\ell}_0\right]\mathclose{}
 <p><span class="math display">\[
 \begin{aligned}
 \hat{y}
-&amp;= \operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{} \cdot t
+&amp;= {\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1\right\}\mathclose{}} \cdot t
 &amp;&amp; \text{(fitted mean function)} \\
 &amp;= \hat{\lambda}(1) \cdot 1000
 &amp;&amp; \text{(fitted rate for } x = 1 \text{)} \\
@@ -2437,7 +2437,7 @@ G^2 = 2\mathopen{}\left[\hat{\ell}_1 - \hat{\ell}_0\right]\mathclose{}
 <h4 id="observation-residuals">Observation residuals</h4>
 <p><span class="math display">\[e_i \stackrel{\text{def}}{=}y_i - \hat{y}_i\]</span></p>
 <h4 id="pearson-residuals">Pearson residuals</h4>
-<p><span class="math display">\[r_i \stackrel{\text{def}}{=}\frac{e_i}{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(e_i\right)\mathclose{}} \approx \frac{e_i}{\sqrt{\hat{y}_i}}\]</span></p>
+<p><span class="math display">\[r_i \stackrel{\text{def}}{=}\frac{e_i}{{\mathop{\widehat{\operatorname{se}}}\nolimits\mathopen{}\left(e_i\right)\mathclose{}}} \approx \frac{e_i}{\sqrt{\hat{y}_i}}\]</span></p>
 <h4 id="standardized-pearson-residuals">Standardized Pearson residuals</h4>
 <p><span class="math display">\[r_{p,i} \stackrel{\text{def}}{=}\frac{r_i}{\sqrt{1-h_{i}}}\]</span> where <span class="math inline">\(h_{i}\)</span> is the <a href="../chapters/logistic-regression.html#def-leverage-glm">leverage</a> of observation <span class="math inline">\(i\)</span>: the <span class="math inline">\(i\)</span>-th diagonal element of the weighted <a href="../chapters/Linear-models-overview.html#def-hat-matrix">hat matrix</a>. The leverage definition in the logistic regression chapter is stated for a logistic model, so it uses binomial weights; for Poisson regression the corresponding weight is <span class="math inline">\(\hat{\mu}_i\)</span>. The leverage definition also indexes covariate patterns, which here we take to be the individual observations.</p>
 <h4 id="deviance-residuals">Deviance residuals</h4>
@@ -2479,18 +2479,18 @@ d_i \stackrel{\text{def}}{=}\operatorname{sign}(y_i - \hat{y}_i)
 <p><span class="theorem-title"><strong>Theorem 5 (Deviance residuals in Poisson regression)</strong></span> In a Poisson regression model, the deviance residual of observation <span class="math inline">\(i\)</span> is</p>
 <p><span id="eq-pois-deviance-residual"><span class="math display">\[
 d_i = \operatorname{sign}(y_i - \hat{y}_i)
-\sqrt{2\mathopen{}\left[y_i \operatorname{log}\mathopen{}\left\{\frac{y_i}{\hat{y}_i}\right\}\mathclose{} - (y_i - \hat{y}_i)\right]\mathclose{}}
+\sqrt{2\mathopen{}\left[y_i {\operatorname{log}\mathopen{}\left\{\frac{y_i}{\hat{y}_i}\right\}\mathclose{}} - (y_i - \hat{y}_i)\right]\mathclose{}}
 \tag{7}\]</span></span></p>
-<p>where <span class="math inline">\(y_i \operatorname{log}\mathopen{}\left\{y_i / \hat{y}_i\right\}\mathclose{}\)</span> is taken to be <span class="math inline">\(0\)</span> when <span class="math inline">\(y_i = 0\)</span>.</p>
+<p>where <span class="math inline">\(y_i {\operatorname{log}\mathopen{}\left\{y_i / \hat{y}_i\right\}\mathclose{}}\)</span> is taken to be <span class="math inline">\(0\)</span> when <span class="math inline">\(y_i = 0\)</span>.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>The <a href="../chapters/Linear-models-overview.html#def-saturated-model">saturated model</a> fits each observation’s mean exactly, so its fitted mean for observation <span class="math inline">\(i\)</span> is <span class="math inline">\(y_i\)</span>, while the fitted Poisson regression model has fitted mean <span class="math inline">\(\hat{y}_i\)</span>. A Poisson observation with mean <span class="math inline">\(\mu\)</span> contributes the log-likelihood term</p>
 <p><span class="math display">\[
 \begin{aligned}
 \ell(\mu; y_i)
-&amp;= \operatorname{log}\mathopen{}\left\{\frac{\mu^{y_i} \operatorname{exp}\mathopen{}\left\{-\mu\right\}\mathclose{}}{y_i!}\right\}\mathclose{}
+&amp;= {\operatorname{log}\mathopen{}\left\{\frac{\mu^{y_i} {\operatorname{exp}\mathopen{}\left\{-\mu\right\}\mathclose{}}}{y_i!}\right\}\mathclose{}}
 &amp;&amp; \text{(log of the Poisson PMF)} \\
-&amp;= y_i \operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{} - \mu - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}
+&amp;= y_i {\operatorname{log}\mathopen{}\left\{\mu\right\}\mathclose{}} - \mu - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}
 &amp;&amp; \text{(log of a product and quotient)}
 \end{aligned}
 \]</span></p>
@@ -2498,27 +2498,27 @@ d_i = \operatorname{sign}(y_i - \hat{y}_i)
 <p><span class="math display">\[
 \begin{aligned}
 \ell_{\text{full}}(y_i) - \ell(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}; y_i)
-&amp;= \mathopen{}\left[y_i \operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{} - y_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right]\mathclose{} \\
-&amp;\phantom{={}} - \mathopen{}\left[y_i \operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{} - \hat{y}_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right]\mathclose{}
+&amp;= \mathopen{}\left[y_i {\operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{}} - y_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right]\mathclose{} \\
+&amp;\phantom{={}} - \mathopen{}\left[y_i {\operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{}} - \hat{y}_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right]\mathclose{}
 &amp;&amp; \text{(substitute } \mu = y_i \text{ and } \mu = \hat{y}_i \text{)} \\
-&amp;= y_i \operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{} - y_i - y_i \operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{} + \hat{y}_i
-&amp;&amp; \text{(cancel } \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{} \text{)} \\
-&amp;= y_i \mathopen{}\left(\operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{} - \operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{}\right)\mathclose{} - (y_i - \hat{y}_i)
+&amp;= y_i {\operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{}} - y_i - y_i {\operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{}} + \hat{y}_i
+&amp;&amp; \text{(cancel } {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}} \text{)} \\
+&amp;= y_i \mathopen{}\left({\operatorname{log}\mathopen{}\left\{y_i\right\}\mathclose{}} - {\operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{}}\right)\mathclose{} - (y_i - \hat{y}_i)
 &amp;&amp; \text{(group terms)} \\
-&amp;= y_i \operatorname{log}\mathopen{}\left\{\frac{y_i}{\hat{y}_i}\right\}\mathclose{} - (y_i - \hat{y}_i)
+&amp;= y_i {\operatorname{log}\mathopen{}\left\{\frac{y_i}{\hat{y}_i}\right\}\mathclose{}} - (y_i - \hat{y}_i)
 &amp;&amp; \text{(quotient rule for logarithms)}
 \end{aligned}
 \]</span></p>
-<p>For <span class="math inline">\(y_i = 0\)</span>, the saturated mean is <span class="math inline">\(0\)</span>, and a Poisson variable with mean <span class="math inline">\(0\)</span> equals <span class="math inline">\(0\)</span> with probability <span class="math inline">\(1\)</span>, so <span class="math inline">\(\ell_{\text{full}}(0) = \operatorname{log}\mathopen{}\left\{1\right\}\mathclose{} = 0\)</span>, and</p>
+<p>For <span class="math inline">\(y_i = 0\)</span>, the saturated mean is <span class="math inline">\(0\)</span>, and a Poisson variable with mean <span class="math inline">\(0\)</span> equals <span class="math inline">\(0\)</span> with probability <span class="math inline">\(1\)</span>, so <span class="math inline">\(\ell_{\text{full}}(0) = {\operatorname{log}\mathopen{}\left\{1\right\}\mathclose{}} = 0\)</span>, and</p>
 <p><span class="math display">\[
 \begin{aligned}
 \ell_{\text{full}}(0) - \ell(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}; 0)
-&amp;= 0 - \mathopen{}\left(0 \cdot \operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{} - \hat{y}_i - \operatorname{log}\mathopen{}\left\{0!\right\}\mathclose{}\right)\mathclose{}
+&amp;= 0 - \mathopen{}\left(0 \cdot {\operatorname{log}\mathopen{}\left\{\hat{y}_i\right\}\mathclose{}} - \hat{y}_i - {\operatorname{log}\mathopen{}\left\{0!\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(substitute } y_i = 0 \text{)} \\
 &amp;= \hat{y}_i
-&amp;&amp; \text{(} \operatorname{log}\mathopen{}\left\{0!\right\}\mathclose{} = \operatorname{log}\mathopen{}\left\{1\right\}\mathclose{} = 0 \text{)} \\
+&amp;&amp; \text{(} {\operatorname{log}\mathopen{}\left\{0!\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{1\right\}\mathclose{}} = 0 \text{)} \\
 &amp;= 0 - (0 - \hat{y}_i)
-&amp;&amp; \text{(the bracket in the residual formula, with } y_i \operatorname{log}\mathopen{}\left\{y_i/\hat{y}_i\right\}\mathclose{} \stackrel{\text{def}}{=}0 \text{)}
+&amp;&amp; \text{(the bracket in the residual formula, with } y_i {\operatorname{log}\mathopen{}\left\{y_i/\hat{y}_i\right\}\mathclose{}} \stackrel{\text{def}}{=}0 \text{)}
 \end{aligned}
 \]</span></p>
 <p>Substituting either case into the deviance residual definition <span class="math display">\[
@@ -2544,12 +2544,12 @@ r_i
 <p><span class="math display">\[
 \begin{aligned}
 d_i
-&amp;= \operatorname{sign}(5 - 2.5) \sqrt{2\mathopen{}\left[5 \operatorname{log}\mathopen{}\left\{\frac{5}{2.5}\right\}\mathclose{} - (5 - 2.5)\right]\mathclose{}}
+&amp;= \operatorname{sign}(5 - 2.5) \sqrt{2\mathopen{}\left[5 {\operatorname{log}\mathopen{}\left\{\frac{5}{2.5}\right\}\mathclose{}} - (5 - 2.5)\right]\mathclose{}}
 &amp;&amp; \text{(deviance residual formula)} \\
-&amp;= \sqrt{2\mathopen{}\left[5 \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} - 2.5\right]\mathclose{}}
+&amp;= \sqrt{2\mathopen{}\left[5 {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} - 2.5\right]\mathclose{}}
 &amp;&amp; \text{(} \operatorname{sign}(2.5) = 1 \text{; simplify)} \\
 &amp;\approx \sqrt{2\mathopen{}\left[3.466 - 2.5\right]\mathclose{}}
-&amp;&amp; \text{(} 5 \operatorname{log}\mathopen{}\left\{2\right\}\mathclose{} \approx 3.466 \text{)} \\
+&amp;&amp; \text{(} 5 {\operatorname{log}\mathopen{}\left\{2\right\}\mathclose{}} \approx 3.466 \text{)} \\
 &amp;= \sqrt{1.931}
 &amp;&amp; \text{(subtract and double)} \\
 &amp;\approx 1.390
@@ -2596,9 +2596,9 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p><span class="theorem-title"><strong>Definition 3 (Zero-inflated Poisson regression model)</strong></span> A <strong>zero-inflated Poisson regression model</strong> for a count outcome <span class="math inline">\(Y\)</span> with covariate vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span> and exposure magnitude <span class="math inline">\(T\)</span> assumes a latent binary variable <span class="math inline">\(Z\)</span> such that:</p>
 <ul>
 <li>
-<span class="math inline">\(\operatorname{P}(Z = 1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t) = \pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\operatorname{expit}(\gamma_0 + \gamma_1 x_1 + \dots + \gamma_p x_p)\)</span> for every <span class="math inline">\(t\)</span>;</li>
+<span class="math inline">\(\mathbb{P}(Z = 1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t) = \pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \stackrel{\text{def}}{=}\operatorname{expit}(\gamma_0 + \gamma_1 x_1 + \dots + \gamma_p x_p)\)</span> for every <span class="math inline">\(t\)</span>;</li>
 <li>if <span class="math inline">\(Z = 1\)</span>, then <span class="math inline">\(Y = 0\)</span>;</li>
-<li>if <span class="math inline">\(Z = 0\)</span>, then <span class="math inline">\(Y\)</span> follows the <a href="#/def-poisson-reg">Poisson regression model</a>: <span class="math inline">\(Y \mid Z = 0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t \sim \operatorname{Pois}(\mu_0(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t))\)</span>, with <span class="math inline">\(\mu_0(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span>.</li>
+<li>if <span class="math inline">\(Z = 0\)</span>, then <span class="math inline">\(Y\)</span> follows the <a href="#/def-poisson-reg">Poisson regression model</a>: <span class="math inline">\(Y \mid Z = 0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t \sim \operatorname{Pois}(\mu_0(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t))\)</span>, with <span class="math inline">\(\mu_0(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span>.</li>
 </ul>
 <p>Observations with <span class="math inline">\(Z = 1\)</span> are called <strong>structural zeros</strong>.</p>
 </div>
@@ -2606,82 +2606,82 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p><span class="math display">\[
 \begin{aligned}
 \pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})
-&amp;\stackrel{\text{def}}{=}\operatorname{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\\
+&amp;\stackrel{\text{def}}{=}\mathbb{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\\
 &amp;= \operatorname{expit}(\gamma_0 + \gamma_1 x_1 + \dots + \gamma_p x_p)
 \end{aligned}
 \]</span></p>
-<p>The model makes <span class="math inline">\(Z\)</span> depend on the covariates alone, not on the <a href="https://morrison-lab.github.io/pds/distributions.html#def-exposure">exposure magnitude</a> <span class="math inline">\(T\)</span>, so <span class="math inline">\(\operatorname{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) = \pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> for every <span class="math inline">\(t\)</span> — that is, <span class="math inline">\(Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span>.</p>
+<p>The model makes <span class="math inline">\(Z\)</span> depend on the covariates alone, not on the <a href="https://morrison-lab.github.io/pds/distributions.html#def-exposure">exposure magnitude</a> <span class="math inline">\(T\)</span>, so <span class="math inline">\(\mathbb{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) = \pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> for every <span class="math inline">\(t\)</span> — that is, <span class="math inline">\(Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span>.</p>
 <p>According to this model, if <span class="math inline">\(Z=1\)</span>, then <span class="math inline">\(Y\)</span> will always be zero, regardless of <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span> and <span class="math inline">\(T\)</span>:</p>
-<p><span class="math display">\[\operatorname{P}(Y=0 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) = 1\]</span></p>
+<p><span class="math display">\[\mathbb{P}(Y=0 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) = 1\]</span></p>
 <p>Otherwise (if <span class="math inline">\(Z=0\)</span>), <span class="math inline">\(Y\)</span> follows a <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a>, conditional on <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span> and <span class="math inline">\(T\)</span>, as in a standard Poisson regression model.</p>
-<p>Throughout this section, abbreviate <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> and <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\)</span>. Since the <span class="math inline">\(Z=0\)</span> arm is an ordinary Poisson regression model, <span class="math inline">\(\mu_0 = t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span> by <a href="#/eq-mean-poisson" class="quarto-xref">Equation&nbsp;1</a>, which is strictly positive whenever <span class="math inline">\(t &gt; 0\)</span>.</p>
+<p>Throughout this section, abbreviate <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> and <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}{\mathbb{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\)</span>. Since the <span class="math inline">\(Z=0\)</span> arm is an ordinary Poisson regression model, <span class="math inline">\(\mu_0 = t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span> by <a href="#/eq-mean-poisson" class="quarto-xref">Equation&nbsp;1</a>, which is strictly positive whenever <span class="math inline">\(t &gt; 0\)</span>.</p>
 <p>Even though we never observe <span class="math inline">\(Z\)</span>, we can estimate the parameters <span class="math inline">\(\gamma_0, \dots, \gamma_p\)</span> via <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
-&amp;= \operatorname{P}(Y=y, Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
-&amp;\phantom{={}} + \operatorname{P}(Y=y, Z=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+\mathbb{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
+&amp;= \mathbb{P}(Y=y, Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+&amp;\phantom{={}} + \mathbb{P}(Y=y, Z=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
 &amp;\quad \text{(by Law of Total Probability)}
 \end{aligned}
 \]</span></p>
 <p>where <span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=y, Z=z \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
-&amp;= \operatorname{P}(Y=y \mid Z=z, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \operatorname{P}(Z=z \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \\
+\mathbb{P}(Y=y, Z=z \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
+&amp;= \mathbb{P}(Y=y \mid Z=z, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \mathbb{P}(Z=z \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \\
 &amp;\quad \text{(with } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)}
 \end{aligned}
 \]</span></p>
 </section><section class="slide level2"><div id="exr-zinf-pmf" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5</strong></span> Expand <span class="math inline">\(\operatorname{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span>, <span class="math inline">\(\operatorname{P}(Y=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span>, and <span class="math inline">\(\operatorname{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span> into expressions involving <span class="math inline">\(\pi\)</span> and <span class="math inline">\(\mu_0\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 5</strong></span> Expand <span class="math inline">\(\mathbb{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span>, <span class="math inline">\(\mathbb{P}(Y=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span>, and <span class="math inline">\(\mathbb{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span> into expressions involving <span class="math inline">\(\pi\)</span> and <span class="math inline">\(\mu_0\)</span>.</p>
 </div>
 <div id="sol-zinf-pmf" class="proof solution">
-<p><span class="proof-title"><em>Solution 5</em>. </span><strong><span class="math inline">\(\operatorname{P}(Y=0)\)</span>:</strong> <span class="math inline">\(Y=0\)</span> occurs either because <span class="math inline">\(Z=1\)</span> (always zero) or because <span class="math inline">\(Z=0\)</span> and the Poisson draw equals 0:</p>
+<p><span class="proof-title"><em>Solution 5</em>. </span><strong><span class="math inline">\(\mathbb{P}(Y=0)\)</span>:</strong> <span class="math inline">\(Y=0\)</span> occurs either because <span class="math inline">\(Z=1\)</span> (always zero) or because <span class="math inline">\(Z=0\)</span> and the Poisson draw equals 0:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
-&amp;= \pi \, \operatorname{P}(Y=0 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
-&amp;\phantom{={}} + (1-\pi) \, \operatorname{P}(Y=0 \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+\mathbb{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
+&amp;= \pi \, \mathbb{P}(Y=0 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+&amp;\phantom{={}} + (1-\pi) \, \mathbb{P}(Y=0 \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
 &amp;\quad \text{(by Law of Total Probability; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
-&amp;= \pi \cdot 1 + (1-\pi) \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{} \\
+&amp;= \pi \cdot 1 + (1-\pi) {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}} \\
 &amp;\quad \text{(substituting the two conditional PMFs)} \\
-&amp;= \pi + (1-\pi) \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{} \\
+&amp;= \pi + (1-\pi) {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}} \\
 &amp;\quad \text{(simplifying arithmetic)}
 \end{aligned}
 \]</span></p>
-<p><strong><span class="math inline">\(\operatorname{P}(Y=1)\)</span>:</strong> <span class="math inline">\(Z=1\)</span> can never produce <span class="math inline">\(Y=1\)</span>, so:</p>
+<p><strong><span class="math inline">\(\mathbb{P}(Y=1)\)</span>:</strong> <span class="math inline">\(Z=1\)</span> can never produce <span class="math inline">\(Y=1\)</span>, so:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
-&amp;= \pi \, \operatorname{P}(Y=1 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
-&amp;\phantom{={}} + (1-\pi) \, \operatorname{P}(Y=1 \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+\mathbb{P}(Y=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
+&amp;= \pi \, \mathbb{P}(Y=1 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+&amp;\phantom{={}} + (1-\pi) \, \mathbb{P}(Y=1 \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
 &amp;\quad \text{(by Law of Total Probability; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
-&amp;= \pi \cdot 0 + (1-\pi) \mu_0 \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{} \\
-&amp;\quad \text{(since } \operatorname{P}(Y=1 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)=0\text{)} \\
-&amp;= (1-\pi) \mu_0 \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{} \\
+&amp;= \pi \cdot 0 + (1-\pi) \mu_0 {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}} \\
+&amp;\quad \text{(since } \mathbb{P}(Y=1 \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)=0\text{)} \\
+&amp;= (1-\pi) \mu_0 {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}} \\
 &amp;\quad \text{(simplifying arithmetic)}
 \end{aligned}
 \]</span></p>
-<p><strong><span class="math inline">\(\operatorname{P}(Y=y)\)</span> for <span class="math inline">\(y \geq 1\)</span>:</strong> Identical reasoning gives:</p>
+<p><strong><span class="math inline">\(\mathbb{P}(Y=y)\)</span> for <span class="math inline">\(y \geq 1\)</span>:</strong> Identical reasoning gives:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
-&amp;= \pi \, \operatorname{P}(Y=y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
-&amp;\phantom{={}} + (1-\pi) \, \operatorname{P}(Y=y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+\mathbb{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)
+&amp;= \pi \, \mathbb{P}(Y=y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
+&amp;\phantom{={}} + (1-\pi) \, \mathbb{P}(Y=y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) \\
 &amp;\quad \text{(by Law of Total Probability; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
-&amp;= \pi \cdot 0 + (1-\pi) \frac{\mu_0^y \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}{y!} \\
-&amp;\quad \text{(since } \operatorname{P}(Y=y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)=0 \text{ for } y \geq 1\text{)} \\
-&amp;= (1-\pi) \frac{\mu_0^y \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}{y!} \\
+&amp;= \pi \cdot 0 + (1-\pi) \frac{\mu_0^y {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}}{y!} \\
+&amp;\quad \text{(since } \mathbb{P}(Y=y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)=0 \text{ for } y \geq 1\text{)} \\
+&amp;= (1-\pi) \frac{\mu_0^y {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}}{y!} \\
 &amp;\quad \text{(simplifying arithmetic)}
 \end{aligned}
 \]</span></p>
 </div>
 </section><section class="slide level2"><div id="thm-zip-pmf" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 6 (Probability mass function of the zero-inflated Poisson model)</strong></span> In a zero-inflated Poisson regression model (<a href="#/def-zip-reg" class="quarto-xref">Definition&nbsp;3</a>), let <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \operatorname{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> be the probability of a structural zero, and let <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\)</span> be the mean count in the <span class="math inline">\(Z=0\)</span> arm. Then:</p>
+<p><span class="theorem-title"><strong>Theorem 6 (Probability mass function of the zero-inflated Poisson model)</strong></span> In a zero-inflated Poisson regression model (<a href="#/def-zip-reg" class="quarto-xref">Definition&nbsp;3</a>), let <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathbb{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> be the probability of a structural zero, and let <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}{\mathbb{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\)</span> be the mean count in the <span class="math inline">\(Z=0\)</span> arm. Then:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) &amp;= \pi + (1-\pi) \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}
+\mathbb{P}(Y=0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) &amp;= \pi + (1-\pi) {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}
 \\
-\operatorname{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) &amp;= (1-\pi) \frac{\mu_0^y \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}{y!}
+\mathbb{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t) &amp;= (1-\pi) \frac{\mu_0^y {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}}{y!}
 \quad \text{for } y \geq 1
 \end{aligned}
 \]</span></p>
@@ -2712,9 +2712,9 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p><span class="proof-title"><em>Solution 6</em>. </span><strong>Expected value.</strong> By the <a href="https://morrison-lab.github.io/pds/expectation.html#thm-conditional-lie">Law of Total Expectation</a> (conditioning on <span class="math inline">\(Z\)</span>, within the subpopulation <span class="math inline">\(\{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\}\)</span>):</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}
-&amp;= \pi \, \operatorname{E}\mathopen{}\left[Y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{} \\
-&amp;\phantom{={}} + (1-\pi) \, \operatorname{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{} \\
+{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}
+&amp;= \pi \, {\mathbb{E}\mathopen{}\left[Y \mid Z=1, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}} \\
+&amp;\phantom{={}} + (1-\pi) \, {\mathbb{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}} \\
 &amp;\quad \text{(by Law of Total Expectation; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
 &amp;= 0 \cdot \pi + \mu_0 (1-\pi) \\
 &amp;\quad \text{(substituting the conditional means)} \\
@@ -2722,23 +2722,23 @@ Table&nbsp;6: Diagnostics for Poisson model
 &amp;\quad \text{(simplifying arithmetic)}
 \end{aligned}
 \]</span></p>
-<p>The substitution <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{} = \mu_0\)</span> follows immediately from the definition of <span class="math inline">\(\mu_0\)</span>.</p>
-<p><strong>Variance.</strong> Within this derivation, write <span class="math inline">\(\operatorname{E}\mathopen{}\left[\,\cdot \mid Z\right]\mathclose{}\)</span> and <span class="math inline">\(\operatorname{Var}\mathopen{}\left(\cdot \mid Z\right)\mathclose{}\)</span> for the moments conditional on <span class="math inline">\(Z\)</span> <strong>and</strong> on <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\)</span>; the outer operators keep their conditioning explicit. By the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-total-variance">Law of Total Variance</a>:</p>
+<p>The substitution <span class="math inline">\({\mathbb{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}} = \mu_0\)</span> follows immediately from the definition of <span class="math inline">\(\mu_0\)</span>.</p>
+<p><strong>Variance.</strong> Within this derivation, write <span class="math inline">\({\mathbb{E}\mathopen{}\left[\,\cdot \mid Z\right]\mathclose{}}\)</span> and <span class="math inline">\({\operatorname{Var}\mathopen{}\left(\cdot \mid Z\right)\mathclose{}}\)</span> for the moments conditional on <span class="math inline">\(Z\)</span> <strong>and</strong> on <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\)</span>; the outer operators keep their conditioning explicit. By the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-total-variance">Law of Total Variance</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}
-&amp;= \operatorname{E}\mathopen{}\left[\operatorname{Var}\mathopen{}\left(Y \mid Z\right)\mathclose{} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{} \\
-&amp;\phantom{={}} + \operatorname{Var}\mathopen{}\left(\operatorname{E}\mathopen{}\left[Y \mid Z\right]\mathclose{} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} \\
+{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}}
+&amp;= {\mathbb{E}\mathopen{}\left[{\operatorname{Var}\mathopen{}\left(Y \mid Z\right)\mathclose{}} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}} \\
+&amp;\phantom{={}} + {\operatorname{Var}\mathopen{}\left({\mathbb{E}\mathopen{}\left[Y \mid Z\right]\mathclose{}} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} \\
 &amp;\quad \text{(by Law of Total Variance)}
 \end{aligned}
 \]</span></p>
 <p>For the expected conditional variance term, note that</p>
-<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid Z=1\right)\mathclose{} = 0 \quad\text{and}\quad \operatorname{Var}\mathopen{}\left(Y \mid Z=0\right)\mathclose{} = \mu_0\]</span></p>
+<p><span class="math display">\[{\operatorname{Var}\mathopen{}\left(Y \mid Z=1\right)\mathclose{}} = 0 \quad\text{and}\quad {\operatorname{Var}\mathopen{}\left(Y \mid Z=0\right)\mathclose{}} = \mu_0\]</span></p>
 <p>since the <span class="math inline">\(Z=0\)</span> arm is Poisson, so:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[\operatorname{Var}\mathopen{}\left(Y \mid Z\right)\mathclose{} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}
-&amp;= \pi \, \operatorname{Var}\mathopen{}\left(Y \mid Z=1\right)\mathclose{} + (1-\pi) \, \operatorname{Var}\mathopen{}\left(Y \mid Z=0\right)\mathclose{} \\
+{\mathbb{E}\mathopen{}\left[{\operatorname{Var}\mathopen{}\left(Y \mid Z\right)\mathclose{}} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}
+&amp;= \pi \, {\operatorname{Var}\mathopen{}\left(Y \mid Z=1\right)\mathclose{}} + (1-\pi) \, {\operatorname{Var}\mathopen{}\left(Y \mid Z=0\right)\mathclose{}} \\
 &amp;\quad \text{(expectation over } Z\text{; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
 &amp;= 0 \cdot \pi + \mu_0 (1-\pi) \\
 &amp;\quad \text{(substituting the conditional variances)} \\
@@ -2746,10 +2746,10 @@ Table&nbsp;6: Diagnostics for Poisson model
 &amp;\quad \text{(simplifying arithmetic)}
 \end{aligned}
 \]</span></p>
-<p>For the variance of conditional expectation term, <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid Z\right]\mathclose{}\)</span> takes value 0 (with probability <span class="math inline">\(\pi\)</span>) or <span class="math inline">\(\mu_0\)</span> (with probability <span class="math inline">\(1-\pi\)</span>), so:</p>
+<p>For the variance of conditional expectation term, <span class="math inline">\({\mathbb{E}\mathopen{}\left[Y \mid Z\right]\mathclose{}}\)</span> takes value 0 (with probability <span class="math inline">\(\pi\)</span>) or <span class="math inline">\(\mu_0\)</span> (with probability <span class="math inline">\(1-\pi\)</span>), so:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(\operatorname{E}\mathopen{}\left[Y \mid Z\right]\mathclose{} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left({\mathbb{E}\mathopen{}\left[Y \mid Z\right]\mathclose{}} \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}}
 &amp;= \pi \mathopen{}\left(0 - (1-\pi)\mu_0\right)\mathclose{}^2 + (1-\pi) \mathopen{}\left(\mu_0 - (1-\pi)\mu_0\right)\mathclose{}^2 \\
 &amp;\quad \text{(variance over } Z\text{; } Z \perp\!\!\!\perp T \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\text{)} \\
 &amp;= \pi(1-\pi)^2 \mu_0^2 + (1-\pi)\pi^2 \mu_0^2 \\
@@ -2763,24 +2763,24 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p>Combining both terms gives:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}}
 &amp;= (1-\pi)\mu_0 + \pi(1-\pi)\mu_0^2 \\
 &amp;\quad \text{(summing expected variance and variance of expectation)} \\
 &amp;= (1-\pi)\mu_0 \mathopen{}\left(1 + \pi\mu_0\right)\mathclose{} \\
 &amp;\quad \text{(factoring out } (1-\pi)\mu_0\text{)}
 \end{aligned}
 \]</span></p>
-<p>The logistic model puts <span class="math inline">\(\pi\)</span> strictly between 0 and 1, since <span class="math inline">\(\operatorname{expit}\)</span> never attains its limits, and <span class="math inline">\(\mu_0 = t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{} &gt; 0\)</span> whenever <span class="math inline">\(t &gt; 0\)</span>. Then <span class="math inline">\(1 + \pi\mu_0 &gt; 1\)</span>, so</p>
-<p><span class="math display">\[(1-\pi)\mu_0 (1+\pi\mu_0) &gt; (1-\pi)\mu_0 = \operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\]</span></p>
+<p>The logistic model puts <span class="math inline">\(\pi\)</span> strictly between 0 and 1, since <span class="math inline">\(\operatorname{expit}\)</span> never attains its limits, and <span class="math inline">\(\mu_0 = t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}} &gt; 0\)</span> whenever <span class="math inline">\(t &gt; 0\)</span>. Then <span class="math inline">\(1 + \pi\mu_0 &gt; 1\)</span>, so</p>
+<p><span class="math display">\[(1-\pi)\mu_0 (1+\pi\mu_0) &gt; (1-\pi)\mu_0 = {\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\]</span></p>
 <p>and a zero-inflated count model is <a href="#/def-overdispersion">overdispersed</a> relative to a Poisson model with the same mean, at every covariate pattern with positive exposure.</p>
 </div>
 </section><section class="slide level2"><div id="thm-zip-moments" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 7 (Mean and variance of the zero-inflated Poisson model)</strong></span> In a zero-inflated Poisson regression model (<a href="#/def-zip-reg" class="quarto-xref">Definition&nbsp;3</a>), let <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \operatorname{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> be the probability of a structural zero, and let <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}\operatorname{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\)</span> be the mean count in the <span class="math inline">\(Z=0\)</span> arm. Then:</p>
+<p><span class="theorem-title"><strong>Theorem 7 (Mean and variance of the zero-inflated Poisson model)</strong></span> In a zero-inflated Poisson regression model (<a href="#/def-zip-reg" class="quarto-xref">Definition&nbsp;3</a>), let <span class="math inline">\(\pi \stackrel{\text{def}}{=}\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathbb{P}(Z=1 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span> be the probability of a structural zero, and let <span class="math inline">\(\mu_0 \stackrel{\text{def}}{=}{\mathbb{E}\mathopen{}\left[Y \mid Z=0, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\)</span> be the mean count in the <span class="math inline">\(Z=0\)</span> arm. Then:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{} &amp;= (1-\pi)\mu_0
+{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}} &amp;= (1-\pi)\mu_0
 \\
-\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} &amp;= (1-\pi)\mu_0(1+\pi\mu_0)
+{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} &amp;= (1-\pi)\mu_0(1+\pi\mu_0)
 \end{aligned}
 \]</span></p>
 </div>
@@ -2791,13 +2791,13 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p><span class="theorem-title"><strong>Example 12 (Zero-inflated Poisson probabilities and moments)</strong></span> Suppose that at some covariate pattern and exposure, a zero-inflated Poisson regression model (<a href="#/def-zip-reg" class="quarto-xref">Definition&nbsp;3</a>) has <span class="math inline">\(\pi = 0.3\)</span> and <span class="math inline">\(\mu_0 = 2\)</span>. By <a href="#/thm-zip-pmf" class="quarto-xref">Theorem&nbsp;6</a>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(Y = 0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t)
-&amp;= \pi + (1 - \pi) \operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}
+\mathbb{P}(Y = 0 \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t)
+&amp;= \pi + (1 - \pi) {\operatorname{exp}\mathopen{}\left\{-\mu_0\right\}\mathclose{}}
 &amp;&amp; \text{(zero-inflated PMF at 0)} \\
-&amp;= 0.3 + 0.7 \operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{}
+&amp;= 0.3 + 0.7 {\operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{}}
 &amp;&amp; \text{(substitute)} \\
 &amp;\approx 0.3 + 0.7 \cdot 0.135
-&amp;&amp; \text{(} \operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{} \approx 0.135 \text{)} \\
+&amp;&amp; \text{(} {\operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{}} \approx 0.135 \text{)} \\
 &amp;\approx 0.395
 &amp;&amp; \text{(multiply and add)}
 \end{aligned}
@@ -2805,14 +2805,14 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p>and by <a href="#/thm-zip-moments" class="quarto-xref">Theorem&nbsp;7</a>,</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}
+{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}}
 &amp;= (1 - \pi) \mu_0
 &amp;&amp; \text{(zero-inflated mean)} \\
 &amp;= 0.7 \cdot 2
 &amp;&amp; \text{(substitute)} \\
 &amp;= 1.4
 &amp;&amp; \text{(multiply)} \\
-\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}}
 &amp;= (1 - \pi) \mu_0 (1 + \pi \mu_0)
 &amp;&amp; \text{(zero-inflated variance)} \\
 &amp;= 1.4 \cdot (1 + 0.3 \cdot 2)
@@ -2823,12 +2823,12 @@ Table&nbsp;6: Diagnostics for Poisson model
 &amp;&amp; \text{(multiply)}
 \end{aligned}
 \]</span></p>
-<p>A Poisson distribution with the same mean, <span class="math inline">\(1.4\)</span>, has variance <span class="math inline">\(1.4\)</span> and <span class="math inline">\(\operatorname{P}(Y = 0) = \operatorname{exp}\mathopen{}\left\{-1.4\right\}\mathclose{} \approx 0.247\)</span>. The zero-inflated model has both more zeros (<span class="math inline">\(0.395\)</span> versus <span class="math inline">\(0.247\)</span>) and a larger variance (<span class="math inline">\(2.24\)</span> versus <span class="math inline">\(1.4\)</span>), so it is <a href="#/def-overdispersion">overdispersed</a> relative to that Poisson model.</p>
+<p>A Poisson distribution with the same mean, <span class="math inline">\(1.4\)</span>, has variance <span class="math inline">\(1.4\)</span> and <span class="math inline">\(\mathbb{P}(Y = 0) = {\operatorname{exp}\mathopen{}\left\{-1.4\right\}\mathclose{}} \approx 0.247\)</span>. The zero-inflated model has both more zeros (<span class="math inline">\(0.395\)</span> versus <span class="math inline">\(0.247\)</span>) and a larger variance (<span class="math inline">\(2.24\)</span> versus <span class="math inline">\(1.4\)</span>), so it is <a href="#/def-overdispersion">overdispersed</a> relative to that Poisson model.</p>
 </div>
 </section></section><section><section id="over-dispersion" class="title-slide slide level1 center" data-number="8"><h1>
 <span class="header-section-number">8</span> Over-dispersion</h1>
 
-</section><section class="slide level2"><aside class="notes"><p>The <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a> model <strong>forces</strong> the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance">conditional variance</a> to equal the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation">conditional mean</a> (<span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} = \operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\)</span>). In practice, observational count data frequently exhibit variance substantially larger than the mean (or occasionally smaller, termed underdispersion).</p>
+</section><section class="slide level2"><aside class="notes"><p>The <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a> model <strong>forces</strong> the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance">conditional variance</a> to equal the <a href="https://morrison-lab.github.io/pds/expectation.html#def-cond-expectation">conditional mean</a> (<span class="math inline">\({\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} = {\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\)</span>). In practice, observational count data frequently exhibit variance substantially larger than the mean (or occasionally smaller, termed underdispersion).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2840,11 +2840,11 @@ Table&nbsp;6: Diagnostics for Poisson model
           overflow: hidden!important;
           display:block!important;
       }</style></aside></section><section class="slide level2"><div id="def-overdispersion" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Overdispersion)</strong></span> Write <span class="math inline">\(m_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span> and <span class="math inline">\(v_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span> for the conditional mean and variance that a model <span class="math inline">\(\operatorname{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span> specifies; for a Poisson model, <span class="math inline">\(v_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = m_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>. Let <span class="math inline">\(\operatorname{P}\)</span> specify <span class="math inline">\(Y\)</span>’s conditional mean correctly, so that <span class="math inline">\(m_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = \operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\)</span> for every <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(t\)</span>. Then <span class="math inline">\(Y\)</span> is <strong>overdispersed</strong> relative to <span class="math inline">\(\operatorname{P}\)</span> if its conditional variance exceeds the one <span class="math inline">\(\operatorname{P}\)</span> specifies at some covariate pattern and exposure:</p>
-<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} &gt; v_{\operatorname{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\]</span></p>
+<p><span class="theorem-title"><strong>Definition 4 (Overdispersion)</strong></span> Write <span class="math inline">\(m_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span> and <span class="math inline">\(v_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span> for the conditional mean and variance that a model <span class="math inline">\(\mathbb{P}(Y=y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t)\)</span> specifies; for a Poisson model, <span class="math inline">\(v_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = m_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>. Let <span class="math inline">\(\mathbb{P}\)</span> specify <span class="math inline">\(Y\)</span>’s conditional mean correctly, so that <span class="math inline">\(m_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = {\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\)</span> for every <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(t\)</span>. Then <span class="math inline">\(Y\)</span> is <strong>overdispersed</strong> relative to <span class="math inline">\(\mathbb{P}\)</span> if its conditional variance exceeds the one <span class="math inline">\(\mathbb{P}\)</span> specifies at some covariate pattern and exposure:</p>
+<p><span class="math display">\[{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} &gt; v_{\mathbb{P}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\]</span></p>
 </div>
 </section><section class="slide level2"><div id="rem-overdispersion-same-mean" class="proof remark">
-<p><span class="proof-title"><em>Remark 1</em> (Why the model must specify the mean correctly). </span>The same-mean requirement is what makes this a statement about dispersion: without it, any model that simply understates the mean would look overdispersed. In practice we detect overdispersion by comparing the conditional empirical variance in a dataset against <span class="math inline">\(v_{\hat{\operatorname{P}}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>, the variance a <em>fitted</em> model predicts.</p>
+<p><span class="proof-title"><em>Remark 1</em> (Why the model must specify the mean correctly). </span>The same-mean requirement is what makes this a statement about dispersion: without it, any model that simply understates the mean would look overdispersed. In practice we detect overdispersion by comparing the conditional empirical variance in a dataset against <span class="math inline">\(v_{\hat{\mathbb{P}}}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>, the variance a <em>fitted</em> model predicts.</p>
 </div>
 <p>In Poisson regression, unmodeled heterogeneity, clustering, and omitted predictors all inflate the conditional variance. Where the mean model remains correct, that inflation is overdispersion in the sense of <a href="#/def-overdispersion" class="quarto-xref">Definition&nbsp;4</a>. An omitted predictor may instead — or additionally — misspecify the mean, and to whatever extent it does, the model is failing the correct-mean requirement <a href="#/def-overdispersion" class="quarto-xref">Definition&nbsp;4</a> imposes, which is a different problem requiring a different remedy. When overdispersion is present but ignored, the point estimates <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> remain consistent, but the <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard errors</a> produced by standard <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimation</a> are severely underestimated. This underestimation leads to overly narrow <a href="https://morrison-lab.github.io/sds/inference.html#def-confidence-interval">confidence intervals</a> and inflated false-positive (type I error) rates during hypothesis testing.</p>
 <p>When overdispersion is detected via residual diagnostics (such as the deviance or <a href="../chapters/Intro-to-GLMs.html#def-pearson-chisq-glm">Pearson <span class="math inline">\(\chi^2\)</span> statistic</a>, divided by its residual degrees of freedom, substantially exceeding 1), practitioners can address it by incorporating missing predictors, using quasipoisson estimation, or fitting a <a href="https://morrison-lab.github.io/pds/distributions.html#def-nb">negative binomial</a> regression model.</p>
@@ -2886,20 +2886,20 @@ Table&nbsp;6: Diagnostics for Poisson model
           overflow: hidden!important;
           display:block!important;
       }</style></aside><p>Diagnostics that reveal <a href="#/def-overdispersion">overdispersion</a> are telling us that the data violate the standard Poisson assumption</p>
-<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} = \operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}\]</span></p>
-<p>Ignoring that violation leads to artificially narrow <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard errors</a> and inflated type I error rates. The <a href="https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist">negative binomial distribution</a> serves as a natural generalization of the <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a> for count outcomes. It introduces an overdispersion parameter <span class="math inline">\(\rho\)</span> that allows the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance">conditional variance</a> to exceed the mean (<span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) + \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)^2 / \rho\)</span>). We still model <span class="math inline">\(\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span> as before, preserving the rate-ratio interpretation for regression coefficients. Furthermore, negative binomial models can be combined with zero-inflation to account for both structural zeros and variance expansion in count data, with the negative binomial serving as the conditional distribution for the count component.</p>
+<p><span class="math display">\[{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} = {\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right]\mathclose{}}\]</span></p>
+<p>Ignoring that violation leads to artificially narrow <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard errors</a> and inflated type I error rates. The <a href="https://morrison-lab.github.io/pds/distributions.html#sec-nb-dist">negative binomial distribution</a> serves as a natural generalization of the <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a> for count outcomes. It introduces an overdispersion parameter <span class="math inline">\(\rho\)</span> that allows the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#def-cond-variance">conditional variance</a> to exceed the mean (<span class="math inline">\({\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) + \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)^2 / \rho\)</span>). We still model <span class="math inline">\(\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span> as before, preserving the rate-ratio interpretation for regression coefficients. Furthermore, negative binomial models can be combined with zero-inflation to account for both structural zeros and variance expansion in count data, with the negative binomial serving as the conditional distribution for the count component.</p>
 </section><section class="slide level2"><div id="def-nb-reg" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5 (Negative binomial regression model)</strong></span> A <strong>negative binomial regression model</strong> for a count outcome <span class="math inline">\(Y\)</span> with covariate vector <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}\)</span> and exposure magnitude <span class="math inline">\(T\)</span> assumes that, given <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(T = t\)</span>, <span class="math inline">\(Y\)</span> has a <a href="https://morrison-lab.github.io/pds/distributions.html#def-nb">negative binomial distribution</a> with the same mean function as the <a href="#/def-poisson-reg">Poisson regression model</a>,</p>
-<p><span class="math display">\[\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[{\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\]</span></p>
 <p>and with variance</p>
-<p><span id="eq-nb-reg-var"><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) + \frac{\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)^2}{\rho} \tag{8}\]</span></span></p>
+<p><span id="eq-nb-reg-var"><span class="math display">\[{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) + \frac{\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)^2}{\rho} \tag{8}\]</span></span></p>
 <p>for an overdispersion parameter <span class="math inline">\(\rho &gt; 0\)</span> that does not depend on <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> or <span class="math inline">\(t\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-nb-reg" class="theorem example">
 <p><span class="theorem-title"><strong>Example 13 (Negative binomial variance)</strong></span> Suppose a negative binomial regression model (<a href="#/def-nb-reg" class="quarto-xref">Definition&nbsp;5</a>) has <span class="math inline">\(\rho = 2\)</span>, and that at some covariate pattern and exposure the mean count is <span class="math inline">\(\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) = 4\)</span>. By <a href="#/eq-nb-reg-var" class="quarto-xref">Equation&nbsp;8</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}}
 &amp;= 4 + \frac{4^2}{2}
 &amp;&amp; \text{(substitute } \mu = 4 \text{ and } \rho = 2 \text{)} \\
 &amp;= 4 + 8
@@ -2914,20 +2914,20 @@ Table&nbsp;6: Diagnostics for Poisson model
 </section><section class="slide level2"><div id="thm-nb-mixture-moments" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 8 (Moments of a Poisson mixture)</strong></span> Let <span class="math inline">\(\Lambda\)</span> be a positive random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\mu^2 / \rho\)</span>, for constants <span class="math inline">\(\mu &gt; 0\)</span> and <span class="math inline">\(\rho &gt; 0\)</span>, and suppose that, given <span class="math inline">\(\Lambda\)</span>, <span class="math inline">\(Y\)</span> has a <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson distribution</a> with mean <span class="math inline">\(\Lambda\)</span>: <span class="math inline">\(Y \mid \Lambda \sim \operatorname{Pois}(\Lambda)\)</span>. Then:</p>
 <p><span id="eq-nb-mixture-moments"><span class="math display">\[
-\operatorname{E}\mathopen{}\left[Y\right]\mathclose{} = \mu,
+{\mathbb{E}\mathopen{}\left[Y\right]\mathclose{}} = \mu,
 \qquad
-\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{} = \mu + \frac{\mu^2}{\rho}
+{\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{}} = \mu + \frac{\mu^2}{\rho}
 \tag{9}\]</span></span></p>
 <p>which are the mean and the variance <a href="#/eq-nb-reg-var" class="quarto-xref">Equation&nbsp;8</a> that a negative binomial regression model (<a href="#/def-nb-reg" class="quarto-xref">Definition&nbsp;5</a>) specifies for a covariate pattern and exposure with mean <span class="math inline">\(\mu\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>A Poisson distribution’s mean and variance both equal its mean parameter, so <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{} = \Lambda\)</span> and <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \Lambda\right)\mathclose{} = \Lambda\)</span>. By the <a href="https://morrison-lab.github.io/pds/expectation.html#thm-lie">law of total expectation</a>:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>A Poisson distribution’s mean and variance both equal its mean parameter, so <span class="math inline">\({\mathbb{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{}} = \Lambda\)</span> and <span class="math inline">\({\operatorname{Var}\mathopen{}\left(Y \mid \Lambda\right)\mathclose{}} = \Lambda\)</span>. By the <a href="https://morrison-lab.github.io/pds/expectation.html#thm-lie">law of total expectation</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{E}\mathopen{}\left[Y\right]\mathclose{}
-&amp;= \operatorname{E}\mathopen{}\left[\operatorname{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{}\right]\mathclose{}
+{\mathbb{E}\mathopen{}\left[Y\right]\mathclose{}}
+&amp;= {\mathbb{E}\mathopen{}\left[{\mathbb{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{}}\right]\mathclose{}}
 &amp;&amp; \text{(law of total expectation)} \\
-&amp;= \operatorname{E}\mathopen{}\left[\Lambda\right]\mathclose{}
+&amp;= {\mathbb{E}\mathopen{}\left[\Lambda\right]\mathclose{}}
 &amp;&amp; \text{(Poisson mean)} \\
 &amp;= \mu
 &amp;&amp; \text{(mean of } \Lambda \text{)}
@@ -2936,10 +2936,10 @@ Table&nbsp;6: Diagnostics for Poisson model
 <p>By the <a href="https://morrison-lab.github.io/pds/variance-covariance.html#thm-total-variance">law of total variance</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{}
-&amp;= \operatorname{E}\mathopen{}\left[\operatorname{Var}\mathopen{}\left(Y \mid \Lambda\right)\mathclose{}\right]\mathclose{} + \operatorname{Var}\mathopen{}\left(\operatorname{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{}\right)\mathclose{}
+{\operatorname{Var}\mathopen{}\left(Y\right)\mathclose{}}
+&amp;= {\mathbb{E}\mathopen{}\left[{\operatorname{Var}\mathopen{}\left(Y \mid \Lambda\right)\mathclose{}}\right]\mathclose{}} + {\operatorname{Var}\mathopen{}\left({\mathbb{E}\mathopen{}\left[Y \mid \Lambda\right]\mathclose{}}\right)\mathclose{}}
 &amp;&amp; \text{(law of total variance)} \\
-&amp;= \operatorname{E}\mathopen{}\left[\Lambda\right]\mathclose{} + \operatorname{Var}\mathopen{}\left(\Lambda\right)\mathclose{}
+&amp;= {\mathbb{E}\mathopen{}\left[\Lambda\right]\mathclose{}} + {\operatorname{Var}\mathopen{}\left(\Lambda\right)\mathclose{}}
 &amp;&amp; \text{(Poisson mean and variance)} \\
 &amp;= \mu + \frac{\mu^2}{\rho}
 &amp;&amp; \text{(moments of } \Lambda \text{)}
@@ -2988,40 +2988,40 @@ Table&nbsp;7: Negative binomial model for needle-sharing data
 <span id="cb26-2"><a aria-label="2"></a><span class="co">#&gt; </span></span>
 <span id="cb26-3"><a aria-label="3"></a><span class="co">#&gt; Call:</span></span>
 <span id="cb26-4"><a aria-label="4"></a><span class="co">#&gt; glm.nb(formula = shared_syr ~ homeless + age + sex + ethn + polydrug + </span></span>
-<span id="cb26-5"><a aria-label="5"></a><span class="co">#&gt;     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.0903642555, </span></span>
+<span id="cb26-5"><a aria-label="5"></a><span class="co">#&gt;     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.08315440712, </span></span>
 <span id="cb26-6"><a aria-label="6"></a><span class="co">#&gt;     link = log)</span></span>
 <span id="cb26-7"><a aria-label="7"></a><span class="co">#&gt; </span></span>
 <span id="cb26-8"><a aria-label="8"></a><span class="co">#&gt; Coefficients:</span></span>
-<span id="cb26-9"><a aria-label="9"></a><span class="co">#&gt;                             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
-<span id="cb26-10"><a aria-label="10"></a><span class="co">#&gt; (Intercept)                   2.8948     1.9293    1.50   0.1335   </span></span>
-<span id="cb26-11"><a aria-label="11"></a><span class="co">#&gt; homelesshomeless              2.5534     0.8024    3.18   0.0015 **</span></span>
-<span id="cb26-12"><a aria-label="12"></a><span class="co">#&gt; age                          -0.0729     0.0447   -1.63   0.1027   </span></span>
-<span id="cb26-13"><a aria-label="13"></a><span class="co">#&gt; sexF                         -0.5545     0.8869   -0.63   0.5318   </span></span>
-<span id="cb26-14"><a aria-label="14"></a><span class="co">#&gt; ethnAA                        0.9100     0.9416    0.97   0.3339   </span></span>
-<span id="cb26-15"><a aria-label="15"></a><span class="co">#&gt; ethnHispanic                  2.6222     1.5835    1.66   0.0977 . </span></span>
-<span id="cb26-16"><a aria-label="16"></a><span class="co">#&gt; ethnOther                    -1.5963     2.1745   -0.73   0.4629   </span></span>
-<span id="cb26-17"><a aria-label="17"></a><span class="co">#&gt; polydrugmultiple drugs used  -3.7062     1.3330   -2.78   0.0054 **</span></span>
-<span id="cb26-18"><a aria-label="18"></a><span class="co">#&gt; hivstatHIV+                  -3.4809     1.5036   -2.32   0.0206 * </span></span>
-<span id="cb26-19"><a aria-label="19"></a><span class="co">#&gt; sexabuseyes                  -1.5612     1.2484   -1.25   0.2111   </span></span>
-<span id="cb26-20"><a aria-label="20"></a><span class="co">#&gt; hplsns                       -0.0449     0.0685   -0.66   0.5119   </span></span>
+<span id="cb26-9"><a aria-label="9"></a><span class="co">#&gt;                             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb26-10"><a aria-label="10"></a><span class="co">#&gt; (Intercept)                   6.4536     1.8421    3.50  0.00046 ***</span></span>
+<span id="cb26-11"><a aria-label="11"></a><span class="co">#&gt; homelesshomeless              1.1508     0.7366    1.56  0.11820    </span></span>
+<span id="cb26-12"><a aria-label="12"></a><span class="co">#&gt; age                          -0.1485     0.0433   -3.43  0.00059 ***</span></span>
+<span id="cb26-13"><a aria-label="13"></a><span class="co">#&gt; sexF                          0.2198     0.8179    0.27  0.78813    </span></span>
+<span id="cb26-14"><a aria-label="14"></a><span class="co">#&gt; ethnAA                        1.5958     0.8890    1.79  0.07265 .  </span></span>
+<span id="cb26-15"><a aria-label="15"></a><span class="co">#&gt; ethnHispanic                  3.7763     1.5240    2.48  0.01322 *  </span></span>
+<span id="cb26-16"><a aria-label="16"></a><span class="co">#&gt; ethnOther                    -3.2365     2.2663   -1.43  0.15327    </span></span>
+<span id="cb26-17"><a aria-label="17"></a><span class="co">#&gt; polydrugmultiple drugs used  -4.0532     1.0898   -3.72  0.00020 ***</span></span>
+<span id="cb26-18"><a aria-label="18"></a><span class="co">#&gt; hivstatHIV+                  -1.1548     1.3185   -0.88  0.38113    </span></span>
+<span id="cb26-19"><a aria-label="19"></a><span class="co">#&gt; sexabuseyes                  -2.6449     1.0772   -2.46  0.01408 *  </span></span>
+<span id="cb26-20"><a aria-label="20"></a><span class="co">#&gt; hplsns                        0.0948     0.0648    1.46  0.14306    </span></span>
 <span id="cb26-21"><a aria-label="21"></a><span class="co">#&gt; ---</span></span>
 <span id="cb26-22"><a aria-label="22"></a><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb26-23"><a aria-label="23"></a><span class="co">#&gt; </span></span>
-<span id="cb26-24"><a aria-label="24"></a><span class="co">#&gt; (Dispersion parameter for Negative Binomial(0.0899) family taken to be 1)</span></span>
+<span id="cb26-24"><a aria-label="24"></a><span class="co">#&gt; (Dispersion parameter for Negative Binomial(0.0913) family taken to be 1)</span></span>
 <span id="cb26-25"><a aria-label="25"></a><span class="co">#&gt; </span></span>
-<span id="cb26-26"><a aria-label="26"></a><span class="co">#&gt;     Null deviance: 61.511  on 108  degrees of freedom</span></span>
-<span id="cb26-27"><a aria-label="27"></a><span class="co">#&gt; Residual deviance: 52.284  on  98  degrees of freedom</span></span>
+<span id="cb26-26"><a aria-label="26"></a><span class="co">#&gt;     Null deviance: 62.231  on 108  degrees of freedom</span></span>
+<span id="cb26-27"><a aria-label="27"></a><span class="co">#&gt; Residual deviance: 60.031  on  98  degrees of freedom</span></span>
 <span id="cb26-28"><a aria-label="28"></a><span class="co">#&gt;   (18 observations deleted due to missingness)</span></span>
-<span id="cb26-29"><a aria-label="29"></a><span class="co">#&gt; AIC: 261.5</span></span>
+<span id="cb26-29"><a aria-label="29"></a><span class="co">#&gt; AIC: 267.9</span></span>
 <span id="cb26-30"><a aria-label="30"></a><span class="co">#&gt; </span></span>
 <span id="cb26-31"><a aria-label="31"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 25</span></span>
 <span id="cb26-32"><a aria-label="32"></a><span class="co">#&gt; </span></span>
 <span id="cb26-33"><a aria-label="33"></a><span class="co">#&gt; </span></span>
-<span id="cb26-34"><a aria-label="34"></a><span class="co">#&gt;               Theta:  0.0904 </span></span>
-<span id="cb26-35"><a aria-label="35"></a><span class="co">#&gt;           Std. Err.:  0.0239 </span></span>
+<span id="cb26-34"><a aria-label="34"></a><span class="co">#&gt;               Theta:  0.0832 </span></span>
+<span id="cb26-35"><a aria-label="35"></a><span class="co">#&gt;           Std. Err.:  0.0216 </span></span>
 <span id="cb26-36"><a aria-label="36"></a><span class="co">#&gt; Warning while fitting theta: alternation limit reached </span></span>
 <span id="cb26-37"><a aria-label="37"></a><span class="co">#&gt; </span></span>
-<span id="cb26-38"><a aria-label="38"></a><span class="co">#&gt;  2 x log-likelihood:  -237.5430</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-38"><a aria-label="38"></a><span class="co">#&gt;  2 x log-likelihood:  -243.8880</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </figure>
@@ -3043,11 +3043,11 @@ Table&nbsp;8: Poisson vs.&nbsp;Negative Binomial regression estimates
 <div class="cell-output-display">
 <table class="cell caption-top">
 <colgroup>
-<col style="width: 37%">
-<col style="width: 18%">
+<col style="width: 38%">
+<col style="width: 19%">
 <col style="width: 16%">
-<col style="width: 13%">
-<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: center;">Parameter</th>
@@ -3061,78 +3061,78 @@ Table&nbsp;8: Poisson vs.&nbsp;Negative Binomial regression estimates
 <td style="text-align: center;">(Intercept)</td>
 <td style="text-align: center;">1.306</td>
 <td style="text-align: center;">0.3649</td>
-<td style="text-align: center;">2.895</td>
-<td style="text-align: center;">1.929</td>
+<td style="text-align: center;">6.454</td>
+<td style="text-align: center;">1.842</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">homelesshomeless</td>
 <td style="text-align: center;">1.799</td>
 <td style="text-align: center;">0.1676</td>
-<td style="text-align: center;">2.553</td>
-<td style="text-align: center;">0.8024</td>
+<td style="text-align: center;">1.151</td>
+<td style="text-align: center;">0.7366</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">age</td>
 <td style="text-align: center;">-0.0436</td>
 <td style="text-align: center;">0.009183</td>
-<td style="text-align: center;">-0.07291</td>
-<td style="text-align: center;">0.04468</td>
+<td style="text-align: center;">-0.1485</td>
+<td style="text-align: center;">0.04326</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sexF</td>
 <td style="text-align: center;">0.8835</td>
 <td style="text-align: center;">0.1479</td>
-<td style="text-align: center;">-0.5545</td>
-<td style="text-align: center;">0.8869</td>
+<td style="text-align: center;">0.2198</td>
+<td style="text-align: center;">0.8179</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">ethnAA</td>
 <td style="text-align: center;">0.9525</td>
 <td style="text-align: center;">0.1858</td>
-<td style="text-align: center;">0.91</td>
-<td style="text-align: center;">0.9416</td>
+<td style="text-align: center;">1.596</td>
+<td style="text-align: center;">0.889</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">ethnHispanic</td>
 <td style="text-align: center;">0.5775</td>
 <td style="text-align: center;">0.3183</td>
-<td style="text-align: center;">2.622</td>
-<td style="text-align: center;">1.584</td>
+<td style="text-align: center;">3.776</td>
+<td style="text-align: center;">1.524</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">ethnOther</td>
 <td style="text-align: center;">0.03598</td>
 <td style="text-align: center;">0.3933</td>
-<td style="text-align: center;">-1.596</td>
-<td style="text-align: center;">2.175</td>
+<td style="text-align: center;">-3.236</td>
+<td style="text-align: center;">2.266</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">polydrugmultiple drugs used</td>
 <td style="text-align: center;">-1.676</td>
 <td style="text-align: center;">0.3062</td>
-<td style="text-align: center;">-3.706</td>
-<td style="text-align: center;">1.333</td>
+<td style="text-align: center;">-4.053</td>
+<td style="text-align: center;">1.09</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">hivstatHIV+</td>
 <td style="text-align: center;">-2.179</td>
 <td style="text-align: center;">0.4617</td>
-<td style="text-align: center;">-3.481</td>
-<td style="text-align: center;">1.504</td>
+<td style="text-align: center;">-1.155</td>
+<td style="text-align: center;">1.319</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sexabuseyes</td>
 <td style="text-align: center;">-1.474</td>
 <td style="text-align: center;">0.3132</td>
-<td style="text-align: center;">-1.561</td>
-<td style="text-align: center;">1.248</td>
+<td style="text-align: center;">-2.645</td>
+<td style="text-align: center;">1.077</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">hplsns</td>
 <td style="text-align: center;">-0.03147</td>
 <td style="text-align: center;">0.01423</td>
-<td style="text-align: center;">-0.0449</td>
-<td style="text-align: center;">0.06845</td>
+<td style="text-align: center;">0.09484</td>
+<td style="text-align: center;">0.06476</td>
 </tr>
 </tbody>
 </table>
@@ -3524,8 +3524,8 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <span class="header-section-number">8.2</span> Quasipoisson regression</h2>
 <!-- No slidebreak here: the heading shares its slide with the def-quasipoisson div. -->
 <div id="def-quasipoisson" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Quasipoisson regression)</strong></span> <strong>Quasipoisson regression</strong> assumes the Poisson regression mean function <span class="math inline">\(\operatorname{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t \operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}\)</span> and the variance function</p>
-<p><span class="math display">\[\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{} = \theta \, \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\]</span></p>
+<p><span class="theorem-title"><strong>Definition 6 (Quasipoisson regression)</strong></span> <strong>Quasipoisson regression</strong> assumes the Poisson regression mean function <span class="math inline">\({\mathbb{E}\mathopen{}\left[Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right]\mathclose{}} = \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t) \stackrel{\text{def}}{=}t {\operatorname{exp}\mathopen{}\left\{\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right\}\mathclose{}}\)</span> and the variance function</p>
+<p><span class="math display">\[{\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T = t\right)\mathclose{}} = \theta \, \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\]</span></p>
 <p>for a dispersion parameter <span class="math inline">\(\theta &gt; 0\)</span>, without assuming a full distribution for <span class="math inline">\(Y\)</span>. It estimates <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\)</span> with the Poisson regression estimate <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span>, and estimates <span class="math inline">\(\theta\)</span> by the <a href="../chapters/Intro-to-GLMs.html#def-pearson-chisq-glm">Pearson <span class="math inline">\(\chi^2\)</span> statistic</a> divided by its residual degrees of freedom:</p>
 <p><span id="eq-quasipoisson-theta"><span class="math display">\[
 \hat{\theta}\stackrel{\text{def}}{=}\frac{1}{n - (p + 1)} \sum_{i=1}^n\frac{(y_i - \hat{\mu}_i)^2}{\hat{\mu}_i}
@@ -3557,7 +3557,7 @@ Table&nbsp;10: Zero-inflated negative binomial model
 \]</span></p>
 <p>The point estimate <span class="math inline">\(\hat{\beta}_1\)</span> does not change, but its 95% confidence interval becomes <span class="math inline">\(\sqrt{2} \approx 1.41\)</span> times as wide. If <span class="math inline">\(\hat{\theta}\)</span> had been close to <span class="math inline">\(1\)</span>, the quasipoisson and Poisson standard errors would nearly agree.</p>
 </div>
-</section><section class="slide level2"><p>Another way to handle overdispersion — rather than switching to the <a href="https://morrison-lab.github.io/pds/distributions.html#def-nb">negative binomial</a> distributional family — is the quasipoisson approach. It assumes less <em>model structure</em> than the negative binomial does: rather than committing to a complete probability distribution and estimating by <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood</a>, it assumes only the mean-variance relationship <span class="math inline">\(\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{} = \theta \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>, for a dispersion parameter <span class="math inline">\(\theta\)</span>. It pairs that single assumption with a moment-based <em>inference method</em>, estimating <span class="math inline">\(\theta\)</span> from the <a href="../chapters/Intro-to-GLMs.html#def-pearson-residual-glm">Pearson residuals</a>.</p>
+</section><section class="slide level2"><p>Another way to handle overdispersion — rather than switching to the <a href="https://morrison-lab.github.io/pds/distributions.html#def-nb">negative binomial</a> distributional family — is the quasipoisson approach. It assumes less <em>model structure</em> than the negative binomial does: rather than committing to a complete probability distribution and estimating by <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood</a>, it assumes only the mean-variance relationship <span class="math inline">\({\operatorname{Var}\mathopen{}\left(Y \mid \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, T=t\right)\mathclose{}} = \theta \mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}, t)\)</span>, for a dispersion parameter <span class="math inline">\(\theta\)</span>. It pairs that single assumption with a moment-based <em>inference method</em>, estimating <span class="math inline">\(\theta\)</span> from the <a href="../chapters/Intro-to-GLMs.html#def-pearson-residual-glm">Pearson residuals</a>.</p>
 <p>While point estimates for regression coefficients <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span> remain identical to standard Poisson regression, their estimated <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard errors</a> are scaled by <span class="math inline">\(\sqrt{\hat{\theta}}\)</span>. This approach provides valid standard errors and <a href="https://morrison-lab.github.io/sds/inference.html#def-p-value"><span class="math inline">\(p\)</span>-values</a> when overdispersion is multiplicative. That validity comes from the assumed mean-variance relationship itself. A sandwich (robust) variance estimator also uses the residuals, but it does not require the model’s variance function to be correct; it accumulates the squared residuals across observations instead of scaling the variance formula the model supplied. Its validity therefore does not depend on that variance function being the right one, only on the mean model being approximately correct <span class="citation" data-cites="vittinghoff2e vittinghoff2e"><a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 4.7.3.6]</a> for linear regression, <a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 8.3.1]</a> for the generalized linear model case</span>. The quasipoisson scaling has no such guarantee: its single <span class="math inline">\(\hat{\theta}\)</span> is estimated under the assumption of proportionality, so if the variance is not proportional to the mean, the scaled standard errors are simply wrong.</p>
 <p>Robust standard errors are not a free improvement, though. For linear regression, <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 4.7.3.6]</a></span> reports simulations in which robust standard errors can be too small in samples as large as 250 observations, and recommends the more conservative HC3 estimator at those sizes. The specific remedy is a linear-model construction, but the caution about small samples is worth carrying over to the sample sizes many epidemiological studies actually have.</p>
 <p>The quasipoisson approach is simpler to implement than the negative binomial model, but provides less information than a full negative binomial <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik">likelihood</a>: it does not specify a full parametric distribution for <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval">prediction intervals</a> or model likelihood comparisons.</p>
@@ -3573,42 +3573,42 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <p><span class="theorem-title"><strong>Exercise 7 (Interpreting Poisson regression coefficients)</strong></span> (adapted from <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth <a href="#/references" role="doc-biblioref" onclick="">[9]</a></span>, Chapter 5, and <span class="citation" data-cites="dobson4e">Dobson and Barnett <a href="#/references" role="doc-biblioref" onclick="">[1]</a></span>, Chapter 9)</p>
 <p>Consider a Poisson log-linear model for the expected number of events <span class="math inline">\(\mu_i\)</span>:</p>
 <p><span class="math display">\[
-\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \beta_0 + \beta_1 x_i,
+{\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} = \beta_0 + \beta_1 x_i,
 \]</span></p>
 <p>where <span class="math inline">\(x_i\)</span> is a <a href="https://morrison-lab.github.io/sds/data.html#def-indicator-variable">binary indicator</a> (<span class="math inline">\(x_i = 0\)</span> or <span class="math inline">\(x_i = 1\)</span>).</p>
 <p><strong>(a)</strong> Express <span class="math inline">\(\mu_i\)</span> as a function of <span class="math inline">\(x_i\)</span>.</p>
-<p><strong>(b)</strong> Interpret <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>.</p>
-<p><strong>(c)</strong> Interpret <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}\)</span>.</p>
+<p><strong>(b)</strong> Interpret <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\)</span>.</p>
+<p><strong>(c)</strong> Interpret <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}\)</span>.</p>
 <p><strong>(d)</strong> If <span class="math inline">\(\hat{\beta}_0 = 1.2\)</span> and <span class="math inline">\(\hat{\beta}_1 = 0.5\)</span>, compute the estimated mean event count for <span class="math inline">\(x_i = 0\)</span> and <span class="math inline">\(x_i = 1\)</span>.</p>
 </div>
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span><strong>(a)</strong></p>
 <p><span class="math display">\[
-\mu_i = \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{} \cdot (\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{})^{x_i}
+\mu_i = {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}} \cdot ({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}})^{x_i}
 \]</span></p>
-<p>For <span class="math inline">\(x_i = 0\)</span>: <span class="math inline">\(\mu_0 = \operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span>. For <span class="math inline">\(x_i = 1\)</span>: <span class="math inline">\(\mu_1 = \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}\)</span>.</p>
+<p>For <span class="math inline">\(x_i = 0\)</span>: <span class="math inline">\(\mu_0 = {\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\)</span>. For <span class="math inline">\(x_i = 1\)</span>: <span class="math inline">\(\mu_1 = {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1\right\}\mathclose{}}\)</span>.</p>
 <p><strong>(b)</strong></p>
-<p><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}\)</span> is the expected mean count when <span class="math inline">\(x_i = 0\)</span> (the <a href="https://morrison-lab.github.io/sds/data.html#def-reference-level">reference group</a>).</p>
+<p><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}\)</span> is the expected mean count when <span class="math inline">\(x_i = 0\)</span> (the <a href="https://morrison-lab.github.io/sds/data.html#def-reference-level">reference group</a>).</p>
 <p><strong>(c)</strong></p>
 <p><span class="math display">\[
-\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}
+{\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}
 = \frac{\mu_1}{\mu_0}
-= \frac{\operatorname{exp}\mathopen{}\left\{\beta_0+\beta_1\right\}\mathclose{}}{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}
+= \frac{{\operatorname{exp}\mathopen{}\left\{\beta_0+\beta_1\right\}\mathclose{}}}{{\operatorname{exp}\mathopen{}\left\{\beta_0\right\}\mathclose{}}}
 \]</span></p>
-<p><span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}\)</span> is the <strong>rate ratio</strong> (or count ratio): the multiplicative factor by which the expected count changes when <span class="math inline">\(x_i\)</span> increases from 0 to 1.</p>
+<p><span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}\)</span> is the <strong>rate ratio</strong> (or count ratio): the multiplicative factor by which the expected count changes when <span class="math inline">\(x_i\)</span> increases from 0 to 1.</p>
 <p>If <span class="math inline">\(\beta_1 &gt; 0\)</span>, the group with <span class="math inline">\(x_i = 1\)</span> has a higher expected count.</p>
 <p><strong>(d)</strong></p>
 <p>For <span class="math inline">\(x_i = 0\)</span>: <span class="math display">\[
-\hat{\mu}_0 = \operatorname{exp}\mathopen{}\left\{1.2\right\}\mathclose{} \approx 3.32
+\hat{\mu}_0 = {\operatorname{exp}\mathopen{}\left\{1.2\right\}\mathclose{}} \approx 3.32
 \]</span></p>
 <p>For <span class="math inline">\(x_i = 1\)</span>: <span class="math display">\[
-\hat{\mu}_1 = \operatorname{exp}\mathopen{}\left\{1.2 + 0.5\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{1.7\right\}\mathclose{} \approx 5.47
+\hat{\mu}_1 = {\operatorname{exp}\mathopen{}\left\{1.2 + 0.5\right\}\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{1.7\right\}\mathclose{}} \approx 5.47
 \]</span></p>
-<p>The estimated rate ratio is <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{0.5\right\}\mathclose{} \approx 1.65\)</span>, meaning the group with <span class="math inline">\(x_i = 1\)</span> has about 65% more events on average.</p>
+<p>The estimated rate ratio is <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{0.5\right\}\mathclose{}} \approx 1.65\)</span>, meaning the group with <span class="math inline">\(x_i = 1\)</span> has about 65% more events on average.</p>
 </div>
 </section><section class="slide level2"><div id="exr-prac-glm-score" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 8 (Score equations for a Poisson GLM)</strong></span> (adapted from <span class="citation" data-cites="dobson4e">Dobson and Barnett <a href="#/references" role="doc-biblioref" onclick="">[1]</a></span>, Chapter 4, and <span class="citation" data-cites="dunn2018generalized">Dunn and Smyth <a href="#/references" role="doc-biblioref" onclick="">[9]</a></span>, Chapter 4)</p>
-<p>Consider the Poisson log-linear model <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \beta_0 + \beta_1 x_i\)</span>, with <span class="math inline">\(Y_i \mid x_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i)\)</span>.</p>
+<p>Consider the Poisson log-linear model <span class="math inline">\({\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} = \beta_0 + \beta_1 x_i\)</span>, with <span class="math inline">\(Y_i \mid x_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i)\)</span>.</p>
 <p><strong>(a)</strong> Write the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> <span class="math inline">\(\ell(\beta_0, \beta_1; \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{y}}\vphantom{y}}, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\)</span>.</p>
 <p><strong>(b)</strong> Derive the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation">score equations</a> <span class="math inline">\(\frac{\partial}{\partial \beta_0}\ell= 0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\ell= 0\)</span>.</p>
 <p><strong>(c)</strong> Interpret the score equations: what condition on the <a href="../chapters/Linear-models-overview.html#def-fitted-value">fitted values</a> <span class="math inline">\(\hat{\mu}_i\)</span> do they imply?</p>
@@ -3618,12 +3618,12 @@ Table&nbsp;10: Zero-inflated negative binomial model
 <p><span class="math display">\[
 \begin{aligned}
 \ell(\beta_0, \beta_1; \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{y}}\vphantom{y}}, \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})
-&amp;= \sum_{i=1}^n \mathopen{}\left(y_i \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} - \mu_i - \operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}\right)\mathclose{}
+&amp;= \sum_{i=1}^n \mathopen{}\left(y_i {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} - \mu_i - {\operatorname{log}\mathopen{}\left\{y_i!\right\}\mathclose{}}\right)\mathclose{}
 \\
-&amp;\propto \sum_{i=1}^n \mathopen{}\left(y_i \operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} - \mu_i\right)\mathclose{}
+&amp;\propto \sum_{i=1}^n \mathopen{}\left(y_i {\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} - \mu_i\right)\mathclose{}
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{} = \beta_0 + \beta_1 x_i\)</span>, so <span class="math inline">\(\mu_i = \operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{}\)</span>.</p>
+<p>where <span class="math inline">\({\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} = \beta_0 + \beta_1 x_i\)</span>, so <span class="math inline">\(\mu_i = {\operatorname{exp}\mathopen{}\left\{\beta_0 + \beta_1 x_i\right\}\mathclose{}}\)</span>.</p>
 <p><strong>(b)</strong></p>
 <p>Using the <a href="https://morrison-lab.github.io/mds/calculus-derivatives.html#thm-chain-rule">chain rule</a> with <span class="math inline">\(\frac{\partial}{\partial \beta_j}\mu_i = \mu_i x_{ij}\)</span> (where <span class="math inline">\(x_{i0} = 1\)</span> and <span class="math inline">\(x_{i1} = x_i\)</span>):</p>
 <p><span class="math display">\[
@@ -3642,7 +3642,7 @@ Table&nbsp;10: Zero-inflated negative binomial model
 \end{aligned}
 \]</span></p>
 <p><strong>(c)</strong></p>
-<p>These equations hold at the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span>, where <span class="math inline">\(\mu_i\)</span> takes its fitted value <span class="math inline">\(\hat{\mu}_i \stackrel{\text{def}}{=}\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1 x_i\right\}\mathclose{}\)</span>.</p>
+<p>These equations hold at the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimate</a> <span class="math inline">\(\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\)</span>, where <span class="math inline">\(\mu_i\)</span> takes its fitted value <span class="math inline">\(\hat{\mu}_i \stackrel{\text{def}}{=}{\operatorname{exp}\mathopen{}\left\{\hat{\beta}_0 + \hat{\beta}_1 x_i\right\}\mathclose{}}\)</span>.</p>
 <p>The first equation says <span class="math inline">\(\sum_i y_i = \sum_i \hat{\mu}_i\)</span>: the total fitted count equals the total observed count.</p>
 <p>The second equation says <span class="math inline">\(\sum_i x_i y_i = \sum_i x_i \hat{\mu}_i\)</span>: the fitted counts are balanced against observed counts, weighted by <span class="math inline">\(x_i\)</span>.</p>
 <p>More generally, these score equations say that the <strong><a href="../chapters/Linear-models-overview.html#def-resid-fitted">residuals</a> <span class="math inline">\((y_i - \hat{\mu}_i)\)</span> are <a href="https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-orthogonal-vectors">orthogonal</a> to each predictor column</strong>: for each predictor <span class="math inline">\(j\)</span>, the residual vector <span class="math inline">\((\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{y}}\vphantom{y}}- \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\mu}}\vphantom{\mu}}})\)</span> satisfies <span class="math inline">\({\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_{(j)}}^{\top}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{y}}\vphantom{y}}- \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\mu}}\vphantom{\mu}}}) = 0\)</span>, where <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_{(j)} \stackrel{\text{def}}{=}{(x_{1j}, \ldots, x_{nj})}^{\top} \in \mathbb{R}^n\)</span> is the column of <span class="math inline">\(j\)</span>-th predictor values across observations. This system of equations is the GLM analogue of the <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-ols">OLS</a> <a href="https://morrison-lab.github.io/sds/correlation-regression.html#def-normal-equations">normal equations</a>.</p>

@@ -372,22 +372,22 @@ text-align: center;
 </section><section class="slide level2"><p>Each mistake in this section is shown in a warning callout, followed by a corrected version.</p>
 </section><section id="logistic-regression-coefficients-are-log-odds-ratios" class="slide level2" data-number="2.1"><h2>
 <span class="header-section-number">2.1</span> Logistic-regression coefficients are log odds ratios</h2>
-<p>In a logistic regression model, a coefficient <span class="math inline">\(\beta_j\)</span> is a difference in <a href="../chapters/binary-outcome-associations.html#def-logodds">log-odds</a>, so <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> is an <a href="../chapters/binary-outcome-associations.html#def-OR">odds ratio</a> (see the <a href="../chapters/logistic-regression.html#thm-logistic-OR">odds ratio theorem for logistic regression</a>), not a <a href="../chapters/binary-outcome-associations.html#def-RR">risk ratio</a>:</p>
+<p>In a logistic regression model, a coefficient <span class="math inline">\(\beta_j\)</span> is a difference in <a href="../chapters/binary-outcome-associations.html#def-logodds">log-odds</a>, so <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}}\)</span> is an <a href="../chapters/binary-outcome-associations.html#def-OR">odds ratio</a> (see the <a href="../chapters/logistic-regression.html#thm-logistic-OR">odds ratio theorem for logistic regression</a>), not a <a href="../chapters/binary-outcome-associations.html#def-RR">risk ratio</a>:</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Interpreting <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}\)</span> as a risk ratio</strong></p>
+<p><strong>Interpreting <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}}\)</span> as a risk ratio</strong></p>
 </div>
 <div class="callout-content">
-<p>“<span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> makes the outcome 50% more likely.”</p>
+<p>“<span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> makes the outcome 50% more likely.”</p>
 </div>
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>“<span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> multiplies the <strong>odds</strong> of the outcome by 1.5, holding the other covariates fixed: <span class="math inline">\(\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = 1.5\)</span> when <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}\)</span> differ by one unit in <span class="math inline">\(x_1\)</span> only.”</p>
+<p><span class="proof-title"><em>Solution</em>. </span>“<span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_1\right\}\mathclose{}} = 1.5\)</span>, so a one-unit increase in <span class="math inline">\(x_1\)</span> multiplies the <strong>odds</strong> of the outcome by 1.5, holding the other covariates fixed: <span class="math inline">\(\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = 1.5\)</span> when <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\)</span> and <span class="math inline">\(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}\)</span> differ by one unit in <span class="math inline">\(x_1\)</span> only.”</p>
 </div>
 </section><section id="odds-ratios-approximate-risk-ratios-only-for-rare-outcomes" class="slide level2" data-number="2.2"><h2>
 <span class="header-section-number">2.2</span> Odds ratios approximate risk ratios only for rare outcomes</h2>
@@ -410,7 +410,7 @@ text-align: center;
 </div>
 </section><section id="poisson-rate-models-need-an-offset" class="slide level2" data-number="2.3"><h2>
 <span class="header-section-number">2.3</span> Poisson rate models need an offset</h2>
-<p>When subjects have different amounts of follow-up time <span class="math inline">\(t\)</span>, a Poisson model for an event rate includes <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> as an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset</a> (see the <a href="../chapters/count-regression.html#eq-mean-poisson">Poisson rate model’s mean</a>). Without the offset term, the model describes expected counts, not rates, and <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}\)</span> is a ratio of expected counts rather than a <a href="../chapters/count-regression.html#thm-poisson-rate-ratio">rate ratio</a>.</p>
+<p>When subjects have different amounts of follow-up time <span class="math inline">\(t\)</span>, a Poisson model for an event rate includes <span class="math inline">\({\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}}\)</span> as an <a href="https://morrison-lab.github.io/pds/distributions.html#def-offset">offset</a> (see the <a href="../chapters/count-regression.html#eq-mean-poisson">Poisson rate model’s mean</a>). Without the offset term, the model describes expected counts, not rates, and <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\beta_j\right\}\mathclose{}}\)</span> is a ratio of expected counts rather than a <a href="../chapters/count-regression.html#thm-poisson-rate-ratio">rate ratio</a>.</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -420,12 +420,12 @@ text-align: center;
 <p><strong>Omitting the offset</strong></p>
 </div>
 <div class="callout-content">
-<p>Group A: 10 events in 1000 person-years; group B: 10 events in 500 person-years. A Poisson model fit to the counts alone gives <span class="math inline">\(\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{} = 10/10 = 1\)</span>: “the groups have the same event rate.”</p>
+<p>Group A: 10 events in 1000 person-years; group B: 10 events in 500 person-years. A Poisson model fit to the counts alone gives <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat{\beta}_1\right\}\mathclose{}} = 10/10 = 1\)</span>: “the groups have the same event rate.”</p>
 </div>
 </div>
 </div>
 <div class="proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span>Include <span class="math inline">\(\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}\)</span> as an offset (in R, <code>offset(log(t))</code> in the model formula). The <a href="../chapters/intro-to-survival-analysis.html#def-incidence-rate">incidence rates</a> are <span class="math inline">\(10/1000 = 0.01\)</span> and <span class="math inline">\(10/500 = 0.02\)</span> events per person-year, so the rate ratio for A versus B is <span class="math inline">\(0.01/0.02 = 0.5\)</span>.</p>
+<p><span class="proof-title"><em>Solution</em>. </span>Include <span class="math inline">\({\operatorname{log}\mathopen{}\left\{t\right\}\mathclose{}}\)</span> as an offset (in R, <code>offset(log(t))</code> in the model formula). The <a href="../chapters/intro-to-survival-analysis.html#def-incidence-rate">incidence rates</a> are <span class="math inline">\(10/1000 = 0.01\)</span> and <span class="math inline">\(10/500 = 0.02\)</span> events per person-year, so the rate ratio for A versus B is <span class="math inline">\(0.01/0.02 = 0.5\)</span>.</p>
 </div>
 </section><section id="hazard-ratios-are-not-ratios-of-survival-probabilities" class="slide level2" data-number="2.4"><h2>
 <span class="header-section-number">2.4</span> Hazard ratios are not ratios of survival probabilities</h2>

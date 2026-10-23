@@ -1334,18 +1334,18 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 &amp;&amp; \text{(add)}
 \end{aligned}
 \]</span></p>
-<p>and, with <span class="math inline">\(\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{} \approx 4.605\)</span>,</p>
+<p>and, with <span class="math inline">\({\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}} \approx 4.605\)</span>,</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{BIC}_A
-&amp;= 240 + 3 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}
+&amp;= 240 + 3 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}}
 &amp;&amp; \text{(BIC formula)} \\
 &amp;\approx 240 + 13.82
 &amp;&amp; \text{(multiply)} \\
 &amp;= 253.82
 &amp;&amp; \text{(add)} \\
 \text{BIC}_B
-&amp;= 237 + 5 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}
+&amp;= 237 + 5 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}}
 &amp;&amp; \text{(BIC formula)} \\
 &amp;\approx 237 + 23.03
 &amp;&amp; \text{(multiply)} \\
@@ -1353,7 +1353,7 @@ Table&nbsp;3: Backward elimination under the 10% change-in-estimate rule, with s
 &amp;&amp; \text{(add)}
 \end{aligned}
 \]</span></p>
-<p>Both criteria prefer model A. Model B fits better (<span class="math inline">\(\hat{\ell}_B &gt; \hat{\ell}_A\)</span>), but the penalty for its two extra parameters is larger than the gain from that better fit. The AIC difference is only 1, which is negligible, while the BIC difference of about 6.2 favors model A more clearly, because BIC charges <span class="math inline">\(\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{} \approx 4.6\)</span> per parameter instead of 2.</p>
+<p>Both criteria prefer model A. Model B fits better (<span class="math inline">\(\hat{\ell}_B &gt; \hat{\ell}_A\)</span>), but the penalty for its two extra parameters is larger than the gain from that better fit. The AIC difference is only 1, which is negligible, while the BIC difference of about 6.2 favors model A more clearly, because BIC charges <span class="math inline">\({\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}} \approx 4.6\)</span> per parameter instead of 2.</p>
 </div>
 </section><section class="slide level2"><div id="thm-aic-lrt" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Information criteria as likelihood ratio thresholds)</strong></span> Let model <span class="math inline">\(M_0\)</span> be nested in model <span class="math inline">\(M_1\)</span>, with <span class="math inline">\(M_1\)</span> having <span class="math inline">\(k\)</span> more parameters than <span class="math inline">\(M_0\)</span>, both fit by maximum likelihood to the same <span class="math inline">\(n\)</span> observations, and let <span class="math inline">\(G^2 \stackrel{\text{def}}{=}2\mathopen{}\left(\hat{\ell}_1 - \hat{\ell}_0\right)\mathclose{}\)</span> be the <a href="../chapters/logistic-regression.html#def-lrt-statistic">likelihood ratio test statistic</a> comparing them. Then</p>
@@ -1366,7 +1366,7 @@ G^2 &gt; 2k
 <p><span class="math display">\[
 \text{BIC}_1 &lt; \text{BIC}_0
 \quad \text{if and only if} \quad
-G^2 &gt; k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}
+G^2 &gt; k {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}
 \]</span></p>
 </div>
 <div class="proof">
@@ -1384,21 +1384,21 @@ G^2 &gt; k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}
 &amp;&amp; \text{(definition of } G^2 \text{)}
 \end{aligned}
 \]</span></p>
-<p>so <span class="math inline">\(\text{AIC}_1 &lt; \text{AIC}_0\)</span> exactly when <span class="math inline">\(G^2 - 2k &gt; 0\)</span>, that is, when <span class="math inline">\(G^2 &gt; 2k\)</span>. The BIC calculation is the same with each penalty <span class="math inline">\(2\)</span> replaced by <span class="math inline">\(\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}\)</span>:</p>
+<p>so <span class="math inline">\(\text{AIC}_1 &lt; \text{AIC}_0\)</span> exactly when <span class="math inline">\(G^2 - 2k &gt; 0\)</span>, that is, when <span class="math inline">\(G^2 &gt; 2k\)</span>. The BIC calculation is the same with each penalty <span class="math inline">\(2\)</span> replaced by <span class="math inline">\({\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{BIC}_0 - \text{BIC}_1
-&amp;= \mathopen{}\left(-2 \hat{\ell}_0 + p \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}\right)\mathclose{} - \mathopen{}\left(-2 \hat{\ell}_1 + (p + k) \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}\right)\mathclose{}
+&amp;= \mathopen{}\left(-2 \hat{\ell}_0 + p {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}\right)\mathclose{} - \mathopen{}\left(-2 \hat{\ell}_1 + (p + k) {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}\right)\mathclose{}
 &amp;&amp; \text{(BIC formula for each model)} \\
-&amp;= 2 \hat{\ell}_1 - 2 \hat{\ell}_0 + p \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{} - p \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{} - k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}
+&amp;= 2 \hat{\ell}_1 - 2 \hat{\ell}_0 + p {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}} - p {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}} - k {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}
 &amp;&amp; \text{(distribute the subtraction)} \\
-&amp;= 2\mathopen{}\left(\hat{\ell}_1 - \hat{\ell}_0\right)\mathclose{} - k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}
-&amp;&amp; \text{(cancel } p \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{} \text{; factor out 2)} \\
-&amp;= G^2 - k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}
+&amp;= 2\mathopen{}\left(\hat{\ell}_1 - \hat{\ell}_0\right)\mathclose{} - k {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}
+&amp;&amp; \text{(cancel } p {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}} \text{; factor out 2)} \\
+&amp;= G^2 - k {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}
 &amp;&amp; \text{(definition of } G^2 \text{)}
 \end{aligned}
 \]</span></p>
-<p>so <span class="math inline">\(\text{BIC}_1 &lt; \text{BIC}_0\)</span> exactly when <span class="math inline">\(G^2 &gt; k \operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}\)</span>.</p>
+<p>so <span class="math inline">\(\text{BIC}_1 &lt; \text{BIC}_0\)</span> exactly when <span class="math inline">\(G^2 &gt; k {\operatorname{log}\mathopen{}\left\{n\right\}\mathclose{}}\)</span>.</p>
 </div>
 </section><section class="slide level2"><div id="exm-aic-lrt" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5 (The significance levels implied by AIC and BIC)</strong></span> Suppose model A in <a href="#/exm-aic-bic-compare" class="quarto-xref">Example&nbsp;4</a> is nested in model B, so model B adds <span class="math inline">\(k = 2\)</span> parameters. The likelihood ratio statistic is</p>
@@ -1413,14 +1413,14 @@ G^2
 &amp;&amp; \text{(multiply)}
 \end{aligned}
 \]</span></p>
-<p>By <a href="#/thm-aic-lrt" class="quarto-xref">Theorem&nbsp;1</a>, AIC prefers model B only if <span class="math inline">\(G^2 &gt; 2k = 4\)</span>, and BIC (with <span class="math inline">\(n = 100\)</span>) only if <span class="math inline">\(G^2 &gt; 2 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{} \approx 9.21\)</span>. Since <span class="math inline">\(G^2 = 3\)</span> clears neither threshold, both criteria prefer model A, matching <a href="#/exm-aic-bic-compare" class="quarto-xref">Example&nbsp;4</a>.</p>
-<p>Under <span class="math inline">\(H_0\)</span> (the <span class="math inline">\(k = 2\)</span> extra parameters are zero), <span class="math inline">\(G^2\)</span> approximately follows a <span class="math inline">\(\chi^2_2\)</span> distribution, which is the <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential distribution</a> with mean 2, so <span class="math inline">\(\operatorname{P}(\chi^2_2 &gt; c) = \operatorname{exp}\mathopen{}\left\{-c/2\right\}\mathclose{}\)</span>. Choosing model B whenever AIC prefers it therefore acts like a likelihood ratio test at level</p>
+<p>By <a href="#/thm-aic-lrt" class="quarto-xref">Theorem&nbsp;1</a>, AIC prefers model B only if <span class="math inline">\(G^2 &gt; 2k = 4\)</span>, and BIC (with <span class="math inline">\(n = 100\)</span>) only if <span class="math inline">\(G^2 &gt; 2 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}} \approx 9.21\)</span>. Since <span class="math inline">\(G^2 = 3\)</span> clears neither threshold, both criteria prefer model A, matching <a href="#/exm-aic-bic-compare" class="quarto-xref">Example&nbsp;4</a>.</p>
+<p>Under <span class="math inline">\(H_0\)</span> (the <span class="math inline">\(k = 2\)</span> extra parameters are zero), <span class="math inline">\(G^2\)</span> approximately follows a <span class="math inline">\(\chi^2_2\)</span> distribution, which is the <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">exponential distribution</a> with mean 2, so <span class="math inline">\(\mathbb{P}(\chi^2_2 &gt; c) = {\operatorname{exp}\mathopen{}\left\{-c/2\right\}\mathclose{}}\)</span>. Choosing model B whenever AIC prefers it therefore acts like a likelihood ratio test at level</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(\chi^2_2 &gt; 4)
-&amp;= \operatorname{exp}\mathopen{}\left\{-4/2\right\}\mathclose{}
+\mathbb{P}(\chi^2_2 &gt; 4)
+&amp;= {\operatorname{exp}\mathopen{}\left\{-4/2\right\}\mathclose{}}
 &amp;&amp; \text{(} \chi^2_2 \text{ tail probability with } c = 2k = 4 \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{}
+&amp;= {\operatorname{exp}\mathopen{}\left\{-2\right\}\mathclose{}}
 &amp;&amp; \text{(divide)} \\
 &amp;\approx 0.135
 &amp;&amp; \text{(evaluate)}
@@ -1429,13 +1429,13 @@ G^2
 <p>and choosing by BIC acts like a test at level</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{P}(\chi^2_2 &gt; 2 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{})
-&amp;= \operatorname{exp}\mathopen{}\left\{-2 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{} / 2\right\}\mathclose{}
-&amp;&amp; \text{(} \chi^2_2 \text{ tail probability with } c = 2 \operatorname{log}\mathopen{}\left\{100\right\}\mathclose{} \text{)} \\
-&amp;= \operatorname{exp}\mathopen{}\left\{-\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}\right\}\mathclose{}
+\mathbb{P}(\chi^2_2 &gt; 2 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}})
+&amp;= {\operatorname{exp}\mathopen{}\left\{-2 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}} / 2\right\}\mathclose{}}
+&amp;&amp; \text{(} \chi^2_2 \text{ tail probability with } c = 2 {\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}} \text{)} \\
+&amp;= {\operatorname{exp}\mathopen{}\left\{-{\operatorname{log}\mathopen{}\left\{100\right\}\mathclose{}}\right\}\mathclose{}}
 &amp;&amp; \text{(cancel the 2s)} \\
 &amp;= \frac{1}{100}
-&amp;&amp; \text{(} \operatorname{exp}\mathopen{}\left\{-\operatorname{log}\mathopen{}\left\{a\right\}\mathclose{}\right\}\mathclose{} = 1/a \text{)}
+&amp;&amp; \text{(} {\operatorname{exp}\mathopen{}\left\{-{\operatorname{log}\mathopen{}\left\{a\right\}\mathclose{}}\right\}\mathclose{}} = 1/a \text{)}
 \end{aligned}
 \]</span></p>
 <p>AIC is a more lenient threshold than the conventional <span class="math inline">\(\alpha = 0.05\)</span>, which is one reason it tends to select larger models, while BIC’s implied level shrinks as <span class="math inline">\(n\)</span> grows.</p>
@@ -1504,9 +1504,9 @@ Table&nbsp;4: Comparison of LDL models by AIC, BIC, and adjusted <span class="ma
 <div id="def-lasso" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3 (LASSO estimate)</strong></span> The <strong>LASSO</strong> (Least Absolute Shrinkage and Selection Operator) estimate of the coefficients <span class="math inline">\(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= {(\beta_1, \dots, \beta_p)}^{\top}\)</span> maximizes the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik">log-likelihood</a> minus an <span class="math inline">\(\ell_{1}\)</span> penalty:</p>
 <p><span id="eq-lasso"><span class="math display">\[
-\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}} \mathopen{}\left\{
+\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}_\lambda \stackrel{\text{def}}{=}\arg\max_{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}} {\mathopen{}\left\{
 \ell(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}) - \lambda \sum_{j=1}^p \mathopen{}\left|\beta_j\right|\mathclose{}
-\right\}\mathclose{}
+\right\}\mathclose{}}
 \tag{1}\]</span></span></p>
 <p>where <span class="math inline">\(\lambda \ge 0\)</span> is a <a href="https://morrison-lab.github.io/sds/model-validation.html#def-tuning-parameter">tuning parameter</a>. The intercept, if any, is not penalized.</p>
 </div>
@@ -1538,7 +1538,7 @@ z + \lambda &amp; \text{if } z &lt; -\lambda
 &amp;= \frac{1}{2} \sum_{i=1}^n\mathopen{}\left(y_i^2 - 2 x_i y_i \beta + x_i^2 \beta^2\right)\mathclose{} + \lambda \mathopen{}\left|\beta\right|\mathclose{}
 &amp;&amp; \text{(expand the square)} \\
 &amp;= \frac{1}{2} \sum_{i=1}^ny_i^2 - \beta \sum_{i=1}^nx_i y_i + \frac{\beta^2}{2} \sum_{i=1}^nx_i^2 + \lambda \mathopen{}\left|\beta\right|\mathclose{}
-&amp;&amp; \text{(distribute the sum)} \\
+&amp;&amp; \text{(distribute the sum over the terms)} \\
 &amp;= \frac{1}{2} \sum_{i=1}^ny_i^2 - z \beta + \frac{\beta^2}{2} + \lambda \mathopen{}\left|\beta\right|\mathclose{}
 &amp;&amp; \text{(} z \stackrel{\text{def}}{=}\sum_{i=1}^nx_i y_i \text{; } \sum_{i=1}^nx_i^2 = 1 \text{)}
 \end{aligned}

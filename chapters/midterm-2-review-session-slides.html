@@ -561,7 +561,7 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <p>Two versions of this error were common:</p>
 <ol type="1">
 <li><p>Computing a running sum of arbitrary quantities (e.g.&nbsp;summing survival probabilities, or summing <span class="math inline">\(1 - \hat\lambda_j\)</span>) instead of summing the <a href="../chapters/intro-to-survival-analysis.html#def-hazard">hazards</a> <span class="math inline">\(\hat\lambda_j = d_j / n_j\)</span>.</p></li>
-<li><p>Computing the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a> correctly but then forgetting the final step, <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}\)</span>, and reporting the cumulative hazard itself (or the KM product) as the Nelson-Aalen survival estimate.</p></li>
+<li><p>Computing the <a href="../chapters/intro-to-survival-analysis.html#def-cuhaz">cumulative hazard</a> correctly but then forgetting the final step, <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}}\)</span>, and reporting the cumulative hazard itself (or the KM product) as the Nelson-Aalen survival estimate.</p></li>
 </ol>
 </div>
 </div>
@@ -569,17 +569,17 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>The <a href="../chapters/intro-to-survival-analysis.html#def-na-cuhaz-est">Nelson-Aalen estimator</a> builds the <strong>cumulative hazard</strong> by adding up the instantaneous hazard contributions at each event time:</p>
 <p><span class="math display">\[\hat\Lambda(t) = \sum_{j: t_j \le t} \frac{d_j}{n_j}\]</span></p>
-<p>and then converts it to a survival estimate using <span class="math inline">\(\operatorname{S}(t) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}\)</span>:</p>
-<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}\]</span></p>
+<p>and then converts it to a survival estimate using <span class="math inline">\(\operatorname{S}(t) = {\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t)\right\}\mathclose{}}\)</span>:</p>
+<p><span class="math display">\[{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-\hat\Lambda(t)\right\}\mathclose{}}\]</span></p>
 <p>For example, at <span class="math inline">\(t = 10\)</span>:</p>
 <p><span class="math display">\[\hat\Lambda(10) = \frac{1}{7} = 0.143,
 \qquad
-\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(10\right)\mathclose{} = \operatorname{exp}\mathopen{}\left\{-0.143\right\}\mathclose{} = 0.867\]</span></p>
+{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(10\right)\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{-0.143\right\}\mathclose{}} = 0.867\]</span></p>
 <p>Contrast this with <a href="../chapters/intro-to-survival-analysis.html#def-KM-estimator">Kaplan-Meier</a>, which multiplies <a href="../chapters/intro-to-survival-analysis.html#def-kappa">conditional survival probabilities</a>:</p>
-<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{} = \prod_{j: t_j \le t}\mathopen{}\left(1 - \frac{d_j}{n_j}\right)\mathclose{},
+<p><span class="math display">\[{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}} = \prod_{j: t_j \le t}\mathopen{}\left(1 - \frac{d_j}{n_j}\right)\mathclose{},
 \qquad
-\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(10\right)\mathclose{} = 1 - \tfrac{1}{7} = 0.857\]</span></p>
-<p>The two estimators are close but <strong>not</strong> identical, and <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{} \ge \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> always. Reporting the same numbers for both, or reporting <span class="math inline">\(\hat\Lambda\)</span> where <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\)</span> was asked for, loses credit.</p>
+{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(10\right)\mathclose{}} = 1 - \tfrac{1}{7} = 0.857\]</span></p>
+<p>The two estimators are close but <strong>not</strong> identical, and <span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}} \ge {\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}}\)</span> always. Reporting the same numbers for both, or reporting <span class="math inline">\(\hat\Lambda\)</span> where <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\)</span> was asked for, loses credit.</p>
 </div>
 </section><section id="sec-step-function" class="slide level2" data-number="2.3"><h2>
 <span class="header-section-number">2.3</span> Survival estimates are <em>step functions</em>: use the most recent event time</h2>
@@ -599,9 +599,9 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 </div>
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span><span class="math inline">\(\hat S(t)\)</span> is a <strong>right-continuous step function</strong>: it only changes at observed event times and stays flat in between. To evaluate it at <span class="math inline">\(t = 17\)</span>, find the <strong>most recent event time at or before 17</strong>, which is <span class="math inline">\(t = 14\)</span> (the subsequent <span class="math inline">\(t = 15^+\)</span> is a censoring, not an event, so the curve does not step there). So:</p>
-<p><span class="math display">\[\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(17\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(14\right)\mathclose{} = 0.714,
+<p><span class="math display">\[{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(17\right)\mathclose{}} = {\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(14\right)\mathclose{}} = 0.714,
 \qquad
-\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(17\right)\mathclose{} = \mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(14\right)\mathclose{} = 0.734\]</span></p>
+{\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(17\right)\mathclose{}} = {\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(14\right)\mathclose{}} = 0.734\]</span></p>
 <p>Give the actual numbers, not just “it’s flat.”</p>
 </div>
 </section><section id="sec-median" class="slide level2" data-number="2.4"><h2>
@@ -626,9 +626,9 @@ Table&nbsp;1: Kaplan-Meier and Nelson-Aalen calculations for the Part 1 data
 <p>Reading from <a href="#/tbl-km-na" class="quarto-xref">Table&nbsp;1</a>:</p>
 <ul>
 <li>
-<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}\)</span> first reaches <span class="math inline">\(\le 0.5\)</span> at <span class="math inline">\(t = 18\)</span> (where it drops to <span class="math inline">\(0.476\)</span>), so the KM median is <strong>18 months</strong>.</li>
+<span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{KM}}\mathopen{}\left(t\right)\mathclose{}}\)</span> first reaches <span class="math inline">\(\le 0.5\)</span> at <span class="math inline">\(t = 18\)</span> (where it drops to <span class="math inline">\(0.476\)</span>), so the KM median is <strong>18 months</strong>.</li>
 <li>
-<span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}\)</span> first reaches <span class="math inline">\(\le 0.5\)</span> at <span class="math inline">\(t = 21\)</span> (where it drops to <span class="math inline">\(0.319\)</span>), so the NA median is <strong>21 months</strong>.</li>
+<span class="math inline">\({\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}\mathopen{}\left(t\right)\mathclose{}}\)</span> first reaches <span class="math inline">\(\le 0.5\)</span> at <span class="math inline">\(t = 21\)</span> (where it drops to <span class="math inline">\(0.319\)</span>), so the NA median is <strong>21 months</strong>.</li>
 </ul>
 <p>We can confirm this in R:</p>
 <div class="cell">
@@ -774,7 +774,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 \mathopen{}\left[\operatorname{S}(y_i \mid \tilde x_i)\right]\mathclose{}^{1 - d_i}
 = \operatorname{S}(y_i \mid \tilde x_i)\cdot\mathopen{}\left[{\lambda}(y_i \mid \tilde x_i)\right]\mathclose{}^{d_i}\]</span></p>
 <p><strong>Distribution functions</strong> (define each one):</p>
-<p><span class="math display">\[\operatorname{S}(t \mid \tilde x) \stackrel{\text{def}}{=}\operatorname{P}(T &gt; t \mid \tilde X = \tilde x) = \operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \tilde x)\right\}\mathclose{}\]</span></p>
+<p><span class="math display">\[\operatorname{S}(t \mid \tilde x) \stackrel{\text{def}}{=}\mathbb{P}(T &gt; t \mid \tilde X = \tilde x) = {\operatorname{exp}\mathopen{}\left\{-{\Lambda}(t \mid \tilde x)\right\}\mathclose{}}\]</span></p>
 <p><span class="math display">\[\operatorname{f}(t \mid \tilde x) \stackrel{\text{def}}{=}{\lambda}(t \mid \tilde x)\,\operatorname{S}(t \mid \tilde x)\]</span></p>
 <p><span class="math display">\[{\lambda}(t \mid \tilde x) \stackrel{\text{def}}{=}\operatorname{p}(T = t \mid T \ge t, \tilde X = \tilde x) = \frac{\operatorname{f}(t \mid \tilde x)}{\operatorname{S}(t \mid \tilde x)}\]</span></p>
 <p><span class="math display">\[{\Lambda}(t \mid \tilde x) \stackrel{\text{def}}{=}\int_0^t {\lambda}(u \mid \tilde x)\,du = -\log\operatorname{S}(t \mid \tilde x)\]</span></p>
@@ -782,7 +782,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <p><strong><em><a href="../chapters/proportional-hazards-models.html#def-pha">Proportional-hazards</a> assumption</em></strong> (used to split the hazard into a baseline that depends only on time and a factor that depends only on covariates): <span class="math display">\[{\lambda}(t \mid \tilde x) = \lambda_0(t)\cdot\theta(\tilde x)\]</span> where <span class="math inline">\(\lambda_0(t)\)</span> is the <strong>unspecified</strong> baseline hazard.</p>
 <p><strong><em>Logarithmic-<a href="../chapters/Intro-to-GLMs.html#sec-why-link">link</a> assumption</em></strong> (used to make the covariate factor a function of a linear predictor): <span class="math display">\[\eta(t \mid \tilde x) = \eta_0(t) + \Delta\eta(\tilde x),
 \qquad
-\theta(\tilde x) = \operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde x)\right\}\mathclose{}\]</span></p>
+\theta(\tilde x) = {\operatorname{exp}\mathopen{}\left\{\Delta\eta(\tilde x)\right\}\mathclose{}}\]</span></p>
 <p><strong><em>Linear functional-form assumption</em></strong> (used to write the covariate term as a <a href="https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination">linear combination</a>): <span class="math display">\[\Delta\eta(\tilde x) = \tilde x \cdot \tilde\beta
 = \beta_L\, l + \beta_H\, h + \beta_A\, a + \beta_P\, p + \beta_B\, b + \beta_C\, c\]</span></p>
 <p>Notice that the baseline hazard <span class="math inline">\(\lambda_0(t)\)</span> is carried along symbolically the whole time — we never assume a shape for it.</p>
@@ -838,9 +838,9 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 </div>
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>On the <strong>log</strong> scale, the effect is linear: a change of <span class="math inline">\(c\)</span> units multiplies the <a href="../chapters/proportional-hazards-models.html#def-loghaz">log-hazard</a> by <span class="math inline">\(c \cdot \beta\)</span>. So the hazard ratio for a <span class="math inline">\(c\)</span>-unit change is</p>
-<p><span class="math display">\[HR(c) = \operatorname{exp}\mathopen{}\left\{c\,\beta\right\}\mathclose{} = \mathopen{}\left(\operatorname{exp}\mathopen{}\left\{\beta\right\}\mathclose{}\right)\mathclose{}^c = HR^{\,c}\]</span></p>
+<p><span class="math display">\[HR(c) = {\operatorname{exp}\mathopen{}\left\{c\,\beta\right\}\mathclose{}} = \mathopen{}\left({\operatorname{exp}\mathopen{}\left\{\beta\right\}\mathclose{}}\right)\mathclose{}^c = HR^{\,c}\]</span></p>
 <p>A 7.5-year increase is <span class="math inline">\(c = 0.75\)</span> decades, and the per-decade <span class="math inline">\(\widehat{HR} = 1.94\)</span> (i.e.&nbsp;<span class="math inline">\(\hat\beta_A = \log 1.94 = 0.66\)</span>):</p>
-<p><span class="math display">\[\widehat{HR}(0.75) = 1.94^{\,0.75} = \operatorname{exp}\mathopen{}\left\{0.75 \times 0.66\right\}\mathclose{} = \operatorname{exp}\mathopen{}\left\{0.495\right\}\mathclose{} = 1.64\]</span></p>
+<p><span class="math display">\[\widehat{HR}(0.75) = 1.94^{\,0.75} = {\operatorname{exp}\mathopen{}\left\{0.75 \times 0.66\right\}\mathclose{}} = {\operatorname{exp}\mathopen{}\left\{0.495\right\}\mathclose{}} = 1.64\]</span></p>
 <p>So a 7.5-year-older man has about <strong>64% higher</strong> estimated hazard of CHD, all else equal. The operation is <strong>exponentiation</strong> (<span class="math inline">\(HR^{0.75}\)</span>), not multiplication.</p>
 </div>
 </section><section id="sec-wald" class="slide level2" data-number="3.4"><h2>
@@ -966,7 +966,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">1.1</td>
 <td style="text-align: left;">Nelson-Aalen (<a href="#/sec-na-exp" class="quarto-xref">Section&nbsp;2.2</a>)</td>
-<td style="text-align: left;">Sum hazards <span class="math inline">\(d_j/n_j\)</span>, then <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}= \operatorname{exp}\mathopen{}\left\{-\hat\Lambda\right\}\mathclose{}\)</span>.</td>
+<td style="text-align: left;">Sum hazards <span class="math inline">\(d_j/n_j\)</span>, then <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits_{\text{NA}}= {\operatorname{exp}\mathopen{}\left\{-\hat\Lambda\right\}\mathclose{}}\)</span>.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">3</td>
@@ -1003,7 +1003,7 @@ Table&nbsp;2: Cox PH regression for the WCGS CHD data
 <td style="text-align: center;">2.3</td>
 <td style="text-align: left;">HR for a non-unit change (<a href="#/sec-hr-multiunit" class="quarto-xref">Section&nbsp;3.3</a>)</td>
 <td style="text-align: left;">
-<span class="math inline">\(HR^{\,c} = \operatorname{exp}\mathopen{}\left\{c\beta\right\}\mathclose{}\)</span> — exponentiate, don’t multiply.</td>
+<span class="math inline">\(HR^{\,c} = {\operatorname{exp}\mathopen{}\left\{c\beta\right\}\mathclose{}}\)</span> — exponentiate, don’t multiply.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">9</td>
