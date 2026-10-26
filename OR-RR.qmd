@@ -6,17 +6,18 @@ server: shiny
 
 ```{r}
 sliderInput(
-   "pi1", 
-   label = "baseline probability", 
-   min = 0.00001, 
-   max = .99999, 
-   value = .5)
+  "pi1",
+  label = "baseline probability",
+  min = 0.00001,
+  max = .99999,
+  value = .5
+)
 numericInput(
-   "or_max", 
-   label = "max OR",
-   min = 0.0001,
-   # max = 100,
-   value = 10)
+  "or_max",
+  label = "max OR",
+  min = 0.0001,
+  value = 10
+)
 plotOutput("plot1")
 ```
 
@@ -25,13 +26,13 @@ plotOutput("plot1")
 #| context: server
 library(ggplot2)
 odds <- function(pi) pi / (1 - pi)
-odds.inv <- function(odds) odds / (1 + odds)
+odds_inv <- function(odds) odds / (1 + odds)
 OR <- function(pi1, pi2) odds(pi2) / odds(pi1)
 RR <- function(pi1, pi2) pi2 / pi1
 OR_to_RR <- function(pi1, OR) {
   odds1 <- odds(pi1)
   odds2 <- OR * odds1
-  pi2 <- odds.inv(odds2)
+  pi2 <- odds_inv(odds2)
   RR <- RR(pi1, pi2)
 }
 RR_to_OR <- function(pi1, RR) {
