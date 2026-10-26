@@ -59,8 +59,8 @@ df_isf <- do.call(rbind, lapply(rates, function(lam) {
 ggplot(df_isf, aes(x = p, y = isf, color = lambda)) +
   geom_line() +
   labs(
-    x = expression(p),
-    y = expression(S^{-1}*(p)),
+    x = expression("Probability, " * p),
+    y = expression("Survival time, " * S^{-1}*(p)),
     color = NULL
   ) +
   theme_bw()
