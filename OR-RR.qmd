@@ -24,36 +24,31 @@ plotOutput("plot1")
 ```{r}
 #| context: server
 library(ggplot2)
-odds = function(pi) pi / (1-pi)
-odds.inv = function(odds) odds/(1+odds)
-OR = function(pi1, pi2) odds(pi2) / odds(pi1)
-RR = function(pi1, pi2) pi2 / pi1
-OR_to_RR = function(pi1, OR)
-{
-   odds1 = odds(pi1)
-   odds2 = OR * odds1
-   pi2 = odds.inv(odds2)
-   RR = RR(pi1, pi2)
+odds <- function(pi) pi / (1 - pi)
+odds.inv <- function(odds) odds / (1 + odds)
+OR <- function(pi1, pi2) odds(pi2) / odds(pi1)
+RR <- function(pi1, pi2) pi2 / pi1
+OR_to_RR <- function(pi1, OR) {
+  odds1 <- odds(pi1)
+  odds2 <- OR * odds1
+  pi2 <- odds.inv(odds2)
+  RR <- RR(pi1, pi2)
 }
-RR_to_OR = function(pi1, RR)
-{
-   pi2 = RR * pi1
-   OR = OR(pi1, pi2)
+RR_to_OR <- function(pi1, RR) {
+  pi2 <- RR * pi1
+  OR <- OR(pi1, pi2)
 }
-OR_RR_plot = function(pi1, max_OR = 3)
-{
-   ggplot() +
-      geom_function(fun = function(x) OR_to_RR(pi1 = pi1, OR = x)) +
-      xlab("Odds ratio, OR") + 
-      ylab("Risk ratio, RR") +
-      theme_bw() +
-      geom_abline(aes(intercept = 0, slope = 1, col = "y=x")) +
-      geom_hline(aes(yintercept = 1, col = "RR=1")) +
-      scale_y_continuous(trans = "log10", limits = c(1/max_OR, max_OR)) + 
-      scale_x_continuous(trans = "log10", limits = c(1/max_OR, max_OR))
+OR_RR_plot <- function(pi1, max_OR = 3) {
+  ggplot() +
+    geom_function(fun = function(x) OR_to_RR(pi1 = pi1, OR = x)) +
+    xlab("Odds ratio, OR") +
+    ylab("Risk ratio, RR") +
+    theme_bw() +
+    geom_abline(aes(intercept = 0, slope = 1, col = "y=x")) +
+    geom_hline(aes(yintercept = 1, col = "RR=1")) +
+    scale_y_continuous(trans = "log10", limits = c(1 / max_OR, max_OR)) +
+    scale_x_continuous(trans = "log10", limits = c(1 / max_OR, max_OR))
 }
-output$plot1 = 
-   OR_RR_plot(input$pi1, input$or_max) |> 
-   renderPlot()
-
+output$plot1 <- OR_RR_plot(input$pi1, input$or_max) |>
+  renderPlot()
 ```
