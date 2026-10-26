@@ -591,7 +591,7 @@ P(T&gt; t) =
 <span id="cb3-21"><a aria-label="21"></a>    <span class="at">args =</span> <span class="fu">list</span>(<span class="at">lower.tail =</span> <span class="cn">FALSE</span>, <span class="at">rate =</span> <span class="dv">5</span>)</span>
 <span id="cb3-22"><a aria-label="22"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-23"><a aria-label="23"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb3-24"><a aria-label="24"></a>  <span class="fu">ylab</span>(<span class="st">"S(t)"</span>) <span class="sc">+</span></span>
+<span id="cb3-24"><a aria-label="24"></a>  <span class="fu">ylab</span>(<span class="st">"Survival</span><span class="sc">\n</span><span class="st">probability,</span><span class="sc">\n</span><span class="st">S(t)"</span>) <span class="sc">+</span></span>
 <span id="cb3-25"><a aria-label="25"></a>  <span class="fu">guides</span>(<span class="at">col =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="fu">expr</span>(lambda))) <span class="sc">+</span></span>
 <span id="cb3-26"><a aria-label="26"></a>  <span class="fu">xlab</span>(<span class="st">"Time (t)"</span>) <span class="sc">+</span></span>
 <span id="cb3-27"><a aria-label="27"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="fl">2.5</span>) <span class="sc">+</span></span>
@@ -651,7 +651,7 @@ Figure&nbsp;1: Exponential Survival Functions
 <span id="cb4-18"><a aria-label="18"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-19"><a aria-label="19"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
 <span id="cb4-20"><a aria-label="20"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb4-21"><a aria-label="21"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t"</span>, <span class="at">y =</span> <span class="st">"u"</span>)</span>
+<span id="cb4-21"><a aria-label="21"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time, t"</span>, <span class="at">y =</span> <span class="st">"Integration variable, u"</span>)</span>
 <span id="cb4-22"><a aria-label="22"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-23"><a aria-label="23"></a>u_max <span class="ot">&lt;-</span> <span class="dv">6</span></span>
 <span id="cb4-24"><a aria-label="24"></a>tri_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> <span class="fu">c</span>(<span class="dv">0</span>, u_max, <span class="dv">0</span>), <span class="at">u =</span> <span class="fu">c</span>(<span class="dv">0</span>, u_max, u_max))</span>
@@ -672,7 +672,7 @@ Figure&nbsp;1: Exponential Survival Functions
 <span id="cb4-39"><a aria-label="39"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-40"><a aria-label="40"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
 <span id="cb4-41"><a aria-label="41"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb4-42"><a aria-label="42"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t"</span>, <span class="at">y =</span> <span class="st">"u"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-42"><a aria-label="42"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time, t"</span>, <span class="at">y =</span> <span class="st">"Integration variable, u"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-surv-and-mean-integration-bounds" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-surv-and-mean-integration-bounds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: The same triangular region in the <span class="math inline">\((t, u)\)</span>-plane, described in two equivalent ways: <span class="math inline">\(0 \le t \le u &lt; \infty\)</span> (left, original order) and <span class="math inline">\(0 \le t &lt; \infty,\ t \le u &lt; \infty\)</span> (right, reversed order).
@@ -756,8 +756,8 @@ t &amp;= \frac{-{\operatorname{log}\mathopen{}\left\{p\right\}\mathclose{}}}{{\l
 <span id="cb5-17"><a aria-label="17"></a><span class="fu">ggplot</span>(df_isf, <span class="fu">aes</span>(<span class="at">x =</span> p, <span class="at">y =</span> isf, <span class="at">color =</span> lambda)) <span class="sc">+</span></span>
 <span id="cb5-18"><a aria-label="18"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb5-19"><a aria-label="19"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-20"><a aria-label="20"></a>    <span class="at">x =</span> <span class="fu">expression</span>(p),</span>
-<span id="cb5-21"><a aria-label="21"></a>    <span class="at">y =</span> <span class="fu">expression</span>(S<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">*</span>(p)),</span>
+<span id="cb5-20"><a aria-label="20"></a>    <span class="at">x =</span> <span class="fu">expression</span>(<span class="st">"Probability, "</span> <span class="sc">*</span> p),</span>
+<span id="cb5-21"><a aria-label="21"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival time, "</span> <span class="sc">*</span> S<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">*</span>(p)),</span>
 <span id="cb5-22"><a aria-label="22"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
 <span id="cb5-23"><a aria-label="23"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-24"><a aria-label="24"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -843,8 +843,11 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 <span id="cb6-19"><a aria-label="19"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span></span>
 <span id="cb6-20"><a aria-label="20"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-21"><a aria-label="21"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> t_med, <span class="at">y =</span> <span class="fl">0.5</span>), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb6-22"><a aria-label="22"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t (years)"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">S</span>(t))) <span class="sc">+</span></span>
-<span id="cb6-23"><a aria-label="23"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-22"><a aria-label="22"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-23"><a aria-label="23"></a>    <span class="at">x =</span> <span class="st">"Time, t (years)"</span>,</span>
+<span id="cb6-24"><a aria-label="24"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival probability, "</span> <span class="sc">*</span> <span class="fu">S</span>(t))</span>
+<span id="cb6-25"><a aria-label="25"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-26"><a aria-label="26"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-isf-surv-exp-median" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig"><figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-isf-surv-exp-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Survival function <span class="math inline">\(\operatorname{S}(t)\)</span>.
@@ -876,8 +879,11 @@ Figure&nbsp;4: For <span class="math inline">\({\lambda}= 2\)</span>, the surviv
 <span id="cb7-12"><a aria-label="12"></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span></span>
 <span id="cb7-13"><a aria-label="13"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-14"><a aria-label="14"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> t_med), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb7-15"><a aria-label="15"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"p"</span>, <span class="at">y =</span> <span class="fu">expression</span>(S<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">*</span>(p))) <span class="sc">+</span></span>
-<span id="cb7-16"><a aria-label="16"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-15"><a aria-label="15"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-16"><a aria-label="16"></a>    <span class="at">x =</span> <span class="st">"Probability, p"</span>,</span>
+<span id="cb7-17"><a aria-label="17"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival time, "</span> <span class="sc">*</span> S<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>} <span class="sc">*</span> (p))</span>
+<span id="cb7-18"><a aria-label="18"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-19"><a aria-label="19"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-isf-isf-exp-median" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig"><figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-fig" id="fig-isf-isf-exp-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Inverse survival function <span class="math inline">\(\operatorname{S}^{-1}(p)\)</span>.
@@ -2312,7 +2318,7 @@ Table&nbsp;3: Empirical survival function <span class="math inline">\(\mathop{\h
 <span id="cb16-10"><a aria-label="10"></a>  <span class="fu">geom_step</span>(<span class="at">direction =</span> <span class="st">"hv"</span>) <span class="sc">+</span></span>
 <span id="cb16-11"><a aria-label="11"></a>  <span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb16-12"><a aria-label="12"></a>  <span class="fu">xlab</span>(<span class="st">"Time since diagnosis (months)"</span>) <span class="sc">+</span></span>
-<span id="cb16-13"><a aria-label="13"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(S)(t))) <span class="sc">+</span></span>
+<span id="cb16-13"><a aria-label="13"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="st">"Survival probability, "</span> <span class="sc">*</span> <span class="fu">hat</span>(S)(t))) <span class="sc">+</span></span>
 <span id="cb16-14"><a aria-label="14"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-surv-placebo-no-cens" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-surv-placebo-no-cens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -4408,7 +4414,7 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 <span id="cb50-3"><a aria-label="3"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
 <span id="cb50-4"><a aria-label="4"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> strata) <span class="sc">+</span></span>
 <span id="cb50-5"><a aria-label="5"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb50-6"><a aria-label="6"></a>  <span class="fu">ylab</span>(<span class="st">"S(t) = P(T&gt;t)"</span>) <span class="sc">+</span></span>
+<span id="cb50-6"><a aria-label="6"></a>  <span class="fu">ylab</span>(<span class="st">"Survival probability, S(t) = P(T&gt;t)"</span>) <span class="sc">+</span></span>
 <span id="cb50-7"><a aria-label="7"></a>  <span class="fu">xlab</span>(<span class="st">"Survival time (t, days)"</span>) <span class="sc">+</span></span>
 <span id="cb50-8"><a aria-label="8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -4696,7 +4702,7 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <span id="cb53-10"><a aria-label="10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> surv, <span class="at">col =</span> model)) <span class="sc">+</span></span>
 <span id="cb53-11"><a aria-label="11"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
 <span id="cb53-12"><a aria-label="12"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb53-13"><a aria-label="13"></a>  <span class="fu">ylab</span>(<span class="st">"S(t) = P(T&gt;t)"</span>) <span class="sc">+</span></span>
+<span id="cb53-13"><a aria-label="13"></a>  <span class="fu">ylab</span>(<span class="st">"Survival probability, S(t) = P(T&gt;t)"</span>) <span class="sc">+</span></span>
 <span id="cb53-14"><a aria-label="14"></a>  <span class="fu">xlab</span>(<span class="st">"Survival time (t, days)"</span>) <span class="sc">+</span></span>
 <span id="cb53-15"><a aria-label="15"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -4901,9 +4907,13 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <span id="cb56-49"><a aria-label="49"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
 <span id="cb56-50"><a aria-label="50"></a>  ) <span class="sc">+</span></span>
 <span id="cb56-51"><a aria-label="51"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.05</span>)) <span class="sc">+</span></span>
-<span id="cb56-52"><a aria-label="52"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time (months)"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(S)(t)), <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb56-53"><a aria-label="53"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb56-54"><a aria-label="54"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb56-52"><a aria-label="52"></a>  <span class="fu">labs</span>(</span>
+<span id="cb56-53"><a aria-label="53"></a>    <span class="at">x =</span> <span class="st">"Time (months)"</span>,</span>
+<span id="cb56-54"><a aria-label="54"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival probability, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)(t)),</span>
+<span id="cb56-55"><a aria-label="55"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
+<span id="cb56-56"><a aria-label="56"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-57"><a aria-label="57"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb56-58"><a aria-label="58"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-emp-surv-drug6mp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-emp-surv-drug6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17: Estimated survival functions for 6-MP patients from the KM and Nelson-Aalen estimators.
@@ -4956,9 +4966,13 @@ Figure&nbsp;17: Estimated survival functions for 6-MP patients from the KM and N
 <span id="cb57-35"><a aria-label="35"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
 <span id="cb57-36"><a aria-label="36"></a>  ) <span class="sc">+</span></span>
 <span id="cb57-37"><a aria-label="37"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb57-38"><a aria-label="38"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"p"</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(S)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>}<span class="sc">*</span>(p)), <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb57-39"><a aria-label="39"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb57-40"><a aria-label="40"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb57-38"><a aria-label="38"></a>  <span class="fu">labs</span>(</span>
+<span id="cb57-39"><a aria-label="39"></a>    <span class="at">x =</span> <span class="st">"Probability, p"</span>,</span>
+<span id="cb57-40"><a aria-label="40"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival time, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>} <span class="sc">*</span> (p)),</span>
+<span id="cb57-41"><a aria-label="41"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
+<span id="cb57-42"><a aria-label="42"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-43"><a aria-label="43"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb57-44"><a aria-label="44"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-emp-isf-drug6mp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-emp-isf-drug6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> for 6-MP patients from the KM and Nelson-Aalen estimators.
