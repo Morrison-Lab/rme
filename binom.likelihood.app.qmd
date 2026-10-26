@@ -76,8 +76,8 @@ ggplot() +
     n = 100000
   ) +
   xlim(0, 1) +
-  ylab("L(pi)") +
-  xlab("pi") +
+  ylab("Likelihood, L(pi)") +
+  xlab("Success probability, pi") +
   theme_bw()
 ```
 
@@ -96,7 +96,7 @@ ggplot() +
   ) +
   xlim(0, 1) +
   ylab("log(L(pi))") +
-  xlab("pi") +
+  xlab("Success probability, pi") +
   theme_bw()
 ```
 
@@ -153,8 +153,8 @@ likelihood_plot <- reactive({
   temp <-
     ggplot() +
     xlim(0, 1) +
-    ylab("L(pi)") +
-    xlab("pi") +
+    ylab("Likelihood, L(pi)") +
+    xlab("Success probability, pi") +
     theme_bw()
   if (input$logl) {
     temp <- temp +
@@ -460,7 +460,7 @@ power_plot <-
   xlim(c(1, 200)) +
   ylim(0, 1) +
   ylab("Power") +
-  xlab("n") +
+  xlab("Sample size, n") +
   theme_bw()
 
 print(power_plot)
