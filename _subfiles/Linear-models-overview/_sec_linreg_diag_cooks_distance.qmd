@@ -112,20 +112,28 @@ cooks.distance(bw_lm2)
 
 :::{#exr-cooks-d-formula}
 Verify @eq-cooks-distance-formula for the observations in `bw_lm2`:
-
-1.  Compute $D_i$ using the [standardized residuals](#def-stred) and [leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage) values.
-2.  Check that the result matches `cooks.distance(bw_lm2)`.
+compute $D_i$ using the [standardized residuals](#def-stred) and [leverage](https://morrison-lab.github.io/sds/model-validation.html#def-leverage) values.
 :::
 
-:::{.solution}
+:::{#sol-cooks-d-formula .solution}
 ```{r}
-# 1. Compute D_i from the standardized residuals and leverage values
 r_prime <- rstandard(bw_lm2)
 h <- hatvalues(bw_lm2)
 p <- length(coef(bw_lm2))
 
 D_manual <- (r_prime^2 / p) * (h / (1 - h))
-# 2. Check the result against the built-in function
+```
+:::
+
+{{< slidebreak >}}
+
+:::{#exr-cooks-d-check}
+In the setting of @exr-cooks-d-formula,
+check that the result matches `cooks.distance(bw_lm2)`.
+:::
+
+:::{#sol-cooks-d-check .solution}
+```{r}
 cbind(manual = D_manual, builtin = cooks.distance(bw_lm2)) |> head(3)
 ```
 :::
