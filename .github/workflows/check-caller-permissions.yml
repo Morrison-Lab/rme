@@ -1,0 +1,20 @@
+# Fails when a workflow calls a Morrison-Lab/gha reusable workflow from a job that
+# does not grant the permissions the callee's jobs request. GitHub rejects such a
+# call at startup, so a scheduled caller stops silently (lds#1468); this catches
+# it at pull-request time.
+name: Check caller permissions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-caller-permissions.yml@v3
