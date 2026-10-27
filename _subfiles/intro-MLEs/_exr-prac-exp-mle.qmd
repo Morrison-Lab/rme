@@ -17,11 +17,14 @@ for the observed data $\vx = (x_1, \ldots, x_n)$.
 $\score(\pmean; \vx) = \deriv{\pmean}\llik(\pmean; \vx)$.
 
 **(c)** Set the score equal to zero and show that $\hat\pmean_{ML} = \bar{x}$.
-Compute the second derivative and verify this critical point is a maximum.
 
-**(d)** Derive the observed information $I(\pmean; \vx) = -\hess(\pmean; \vx)$,
-evaluate it at $\hat\pmean_{ML}$,
-and give an approximate 95% confidence interval for $\pmean$.
+**(d)** Compute the second derivative and verify this [critical point](https://morrison-lab.github.io/sds/intro-MLEs.html#def-critical-point) is a maximum.
+
+**(e)** Derive the [observed information](https://morrison-lab.github.io/sds/intro-MLEs.html#def-oinf) $I(\pmean; \vx) = -\hess(\pmean; \vx)$.
+
+**(f)** Evaluate it at $\hat\pmean_{ML}$.
+
+**(g)** Give an [approximate 95% confidence interval](https://morrison-lab.github.io/sds/inference.html#def-approximate-ci) for $\pmean$.
 :::
 
 ::: {.solution}
@@ -68,7 +71,7 @@ $$
 \ea
 $$
 
-The second derivative is:
+**(d)** The second derivative is:
 
 $$
 \ba
@@ -90,7 +93,7 @@ $$
 
 Since the second derivative is negative, $\hat\pmean_{ML} = \bar{x}$ is a maximum.
 
-**(d)**
+**(e)**
 
 The observed information is:
 
@@ -99,7 +102,7 @@ I(\pmean; \vx) = -\hess(\pmean; \vx)
 = \frac{2n\bar{x}}{\pmean^3} - \frac{n}{\pmean^2}
 $$
 
-Evaluated at $\hat\pmean_{ML} = \bar{x}$:
+**(f)** Evaluated at $\hat\pmean_{ML} = \bar{x}$:
 
 $$
 I(\hat\pmean_{ML}; \vx) = \frac{2n\bar{x}}{\bar{x}^3} - \frac{n}{\bar{x}^2}
@@ -109,7 +112,7 @@ $$
 
 So $\SE{\hat\pmean_{ML}} \approx \sqrt{I(\hat\pmean_{ML}; \vx)^{-1}} = \frac{\bar{x}}{\sqrt{n}}$.
 
-An approximate 95% CI for $\pmean$ is:
+**(g)** An [approximate](https://morrison-lab.github.io/sds/inference.html#def-approximate-ci) 95% CI for $\pmean$ is:
 
 $$
 \hat\pmean_{ML} \pm 1.96 \times \frac{\bar{x}}{\sqrt{n}}
