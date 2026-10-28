@@ -25,33 +25,35 @@ We are going to model the distribution of fasting glucose among nondiabetics who
 ```{r}
 #| context: setup
 # load the data from rmb package
-hers = rmb::hers |> haven::zap_labels()
+hers <- rmb::hers |> haven::zap_labels()
 
-n.obs = 100 # we're going to take a small subset of the data to look at;
+n_obs <- 100 # we're going to take a small subset of the data to look at;
 # if we took the whole data set, the likelihood function would be hard to
 # graph nicely
 
-data1 =
+data1 <-
   hers |>
   filter(
     diabetes == 0,
-    exercise == 0) |>
-  head(n.obs)
+    exercise == 0
+  ) |>
+  head(n_obs)
 
-glucose_data =
+glucose_data <-
   data1 |>
   pull(glucose)
 
-plot1 =
+plot1 <-
   data1 |>
   ggplot() +
   geom_histogram(aes(x = glucose), bins = 30) +
   theme_classic()
 
-nobs <-  length(glucose_data)
+nobs <- length(glucose_data)
 mles <- tibble(
   mu_hat = mean(glucose_data),
-  sigma_hat = sqrt(mean((glucose_data - mu_hat)^2)))
+  sigma_hat = sqrt(mean((glucose_data - mu_hat)^2))
+)
 
 plot1 |> ggplotly()
 
@@ -66,34 +68,31 @@ Looks somewhat plausibly Gaussian. Good enough for this example!
 # it's computationally better to construct the log-likelihood first and then
 # exponentiate it to get the likelihood
 
-loglik = function(
-    mu = mles$mu_hat, # I'm assigning default values, which the function will use
-    # unless we tell it otherwise
-    sigma = mles$sigma_hat, # note that you can define some defaults based on other arguments
-    x = glucose_data,
-    n = length(x)
-)
-{
+loglik <- function(
+  mu = mles$mu_hat, # I'm assigning default values, which the function will
+  # use unless we tell it otherwise
+  sigma = mles$sigma_hat, # note that you can define some defaults based on
+  # other arguments
+  x = glucose_data,
+  n = length(x)
+) {
+  normalizing_constants <- -n / 2 * log((sigma^2) * 2 * pi)
 
-  normalizing_constants = -n/2 * log((sigma^2) * 2 * pi)
+  # I have to do this part in a somewhat complicated way
+  # so that we can pass in vectors of possible values of mu
+  # and get the likelihood for each value;
+  # for the binomial case it's easier
+  sum_squares <- sum(x^2) - 2 * sum(x) * mu + n * mu^2
 
-  likelihood_kernel = - 1/(2 * sigma^2) *
-    {
-      # I have to do this part in a somewhat complicated way
-      # so that we can pass in vectors of possible values of mu
-      # and get the likelihood for each value;
-      # for the binomial case it's easier
-      sum(x^2) - 2 * sum(x) * mu + n * mu^2
-    }
+  likelihood_kernel <- -1 / (2 * sigma^2) * sum_squares
 
-  answer = normalizing_constants + likelihood_kernel
+  answer <- normalizing_constants + likelihood_kernel
 
   return(answer)
-
 }
 
 # `...` means pass any inputs to lik() along to loglik()
-lik = function(...) exp(loglik(...))
+lik <- function(...) exp(loglik(...))
 
 
 ```
@@ -105,9 +104,9 @@ lik = function(...) exp(loglik(...))
 ```{r}
 ggplot() +
   geom_function(fun = function(x) lik(mu = x)) +
-  xlim(mean(glucose_data) + c(-1,1) * sd(glucose_data)) +
+  xlim(mean(glucose_data) + c(-1, 1) * sd(glucose_data)) +
   ylab("likelihood") +
-  xlab("mu") +
+  xlab(expression("Mean, " * mu)) +
   geom_vline(xintercept = mean(glucose_data), col = "red")
 
 ```
@@ -124,9 +123,9 @@ Likelihood of `hers` data w.r.t. $\mu$
 
 ggplot() +
   geom_function(fun = function(x) loglik(mu = x)) +
-  xlim(mean(glucose_data) + c(-1,1) * sd(glucose_data)) +
-  ylab('log(likelihood)') +
-  xlab("mu") +
+  xlim(mean(glucose_data) + c(-1, 1) * sd(glucose_data)) +
+  ylab("log(likelihood)") +
+  xlab(expression("Mean, " * mu)) +
   geom_vline(xintercept = mean(glucose_data), col = "red")
 
 
@@ -141,12 +140,14 @@ Log-likelihood of `hers` data w.r.t. $\mu$
 
 
 ```{r}
-shiny::sliderInput(inputId = "mu",
-                   label = "mu-hat",
-                   min = 95,
-                   max = 105,
-                   value = mean(glucose_data),
-                   step = .1)
+shiny::sliderInput(
+  inputId = "mu",
+  label = "mu-hat",
+  min = 95,
+  max = 105,
+  value = mean(glucose_data),
+  step = .1
+)
 ```
 
 
@@ -155,29 +156,30 @@ shiny::sliderInput(inputId = "mu",
 
 library(ggplot2)
 library(plotly)
-lik_plot = 
+lik_plot <-
   ggplot() +
   geom_function(
     fun = function(x) lik(sigma = x, mu = input$mu)
   ) +
-  xlim(sd(glucose_data) * c(.9,1.1)) +
+  xlim(sd(glucose_data) * c(.9, 1.1)) +
   geom_vline(
     xintercept = mles$sigma_hat,
-    col = "red") +
-  ylab('Likelihood') +
-  xlab('sigma')
+    col = "red"
+  ) +
+  ylab("Likelihood") +
+  xlab("sigma")
 
-loglik_plot = ggplot() +
+loglik_plot <- ggplot() +
   geom_function(
     fun = function(x) loglik(sigma = x, mu = input$mu)
   ) +
   xlim(sd(glucose_data) * c(0.9, 1.1)) +
-  # ylim(1e-164, 1e-162) +
   geom_vline(
     xintercept = mles$sigma_hat,
-    col = "red") +
+    col = "red"
+  ) +
   ylab("log(likelihood)") +
-  xlab('sigma')
+  xlab("sigma")
 
 output$lik_plot <- shiny::renderPlot(lik_plot)
 output$loglik_plot <- shiny::renderPlot(loglik_plot)
@@ -228,28 +230,32 @@ print(mles)
 
 library(plotly)
 
-n_points = 200
-mu = seq(95, 105, length.out = n_points)
-sigma = seq(7, 15, 
-            length.out = n_points)
-names(mu) = round(mu, 5)
-names(sigma) = round(sigma, 5)
-lliks = outer(mu, sigma, loglik)
-liks = outer(mu, sigma, lik)
+n_points <- 200
+mu <- seq(95, 105, length.out = n_points)
+sigma <- seq(
+  7, 15,
+  length.out = n_points
+)
+names(mu) <- round(mu, 5)
+names(sigma) <- round(sigma, 5)
+lliks <- outer(mu, sigma, loglik)
+liks <- outer(mu, sigma, lik)
 
+# plotly's surface wants z with one row per y value, so we transpose with `t()`
 fig <- plot_ly(
-  type = 'surface',
+  type = "surface",
   x = ~mu,
   y = ~sigma,
-  z = ~t(lliks)) 
- # see https://stackoverflow.com/questions/69472185/correct-use-of-coordinates-to-plot-surface-data-with-plotly for explanation of why transpose `t()` is needed
-fig1 <- fig %>%
+  z = ~ t(lliks)
+)
+fig1 <- fig |>
   plotly::layout(
     scene = list(
       xaxis = list(nticks = 20),
       zaxis = list(nticks = 10),
-      # camera = list(eye = list(x = 0, y = -1, z = 0.5)),
-      aspectratio = list(x = .9, y = .8, z = 0.8)))
+      aspectratio = list(x = .9, y = .8, z = 0.8)
+    )
+  )
 
 fig1
 ```
@@ -257,3 +263,6 @@ fig1
 Log-likelihood of `hers` data w.r.t. $\mu$ and $\sigma^2$
 
 :::
+
+The transpose in the 3D graph follows
+[this Stack Overflow answer](https://stackoverflow.com/questions/69472185/correct-use-of-coordinates-to-plot-surface-data-with-plotly).
