@@ -1,0 +1,24 @@
+:::{#sol-prac-exp-mle-ci .solution}
+
+By @sol-prac-exp-mle-oinf-at-mle,
+$$
+\SE{\hat\pmean_{ML}}
+\approx \sqrt{I(\hat\pmean_{ML}; \vx)^{-1}}
+= \frac{\bar{x}}{\sqrt{n}}.
+$$
+An [approximate](https://morrison-lab.github.io/sds/inference.html#def-approximate-ci) 95% CI for $\pmean$ is:
+
+$$
+\hat\pmean_{ML} \pm 1.96 \times \frac{\bar{x}}{\sqrt{n}}
+= \bar{x} \pm \frac{1.96\bar{x}}{\sqrt{n}}
+$$
+
+Note: the exponential distribution has $\Varf{X} = \pmean^2$,
+so $\SE{\hat\pmean_{ML}} = \pmean/\sqrt{n}$,
+which is estimated by $\bar{x}/\sqrt{n}$.
+More generally,
+the standard error of a sample mean is $\SD{X}/\sqrt{n}$;
+here that reduces to $\pmean/\sqrt{n}$
+because $\SD{X} = \pmean$ for the exponential distribution.
+
+:::

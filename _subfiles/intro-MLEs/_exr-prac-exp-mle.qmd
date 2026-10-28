@@ -1,6 +1,4 @@
-{{< include latex-macros/macros.qmd >}}
-
-::: {#exr-prac-exp-mle}
+:::{#exr-prac-exp-mle}
 #### Exponential MLE (adapted from @dobson4e, Chapter 3)
 
 Let $X_1, \ldots, X_n \siid \text{Exponential}(\pmean)$,
@@ -10,118 +8,7 @@ $$
 \quad x > 0, \quad \pmean > 0.
 $$
 
-**(a)** Write the log-likelihood $\llik(\pmean; \vx)$
+Write the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) $\llik(\pmean; \vx)$
 for the observed data $\vx = (x_1, \ldots, x_n)$.
-
-**(b)** Derive the score function
-$\score(\pmean; \vx) = \deriv{\pmean}\llik(\pmean; \vx)$.
-
-**(c)** Set the score equal to zero and show that $\hat\pmean_{ML} = \bar{x}$.
-Compute the second derivative and verify this critical point is a maximum.
-
-**(d)** Derive the observed information $I(\pmean; \vx) = -\hess(\pmean; \vx)$,
-evaluate it at $\hat\pmean_{ML}$,
-and give an approximate 95% confidence interval for $\pmean$.
-:::
-
-::: {.solution}
-
-**(a)**
-
-$$
-\ba
-\llik(\pmean; \vx)
-&= \logf{\prod_{i=1}^n \frac{1}{\pmean} e^{-x_i/\pmean}}
-\\
-&= \sum_{i=1}^n \logf{\frac{1}{\pmean} e^{-x_i/\pmean}}
-\\
-&= \sum_{i=1}^n \paren{-\logf{\pmean} - \frac{x_i}{\pmean}}
-\\
-&= -n\logf{\pmean} - \frac{1}{\pmean}\sum_{i=1}^n x_i
-\\
-&= -n\logf{\pmean} - \frac{n\bar{x}}{\pmean}
-\ea
-$$
-
-**(b)**
-
-$$
-\ba
-\score(\pmean; \vx)
-&= \deriv{\pmean}\paren{-n\logf{\pmean} - \frac{n\bar{x}}{\pmean}}
-\\
-&= -\frac{n}{\pmean} + \frac{n\bar{x}}{\pmean^2}
-\\
-&= \frac{n}{\pmean^2}\paren{\bar{x} - \pmean}
-\ea
-$$
-
-**(c)**
-
-Setting $\score(\pmean; \vx) = 0$:
-
-$$
-\ba
-0 &= \frac{n}{\pmean^2}\paren{\bar{x} - \pmean}
-\\
-\hat\pmean_{ML} &= \bar{x}
-\ea
-$$
-
-The second derivative is:
-
-$$
-\ba
-\hess(\pmean; \vx)
-&= \deriv{\pmean}\paren{-\frac{n}{\pmean} + \frac{n\bar{x}}{\pmean^2}}
-\\
-&= \frac{n}{\pmean^2} - \frac{2n\bar{x}}{\pmean^3}
-\ea
-$$
-
-Evaluated at $\hat\pmean_{ML} = \bar{x}$:
-
-$$
-\hess(\bar{x}; \vx)
-= \frac{n}{\bar{x}^2} - \frac{2n\bar{x}}{\bar{x}^3}
-= \frac{n}{\bar{x}^2} - \frac{2n}{\bar{x}^2}
-= -\frac{n}{\bar{x}^2} < 0
-$$
-
-Since the second derivative is negative, $\hat\pmean_{ML} = \bar{x}$ is a maximum.
-
-**(d)**
-
-The observed information is:
-
-$$
-I(\pmean; \vx) = -\hess(\pmean; \vx)
-= \frac{2n\bar{x}}{\pmean^3} - \frac{n}{\pmean^2}
-$$
-
-Evaluated at $\hat\pmean_{ML} = \bar{x}$:
-
-$$
-I(\hat\pmean_{ML}; \vx) = \frac{2n\bar{x}}{\bar{x}^3} - \frac{n}{\bar{x}^2}
-= \frac{2n}{\bar{x}^2} - \frac{n}{\bar{x}^2}
-= \frac{n}{\bar{x}^2}
-$$
-
-So $\SE{\hat\pmean_{ML}} \approx \sqrt{I(\hat\pmean_{ML}; \vx)^{-1}} = \frac{\bar{x}}{\sqrt{n}}$.
-
-An approximate 95% CI for $\pmean$ is:
-
-$$
-\hat\pmean_{ML} \pm 1.96 \times \frac{\bar{x}}{\sqrt{n}}
-= \bar{x} \pm \frac{1.96\bar{x}}{\sqrt{n}}
-$$
-
-Note: the exponential distribution has $\Varf{X} = \pmean^2$,
-so $\SE{\hat\pmean_{ML}} = \pmean/\sqrt{n}$,
-which is estimated by $\bar{x}/\sqrt{n}$.
-More generally,
-the standard error of a sample mean is $\SD{X}/\sqrt{n}$;
-here that reduces to $\pmean/\sqrt{n}$
-because $\SD{X} = \pmean$ for the exponential distribution.
 
 :::
