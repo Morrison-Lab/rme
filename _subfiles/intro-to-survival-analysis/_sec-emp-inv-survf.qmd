@@ -123,12 +123,28 @@ s_after_na <- na_fit$surv[ev_idx_na]
 s_before_na <- c(1, head(s_after_na, -1))
 
 open_surv <- rbind(
-  data.frame(time = km_fit$time[ev_idx_km], surv = s_before_km, estimator = "Kaplan-Meier"),
-  data.frame(time = na_fit$time[ev_idx_na], surv = s_before_na, estimator = "Nelson-Aalen")
+  data.frame(
+    time = km_fit$time[ev_idx_km],
+    surv = s_before_km,
+    estimator = "Kaplan-Meier"
+  ),
+  data.frame(
+    time = na_fit$time[ev_idx_na],
+    surv = s_before_na,
+    estimator = "Nelson-Aalen"
+  )
 )
 closed_surv <- rbind(
-  data.frame(time = km_fit$time[ev_idx_km], surv = s_after_km, estimator = "Kaplan-Meier"),
-  data.frame(time = na_fit$time[ev_idx_na], surv = s_after_na, estimator = "Nelson-Aalen")
+  data.frame(
+    time = km_fit$time[ev_idx_km],
+    surv = s_after_km,
+    estimator = "Kaplan-Meier"
+  ),
+  data.frame(
+    time = na_fit$time[ev_idx_na],
+    surv = s_after_na,
+    estimator = "Nelson-Aalen"
+  )
 )
 
 ggplot(surv_steps, aes(x = time, y = surv, color = estimator)) +
@@ -180,8 +196,16 @@ isf_steps <- rbind(
 isf_steps <- isf_steps[order(isf_steps$estimator, isf_steps$p), ]
 
 open_isf <- rbind(
-  data.frame(p = head(s_ev_km, -1), t = tail(t_ev_km, -1), estimator = "Kaplan-Meier"),
-  data.frame(p = head(s_ev_na, -1), t = tail(t_ev_na, -1), estimator = "Nelson-Aalen")
+  data.frame(
+    p = head(s_ev_km, -1),
+    t = tail(t_ev_km, -1),
+    estimator = "Kaplan-Meier"
+  ),
+  data.frame(
+    p = head(s_ev_na, -1),
+    t = tail(t_ev_na, -1),
+    estimator = "Nelson-Aalen"
+  )
 )
 closed_isf <- rbind(
   data.frame(p = s_ev_km, t = t_ev_km, estimator = "Kaplan-Meier"),
