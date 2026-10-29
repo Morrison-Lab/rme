@@ -1862,14 +1862,14 @@ Var(t) &amp;= {\lambda}^{-2}
 </div>
 </div>
 </section><section class="slide level2"><div id="sol-compute-surv-pred" class="proof solution">
-<p><span class="proof-title"><em>Solution 8</em>. </span>If the mean is 7 years until death, then the rate parameter <span class="math inline">\({\lambda}= 1/7\)</span> events (deaths) per year.</p>
+<p><span class="proof-title"><em>Solution 9</em>. </span>If the mean is 7 years until death, then the rate parameter <span class="math inline">\({\lambda}= 1/7\)</span> events (deaths) per year.</p>
 <p>The 0.025 quantile of the exponential distribution with <span class="math inline">\({\lambda}= 1/7\)</span> is <code>qexp(p 0.025, rate = 1/7)</code> = 0.177225 and the 0.975 quantile is <code>qexp(p 0.975, rate = 1/7)</code> = 25.822156, so the prediction interval is <code>qexp(p c(.025, 0.975), rate = 1/7)</code> = (0.177225, 25.822156).</p>
 </div>
 </section><section class="slide level2"><div id="exr-graph-prediction-intervals" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4</strong></span> Graph the prediction interval as a function of the mean, for <a href="https://morrison-lab.github.io/pds/random-variables.html#def-normal">Gaussian</a> (<span class="math inline">\(\sigma = 1\)</span>), <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">Binomial</a>, <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a>, and <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">Exponential</a>.</p>
 </div>
 </section><section class="slide level2"><div id="sol-graph-prediction-intervals" class="proof solution">
-<p><span class="proof-title"><em>Solution 9</em>. </span>Left to the reader for now.</p>
+<p><span class="proof-title"><em>Solution 10</em>. </span>Left to the reader for now.</p>
 </div>
 </section><section class="slide level2"><div id="exr-explain-surv-pred" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5 (Explain the results)</strong></span> Why do time-to-event models have such wide predictive intervals?</p>
@@ -1888,7 +1888,7 @@ Var(t) &amp;= {\lambda}^{-2}
 </div>
 </div>
 </section><section class="slide level2"><div id="sol-explain-surv-pred" class="proof solution">
-<p><span class="proof-title"><em>Solution 10</em>. </span>In the exponential distribution, variance is the square of the mean (hence SD is equal to mean); as opposed to Poisson, where variance was equal to the mean (and SD is the square-root of the mean), or the Bernoulli, where the variance is the mean minus the square of the mean (so the SD is smaller than the square-root of the mean).</p>
+<p><span class="proof-title"><em>Solution 11</em>. </span>In the exponential distribution, variance is the square of the mean (hence SD is equal to mean); as opposed to Poisson, where variance was equal to the mean (and SD is the square-root of the mean), or the Bernoulli, where the variance is the mean minus the square of the mean (so the SD is smaller than the square-root of the mean).</p>
 </div>
 </section><section class="slide level2"><h4 class="smaller" id="estimating-lambda">Estimating <span class="math inline">\({\lambda}\)</span>
 </h4>
@@ -2857,10 +2857,16 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 </div>
 </div>
 <div id="exr-km-survfit" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7</strong></span> Implement the KM survival curve estimator in R. Check the output of your implementation against the version in the <code>survival</code> package.</p>
+<p><span class="theorem-title"><strong>Exercise 7</strong></span> Implement the <a href="#/def-KM-estimator">KM survival curve</a> <a href="https://morrison-lab.github.io/sds/estimation.html#def-estimator">estimator</a> in R.</p>
 </div>
 <div id="sol-km-survfit" class="proof solution">
-<p><span class="proof-title"><em>Solution 5</em>. </span>See <a href="#/tbl-km-curve" class="quarto-xref">Table&nbsp;5</a> in <a href="#/sol-km-curve-by-hand" class="quarto-xref">Solution&nbsp;4</a> for the manual implementation. Here’s the version from the <code>survival</code> package:</p>
+<p><span class="proof-title"><em>Solution 5</em>. </span>See <a href="#/tbl-km-curve" class="quarto-xref">Table&nbsp;5</a> in <a href="#/sol-km-curve-by-hand" class="quarto-xref">Solution&nbsp;4</a> for the manual implementation.</p>
+</div>
+</section><section class="slide level2"><div id="exr-km-survfit-check" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 8</strong></span> In the setting of <a href="#/exr-km-survfit" class="quarto-xref">Exercise&nbsp;7</a>, check the output of your implementation against the version in the <code>survival</code> package.</p>
+</div>
+<div id="sol-km-survfit-check" class="proof solution">
+<p><span class="proof-title"><em>Solution 6</em>. </span>Compare <a href="#/sol-km-survfit" class="quarto-xref">Solution&nbsp;5</a> with the version from the <code>survival</code> package:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-label="1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb20-2"><a aria-label="2"></a>data1 <span class="sc">|&gt;</span></span>
@@ -2878,10 +2884,10 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 </div>
 </div>
 <div id="exr-km-graph-1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 8</strong></span> Graph the KM estimated survival curve for the data in <a href="#/tbl-surv1" class="quarto-xref">Table&nbsp;4</a>.</p>
+<p><span class="theorem-title"><strong>Exercise 9</strong></span> Graph the KM estimated survival curve for the data in <a href="#/tbl-surv1" class="quarto-xref">Table&nbsp;4</a>.</p>
 </div>
 <div id="sol-km-graph-1" class="proof solution">
-<p><span class="proof-title"><em>Solution 6</em>. </span></p>
+<p><span class="proof-title"><em>Solution 7</em>. </span></p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-label="1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb21-2"><a aria-label="2"></a>km_curve <span class="sc">|&gt;</span></span>
@@ -2916,10 +2922,10 @@ Table&nbsp;5: Kaplan-Meier survival curve calculations
 </div>
 </div>
 <div id="exr-km-median" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 9</strong></span> Find the KM estimate of <a href="#/def-median-survival">median survival time</a>.</p>
+<p><span class="theorem-title"><strong>Exercise 10</strong></span> Find the KM estimate of <a href="#/def-median-survival">median survival time</a>.</p>
 </div>
 <div id="sol-km-median" class="proof solution">
-<p><span class="proof-title"><em>Solution 7</em>. </span></p>
+<p><span class="proof-title"><em>Solution 8</em>. </span></p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-label="1"></a>KM_model <span class="sc">|&gt;</span> <span class="fu">quantile</span>(<span class="at">prob =</span> <span class="fl">0.5</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -3369,7 +3375,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </div>
 </div>
 </section><section class="slide level2"><div id="exr-compute-surv-pred" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 10 (Construct a prediction interval)</strong></span> Suppose a cancer patient is predicted to have an <a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">expected (mean)</a> lifetime of 7 years after diagnosis, and suppose the distribution is exponential.</p>
+<p><span class="theorem-title"><strong>Exercise 11 (Construct a prediction interval)</strong></span> Suppose a cancer patient is predicted to have an <a href="https://morrison-lab.github.io/pds/expectation.html#def-expectation">expected (mean)</a> lifetime of 7 years after diagnosis, and suppose the distribution is exponential.</p>
 <p>Construct a 95% <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-prediction-interval">prediction interval</a> for survival.</p>
 </div>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -3386,17 +3392,17 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </div>
 </div>
 </section><section class="slide level2"><div id="sol-compute-surv-pred" class="proof solution">
-<p><span class="proof-title"><em>Solution 8</em>. </span>If the mean is 7 years until death, then the rate parameter <span class="math inline">\({\lambda}= 1/7\)</span> events (deaths) per year.</p>
+<p><span class="proof-title"><em>Solution 9</em>. </span>If the mean is 7 years until death, then the rate parameter <span class="math inline">\({\lambda}= 1/7\)</span> events (deaths) per year.</p>
 <p>The 0.025 quantile of the exponential distribution with <span class="math inline">\({\lambda}= 1/7\)</span> is <code>qexp(p 0.025, rate = 1/7)</code> = 0.177225 and the 0.975 quantile is <code>qexp(p 0.975, rate = 1/7)</code> = 25.822156, so the prediction interval is <code>qexp(p c(.025, 0.975), rate = 1/7)</code> = (0.177225, 25.822156).</p>
 </div>
 </section><section class="slide level2"><div id="exr-graph-prediction-intervals" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 11</strong></span> Graph the prediction interval as a function of the mean, for <a href="https://morrison-lab.github.io/pds/random-variables.html#def-normal">Gaussian</a> (<span class="math inline">\(\sigma = 1\)</span>), <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">Binomial</a>, <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a>, and <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">Exponential</a>.</p>
+<p><span class="theorem-title"><strong>Exercise 12</strong></span> Graph the prediction interval as a function of the mean, for <a href="https://morrison-lab.github.io/pds/random-variables.html#def-normal">Gaussian</a> (<span class="math inline">\(\sigma = 1\)</span>), <a href="https://morrison-lab.github.io/pds/distributions.html#def-binomial">Binomial</a>, <a href="https://morrison-lab.github.io/pds/distributions.html#def-poisson">Poisson</a>, and <a href="https://morrison-lab.github.io/pds/random-variables.html#def-exponential">Exponential</a>.</p>
 </div>
 </section><section class="slide level2"><div id="sol-graph-prediction-intervals" class="proof solution">
-<p><span class="proof-title"><em>Solution 9</em>. </span>Left to the reader for now.</p>
+<p><span class="proof-title"><em>Solution 10</em>. </span>Left to the reader for now.</p>
 </div>
 </section><section class="slide level2"><div id="exr-explain-surv-pred" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 12 (Explain the results)</strong></span> Why do time-to-event models have such wide predictive intervals?</p>
+<p><span class="theorem-title"><strong>Exercise 13 (Explain the results)</strong></span> Why do time-to-event models have such wide predictive intervals?</p>
 </div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -3412,7 +3418,7 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 </div>
 </div>
 </section><section class="slide level2"><div id="sol-explain-surv-pred" class="proof solution">
-<p><span class="proof-title"><em>Solution 10</em>. </span>In the exponential distribution, variance is the square of the mean (hence SD is equal to mean); as opposed to Poisson, where variance was equal to the mean (and SD is the square-root of the mean), or the Bernoulli, where the variance is the mean minus the square of the mean (so the SD is smaller than the square-root of the mean).</p>
+<p><span class="proof-title"><em>Solution 11</em>. </span>In the exponential distribution, variance is the square of the mean (hence SD is equal to mean); as opposed to Poisson, where variance was equal to the mean (and SD is the square-root of the mean), or the Bernoulli, where the variance is the mean minus the square of the mean (so the SD is smaller than the square-root of the mean).</p>
 </div>
 </section></section><section><section id="using-the-survival-package-in-r" class="title-slide slide level1 center" data-number="8"><h1>
 <span class="header-section-number">8</span> Using the <code>survival</code> package in R</h1>
@@ -3677,10 +3683,10 @@ Figure&nbsp;13: KM curve for 6MP patients, calculated by hand
 
 </section><section class="slide level2"><p>(a.k.a. the Mantel-Cox test)</p>
 </section><section class="slide level2"><div id="exr-compare-surv-ests" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 13</strong></span> How do we test the <a href="https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis">null hypothesis</a> that two or more groups have the same time-to-event distribution?</p>
+<p><span class="theorem-title"><strong>Exercise 14</strong></span> How do we test the <a href="https://morrison-lab.github.io/sds/inference.html#def-null-hypothesis">null hypothesis</a> that two or more groups have the same time-to-event distribution?</p>
 </div>
 </section><section class="slide level2"><div id="sol-compare-surv-ests" class="proof solution">
-<p><span class="proof-title"><em>Solution 11</em>. </span>One option is the <strong>log-rank test</strong>, which compares the <a href="#/def-KM-estimator">Kaplan-Meier estimates</a> of the <a href="#/def-surv-fn">survival functions</a> of those groups.</p>
+<p><span class="proof-title"><em>Solution 12</em>. </span>One option is the <strong>log-rank test</strong>, which compares the <a href="#/def-KM-estimator">Kaplan-Meier estimates</a> of the <a href="#/def-surv-fn">survival functions</a> of those groups.</p>
 </div>
 </section><section class="slide level2"><aside class="notes"><p>Adapted from <span class="citation" data-cites="kleinbaum2012survival"><a href="#/references" role="doc-biblioref" onclick="">[6, Sec. IV]</a>, pp.&nbsp;67–68</span>:</p>
 <ul>
@@ -4426,10 +4432,10 @@ Figure&nbsp;16: Disease-Free Cumulative Hazard by Disease Group
 </div>
 <p>The Kaplan-Meier and Nelson-Aalen survival estimates are very similar for this dataset.</p>
 </section><section class="slide level2"><div id="exr-na-curve-by-hand" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 14</strong></span> Compute the Nelson-Aalen (NA) estimated survival curve for the data in <a href="#/tbl-surv1" class="quarto-xref">Table&nbsp;4</a>, by hand.</p>
+<p><span class="theorem-title"><strong>Exercise 15</strong></span> Compute the Nelson-Aalen (NA) estimated survival curve for the data in <a href="#/tbl-surv1" class="quarto-xref">Table&nbsp;4</a>, by hand.</p>
 </div>
 <div id="sol-na-curve-by-hand" class="proof solution">
-<p><span class="proof-title"><em>Solution 12</em>. </span>Let:</p>
+<p><span class="proof-title"><em>Solution 13</em>. </span>Let:</p>
 <ul>
 <li>
 <span class="math inline">\(n\)</span>: total sample size</li>
@@ -4662,10 +4668,16 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 </div>
 </div>
 <div id="exr-na-survfit" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 15</strong></span> Implement the NA survival curve estimator in R. Check the output of your implementation against the version in the <code>survival</code> package.</p>
+<p><span class="theorem-title"><strong>Exercise 16</strong></span> Implement the NA <a href="#/def-surv-fn">survival curve</a> <a href="https://morrison-lab.github.io/sds/estimation.html#def-estimator">estimator</a> in R.</p>
 </div>
 <div id="sol-na-survfit" class="proof solution">
-<p><span class="proof-title"><em>Solution 13</em>. </span></p>
+<p><span class="proof-title"><em>Solution 14</em>. </span>See <a href="#/tbl-na-curve" class="quarto-xref">Table&nbsp;9</a> in <a href="#/sol-na-curve-by-hand" class="quarto-xref">Solution&nbsp;13</a> for the manual implementation.</p>
+</div>
+</section><section class="slide level2"><div id="exr-na-survfit-check" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 17</strong></span> In the setting of <a href="#/exr-na-survfit" class="quarto-xref">Exercise&nbsp;16</a>, check the output of your implementation against the version in the <code>survival</code> package.</p>
+</div>
+<div id="sol-na-survfit-check" class="proof solution">
+<p><span class="proof-title"><em>Solution 15</em>. </span>Compare <a href="#/sol-na-survfit" class="quarto-xref">Solution&nbsp;14</a> with the version from the <code>survival</code> package:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a aria-label="1"></a>NA_model <span class="ot">&lt;-</span></span>
 <span id="cb52-2"><a aria-label="2"></a>  data1 <span class="sc">|&gt;</span></span>
@@ -4685,10 +4697,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 </div>
 </div>
 <div id="exr-km-na-graph" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 16</strong></span> Add the NA estimated survival curve to the graph from <a href="#/exr-km-graph-1" class="quarto-xref">Exercise&nbsp;8</a>.</p>
+<p><span class="theorem-title"><strong>Exercise 18</strong></span> Add the NA estimated survival curve to the graph from <a href="#/exr-km-graph-1" class="quarto-xref">Exercise&nbsp;9</a>.</p>
 </div>
 <div id="sol-km-na-graph" class="proof solution">
-<p><span class="proof-title"><em>Solution 14</em>. </span></p>
+<p><span class="proof-title"><em>Solution 16</em>. </span></p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a aria-label="1"></a>km_and_na <span class="ot">&lt;-</span></span>
 <span id="cb53-2"><a aria-label="2"></a>  <span class="fu">bind_rows</span>(</span>
@@ -4714,10 +4726,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 </div>
 </div>
 <div id="exr-na-median" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 17</strong></span> Find the NA estimate of <a href="#/def-median-survival">median survival time</a>.</p>
+<p><span class="theorem-title"><strong>Exercise 19</strong></span> Find the NA estimate of <a href="#/def-median-survival">median survival time</a>.</p>
 </div>
 <div id="sol-na-median" class="proof solution">
-<p><span class="proof-title"><em>Solution 15</em>. </span></p>
+<p><span class="proof-title"><em>Solution 17</em>. </span></p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a aria-label="1"></a>NA_model <span class="sc">|&gt;</span> <span class="fu">quantile</span>(<span class="at">prob =</span> <span class="fl">0.5</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
@@ -4730,10 +4742,10 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 </div>
 </div>
 <div id="exr-compare-km-na" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 18</strong></span> Describe the similarities and differences between the graphs of the KM and NA survival function estimates.</p>
+<p><span class="theorem-title"><strong>Exercise 20</strong></span> Describe the similarities and differences between the graphs of the KM and NA survival function estimates.</p>
 </div>
 <div id="sol-compare-km-na" class="proof solution">
-<p><span class="proof-title"><em>Solution 16</em>. </span>The curves are very similar for this data set, with the KM curve returning slightly lower estimates of survival.</p>
+<p><span class="proof-title"><em>Solution 18</em>. </span>The curves are very similar for this data set, with the KM curve returning slightly lower estimates of survival.</p>
 </div>
 </section></section><section><section id="empirical-inverse-survival-function" class="title-slide slide level1 center" data-number="11"><h1>
 <span class="header-section-number">11</span> Empirical Inverse Survival Function</h1>
@@ -4890,30 +4902,46 @@ Table&nbsp;9: Nelson-Aalen survival curve calculations
 <span id="cb56-32"><a aria-label="32"></a>s_before_na <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">head</span>(s_after_na, <span class="sc">-</span><span class="dv">1</span>))</span>
 <span id="cb56-33"><a aria-label="33"></a></span>
 <span id="cb56-34"><a aria-label="34"></a>open_surv <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb56-35"><a aria-label="35"></a>  <span class="fu">data.frame</span>(<span class="at">time =</span> km_fit<span class="sc">$</span>time[ev_idx_km], <span class="at">surv =</span> s_before_km, <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span>),</span>
-<span id="cb56-36"><a aria-label="36"></a>  <span class="fu">data.frame</span>(<span class="at">time =</span> na_fit<span class="sc">$</span>time[ev_idx_na], <span class="at">surv =</span> s_before_na, <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span>)</span>
-<span id="cb56-37"><a aria-label="37"></a>)</span>
-<span id="cb56-38"><a aria-label="38"></a>closed_surv <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb56-39"><a aria-label="39"></a>  <span class="fu">data.frame</span>(<span class="at">time =</span> km_fit<span class="sc">$</span>time[ev_idx_km], <span class="at">surv =</span> s_after_km, <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span>),</span>
-<span id="cb56-40"><a aria-label="40"></a>  <span class="fu">data.frame</span>(<span class="at">time =</span> na_fit<span class="sc">$</span>time[ev_idx_na], <span class="at">surv =</span> s_after_na, <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span>)</span>
-<span id="cb56-41"><a aria-label="41"></a>)</span>
-<span id="cb56-42"><a aria-label="42"></a></span>
-<span id="cb56-43"><a aria-label="43"></a><span class="fu">ggplot</span>(surv_steps, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> surv, <span class="at">color =</span> estimator)) <span class="sc">+</span></span>
-<span id="cb56-44"><a aria-label="44"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
-<span id="cb56-45"><a aria-label="45"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> cens_marks, <span class="at">shape =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb56-46"><a aria-label="46"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> open_surv, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb56-47"><a aria-label="47"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> closed_surv, <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb56-48"><a aria-label="48"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb56-49"><a aria-label="49"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
-<span id="cb56-50"><a aria-label="50"></a>  ) <span class="sc">+</span></span>
-<span id="cb56-51"><a aria-label="51"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.05</span>)) <span class="sc">+</span></span>
-<span id="cb56-52"><a aria-label="52"></a>  <span class="fu">labs</span>(</span>
-<span id="cb56-53"><a aria-label="53"></a>    <span class="at">x =</span> <span class="st">"Time (months)"</span>,</span>
-<span id="cb56-54"><a aria-label="54"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival probability, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)(t)),</span>
-<span id="cb56-55"><a aria-label="55"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
-<span id="cb56-56"><a aria-label="56"></a>  ) <span class="sc">+</span></span>
-<span id="cb56-57"><a aria-label="57"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb56-58"><a aria-label="58"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb56-35"><a aria-label="35"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb56-36"><a aria-label="36"></a>    <span class="at">time =</span> km_fit<span class="sc">$</span>time[ev_idx_km],</span>
+<span id="cb56-37"><a aria-label="37"></a>    <span class="at">surv =</span> s_before_km,</span>
+<span id="cb56-38"><a aria-label="38"></a>    <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span></span>
+<span id="cb56-39"><a aria-label="39"></a>  ),</span>
+<span id="cb56-40"><a aria-label="40"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb56-41"><a aria-label="41"></a>    <span class="at">time =</span> na_fit<span class="sc">$</span>time[ev_idx_na],</span>
+<span id="cb56-42"><a aria-label="42"></a>    <span class="at">surv =</span> s_before_na,</span>
+<span id="cb56-43"><a aria-label="43"></a>    <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span></span>
+<span id="cb56-44"><a aria-label="44"></a>  )</span>
+<span id="cb56-45"><a aria-label="45"></a>)</span>
+<span id="cb56-46"><a aria-label="46"></a>closed_surv <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb56-47"><a aria-label="47"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb56-48"><a aria-label="48"></a>    <span class="at">time =</span> km_fit<span class="sc">$</span>time[ev_idx_km],</span>
+<span id="cb56-49"><a aria-label="49"></a>    <span class="at">surv =</span> s_after_km,</span>
+<span id="cb56-50"><a aria-label="50"></a>    <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span></span>
+<span id="cb56-51"><a aria-label="51"></a>  ),</span>
+<span id="cb56-52"><a aria-label="52"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb56-53"><a aria-label="53"></a>    <span class="at">time =</span> na_fit<span class="sc">$</span>time[ev_idx_na],</span>
+<span id="cb56-54"><a aria-label="54"></a>    <span class="at">surv =</span> s_after_na,</span>
+<span id="cb56-55"><a aria-label="55"></a>    <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span></span>
+<span id="cb56-56"><a aria-label="56"></a>  )</span>
+<span id="cb56-57"><a aria-label="57"></a>)</span>
+<span id="cb56-58"><a aria-label="58"></a></span>
+<span id="cb56-59"><a aria-label="59"></a><span class="fu">ggplot</span>(surv_steps, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> surv, <span class="at">color =</span> estimator)) <span class="sc">+</span></span>
+<span id="cb56-60"><a aria-label="60"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb56-61"><a aria-label="61"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> cens_marks, <span class="at">shape =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb56-62"><a aria-label="62"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> open_surv, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb56-63"><a aria-label="63"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> closed_surv, <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb56-64"><a aria-label="64"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb56-65"><a aria-label="65"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
+<span id="cb56-66"><a aria-label="66"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-67"><a aria-label="67"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.05</span>)) <span class="sc">+</span></span>
+<span id="cb56-68"><a aria-label="68"></a>  <span class="fu">labs</span>(</span>
+<span id="cb56-69"><a aria-label="69"></a>    <span class="at">x =</span> <span class="st">"Time (months)"</span>,</span>
+<span id="cb56-70"><a aria-label="70"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival probability, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)(t)),</span>
+<span id="cb56-71"><a aria-label="71"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
+<span id="cb56-72"><a aria-label="72"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-73"><a aria-label="73"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb56-74"><a aria-label="74"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-emp-surv-drug6mp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-emp-surv-drug6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17: Estimated survival functions for 6-MP patients from the KM and Nelson-Aalen estimators.
@@ -4950,29 +4978,37 @@ Figure&nbsp;17: Estimated survival functions for 6-MP patients from the KM and N
 <span id="cb57-19"><a aria-label="19"></a>isf_steps <span class="ot">&lt;-</span> isf_steps[<span class="fu">order</span>(isf_steps<span class="sc">$</span>estimator, isf_steps<span class="sc">$</span>p), ]</span>
 <span id="cb57-20"><a aria-label="20"></a></span>
 <span id="cb57-21"><a aria-label="21"></a>open_isf <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb57-22"><a aria-label="22"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> <span class="fu">head</span>(s_ev_km, <span class="sc">-</span><span class="dv">1</span>), <span class="at">t =</span> <span class="fu">tail</span>(t_ev_km, <span class="sc">-</span><span class="dv">1</span>), <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span>),</span>
-<span id="cb57-23"><a aria-label="23"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> <span class="fu">head</span>(s_ev_na, <span class="sc">-</span><span class="dv">1</span>), <span class="at">t =</span> <span class="fu">tail</span>(t_ev_na, <span class="sc">-</span><span class="dv">1</span>), <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span>)</span>
-<span id="cb57-24"><a aria-label="24"></a>)</span>
-<span id="cb57-25"><a aria-label="25"></a>closed_isf <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb57-26"><a aria-label="26"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> s_ev_km, <span class="at">t =</span> t_ev_km, <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span>),</span>
-<span id="cb57-27"><a aria-label="27"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> s_ev_na, <span class="at">t =</span> t_ev_na, <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span>)</span>
-<span id="cb57-28"><a aria-label="28"></a>)</span>
-<span id="cb57-29"><a aria-label="29"></a></span>
-<span id="cb57-30"><a aria-label="30"></a><span class="fu">ggplot</span>(isf_steps, <span class="fu">aes</span>(<span class="at">x =</span> p, <span class="at">y =</span> t, <span class="at">color =</span> estimator)) <span class="sc">+</span></span>
-<span id="cb57-31"><a aria-label="31"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
-<span id="cb57-32"><a aria-label="32"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> open_isf, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb57-33"><a aria-label="33"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> closed_isf, <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb57-34"><a aria-label="34"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb57-35"><a aria-label="35"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
-<span id="cb57-36"><a aria-label="36"></a>  ) <span class="sc">+</span></span>
-<span id="cb57-37"><a aria-label="37"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb57-38"><a aria-label="38"></a>  <span class="fu">labs</span>(</span>
-<span id="cb57-39"><a aria-label="39"></a>    <span class="at">x =</span> <span class="st">"Probability, p"</span>,</span>
-<span id="cb57-40"><a aria-label="40"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival time, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>} <span class="sc">*</span> (p)),</span>
-<span id="cb57-41"><a aria-label="41"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
-<span id="cb57-42"><a aria-label="42"></a>  ) <span class="sc">+</span></span>
-<span id="cb57-43"><a aria-label="43"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb57-44"><a aria-label="44"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb57-22"><a aria-label="22"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb57-23"><a aria-label="23"></a>    <span class="at">p =</span> <span class="fu">head</span>(s_ev_km, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb57-24"><a aria-label="24"></a>    <span class="at">t =</span> <span class="fu">tail</span>(t_ev_km, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb57-25"><a aria-label="25"></a>    <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span></span>
+<span id="cb57-26"><a aria-label="26"></a>  ),</span>
+<span id="cb57-27"><a aria-label="27"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb57-28"><a aria-label="28"></a>    <span class="at">p =</span> <span class="fu">head</span>(s_ev_na, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb57-29"><a aria-label="29"></a>    <span class="at">t =</span> <span class="fu">tail</span>(t_ev_na, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb57-30"><a aria-label="30"></a>    <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span></span>
+<span id="cb57-31"><a aria-label="31"></a>  )</span>
+<span id="cb57-32"><a aria-label="32"></a>)</span>
+<span id="cb57-33"><a aria-label="33"></a>closed_isf <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb57-34"><a aria-label="34"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> s_ev_km, <span class="at">t =</span> t_ev_km, <span class="at">estimator =</span> <span class="st">"Kaplan-Meier"</span>),</span>
+<span id="cb57-35"><a aria-label="35"></a>  <span class="fu">data.frame</span>(<span class="at">p =</span> s_ev_na, <span class="at">t =</span> t_ev_na, <span class="at">estimator =</span> <span class="st">"Nelson-Aalen"</span>)</span>
+<span id="cb57-36"><a aria-label="36"></a>)</span>
+<span id="cb57-37"><a aria-label="37"></a></span>
+<span id="cb57-38"><a aria-label="38"></a><span class="fu">ggplot</span>(isf_steps, <span class="fu">aes</span>(<span class="at">x =</span> p, <span class="at">y =</span> t, <span class="at">color =</span> estimator)) <span class="sc">+</span></span>
+<span id="cb57-39"><a aria-label="39"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb57-40"><a aria-label="40"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> open_isf, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb57-41"><a aria-label="41"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> closed_isf, <span class="at">shape =</span> <span class="dv">19</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb57-42"><a aria-label="42"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb57-43"><a aria-label="43"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Kaplan-Meier"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Nelson-Aalen"</span> <span class="ot">=</span> <span class="st">"darkorange"</span>)</span>
+<span id="cb57-44"><a aria-label="44"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-45"><a aria-label="45"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb57-46"><a aria-label="46"></a>  <span class="fu">labs</span>(</span>
+<span id="cb57-47"><a aria-label="47"></a>    <span class="at">x =</span> <span class="st">"Probability, p"</span>,</span>
+<span id="cb57-48"><a aria-label="48"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">"Survival time, "</span> <span class="sc">*</span> <span class="fu">widehat</span>(S)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span>} <span class="sc">*</span> (p)),</span>
+<span id="cb57-49"><a aria-label="49"></a>    <span class="at">color =</span> <span class="cn">NULL</span></span>
+<span id="cb57-50"><a aria-label="50"></a>  ) <span class="sc">+</span></span>
+<span id="cb57-51"><a aria-label="51"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb57-52"><a aria-label="52"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div id="fig-emp-isf-drug6mp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-emp-isf-drug6mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;18: Empirical inverse survival function <span class="math inline">\(\mathop{\hat{\operatorname{S}}}\nolimits^{-1}(p)\)</span> for 6-MP patients from the KM and Nelson-Aalen estimators.
