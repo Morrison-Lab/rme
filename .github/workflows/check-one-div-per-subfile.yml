@@ -1,0 +1,25 @@
+# Thin caller of Morrison-Lab/gha's reusable one-div-per-subfile check.
+#
+# Fails a PR that adds a line to a subfile (_subfiles/_*.qmd) holding more than
+# one top-level div. Diff-scoped: subfiles a PR does not touch are never judged,
+# so existing multi-div files are not swept. A proof may share a file with its
+# claim, and a solution with its exercise.
+#
+# Why it exists: the rule was warn-only and no repo called the check, so
+# Morrison-Lab/sds#444 added divs to a multi-div subfile (Ezra, 2026-10-29;
+# Morrison-Lab/gha#1176).
+
+name: Check one div per subfile
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-one-div-per-subfile.yml@v3
+    with:
+      fail: true
+      # Vendored Quarto extensions are not ours to edit.
+      paths-ignore: '_extensions/**'
