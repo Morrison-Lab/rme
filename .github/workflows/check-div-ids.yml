@@ -1,0 +1,15 @@
+# Flags a fenced div with a theorem-type class (.remark, .definition, ...)
+# but no matching id (#rem-, #def-, ...) when a PR adds its opening line.
+# Without the id the div renders as a plain block quote. Warn-only.
+name: Check div ids
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: Morrison-Lab/gha/.github/workflows/check-div-ids.yml@v3
