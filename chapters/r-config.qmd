@@ -10,7 +10,7 @@ Functions from these packages will be used throughout this document:
 #| label: "packages"
 #| message: false
 library(conflicted) # check for conflicting function definitions
-# library(printr) # inserts help-file output into markdown output
+# printr is not loaded here: it inserts help-file output into markdown output
 library(rmarkdown) # Convert R Markdown documents into a variety of formats.
 library(pander) # format tables for markdown
 library(ggplot2) # graphics
@@ -35,8 +35,11 @@ library(webshot2) # convert interactive content to static for pdf
 library(forcats) # functions for categorical variables ("factors")
 library(stringr) # functions for dealing with strings
 library(lubridate) # functions for dealing with dates and times
-library(broom) # Summarizes key information about statistical objects in tidy tibbles
-library(broom.helpers) # Provides suite of functions to work with regression model 'broom::tidy()' tibbles
+# Summarizes key information about statistical objects in tidy tibbles
+library(broom)
+# Provides suite of functions to work with regression model
+# `broom::tidy()` tibbles
+library(broom.helpers)
 ```
 
 Here are some R settings I use in this document:
@@ -48,21 +51,24 @@ rm(list = ls()) # delete any data that's already loaded into R
 
 conflicts_prefer(dplyr::filter)
 ggplot2::theme_set(
-  ggplot2::theme_bw() + 
-        # ggplot2::labs(col = "") +
+  ggplot2::theme_bw() +
+    # ggplot2::labs(col = "") +
     ggplot2::theme(
       legend.position = "bottom",
-      text = ggplot2::element_text(size = 12, family = "serif")))
+      text = ggplot2::element_text(size = 12, family = "serif")
+    )
+)
 
 knitr::opts_chunk$set(message = FALSE)
-options('digits' = 6)
+options(digits = 6)
 
 panderOptions("big.mark", ",")
 pander::panderOptions("table.emphasize.rownames", FALSE)
 pander::panderOptions("table.split.table", Inf)
-conflicts_prefer(dplyr::filter) # use the `filter()` function from dplyr() by default
-legend_text_size = 9
-run_graphs = TRUE
+# use the `filter()` function from dplyr() by default
+conflicts_prefer(dplyr::filter)
+legend_text_size <- 9
+run_graphs <- TRUE
 ```
 
 <!-- ::: -->
