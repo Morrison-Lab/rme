@@ -320,7 +320,7 @@
 <p>Functions from these packages will be used throughout this document:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
-<span id="cb1-2"><a aria-label="2"></a><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># printr is not loaded here: it inserts help-file output into markdown output</span></span>
 <span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rmarkdown) <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
 <span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(pander) <span class="co"># format tables for markdown</span></span>
 <span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(ggplot2) <span class="co"># graphics</span></span>
@@ -345,8 +345,11 @@
 <span id="cb1-24"><a aria-label="24"></a><span class="fu">library</span>(forcats) <span class="co"># functions for categorical variables ("factors")</span></span>
 <span id="cb1-25"><a aria-label="25"></a><span class="fu">library</span>(stringr) <span class="co"># functions for dealing with strings</span></span>
 <span id="cb1-26"><a aria-label="26"></a><span class="fu">library</span>(lubridate) <span class="co"># functions for dealing with dates and times</span></span>
-<span id="cb1-27"><a aria-label="27"></a><span class="fu">library</span>(broom) <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
-<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom.helpers) <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-27"><a aria-label="27"></a><span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-29"><a aria-label="29"></a><span class="co"># Provides suite of functions to work with regression model</span></span>
+<span id="cb1-30"><a aria-label="30"></a><span class="co"># `broom::tidy()` tibbles</span></span>
+<span id="cb1-31"><a aria-label="31"></a><span class="fu">library</span>(broom.helpers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Here are some R settings I use in this document:</p>
@@ -355,21 +358,24 @@
 <span id="cb2-2"><a aria-label="2"></a></span>
 <span id="cb2-3"><a aria-label="3"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
 <span id="cb2-4"><a aria-label="4"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
-<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb2-6"><a aria-label="6"></a>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-6"><a aria-label="6"></a>    <span class="co"># ggplot2::labs(col = "") +</span></span>
 <span id="cb2-7"><a aria-label="7"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
 <span id="cb2-8"><a aria-label="8"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)))</span>
-<span id="cb2-10"><a aria-label="10"></a></span>
-<span id="cb2-11"><a aria-label="11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-12"><a aria-label="12"></a><span class="fu">options</span>(<span class="st">'digits'</span> <span class="ot">=</span> <span class="dv">6</span>)</span>
-<span id="cb2-13"><a aria-label="13"></a></span>
-<span id="cb2-14"><a aria-label="14"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
-<span id="cb2-15"><a aria-label="15"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb2-16"><a aria-label="16"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
-<span id="cb2-17"><a aria-label="17"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) <span class="co"># use the `filter()` function from dplyr() by default</span></span>
-<span id="cb2-18"><a aria-label="18"></a>legend_text_size <span class="ot">=</span> <span class="dv">9</span></span>
-<span id="cb2-19"><a aria-label="19"></a>run_graphs <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)</span>
+<span id="cb2-10"><a aria-label="10"></a>    )</span>
+<span id="cb2-11"><a aria-label="11"></a>)</span>
+<span id="cb2-12"><a aria-label="12"></a></span>
+<span id="cb2-13"><a aria-label="13"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-14"><a aria-label="14"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">6</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a></span>
+<span id="cb2-16"><a aria-label="16"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb2-18"><a aria-label="18"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-19"><a aria-label="19"></a><span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span id="cb2-20"><a aria-label="20"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
+<span id="cb2-21"><a aria-label="21"></a>legend_text_size <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb2-22"><a aria-label="22"></a>run_graphs <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <!-- ::: -->
@@ -814,23 +820,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="xmdtadblgm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xmdtadblgm table {
+<div id="xjulcgoxvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xjulcgoxvp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xmdtadblgm thead, #xmdtadblgm tbody, #xmdtadblgm tfoot, #xmdtadblgm tr, #xmdtadblgm td, #xmdtadblgm th {
+#xjulcgoxvp thead, #xjulcgoxvp tbody, #xjulcgoxvp tfoot, #xjulcgoxvp tr, #xjulcgoxvp td, #xjulcgoxvp th {
   border-style: none;
 }
 
-#xmdtadblgm p {
+#xjulcgoxvp p {
   margin: 0;
   padding: 0;
 }
 
-#xmdtadblgm .gt_table {
+#xjulcgoxvp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -856,12 +862,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_caption {
+#xjulcgoxvp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xmdtadblgm .gt_title {
+#xjulcgoxvp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -873,7 +879,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#xmdtadblgm .gt_subtitle {
+#xjulcgoxvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -885,7 +891,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#xmdtadblgm .gt_heading {
+#xjulcgoxvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -897,13 +903,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_bottom_border {
+#xjulcgoxvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_col_headings {
+#xjulcgoxvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -918,7 +924,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_col_heading {
+#xjulcgoxvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -938,7 +944,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#xmdtadblgm .gt_column_spanner_outer {
+#xjulcgoxvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -950,15 +956,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#xmdtadblgm .gt_column_spanner_outer:first-child {
+#xjulcgoxvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xmdtadblgm .gt_column_spanner_outer:last-child {
+#xjulcgoxvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xmdtadblgm .gt_column_spanner {
+#xjulcgoxvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -970,11 +976,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#xmdtadblgm .gt_spanner_row {
+#xjulcgoxvp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xmdtadblgm .gt_group_heading {
+#xjulcgoxvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1000,7 +1006,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#xmdtadblgm .gt_empty_group_heading {
+#xjulcgoxvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1015,15 +1021,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#xmdtadblgm .gt_from_md > :first-child {
+#xjulcgoxvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xmdtadblgm .gt_from_md > :last-child {
+#xjulcgoxvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xmdtadblgm .gt_row {
+#xjulcgoxvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1042,7 +1048,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#xmdtadblgm .gt_stub {
+#xjulcgoxvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1055,7 +1061,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#xmdtadblgm .gt_stub_row_group {
+#xjulcgoxvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1069,15 +1075,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#xmdtadblgm .gt_row_group_first td {
+#xjulcgoxvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xmdtadblgm .gt_row_group_first th {
+#xjulcgoxvp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xmdtadblgm .gt_summary_row {
+#xjulcgoxvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1087,16 +1093,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#xmdtadblgm .gt_first_summary_row {
+#xjulcgoxvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_first_summary_row.thick {
+#xjulcgoxvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xmdtadblgm .gt_last_summary_row {
+#xjulcgoxvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1112,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_grand_summary_row {
+#xjulcgoxvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1116,7 +1122,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#xmdtadblgm .gt_first_grand_summary_row {
+#xjulcgoxvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1126,7 +1132,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_last_grand_summary_row_top {
+#xjulcgoxvp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,11 +1142,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_striped {
+#xjulcgoxvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xmdtadblgm .gt_table_body {
+#xjulcgoxvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1149,7 +1155,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_footnotes {
+#xjulcgoxvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1163,7 +1169,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_footnote {
+#xjulcgoxvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1172,7 +1178,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#xmdtadblgm .gt_sourcenotes {
+#xjulcgoxvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1186,7 +1192,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#xmdtadblgm .gt_sourcenote {
+#xjulcgoxvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1194,72 +1200,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#xmdtadblgm .gt_left {
+#xjulcgoxvp .gt_left {
   text-align: left;
 }
 
-#xmdtadblgm .gt_center {
+#xjulcgoxvp .gt_center {
   text-align: center;
 }
 
-#xmdtadblgm .gt_right {
+#xjulcgoxvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xmdtadblgm .gt_font_normal {
+#xjulcgoxvp .gt_font_normal {
   font-weight: normal;
 }
 
-#xmdtadblgm .gt_font_bold {
+#xjulcgoxvp .gt_font_bold {
   font-weight: bold;
 }
 
-#xmdtadblgm .gt_font_italic {
+#xjulcgoxvp .gt_font_italic {
   font-style: italic;
 }
 
-#xmdtadblgm .gt_super {
+#xjulcgoxvp .gt_super {
   font-size: 65%;
 }
 
-#xmdtadblgm .gt_footnote_marks {
+#xjulcgoxvp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xmdtadblgm .gt_asterisk {
+#xjulcgoxvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xmdtadblgm .gt_indent_1 {
+#xjulcgoxvp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xmdtadblgm .gt_indent_2 {
+#xjulcgoxvp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xmdtadblgm .gt_indent_3 {
+#xjulcgoxvp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xmdtadblgm .gt_indent_4 {
+#xjulcgoxvp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xmdtadblgm .gt_indent_5 {
+#xjulcgoxvp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xmdtadblgm .katex-display {
+#xjulcgoxvp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xmdtadblgm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xjulcgoxvp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

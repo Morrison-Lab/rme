@@ -291,7 +291,7 @@
 <p>Functions from these packages will be used throughout this document:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
-<span id="cb1-2"><a aria-label="2"></a><span class="co"># library(printr) # inserts help-file output into markdown output</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co"># printr is not loaded here: it inserts help-file output into markdown output</span></span>
 <span id="cb1-3"><a aria-label="3"></a><span class="fu">library</span>(rmarkdown) <span class="co"># Convert R Markdown documents into a variety of formats.</span></span>
 <span id="cb1-4"><a aria-label="4"></a><span class="fu">library</span>(pander) <span class="co"># format tables for markdown</span></span>
 <span id="cb1-5"><a aria-label="5"></a><span class="fu">library</span>(ggplot2) <span class="co"># graphics</span></span>
@@ -316,8 +316,11 @@
 <span id="cb1-24"><a aria-label="24"></a><span class="fu">library</span>(forcats) <span class="co"># functions for categorical variables ("factors")</span></span>
 <span id="cb1-25"><a aria-label="25"></a><span class="fu">library</span>(stringr) <span class="co"># functions for dealing with strings</span></span>
 <span id="cb1-26"><a aria-label="26"></a><span class="fu">library</span>(lubridate) <span class="co"># functions for dealing with dates and times</span></span>
-<span id="cb1-27"><a aria-label="27"></a><span class="fu">library</span>(broom) <span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
-<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom.helpers) <span class="co"># Provides suite of functions to work with regression model 'broom::tidy()' tibbles</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-27"><a aria-label="27"></a><span class="co"># Summarizes key information about statistical objects in tidy tibbles</span></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-29"><a aria-label="29"></a><span class="co"># Provides suite of functions to work with regression model</span></span>
+<span id="cb1-30"><a aria-label="30"></a><span class="co"># `broom::tidy()` tibbles</span></span>
+<span id="cb1-31"><a aria-label="31"></a><span class="fu">library</span>(broom.helpers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Here are some R settings I use in this document:</p>
@@ -326,21 +329,24 @@
 <span id="cb2-2"><a aria-label="2"></a></span>
 <span id="cb2-3"><a aria-label="3"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
 <span id="cb2-4"><a aria-label="4"></a>ggplot2<span class="sc">::</span><span class="fu">theme_set</span>(</span>
-<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb2-6"><a aria-label="6"></a>        <span class="co"># ggplot2::labs(col = "") +</span></span>
+<span id="cb2-5"><a aria-label="5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-6"><a aria-label="6"></a>    <span class="co"># ggplot2::labs(col = "") +</span></span>
 <span id="cb2-7"><a aria-label="7"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
 <span id="cb2-8"><a aria-label="8"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)))</span>
-<span id="cb2-10"><a aria-label="10"></a></span>
-<span id="cb2-11"><a aria-label="11"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-12"><a aria-label="12"></a><span class="fu">options</span>(<span class="st">'digits'</span> <span class="ot">=</span> <span class="dv">6</span>)</span>
-<span id="cb2-13"><a aria-label="13"></a></span>
-<span id="cb2-14"><a aria-label="14"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
-<span id="cb2-15"><a aria-label="15"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb2-16"><a aria-label="16"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
-<span id="cb2-17"><a aria-label="17"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) <span class="co"># use the `filter()` function from dplyr() by default</span></span>
-<span id="cb2-18"><a aria-label="18"></a>legend_text_size <span class="ot">=</span> <span class="dv">9</span></span>
-<span id="cb2-19"><a aria-label="19"></a>run_graphs <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a aria-label="9"></a>      <span class="at">text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">family =</span> <span class="st">"serif"</span>)</span>
+<span id="cb2-10"><a aria-label="10"></a>    )</span>
+<span id="cb2-11"><a aria-label="11"></a>)</span>
+<span id="cb2-12"><a aria-label="12"></a></span>
+<span id="cb2-13"><a aria-label="13"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-14"><a aria-label="14"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">6</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a></span>
+<span id="cb2-16"><a aria-label="16"></a><span class="fu">panderOptions</span>(<span class="st">"big.mark"</span>, <span class="st">","</span>)</span>
+<span id="cb2-17"><a aria-label="17"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.emphasize.rownames"</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb2-18"><a aria-label="18"></a>pander<span class="sc">::</span><span class="fu">panderOptions</span>(<span class="st">"table.split.table"</span>, <span class="cn">Inf</span>)</span>
+<span id="cb2-19"><a aria-label="19"></a><span class="co"># use the `filter()` function from dplyr() by default</span></span>
+<span id="cb2-20"><a aria-label="20"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter)</span>
+<span id="cb2-21"><a aria-label="21"></a>legend_text_size <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb2-22"><a aria-label="22"></a>run_graphs <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <!-- ::: -->
