@@ -287,8 +287,9 @@
 <div class="quarto-title-authors">
 </div>
 
-</section><section class="slide level2"><!-- ::: {.content-hidden when-format="revealjs"} --></section><section class="slide level2"><h3 class="unnumbered" id="configuring-r">Configuring R</h3>
-<p>Functions from these packages will be used throughout this document:</p>
+</section><section class="slide level2"><!-- ::: {.content-hidden when-format="revealjs"} --></section><section class="slide level2"></section><section><section id="configuring-r" class="title-slide slide level1 unnumbered center"><h1>Configuring R</h1>
+
+</section><section class="slide level2"><p>Functions from these packages will be used throughout this document:</p>
 <div class="cell">
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-label="1"></a><span class="fu">library</span>(conflicted) <span class="co"># check for conflicting function definitions</span></span>
 <span id="cb1-2"><a aria-label="2"></a><span class="co"># printr is not loaded here: it inserts help-file output into markdown output</span></span>
@@ -377,9 +378,10 @@ text-align: center;
 </details>
 </div>
 <p>There are 271 labeled definitions and results in the notes, connected by 129 direct dependency links.</p>
-</section><section id="dependency-diagram" class="slide level2" data-number="1"><h2>
-<span class="header-section-number">1</span> Dependency diagram</h2>
-<p><a href="#/fig-concept-map" class="quarto-xref">Figure&nbsp;1</a> shows the results that participate in at least one dependency link, laid out so that connected results sit near each other. Color encodes the type of result. Results with no detected dependency links are omitted from the diagram. Node labels are larger for results with more total descendants, so the most foundational results are visually prominent. The most foundational results (most descendants) appear near the center; peripheral results have no or few descendants. Long names are abbreviated in the diagram; <a href="#/tbl-descendants" class="quarto-xref">Table&nbsp;1</a> gives each result’s full name. Labels are shifted to avoid overlap; a grey line connects a shifted label to its node position. Zoom in with Ctrl+scroll (or pinch on mobile) to read individual labels.</p>
+</section></section><section><section id="dependency-diagram" class="title-slide slide level1 center" data-number="1"><h1>
+<span class="header-section-number">1</span> Dependency diagram</h1>
+
+</section><section class="slide level2"><p><a href="#/fig-concept-map" class="quarto-xref">Figure&nbsp;1</a> shows the results that participate in at least one dependency link, laid out so that connected results sit near each other. Color encodes the type of result. Results with no detected dependency links are omitted from the diagram. Node labels are larger for results with more total descendants, so the most foundational results are visually prominent. The most foundational results (most descendants) appear near the center; peripheral results have no or few descendants. Long names are abbreviated in the diagram; <a href="#/tbl-descendants" class="quarto-xref">Table&nbsp;1</a> gives each result’s full name. Labels are shifted to avoid overlap; a grey line connects a shifted label to its node position. Zoom in with Ctrl+scroll (or pinch on mobile) to read individual labels.</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-label="1"></a>connected <span class="ot">&lt;-</span> cg<span class="sc">$</span>nodes<span class="sc">$</span>id[cg<span class="sc">$</span>nodes<span class="sc">$</span>id <span class="sc">%in%</span> <span class="fu">c</span>(cg<span class="sc">$</span>edges<span class="sc">$</span>from, cg<span class="sc">$</span>edges<span class="sc">$</span>to)]</span>
 <span id="cb4-2"><a aria-label="2"></a>core <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(</span>
 <span id="cb4-3"><a aria-label="3"></a>  cg<span class="sc">$</span>edges,</span>
@@ -466,9 +468,10 @@ Figure&nbsp;1: Dependency structure of the definitions and results in the notes.
 </div>
 </figure>
 </div>
-</section><section id="sec-descendants-table" class="slide level2" data-number="2"><h2>
-<span class="header-section-number">2</span> Descendants of each result</h2>
-<p><a href="#/tbl-descendants" class="quarto-xref">Table&nbsp;1</a> lists every result that has at least one descendant, sorted by the number of total descendants (direct or transitive).</p>
+</section></section><section><section id="sec-descendants-table" class="title-slide slide level1 center" data-number="2"><h1>
+<span class="header-section-number">2</span> Descendants of each result</h1>
+
+</section><section class="slide level2"><p><a href="#/tbl-descendants" class="quarto-xref">Table&nbsp;1</a> lists every result that has at least one descendant, sorted by the number of total descendants (direct or transitive).</p>
 <details class="code-fold"><summary>[R code]</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-label="1"></a>ranked <span class="ot">&lt;-</span> cg<span class="sc">$</span>nodes[cg<span class="sc">$</span>nodes<span class="sc">$</span>n_desc <span class="sc">&gt;=</span> <span class="dv">1</span>, ]</span>
 <span id="cb5-2"><a aria-label="2"></a>ranked <span class="ot">&lt;-</span> ranked[<span class="fu">order</span>(<span class="sc">-</span>ranked<span class="sc">$</span>n_desc, ranked<span class="sc">$</span>id), ]</span>
 <span id="cb5-3"><a aria-label="3"></a></span>
@@ -1331,7 +1334,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
     initRevealJsHtmlLink();
   }
 })();
-</script></section>
+</script></section></section>
 </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
