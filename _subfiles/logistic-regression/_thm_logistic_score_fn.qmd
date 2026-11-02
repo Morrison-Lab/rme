@@ -1,0 +1,22 @@
+Finally, 
+combining @lem-score-logistic and @thm-logistic-score-comp, 
+we have:
+
+:::{#thm-logistic-score-fn}
+
+#### Logistic-model score function
+
+$$
+\ba
+\brown{\vec{\llik'}(\vb)} &= \sumin \magenta{\llik_i'(\vb)}
+&& \text{(the score decomposes over observations)}
+\\
+&= \sumin \ub{\vx_i}_{(p+1) \times 1} \ub{\eps_i}_{1 \times 1}
+&& \text{(score component for one observation)}
+\\
+&= \brown{\ub{\mX\'}_{(p+1) \times n} \ub{\veps}_{n \times 1}}
+&& \text{(matrix form: } \sumin \vx_i \eps_i = \mX\'\veps \text{)}
+\ea
+$${#eq-logit-score}
+
+:::
