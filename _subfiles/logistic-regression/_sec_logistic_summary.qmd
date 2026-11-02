@@ -162,8 +162,8 @@ $$\vec{\llik'}(\vb) = \sumin \vx_i\eps_i
 The [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$ solves the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
 $$\underbrace{\vec{\llik'}(\evb)}_{(p+1) \times 1} = \sumin \underbrace{\vx_i}_{(p+1) \times 1}\underbrace{\paren{y_i - \expitf{\tp{\vx_i}\evb}}}_{1 \times 1} = \mathbf{0}_{(p+1) \times 1}$$
 
-This estimating equation has no closed-form solution in general ([rem](logistic-regression.qmd#rem-score-no-closed-form)),
-so $\evb$ must be computed by numerical iteration.
+This estimating equation has no closed-form solution in general;
+$\evb$ must be computed by numerical iteration.
 
 **Hessian** ([eq](logistic-regression.qmd#eq-logistic-hess))
 $$\underbrace{\llik''(\vb)}_{(p+1) \times (p+1)} = -\underbrace{\tp{\mX}}_{(p+1) \times n} \underbrace{\matr{D}}_{n \times n} \underbrace{\mX}_{n \times (p+1)}, \qquad \matr{D} \eqdef \text{diag}(\Varf{Y_i|\vX_i=\vx_i}) = \text{diag}(\pi_i(1-\pi_i))$$
