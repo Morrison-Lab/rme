@@ -1,83 +1,14 @@
 {{< include latex-macros/macros.qmd >}}
 
-As usual, by [independence](https://morrison-lab.github.io/pds/independence.html#def-indpt), we have:
-
-:::{#lem-score-logistic}
-
-#### Score function decomposes over observations
-
-$$
-\ba
-\brown{\vec{\llik'}(\vb)}
-   &\eqdef \deriv{\vb} \llik(\vb)
-&& \text{(definition of the score function)}
-\\ &=      \deriv{\vb} \sumin \llik_i(\vb)
-&& \text{(the log-likelihood decomposes over observations, by independence)}
-\\ &=      \sumin \deriv{\vb} \llik_i(\vb)
-&& \text{(linearity of differentiation)}
-\\ &=      \sumin \magenta{\vec{\llik'_i}(\vb)}
-&& \text{(definition: } \magenta{\vec{\llik'_i}} \eqdef \deriv{\vb} \llik_i \text{)}
-\ea
-$$
-:::
+{{< include _subfiles/logistic-regression/_lem_score_logistic.qmd >}}
 
 {{< slidebreak >}}
 
-Starting from @lem-logistic-loglik-component, 
-we can apply the [vector chain rule](https://morrison-lab.github.io/mds/vector-calculus.html#thm-chain-vec):
-
-:::{#lem-logistic-score-comp}
-
-#### Chain rule applied to the score component
-
-$$
-\ba
-\magenta{\vec{\llik_i'}(\vb)}
-   &\eqdef \deriv{\vb} \llik_i(\vb)
-&& \text{(definition of the score component)}
-\\ &= \deriv{\vb}\paren{y_i \eta_i - \logf{1+\odds_i}}
-&& \text{(per-observation log-likelihood)}
-\\ &= \deriv{\vb}\paren{y_i\eta_i} - \deriv{\vb}\logf{1+\odds_i}
-&& \text{(linearity of differentiation)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \deriv{\vb}\logf{1+\odds_i}
-&& \text{(constant-factor rule: } y_i \text{ does not depend on } \vb \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \derivf{u_i}{\vb} \paren{\deriv{u_i}\logf{u_i}}
-&& \text{(vector chain rule, with } u_i \eqdef 1+\odds_i \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \derivf{u_i}{\vb} \frac{1}{u_i}
-&& \text{(derivative of the natural log: } \deriv{u}\logf{u} = 1/u \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}} \frac{1}{u_i}
-&& \text{(} \derivf{u_i}{\vb} = \derivf{\odds_i}{\vb} \text{: the constant 1 has derivative } \mathbf{0}_{(p+1) \times 1} \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
-&& \text{(substitute back } u_i = 1+\odds_i \text{)}
-\ea
-$$
-
-:::
+{{< include _subfiles/logistic-regression/_lem_logistic_score_comp.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#lem-d_logodds-d_vb}
-
-#### Derivative of log-odds with respect to coefficients
-
-By [the derivative of a linear combination](https://morrison-lab.github.io/mds/vector-calculus.html#thm-deriv-lincom):
-
-$$
-\ba
-\red{\derivf{\eta}{\vb}} &= \deriv{\vb}(\vx \cdot \vb)
-\\
-&= \red{\vx}
-\ea
-$${#eq-d_eta_d_vb}
-
-:::
-
-::: notes
-@lem-d_logodds-d_vb is very similar to @lem-d_logodds-d_x, 
-but not quite the same;
-@lem-d_logodds-d_x differentiates by $\vx$,
-whereas @lem-d_logodds-d_vb differentiates by $\vb$.
-:::
+{{< include _subfiles/logistic-regression/_lem_d_logodds_d_vb.qmd >}}
 
 
 {{< slidebreak >}}
