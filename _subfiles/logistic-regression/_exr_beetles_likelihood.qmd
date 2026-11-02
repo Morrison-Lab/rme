@@ -1,0 +1,59 @@
+:::{#exr-beetles-likelihood}
+
+Compute and graph the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) for the `beetles` data model:
+
+:::{#tbl-beetles-data-recap}
+
+```{r}
+#| label: load-beetles-data
+library(glmx)
+library(dplyr)
+data(BeetleMortality)
+beetles <- BeetleMortality |>
+  mutate(
+    pct = died / n,
+    survived = n - died,
+    dose_c = dose - mean(dose)
+  )
+beetles_long <-
+  beetles |>
+  reframe(
+    .by = everything(),
+    outcome = c(
+      rep(1, times = died),
+      rep(0, times = survived)
+    )
+  )
+beetles
+```
+
+Mortality rates of adult flour beetles after 
+five hours' exposure to gaseous carbon disulphide [@bliss1935beetles]
+
+:::
+
+```{r}
+#| results: asis
+beetles_glm <-
+  beetles |>
+  glm(
+    formula = cbind(died, survived) ~ dose,
+    family = "binomial"
+  )
+equatiomatic::extract_eq(beetles_glm)
+```
+
+:::{#tbl-beetles-model-uncentered}
+
+```{r}
+#| code-fold: true
+beetles_glm |>
+  parameters::parameters() |>
+  parameters::print_md()
+```
+
+Fitted [logistic regression model](#def-logistic-regression) for `beetles` data
+
+:::
+
+:::

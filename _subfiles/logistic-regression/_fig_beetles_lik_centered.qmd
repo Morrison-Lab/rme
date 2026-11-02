@@ -1,0 +1,56 @@
+```{r}
+#| label: beetles-lik-centered-fig
+odds_inv <- function(omega) (1 + omega^-1)^-1
+lik_beetles0 <- function(beta_0, beta_1) {
+  beetles |>
+    mutate(
+      eta = beta_0 + beta_1 * dose_c,
+      omega = exp(eta),
+      pi = odds_inv(omega),
+      Lik = (pi^died) * (1 - pi)^(survived)
+    ) |>
+    pull(Lik) |>
+    prod()
+}
+
+lik_beetles <- Vectorize(lik_beetles0)
+
+```
+
+::: {.content-visible when-format="html"}
+
+:::{#fig-beetles-lik-centered}
+
+```{r}
+
+ranges <- beetles_glm_grouped_centered |> confint.default(level = .95)
+
+n_points <- 25
+beta_0s <- seq(
+  ranges["(Intercept)", 1],
+  ranges["(Intercept)", 2],
+  length.out = n_points
+)
+beta_1s <- seq(
+  ranges["dose_c", 1],
+  ranges["dose_c", 2],
+  length.out = n_points
+)
+names(beta_0s) <- round(beta_0s, 2)
+names(beta_1s) <- round(beta_1s, 2)
+if (run_graphs) {
+  lik_mat_beetles <- outer(beta_0s, beta_1s, lik_beetles)
+  plotly::plot_ly(
+    type = "surface",
+    x = ~beta_0s,
+    y = ~beta_1s,
+    z = ~ t(lik_mat_beetles)
+  )
+}
+```
+
+[Likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) of `beetles` data (centered model)
+
+:::
+
+:::
