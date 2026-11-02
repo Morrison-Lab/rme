@@ -1,14 +1,14 @@
 {{< include latex-macros/macros.qmd >}}
 
-### Model
+## Model
 
-Assume:
+We estimate the coefficients $\vb$ of the [logistic regression model](#def-logistic-regression), which has three parts:
 
-- $Y_i|\vX_i \simind \Ber(\pi(X_i))$
+- $Y_i|\vX_i \simind \Ber(\pi(\vX_i))$
 - $\pi(\vx) = \expitf{\eta(\vx)}$
 - $\eta(\vx) = \vx \cdot \vb$
 
-### Likelihood function
+## Likelihood function
 
 :::{#exr-beetles-likelihood}
 
@@ -142,7 +142,7 @@ increase `n_points` to improve render quality.
 
 {{< slidebreak >}}
 
-### Log-likelihood function
+## Log-likelihood function
 
 {{< include _subfiles/logistic-regression/_sec_derive_logistic_loglik.qmd >}}
 
@@ -205,7 +205,8 @@ log-likelihood of `beetles` data
 
 {{< slidebreak >}}
 
-Let's center dose:
+Subtracting the average dose from `dose` makes the intercept the [log-odds](binary-outcome-associations.qmd#def-logodds) of death at the average dose.
+It also moves the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) surface closer to the origin, which makes the surface easier to plot.
 
 ```{r}
 #| results: asis
@@ -341,7 +342,7 @@ log-likelihood of `beetles` data (centered model)
 
 {{< slidebreak >}}
 
-### Score function
+## Score function
 
 {{< include _subfiles/logistic-regression/_sec_logistic_score_fn.qmd >}}
 
@@ -358,14 +359,13 @@ Implement and graph the [score function](https://morrison-lab.github.io/sds/intr
 {{< include _subfiles/logistic-regression/_sec_score_graph.qmd >}}
 
 
-### Hessian function
+## Hessian function
 
 {{< include _subfiles/logistic-regression/_sec_derive_logistic_hessian.qmd >}}
 
 {{< slidebreak >}}
 
-Setting $\score(\vb; \vy) = 0$ gives us:
-
+Setting the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) to zero gives the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
 
 $$\sumin \cb{\ub{\vx_i}_{(p+1) \times 1} \ub{\paren{y_i - \expitf{\tp{\vx_i}\vb}}}_{1 \times 1} } = \mathbf{0}_{(p+1) \times 1}$$ {#eq-score-logistic}
 
@@ -374,9 +374,7 @@ $$\sumin \cb{\ub{\vx_i}_{(p+1) \times 1} \ub{\paren{y_i - \expitf{\tp{\vx_i}\vb}
 
 ::: notes
 
-In general, the estimating equation $\score(\vb; \vy) = 0$ 
-cannot be solved analytically.
-
+In general, the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) cannot be solved analytically.
 Instead, we can use the [Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson):
 
 :::
@@ -389,10 +387,9 @@ $$
 
 ::: notes
 
-We make an iterative series of guesses, 
-and each guess helps us make the next guess better 
-(i.e., higher [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik)). 
-You can see some information about this process like so:
+The method makes a series of guesses.
+Each guess improves on the previous one by raising the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik).
+Setting `glm.control(trace = TRUE)` prints the [deviance](Linear-models-overview.qmd#def-deviance) after each iteration:
 
 :::
 
@@ -411,11 +408,8 @@ beetles_glm_ungrouped <-
 
 ::: notes
 
-After each iteration of the fitting procedure, the deviance
-($2(\llik_{\text{full}} - \llik(\hat\beta))$ ) is printed. 
-You can see that 
-the algorithm took 5 iterations to converge to a solution where
-the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) wasn't changing much anymore.
+The printed [deviance](Linear-models-overview.qmd#def-deviance) is $2(\llik_{\text{full}} - \llik(\hat\beta))$.
+The algorithm stops once the deviance changes very little between iterations.
 
 :::
 
