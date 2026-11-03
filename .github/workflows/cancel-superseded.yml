@@ -1,0 +1,17 @@
+# Cancels the queued and running workflow runs of a pull request that were
+# started for a head the pull request no longer has, and every run of a pull
+# request that has closed, so superseded runs never hold the runners that
+# gate review (gha#1400, gha#1401).
+name: Cancel Superseded Runs
+
+on:
+  pull_request:
+    types: [synchronize, closed]
+
+permissions:
+  actions: write
+  pull-requests: read
+
+jobs:
+  cancel:
+    uses: Morrison-Lab/gha/.github/workflows/cancel-superseded.yml@v3
