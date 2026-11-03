@@ -1,0 +1,39 @@
+```{r}
+odds_inv <- function(omega) (1 + omega^-1)^-1
+llik_beetles0 <- function(beta_0, beta_1) {
+  beetles |>
+    mutate(
+      eta = beta_0 + beta_1 * dose_c,
+      omega = exp(eta),
+      pi = odds_inv(omega),
+      llik = died * eta + n*log(1 - pi)
+    ) |>
+    pull(llik) |>
+    sum()
+}
+
+llik_beetles <- Vectorize(llik_beetles0)
+
+```
+
+::: {.content-visible when-format="html"}
+
+:::{#fig-beetles-llik-centered}
+
+```{r}
+if (run_graphs) {
+  llik_mat_beetles <- outer(beta_0s, beta_1s, llik_beetles)
+  plotly::plot_ly(
+    type = "surface",
+    x = ~beta_0s,
+    y = ~beta_1s,
+    z = ~ t(llik_mat_beetles)
+  )
+}
+```
+
+log-likelihood of `beetles` data (centered model)
+
+:::
+
+:::

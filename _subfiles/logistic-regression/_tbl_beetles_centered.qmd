@@ -1,0 +1,33 @@
+Subtracting the average dose from `dose` makes the intercept the [log-odds](binary-outcome-associations.qmd#def-logodds) of death at the average dose.
+It also moves the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) surface closer to the origin, which makes the surface easier to plot.
+
+```{r}
+#| results: asis
+beetles_glm_grouped_centered <- beetles |>
+  glm(
+    formula = cbind(died, survived) ~ dose_c,
+    family = "binomial"
+  )
+
+beetles_glm_ungrouped_centered <- beetles_long |>
+  mutate(died = outcome) |>
+  glm(
+    formula = died ~ dose_c,
+    family = "binomial"
+  )
+
+equatiomatic::extract_eq(beetles_glm_ungrouped_centered)
+```
+
+:::{#tbl-beetles-model-centered}
+
+```{r}
+#| code-fold: true
+beetles_glm_grouped_centered |>
+  parameters::parameters() |>
+  parameters::print_md()
+```
+
+Fitted [logistic regression model](#def-logistic-regression) for `beetles` data, with `dose` centered
+
+:::

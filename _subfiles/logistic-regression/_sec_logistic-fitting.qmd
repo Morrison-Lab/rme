@@ -1,385 +1,76 @@
 {{< include latex-macros/macros.qmd >}}
 
-### Model
+## Model
 
-Assume:
+We estimate the coefficients $\vb$ of the [logistic regression model](#def-logistic-regression), which has three parts:
 
-- $Y_i|\vX_i \simind \Ber(\pi(X_i))$
+- $Y_i|\vX_i \simind \Ber(\pi(\vX_i))$
 - $\pi(\vx) = \expitf{\eta(\vx)}$
 - $\eta(\vx) = \vx \cdot \vb$
 
-### Likelihood function
+## Likelihood function
 
-:::{#exr-beetles-likelihood}
-
-Compute and graph the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) for the `beetles` data model:
-
-:::{#tbl-beetles-data-recap}
-
-```{r}
-#| label: load-beetles-data
-library(glmx)
-library(dplyr)
-data(BeetleMortality)
-beetles <- BeetleMortality |>
-  mutate(
-    pct = died / n,
-    survived = n - died,
-    dose_c = dose - mean(dose)
-  )
-beetles_long <-
-  beetles |>
-  reframe(
-    .by = everything(),
-    outcome = c(
-      rep(1, times = died),
-      rep(0, times = survived)
-    )
-  )
-beetles
-```
-
-Mortality rates of adult flour beetles after 
-five hours' exposure to gaseous carbon disulphide [@bliss1935beetles]
-
-:::
-
-```{r}
-#| results: asis
-beetles_glm <-
-  beetles |>
-  glm(
-    formula = cbind(died, survived) ~ dose,
-    family = "binomial"
-  )
-equatiomatic::extract_eq(beetles_glm)
-```
-
-:::{#tbl-beetles-model-uncentered}
-
-```{r}
-#| code-fold: true
-beetles_glm |>
-  parameters::parameters() |>
-  parameters::print_md()
-```
-
-Fitted [logistic regression model](#def-logistic-regression) for `beetles` data
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_exr_beetles_likelihood.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-beetles-likelihood}
-
-```{r}
-odds_inv <- function(omega) (1 + omega^-1)^-1
-lik_beetles0 <- function(beta_0, beta_1) {
-  beetles |>
-    mutate(
-      eta = beta_0 + beta_1 * dose,
-      omega = exp(eta),
-      pi = odds_inv(omega),
-      Lik = pi^died * (1 - pi)^survived,
-      # llik = died*eta + n*log(1 - pi)
-    ) |>
-    pull(Lik) |>
-    prod()
-}
-
-lik_beetles <- Vectorize(lik_beetles0)
-
-```
-
-::: {.content-visible when-format="html"}
-
-:::{#fig-beetles-likelihood}
-
-```{r}
-#| label: beetles-likelihood-plot
-
-ranges <- beetles_glm |> confint.default(level = 0.05)
-
-n_points <- 25
-beta_0s <- seq(
-  ranges["(Intercept)", 1],
-  ranges["(Intercept)", 2],
-  length.out = n_points
-)
-beta_1s <- seq(
-  ranges["dose", 1],
-  ranges["dose", 2],
-  length.out = n_points
-)
-names(beta_0s) <- round(beta_0s, 2)
-names(beta_1s) <- round(beta_1s, 2)
-
-if (run_graphs) {
-  lik_mat_beetles <- outer(beta_0s, beta_1s, lik_beetles)
-  plotly::plot_ly(
-    type = "surface",
-    x = ~beta_0s,
-    y = ~beta_1s,
-    z = ~ t(lik_mat_beetles)
-  )
-  # see https://stackoverflow.com/questions/69472185/correct-use-of-coordinates-to-plot-surface-data-with-plotly 
-  # for explanation of why transpose `t()` is needed
-  
-}
-```
-
-**Likelihood of `beetles` data.**
-Bumps on ridge are artifacts of render;
-increase `n_points` to improve render quality.
-
-:::
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_sol_beetles_likelihood.qmd >}}
 
 {{< slidebreak >}}
 
-### Log-likelihood function
+## Log-likelihood function
 
 {{< include _subfiles/logistic-regression/_sec_derive_logistic_loglik.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-beetles-loglik}
-Compute and graph the [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) for the `beetles` data.
-:::
+{{< include _subfiles/logistic-regression/_exr_beetles_loglik.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-beetles-loglik}
-
-```{r}
-odds_inv <- function(omega) (1 + omega^-1)^-1
-llik_beetles0 <- function(beta_0, beta_1) {
-  beetles |>
-    mutate(
-      eta = beta_0 + beta_1 * dose,
-      omega = exp(eta),
-      pi = odds_inv(omega), # need for next line:
-      llik = died*eta + n*log(1 - pi)
-    ) |>
-    pull(llik) |>
-    sum()
-}
-
-llik_beetles <- Vectorize(llik_beetles0)
-
-# to check that we implemented it correctly:
-# ests = coef(beetles_glm_ungrouped)
-# logLik(beetles_glm_ungrouped)
-# llik_beetles(ests[1], ests[2])
-```
-
-::: {.content-visible when-format="html"}
-
-:::{#fig-beetles-llik}
-
-```{r}
-#| label: beetles-llik-fig1
-if (run_graphs) {
-  llik_mat_beetles <- outer(beta_0s, beta_1s, llik_beetles)
-  plotly::plot_ly(
-    type = "surface",
-    x = ~beta_0s,
-    y = ~beta_1s,
-    z = ~ t(llik_mat_beetles)
-  )
-}
-```
-
-log-likelihood of `beetles` data
-
-:::
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_sol_beetles_loglik.qmd >}}
 
 {{< slidebreak >}}
 
-Let's center dose:
-
-```{r}
-#| results: asis
-beetles_glm_grouped_centered <- beetles |>
-  glm(
-    formula = cbind(died, survived) ~ dose_c,
-    family = "binomial"
-  )
-
-beetles_glm_ungrouped_centered <- beetles_long |>
-  mutate(died = outcome) |>
-  glm(
-    formula = died ~ dose_c,
-    family = "binomial"
-  )
-
-equatiomatic::extract_eq(beetles_glm_ungrouped_centered)
-```
-
-:::{#tbl-beetles-model-centered}
-
-```{r}
-#| code-fold: true
-beetles_glm_grouped_centered |>
-  parameters::parameters() |>
-  parameters::print_md()
-```
-
-Fitted [logistic regression model](#def-logistic-regression) for `beetles` data, with `dose` centered
-
-:::
+{{< include _subfiles/logistic-regression/_tbl_beetles_centered.qmd >}}
 
 {{< slidebreak >}}
 
-```{r}
-#| label: beetles-lik-centered-fig
-odds_inv <- function(omega) (1 + omega^-1)^-1
-lik_beetles0 <- function(beta_0, beta_1) {
-  beetles |>
-    mutate(
-      eta = beta_0 + beta_1 * dose_c,
-      omega = exp(eta),
-      pi = odds_inv(omega),
-      Lik = (pi^died) * (1 - pi)^(survived)
-    ) |>
-    pull(Lik) |>
-    prod()
-}
-
-lik_beetles <- Vectorize(lik_beetles0)
-
-```
-
-::: {.content-visible when-format="html"}
-
-:::{#fig-beetles-lik-centered}
-
-```{r}
-
-ranges <- beetles_glm_grouped_centered |> confint.default(level = .95)
-
-n_points <- 25
-beta_0s <- seq(
-  ranges["(Intercept)", 1],
-  ranges["(Intercept)", 2],
-  length.out = n_points
-)
-beta_1s <- seq(
-  ranges["dose_c", 1],
-  ranges["dose_c", 2],
-  length.out = n_points
-)
-names(beta_0s) <- round(beta_0s, 2)
-names(beta_1s) <- round(beta_1s, 2)
-if (run_graphs) {
-  lik_mat_beetles <- outer(beta_0s, beta_1s, lik_beetles)
-  plotly::plot_ly(
-    type = "surface",
-    x = ~beta_0s,
-    y = ~beta_1s,
-    z = ~ t(lik_mat_beetles)
-  )
-}
-```
-
-[Likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) of `beetles` data (centered model)
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_fig_beetles_lik_centered.qmd >}}
 
 {{< slidebreak >}}
 
-```{r}
-odds_inv <- function(omega) (1 + omega^-1)^-1
-llik_beetles0 <- function(beta_0, beta_1) {
-  beetles |>
-    mutate(
-      eta = beta_0 + beta_1 * dose_c,
-      omega = exp(eta),
-      pi = odds_inv(omega),
-      llik = died * eta + n*log(1 - pi)
-    ) |>
-    pull(llik) |>
-    sum()
-}
-
-llik_beetles <- Vectorize(llik_beetles0)
-
-```
-
-::: {.content-visible when-format="html"}
-
-:::{#fig-beetles-llik-centered}
-
-```{r}
-if (run_graphs) {
-  llik_mat_beetles <- outer(beta_0s, beta_1s, llik_beetles)
-  plotly::plot_ly(
-    type = "surface",
-    x = ~beta_0s,
-    y = ~beta_1s,
-    z = ~ t(llik_mat_beetles)
-  )
-}
-```
-
-log-likelihood of `beetles` data (centered model)
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_fig_beetles_llik_centered.qmd >}}
 
 {{< slidebreak >}}
 
-### Score function
+## Score function
 
 {{< include _subfiles/logistic-regression/_sec_logistic_score_fn.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-beetles-score}
-
-Implement and graph the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) for the beetles data
-
-:::
+{{< include _subfiles/logistic-regression/_exr_beetles_score.qmd >}}
 
 {{< slidebreak >}}
 
 {{< include _subfiles/logistic-regression/_sec_score_graph.qmd >}}
 
 
-### Hessian function
+## Hessian function
 
 {{< include _subfiles/logistic-regression/_sec_derive_logistic_hessian.qmd >}}
 
 {{< slidebreak >}}
 
-Setting $\score(\vb; \vy) = 0$ gives us:
-
+Setting the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) to zero gives the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
 
 $$\sumin \cb{\ub{\vx_i}_{(p+1) \times 1} \ub{\paren{y_i - \expitf{\tp{\vx_i}\vb}}}_{1 \times 1} } = \mathbf{0}_{(p+1) \times 1}$$ {#eq-score-logistic}
 
 
 {{< slidebreak >}}
 
-::: notes
-
-In general, the estimating equation $\score(\vb; \vy) = 0$ 
-cannot be solved analytically.
-
-Instead, we can use the [Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson):
-
-:::
+{{< include _subfiles/logistic-regression/_note_newton_raphson.qmd >}}
 
 $$
 \esttmp{\theta}
@@ -387,14 +78,7 @@ $$
 \scoref{\vec y;\esttmp{\theta}}
 $$
 
-::: notes
-
-We make an iterative series of guesses, 
-and each guess helps us make the next guess better 
-(i.e., higher [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik)). 
-You can see some information about this process like so:
-
-:::
+{{< include _subfiles/logistic-regression/_note_newton_raphson_trace.qmd >}}
 
 ```{r}
 #| label: out-glm-fitting-process
@@ -409,41 +93,13 @@ beetles_glm_ungrouped <-
   )
 ```
 
-::: notes
-
-After each iteration of the fitting procedure, the deviance
-($2(\llik_{\text{full}} - \llik(\hat\beta))$ ) is printed. 
-You can see that 
-the algorithm took 5 iterations to converge to a solution where
-the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) wasn't changing much anymore.
-
-:::
+{{< include _subfiles/logistic-regression/_note_deviance_trace.qmd >}}
 
 {{< slidebreak >}}
 
 @tbl-beetles-glm-ungrouped and @tbl-beetles-glm-ungrouped-vcov show 
 the fitted model and the [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x) of the estimates, respectively.
 
-:::{#tbl-beetles-glm-ungrouped}
+{{< include _subfiles/logistic-regression/_tbl_beetles_glm.qmd >}}
 
-```{r}
-#| code-fold: show
-
-beetles_glm_ungrouped |> summary()
-```
-
-Fitted model for `beetles` data
-
-:::
-
-:::{#tbl-beetles-glm-ungrouped-vcov}
-
-```{r}
-#| code-fold: show
-
-beetles_glm_ungrouped |> vcov()
-```
-
-Parameter estimate covariance matrix for `beetles` data
-
-:::
+{{< include _subfiles/logistic-regression/_tbl_beetles_glm_vcov.qmd >}}
