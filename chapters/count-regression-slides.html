@@ -8,7 +8,7 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
@@ -16,11 +16,11 @@
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.11.9">
 <title>Regression Models for Epidemiology – Models for Count Outcomes</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
 <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
 <style>
@@ -128,7 +128,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-62c6d01237d2b31aa9ac2918f5937752.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-7d82ebb156a26dfaf80ebb6871c0f9a8.css">
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-VLDZY2T3JF"></script><script type="text/plain" cookie-consent="tracking">
 
   window.dataLayer = window.dataLayer || [];
@@ -387,8 +387,7 @@ text-align: center;
 </style></section></section><section><section id="introduction" class="title-slide slide level1 center" data-number="1"><h1>
 <span class="header-section-number">1</span> Introduction</h1>
 
-</section><section class="slide level2"><div title="Video lecture">
-<div class="callout callout-tip callout-titled callout-style-default">
+</section><section class="slide level2"><div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
@@ -401,8 +400,6 @@ text-align: center;
 </div>
 </div>
 </div>
-</div>
-<div title="Video lecture">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -413,7 +410,6 @@ text-align: center;
 </div>
 <div class="callout-content">
 <p>Richard McElreath’s <a href="https://www.youtube.com/watch?v=RuBUVQELw-c"><em>Modeling Events</em></a> (Statistical Rethinking 2026, Lecture A09) accompanies Chapters 10 and 11 of <span class="citation" data-cites="statrethink2e">McElreath <a href="#/references" role="doc-biblioref" onclick="">[4]</a></span>, which cover generalized linear models for binary and count outcomes, including Poisson regression. The lecture fits these models using <a href="https://morrison-lab.github.io/sds/bayesian-inference.html#def-bayesian-paradigm">Bayesian inference</a> rather than the <a href="https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle">maximum likelihood estimation</a> used in this chapter <span class="citation" data-cites="mcelreath2026rethinking"><a href="#/references" role="doc-biblioref" onclick="">[5]</a></span>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -821,23 +817,23 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
 </figcaption><div aria-describedby="tbl-needles-demographics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="bwtypypyok" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bwtypypyok table {
+<div id="nycgnkygjf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nycgnkygjf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bwtypypyok thead, #bwtypypyok tbody, #bwtypypyok tfoot, #bwtypypyok tr, #bwtypypyok td, #bwtypypyok th {
+#nycgnkygjf thead, #nycgnkygjf tbody, #nycgnkygjf tfoot, #nycgnkygjf tr, #nycgnkygjf td, #nycgnkygjf th {
   border-style: none;
 }
 
-#bwtypypyok p {
+#nycgnkygjf p {
   margin: 0;
   padding: 0;
 }
 
-#bwtypypyok .gt_table {
+#nycgnkygjf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -863,12 +859,12 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-left-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_caption {
+#nycgnkygjf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bwtypypyok .gt_title {
+#nycgnkygjf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -880,7 +876,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-width: 0;
 }
 
-#bwtypypyok .gt_subtitle {
+#nycgnkygjf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -892,7 +888,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-width: 0;
 }
 
-#bwtypypyok .gt_heading {
+#nycgnkygjf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -904,13 +900,13 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_bottom_border {
+#nycgnkygjf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_col_headings {
+#nycgnkygjf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -925,7 +921,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_col_heading {
+#nycgnkygjf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -945,7 +941,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#bwtypypyok .gt_column_spanner_outer {
+#nycgnkygjf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -957,15 +953,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 4px;
 }
 
-#bwtypypyok .gt_column_spanner_outer:first-child {
+#nycgnkygjf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bwtypypyok .gt_column_spanner_outer:last-child {
+#nycgnkygjf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bwtypypyok .gt_column_spanner {
+#nycgnkygjf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -977,11 +973,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   width: 100%;
 }
 
-#bwtypypyok .gt_spanner_row {
+#nycgnkygjf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bwtypypyok .gt_group_heading {
+#nycgnkygjf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1007,7 +1003,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   text-align: left;
 }
 
-#bwtypypyok .gt_empty_group_heading {
+#nycgnkygjf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1022,15 +1018,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: middle;
 }
 
-#bwtypypyok .gt_from_md > :first-child {
+#nycgnkygjf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bwtypypyok .gt_from_md > :last-child {
+#nycgnkygjf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bwtypypyok .gt_row {
+#nycgnkygjf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1049,7 +1045,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   overflow-x: hidden;
 }
 
-#bwtypypyok .gt_stub {
+#nycgnkygjf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1062,7 +1058,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#bwtypypyok .gt_stub_row_group {
+#nycgnkygjf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1076,15 +1072,15 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   vertical-align: top;
 }
 
-#bwtypypyok .gt_row_group_first td {
+#nycgnkygjf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bwtypypyok .gt_row_group_first th {
+#nycgnkygjf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bwtypypyok .gt_summary_row {
+#nycgnkygjf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1094,16 +1090,16 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#bwtypypyok .gt_first_summary_row {
+#nycgnkygjf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_first_summary_row.thick {
+#nycgnkygjf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bwtypypyok .gt_last_summary_row {
+#nycgnkygjf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1113,7 +1109,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_grand_summary_row {
+#nycgnkygjf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1123,7 +1119,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#bwtypypyok .gt_first_grand_summary_row {
+#nycgnkygjf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1133,7 +1129,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-top-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_last_grand_summary_row_top {
+#nycgnkygjf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1143,11 +1139,11 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_striped {
+#nycgnkygjf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bwtypypyok .gt_table_body {
+#nycgnkygjf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1156,7 +1152,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-bottom-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_footnotes {
+#nycgnkygjf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1170,7 +1166,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_footnote {
+#nycgnkygjf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1179,7 +1175,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#bwtypypyok .gt_sourcenotes {
+#nycgnkygjf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1193,7 +1189,7 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   border-right-color: #D3D3D3;
 }
 
-#bwtypypyok .gt_sourcenote {
+#nycgnkygjf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1201,72 +1197,72 @@ Table&nbsp;2: Demographics and behavioural variables for the needle-sharing data
   padding-right: 5px;
 }
 
-#bwtypypyok .gt_left {
+#nycgnkygjf .gt_left {
   text-align: left;
 }
 
-#bwtypypyok .gt_center {
+#nycgnkygjf .gt_center {
   text-align: center;
 }
 
-#bwtypypyok .gt_right {
+#nycgnkygjf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bwtypypyok .gt_font_normal {
+#nycgnkygjf .gt_font_normal {
   font-weight: normal;
 }
 
-#bwtypypyok .gt_font_bold {
+#nycgnkygjf .gt_font_bold {
   font-weight: bold;
 }
 
-#bwtypypyok .gt_font_italic {
+#nycgnkygjf .gt_font_italic {
   font-style: italic;
 }
 
-#bwtypypyok .gt_super {
+#nycgnkygjf .gt_super {
   font-size: 65%;
 }
 
-#bwtypypyok .gt_footnote_marks {
+#nycgnkygjf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bwtypypyok .gt_asterisk {
+#nycgnkygjf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bwtypypyok .gt_indent_1 {
+#nycgnkygjf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bwtypypyok .gt_indent_2 {
+#nycgnkygjf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bwtypypyok .gt_indent_3 {
+#nycgnkygjf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bwtypypyok .gt_indent_4 {
+#nycgnkygjf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bwtypypyok .gt_indent_5 {
+#nycgnkygjf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bwtypypyok .katex-display {
+#nycgnkygjf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bwtypypyok div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nycgnkygjf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1720,7 +1716,6 @@ Table&nbsp;4: Counts in <code>needles</code> by sex, housing status, and multipl
 </ul>
 </div>
 <p>Vittinghoff’s analysis uses neither an offset nor <code>nivdu</code> as a covariate.</p>
-<div title="Rule of thumb">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1731,7 +1726,6 @@ Table&nbsp;4: Counts in <code>needles</code> by sex, housing status, and multipl
 </div>
 <div class="callout-content">
 <p>An offset’s exposure is usually something fixed by the <em>study design</em> — person-time of follow-up, population at risk, area surveyed, number of trials — a known denominator that remains <em>exogenous</em> to the question (not caused by the predictors of interest). When the candidate denominator is instead something the participants <em>did</em>, and the predictors also influence it (here, how often they inject), it is a mediator rather than an exposure window, and we model the count directly instead of dividing by it.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1936,7 +1930,6 @@ Figure&nbsp;4: Fitted Poisson model: expected sharing by age and housing status
 <p><strong>Ethnicity.</strong> The <code>ethn</code> coefficients compare each retained group to the White reference (small groups were lumped into “Other”); they adjust for any confounding of the homelessness effect by ethnicity but are not of separate interest.</p>
 <p><strong>Sexual-abuse history.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{sexabuse}}\right\}\mathclose{}} = 0.23\)</span>: participants with a history of sexual abuse share syringes about 0.23 times as often as those without, adjusting for the other covariates.</p>
 <p><strong>Hopelessness.</strong> <span class="math inline">\({\operatorname{exp}\mathopen{}\left\{\hat\beta_{\text{hplsns}}\right\}\mathclose{}} = 0.97\)</span> per point: each one-point increase in the hopelessness score multiplies the expected count by 0.97, adjusting for the other covariates.</p>
-<div title="Overdispersion caveat">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1947,7 +1940,6 @@ Figure&nbsp;4: Fitted Poisson model: expected sharing by age and housing status
 </div>
 <div class="callout-content">
 <p>These data are highly <a href="#/def-overdispersion">overdispersed</a> — the variance far exceeds the mean — so the model-based Poisson <a href="https://morrison-lab.github.io/sds/estimation.html#def-SE">standard errors</a> are too small. <span class="citation" data-cites="vittinghoff2e">Vittinghoff et al. <a href="#/references" role="doc-biblioref" onclick="">[2, Sec. 8.3.1]</a></span> recommends robust standard errors or a <a href="https://morrison-lab.github.io/pds/distributions.html#def-nb">negative-binomial</a> model for this example.</p>
-</div>
 </div>
 </div>
 </div>
@@ -4092,7 +4084,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -4381,7 +4373,8 @@ window.addEventListener("hashchange", revealEquationHashTarget);
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -4390,8 +4383,69 @@ window.addEventListener("hashchange", revealEquationHashTarget);
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -4405,6 +4459,7 @@ window.addEventListener("hashchange", revealEquationHashTarget);
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.11.9">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Causal Inference – Regression Models for Epidemiology</title>
 <style>
@@ -93,18 +93,19 @@ div.csl-indent {
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0e74cb5aeedc19cd2d1e3de94fc88b13.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9a28beebc580df245a3a290f58c3fd12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0e74cb5aeedc19cd2d1e3de94fc88b13.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6168d42d8f3585f3173cbca1a3748e50.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f8b1eca2cd78219460a8dcedad151dd7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6168d42d8f3585f3173cbca1a3748e50.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.js"></script>
 <link href="../site_libs/quarto-contrib/div-anchors-1.0.0/div-anchors.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
@@ -230,6 +231,96 @@ cookieconsent.run({
 })();
 </script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><style>
+div.callout-tbl.callout {
+  border-left-color: #757575;
+}
+div.callout-tbl.callout-style-default .callout-header {
+  background-color: rgba(117, 117, 117, 0.13);
+}
+div.callout-tbl .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-tbl.callout-style-default .callout-icon::before, div.callout-tbl.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23757575" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cor.callout {
+  border-left-color: #00838F;
+}
+div.callout-cor.callout-style-default .callout-header {
+  background-color: rgba(0, 131, 143, 0.13);
+}
+div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exr.callout {
+  border-left-color: #FFA500;
+}
+div.callout-exr.callout-style-default .callout-header {
+  background-color: rgba(255, 165, 0, 0.13);
+}
+div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-prp.callout {
+  border-left-color: #827717;
+}
+div.callout-prp.callout-style-default .callout-header {
+  background-color: rgba(130, 119, 23, 0.13);
+}
+div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-proof.callout {
+  border-left-color: #37474F;
+}
+div.callout-proof.callout-style-default .callout-header {
+  background-color: rgba(55, 71, 79, 0.13);
+}
+div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-exm.callout {
+  border-left-color: #6A1B9A;
+}
+div.callout-exm.callout-style-default .callout-header {
+  background-color: rgba(106, 27, 154, 0.13);
+}
+div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-solution.callout {
+  border-left-color: #4E342E;
+}
+div.callout-solution.callout-style-default .callout-header {
+  background-color: rgba(78, 52, 46, 0.13);
+}
+div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-def.callout {
+  border-left-color: #1B5E20;
+}
+div.callout-def.callout-style-default .callout-header {
+  background-color: rgba(27, 94, 32, 0.13);
+}
+div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
+div.callout-cnj.callout {
+  border-left-color: #558B2F;
+}
+div.callout-cnj.callout-style-default .callout-header {
+  background-color: rgba(85, 139, 47, 0.13);
+}
+div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
+}
 div.callout-lem.callout {
   border-left-color: #1565C0;
 }
@@ -250,66 +341,6 @@ div.callout-remark .callout-toggle::before {  background-image: url('data:image/
 div.callout-remark.callout-style-default .callout-icon::before, div.callout-remark.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23AD1457" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
-div.callout-exr.callout {
-  border-left-color: #FFA500;
-}
-div.callout-exr.callout-style-default .callout-header {
-  background-color: rgba(255, 165, 0, 0.13);
-}
-div.callout-exr .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exr.callout-style-default .callout-icon::before, div.callout-exr.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23FFA500" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-proof.callout {
-  border-left-color: #37474F;
-}
-div.callout-proof.callout-style-default .callout-header {
-  background-color: rgba(55, 71, 79, 0.13);
-}
-div.callout-proof .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-proof.callout-style-default .callout-icon::before, div.callout-proof.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2337474F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-prp.callout {
-  border-left-color: #827717;
-}
-div.callout-prp.callout-style-default .callout-header {
-  background-color: rgba(130, 119, 23, 0.13);
-}
-div.callout-prp .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-prp.callout-style-default .callout-icon::before, div.callout-prp.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23827717" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-exm.callout {
-  border-left-color: #6A1B9A;
-}
-div.callout-exm.callout-style-default .callout-header {
-  background-color: rgba(106, 27, 154, 0.13);
-}
-div.callout-exm .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-exm.callout-style-default .callout-icon::before, div.callout-exm.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236A1B9A" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cor.callout {
-  border-left-color: #00838F;
-}
-div.callout-cor.callout-style-default .callout-header {
-  background-color: rgba(0, 131, 143, 0.13);
-}
-div.callout-cor .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cor.callout-style-default .callout-icon::before, div.callout-cor.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2300838F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-solution.callout {
-  border-left-color: #4E342E;
-}
-div.callout-solution.callout-style-default .callout-header {
-  background-color: rgba(78, 52, 46, 0.13);
-}
-div.callout-solution .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-solution.callout-style-default .callout-icon::before, div.callout-solution.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E342E" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
 div.callout-fig.callout {
   border-left-color: #757575;
 }
@@ -318,36 +349,6 @@ div.callout-fig.callout-style-default .callout-header {
 }
 div.callout-fig .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-fig.callout-style-default .callout-icon::before, div.callout-fig.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23757575" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-cnj.callout {
-  border-left-color: #558B2F;
-}
-div.callout-cnj.callout-style-default .callout-header {
-  background-color: rgba(85, 139, 47, 0.13);
-}
-div.callout-cnj .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-cnj.callout-style-default .callout-icon::before, div.callout-cnj.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23558B2F" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-def.callout {
-  border-left-color: #1B5E20;
-}
-div.callout-def.callout-style-default .callout-header {
-  background-color: rgba(27, 94, 32, 0.13);
-}
-div.callout-def .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-def.callout-style-default .callout-icon::before, div.callout-def.callout-titled .callout-icon::before {
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%231B5E20" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
-}
-div.callout-tbl.callout {
-  border-left-color: #757575;
-}
-div.callout-tbl.callout-style-default .callout-header {
-  background-color: rgba(117, 117, 117, 0.13);
-}
-div.callout-tbl .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-tbl.callout-style-default .callout-icon::before, div.callout-tbl.callout-titled .callout-icon::before {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23757575" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/></svg>');
 }
 </style>
@@ -378,7 +379,7 @@ window.Quarto = {
 };
 </script>
 </head>
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -401,6 +402,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -430,13 +432,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -530,6 +538,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -543,14 +552,13 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Regression Models for Epidemiology</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -698,35 +706,33 @@ window.Quarto = {
 </ul>
 </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
-    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/causal-inference.html">Causal Inference</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/causal-inference.html">Causal Inference</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section"><div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Course Logistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Course Logistics</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/syllabus.html" class="sidebar-item-text sidebar-link">
@@ -743,13 +749,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Chapters</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Chapters</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/Intro-to-GLMs.html" class="sidebar-item-text sidebar-link">
@@ -838,13 +841,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Appendices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/appendices-are-prereqs.html" class="sidebar-item-text sidebar-link">
@@ -888,7 +888,7 @@ window.Quarto = {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
 <li><a href="#configuring-r" id="toc-configuring-r" class="nav-link active" data-scroll-target="#configuring-r">Configuring R</a></li>
@@ -957,7 +957,7 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/Morrison-Lab/rme/edit/main/chapters/causal-inference.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Morrison-Lab/rme/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li><li><a href="https://github.com/Morrison-Lab/rme/blob/main/chapters/causal-inference.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="causal-inference-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="causal-inference-handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/causal-inference.html">Causal Inference</a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/Intro-to-GLMs.html">Chapters</a></li><li class="breadcrumb-item"><a href="../chapters/causal-inference.html">Causal Inference</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Causal Inference</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Estimating causal effects from regression models</p>
 </div>
@@ -970,7 +970,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-11-01: 15:55:22 (UTC)</p>
+      <p class="date">Last modified: 2026-11-03: 16:01:02 (UTC)</p>
     </div>
   </div>
   
@@ -1919,7 +1919,7 @@ text-align: center;
 <p>However, in an RCT, covariates that are <strong><a href="#def-mediator">mediators</a></strong> of the treatment effect (i.e., variables affected by treatment) should generally <strong>not</strong> be adjusted for when estimating the <strong>total</strong> causal effect of treatment. Adjusting for mediators blocks part of the causal pathway and gives only the <strong>direct</strong> effect of treatment.</p>
 </section></section><section id="sec-causal-observational" class="level1" data-number="6"><h1 data-number="6">
 <span class="header-section-number">6</span> Observational Studies</h1>
-<div class="callout callout-style-default callout-tip callout-titled" title="Video lecture">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2494,23 +2494,23 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="nzeqdbyjgn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nzeqdbyjgn table {
+<div id="rivaoyzqfj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rivaoyzqfj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nzeqdbyjgn thead, #nzeqdbyjgn tbody, #nzeqdbyjgn tfoot, #nzeqdbyjgn tr, #nzeqdbyjgn td, #nzeqdbyjgn th {
+#rivaoyzqfj thead, #rivaoyzqfj tbody, #rivaoyzqfj tfoot, #rivaoyzqfj tr, #rivaoyzqfj td, #rivaoyzqfj th {
   border-style: none;
 }
 
-#nzeqdbyjgn p {
+#rivaoyzqfj p {
   margin: 0;
   padding: 0;
 }
 
-#nzeqdbyjgn .gt_table {
+#rivaoyzqfj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2536,12 +2536,12 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-left-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_caption {
+#rivaoyzqfj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nzeqdbyjgn .gt_title {
+#rivaoyzqfj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2553,7 +2553,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-width: 0;
 }
 
-#nzeqdbyjgn .gt_subtitle {
+#rivaoyzqfj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2565,7 +2565,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-width: 0;
 }
 
-#nzeqdbyjgn .gt_heading {
+#rivaoyzqfj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2577,13 +2577,13 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_bottom_border {
+#rivaoyzqfj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_col_headings {
+#rivaoyzqfj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2598,7 +2598,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_col_heading {
+#rivaoyzqfj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2618,7 +2618,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#nzeqdbyjgn .gt_column_spanner_outer {
+#rivaoyzqfj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2630,15 +2630,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 4px;
 }
 
-#nzeqdbyjgn .gt_column_spanner_outer:first-child {
+#rivaoyzqfj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nzeqdbyjgn .gt_column_spanner_outer:last-child {
+#rivaoyzqfj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nzeqdbyjgn .gt_column_spanner {
+#rivaoyzqfj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2650,11 +2650,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   width: 100%;
 }
 
-#nzeqdbyjgn .gt_spanner_row {
+#rivaoyzqfj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nzeqdbyjgn .gt_group_heading {
+#rivaoyzqfj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2680,7 +2680,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   text-align: left;
 }
 
-#nzeqdbyjgn .gt_empty_group_heading {
+#rivaoyzqfj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2695,15 +2695,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: middle;
 }
 
-#nzeqdbyjgn .gt_from_md > :first-child {
+#rivaoyzqfj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nzeqdbyjgn .gt_from_md > :last-child {
+#rivaoyzqfj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nzeqdbyjgn .gt_row {
+#rivaoyzqfj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2722,7 +2722,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   overflow-x: hidden;
 }
 
-#nzeqdbyjgn .gt_stub {
+#rivaoyzqfj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2735,7 +2735,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#nzeqdbyjgn .gt_stub_row_group {
+#rivaoyzqfj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2749,15 +2749,15 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   vertical-align: top;
 }
 
-#nzeqdbyjgn .gt_row_group_first td {
+#rivaoyzqfj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nzeqdbyjgn .gt_row_group_first th {
+#rivaoyzqfj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nzeqdbyjgn .gt_summary_row {
+#rivaoyzqfj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2767,16 +2767,16 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#nzeqdbyjgn .gt_first_summary_row {
+#rivaoyzqfj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_first_summary_row.thick {
+#rivaoyzqfj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nzeqdbyjgn .gt_last_summary_row {
+#rivaoyzqfj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2786,7 +2786,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_grand_summary_row {
+#rivaoyzqfj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2796,7 +2796,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#nzeqdbyjgn .gt_first_grand_summary_row {
+#rivaoyzqfj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2806,7 +2806,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-top-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_last_grand_summary_row_top {
+#rivaoyzqfj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2816,11 +2816,11 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_striped {
+#rivaoyzqfj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nzeqdbyjgn .gt_table_body {
+#rivaoyzqfj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2829,7 +2829,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_footnotes {
+#rivaoyzqfj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2843,7 +2843,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_footnote {
+#rivaoyzqfj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2852,7 +2852,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#nzeqdbyjgn .gt_sourcenotes {
+#rivaoyzqfj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2866,7 +2866,7 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   border-right-color: #D3D3D3;
 }
 
-#nzeqdbyjgn .gt_sourcenote {
+#rivaoyzqfj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2874,72 +2874,72 @@ Table&nbsp;3: Summary table for LDL analysis variables in HERS
   padding-right: 5px;
 }
 
-#nzeqdbyjgn .gt_left {
+#rivaoyzqfj .gt_left {
   text-align: left;
 }
 
-#nzeqdbyjgn .gt_center {
+#rivaoyzqfj .gt_center {
   text-align: center;
 }
 
-#nzeqdbyjgn .gt_right {
+#rivaoyzqfj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nzeqdbyjgn .gt_font_normal {
+#rivaoyzqfj .gt_font_normal {
   font-weight: normal;
 }
 
-#nzeqdbyjgn .gt_font_bold {
+#rivaoyzqfj .gt_font_bold {
   font-weight: bold;
 }
 
-#nzeqdbyjgn .gt_font_italic {
+#rivaoyzqfj .gt_font_italic {
   font-style: italic;
 }
 
-#nzeqdbyjgn .gt_super {
+#rivaoyzqfj .gt_super {
   font-size: 65%;
 }
 
-#nzeqdbyjgn .gt_footnote_marks {
+#rivaoyzqfj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nzeqdbyjgn .gt_asterisk {
+#rivaoyzqfj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nzeqdbyjgn .gt_indent_1 {
+#rivaoyzqfj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nzeqdbyjgn .gt_indent_2 {
+#rivaoyzqfj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nzeqdbyjgn .gt_indent_3 {
+#rivaoyzqfj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nzeqdbyjgn .gt_indent_4 {
+#rivaoyzqfj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nzeqdbyjgn .gt_indent_5 {
+#rivaoyzqfj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nzeqdbyjgn .katex-display {
+#rivaoyzqfj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nzeqdbyjgn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rivaoyzqfj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3044,23 +3044,23 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-unadj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="fkfesqqdzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fkfesqqdzz table {
+<div id="opkeqanghf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#opkeqanghf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fkfesqqdzz thead, #fkfesqqdzz tbody, #fkfesqqdzz tfoot, #fkfesqqdzz tr, #fkfesqqdzz td, #fkfesqqdzz th {
+#opkeqanghf thead, #opkeqanghf tbody, #opkeqanghf tfoot, #opkeqanghf tr, #opkeqanghf td, #opkeqanghf th {
   border-style: none;
 }
 
-#fkfesqqdzz p {
+#opkeqanghf p {
   margin: 0;
   padding: 0;
 }
 
-#fkfesqqdzz .gt_table {
+#opkeqanghf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3086,12 +3086,12 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_caption {
+#opkeqanghf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fkfesqqdzz .gt_title {
+#opkeqanghf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3103,7 +3103,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#fkfesqqdzz .gt_subtitle {
+#opkeqanghf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3115,7 +3115,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#fkfesqqdzz .gt_heading {
+#opkeqanghf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3127,13 +3127,13 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_bottom_border {
+#opkeqanghf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_col_headings {
+#opkeqanghf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3148,7 +3148,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_col_heading {
+#opkeqanghf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3168,7 +3168,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#fkfesqqdzz .gt_column_spanner_outer {
+#opkeqanghf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3180,15 +3180,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#fkfesqqdzz .gt_column_spanner_outer:first-child {
+#opkeqanghf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fkfesqqdzz .gt_column_spanner_outer:last-child {
+#opkeqanghf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fkfesqqdzz .gt_column_spanner {
+#opkeqanghf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3200,11 +3200,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#fkfesqqdzz .gt_spanner_row {
+#opkeqanghf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fkfesqqdzz .gt_group_heading {
+#opkeqanghf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3230,7 +3230,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#fkfesqqdzz .gt_empty_group_heading {
+#opkeqanghf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3245,15 +3245,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#fkfesqqdzz .gt_from_md > :first-child {
+#opkeqanghf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fkfesqqdzz .gt_from_md > :last-child {
+#opkeqanghf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fkfesqqdzz .gt_row {
+#opkeqanghf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3272,7 +3272,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#fkfesqqdzz .gt_stub {
+#opkeqanghf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3285,7 +3285,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#fkfesqqdzz .gt_stub_row_group {
+#opkeqanghf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3299,15 +3299,15 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#fkfesqqdzz .gt_row_group_first td {
+#opkeqanghf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fkfesqqdzz .gt_row_group_first th {
+#opkeqanghf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fkfesqqdzz .gt_summary_row {
+#opkeqanghf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3317,16 +3317,16 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#fkfesqqdzz .gt_first_summary_row {
+#opkeqanghf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_first_summary_row.thick {
+#opkeqanghf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fkfesqqdzz .gt_last_summary_row {
+#opkeqanghf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3336,7 +3336,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_grand_summary_row {
+#opkeqanghf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3346,7 +3346,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#fkfesqqdzz .gt_first_grand_summary_row {
+#opkeqanghf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3356,7 +3356,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_last_grand_summary_row_top {
+#opkeqanghf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3366,11 +3366,11 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_striped {
+#opkeqanghf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fkfesqqdzz .gt_table_body {
+#opkeqanghf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3379,7 +3379,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_footnotes {
+#opkeqanghf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3393,7 +3393,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_footnote {
+#opkeqanghf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3402,7 +3402,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#fkfesqqdzz .gt_sourcenotes {
+#opkeqanghf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3416,7 +3416,7 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#fkfesqqdzz .gt_sourcenote {
+#opkeqanghf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3424,72 +3424,72 @@ Table&nbsp;4: Unadjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#fkfesqqdzz .gt_left {
+#opkeqanghf .gt_left {
   text-align: left;
 }
 
-#fkfesqqdzz .gt_center {
+#opkeqanghf .gt_center {
   text-align: center;
 }
 
-#fkfesqqdzz .gt_right {
+#opkeqanghf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fkfesqqdzz .gt_font_normal {
+#opkeqanghf .gt_font_normal {
   font-weight: normal;
 }
 
-#fkfesqqdzz .gt_font_bold {
+#opkeqanghf .gt_font_bold {
   font-weight: bold;
 }
 
-#fkfesqqdzz .gt_font_italic {
+#opkeqanghf .gt_font_italic {
   font-style: italic;
 }
 
-#fkfesqqdzz .gt_super {
+#opkeqanghf .gt_super {
   font-size: 65%;
 }
 
-#fkfesqqdzz .gt_footnote_marks {
+#opkeqanghf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fkfesqqdzz .gt_asterisk {
+#opkeqanghf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fkfesqqdzz .gt_indent_1 {
+#opkeqanghf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fkfesqqdzz .gt_indent_2 {
+#opkeqanghf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fkfesqqdzz .gt_indent_3 {
+#opkeqanghf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fkfesqqdzz .gt_indent_4 {
+#opkeqanghf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fkfesqqdzz .gt_indent_5 {
+#opkeqanghf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fkfesqqdzz .katex-display {
+#opkeqanghf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fkfesqqdzz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#opkeqanghf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3562,23 +3562,23 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
 </figcaption><div aria-describedby="tbl-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="lihomqqhcs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lihomqqhcs table {
+<div id="ltlznjhxtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ltlznjhxtl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lihomqqhcs thead, #lihomqqhcs tbody, #lihomqqhcs tfoot, #lihomqqhcs tr, #lihomqqhcs td, #lihomqqhcs th {
+#ltlznjhxtl thead, #ltlznjhxtl tbody, #ltlznjhxtl tfoot, #ltlznjhxtl tr, #ltlznjhxtl td, #ltlznjhxtl th {
   border-style: none;
 }
 
-#lihomqqhcs p {
+#ltlznjhxtl p {
   margin: 0;
   padding: 0;
 }
 
-#lihomqqhcs .gt_table {
+#ltlznjhxtl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3604,12 +3604,12 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-left-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_caption {
+#ltlznjhxtl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lihomqqhcs .gt_title {
+#ltlznjhxtl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3621,7 +3621,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-width: 0;
 }
 
-#lihomqqhcs .gt_subtitle {
+#ltlznjhxtl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3633,7 +3633,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-width: 0;
 }
 
-#lihomqqhcs .gt_heading {
+#ltlznjhxtl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3645,13 +3645,13 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_bottom_border {
+#ltlznjhxtl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_col_headings {
+#ltlznjhxtl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3666,7 +3666,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_col_heading {
+#ltlznjhxtl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3686,7 +3686,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#lihomqqhcs .gt_column_spanner_outer {
+#ltlznjhxtl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3698,15 +3698,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 4px;
 }
 
-#lihomqqhcs .gt_column_spanner_outer:first-child {
+#ltlznjhxtl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lihomqqhcs .gt_column_spanner_outer:last-child {
+#ltlznjhxtl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lihomqqhcs .gt_column_spanner {
+#ltlznjhxtl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3718,11 +3718,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   width: 100%;
 }
 
-#lihomqqhcs .gt_spanner_row {
+#ltlznjhxtl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lihomqqhcs .gt_group_heading {
+#ltlznjhxtl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3748,7 +3748,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   text-align: left;
 }
 
-#lihomqqhcs .gt_empty_group_heading {
+#ltlznjhxtl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3763,15 +3763,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: middle;
 }
 
-#lihomqqhcs .gt_from_md > :first-child {
+#ltlznjhxtl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lihomqqhcs .gt_from_md > :last-child {
+#ltlznjhxtl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lihomqqhcs .gt_row {
+#ltlznjhxtl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3790,7 +3790,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   overflow-x: hidden;
 }
 
-#lihomqqhcs .gt_stub {
+#ltlznjhxtl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3803,7 +3803,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#lihomqqhcs .gt_stub_row_group {
+#ltlznjhxtl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3817,15 +3817,15 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   vertical-align: top;
 }
 
-#lihomqqhcs .gt_row_group_first td {
+#ltlznjhxtl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lihomqqhcs .gt_row_group_first th {
+#ltlznjhxtl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lihomqqhcs .gt_summary_row {
+#ltlznjhxtl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3835,16 +3835,16 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#lihomqqhcs .gt_first_summary_row {
+#ltlznjhxtl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_first_summary_row.thick {
+#ltlznjhxtl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lihomqqhcs .gt_last_summary_row {
+#ltlznjhxtl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3854,7 +3854,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_grand_summary_row {
+#ltlznjhxtl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3864,7 +3864,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#lihomqqhcs .gt_first_grand_summary_row {
+#ltlznjhxtl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3874,7 +3874,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-top-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_last_grand_summary_row_top {
+#ltlznjhxtl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3884,11 +3884,11 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_striped {
+#ltlznjhxtl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lihomqqhcs .gt_table_body {
+#ltlznjhxtl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3897,7 +3897,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-bottom-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_footnotes {
+#ltlznjhxtl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3911,7 +3911,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_footnote {
+#ltlznjhxtl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3920,7 +3920,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#lihomqqhcs .gt_sourcenotes {
+#ltlznjhxtl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3934,7 +3934,7 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   border-right-color: #D3D3D3;
 }
 
-#lihomqqhcs .gt_sourcenote {
+#ltlznjhxtl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3942,72 +3942,72 @@ Table&nbsp;5: Adjusted linear regression for LDL in HERS
   padding-right: 5px;
 }
 
-#lihomqqhcs .gt_left {
+#ltlznjhxtl .gt_left {
   text-align: left;
 }
 
-#lihomqqhcs .gt_center {
+#ltlznjhxtl .gt_center {
   text-align: center;
 }
 
-#lihomqqhcs .gt_right {
+#ltlznjhxtl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lihomqqhcs .gt_font_normal {
+#ltlznjhxtl .gt_font_normal {
   font-weight: normal;
 }
 
-#lihomqqhcs .gt_font_bold {
+#ltlznjhxtl .gt_font_bold {
   font-weight: bold;
 }
 
-#lihomqqhcs .gt_font_italic {
+#ltlznjhxtl .gt_font_italic {
   font-style: italic;
 }
 
-#lihomqqhcs .gt_super {
+#ltlznjhxtl .gt_super {
   font-size: 65%;
 }
 
-#lihomqqhcs .gt_footnote_marks {
+#ltlznjhxtl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lihomqqhcs .gt_asterisk {
+#ltlznjhxtl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lihomqqhcs .gt_indent_1 {
+#ltlznjhxtl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lihomqqhcs .gt_indent_2 {
+#ltlznjhxtl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lihomqqhcs .gt_indent_3 {
+#ltlznjhxtl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lihomqqhcs .gt_indent_4 {
+#ltlznjhxtl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lihomqqhcs .gt_indent_5 {
+#ltlznjhxtl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lihomqqhcs .katex-display {
+#ltlznjhxtl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lihomqqhcs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ltlznjhxtl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4244,7 +4244,7 @@ Figure&nbsp;2: Directed Acyclic Graph (DAG) for the WCGS study. <code>personalit
 </div>
 </section></section><section id="sec-causal-regression" class="level1" data-number="7"><h1 data-number="7">
 <span class="header-section-number">7</span> Regression Adjustment</h1>
-<div class="callout callout-style-default callout-tip callout-titled" title="Video lecture">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -4431,23 +4431,23 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
 </figcaption><div aria-describedby="tbl-causal-hers-ldl-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="cfovampbfy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cfovampbfy table {
+<div id="plzctdpbyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#plzctdpbyu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cfovampbfy thead, #cfovampbfy tbody, #cfovampbfy tfoot, #cfovampbfy tr, #cfovampbfy td, #cfovampbfy th {
+#plzctdpbyu thead, #plzctdpbyu tbody, #plzctdpbyu tfoot, #plzctdpbyu tr, #plzctdpbyu td, #plzctdpbyu th {
   border-style: none;
 }
 
-#cfovampbfy p {
+#plzctdpbyu p {
   margin: 0;
   padding: 0;
 }
 
-#cfovampbfy .gt_table {
+#plzctdpbyu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4473,12 +4473,12 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-left-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_caption {
+#plzctdpbyu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cfovampbfy .gt_title {
+#plzctdpbyu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4490,7 +4490,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-width: 0;
 }
 
-#cfovampbfy .gt_subtitle {
+#plzctdpbyu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4502,7 +4502,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-width: 0;
 }
 
-#cfovampbfy .gt_heading {
+#plzctdpbyu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4514,13 +4514,13 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_bottom_border {
+#plzctdpbyu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_col_headings {
+#plzctdpbyu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4535,7 +4535,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_col_heading {
+#plzctdpbyu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4555,7 +4555,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#cfovampbfy .gt_column_spanner_outer {
+#plzctdpbyu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4567,15 +4567,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 4px;
 }
 
-#cfovampbfy .gt_column_spanner_outer:first-child {
+#plzctdpbyu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cfovampbfy .gt_column_spanner_outer:last-child {
+#plzctdpbyu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cfovampbfy .gt_column_spanner {
+#plzctdpbyu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4587,11 +4587,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   width: 100%;
 }
 
-#cfovampbfy .gt_spanner_row {
+#plzctdpbyu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cfovampbfy .gt_group_heading {
+#plzctdpbyu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4617,7 +4617,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   text-align: left;
 }
 
-#cfovampbfy .gt_empty_group_heading {
+#plzctdpbyu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4632,15 +4632,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: middle;
 }
 
-#cfovampbfy .gt_from_md > :first-child {
+#plzctdpbyu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cfovampbfy .gt_from_md > :last-child {
+#plzctdpbyu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cfovampbfy .gt_row {
+#plzctdpbyu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4659,7 +4659,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   overflow-x: hidden;
 }
 
-#cfovampbfy .gt_stub {
+#plzctdpbyu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4672,7 +4672,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#cfovampbfy .gt_stub_row_group {
+#plzctdpbyu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4686,15 +4686,15 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   vertical-align: top;
 }
 
-#cfovampbfy .gt_row_group_first td {
+#plzctdpbyu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cfovampbfy .gt_row_group_first th {
+#plzctdpbyu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cfovampbfy .gt_summary_row {
+#plzctdpbyu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4704,16 +4704,16 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#cfovampbfy .gt_first_summary_row {
+#plzctdpbyu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_first_summary_row.thick {
+#plzctdpbyu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cfovampbfy .gt_last_summary_row {
+#plzctdpbyu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4723,7 +4723,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_grand_summary_row {
+#plzctdpbyu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4733,7 +4733,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#cfovampbfy .gt_first_grand_summary_row {
+#plzctdpbyu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4743,7 +4743,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-top-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_last_grand_summary_row_top {
+#plzctdpbyu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4753,11 +4753,11 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_striped {
+#plzctdpbyu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cfovampbfy .gt_table_body {
+#plzctdpbyu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4766,7 +4766,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-bottom-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_footnotes {
+#plzctdpbyu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4780,7 +4780,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_footnote {
+#plzctdpbyu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4789,7 +4789,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#cfovampbfy .gt_sourcenotes {
+#plzctdpbyu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4803,7 +4803,7 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   border-right-color: #D3D3D3;
 }
 
-#cfovampbfy .gt_sourcenote {
+#plzctdpbyu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4811,72 +4811,72 @@ Table&nbsp;7: Adjusted regression for the causal effect of HT on LDL in HERS. Si
   padding-right: 5px;
 }
 
-#cfovampbfy .gt_left {
+#plzctdpbyu .gt_left {
   text-align: left;
 }
 
-#cfovampbfy .gt_center {
+#plzctdpbyu .gt_center {
   text-align: center;
 }
 
-#cfovampbfy .gt_right {
+#plzctdpbyu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cfovampbfy .gt_font_normal {
+#plzctdpbyu .gt_font_normal {
   font-weight: normal;
 }
 
-#cfovampbfy .gt_font_bold {
+#plzctdpbyu .gt_font_bold {
   font-weight: bold;
 }
 
-#cfovampbfy .gt_font_italic {
+#plzctdpbyu .gt_font_italic {
   font-style: italic;
 }
 
-#cfovampbfy .gt_super {
+#plzctdpbyu .gt_super {
   font-size: 65%;
 }
 
-#cfovampbfy .gt_footnote_marks {
+#plzctdpbyu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cfovampbfy .gt_asterisk {
+#plzctdpbyu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cfovampbfy .gt_indent_1 {
+#plzctdpbyu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cfovampbfy .gt_indent_2 {
+#plzctdpbyu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cfovampbfy .gt_indent_3 {
+#plzctdpbyu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cfovampbfy .gt_indent_4 {
+#plzctdpbyu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cfovampbfy .gt_indent_5 {
+#plzctdpbyu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cfovampbfy .katex-display {
+#plzctdpbyu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cfovampbfy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#plzctdpbyu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5337,23 +5337,23 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
 </figcaption><div aria-describedby="tbl-ps-wcgs-ipw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ifmoayjihd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ifmoayjihd table {
+<div id="ehrqxpqcum" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ehrqxpqcum table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ifmoayjihd thead, #ifmoayjihd tbody, #ifmoayjihd tfoot, #ifmoayjihd tr, #ifmoayjihd td, #ifmoayjihd th {
+#ehrqxpqcum thead, #ehrqxpqcum tbody, #ehrqxpqcum tfoot, #ehrqxpqcum tr, #ehrqxpqcum td, #ehrqxpqcum th {
   border-style: none;
 }
 
-#ifmoayjihd p {
+#ehrqxpqcum p {
   margin: 0;
   padding: 0;
 }
 
-#ifmoayjihd .gt_table {
+#ehrqxpqcum .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5379,12 +5379,12 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-left-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_caption {
+#ehrqxpqcum .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ifmoayjihd .gt_title {
+#ehrqxpqcum .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5396,7 +5396,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-width: 0;
 }
 
-#ifmoayjihd .gt_subtitle {
+#ehrqxpqcum .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5408,7 +5408,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-width: 0;
 }
 
-#ifmoayjihd .gt_heading {
+#ehrqxpqcum .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5420,13 +5420,13 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_bottom_border {
+#ehrqxpqcum .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_col_headings {
+#ehrqxpqcum .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5441,7 +5441,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_col_heading {
+#ehrqxpqcum .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5461,7 +5461,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#ifmoayjihd .gt_column_spanner_outer {
+#ehrqxpqcum .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5473,15 +5473,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 4px;
 }
 
-#ifmoayjihd .gt_column_spanner_outer:first-child {
+#ehrqxpqcum .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ifmoayjihd .gt_column_spanner_outer:last-child {
+#ehrqxpqcum .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ifmoayjihd .gt_column_spanner {
+#ehrqxpqcum .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5493,11 +5493,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   width: 100%;
 }
 
-#ifmoayjihd .gt_spanner_row {
+#ehrqxpqcum .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ifmoayjihd .gt_group_heading {
+#ehrqxpqcum .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5523,7 +5523,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   text-align: left;
 }
 
-#ifmoayjihd .gt_empty_group_heading {
+#ehrqxpqcum .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5538,15 +5538,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: middle;
 }
 
-#ifmoayjihd .gt_from_md > :first-child {
+#ehrqxpqcum .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ifmoayjihd .gt_from_md > :last-child {
+#ehrqxpqcum .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ifmoayjihd .gt_row {
+#ehrqxpqcum .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5565,7 +5565,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   overflow-x: hidden;
 }
 
-#ifmoayjihd .gt_stub {
+#ehrqxpqcum .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5578,7 +5578,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#ifmoayjihd .gt_stub_row_group {
+#ehrqxpqcum .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5592,15 +5592,15 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   vertical-align: top;
 }
 
-#ifmoayjihd .gt_row_group_first td {
+#ehrqxpqcum .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ifmoayjihd .gt_row_group_first th {
+#ehrqxpqcum .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ifmoayjihd .gt_summary_row {
+#ehrqxpqcum .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5610,16 +5610,16 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#ifmoayjihd .gt_first_summary_row {
+#ehrqxpqcum .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_first_summary_row.thick {
+#ehrqxpqcum .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ifmoayjihd .gt_last_summary_row {
+#ehrqxpqcum .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5629,7 +5629,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_grand_summary_row {
+#ehrqxpqcum .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5639,7 +5639,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#ifmoayjihd .gt_first_grand_summary_row {
+#ehrqxpqcum .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5649,7 +5649,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-top-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_last_grand_summary_row_top {
+#ehrqxpqcum .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5659,11 +5659,11 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_striped {
+#ehrqxpqcum .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ifmoayjihd .gt_table_body {
+#ehrqxpqcum .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5672,7 +5672,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-bottom-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_footnotes {
+#ehrqxpqcum .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5686,7 +5686,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_footnote {
+#ehrqxpqcum .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5695,7 +5695,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#ifmoayjihd .gt_sourcenotes {
+#ehrqxpqcum .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5709,7 +5709,7 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   border-right-color: #D3D3D3;
 }
 
-#ifmoayjihd .gt_sourcenote {
+#ehrqxpqcum .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5717,72 +5717,72 @@ Table&nbsp;8: Inverse probability weighted (IPW) logistic regression model for t
   padding-right: 5px;
 }
 
-#ifmoayjihd .gt_left {
+#ehrqxpqcum .gt_left {
   text-align: left;
 }
 
-#ifmoayjihd .gt_center {
+#ehrqxpqcum .gt_center {
   text-align: center;
 }
 
-#ifmoayjihd .gt_right {
+#ehrqxpqcum .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ifmoayjihd .gt_font_normal {
+#ehrqxpqcum .gt_font_normal {
   font-weight: normal;
 }
 
-#ifmoayjihd .gt_font_bold {
+#ehrqxpqcum .gt_font_bold {
   font-weight: bold;
 }
 
-#ifmoayjihd .gt_font_italic {
+#ehrqxpqcum .gt_font_italic {
   font-style: italic;
 }
 
-#ifmoayjihd .gt_super {
+#ehrqxpqcum .gt_super {
   font-size: 65%;
 }
 
-#ifmoayjihd .gt_footnote_marks {
+#ehrqxpqcum .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ifmoayjihd .gt_asterisk {
+#ehrqxpqcum .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ifmoayjihd .gt_indent_1 {
+#ehrqxpqcum .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ifmoayjihd .gt_indent_2 {
+#ehrqxpqcum .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ifmoayjihd .gt_indent_3 {
+#ehrqxpqcum .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ifmoayjihd .gt_indent_4 {
+#ehrqxpqcum .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ifmoayjihd .gt_indent_5 {
+#ehrqxpqcum .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ifmoayjihd .katex-display {
+#ehrqxpqcum .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ifmoayjihd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ehrqxpqcum div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -6452,15 +6452,50 @@ document.querySelectorAll("main table").forEach(function (t) {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -6590,7 +6625,8 @@ document.querySelectorAll("main table").forEach(function (t) {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -6599,10 +6635,71 @@ document.querySelectorAll("main table").forEach(function (t) {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -6616,6 +6713,7 @@ document.querySelectorAll("main table").forEach(function (t) {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -6778,44 +6876,54 @@ document.querySelectorAll("main table").forEach(function (t) {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -6913,7 +7021,9 @@ document.querySelectorAll("main table").forEach(function (t) {
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../chapters/count-regression.html" class="pagination-link" aria-label="Models for Count Outcomes">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Models for Count Outcomes</span>
       </a>          
