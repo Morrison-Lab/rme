@@ -1,0 +1,46 @@
+Now we can combine 
+@lem-logistic-score-comp,
+@lem-d_logodds-d_vb,
+and
+@thm-d_odds_d_beta:
+
+$$
+\ba
+\magenta{\llik_i'(\vb)}
+&= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
+&& \text{(score component lemma)}
+\\
+&= \red{\vx_i}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
+&& \text{(gradient of log-odds w.r.t. coefficients: } \derivf{\eta_i}{\vb} = \vx_i \text{)}
+\\
+&= \red{\vx_i}y_i - \red{\vx_i} \teal{\odds_i}\frac{1}{1+\odds_i}
+&& \text{(gradient of odds w.r.t. coefficients: } \derivf{\odds_i}{\vb} = \vx_i \odds_i \text{)}
+\\
+&= \red{\vx_i}y_i - \red{\vx_i} \frac{\teal{\odds_i}}{1+\odds_i}
+&& \text{(combine the scalar factors into one fraction)}
+\\
+&= \vx_i y_i - \vx_i \pi_i
+&& \text{(inverse-odds identity: } \frac{\odds_i}{1+\odds_i} = \pi_i \text{)}
+\\ &= \vx_i (y_i - \pi_i)
+&& \text{(factor out } \vx_i \text{)}
+\\ &= \vx_i (y_i - \mu_i)
+&& \text{(Bernoulli conditional mean: } \pi_i = \mu_i \text{)}
+\\ &= \vx_i (y_i - \Expp[Y_i|\vX_i=\vx_i])
+&& \text{(definition: } \mu_i \eqdef \Expp[Y_i|\vX_i=\vx_i] \text{)}
+\\ &= \vx_i \ \err(y_i|\vX_i=\vx_i)
+&& \text{(definition of the error: } \err(y|\vX=\vx) \eqdef y - \Expp[Y|\vX=\vx] \text{)}
+\\ &= \magenta{\vx_i \err_i}
+&& \text{(abbreviation: } \err_i \eqdef \err(y_i|\vX_i=\vx_i) \text{)}
+\ea
+$$
+
+
+:::{#thm-logistic-score-comp}
+#### Score component for one observation
+$$\magenta{\llik_i'(\vb)} = \magenta{\vx_i \err_i}$${#eq-score-comp}
+:::
+
+::: notes
+
+This last expression is essentially the same as we found in [linear regression](Linear-models-overview.qmd#eq-scorefun-linreg).
+:::

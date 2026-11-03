@@ -1,84 +1,14 @@
 {{< include latex-macros/macros.qmd >}}
 
-As usual, by [independence](https://morrison-lab.github.io/pds/independence.html#def-indpt), we have:
-
-:::{#lem-score-logistic}
-
-#### Score function decomposes over observations
-
-$$
-\ba
-\brown{\vec{\llik'}(\vb)}
-   &\eqdef \deriv{\vb} \llik(\vb)
-&& \text{(definition of the score function)}
-\\ &=      \deriv{\vb} \sumin \llik_i(\vb)
-&& \text{(the log-likelihood decomposes over observations, by independence)}
-\\ &=      \sumin \deriv{\vb} \llik_i(\vb)
-&& \text{(linearity of differentiation)}
-\\ &=      \sumin \magenta{\vec{\llik'_i}(\vb)}
-&& \text{(definition: } \magenta{\vec{\llik'_i}} \eqdef \deriv{\vb} \llik_i \text{)}
-\ea
-$$
-:::
+{{< include _subfiles/logistic-regression/_lem_score_logistic.qmd >}}
 
 {{< slidebreak >}}
 
-Starting from @lem-logistic-loglik-component, 
-we can apply the [vector chain rule](https://morrison-lab.github.io/mds/vector-calculus.html#thm-chain-vec):
-
-:::{#lem-logistic-score-comp}
-
-#### Chain rule applied to the score component
-
-$$
-\ba
-\magenta{\vec{\llik_i'}(\vb)}
-   &\eqdef \deriv{\vb} \llik_i(\vb)
-&& \text{(definition of the score component)}
-\\ &= \deriv{\vb}\paren{y_i \eta_i - \logf{1+\odds_i}}
-&& \text{(per-observation log-likelihood)}
-\\ &= \deriv{\vb}\paren{y_i\eta_i} - \deriv{\vb}\logf{1+\odds_i}
-&& \text{(linearity of differentiation)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \deriv{\vb}\logf{1+\odds_i}
-&& \text{(constant-factor rule: } y_i \text{ does not depend on } \vb \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \derivf{u_i}{\vb} \paren{\deriv{u_i}\logf{u_i}}
-&& \text{(vector chain rule, with } u_i \eqdef 1+\odds_i \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \derivf{u_i}{\vb} \frac{1}{u_i}
-&& \text{(derivative of the natural log: } \deriv{u}\logf{u} = 1/u \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}} \frac{1}{u_i}
-&& \text{(} \derivf{u_i}{\vb} = \derivf{\odds_i}{\vb} \text{: the constant 1 has derivative } \mathbf{0}_{(p+1) \times 1} \text{)}
-\\ &= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
-&& \text{(substitute back } u_i = 1+\odds_i \text{)}
-\ea
-$$
-
-:::
+{{< include _subfiles/logistic-regression/_lem_logistic_score_comp.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#lem-d_logodds-d_vb}
-
-#### Derivative of log-odds with respect to coefficients
-
-By [the derivative of a linear combination](https://morrison-lab.github.io/mds/vector-calculus.html#thm-deriv-lincom):
-
-$$
-\ba
-\red{\derivf{\eta}{\vb}} &= \deriv{\vb}(\vx \cdot \vb)
-\\
-&= \red{\vx}
-\ea
-$${#eq-d_eta_d_vb}
-
-:::
-
-::: notes
-@lem-d_logodds-d_vb is very similar to @lem-d_logodds-d_x, 
-but not quite the same;
-@lem-d_logodds-d_x differentiates by $\vx$,
-whereas @lem-d_logodds-d_vb differentiates by $\vb$.
-:::
-
+{{< include _subfiles/logistic-regression/_lem_d_logodds_d_vb.qmd >}}
 
 {{< slidebreak >}}
 
@@ -86,148 +16,16 @@ whereas @lem-d_logodds-d_vb differentiates by $\vb$.
 
 {{< slidebreak >}}
 
-Now we can combine 
-@lem-logistic-score-comp,
-@lem-d_logodds-d_vb,
-and
-@thm-d_odds_d_beta:
-
-$$
-\ba
-\magenta{\llik_i'(\vb)}
-&= \red{\derivf{\eta_i}{\vb}}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
-&& \text{(score component lemma)}
-\\
-&= \red{\vx_i}y_i - \purple{\derivf{\odds_i}{\vb}}\frac{1}{1+\odds_i}
-&& \text{(gradient of log-odds w.r.t. coefficients: } \derivf{\eta_i}{\vb} = \vx_i \text{)}
-\\
-&= \red{\vx_i}y_i - \red{\vx_i} \teal{\odds_i}\frac{1}{1+\odds_i}
-&& \text{(gradient of odds w.r.t. coefficients: } \derivf{\odds_i}{\vb} = \vx_i \odds_i \text{)}
-\\
-&= \red{\vx_i}y_i - \red{\vx_i} \frac{\teal{\odds_i}}{1+\odds_i}
-&& \text{(combine the scalar factors into one fraction)}
-\\
-&= \vx_i y_i - \vx_i \pi_i
-&& \text{(inverse-odds identity: } \frac{\odds_i}{1+\odds_i} = \pi_i \text{)}
-\\ &= \vx_i (y_i - \pi_i)
-&& \text{(factor out } \vx_i \text{)}
-\\ &= \vx_i (y_i - \mu_i)
-&& \text{(Bernoulli conditional mean: } \pi_i = \mu_i \text{)}
-\\ &= \vx_i (y_i - \Expp[Y_i|\vX_i=\vx_i])
-&& \text{(definition: } \mu_i \eqdef \Expp[Y_i|\vX_i=\vx_i] \text{)}
-\\ &= \vx_i \ \err(y_i|\vX_i=\vx_i)
-&& \text{(definition of the error: } \err(y|\vX=\vx) \eqdef y - \Expp[Y|\vX=\vx] \text{)}
-\\ &= \magenta{\vx_i \err_i}
-&& \text{(abbreviation: } \err_i \eqdef \err(y_i|\vX_i=\vx_i) \text{)}
-\ea
-$$
-
-
-:::{#thm-logistic-score-comp}
-#### Score component for one observation
-$$\magenta{\llik_i'(\vb)} = \magenta{\vx_i \err_i}$${#eq-score-comp}
-:::
-
-::: notes
-
-This last expression is essentially the same as we found in [linear regression](Linear-models-overview.qmd#eq-scorefun-linreg).
-:::
+{{< include _subfiles/logistic-regression/_thm_logistic_score_comp.qmd >}}
 
 {{< slidebreak >}}
 
-Finally, 
-combining @lem-score-logistic and @thm-logistic-score-comp, 
-we have:
-
-:::{#thm-logistic-score-fn}
-
-#### Logistic-model score function
-
-$$
-\ba
-\brown{\vec{\llik'}(\vb)} &= \sumin \magenta{\llik_i'(\vb)}
-&& \text{(the score decomposes over observations)}
-\\
-&= \sumin \ub{\vx_i}_{(p+1) \times 1} \ub{\eps_i}_{1 \times 1}
-&& \text{(score component for one observation)}
-\\
-&= \brown{\ub{\mX\'}_{(p+1) \times n} \ub{\veps}_{n \times 1}}
-&& \text{(matrix form: } \sumin \vx_i \eps_i = \mX\'\veps \text{)}
-\ea
-$${#eq-logit-score}
-
-:::
+{{< include _subfiles/logistic-regression/_thm_logistic_score_fn.qmd >}}
 
 {{< slidebreak >}}
 
-The [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) is vector-valued; 
-its components are:
-
-$$
-\derivf{\llik}{\vb} 
-= \pmat{
-\derivf{\llik}{\b_0}
-\\
-\derivf{\llik}{\b_1}
-\\
-\vdots
-\\
-\derivf{\llik}{\b_p}
-}
-= \pmat{
-\sumin 1 \eps_i
-\\
-\sumin x_{i,1}\eps_i
-\\
-\vdots
-\\
-\sumin x_{i,p} \eps_i
-}
-= \pmat{
-\v1 \cdot \veps
-\\
-\mX_{\cdot 1} \cdot \veps
-\\
-\vdots
-\\
-\mX_{\cdot p} \cdot \veps}
-$$
-
-Here, $\mX_{\cdot j} \eqdef (x_{1j}, \ldots, x_{nj})$ denotes
-the $j^{th}$ column of the [design matrix](https://morrison-lab.github.io/mds/linear-algebra-projections.html#def-design-matrix) $\mX$
-(the $n$-vector of covariate $j$'s values across all observations),
-in contrast with $\vx_i$,
-which denotes observation $i$'s covariate row vector (a $p$-vector).
-
-Thus, the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) $\vec{\llik'} = \mathbf{0}_{(p+1) \times 1}$ means that
-for the [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$:
-
-1. the sum of the errors (aka deviations) equals 0:
-
-$$\sumin \eps_i = 0$$
-
-2. the sums of the errors times each covariate also equal 0:
-
-$$\mX_{\cdot j} \cdot \veps = \sumin x_{ij} \eps_i = 0, \forall j \in \set{1:p}$$
+{{< include _subfiles/logistic-regression/_note_score_components.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exm-score-beetles}
-
-In our model for the `beetles` data, 
-we only have an intercept plus one covariate, gas concentration ($c$):
-$$\vx = (1, c)$$
-
-If $c_i$ is the gas concentration for the beetle in observation $i$, 
-and $\vec{c} = (c_1, c_2, ...c_n)$, then the score equation $\vec{\llik'} = \mathbf{0}_{2 \times 1}$ means that
-for the MLE $\evb$:
-
-1. the sum of the errors (aka deviations) equals 0:
-
-$$\sumin \eps_i = 0$$
-
-2. the weighted sum of the error times the gas concentrations equals 0:
-
-$$\sumin c_i \eps_i = 0 $$
-
-:::
+{{< include _subfiles/logistic-regression/_exm_score_beetles.qmd >}}
