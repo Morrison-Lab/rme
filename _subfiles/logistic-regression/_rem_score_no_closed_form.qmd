@@ -1,0 +1,19 @@
+:::{#rem-score-no-closed-form}
+
+#### Why the logistic score equation has no closed-form solution
+
+In [linear regression](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-linear-regression), the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) is [linear in $\vb$](Linear-models-overview.qmd#eq-scorefun-linreg).
+Rearranging a linear system isolates $\vb$, which gives the [normal equations](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-normal-equations).
+
+In [logistic regression](#def-logistic-regression), $\vb$ appears inside $\expitf{\tp{\vx_i}\vb}$ in every term of @eq-score-logistic.
+The equations are therefore non-linear in $\vb$.
+No rearrangement isolates $\vb$ on one side.
+A system of $p+1$ non-linear equations in $p+1$ unknowns has no general solution formula.
+
+The [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is [concave](#rem-hessian-nsd), so every solution of the score equation is a global maximum.
+Concavity does not give a formula for such a solution.
+
+Some models do have closed-form solutions.
+In the intercept-only model, the [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of the [log-odds](binary-outcome-associations.qmd#def-logodds) is the log-odds of the [sample proportion](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-proportion) of the $y_i$ that equal 1.
+
+:::
