@@ -76,6 +76,38 @@ Some text between the result and the proof.
 ::: proof
 Cites @thm-c, which belongs to no result.
 :::
+
+::: {#thm-e}
+Statement without references.
+:::
+
+::: proof
+Cites [one](a.qmd#def-one).
+:::
+
+::: proof
+A second proof citing [b](b.qmd#thm-b), which the result does not take.
+:::
+
+::: {#thm-f}
+Statement without references.
+:::
+
+::: {.proofreading}
+Cites [one](a.qmd#def-one), but this div is not a proof.
+:::
+
+::: {.callout-note title="draft.proof"}
+Cites [b](b.qmd#thm-b), but this div is not a proof either.
+:::
+
+::: {#thm-g}
+Statement without references.
+:::
+
+::: {.proof}
+Cites [one](a.qmd#def-one) in a brace-form proof.
+:::
 """
 
 
@@ -114,6 +146,11 @@ def main() -> int:
     check("a proof right after its result adds that result's edges",
           ("t/c#thm-c", "t/a#def-one") in edge_set and ("t/c#thm-c", "t/b#thm-b") in edge_set)
     check("a proof after other text belongs to no result", not any(a == "t/c#thm-d" for a, _ in edge_set))
+    check("only the first proof after a result counts",
+          ("t/c#thm-e", "t/a#def-one") in edge_set and ("t/c#thm-e", "t/b#thm-b") not in edge_set)
+    check("a class that merely contains proof is not a proof",
+          not any(a == "t/c#thm-f" for a, _ in edge_set))
+    check("a brace-form .proof div is a proof", ("t/c#thm-g", "t/a#def-one") in edge_set)
     check("example reference adds no edge", not any("exm" in b for _, b in edge_set))
     check("syntax shown in a code block is not a reference", ("t/a#def-two", "t/a#def-late") not in edge_set)
     check("forward reference", ("t/a#def-early", "t/a#def-late") in forward)
