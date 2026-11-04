@@ -27,7 +27,18 @@ INCLUDE = re.compile(r"\{\{<\s*include\s+(\S+?)\s*>\}\}")
 AT_REF = re.compile(r"(?<![\w@/.])@((?:%s)-[A-Za-z0-9_-]+)" % "|".join(KINDS))
 LINK = re.compile(r"\]\(\s*<?([^)\s>]*?)#((?:%s)-[A-Za-z0-9_-]+)>?[^)]*\)" % "|".join(KINDS))
 URL_SITE = re.compile(r"https?://[^/]+/([^/]+)/([^/#?]+?)\.(?:html|qmd)$")
-PROOF_OPEN = re.compile(r"^:{3,}\s*(?:proof|\{[^}]*\.proof[^}]*\})\s*$")
+PROOF_OPEN = re.compile(r"^:{3,}\s*(?:proof|(\{[^}]*\}))\s*$")
+PROOF_CLASS = re.compile(r"[{\s]\.proof(?![\w-])")
+QUOTED = re.compile(r"\"[^\"]*\"|'[^']*'")
+
+
+def is_proof_open(line):
+    """True for a bare `::: proof` or a brace form with an exact .proof class token."""
+    m = PROOF_OPEN.match(line)
+    if not m:
+        return False
+    attrs = m.group(1)
+    return attrs is None or bool(PROOF_CLASS.search(QUOTED.sub('""', attrs)))
 HEADING = re.compile(r"^#{2,6}\s+(.*?)\s*(?:\{.*\})?\s*$")
 
 
@@ -67,7 +78,7 @@ def parse_page(qmd, site):
             cur = {"site": site, "page": page, "id": m.group(2), "title": "", "text": [],
                    "file": str(src), "depth": len(stack)}
             divs.append(cur)
-            stack.append((len(m.group(1)), cur))
+            stack.append((len(m.group(1)), cur, False))
             closed = None
             continue
         m = DIV_ANY.match(line)
@@ -77,19 +88,20 @@ def parse_page(qmd, site):
                 closed = None
                 for i in range(len(stack) - 1, -1, -1):
                     if stack[i][0] == fence:
-                        if stack[i][1] is not None and stack[i][1]["depth"] == i:
+                        # A closing proof does not make the result accept a second proof.
+                        if stack[i][1] is not None and stack[i][1]["depth"] == i and not stack[i][2]:
                             closed = (i, stack[i][1])
                         del stack[i:]
                         break
-            elif PROOF_OPEN.match(line) and closed and closed[0] == len(stack):
+            elif is_proof_open(line) and closed and closed[0] == len(stack):
                 # A proof written right after its result belongs to it: what the proof
                 # cites is what the result depends on.
-                stack.append((fence, closed[1]))
+                stack.append((fence, closed[1], True))
                 closed = None
             else:  # a nested, non-definition div
-                stack.append((fence, None))
+                stack.append((fence, None, False))
                 closed = None
-            cur = next((d for _, d in reversed(stack) if d), None)
+            cur = next((d for _, d, _ in reversed(stack) if d), None)
             continue
         if line.strip():
             closed = None
