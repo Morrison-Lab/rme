@@ -27,6 +27,7 @@ INCLUDE = re.compile(r"\{\{<\s*include\s+(\S+?)\s*>\}\}")
 AT_REF = re.compile(r"(?<![\w@/.])@((?:%s)-[A-Za-z0-9_-]+)" % "|".join(KINDS))
 LINK = re.compile(r"\]\(\s*<?([^)\s>]*?)#((?:%s)-[A-Za-z0-9_-]+)>?[^)]*\)" % "|".join(KINDS))
 URL_SITE = re.compile(r"https?://[^/]+/([^/]+)/([^/#?]+?)\.(?:html|qmd)$")
+PROOF_OPEN = re.compile(r"^:{3,}\s*(?:proof|\{[^}]*\.proof[^}]*\})\s*$")
 HEADING = re.compile(r"^#{2,6}\s+(.*?)\s*(?:\{.*\})?\s*$")
 
 
@@ -54,6 +55,7 @@ def parse_page(qmd, site):
     """Return the ordered list of div records of one page."""
     page = qmd.stem
     divs, stack, cur = [], [], None
+    closed = None  # (stack index, div record) of a definition div that just closed, for its proof
     in_code = False
     for line, src in expand(qmd, (qmd.resolve(),)):
         if line.lstrip().startswith("```"):
@@ -66,19 +68,31 @@ def parse_page(qmd, site):
                    "file": str(src), "depth": len(stack)}
             divs.append(cur)
             stack.append((len(m.group(1)), cur))
+            closed = None
             continue
         m = DIV_ANY.match(line)
         if m:
             fence = len(m.group(1))
             if line.strip().strip(":") == "":  # closing fence
+                closed = None
                 for i in range(len(stack) - 1, -1, -1):
                     if stack[i][0] == fence:
+                        if stack[i][1] is not None and stack[i][1]["depth"] == i:
+                            closed = (i, stack[i][1])
                         del stack[i:]
                         break
+            elif PROOF_OPEN.match(line) and closed and closed[0] == len(stack):
+                # A proof written right after its result belongs to it: what the proof
+                # cites is what the result depends on.
+                stack.append((fence, closed[1]))
+                closed = None
             else:  # a nested, non-definition div
                 stack.append((fence, None))
+                closed = None
             cur = next((d for _, d in reversed(stack) if d), None)
             continue
+        if line.strip():
+            closed = None
         if cur is not None:
             if not cur["title"]:
                 h = HEADING.match(line)
