@@ -50,6 +50,42 @@ plot(1:10, cv_poly, type = "b", xlab = "Degree", ylab = "CV MSE",
 points(best_d, cv_poly[best_d], col = "red", pch = 19)
 ```
 
+**(b)** Fit the degree-$d^*$ [polynomial](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-polynomial) and draw its 95% confidence band:
+
+```{r}
+#| code-fold: true
+age_grid <- data.frame(age = seq(min(Wage$age), max(Wage$age)))
+fit_best <- lm(wage ~ poly(age, best_d), data = Wage)
+band <- cbind(age_grid,
+              predict(fit_best, age_grid, interval = "confidence"))
+ggplot(Wage, aes(age, wage)) +
+  geom_point(alpha = 0.15) +
+  geom_ribbon(data = band, aes(y = fit, ymin = lwr, ymax = upr),
+              alpha = 0.3) +
+  geom_line(data = band, aes(y = fit), colour = "steelblue", linewidth = 1) +
+  labs(x = "Age", y = "Wage")
+```
+
+**(c)** Choose the number of cut-points $K^*$ for the step function.
+A step function with $K$ cut-points has $K + 1$ intervals, so `cut(age, K + 1)` makes it:
+
+```{r}
+#| code-fold: true
+cv_step <- vapply(1:9, function(K) {
+  wage_cut <- transform(Wage, age_cut = cut(age, K + 1))
+  cv.glm(wage_cut, glm(wage ~ age_cut, data = wage_cut), K = 10)$delta[1]
+}, numeric(1))
+best_K <- which.min(cv_step)
+cat("CV-selected number of cut-points:", best_K, "\n")
+
+fit_step <- lm(wage ~ cut(age, best_K + 1), data = Wage)
+step_df <- cbind(age_grid, fit = predict(fit_step, age_grid))
+ggplot(Wage, aes(age, wage)) +
+  geom_point(alpha = 0.15) +
+  geom_line(data = step_df, aes(y = fit), colour = "tomato", linewidth = 1) +
+  labs(x = "Age", y = "Wage")
+```
+
 #### Python
 
 ```{python}
@@ -57,20 +93,64 @@ points(best_d, cv_poly[best_d], col = "red", pch = 19)
 #| python.reticulate: false
 # Not run: the rme render has no Python environment.
 import numpy as np
-from sklearn.preprocessing import PolynomialFeatures
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 from ISLP import load_data
 Wage = load_data("Wage")
 X = Wage["age"].values.reshape(-1, 1)
 y = Wage["wage"].values
+folds = KFold(10, shuffle=True, random_state=1)
+
+# Standardize age first: raw age**10 is of order 1e17, which makes the
+# least-squares problem ill-conditioned (the R solution uses orthogonal poly()).
 cv_errs = [-cross_val_score(
-    Pipeline([("poly", PolynomialFeatures(d, include_bias=False)),
+    Pipeline([("scale", StandardScaler()),
+              ("poly", PolynomialFeatures(d, include_bias=False)),
               ("reg", LinearRegression())]),
-    X, y, cv=10, scoring="neg_mean_squared_error").mean() for d in range(1, 11)]
+    X, y, cv=folds, scoring="neg_mean_squared_error").mean()
+    for d in range(1, 11)]
 best_d = int(np.argmin(cv_errs)) + 1
 print(f"CV-selected degree: {best_d}")
+
+# (b) Degree-best_d fit with a 95% confidence band
+age_lo, age_hi = Wage["age"].min(), Wage["age"].max()
+age_grid = np.linspace(age_lo, age_hi, age_hi - age_lo + 1)
+scaler = StandardScaler().fit(X)
+poly = PolynomialFeatures(best_d)
+fit_poly = sm.OLS(y, poly.fit_transform(scaler.transform(X))).fit()
+pred = fit_poly.get_prediction(
+    poly.transform(scaler.transform(age_grid.reshape(-1, 1)))
+).summary_frame(alpha=0.05)
+plt.scatter(Wage["age"], Wage["wage"], alpha=0.15, s=6)
+plt.plot(age_grid, pred["mean"], color="steelblue", linewidth=2)
+plt.fill_between(age_grid, pred["mean_ci_lower"], pred["mean_ci_upper"],
+                 alpha=0.3)
+plt.xlabel("Age"); plt.ylabel("Wage"); plt.show()
+
+# (c) Step function: K cut-points make K + 1 intervals
+def step_cv(K):
+    cut = pd.cut(Wage["age"], K + 1)
+    dummies = pd.get_dummies(cut, drop_first=True).astype(float).values
+    return -cross_val_score(LinearRegression(), dummies, y, cv=folds,
+                            scoring="neg_mean_squared_error").mean()
+step_errs = [step_cv(K) for K in range(1, 10)]
+best_K = int(np.argmin(step_errs)) + 1
+print(f"CV-selected number of cut-points: {best_K}")
+
+cut, bins = pd.cut(Wage["age"], best_K + 1, retbins=True)
+fit_step = LinearRegression().fit(
+    pd.get_dummies(cut, drop_first=True).astype(float).values, y)
+grid_cut = pd.cut(age_grid, bins, include_lowest=True)
+step_pred = fit_step.predict(
+    pd.get_dummies(grid_cut, drop_first=True).astype(float).values)
+plt.scatter(Wage["age"], Wage["wage"], alpha=0.15, s=6)
+plt.plot(age_grid, step_pred, color="tomato", linewidth=2)
+plt.xlabel("Age"); plt.ylabel("Wage"); plt.show()
 ```
 
 :::
