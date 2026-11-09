@@ -1,0 +1,28 @@
+# Thin caller of Morrison-Lab/gha's reusable Quarto link check.
+# It fails when a .qmd/.md/.Rmd page links to a page that does not exist,
+# or, with check-fragments, to an #anchor the target page does not define.
+# Quarto only warns about these, and check-links (lychee) does not read
+# relative links out of .qmd files, so nothing else in CI goes red over them.
+# It reads source files and renders nothing, so it takes seconds.
+
+name: Check Quarto links
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-quarto-links.yml@v3
+    with:
+      # `**`, not `*`: gha's matcher stops a single `*` at a `/`.
+      # `_extensions/` holds vendored Quarto extensions,
+      # `latex-macros/` is the shared macros submodule,
+      # and `renv/` holds the restored package library.
+      paths-ignore: '_extensions/**,latex-macros/**,renv/**'
+      check-fragments: true
