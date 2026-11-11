@@ -1,0 +1,116 @@
+# Renders to PDF the website pages a pull request can affect, so a change that
+# MathJax accepts and LaTeX rejects fails on the PR instead of in publish.yml
+# after it merges (#1152, #1160; step 2 of #1461).
+#
+# A whole-site PDF render runs out of memory (#1241), so this renders the
+# pages tools/pdf_pages_to_check.py lists one per call, as publish.yml does,
+# with no freeze cache: each page it renders is one the PR may have changed.
+name: Check PDF render
+
+on:
+  pull_request:
+    paths:  # keep in step with GLOBAL in tools/pdf_pages_to_check.py
+      - '*.qmd'
+      - 'chapters/**'
+      - '_subfiles/**'
+      - '_quarto.yml'
+      - '_quarto-website.yml'
+      - '_extensions/**'
+      - 'filters/**'
+      - 'latex-macros'
+      - 'references.bib'
+      - 'renv.lock'
+      - 'DESCRIPTION'
+      - 'NAMESPACE'
+      - 'R/**'
+      - 'Data/**'
+      - 'inst/**'
+      - '.github/workflows/check-pdf.yml'
+      - 'tools/pdf_pages_to_check.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-pdf-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    outputs:
+      pages: ${{ steps.pages.outputs.pages }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # The merge commit and its first parent (the base tip) suffice.
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: List the pages to render
+        id: pages
+        run: |
+          set -euo pipefail
+          pages=$(python3 tools/pdf_pages_to_check.py HEAD^1 | paste -sd ' ' -)
+          echo "Pages to render to PDF: ${pages:-none}"
+          echo "pages=$pages" >> "$GITHUB_OUTPUT"
+
+  check-pdf:
+    needs: pages
+    if: needs.pages.outputs.pages != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tinytex: true
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.6.0'
+          use-public-rspm: true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jags libcurl4-openssl-dev libpng-dev libfontconfig1-dev libjpeg-dev libglpk-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libtiff-dev libwebp-dev libnode109
+
+      - uses: browser-actions/setup-chrome@v2
+
+      - uses: r-lib/actions/setup-renv@v2
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          bypass-cache: never
+
+      - name: Install local package
+        run: R CMD INSTALL .
+
+      # Renders every page, so one run reports each broken one.
+      - name: Render each page to PDF
+        env:
+          PAGES: ${{ needs.pages.outputs.pages }}
+          # Same heap cap as publish.yml (rme#1044).
+          QUARTO_DENO_V8_OPTIONS: --max-old-space-size=12288,--max-heap-size=12288
+        run: |
+          set -uo pipefail
+          failed=()
+          for page in $PAGES; do
+            echo "::group::$page"
+            if ! quarto render "$page" --to pdf --no-clean; then
+              failed+=("$page")
+              echo "::error file=$page::The PDF render of $page failed."
+            fi
+            echo "::endgroup::"
+          done
+          if [ "${#failed[@]}" -gt 0 ]; then
+            echo "PDF render failed for ${#failed[@]} page(s): ${failed[*]}"
+            exit 1
+          fi
