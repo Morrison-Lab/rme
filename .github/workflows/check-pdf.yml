@@ -2,11 +2,9 @@
 # MathJax accepts and LaTeX rejects fails on the PR instead of in publish.yml
 # after it merges (#1152, #1160; step 2 of #1461).
 #
-# The PR preview renders HTML only, and its `preview:pdf` label renders the
-# whole site's PDF in one call, which runs out of memory (#1241). This check
-# renders one page per `quarto render` call, as publish.yml does, choosing
-# the pages with tools/pdf_pages_to_check.py. No freeze cache is restored:
-# every page it renders is one the PR may have changed.
+# A whole-site PDF render runs out of memory (#1241), so this renders the
+# pages tools/pdf_pages_to_check.py lists one per call, as publish.yml does,
+# with no freeze cache: each page it renders is one the PR may have changed.
 name: Check PDF render
 
 on:
@@ -95,8 +93,7 @@ jobs:
       - name: Install local package
         run: R CMD INSTALL .
 
-      # Every page is rendered even after one fails, so one run reports
-      # every broken page; the step fails if any did.
+      # Renders every page, so one run reports each broken one.
       - name: Render each page to PDF
         env:
           PAGES: ${{ needs.pages.outputs.pages }}

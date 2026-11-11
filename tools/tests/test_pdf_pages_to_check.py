@@ -61,9 +61,7 @@ def main() -> int:
         check("unrelated", pages_to_check(["README.md"], root), [], failures)
         check("global path", pages_to_check(["latex-macros"], root), both, failures)
         check("global dir", pages_to_check(["filters/x.lua"], root), both, failures)
-    for failure in failures:
-        print(f"FAIL {failure}")
-    print("ok" if not failures else f"{len(failures)} failure(s)")
+    print("\n".join(f"FAIL {f}" for f in failures) or "ok")
     return 1 if failures else 0
 
 
