@@ -1,5 +1,10 @@
 on:
   workflow_dispatch:
+    inputs:
+      word:
+        description: Also render the Word (docx) handouts and link them
+        type: boolean
+        default: false
   push:
     branches: main
 
@@ -96,6 +101,12 @@ jobs:
           # (exit 133); 12 GB of the runner's 16 GB leaves headroom for R,
           # LaTeX, and the OS (rme#1044, same mechanism as gha#263).
           QUARTO_DENO_V8_OPTIONS: --max-old-space-size=12288,--max-heap-size=12288
+          # Word is rendered only on request (rme#1458 decision 2): it took
+          # 12 of the run's 54 minutes and raised nearly all of its 1066
+          # render warnings (run 42985343329, #606). Turn it on for one run
+          # with the `word` dispatch input, or for every run with the
+          # repository variable RME_RENDER_WORD=true.
+          WORD: ${{ inputs.word || vars.RME_RENDER_WORD == 'true' }}
         shell: bash
         # One `quarto render` of the website profile builds every page in
         # all four of its formats (html, revealjs, pdf, docx) inside a
@@ -126,12 +137,18 @@ jobs:
           )
           echo "Rendering ${#pages[@]} pages per format, one per invocation"
           test "${#pages[@]}" -gt 0
-          for format in pdf docx revealjs; do
+          formats=(pdf revealjs)
+          profile=website
+          if [ "$WORD" = true ]; then
+            formats+=(docx)
+            profile=website,word
+          fi
+          for format in "${formats[@]}"; do
             for page in "${pages[@]}"; do
-              quarto render "$page" --to "$format" --no-clean
+              quarto render "$page" --to "$format" --no-clean --profile "$profile"
             done
           done
-          quarto render --to html --no-clean
+          quarto render --to html --no-clean --profile "$profile"
 
       # We intentionally do NOT restore the cache before rendering on main, to
       # guarantee that the published website is always fresh and never uses
