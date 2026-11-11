@@ -3,7 +3,8 @@
 # for PRs that are no longer open, and (with compact-history) orphan-squashes
 # gh-pages to a single commit so the deleted snapshots stop bloating the repo.
 # The calling job grants contents: write so the reusable workflow can commit the
-# deletions / force-push the compacted branch back to gh-pages.
+# deletions / force-push the compacted branch back to gh-pages, and actions: read,
+# which the reusable job requests as of gha @v3.
 name: Clean up PR Previews
 
 on:
@@ -16,6 +17,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: read
-    uses: Morrison-Lab/gha/.github/workflows/cleanup-pr-previews.yml@v2
+      actions: read
+    uses: Morrison-Lab/gha/.github/workflows/cleanup-pr-previews.yml@v3
     with:
       compact-history: true
