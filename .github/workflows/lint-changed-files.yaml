@@ -40,9 +40,14 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Add lintr options
+      # object_usage_linter resolves calls between rme's own functions
+      # through the installed namespace. Without this install it falls back
+      # to the global environment and reports every such call as an
+      # undefined function (Morrison-Lab/rme#1487).
+      # lintr finds its configuration, .lintr.R, by itself; no option is set.
+      - name: Install rme so lintr can resolve its functions
         run: |
-          cat('\noptions(lintr.linter_file = ".lintr")\n', file = "~/.Rprofile", append = TRUE)
+          install.packages(".", repos = NULL, type = "source")
         shell: Rscript {0}
 
       - name: Extract and lint files changed by this PR
