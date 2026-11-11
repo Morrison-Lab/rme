@@ -109,7 +109,6 @@ def main():
     ).stdout.split()
     for page in pages_to_check(diff, root):
         print(page)
-    return 0
 
 
 if __name__ == "__main__":
