@@ -21,7 +21,9 @@ or_rr_plot <- function(pi1, max_or = 3) {
     ggplot2::xlab("Odds ratio, OR") +
     ggplot2::ylab("Risk ratio, RR") +
     ggplot2::theme_bw() +
-    ggplot2::geom_abline(ggplot2::aes(intercept = 0, slope = 1, col = "RR=OR")) +
+    ggplot2::geom_abline(
+      ggplot2::aes(intercept = 0, slope = 1, col = "RR=OR")
+    ) +
     ggplot2::geom_hline(ggplot2::aes(yintercept = 1, col = "RR=1")) +
     ggplot2::scale_y_continuous(transform = "log10", limits = limits) +
     ggplot2::scale_x_continuous(transform = "log10", limits = limits)
