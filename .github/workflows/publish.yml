@@ -137,12 +137,17 @@ jobs:
       # guarantee that the published website is always fresh and never uses
       # out-of-date frozen content. The Save step below exists solely to populate
       # the cache so that PR preview renders get a warm start.
+      #
+      # The key ends `-<sha>-<attempt>` because gha's preview pruner reads the
+      # commit from that suffix, diffs it against the PR, and drops only the
+      # changed pages' frozen results. A key ending in the bare sha names no
+      # commit to it, so it discarded the whole restored freeze (#605, #1461).
       - name: Save Quarto freeze
         if: github.ref_name == 'main'
         uses: actions/cache/save@v6
         with:
           path: _freeze
-          key: quarto-freezer-${{ runner.os }}-${{ hashFiles('renv.lock') }}-main-${{ github.sha }}
+          key: quarto-freezer-${{ runner.os }}-${{ hashFiles('renv.lock') }}-main-${{ github.sha }}-${{ github.run_attempt }}
 
       - name: Deploy to gh-pages (preserving PR previews)
         uses: JamesIves/github-pages-deploy-action@v4.9.0

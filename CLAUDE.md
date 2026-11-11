@@ -165,7 +165,9 @@ Before committing any `.qmd`, `.R`, or config file change:
 - Always merge `main` into the feature branch when starting or resuming work on it
 - Merge `main` again before pushing --- not just before requesting review
 - Verify all changed hyperlinks before requesting review
-- If any `_subfiles/` were edited, add the "clear freezer" label
+- Add the "clear freezer" label only to force a full re-render;
+  the preview already drops the frozen results of pages whose included subfiles changed
+  ([Morrison-Lab/gha#1022](https://github.com/Morrison-Lab/gha/pull/1022))
 - Workflow / `.github/` / CI / infra changes go in their own dedicated PRs --- never mix them with book-content PRs
 - **Fact-check prose and reasoning when reviewing content changes**, per the
   global rule in `Morrison-Lab/ai-config`'s `shared/writing/fact-check-prose.md`:
