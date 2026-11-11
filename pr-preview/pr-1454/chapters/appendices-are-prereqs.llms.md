@@ -1,0 +1,35 @@
+# Overview of Appendices
+
+Code
+
+Published
+
+Last modified: 2026-11-11: 8:26:34 (UTC)
+
+These appendices contain information that I consider to be important prerequisites for the main content of this course. I will review *some* of this content in class, but not all of it; there simply isn’t enough time to cover it all, and it should be review from your earlier statistics courses. The appendices are also not an exhaustive list of the assumed prerequisites.
+
+# 1 Prerequisite notes
+
+Most of the prerequisite material now lives in three companion sets of notes, which other courses share:
+
+- [Mathematics for Data Science](https://morrison-lab.github.io/mds/) (mds): notation, algebra, calculus, linear algebra, vector calculus, and proof writing;
+- [Probability for Data Science](https://morrison-lab.github.io/pds/) (pds): probability, random variables, expectation, variance, probability distributions (including the Bernoulli, Poisson, and negative binomial), and the central limit theorem;
+- [Statistics for Data Science](https://morrison-lab.github.io/sds/) (sds): types of data, exploratory data analysis, estimation, statistical inference, maximum likelihood, basic statistical methods, nonparametric models, and Bayesian inference.
+
+These pages replace the appendices that this book used to carry on those topics; links elsewhere in these notes point to them directly.
+
+------------------------------------------------------------------------
+
+Please test yourself on this material; try to write down the definitions from memory, try to solve the proofs for yourself before looking the provided versions, and try to implement the programming solutions before looking at the provided code.
+
+------------------------------------------------------------------------
+
+If you find that don’t have all of the definitions and results in these appendices memorized yet, now is the time to make it happen.
+
+------------------------------------------------------------------------
+
+# 2 Rote memorization is sometimes necessary
+
+For much of my K-12 education, I tried to avoid spending time on rote memorization. Instead, I memorized concepts passively, by repeatedly looking up and applying definitions as I solved problems. I still think that is the most pleasant way to learn, but when I started taking college-level quantitative courses, I found that passive memorization was no longer sufficiently reliable. Especially in the 10-week quarter system, there isn’t enough time for new concepts to settle in naturally before we need to use those concepts and construct higher-level concepts on top of them. So, if you are missing any of the concepts in these appendices, please lock them in ASAP. You will need them.
+
+Back to top
