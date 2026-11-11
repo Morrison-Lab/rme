@@ -22,9 +22,15 @@ test_that("or_rr_plot() draws the curve and both reference lines", {
 test_that("or_rr_plot() rejects a baseline probability outside (0, 1)", {
   or_rr_plot(pi1 = 1) |>
     expect_error(class = "rme_invalid_pi1")
+  or_rr_plot(pi1 = NA_real_) |>
+    expect_error(class = "rme_invalid_pi1")
+  or_rr_plot(pi1 = "0.5") |>
+    expect_error(class = "rme_invalid_pi1")
 })
 
 test_that("or_rr_plot() rejects max_or of 1 or less", {
   or_rr_plot(pi1 = 0.5, max_or = 0.5) |>
+    expect_error(class = "rme_invalid_max_or")
+  or_rr_plot(pi1 = 0.5, max_or = NA) |>
     expect_error(class = "rme_invalid_max_or")
 })
