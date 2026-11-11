@@ -114,9 +114,11 @@ but do not flag issues or request modifications in those files.
   - Verify external URLs are accessible and correct
   - Test cross-references and anchor links
   - Ensure relative paths are correct
-- **If ANY subfiles (`_subfiles/`) were edited in the PR, add the "clear freezer" label to the PR.**
-  Quarto's freeze cache does not detect changes in subfiles (see [quarto-dev/quarto-cli#6793](https://github.com/quarto-dev/quarto-cli/issues/6793)),
-  so the frozen output must be cleared manually to pick up those changes.
+- The "clear freezer" label is only for forcing a full re-render.
+  Quarto's freeze cache does not notice changes in included files ([quarto-dev/quarto-cli#6793](https://github.com/quarto-dev/quarto-cli/issues/6793)),
+  but the preview drops the frozen results of every page whose own file, included subfiles or named data files changed
+  ([Morrison-Lab/gha#1022](https://github.com/Morrison-Lab/gha/pull/1022)),
+  so an edited subfile no longer needs the label.
 
 ## Linking Within the Quarto Website
 
