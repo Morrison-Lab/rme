@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
-"""Self-test for pdf_pages_to_check.py.
+"""Self-test for pdf_pages_to_check.py, on a tiny site: each case in main().
 
-Builds a tiny site and pins: a changed page lists itself, a changed subfile
-lists the page that includes it through a nested include, a changed data file
-lists the page that names it, an unrelated change lists nothing, a global path
-lists every page, and comments in the render list are dropped.
-
-Run it directly with ``python3`` (from the repository root, giving its path). Needs no pytest.
+Run it with ``python3 tools/tests/test_pdf_pages_to_check.py``; no pytest.
 """
-
 from __future__ import annotations
 
 import sys

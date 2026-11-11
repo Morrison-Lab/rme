@@ -12,9 +12,7 @@ a data file. A change to a path in `GLOBAL` can affect every page, so it lists
 them all. Pages come from the `render:` list of `_quarto-website.yml`, read
 the way `publish.yml` reads it. Standard library only.
 
-    python3 tools/pdf_pages_to_check.py BASE [--root .]
-
-Prints one project-relative page per line.
+    python3 tools/pdf_pages_to_check.py BASE [--root .]   # one page per line
 """
 import argparse
 import re
