@@ -1,0 +1,26 @@
+:::{#fig-logit}
+
+```{r}
+#| code-fold: true
+
+odds <- function(pi) pi / (1 - pi)
+
+logit <- function(p) log(odds(p))
+
+library(ggplot2)
+logit_plot <-
+  ggplot() +
+  geom_function(
+    fun = logit,
+    arrow = arrow(ends = "both")
+  ) +
+  xlim(.001, .999) +
+  ylab("logit(p)") +
+  xlab("Probability, p") +
+  theme_bw()
+print(logit_plot)
+```
+
+The [logit function](#def-logit-fn)
+
+:::

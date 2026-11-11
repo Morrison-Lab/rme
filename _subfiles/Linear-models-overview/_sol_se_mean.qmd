@@ -1,0 +1,67 @@
+:::{#sol-se-mean}
+
+$$
+\green{\SE{\hat\mu(\vx)}} =
+\sqrt{\red{\Var{\hat\mu(\vx)}}}
+$${#eq-se-sqrt-var-mean}
+
+By the definition $\hat\mu(\vx) = \vx'\evb$
+and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
+
+$$
+\ba
+\red{\Var{\hat\mu(\vx)}}
+&= \Var{\vx'\evb}
+\\
+&= \vx'\Cov{\evb}\vx
+\\
+&= \red{\tp{\vx}\Sigma\vx}
+\ea
+$${#eq-var-mean}
+
+where $\Sigma \eqdef \Covt(\evb)$.
+
+---
+
+::: notes
+
+Expanding @eq-var-mean out of matrix-vector notation, we have:
+
+:::
+
+$$
+\ba
+\red{\tp{\vx}\Sigma\vx}
+&= \sumip\sumjp x_i \Sigma_{ij} x_j
+\\
+&= \red{\sumip\sumjp x_i \Covt(\evb_i,\evb_j) x_j}
+\ea
+$$
+
+---
+
+Combining @eq-var-mean and the Gauss-Markov theorem:
+
+:::{#thm-est-se-mean}
+
+#### Estimated variance and standard error of predicted mean
+
+$$
+\orange{\eVar{\hat\mu(\vx)}} = \orange{\tp{\vx}\hat{\Sigma}\vx}
+$${#eq-est-var-mean}
+
+$$
+\blue{\HSE{\hat\mu(\vx)}} =
+\blue{\sqrt{\tp{\vx}\hat{\Sigma}\vx}}
+$${#eq-est-se-mean}
+
+:::
+
+::: notes
+
+Note: on the RHS, we have plugged in $\hat{\Sigma}$,
+our estimate of $\Sigma$.
+
+:::
+
+:::

@@ -1,0 +1,37 @@
+:::{#exm-ref-rrd}
+
+#### Switching the reference group in a relative risk difference
+
+In @exm-RRD, we estimated that the relative risk difference of MI for OC versus non-OC is:
+
+$$
+\begin{aligned}
+\xi(OC, \neg OC)
+&= `r rrd_OC`
+\end{aligned}
+$$
+
+In comparison, the relative risk difference for non-OC versus OC is:
+
+$$
+\begin{aligned}
+\xi(\neg OC, OC)
+&= \frac{\ph(MI|\neg OC) - \ph(MI|OC)}{\ph(MI|OC)}\\
+&= \frac{`r p_MI_nOC - p_MI_OC`}{`r p_MI_OC`}\\
+&= `r (p_MI_nOC - p_MI_OC) / p_MI_OC`
+\end{aligned}
+$$
+
+We can check this value against the switched-reference identity @thm-rrd-switch-ref:
+
+$$
+\begin{aligned}
+\frac{1}{\xi(OC, \neg OC) + 1} - 1
+&= \frac{1}{`r rrd_OC` + 1} - 1\\
+&= `r 1 / (rrd_OC + 1) - 1`
+\end{aligned}
+$$
+
+The two calculations agree.
+
+:::
