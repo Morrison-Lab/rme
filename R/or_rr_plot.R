@@ -10,9 +10,23 @@
 #'
 #' @returns A \code{ggplot} object.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("ggplot2", quietly = TRUE)
 #' or_rr_plot(pi1 = 0.5, max_or = 10)
 or_rr_plot <- function(pi1, max_or = 3) {
+  pi1_bad <- length(pi1) != 1 || pi1 <= 0 || pi1 >= 1
+  if (pi1_bad) {
+    cli::cli_abort(
+      "{.arg pi1} must be a single number strictly between 0 and 1.",
+      class = "rme_invalid_pi1"
+    )
+  }
+  max_or_bad <- length(max_or) != 1 || max_or <= 1
+  if (max_or_bad) {
+    cli::cli_abort(
+      "{.arg max_or} must be a single number greater than 1.",
+      class = "rme_invalid_max_or"
+    )
+  }
   rlang::check_installed("ggplot2")
   limits <- c(1 / max_or, max_or)
   rr_of_or <- function(x) or_to_rr(pi1 = pi1, or = x)

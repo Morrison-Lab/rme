@@ -21,5 +21,7 @@ probability, on log scales, with the line \eqn{RR = OR} and the line
 \eqn{RR = 1} for reference.
 }
 \examples{
+\dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 or_rr_plot(pi1 = 0.5, max_or = 10)
+\dontshow{\}) # examplesIf}
 }
