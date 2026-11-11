@@ -47,6 +47,8 @@ Before committing any `.qmd`, `.R`, or config file change:
   - `_quarto-book.yml` --- the book/PDF TOC: add to `book.chapters:` (directly or inside a `part:` grouping)
   - `_quarto-handout.yml` --- a curated PDF-handout subset with its own `render:` list;
     add the page here too if it belongs in the handouts
+- Word (`docx`) handouts are rendered only on request (`publish.yml`'s `word` dispatch input, or the repository variable `RME_RENDER_WORD=true`);
+  the `word` profile (`_quarto-word.yml`, used as `--profile website,word`) adds their link to each HTML page
 - `_quarto.yml` repeats the website profile's format names (`html`, `revealjs`, `pdf`, `docx`) so that Quarto can reuse its cached chapter indexes when it resolves cross-chapter `.qmd` links.
   Without that list, the site render runs out of memory.
   When adding or removing a format in `_quarto-website.yml`, change the list in `_quarto.yml` to match.
