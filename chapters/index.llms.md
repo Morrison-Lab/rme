@@ -4,7 +4,7 @@ Code
 
 Published
 
-Last modified: 2026-11-10: 1:23:48 (UTC)
+Last modified: 2026-11-11: 8:13:42 (UTC)
 
 # Preface
 
@@ -265,6 +265,8 @@ Here are some additional resources that I’ve come across; I haven’t had time
 - [StatQuest with Josh Starmer](https://statquest.org/) provides clear, step-by-step video tutorials on core statistical and machine learning concepts, including linear models and logistic regression.
 
 - [AmstatVideos (American Statistical Association YouTube Channel)](https://www.youtube.com/@AmstatVideos) features lectures, webinars, and historical interviews with prominent statisticians, including the [Distinguished Statistician series](https://www.youtube.com/watch?v=rSg5e0w8uTE&list=PLKO-pS4OmDhE) featuring Jerzy Neyman.
+
+- [Stanford Mini Med School](https://www.youtube.com/playlist?list=PLD7B0DBD8C28BDEA2) is a YouTube playlist of lectures by Stanford School of Medicine faculty that introduces human biology, health and disease to a general audience. It gives background on the diseases and conditions that the examples in these notes model.
 
 - Cameron et al. [\[44\]](#ref-cameron2011robust) proposes a variance estimator extending one-way cluster-robust (“sandwich”) standard errors to two-way or multiway non-nested clustering (e.g., clustering by both firm and year and their intersection), for OLS as well as nonlinear estimators like logit, probit, and GMM. It is the standard reference for multiway-clustered standard errors in applied econometrics and is easily implemented in any package that already supports one-way cluster-robust standard errors.
 
