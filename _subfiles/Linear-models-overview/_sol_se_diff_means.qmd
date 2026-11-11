@@ -43,29 +43,31 @@ $$
 
 Combining @eq-var-diff-means and the Gauss-Markov theorem:
 
-:::{#thm-est-se-diff-means}
+$$
+\ba
+\orange{\eVar{\widehat{\Delta \mu}}}
+&= \orange{\tp{\diffvx}\hat{\Sigma}(\diffvx)}
+&& \text{(plug in } \hat{\Sigma} \text{ for } \Sigma\text{)}
+\ea
+$$
 
-#### Estimated variance and standard error of difference in means
+Then, by @eq-se-sqrt-var-diff-means:
 
 $$
-\orange{\eVar{\widehat{\Delta \mu}}} = \orange{\tp{\diffvx}\hat{\Sigma}(\diffvx)}
-$${#eq-est-var-diff-means}
-
+\ba
+\blue{\HSE{\widehat{\Delta \mu}}}
+&= \sqrt{\orange{\eVar{\widehat{\Delta \mu}}}}
+&& \text{(take the square root)}
+\\
+&= \blue{\sqrt{\tp{\diffvx}\hat{\Sigma}(\diffvx)}}
+&& \text{(substitute the previous display)}
+\ea
 $$
-\blue{\HSE{\widehat{\Delta \mu}}} =
-\blue{\sqrt{\tp{\diffvx}\hat{\Sigma}(\diffvx)}}
-$${#eq-est-se-diff-means}
-
-:::
 
 ::: notes
 
 Note: on the RHS, we have plugged in $\hat{\Sigma}$,
 our estimate of $\Sigma$.
-
-Compare @eq-est-se-diff-means with the formula for
-[inference for predicted means](#exr-se-mean):
-the only change is to replace $\vx$ with $\diffvx = \vx - \vxs$.
 
 :::
 

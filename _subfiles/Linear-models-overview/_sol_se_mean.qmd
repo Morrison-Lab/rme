@@ -42,20 +42,26 @@ $$
 
 Combining @eq-var-mean and the Gauss-Markov theorem:
 
-:::{#thm-est-se-mean}
+$$
+\ba
+\orange{\eVar{\hat\mu(\vx)}}
+&= \orange{\tp{\vx}\hat{\Sigma}\vx}
+&& \text{(plug in } \hat{\Sigma} \text{ for } \Sigma\text{)}
+\ea
+$$
 
-#### Estimated variance and standard error of predicted mean
+Then, by @eq-se-sqrt-var-mean:
 
 $$
-\orange{\eVar{\hat\mu(\vx)}} = \orange{\tp{\vx}\hat{\Sigma}\vx}
-$${#eq-est-var-mean}
-
+\ba
+\blue{\HSE{\hat\mu(\vx)}}
+&= \sqrt{\orange{\eVar{\hat\mu(\vx)}}}
+&& \text{(take the square root)}
+\\
+&= \blue{\sqrt{\tp{\vx}\hat{\Sigma}\vx}}
+&& \text{(substitute the previous display)}
+\ea
 $$
-\blue{\HSE{\hat\mu(\vx)}} =
-\blue{\sqrt{\tp{\vx}\hat{\Sigma}\vx}}
-$${#eq-est-se-mean}
-
-:::
 
 ::: notes
 
