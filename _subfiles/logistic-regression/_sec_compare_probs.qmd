@@ -1,283 +1,71 @@
 ### Risk differences
 
-::: notes
-The simplest comparison of two probabilities, $\pi_1$, and $\pi_2$, is the difference of their values:
-:::
+{{< include _subfiles/logistic-regression/_note_compare_probs_1.qmd >}}
 
-:::{#def-RD}
-#### Risk difference
-The **risk difference** of two probabilities, $\pi_1$, and $\pi_2$, is the difference of their values:
-$$\delta(\pi_1,\pi_2) \eqdef \pi_1 - \pi_2$$
-:::
+{{< include _subfiles/logistic-regression/_def_RD.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exm-RD}
-
-#### Difference in MI risk
-
-Recall the shorthand $\pi(OC)$ and $\pi(\neg OC)$ from @exr-probs
-for the probability of MI given OC use and given OC non-use,
-respectively.
-
-In @exm-oc-mi, the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of the difference in MI [risk](#def-risk-epi) between OC users and OC non-users is:
-```{r, include = FALSE}
-#| label: compute-risk-diff
-rd_OC <- p_MI_OC - p_MI_nOC # nolint: object_name_linter
-```
-
-$$
-\begin{aligned}
-\hat\delta(\pi(OC), \pi(\neg OC))
-&= \delta(\hat\pi(OC), \hat\pi(\neg OC))\\
-&= \hat\pi(OC) - \hat\pi(\neg OC)\\
-&= `r p_MI_OC` - `r p_MI_nOC`\\
-&= `r rd_OC`
-\end{aligned}
-$$
-
-:::
+{{< include _subfiles/logistic-regression/_exm_RD.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-interpret-rd}
-#### interpreting risk differences
-
-How can we interpret the preceding [risk difference](#def-RD) estimate in prose?
-:::
+{{< include _subfiles/logistic-regression/_exr_interpret_rd.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-interpret-rd}
+{{< include _subfiles/logistic-regression/_sol_interpret_rd.qmd >}}
 
-#### interpreting risk differences
-
-"The difference in risk of MI between OC users and non-users was `r rd_OC`."
-
-or
-
-"The difference in risk of MI between OC users and non-users was `r rd_OC*100`
-[percentage points](https://en.wikipedia.org/wiki/Percentage_point)."
-
-:::
-
-::: notes
-See the note about working with percentages in the [algebra page of the lab's math notes](https://morrison-lab.github.io/mds/algebra-basics.html#sec-percent).
-:::
+{{< include _subfiles/logistic-regression/_note_compare_probs_2.qmd >}}
 
 {{< slidebreak >}}
 
 ### Risk ratios
 
-:::{#exr-name-RR}
-
-If $\pi_1$ and $\pi_2$ are two probabilities,
-what do we call the following ratio?
-
-$$\rho(\pi_1,\pi_2) = \frac{\pi_1}{\pi_2}$$
-:::
+{{< include _subfiles/logistic-regression/_exr_name_RR.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-exr-name-RR}
-
-:::{#def-RR}
-#### Relative risk ratio (risk ratio, probability ratio)
-
-The ratio of two probabilities $\pi_1$ and $\pi_2$,
-
-$$\rho(\pi_1,\pi_2) \eqdef \frac{\pi_1}{\pi_2}$$
-
-is called the:
-
-- **risk ratio**,
-- **relative risk ratio**,
-- **probability ratio**,
-- or, in some texts, rate ratio (a different quantity in count regression)
-
-of $\pi_1$ compared to $\pi_2$.
-
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_sol_exr_name_RR.qmd >}}
 
 
 {{< slidebreak >}}
 
-:::{#exr-RR}
-
-:::: notes
-In @sol-compute-probs, we estimated that:
-::::
-
-$$\ph(MI|OC) = `r 13/5000`$$
-
-$$\ph(MI|\neg OC) = `r 7/10000`$$
-
-Now, estimate the *[relative risk](#def-RR)* of MI for OC versus non-OC.
-
-:::
+{{< include _subfiles/logistic-regression/_exr_RR.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-exr-RR}
-
-:::: notes
-The *relative risk* of MI for OC versus non-OC is:
-::::
-
-```{r}
-#| label: compute-risk-ratio
-rr <- (13 / 5000) / (7 / 10000)
-```
-
-$$
-\begin{aligned}
-\hat\rho(OC, \neg OC)
-&=\frac{\ph(MI|OC)}{\ph(MI|\neg OC)}\\
-&= \frac{`r 13/5000`}{`r 7/10000`}\\
-&= `r rr`
-\end{aligned}
-$$
-
-:::
+{{< include _subfiles/logistic-regression/_sol_exr_RR.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-interpret-rr}
-How can we interpret the preceding relative risk estimate in prose?
-:::
+{{< include _subfiles/logistic-regression/_exr_interpret_rr.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-interpret-rr}
-
-::: notes
-We might summarize this result by saying that:
-:::
-
-- "The estimated probability of MI among OC users was 
-`r rr` [times as high as]{.underline} 
-the estimated probability among OC non-users."
-
-or
-
-- "The estimated probability of MI among OC users was 
-`r rr - 1` [times higher than]{.underline}, 
-the estimated probability among OC non-users."
-
-::: notes
-see also @vittinghoff2e [Section 8.1.4], which uses similar phrasing.
-:::
-
-:::
+{{< include _subfiles/logistic-regression/_sol_interpret_rr.qmd >}}
 
 {{< slidebreak >}}
 
 ### Relative risk differences
 
-::: notes
-The second approach in @sol-interpret-rr,
-where we subtract 1 from the [risk ratio](#def-RR),
-is actually reporting a slightly different metric:
-:::
+{{< include _subfiles/logistic-regression/_note_compare_probs_3.qmd >}}
 
-:::{#def-RRD}
-
-#### Relative risk difference
-
-:::: notes
-Sometimes, we divide the [risk difference](#def-RD) by the comparison probability;
-the result is called the **relative risk difference**:
-::::
-
-$$\xi(\pi_1,\pi_2) \eqdef \frac{\delta(\pi_1,\pi_2)}{\pi_2}$$
-
-:::
+{{< include _subfiles/logistic-regression/_def_RRD.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#thm-rrd-vs-rr}
-#### Relative risk difference equals risk ratio minus 1
-
-$$\xi(\pi_1,\pi_2) = \rho(\pi_1,\pi_2) - 1$$
-:::
+{{< include _subfiles/logistic-regression/_thm_rrd_vs_rr.qmd >}}
 
 {{< slidebreak >}}
 
-::: proof
-$$
-\begin{aligned}
-\xi(\pi_1,\pi_2)
-&\eqdef \frac{\delta(\pi_1,\pi_2)}{\pi_2}
-\\&= \frac{\pi_1-\pi_2}{\pi_2}
-\\&= \frac{\pi_1}{\pi_2} - 1
-\\&= \rho(\pi_1,\pi_2) - 1
-\end{aligned}
-$$
-:::
-
-{{< slidebreak >}}
-
-:::{#exm-RRD}
-
-#### Relative difference in MI risk
-
-In @exm-oc-mi,
-the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of
-the relative risk difference in MI risk
-between OC users and OC non-users is:
-
-```{r, include = FALSE}
-#| label: compute-rrd
-rrd_OC <- rd_OC / p_MI_nOC # nolint: object_name_linter
-```
-
-$$
-\ba
-\hat\xi(\pi(OC), \pi(\neg OC))
-&= \xi(\hat\pi(OC), \hat\pi(\neg OC))
-&& \text{(invariance property of MLEs)}
-\\ &\eqdef \frac{\delta(\hat\pi(OC), \hat\pi(\neg OC))}{\hat\pi(\neg OC)}
-&& \text{(definition of relative risk difference)}
-\\ &= \frac{`r rd_OC`}{`r p_MI_nOC`}
-&& \text{(substituting the estimates)}
-\\ &= `r rrd_OC`
-&& \text{(dividing)}
-\ea
-$$
-
-::: notes
-The numerator `r rd_OC` is the [risk difference](#def-RD) estimate from @exm-RD,
-and the denominator `r p_MI_nOC` is the estimate $\hat\pi(\neg OC)$ from @sol-compute-probs.
-:::
-
-We can check this estimate using @thm-rrd-vs-rr
-and the [risk ratio](#def-RR) estimate from @sol-exr-RR:
-
-$$
-\ba
-\hat\xi(\pi(OC), \pi(\neg OC))
-&= \hat\rho(OC, \neg OC) - 1
-&& \text{(relative risk difference as risk ratio minus 1)}
-\\ &= `r rr` - 1
-&& \text{(substituting the risk ratio estimate)}
-\\ &= `r rr - 1`
-&& \text{(subtracting)}
-\ea
-$$
-
-The two calculations agree.
-
-:::
+{{< include _subfiles/logistic-regression/_exm_RRD.qmd >}}
 
 {{< slidebreak >}}
 
 ### Changing reference groups in risk comparisons
 
-:::: notes
-[Risk differences](#def-RD), [risk ratios](#def-RR), and relative risk differences are defined by two probabilities, plus a choice of which probability is the **baseline** or **reference** probability (i.e., which probability is the subtrahend of the risk difference or the denominator of the risk ratio).
-:::
+{{< include _subfiles/logistic-regression/_note_compare_probs_4.qmd >}}
 
 $$\delta(\pi_2,\pi_1) = -\delta(\pi_1, \pi_2)$$ {#eq-rd-switch-ref}
 
@@ -285,76 +73,11 @@ $$\rho(\pi_2,\pi_1) = \inv{\rho(\pi_1,\pi_2)}$$ {#eq-rr-switch-ref}
 
 $$\xi(\pi_2,\pi_1) = \inv{\xi(\pi_1,\pi_2) + 1} - 1$$ {#eq-rrd-switch-ref}
 
-:::{#exr-change-ref-group}
-
-Prove @eq-rd-switch-ref, @eq-rr-switch-ref, and @eq-rrd-switch-ref.
-
-:::
+{{< include _subfiles/logistic-regression/_exr_change_ref_group.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-change-ref-group}
-
-To prove @eq-rd-switch-ref:
-
-$$
-\ba
-\delta(\pi_2,\pi_1)
-&\eqdef \pi_2 - \pi_1
-&& \text{(definition of risk difference)}
-\\ &= -(\pi_1 - \pi_2)
-&& \text{(factoring out } -1 \text{)}
-\\ &= -\delta(\pi_1, \pi_2)
-&& \text{(definition of risk difference)}
-\ea
-$$
-
-To prove @eq-rr-switch-ref:
-
-$$
-\ba
-\rho(\pi_2,\pi_1)
-&\eqdef \frac{\pi_2}{\pi_1}
-&& \text{(definition of risk ratio)}
-\\ &= \inv{\frac{\pi_1}{\pi_2}}
-&& \text{(inverse of the inverted fraction)}
-\\ &= \inv{\rho(\pi_1,\pi_2)}
-&& \text{(definition of risk ratio)}
-\ea
-$$
-
-To prove @eq-rrd-switch-ref,
-first rearrange @thm-rrd-vs-rr to express the risk ratio
-in terms of the relative risk difference:
-
-$$
-\ba
-\xi(\pi_1,\pi_2)
-&= \rho(\pi_1,\pi_2) - 1
-&& \text{(relative risk difference as risk ratio minus 1)}
-\\ \xi(\pi_1,\pi_2) + 1
-&= \rho(\pi_1,\pi_2)
-&& \text{(adding 1 to both sides)}
-\ea
-$$
-
-Then apply @thm-rrd-vs-rr to the switched-reference pair $(\pi_2, \pi_1)$,
-substitute @eq-rr-switch-ref,
-and substitute the rearranged form of @thm-rrd-vs-rr:
-
-$$
-\ba
-\xi(\pi_2,\pi_1)
-&= \rho(\pi_2,\pi_1) - 1
-&& \text{(relative risk difference as risk ratio minus 1)}
-\\ &= \inv{\rho(\pi_1,\pi_2)} - 1
-&& \text{(risk ratio with switched reference group)}
-\\ &= \inv{\xi(\pi_1,\pi_2) + 1} - 1
-&& \text{(substituting } \rho(\pi_1,\pi_2) = \xi(\pi_1,\pi_2) + 1 \text{)}
-\ea
-$$
-
-:::
+{{< include _subfiles/logistic-regression/_sol_change_ref_group.qmd >}}
 
 {{< slidebreak >}}
 
@@ -362,34 +85,7 @@ $$
 
 {{< slidebreak >}}
 
-:::{#exm-ref-rd}
-
-#### Switching the reference group in a risk difference
-
-In @exm-RD, we estimated that the [risk difference](#def-RD) of MI for OC versus non-OC is:
-
-$$
-\begin{aligned}
-\delta(OC, \neg OC)
-&= `r rd_OC`
-\end{aligned}
-$$
-
-In comparison, the risk difference for non-OC versus OC is:
-
-$$
-\begin{aligned}
-\delta(\neg OC, OC)
-&= \ph(MI|\neg OC) - \ph(MI|OC)\\
-&= `r p_MI_nOC` - `r p_MI_OC`\\
-&= `r p_MI_nOC - p_MI_OC`\\
-&= -\delta(OC, \neg OC)
-\end{aligned}
-$$
-
-as @thm-rd-switch-ref states.
-
-:::
+{{< include _subfiles/logistic-regression/_exm_ref_rd.qmd >}}
 
 {{< slidebreak >}}
 
@@ -397,34 +93,7 @@ as @thm-rd-switch-ref states.
 
 {{< slidebreak >}}
 
-:::{#exm-ref}
-
-#### Switching the reference group in a risk ratio
-
-In @sol-exr-RR, we estimated that the [risk ratio](#def-RR) of OC versus non-OC is:
-
-$$
-\begin{aligned}
-\rho(OC, \neg OC)
-&= `r (13/5000)/(7/10000)`
-\end{aligned}
-$$
-
-In comparison, the risk ratio for non-OC versus OC is:
-
-$$
-\begin{aligned}
-\rho(\neg OC, OC)
-&=\frac{\ph(MI|\neg OC)}{\ph(MI|OC)}\\
-&= \frac{`r 7/10000`}{`r 13/5000`}\\
-&= `r (7/10000)/(13/5000)`\\
-&= \frac{1}{\rho(OC, \neg OC)}
-\end{aligned}
-$$
-
-as @thm-rr-switch-ref states.
-
-:::
+{{< include _subfiles/logistic-regression/_exm_ref.qmd >}}
 
 {{< slidebreak >}}
 
@@ -432,41 +101,5 @@ as @thm-rr-switch-ref states.
 
 {{< slidebreak >}}
 
-:::{#exm-ref-rrd}
-
-#### Switching the reference group in a relative risk difference
-
-In @exm-RRD, we estimated that the relative risk difference of MI for OC versus non-OC is:
-
-$$
-\begin{aligned}
-\xi(OC, \neg OC)
-&= `r rrd_OC`
-\end{aligned}
-$$
-
-In comparison, the relative risk difference for non-OC versus OC is:
-
-$$
-\begin{aligned}
-\xi(\neg OC, OC)
-&= \frac{\ph(MI|\neg OC) - \ph(MI|OC)}{\ph(MI|OC)}\\
-&= \frac{`r p_MI_nOC - p_MI_OC`}{`r p_MI_OC`}\\
-&= `r (p_MI_nOC - p_MI_OC) / p_MI_OC`
-\end{aligned}
-$$
-
-We can check this value against the switched-reference identity @thm-rrd-switch-ref:
-
-$$
-\begin{aligned}
-\frac{1}{\xi(OC, \neg OC) + 1} - 1
-&= \frac{1}{`r rrd_OC` + 1} - 1\\
-&= `r 1 / (rrd_OC + 1) - 1`
-\end{aligned}
-$$
-
-The two calculations agree.
-
-:::
+{{< include _subfiles/logistic-regression/_exm_ref_rrd.qmd >}}
 

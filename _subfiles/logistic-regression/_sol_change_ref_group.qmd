@@ -1,0 +1,62 @@
+:::{#sol-change-ref-group}
+
+To prove @eq-rd-switch-ref:
+
+$$
+\ba
+\delta(\pi_2,\pi_1)
+&\eqdef \pi_2 - \pi_1
+&& \text{(definition of risk difference)}
+\\ &= -(\pi_1 - \pi_2)
+&& \text{(factoring out } -1 \text{)}
+\\ &= -\delta(\pi_1, \pi_2)
+&& \text{(definition of risk difference)}
+\ea
+$$
+
+To prove @eq-rr-switch-ref:
+
+$$
+\ba
+\rho(\pi_2,\pi_1)
+&\eqdef \frac{\pi_2}{\pi_1}
+&& \text{(definition of risk ratio)}
+\\ &= \inv{\frac{\pi_1}{\pi_2}}
+&& \text{(inverse of the inverted fraction)}
+\\ &= \inv{\rho(\pi_1,\pi_2)}
+&& \text{(definition of risk ratio)}
+\ea
+$$
+
+To prove @eq-rrd-switch-ref,
+first rearrange @thm-rrd-vs-rr to express the risk ratio
+in terms of the relative risk difference:
+
+$$
+\ba
+\xi(\pi_1,\pi_2)
+&= \rho(\pi_1,\pi_2) - 1
+&& \text{(relative risk difference as risk ratio minus 1)}
+\\ \xi(\pi_1,\pi_2) + 1
+&= \rho(\pi_1,\pi_2)
+&& \text{(adding 1 to both sides)}
+\ea
+$$
+
+Then apply @thm-rrd-vs-rr to the switched-reference pair $(\pi_2, \pi_1)$,
+substitute @eq-rr-switch-ref,
+and substitute the rearranged form of @thm-rrd-vs-rr:
+
+$$
+\ba
+\xi(\pi_2,\pi_1)
+&= \rho(\pi_2,\pi_1) - 1
+&& \text{(relative risk difference as risk ratio minus 1)}
+\\ &= \inv{\rho(\pi_1,\pi_2)} - 1
+&& \text{(risk ratio with switched reference group)}
+\\ &= \inv{\xi(\pi_1,\pi_2) + 1} - 1
+&& \text{(substituting } \rho(\pi_1,\pi_2) = \xi(\pi_1,\pi_2) + 1 \text{)}
+\ea
+$$
+
+:::

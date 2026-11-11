@@ -1,32 +1,10 @@
 {{< include latex-macros/macros.qmd >}}
 
-:::{#exr-ci-diff-means}
-
-Given
-a [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) $\evb$
-and
-a corresponding estimated [covariance matrix](https://morrison-lab.github.io/pds/variance-covariance.html#def-cov-vec-x)
-$\eS \eqdef \widehat{\Covt}(\evb)$,
-calculate a 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the difference in means
-comparing covariate patterns $\vx$ and $\vxs$:
-
-$$\Delta \mu \eqdef \mu(\vx) - \mu(\vxs)$$
-
-:::
+{{< include _subfiles/Linear-models-overview/_exr_ci_diff_means.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-ci-diff-means}
-
-::: notes
-
-We can construct the confidence interval directly:
-
-:::
-
-$$\Delta \mu \in \widehat{\Delta \mu} \pm t_{n-p}(0.975) \cdot \HSE{\widehat{\Delta \mu}}$$
-
-:::
+{{< include _subfiles/Linear-models-overview/_sol_ci_diff_means.qmd >}}
 
 {{< slidebreak >}}
 
@@ -38,33 +16,11 @@ $$\Delta \mu \in \widehat{\Delta \mu} \pm t_{n-p}(0.975) \cdot \HSE{\widehat{\De
 
 {{< slidebreak >}}
 
-:::{#exr-diff-means-as-lincom}
-
-Express the difference in means
-$\Delta \mu \eqdef \mu(\vx) - \mu(\vxs)$ as a linear function of $\vb$.
-
-:::
+{{< include _subfiles/Linear-models-overview/_exr_diff_means_as_lincom.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-diff-means-as-lincom}
-
-$$
-\ba
-\Delta \mu
-&= \mu(\vx) - \mu(\vxs)
-\\
-&= \dprodf{\vx}{\vb} - \dprodf{(\vxs)}{\vb}
-\\
-&= \dprodf{(\vx - \vxs)}{\vb}
-\\
-&= \dprodf{\diffvx}{\vb}
-\ea
-$${#eq-diff-means-lincom}
-
-where $\diffvx \eqdef \vx - \vxs$.
-
-:::
+{{< include _subfiles/Linear-models-overview/_sol_diff_means_as_lincom.qmd >}}
 
 {{< slidebreak >}}
 
@@ -76,93 +32,11 @@ where $\diffvx \eqdef \vx - \vxs$.
 
 {{< slidebreak >}}
 
-:::{#exr-se-diff-means}
-
-::: notes
-
-How can we estimate the [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of
-$\widehat{\Delta \mu}$?
-
-:::
-
-$$\blue{\HSE{\widehat{\Delta \mu}}} = \blue{?}$$
-
-:::
+{{< include _subfiles/Linear-models-overview/_exr_se_diff_means.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-se-diff-means}
-
-$$
-\green{\SE{\widehat{\Delta \mu}}} =
-\sqrt{\red{\Var{\widehat{\Delta \mu}}}}
-$${#eq-se-sqrt-var-diff-means}
-
-By @thm-diff-means-lincom and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
-
-$$
-\ba
-\red{\Var{\widehat{\Delta \mu}}}
-&= \Var{\dprodf{\diffvx}{\evb}}
-\\
-&= \pt{\diffvx}\Cov{\evb}(\diffvx)
-\\
-&= \red{\pt{\diffvx}\Sigma(\diffvx)}
-\ea
-$${#eq-var-diff-means}
-
-where $\Sigma \eqdef \Covt(\evb)$.
-
----
-
-::: notes
-
-Expanding @eq-var-diff-means out of matrix-vector notation, we have:
-
-:::
-
-$$
-\ba
-\red{\pt{\diffvx}\Sigma(\diffvx)}
-&= \sumip\sumjp (\diffvx)_i \Sigma_{ij} (\diffvx)_j
-\\
-&= \sumip\sumjp (\Delta x_i) \Sigma_{ij} (\Delta x_j)
-\\
-&= \red{\sumip\sumjp (x_i - x^*_i) \Covt(\evb_i,\evb_j) (x_j - x^*_j)}
-\ea
-$$
-
----
-
-Combining @eq-var-diff-means and the Gauss-Markov theorem:
-
-:::{#thm-est-se-diff-means}
-
-#### Estimated variance and standard error of difference in means
-
-$$
-\orange{\eVar{\widehat{\Delta \mu}}} = \orange{\tp{\diffvx}\hat{\Sigma}(\diffvx)}
-$${#eq-est-var-diff-means}
-
-$$
-\blue{\HSE{\widehat{\Delta \mu}}} =
-\blue{\sqrt{\tp{\diffvx}\hat{\Sigma}(\diffvx)}}
-$${#eq-est-se-diff-means}
-
-:::
-
-::: notes
-
-Note: on the RHS, we have plugged in $\hat{\Sigma}$,
-our estimate of $\Sigma$.
-
-Compare @eq-est-se-diff-means with the formula for
-[inference for predicted means](#exr-se-mean):
-the only change is to replace $\vx$ with $\diffvx = \vx - \vxs$.
-
-:::
-
-:::
+{{< include _subfiles/Linear-models-overview/_sol_se_diff_means.qmd >}}
 
 ---
 

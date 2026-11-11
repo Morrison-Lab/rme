@@ -1,0 +1,51 @@
+:::{#exm-RRD}
+
+#### Relative difference in MI risk
+
+In @exm-oc-mi,
+the [maximum likelihood estimate](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of
+the relative risk difference in MI risk
+between OC users and OC non-users is:
+
+```{r, include = FALSE}
+#| label: compute-rrd
+rrd_OC <- rd_OC / p_MI_nOC # nolint: object_name_linter
+```
+
+$$
+\ba
+\hat\xi(\pi(OC), \pi(\neg OC))
+&= \xi(\hat\pi(OC), \hat\pi(\neg OC))
+&& \text{(invariance property of MLEs)}
+\\ &\eqdef \frac{\delta(\hat\pi(OC), \hat\pi(\neg OC))}{\hat\pi(\neg OC)}
+&& \text{(definition of relative risk difference)}
+\\ &= \frac{`r rd_OC`}{`r p_MI_nOC`}
+&& \text{(substituting the estimates)}
+\\ &= `r rrd_OC`
+&& \text{(dividing)}
+\ea
+$$
+
+::: notes
+The numerator `r rd_OC` is the [risk difference](#def-RD) estimate from @exm-RD,
+and the denominator `r p_MI_nOC` is the estimate $\hat\pi(\neg OC)$ from @sol-compute-probs.
+:::
+
+We can check this estimate using @thm-rrd-vs-rr
+and the [risk ratio](#def-RR) estimate from @sol-exr-RR:
+
+$$
+\ba
+\hat\xi(\pi(OC), \pi(\neg OC))
+&= \hat\rho(OC, \neg OC) - 1
+&& \text{(relative risk difference as risk ratio minus 1)}
+\\ &= `r rr` - 1
+&& \text{(substituting the risk ratio estimate)}
+\\ &= `r rr - 1`
+&& \text{(subtracting)}
+\ea
+$$
+
+The two calculations agree.
+
+:::

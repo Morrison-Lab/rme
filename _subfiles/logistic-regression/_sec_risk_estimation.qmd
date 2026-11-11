@@ -1,158 +1,29 @@
-:::::{#exm-oc-mi}
-#### Oral Contraceptive Use and Heart Attack
-
-* Research question:
-how does oral contraceptive (OC) use
-affect the risk of myocardial infarction (MI; a.k.a. heart attack)?
-
-:::{.notes}
-This potential risk increase was a concern when oral contraceptives were first developed,
-because the original formulations used
-much higher doses of estrogen than are used today.
-Cardiovascular risk from combined oral contraceptives increases with estrogen dose,
-and the dose has been reduced substantially since those early formulations,
-so modern low-dose formulations carry much lower risk [@roach2015combined].
-
-@tbl-oc-mi contains simulated data for
-an imaginary follow-up (a.k.a. *prospective*) study
-in which two groups are identified,
-one using OCs and another not using OCs,
-and both groups are tracked for three years
-to determine how many in each groups have MIs.
-
-:::
-
-:::{#tbl-oc-mi}
-
-```{r}
-#| message: false
-#| code-fold: true
-library(dplyr)
-oc_mi <-
-  tribble(
-    ~OC, ~MI, ~Total,
-    "OC use", 13, 5000,
-    "No OC use", 7, 10000
-  ) |>
-  mutate(`No MI` = Total - MI) |>
-  relocate(`No MI`, .after = MI)
-
-totals <-
-  oc_mi |>
-  summarize(across(c(MI, `No MI`, Total), sum)) |>
-  mutate(OC = "Total")
-
-tbl_oc_mi <- bind_rows(oc_mi, totals)
-
-tbl_oc_mi |> pander::pander()
-```
-
-Simulated data from study of oral contraceptive use and heart attack risk
-
-:::
-
-:::::
+{{< include _subfiles/logistic-regression/_exm_oc_mi.qmd >}}
 
 {{< slidebreak >}}
 
-::::{#exr-probs}
-
-Let $\pi(OC) \eqdef \Pr(MI|OC)$ and $\pi(\neg OC) \eqdef \Pr(MI|\neg OC)$
-be the probabilities of MI for OC users and non-OC users.
-Estimate them from @exm-oc-mi.
-::::
+{{< include _subfiles/logistic-regression/_exr_probs.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-compute-probs}
-
-```{r, include = FALSE}
-#| label: calc-prs
-p_MI_OC <- 13 / 5000 # nolint: object_name_linter
-p_MI_nOC <- 7 / 10000 # nolint: object_name_linter
-```
-
-$$\ph(MI|OC) = \frac{13}{5000} = `r p_MI_OC`$$
-
-$$\ph(MI|\neg OC) = \frac{7}{10000} = `r p_MI_nOC`$$
-
-:::
+{{< include _subfiles/logistic-regression/_sol_compute_probs.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-def-controls}
-
-What does the term "controls" mean in the context of study design?
-
-:::
+{{< include _subfiles/logistic-regression/_exr_def_controls.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-def-controls}
-::::{#def-controls}
-##### Two meanings of "controls"
-
-Depending on context, "controls" can mean either:
-
-- individuals who don't experience an *exposure* of interest,
-- or individuals who don't experience an *outcome* of interest.
-
-::::
-:::
+{{< include _subfiles/logistic-regression/_sol_def_controls.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exr-controls-use-cases}
-What types of studies do the two definitions of controls correspond to?
-:::
+{{< include _subfiles/logistic-regression/_exr_controls_use_cases.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#sol-controls-use-cases}
-:::{#def-cases-retrospective}
-##### cases and controls in retrospective studies
-In *retrospective [case-control studies](#sec-CC-studies)*,
-participants who experience the outcome of interest are called **cases**,
-while participants who don't experience that outcome are called **controls**
-[@me4, Chapter 8].
-:::
-
-:::{#def-cases-prospective}
-##### treatment groups and control groups in prospective studies
-In *prospective studies*,
-the group of participants who experience the treatment or exposure of interest
-is called the **treatment group**,
-while the participants who receive the baseline or comparison treatment
-(for example, clinical trial participants who receive a placebo
-or a standard-of-care treatment rather than an experimental treatment)
-are called **controls**
-[@me4, Chapter 6].
-
-:::
-:::
+{{< include _subfiles/logistic-regression/_sol_controls_use_cases.qmd >}}
 
 {{< slidebreak >}}
 
-:::{#exm-cases-controls}
-
-#### Cases and controls in the OC-MI study
-
-@exm-oc-mi describes a *prospective* (follow-up) study:
-participants were enrolled based on their exposure status
-(OC use versus no OC use)
-and then followed for three years to observe MI outcomes.
-
-Therefore, @def-cases-prospective applies:
-the 5000 OC users form the treatment (exposed) group,
-and the 10,000 OC non-users are the **controls**.
-
-@def-cases-retrospective does not apply to this study design,
-because participants were not selected based on their outcomes.
-If we had instead recruited participants by outcome status ---
-enrolling the 20 participants who experienced MIs,
-along with a sample of participants who did not ---
-the study would have been a *retrospective [case-control study](#sec-CC-studies)*:
-the 20 participants with MIs would be the **cases**,
-and the sampled MI-free participants would be the **controls**.
-
-:::
+{{< include _subfiles/logistic-regression/_exm_cases_controls.qmd >}}

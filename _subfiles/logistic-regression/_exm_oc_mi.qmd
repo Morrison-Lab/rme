@@ -1,0 +1,54 @@
+:::::{#exm-oc-mi}
+#### Oral Contraceptive Use and Heart Attack
+
+* Research question:
+how does oral contraceptive (OC) use
+affect the risk of myocardial infarction (MI; a.k.a. heart attack)?
+
+:::{.notes}
+This potential risk increase was a concern when oral contraceptives were first developed,
+because the original formulations used
+much higher doses of estrogen than are used today.
+Cardiovascular risk from combined oral contraceptives increases with estrogen dose,
+and the dose has been reduced substantially since those early formulations,
+so modern low-dose formulations carry much lower risk [@roach2015combined].
+
+@tbl-oc-mi contains simulated data for
+an imaginary follow-up (a.k.a. *prospective*) study
+in which two groups are identified,
+one using OCs and another not using OCs,
+and both groups are tracked for three years
+to determine how many in each groups have MIs.
+
+:::
+
+:::{#tbl-oc-mi}
+
+```{r}
+#| message: false
+#| code-fold: true
+library(dplyr)
+oc_mi <-
+  tribble(
+    ~OC, ~MI, ~Total,
+    "OC use", 13, 5000,
+    "No OC use", 7, 10000
+  ) |>
+  mutate(`No MI` = Total - MI) |>
+  relocate(`No MI`, .after = MI)
+
+totals <-
+  oc_mi |>
+  summarize(across(c(MI, `No MI`, Total), sum)) |>
+  mutate(OC = "Total")
+
+tbl_oc_mi <- bind_rows(oc_mi, totals)
+
+tbl_oc_mi |> pander::pander()
+```
+
+Simulated data from study of oral contraceptive use and heart attack risk
+
+:::
+
+:::::

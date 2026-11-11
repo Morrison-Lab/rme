@@ -1,0 +1,26 @@
+:::{#exm-logit-numeric}
+
+#### Log-odds of an event with probability 0.75
+
+Suppose the probability of an event $A$ is $\prob = 0.75$.
+Then, by @thm-prob-to-odds,
+the corresponding [odds](#def-odds) of $A$ are
+$\odds = \frac{0.75}{1-0.75} = \frac{0.75}{0.25} = 3$,
+and by @cor-logodds-logit and @thm-logit-function,
+the corresponding [log-odds](#def-logodds) of $A$ are:
+
+$$
+\ba
+\logodds = \logitf{0.75}
+&= \logf{\frac{0.75}{1-0.75}}
+&& \text{(expanded expression for logit)}
+\\ &= \logf{\frac{0.75}{0.25}}
+&& \text{(subtract: } 1 - 0.75 = 0.25\text{)}
+\\ &= \logf{3}
+&& \text{(divide: } 0.75 / 0.25 = 3\text{)}
+\\ &\approx 1.0986
+&& \text{(evaluate the natural logarithm)}
+\ea
+$$
+
+:::
