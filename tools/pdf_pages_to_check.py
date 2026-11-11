@@ -27,7 +27,8 @@ INCLUDE_RE = re.compile(
 PAGE_SUFFIXES = {".qmd", ".rmd", ".ipynb", ".md"}
 
 # Paths whose change can alter every page's LaTeX. A trailing `/` matches a
-# directory prefix; anything else matches the path exactly.
+# directory prefix; anything else matches the path exactly. Keep in step with
+# the `paths:` filter of .github/workflows/check-pdf.yml.
 GLOBAL = (
     "_quarto.yml", "_quarto-website.yml", "_extensions/", "filters/",
     "latex-macros", "latex-macros/", "references.bib", "renv.lock",
