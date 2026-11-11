@@ -15,8 +15,8 @@ or_to_rr(pi1, or)
 A numeric vector of risk ratios.
 }
 \description{
-Given the baseline probability `pi1` and an odds ratio comparing a second
-group to the baseline, returns the risk (probability) ratio
+Given the baseline probability \code{pi1} and an odds ratio comparing a
+second group to the baseline, returns the risk (probability) ratio
 \eqn{\pi_2 / \pi_1}.
 }
 \examples{

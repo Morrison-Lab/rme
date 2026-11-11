@@ -1,7 +1,7 @@
 #' Convert an odds ratio to a risk ratio
 #'
-#' Given the baseline probability `pi1` and an odds ratio comparing a second
-#' group to the baseline, returns the risk (probability) ratio
+#' Given the baseline probability \code{pi1} and an odds ratio comparing a
+#' second group to the baseline, returns the risk (probability) ratio
 #' \eqn{\pi_2 / \pi_1}.
 #'
 #' @param pi1 Baseline probability, strictly between 0 and 1.

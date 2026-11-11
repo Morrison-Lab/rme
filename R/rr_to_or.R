@@ -1,11 +1,11 @@
 #' Convert a risk ratio to an odds ratio
 #'
-#' Given the baseline probability `pi1` and a risk (probability) ratio
+#' Given the baseline probability \code{pi1} and a risk (probability) ratio
 #' comparing a second group to the baseline, returns the odds ratio.
 #'
 #' @param pi1 Baseline probability, strictly between 0 and 1.
 #' @param rr Risk ratio, positive, small enough that the second group's
-#'   probability, `pi1` times the risk ratio, stays below 1.
+#'   probability, \code{pi1} times the risk ratio, stays below 1.
 #'
 #' @returns A numeric vector of odds ratios.
 #' @export

@@ -6,7 +6,7 @@ test_that("rr_to_or() inverts or_to_rr()", {
   expect_equal(or_back, or)
 })
 
-test_that("rr_to_or() gives the worked example's odds ratio", {
+test_that("rr_to_or() turns pi1 = 0.4 and RR = 1.25 into OR = 1.5", {
   or <- rr_to_or(pi1 = 0.4, rr = 1.25)
   expect_equal(or, 1.5)
 })
