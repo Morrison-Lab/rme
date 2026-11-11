@@ -16,7 +16,7 @@ Logistic regression and variations
 
 Published
 
-Last modified: 2026-11-11: 18:49:31 (UTC)
+Last modified: 2026-11-11: 19:41:22 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -112,11 +112,11 @@ This content is adapted from:
 
 > **NOTE:**
 >
-> *Solution 1*.
+> *Solution 1*. See [Definition 1](#def-logistic-regression).
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > **Definition 1 (Logistic regression model)** **Logistic regression** is a framework for modeling [binary](https://morrison-lab.github.io/sds/data.html#def-binary) outcomes, conditional on one or more *predictors* (also called *covariates*).
+> **Definition 1 (Logistic regression model)** **Logistic regression** is a framework for modeling [binary](https://morrison-lab.github.io/sds/data.html#def-binary) outcomes, conditional on one or more *predictors* (also called *covariates*).
 
 > **NOTE:**
 >

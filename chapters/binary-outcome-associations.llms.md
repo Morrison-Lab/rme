@@ -16,7 +16,7 @@ Risks, odds, odds ratios, and the logit and expit functions
 
 Published
 
-Last modified: 2026-11-11: 18:49:31 (UTC)
+Last modified: 2026-11-11: 19:41:22 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -217,14 +217,14 @@ A risk is a probability, so it is unitless and lies between 0 and 1. A risk is o
 
 > **NOTE:**
 >
-> *Solution 2*.
+> *Solution 2*. See [Definition 2](#def-controls).
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > **Definition 2 (Two meanings of “controls”)** Depending on context, “controls” can mean either:
-> >
-> > - individuals who don’t experience an *exposure* of interest,
-> > - or individuals who don’t experience an *outcome* of interest.
+> **Definition 2 (Two meanings of “controls”)** Depending on context, “controls” can mean either:
+>
+> - individuals who don’t experience an *exposure* of interest,
+> - or individuals who don’t experience an *outcome* of interest.
 
 > **NOTE:**
 >
@@ -232,15 +232,15 @@ A risk is a probability, so it is unitless and lies between 0 and 1. A risk is o
 
 > **NOTE:**
 >
-> *Solution 3*.
+> *Solution 3*. [Controls](#def-controls) lack the [outcome](../chapters/Intro-to-GLMs.llms.md#def-outcome) in retrospective case-control studies ([Definition 3](#def-cases-retrospective)), and lack the exposure or treatment in prospective studies ([Definition 4](#def-cases-prospective)).
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > **Definition 3 (cases and controls in retrospective studies)** In *retrospective [case-control studies](#sec-CC-studies)*, participants who experience the outcome of interest are called **cases**, while participants who don’t experience that outcome are called **controls** [\[5, Ch. 8\]](#ref-me4).
+> **Definition 3 (cases and controls in retrospective studies)** In *retrospective [case-control studies](#sec-CC-studies)*, participants who experience the outcome of interest are called **cases**, while participants who don’t experience that outcome are called **controls** [\[5, Ch. 8\]](#ref-me4).
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > **Definition 4 (treatment groups and control groups in prospective studies)** In *prospective studies*, the group of participants who experience the treatment or exposure of interest is called the **treatment group**, while the participants who receive the baseline or comparison treatment (for example, clinical trial participants who receive a placebo or a standard-of-care treatment rather than an experimental treatment) are called **controls** [\[5, Ch. 6\]](#ref-me4).
+> **Definition 4 (treatment groups and control groups in prospective studies)** In *prospective studies*, the group of participants who experience the treatment or exposure of interest is called the **treatment group**, while the participants who receive the baseline or comparison treatment (for example, clinical trial participants who receive a placebo or a standard-of-care treatment rather than an experimental treatment) are called **controls** [\[5, Ch. 6\]](#ref-me4).
 
 > **NOTE:**
 >
@@ -298,22 +298,22 @@ See the note about working with percentages in the [algebra page of the lab’s 
 
 > **NOTE:**
 >
-> *Solution 5*.
+> *Solution 5*. See [Definition 6](#def-RR).
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > **Definition 6 (Relative risk ratio (risk ratio, probability ratio))** The ratio of two probabilities $\pi_1$ and $\pi_2$,
-> >
-> > $$\rho(\pi_1,\pi_2) \stackrel{\text{def}}{=}\frac{\pi_1}{\pi_2}$$
-> >
-> > is called the:
-> >
-> > - **risk ratio**,
-> > - **relative risk ratio**,
-> > - **probability ratio**,
-> > - or, in some texts, rate ratio (a different quantity in count regression)
-> >
-> > of $\pi_1$ compared to $\pi_2$.
+> **Definition 6 (Relative risk ratio (risk ratio, probability ratio))** The ratio of two probabilities $\pi_1$ and $\pi_2$,
+>
+> $$\rho(\pi_1,\pi_2) \stackrel{\text{def}}{=}\frac{\pi_1}{\pi_2}$$
+>
+> is called the:
+>
+> - **risk ratio**,
+> - **relative risk ratio**,
+> - **probability ratio**,
+> - or, in some texts, rate ratio (a different quantity in count regression)
+>
+> of $\pi_1$ compared to $\pi_2$.
 
 > **NOTE:**
 >
@@ -1683,23 +1683,23 @@ The logit function is a [composite function](https://en.wikipedia.org/wiki/Funct
 
 > **NOTE:**
 >
-> *Solution 18* (Compose the logit function).
+> *Solution 18* (Compose the logit function). Using [Definition 16](#def-logit-fn) and [Definition 10](#def-odds-fn):
 >
-> > **NOTE:**
-> >
-> > **Theorem 15 (Expanded expression for logit)** $$\operatorname{logit}(\pi) = {\operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}} \tag{20}$$
+> $$\begin{aligned}
+> \operatorname{logit}(\pi)
+> &\stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{{\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{}}\right\}\mathclose{}}
+> && \text{(definition of logit)}
+> \\ &= {\operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}}
+> && \text{(definition of the odds function)}
+> \end{aligned}$$
+
+> **NOTE:**
 >
-> > **NOTE:**
-> >
-> > *Proof*. Using [Definition 16](#def-logit-fn) and [Definition 10](#def-odds-fn):
-> >
-> > $$\begin{aligned}
-> > \operatorname{logit}(\pi)
-> > &\stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{{\operatorname{odds}\mathopen{}\left\{\pi\right\}\mathclose{}}\right\}\mathclose{}}
-> > && \text{(definition of logit)}
-> > \\ &= {\operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}}
-> > && \text{(definition of the odds function)}
-> > \end{aligned}$$
+> **Theorem 15 (Expanded expression for logit)** $$\operatorname{logit}(\pi) = {\operatorname{log}\mathopen{}\left\{\frac{\pi}{1-\pi}\right\}\mathclose{}} \tag{20}$$
+
+> **NOTE:**
+>
+> *Proof*. This proof is the solution to [Exercise 21](#exr-prove-eq-logit), worked in [Solution 18](#sol-prove-eq-logit).
 
 > **NOTE:**
 >

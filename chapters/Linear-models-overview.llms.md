@@ -14,7 +14,7 @@ Code
 
 Published
 
-Last modified: 2026-11-11: 18:49:31 (UTC)
+Last modified: 2026-11-11: 19:41:22 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -6732,16 +6732,37 @@ A small $p$-value says that an estimated slope is distinguishable from zero. It 
 >
 > Combining [Equation 33](#eq-var-mean) and the Gauss-Markov theorem:
 >
-> > **NOTE:**
-> >
-> > **Theorem 9 (Estimated variance and standard error of predicted mean)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} = {\color{orange}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
-> > \tag{34}$$
-> >
-> > $${\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} =
-> > {\color{blue}{\sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}}
-> > \tag{35}$$
+> $$\begin{aligned}
+> {\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}}
+> &= {\color{orange}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
+> && \text{(plug in } \hat{\Sigma} \text{ for } \Sigma\text{)}
+> \end{aligned}$$
+>
+> Then, by [Equation 32](#eq-se-sqrt-var-mean):
+>
+> $$\begin{aligned}
+> {\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}}
+> &= \sqrt{{\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}}}
+> && \text{(take the square root)}
+> \\
+> &= {\color{blue}{\sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}}
+> && \text{(substitute the previous display)}
+> \end{aligned}$$
 >
 > Note: on the RHS, we have plugged in $\hat{\Sigma}$, our estimate of $\Sigma$.
+
+> **NOTE:**
+>
+> **Theorem 9 (Estimated variance and standard error of predicted mean)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} = {\color{orange}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
+> \tag{34}$$
+>
+> $${\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\mu(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} =
+> {\color{blue}{\sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}}
+> \tag{35}$$
+
+> **NOTE:**
+>
+> *Proof*. This proof is the solution to [Exercise 19](#exr-se-mean), worked in [Solution 5](#sol-se-mean).
 
 ------------------------------------------------------------------------
 
@@ -7031,18 +7052,39 @@ Additionally, there is typically more nearby data near the center of the covaria
 >
 > Combining [Equation 40](#eq-var-diff-means) and the Gauss-Markov theorem:
 >
-> > **NOTE:**
-> >
-> > **Theorem 12 (Estimated variance and standard error of difference in means)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}} = {\color{orange}{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
-> > \tag{41}$$
-> >
-> > $${\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}} =
-> > {\color{blue}{\sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}}
-> > \tag{42}$$
+> $$\begin{aligned}
+> {\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}}
+> &= {\color{orange}{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
+> && \text{(plug in } \hat{\Sigma} \text{ for } \Sigma\text{)}
+> \end{aligned}$$
+>
+> Then, by [Equation 39](#eq-se-sqrt-var-diff-means):
+>
+> $$\begin{aligned}
+> {\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}}
+> &= \sqrt{{\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}}}
+> && \text{(take the square root)}
+> \\
+> &= {\color{blue}{\sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}}
+> && \text{(substitute the previous display)}
+> \end{aligned}$$
 >
 > Note: on the RHS, we have plugged in $\hat{\Sigma}$, our estimate of $\Sigma$.
+
+> **NOTE:**
 >
-> Compare [Equation 42](#eq-est-se-diff-means) with the formula for [inference for predicted means](#exr-se-mean): the only change is to replace $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ with $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}- \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}$.
+> **Theorem 12 (Estimated variance and standard error of difference in means)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}} = {\color{orange}{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
+> \tag{41}$$
+>
+> $${\color{blue}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\widehat{\Delta \mu}\right)\mathclose{}}}} =
+> {\color{blue}{\sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}}
+> \tag{42}$$
+
+> **NOTE:**
+>
+> *Proof*. This proof is the solution to [Exercise 22](#exr-se-diff-means), worked in [Solution 8](#sol-se-diff-means).
+
+Compare [Equation 42](#eq-est-se-diff-means) with the formula for [inference for predicted means](#exr-se-mean): the only change is to replace $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ with $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}- \mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}$.
 
 ------------------------------------------------------------------------
 
