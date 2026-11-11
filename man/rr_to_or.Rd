@@ -9,7 +9,8 @@ rr_to_or(pi1, rr)
 \arguments{
 \item{pi1}{Baseline probability, strictly between 0 and 1.}
 
-\item{rr}{Risk ratio, positive, with `rr * pi1` below 1.}
+\item{rr}{Risk ratio, positive, small enough that the second group's
+probability, `pi1` times the risk ratio, stays below 1.}
 }
 \value{
 A numeric vector of odds ratios.
