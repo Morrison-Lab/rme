@@ -16,7 +16,7 @@ Logistic regression and variations
 
 Published
 
-Last modified: 2026-11-11: 21:10:49 (UTC)
+Last modified: 2026-11-11: 22:40:37 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -4036,7 +4036,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > ex_max_gap <- max(abs(ex_converted - ex_direct))
 > ```
 >
-> The largest difference between the converted coefficients and the directly fitted ones is 6.2e-15, which is zero up to numerical error.
+> The largest difference between the converted coefficients and the directly fitted ones is 4.4e-15, which is zero up to numerical error.
 
 # 8 Model comparisons for logistic models
 
