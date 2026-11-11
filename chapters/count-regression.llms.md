@@ -16,7 +16,7 @@ Poisson regression and variations
 
 Published
 
-Last modified: 2026-11-11: 19:41:22 (UTC)
+Last modified: 2026-11-11: 21:10:49 (UTC)
 
 # Acknowledgements
 
@@ -1908,40 +1908,40 @@ $$\log ({ E( \operatorname{shared_syr} ) })  = \alpha + \beta_{1}(\operatorname{
 > #> 
 > #> Call:
 > #> glm.nb(formula = shared_syr ~ homeless + age + sex + ethn + polydrug + 
-> #>     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.0903642555, 
+> #>     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.08315440712, 
 > #>     link = log)
 > #> 
 > #> Coefficients:
-> #>                             Estimate Std. Error z value Pr(>|z|)   
-> #> (Intercept)                   2.8948     1.9293    1.50   0.1335   
-> #> homelesshomeless              2.5534     0.8024    3.18   0.0015 **
-> #> age                          -0.0729     0.0447   -1.63   0.1027   
-> #> sexF                         -0.5545     0.8869   -0.63   0.5318   
-> #> ethnAA                        0.9100     0.9416    0.97   0.3339   
-> #> ethnHispanic                  2.6222     1.5835    1.66   0.0977 . 
-> #> ethnOther                    -1.5963     2.1745   -0.73   0.4629   
-> #> polydrugmultiple drugs used  -3.7062     1.3330   -2.78   0.0054 **
-> #> hivstatHIV+                  -3.4809     1.5036   -2.32   0.0206 * 
-> #> sexabuseyes                  -1.5612     1.2484   -1.25   0.2111   
-> #> hplsns                       -0.0449     0.0685   -0.66   0.5119   
+> #>                             Estimate Std. Error z value Pr(>|z|)    
+> #> (Intercept)                   6.4536     1.8421    3.50  0.00046 ***
+> #> homelesshomeless              1.1508     0.7366    1.56  0.11820    
+> #> age                          -0.1485     0.0433   -3.43  0.00059 ***
+> #> sexF                          0.2198     0.8179    0.27  0.78813    
+> #> ethnAA                        1.5958     0.8890    1.79  0.07265 .  
+> #> ethnHispanic                  3.7763     1.5240    2.48  0.01322 *  
+> #> ethnOther                    -3.2365     2.2663   -1.43  0.15327    
+> #> polydrugmultiple drugs used  -4.0532     1.0898   -3.72  0.00020 ***
+> #> hivstatHIV+                  -1.1548     1.3185   -0.88  0.38113    
+> #> sexabuseyes                  -2.6449     1.0772   -2.46  0.01408 *  
+> #> hplsns                        0.0948     0.0648    1.46  0.14306    
 > #> ---
 > #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > #> 
-> #> (Dispersion parameter for Negative Binomial(0.0899) family taken to be 1)
+> #> (Dispersion parameter for Negative Binomial(0.0913) family taken to be 1)
 > #> 
-> #>     Null deviance: 61.511  on 108  degrees of freedom
-> #> Residual deviance: 52.284  on  98  degrees of freedom
+> #>     Null deviance: 62.231  on 108  degrees of freedom
+> #> Residual deviance: 60.031  on  98  degrees of freedom
 > #>   (18 observations deleted due to missingness)
-> #> AIC: 261.5
+> #> AIC: 267.9
 > #> 
 > #> Number of Fisher Scoring iterations: 25
 > #> 
 > #> 
-> #>               Theta:  0.0904 
-> #>           Std. Err.:  0.0239 
+> #>               Theta:  0.0832 
+> #>           Std. Err.:  0.0216 
 > #> Warning while fitting theta: alternation limit reached 
 > #> 
-> #>  2 x log-likelihood:  -237.5430
+> #>  2 x log-likelihood:  -243.8880
 > ```
 >
 > Table 7: Negative binomial model for needle-sharing data
@@ -1965,19 +1965,19 @@ tibble(
 
 > **NOTE:**
 >
-> |          Parameter          | Poisson Coef | Poisson SE | NB Coef  |  NB SE  |
-> |:---------------------------:|:------------:|:----------:|:--------:|:-------:|
-> |         (Intercept)         |    1.306     |   0.3649   |  2.895   |  1.929  |
-> |      homelesshomeless       |    1.799     |   0.1676   |  2.553   | 0.8024  |
-> |             age             |   -0.0436    |  0.009183  | -0.07291 | 0.04468 |
-> |            sexF             |    0.8835    |   0.1479   | -0.5545  | 0.8869  |
-> |           ethnAA            |    0.9525    |   0.1858   |   0.91   | 0.9416  |
-> |        ethnHispanic         |    0.5775    |   0.3183   |  2.622   |  1.584  |
-> |          ethnOther          |   0.03598    |   0.3933   |  -1.596  |  2.175  |
-> | polydrugmultiple drugs used |    -1.676    |   0.3062   |  -3.706  |  1.333  |
-> |         hivstatHIV+         |    -2.179    |   0.4617   |  -3.481  |  1.504  |
-> |         sexabuseyes         |    -1.474    |   0.3132   |  -1.561  |  1.248  |
-> |           hplsns            |   -0.03147   |  0.01423   | -0.0449  | 0.06845 |
+> |          Parameter          | Poisson Coef | Poisson SE | NB Coef |  NB SE  |
+> |:---------------------------:|:------------:|:----------:|:-------:|:-------:|
+> |         (Intercept)         |    1.306     |   0.3649   |  6.454  |  1.842  |
+> |      homelesshomeless       |    1.799     |   0.1676   |  1.151  | 0.7366  |
+> |             age             |   -0.0436    |  0.009183  | -0.1485 | 0.04326 |
+> |            sexF             |    0.8835    |   0.1479   | 0.2198  | 0.8179  |
+> |           ethnAA            |    0.9525    |   0.1858   |  1.596  |  0.889  |
+> |        ethnHispanic         |    0.5775    |   0.3183   |  3.776  |  1.524  |
+> |          ethnOther          |   0.03598    |   0.3933   | -3.236  |  2.266  |
+> | polydrugmultiple drugs used |    -1.676    |   0.3062   | -4.053  |  1.09   |
+> |         hivstatHIV+         |    -2.179    |   0.4617   | -1.155  |  1.319  |
+> |         sexabuseyes         |    -1.474    |   0.3132   | -2.645  |  1.077  |
+> |           hplsns            |   -0.03147   |  0.01423   | 0.09484 | 0.06476 |
 >
 > Table 8: Poisson vs. Negative Binomial regression estimates
 

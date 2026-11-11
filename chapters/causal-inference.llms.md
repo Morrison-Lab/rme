@@ -16,7 +16,7 @@ Estimating causal effects from regression models
 
 Published
 
-Last modified: 2026-11-11: 19:41:22 (UTC)
+Last modified: 2026-11-11: 21:10:49 (UTC)
 
 ------------------------------------------------------------------------
 
