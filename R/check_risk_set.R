@@ -1,0 +1,36 @@
+#' Check a risk-set size and event count
+#'
+#' Stops with a classed error unless \code{n} is non-empty, every \code{n}
+#' is a finite positive number, \code{d} has length 1 or the length of
+#' \code{n}, and every \code{d} is between 0 and the matching \code{n}.
+#'
+#' @param n Number at risk.
+#' @param d Number of events.
+#'
+#' @returns \code{NULL}, invisibly, when the inputs are valid.
+#' @noRd
+check_risk_set <- function(n, d) {
+  n_bad <- !is.numeric(n) || length(n) == 0 || anyNA(n) ||
+    any(!is.finite(n) | n <= 0)
+  if (n_bad) {
+    cli::cli_abort(
+      "{.arg n} must be non-empty and contain only finite positive numbers.",
+      class = "rme_invalid_n"
+    )
+  }
+  lengths_differ <- length(d) != 1 && length(d) != length(n)
+  if (lengths_differ) {
+    cli::cli_abort(
+      "{.arg d} must have length 1 or the same length as {.arg n}.",
+      class = "rme_invalid_d"
+    )
+  }
+  d_bad <- !is.numeric(d) || anyNA(d) || any(d < 0 | d > n)
+  if (d_bad) {
+    cli::cli_abort(
+      "{.arg d} must be between 0 and {.arg n}.",
+      class = "rme_invalid_d"
+    )
+  }
+  invisible(NULL)
+}
