@@ -22,10 +22,16 @@ birthweight_plot <- function(
   female_slope,
   data = birthweight_long()
 ) {
-  rlang::check_installed("ggplot2")
   check_birthweight_coefs(male_int, male_slope, female_int, female_slope)
+  rlang::check_installed("ggplot2")
   sexes <- c("female", "male")
+  # A character sex column has no levels; ggplot2 then orders it
+  # alphabetically, as sexes is.
   sex_levels <- levels(data$sex)
+  no_levels <- is.null(sex_levels)
+  if (no_levels) {
+    sex_levels <- sexes
+  }
   slopes <- c(female_slope, male_slope)
   centered_intercepts <- c(female_int, male_int)
   # The model centers age at 35 weeks; the plot's axis is uncentered.
@@ -49,7 +55,11 @@ birthweight_plot <- function(
   )
   ggplot2::ggplot(data, points_aes) +
     ggplot2::geom_point(alpha = 0.7) +
-    ggplot2::geom_abline(data = lines, mapping = lines_aes) +
+    ggplot2::geom_abline(
+      data = lines,
+      mapping = lines_aes,
+      show.legend = FALSE
+    ) +
     ggplot2::xlab("Gestational age (weeks)") +
     ggplot2::ylab("Birthweight (grams)") +
     ggplot2::labs(col = "Sex", shape = "Sex") +

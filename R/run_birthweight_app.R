@@ -22,6 +22,7 @@ run_birthweight_app <- function() {
   fit <- stats::lm(weight ~ sex + sex:centered_age - 1, data = bw)
   estimates <- stats::coef(fit)
   ci <- stats::confint(fit)
+  fit_summary <- summary(fit)
   coef_slider <- function(id, label, term) {
     ends <- round(ci[term, ])
     start <- round(estimates[[term]])
@@ -88,7 +89,6 @@ run_birthweight_app <- function() {
         data = bw
       )
     })
-    fit_summary <- summary(fit)
     output$fit <- shiny::renderPrint(fit_summary)
   }
   shiny::shinyApp(ui = ui, server = server)
