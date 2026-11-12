@@ -1,0 +1,22 @@
+# Reports content a merge commit silently dropped: lines either side added
+# since the merge base that appear nowhere in the merge's tree -- what
+# resolving a conflict by keeping one side of a whole file looks like.
+# Copied from Morrison-Lab/gha's examples/check-merge-drops.yml, with
+# `fail: true` so such a merge fails CI instead of only warning
+# (Morrison-Lab/ai-config#5408).
+name: Check merge commits for dropped content
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-merge-drops.yml@v3
+    with:
+      fail: true
