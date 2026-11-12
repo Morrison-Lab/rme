@@ -44,6 +44,9 @@ run_km_na_app <- function() {
       )
     })
     output$plot1 <- shiny::renderPlot({
+      # Until the browser applies the update above, d can briefly exceed n.
+      d_fits <- input$d <= input$n
+      shiny::req(d_fits)
       km_na_survival_plot(d = input$d, n_max = input$n)
     })
   }
