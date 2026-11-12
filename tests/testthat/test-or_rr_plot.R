@@ -33,4 +33,6 @@ test_that("or_rr_plot() rejects max_or of 1 or less", {
     expect_error(class = "rme_invalid_max_or")
   or_rr_plot(pi1 = 0.5, max_or = NA) |>
     expect_error(class = "rme_invalid_max_or")
+  or_rr_plot(pi1 = 0.5, max_or = Inf) |>
+    expect_error(class = "rme_invalid_max_or")
 })
