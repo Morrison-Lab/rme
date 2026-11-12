@@ -4,7 +4,7 @@ Code
 
 Published
 
-Last modified: 2026-11-11: 22:40:37 (UTC)
+Last modified: 2026-11-12: 0:44:21 (UTC)
 
 These appendices contain information that I consider to be important prerequisites for the main content of this course. I will review *some* of this content in class, but not all of it; there simply isn’t enough time to cover it all, and it should be review from your earlier statistics courses. The appendices are also not an exhaustive list of the assumed prerequisites.
 
