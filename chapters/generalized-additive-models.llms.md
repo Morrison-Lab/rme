@@ -14,7 +14,7 @@ Code
 
 Published
 
-Last modified: 2026-11-12: 2:39:08 (UTC)
+Last modified: 2026-11-12: 7:13:01 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -1083,7 +1083,7 @@ The strict-additivity restriction can be relaxed when needed. The two standard e
   #> chol ~ dibpat + s(age, by = dibpat)
   #> 
   #> Estimated degrees of freedom:
-  #> 1.02 1.03  total = 4.05 
+  #> 1.00 1.01  total = 4.01 
   #> 
   #> REML score: 16231.9
   ```
@@ -1160,9 +1160,9 @@ gam.check(m)
     #> 
     #> Method: REML   Optimizer: outer newton
     #> full convergence after 7 iterations.
-    #> Gradient range [-0.000404069,-1.352e-05]
+    #> Gradient range [-0.000358419,-2.1343e-05]
     #> (score 821.975 & scale 1).
-    #> Hessian positive definite, eigenvalue range [1.35192e-05,0.220195].
+    #> Hessian positive definite, eigenvalue range [3.16164e-05,0.220195].
     #> Model rank =  29 / 29 
     #> 
     #> Basis dimension (k) checking results. Low p-value (k-index<1) may
@@ -1218,9 +1218,9 @@ m_inf <- gam(chd ~ dibpat + s(age) + s(bmi),
              family = binomial(), data = wcgs, method = "REML")
 sm_inf <- summary(m_inf)
 sm_inf$p.table  # parametric coefficients
-#>               Estimate Std. Error   z value     Pr(>|z|)
-#> (Intercept)  -2.971461   0.117513 -25.28618 4.53331e-141
-#> dibpatType A  0.781729   0.141714   5.51626  3.46292e-08
+#>              Estimate Std. Error   z value     Pr(>|z|)
+#> (Intercept)  -2.97147   0.117513 -25.28619 4.53227e-141
+#> dibpatType A  0.78173   0.141714   5.51627  3.46277e-08
 ```
 
 Read these exactly as you would GLM coefficients.
@@ -1231,9 +1231,9 @@ Show R code
 
 ``` downlit
 sm_inf$s.table  # smooth terms
-#>            edf  Ref.df  Chi.sq    p-value
-#> s(age) 1.00156 1.00312 36.3980 0.00000000
-#> s(bmi) 1.29791 1.54685 10.8353 0.00641275
+#>            edf  Ref.df  Chi.sq   p-value
+#> s(age) 1.00107 1.00214 36.4005 0.0000000
+#> s(bmi) 1.29959 1.54968 10.8386 0.0064354
 ```
 
 Each column reports:
@@ -1368,10 +1368,10 @@ summary(m_gam)
 #> 
 #> Approximate significance of smooth terms:
 #>          edf Ref.df Chi.sq p-value    
-#> s(age)  1.00   1.00  26.55 5.8e-07 ***
+#> s(age)  1.00   1.00  26.55 1.1e-06 ***
 #> s(bmi)  1.00   1.00   2.18    0.14    
 #> s(chol) 1.61   2.02  56.48 < 2e-16 ***
-#> s(sbp)  1.00   1.00  22.83 1.7e-06 ***
+#> s(sbp)  1.00   1.00  22.83 1.4e-06 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
