@@ -12,6 +12,7 @@
 #' @examples
 #' na_conditional_survival(n = 10, d = 1)
 na_conditional_survival <- function(n, d = 1) {
+  check_risk_set(n, d)
   hazard_increment <- d / n
   exp(-hazard_increment)
 }

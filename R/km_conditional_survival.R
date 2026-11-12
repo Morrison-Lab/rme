@@ -13,5 +13,6 @@
 #' @examples
 #' km_conditional_survival(n = 10, d = 1)
 km_conditional_survival <- function(n, d = 1) {
+  check_risk_set(n, d)
   1 - d / n
 }
