@@ -30,11 +30,19 @@ test_that("km_conditional_survival() rejects d and n of mismatched lengths", {
   d <- c(1, 2)
   km_conditional_survival(n = n, d = d) |>
     expect_error(class = "rme_invalid_d")
+  km_conditional_survival(n = 10, d = d) |>
+    expect_error(class = "rme_invalid_d")
+  no_events <- numeric(0)
+  km_conditional_survival(n = 10, d = no_events) |>
+    expect_error(class = "rme_invalid_d")
 })
 
-test_that("km_conditional_survival() rejects a non-positive risk set", {
+test_that("km_conditional_survival() rejects an empty or non-positive n", {
   km_conditional_survival(n = 0, d = 0) |>
     expect_error(class = "rme_invalid_n")
   km_conditional_survival(n = NA_real_) |>
+    expect_error(class = "rme_invalid_n")
+  empty_n <- numeric(0)
+  km_conditional_survival(n = empty_n) |>
     expect_error(class = "rme_invalid_n")
 })
