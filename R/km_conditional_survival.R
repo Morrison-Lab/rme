@@ -1,8 +1,8 @@
 #' Kaplan-Meier conditional survival at one event time
 #'
 #' Returns the Kaplan-Meier estimate of the probability of surviving past an
-#' event time, given survival up to it: \eqn{1 - d / n}, where \code{d}
-#' events occur among \code{n} individuals at risk.
+#' event time, given survival up to it: \eqn{1 - d / n}{1 - d / n},
+#' where \code{d} events occur among \code{n} individuals at risk.
 #'
 #' @param n Number at risk, positive.
 #' @param d Number of events, between 0 and \code{n}.

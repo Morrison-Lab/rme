@@ -16,8 +16,8 @@ A numeric vector of conditional survival probabilities.
 }
 \description{
 Returns the Kaplan-Meier estimate of the probability of surviving past an
-event time, given survival up to it: \eqn{1 - d / n}, where \code{d}
-events occur among \code{n} individuals at risk.
+event time, given survival up to it: \eqn{1 - d / n}{1 - d / n},
+where \code{d} events occur among \code{n} individuals at risk.
 }
 \examples{
 km_conditional_survival(n = 10, d = 1)

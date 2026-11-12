@@ -20,6 +20,12 @@ test_that("na_ and km_conditional_survival() are both 1 when d = 0", {
   expect_equal(km, 1)
 })
 
+test_that("na_conditional_survival() defaults to one event", {
+  surv <- na_conditional_survival(10)
+  expected <- exp(-0.1)
+  expect_equal(surv, expected)
+})
+
 test_that("na_conditional_survival() checks its inputs", {
   na_conditional_survival(n = 3, d = 5) |>
     expect_error(class = "rme_invalid_d")

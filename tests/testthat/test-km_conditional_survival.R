@@ -11,10 +11,24 @@ test_that("km_conditional_survival() is 0 when all at risk have the event", {
   expect_equal(surv, 0)
 })
 
-test_that("km_conditional_survival() rejects more events than at risk", {
+test_that("km_conditional_survival() defaults to one event", {
+  surv <- km_conditional_survival(10)
+  expect_equal(surv, 0.9)
+})
+
+test_that("km_conditional_survival() rejects d outside 0 to n", {
   km_conditional_survival(n = 3, d = 5) |>
     expect_error(class = "rme_invalid_d")
   km_conditional_survival(n = 3, d = -1) |>
+    expect_error(class = "rme_invalid_d")
+  km_conditional_survival(n = 3, d = NA_real_) |>
+    expect_error(class = "rme_invalid_d")
+})
+
+test_that("km_conditional_survival() rejects d and n of mismatched lengths", {
+  n <- c(10, 4, 5)
+  d <- c(1, 2)
+  km_conditional_survival(n = n, d = d) |>
     expect_error(class = "rme_invalid_d")
 })
 
