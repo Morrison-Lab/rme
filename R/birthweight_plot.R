@@ -25,8 +25,7 @@ birthweight_plot <- function(
   check_birthweight_coefs(male_int, male_slope, female_int, female_slope)
   rlang::check_installed("ggplot2")
   sexes <- c("female", "male")
-  # A character sex column has no levels; ggplot2 then orders it
-  # alphabetically, as sexes is.
+  # A character sex has no levels, and ggplot2 orders it alphabetically.
   sex_levels <- levels(data$sex)
   no_levels <- is.null(sex_levels)
   if (no_levels) {
