@@ -16,7 +16,7 @@ Poisson regression and variations
 
 Published
 
-Last modified: 2026-11-12: 7:13:01 (UTC)
+Last modified: 2026-11-12: 8:19:34 (UTC)
 
 # Acknowledgements
 
