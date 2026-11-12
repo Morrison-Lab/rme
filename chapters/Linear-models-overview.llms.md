@@ -14,7 +14,7 @@ Code
 
 Published
 
-Last modified: 2026-11-12: 1:58:27 (UTC)
+Last modified: 2026-11-12: 2:39:08 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -3253,15 +3253,15 @@ $$y_i = {\mathbb{E}\mathopen{}\left[Y_i \mid X_i\right]\mathclose{}} + \mathbb{d
 > ``` downlit
 > bw_resid <- resid(bw_lm2)
 > crossprod(model.matrix(bw_lm2), bw_resid)
-> #>                     [,1]
-> #> (Intercept)  2.84217e-13
-> #> sexmale     -1.13687e-13
-> #> age          1.09139e-11
-> #> sexmale:age -9.09495e-13
+> #>                    [,1]
+> #> (Intercept) 2.27374e-13
+> #> sexmale     5.68434e-14
+> #> age         1.63709e-11
+> #> sexmale:age 9.09495e-13
 > sum(bw_resid)
-> #> [1] 1.82965e-13
+> #> [1] 2.45137e-13
 > sum(fitted(bw_lm2) * bw_resid)
-> #> [1] -2.98314e-10
+> #> [1] -5.38421e-10
 > ```
 >
 > All three are zero up to floating-point rounding error, as [Theorem 2](#thm-ols-resid-orthogonal) guarantees. Because the model includes an indicator for male babies, the entry of ${\mathbf{X}}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\hat{\varepsilon}}}\vphantom{\hat{\varepsilon}}}$ for that indicator is zero too: the residuals for the male babies add up to zero, and so, subtracting from the overall sum, do the residuals for the female babies.
@@ -3277,7 +3277,7 @@ $$y_i = {\mathbb{E}\mathopen{}\left[Y_i \mid X_i\right]\mathclose{}} + \mathbb{d
 > sum(resid(bw_lm0))
 > #> [1] -75.7726
 > sum(bw$age * resid(bw_lm0))
-> #> [1] -1.00044e-11
+> #> [1] -5.65592e-12
 > ```
 >
 > The age-weighted sum of the residuals is zero up to rounding error, but the residuals themselves do not add up to zero.
@@ -6336,7 +6336,7 @@ For Gaussian linear regression, the covariance formula holds exactly rather than
 > bw_x <- model.matrix(bw_lm2)
 > bw_vcov_by_hand <- sigma(bw_lm2)^2 * solve(crossprod(bw_x))
 > max(abs(bw_vcov_by_hand - vcov(bw_lm2)))
-> #> [1] 3.11993e-08
+> #> [1] 3.40864e-07
 > ```
 >
 > The largest difference between the two matrices is zero, up to floating-point rounding error.
