@@ -4,10 +4,10 @@ fit_birthweight <- function() {
   stats::lm(weight ~ sex + sex:centered_age - 1, data = bw)
 }
 
-ols_loglik <- function(fit, shift = 0) {
+ols_coefs <- function(fit) {
   coefs <- stats::coef(fit)
-  birthweight_loglik(
-    male_int = coefs[["sexmale"]] + shift,
+  list(
+    male_int = coefs[["sexmale"]],
     male_slope = coefs[["sexmale:centered_age"]],
     female_int = coefs[["sexfemale"]],
     female_slope = coefs[["sexfemale:centered_age"]]
@@ -24,26 +24,43 @@ test_that("birthweight_loglik() matches its closed form at the OLS fit", {
   log_term <- log(2 * pi * sigma2)
   expected <- -n / 2 * log_term - rss / (2 * sigma2)
   fit |>
-    ols_loglik() |>
+    ols_coefs() |>
+    do.call(what = birthweight_loglik) |>
     expect_equal(expected)
 })
 
-test_that("birthweight_loglik() is largest at the OLS coefficients", {
+test_that("birthweight_loglik() drops when any coefficient leaves OLS", {
   skip_if_not_installed("tidyr")
   fit <- fit_birthweight()
-  best <- ols_loglik(fit)
-  higher <- ols_loglik(fit, shift = 50)
-  lower <- ols_loglik(fit, shift = -50)
-  expect_gt(best, higher)
-  expect_gt(best, lower)
+  best_coefs <- ols_coefs(fit)
+  best <- do.call(birthweight_loglik, best_coefs)
+  for (name in names(best_coefs)) {
+    for (shift in c(-5, 5)) {
+      moved <- best_coefs
+      moved[[name]] <- moved[[name]] + shift
+      moved_loglik <- do.call(birthweight_loglik, moved)
+      expect_gt(best, moved_loglik)
+    }
+  }
 })
 
-test_that("birthweight_loglik() rejects a missing or non-numeric coefficient", {
-  birthweight_loglik(NA_real_, 112, 2422, 130) |>
-    expect_error(class = "rme_invalid_coef")
-  birthweight_loglik("2651", 112, 2422, 130) |>
-    expect_error(class = "rme_invalid_coef")
+test_that("birthweight_loglik() rejects a coefficient that isn't a number", {
+  valid <- list(
+    male_int = 2651,
+    male_slope = 112,
+    female_int = 2422,
+    female_slope = 130
+  )
   two_values <- c(1, 2)
-  birthweight_loglik(two_values, 112, 2422, 130) |>
-    expect_error(class = "rme_invalid_coef")
+  no_value <- numeric(0)
+  bad_values <- list(NA_real_, "1", two_values, no_value, Inf)
+  for (name in names(valid)) {
+    for (bad in bad_values) {
+      coefs <- valid
+      coefs[name] <- list(bad)
+      birthweight_loglik |>
+        do.call(args = coefs) |>
+        expect_error(class = "rme_invalid_coef")
+    }
+  }
 })

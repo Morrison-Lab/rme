@@ -22,6 +22,8 @@ test_that("birthweight_long() keeps each sex's values", {
   wide <- dobson::birthweight
   boys <- dplyr::filter(bw, .data$male)
   girls <- dplyr::filter(bw, .data$female)
+  expect_identical(boys$age, wide$`boys gestational age`)
   expect_identical(boys$weight, wide$`boys weight`)
   expect_identical(girls$age, wide$`girls gestational age`)
+  expect_identical(girls$weight, wide$`girls weight`)
 })

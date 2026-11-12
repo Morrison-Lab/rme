@@ -31,7 +31,10 @@ E[Y | X] = a_s + b_s (age - 35),}
 where \eqn{s}{s} is the baby's sex and \eqn{a}{age} its gestational age in
 weeks.
 The residual standard deviation is estimated from the residuals of the
-chosen coefficients, with \eqn{n - 4}{n - 4} degrees of freedom.
+chosen coefficients as \eqn{\sqrt{RSS / (n - 4)}}{sqrt(RSS / (n - 4))},
+dividing by the residual degrees of freedom \eqn{n - 4}{n - 4} rather
+than by \eqn{n}{n}, so at the least-squares estimates the result is
+slightly below the maximized likelihood.
 }
 \examples{
 \dontshow{if (requireNamespace("tidyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}

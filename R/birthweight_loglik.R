@@ -7,7 +7,10 @@
 #' where \eqn{s}{s} is the baby's sex and \eqn{a}{age} its gestational age in
 #' weeks.
 #' The residual standard deviation is estimated from the residuals of the
-#' chosen coefficients, with \eqn{n - 4}{n - 4} degrees of freedom.
+#' chosen coefficients as \eqn{\sqrt{RSS / (n - 4)}}{sqrt(RSS / (n - 4))},
+#' dividing by the residual degrees of freedom \eqn{n - 4}{n - 4} rather
+#' than by \eqn{n}{n}, so at the least-squares estimates the result is
+#' slightly below the maximized likelihood.
 #'
 #' @param male_int,female_int Expected birthweight in grams at 35 weeks.
 #' @param male_slope,female_slope Change in expected birthweight in grams
@@ -30,15 +33,7 @@ birthweight_loglik <- function(
   female_slope,
   data = birthweight_long()
 ) {
-  coefs <- c(male_int, male_slope, female_int, female_slope)
-  finite <- is.finite(coefs)
-  coefs_bad <- !is.numeric(coefs) || length(coefs) != 4 || !all(finite)
-  if (coefs_bad) {
-    cli::cli_abort(
-      "Each intercept and slope must be a single finite number.",
-      class = "rme_invalid_coef"
-    )
-  }
+  check_birthweight_coefs(male_int, male_slope, female_int, female_slope)
   centered_age <- data$age - 35
   mean_weight <- ifelse(
     data$male,
