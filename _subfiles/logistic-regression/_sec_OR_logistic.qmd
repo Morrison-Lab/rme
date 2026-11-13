@@ -267,9 +267,9 @@ by about $`r round(exp(coef(beetles_glm_grouped)["dose"] * (beetles$dose[2] - be
 
 #### Odds at one covariate pattern from the odds at another
 
-The [odds](binary-outcome-associations.qmd#def-odds) at covariate pattern $\vx$
+The [odds](binary-outcome-associations.qmd#def-odds) at [covariate pattern](https://morrison-lab.github.io/sds/logistic-inference.html#def-covariate-pattern) $\vx$
 are the odds at $\vxs$
-times the exponential of $\diffvx \cdot \vb$:
+times the [exponential](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-exponential-function) of $\diffvx \cdot \vb$:
 
 $$\odds(\vx) = \odds(\vxs) \cdot \expf{\diffvx \cdot \vb}$${#eq-odds-multiplier}
 
@@ -305,7 +305,7 @@ $$
 
 In @exm-logistic-or-beetles,
 $\vxs$ is the lowest dose level and $\vx$ is the next one.
-The code computes the estimated [odds](binary-outcome-associations.qmd#def-odds) of death at both dose levels
+The code computes the [estimated](https://morrison-lab.github.io/sds/estimation.html#def-estimate) [odds](binary-outcome-associations.qmd#def-odds) of death at both dose levels
 from the `beetles` model (@tbl-beetles-model-grouped),
 and the odds at $\vxs$ times $\expf{\diffvx \cdot \evb}$.
 
@@ -336,7 +336,7 @@ c(
 
 The estimated odds of death are $`r signif(beetles_low_odds[1], 4)`$ at the lowest dose level,
 and $`r signif(beetles_low_odds[1], 4)` \times `r signif(beetles_multiplier, 4)` = `r signif(beetles_odds_product, 4)`$,
-which equals the estimated odds at the next dose level, as @cor-odds-multiplier states.
+which matches the estimated odds at the next dose level, as @cor-odds-multiplier states.
 
 :::
 
