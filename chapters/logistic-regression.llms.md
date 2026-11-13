@@ -16,7 +16,7 @@ Logistic regression and variations
 
 Published
 
-Last modified: 2026-11-12: 8:46:54 (UTC)
+Last modified: 2026-11-13: 18:56:42 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -1289,6 +1289,64 @@ Each entry gives the [derivative](https://morrison-lab.github.io/mds/calculus-de
 >
 > Taking the logarithm yields ${\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}\right\}\mathclose{}} = {\operatorname{log}\mathopen{}\left\{{\operatorname{exp}\mathopen{}\left\{0.693\right\}\mathclose{}}\right\}\mathclose{}} = 0.693 = \Delta\eta$, illustrating [Corollary 8](#cor-log-or); the rounded odds ratio gives ${\operatorname{log}\mathopen{}\left\{2.0\right\}\mathclose{}} \approx 0.693$.
 
+> **NOTE:**
+>
+> **Corollary 9 (Odds at one covariate pattern from the odds at another)** The [odds](../chapters/binary-outcome-associations.llms.md#def-odds) at [covariate pattern](https://morrison-lab.github.io/sds/logistic-inference.html#def-covariate-pattern) $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ are the odds at $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}$ times the [exponential](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-exponential-function) of $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$:
+>
+> $$\omega(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot {\operatorname{exp}\mathopen{}\left\{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}} \tag{14}$$
+
+> **NOTE:**
+>
+> *Proof*. $$\begin{aligned}
+> \omega(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})
+> &= \omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot \frac{\omega(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}{\omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})}
+> && \text{(multiply and divide by } \omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) > 0 \text{)}
+> \\
+> &= \omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot \text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})
+> && \text{(definition of the odds ratio, @eq-def-ror)}
+> \\
+> &= \omega(\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \cdot {\operatorname{exp}\mathopen{}\left\{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}
+> && \text{(@thm-logistic-OR)}
+> \end{aligned}$$
+
+> **NOTE:**
+>
+> **Example 8 (Odds of death at the second-lowest beetle dose)**  
+>
+> In [Example 6](#exm-logistic-or-beetles), $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}$ is the lowest dose level and $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ is the next one. The code computes the [estimated](https://morrison-lab.github.io/sds/estimation.html#def-estimate) [odds](../chapters/binary-outcome-associations.llms.md#def-odds) of death at both dose levels from the `beetles` model ([Table 2](#tbl-beetles-model-grouped)). It then multiplies the odds at $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}$ by ${\operatorname{exp}\mathopen{}\left\{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}\right\}\mathclose{}}$.
+>
+> ``` downlit
+> # estimated probabilities of death at the two lowest dose levels
+> beetles_low_doses <- beetles |> dplyr::slice(1:2)
+> beetles_low_probs <- predict(
+>   beetles_glm_grouped,
+>   newdata = beetles_low_doses,
+>   type = "response"
+> )
+> beetles_low_probs <- unname(beetles_low_probs)
+> # estimated odds of death at those dose levels
+> beetles_low_odds <- beetles_low_probs / (1 - beetles_low_probs)
+> # exp of the dose difference times the dose coefficient
+> beetles_dose_gap <- beetles$dose[2] - beetles$dose[1]
+> beetles_dose_coef <- coef(beetles_glm_grouped)[["dose"]]
+> beetles_gap_term <- beetles_dose_gap * beetles_dose_coef
+> beetles_multiplier <- exp(beetles_gap_term)
+> beetles_odds_product <- beetles_low_odds[1] * beetles_multiplier
+> c(
+>   odds_lowest = beetles_low_odds[1],
+>   odds_next = beetles_low_odds[2],
+>   lowest_times_multiplier = beetles_odds_product
+> )
+> #>             odds_lowest               odds_next lowest_times_multiplier 
+> #>               0.0622489               0.1962121               0.1962121
+> ```
+>
+> The estimated odds of death are $0.06225$ at the lowest dose level. Multiplying them by $3.152$ gives $0.06225 \times 3.152 = 0.1962$. That value matches the estimated odds at the next dose level, as [Corollary 9](#cor-odds-multiplier) states.
+
+> **NOTE:**
+>
+> *Remark 1* (The odds multiplier). The factor ${\operatorname{exp}\mathopen{}\left\{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}$ in [Equation 14](#eq-odds-multiplier) is the [odds multiplier](https://morrison-lab.github.io/sds/logistic-inference.html#def-odds-multiplier) of the change $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$.
+
 # 5 Estimating logistic regression models
 
 > **TIP:**
@@ -1456,7 +1514,7 @@ We estimate the coefficients $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scr
 > \\ &= \sum_{i=1}^n{\color{red}{\ell_i}}(\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i))
 > && \text{(definition: } {\color{red}{\ell_i}} \stackrel{\text{def}}{=}{\operatorname{log}\mathopen{}\left\{\mathcal{L}_i\right\}\mathclose{}} \text{)}
 > \end{aligned}
-> \tag{14}$$
+> \tag{15}$$
 >
 > Using [log-odds as a function of probability](../chapters/binary-outcome-associations.llms.md#thm-logodds-pi) and [one plus odds in terms of non-event probability](../chapters/binary-outcome-associations.llms.md#cor-inverse-odds-nonevent):
 >
@@ -1719,7 +1777,7 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 > \\
 > &= {\color{red}{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
 > \end{aligned}
-> \tag{15}$$
+> \tag{16}$$
 
 [Lemma 9](#lem-d_logodds-d_vb) is very similar to [Lemma 3](#lem-d_logodds-d_x), but not quite the same; [Lemma 3](#lem-d_logodds-d_x) differentiates by $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$, whereas [Lemma 9](#lem-d_logodds-d_vb) differentiates by $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$.
 
@@ -1727,7 +1785,7 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 >
 > **Theorem 10 (Gradient of odds w.r.t. coefficients)** $$\underbrace{\frac{\partial \omega}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}}_{(p+1) \times 1}
 > = \underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}_{(p+1) \times 1} \cdot \omega
-> \tag{16}$$
+> \tag{17}$$
 
 > **NOTE:**
 >
@@ -1744,11 +1802,11 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 > &= {\color{red}{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}} {\color{teal}{\omega}}
 > && \text{(derivative of odds w.r.t. log-odds: } \frac{\partial \omega}{\partial \eta} = \omega\text{)}
 > \end{aligned}
-> \tag{17}$$
+> \tag{18}$$
 
 > **NOTE:**
 >
-> **Example 8 (Evaluating gradient of odds w.r.t. coefficients)** Consider a subject with covariate vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 2)'$ and [linear predictor](../chapters/Intro-to-GLMs.llms.md#def-linear-predictor) $\eta = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= 0$, so $\omega= {\operatorname{exp}\mathopen{}\left\{0\right\}\mathclose{}} = 1$.
+> **Example 9 (Evaluating gradient of odds w.r.t. coefficients)** Consider a subject with covariate vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 2)'$ and [linear predictor](../chapters/Intro-to-GLMs.llms.md#def-linear-predictor) $\eta = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}= 0$, so $\omega= {\operatorname{exp}\mathopen{}\left\{0\right\}\mathclose{}} = 1$.
 >
 > By [Theorem 10](#thm-d_odds_d_beta):
 >
@@ -1763,15 +1821,15 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 > &= \underbrace{\begin{pmatrix}1 \\ 2\end{pmatrix}}_{2 \times 1}
 > && \text{(scalar multiplication)}
 > \end{aligned}
-> \tag{18}$$
+> \tag{19}$$
 >
 > The gradient vector indicates that increasing $\beta_0$ or $\beta_1$ increases the [odds](../chapters/binary-outcome-associations.llms.md#def-odds) at rates 1 and 2, respectively.
 
 > **NOTE:**
 >
-> **Corollary 9 (Gradient of odds w.r.t. coefficients in terms of probability)** $$\underbrace{\frac{\partial \omega}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}}_{(p+1) \times 1}
+> **Corollary 10 (Gradient of odds w.r.t. coefficients in terms of probability)** $$\underbrace{\frac{\partial \omega}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}}_{(p+1) \times 1}
 > = \underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}_{(p+1) \times 1} \cdot \frac{\pi}{1-\pi}
-> \tag{19}$$
+> \tag{20}$$
 
 > **NOTE:**
 >
@@ -1785,11 +1843,11 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 > &= {\color{red}{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}} \frac{\pi}{1-\pi}
 > && \text{(odds in terms of probability: } \omega= \frac{\pi}{1-\pi} \text{)}
 > \end{aligned}
-> \tag{20}$$
+> \tag{21}$$
 
 > **NOTE:**
 >
-> **Example 9 (Gradient of odds in terms of probability)** For a model where a subject has event probability $\pi = 0.5$ and covariate vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 3)'$, [Corollary 9](#cor-d_odds_d_beta) gives:
+> **Example 10 (Gradient of odds in terms of probability)** For a model where a subject has event probability $\pi = 0.5$ and covariate vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 3)'$, [Corollary 10](#cor-d_odds_d_beta) gives:
 >
 > $$\begin{aligned}
 > \frac{\partial \omega}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}
@@ -1805,7 +1863,7 @@ Starting from [Lemma 6](#lem-logistic-loglik-component), we can apply the [vect
 > &= \underbrace{\begin{pmatrix}1 \\ 3\end{pmatrix}}_{2 \times 1}
 > && \text{(scalar multiplication)}
 > \end{aligned}
-> \tag{21}$$
+> \tag{22}$$
 
 Now we can combine [Lemma 8](#lem-logistic-score-comp), [Lemma 9](#lem-d_logodds-d_vb), and [Theorem 10](#thm-d_odds_d_beta):
 
@@ -1839,7 +1897,7 @@ $$\begin{aligned}
 
 > **NOTE:**
 >
-> **Theorem 11 (Score component for one observation)** $${\color{magenta}{\ell_i'(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}} = {\color{magenta}{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i \varepsilon_i}} \tag{22}$$
+> **Theorem 11 (Score component for one observation)** $${\color{magenta}{\ell_i'(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}} = {\color{magenta}{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i \varepsilon_i}} \tag{23}$$
 
 This last expression is essentially the same as we found in [linear regression](../chapters/Linear-models-overview.llms.md#eq-scorefun-linreg).
 
@@ -1857,7 +1915,7 @@ Finally, combining [Lemma 7](#lem-score-logistic) and [Theorem 11](#thm-logist
 > &= {\color{brown}{\underbrace{\mathbf{X}^{\top}}_{(p+1) \times n} \underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\varepsilon}}\vphantom{\varepsilon}}}_{n \times 1}}}
 > && \text{(matrix form: } \sum_{i=1}^n\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i \varepsilon_i = \mathbf{X}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\varepsilon}}\vphantom{\varepsilon}}\text{)}
 > \end{aligned}
-> \tag{23}$$
+> \tag{24}$$
 
 The [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) is vector-valued; its components are:
 
@@ -1903,7 +1961,7 @@ $$\mathbf{X}_{\cdot j} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scri
 
 > **NOTE:**
 >
-> **Example 10** In our model for the `beetles` data, we only have an intercept plus one covariate, gas concentration ($c$): $$\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, c)$$
+> **Example 11** In our model for the `beetles` data, we only have an intercept plus one covariate, gas concentration ($c$): $$\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, c)$$
 >
 > If $c_i$ is the gas concentration for the beetle in observation $i$, and $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{c}}\vphantom{c}} = (c_1, c_2, ...c_n)$, then the score equation $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\ell'}}\vphantom{\ell'}} = \mathbf{0}_{2 \times 1}$ means that for the MLE $\hat{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}}$:
 >
@@ -2019,7 +2077,7 @@ $$\mathbf{X}_{\cdot j} \cdot \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scri
 ## 5.5 Hessian function
 
 $$\underbrace{\ell''(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}_{(p+1) \times (p+1)} = \sum_{i=1}^n\underbrace{{\color{olive}{\ell''_i(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}}}_{(p+1) \times (p+1)}
-\tag{24}$$
+\tag{25}$$
 
 $$\begin{aligned}
 {\color{olive}{\ell''_i(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}} &\stackrel{\text{def}}{=}\frac{\partial}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}^{\top}}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\ell_i'}}\vphantom{\ell_i'}}
@@ -2034,7 +2092,7 @@ $$\begin{aligned}
 &= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i {\color{violet}{\varepsilon_i'}}
 && \text{(definition: } {\color{violet}{\varepsilon_i'}} \stackrel{\text{def}}{=}\frac{\partial}{\partial \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}^{\top}}\varepsilon_i \text{)}
 \end{aligned}
-\tag{25}$$
+\tag{26}$$
 
 > **NOTE:**
 >
@@ -2078,7 +2136,7 @@ $$\begin{aligned}
 && \text{(Bernoulli conditional variance: } {\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}} = \pi_i(1-\pi_i) \text{)}
 \end{aligned}$$
 
-Returning to [Equation 25](#eq-logit-hessian-i):
+Returning to [Equation 26](#eq-logit-hessian-i):
 
 $$\begin{aligned}
 {\color{olive}{\ell''_i(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}} &= \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i {\color{violet}{\varepsilon_i'}}
@@ -2088,9 +2146,9 @@ $$\begin{aligned}
 \\ &= {\color{olive}{-\underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}_{(p+1) \times 1} \underbrace{{\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}}}_{1 \times 1} \underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i^{\top}}_{1 \times (p+1)}}}
 && \text{(move the scalar factor } -{\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}} \text{ between the vectors)}
 \end{aligned}
-\tag{26}$$
+\tag{27}$$
 
-Returning to [Equation 24](#eq-logit-hessian):
+Returning to [Equation 25](#eq-logit-hessian):
 
 $$\begin{aligned}
 {\ell''(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})} &= \sum_{i=1}^n{\color{olive}{\ell''_i(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}})}}
@@ -2100,13 +2158,13 @@ $$\begin{aligned}
 \\ &= {- \underbrace{\mathbf{X}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}}
 && \text{(matrix form: } \mathbf{D} \stackrel{\text{def}}{=}\text{diag}({\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}}) \text{)}
 \end{aligned}
-\tag{27}$$
+\tag{28}$$
 
 where $\mathbf{D} \stackrel{\text{def}}{=}\text{diag}({\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}})$ is the [diagonal matrix](https://morrison-lab.github.io/mds/linear-algebra-special-matrices.html#def-diagonal-matrix) whose $i^{th}$ diagonal element is ${\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}}$.
 
 > **NOTE:**
 >
-> *Remark 1* (The logistic log-likelihood is concave). The [Hessian](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) $\ell''(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}) = -\mathbf{X}^{\top}\mathbf{D}\mathbf{X}$ ([Equation 27](#eq-logistic-hess)) is negative semi-definite for every $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$, because the diagonal entries of $\mathbf{D}$ are ${\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}} = \pi_i(1-\pi_i) \geq 0$. Since the diagonal entries are non-negative, $\mathbf{D}^{1/2} \stackrel{\text{def}}{=}\text{diag}\mathopen{}\left(\sqrt{\pi_i(1-\pi_i)}\right)\mathclose{}$ is well-defined, and for any vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{v}}\vphantom{v}} \in \mathbb{R}^{p+1}$:
+> *Remark 2* (The logistic log-likelihood is concave). The [Hessian](https://morrison-lab.github.io/mds/vector-calculus.html#def-hessian) $\ell''(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}) = -\mathbf{X}^{\top}\mathbf{D}\mathbf{X}$ ([Equation 28](#eq-logistic-hess)) is negative semi-definite for every $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$, because the diagonal entries of $\mathbf{D}$ are ${\operatorname{Var}\mathopen{}\left(Y_i|\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vphantom{X}}_i=\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i\right)\mathclose{}} = \pi_i(1-\pi_i) \geq 0$. Since the diagonal entries are non-negative, $\mathbf{D}^{1/2} \stackrel{\text{def}}{=}\text{diag}\mathopen{}\left(\sqrt{\pi_i(1-\pi_i)}\right)\mathclose{}$ is well-defined, and for any vector $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{v}}\vphantom{v}} \in \mathbb{R}^{p+1}$:
 >
 > $$\begin{aligned}
 > \underbrace{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{v}}\vphantom{v}}}^{\top}}_{1 \times (p+1)} \mathopen{}\left(-\underbrace{\mathbf{X}^{\top}}_{(p+1) \times n}\underbrace{\mathbf{D}}_{n \times n}\underbrace{\mathbf{X}}_{n \times (p+1)}\right)\mathclose{} \underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{v}}\vphantom{v}}}_{(p+1) \times 1}
@@ -2132,7 +2190,7 @@ $$\begin{aligned}
 \\ &= -\underbrace{\mathbf{X}^{\top}}_{(p+1) \times n} \underbrace{\mathbf{D}^{-1}}_{n \times n} \underbrace{\mathbf{X}}_{n \times (p+1)}
 && \text{(matrix form: here } \mathbf{D} = \sigma^2\mathbb{I}_{n \times n} \text{, so } \mathbf{D}^{-1} = \frac{1}{\sigma^2}\mathbb{I}_{n \times n} \text{)}
 \end{aligned}
-\tag{28}$$
+\tag{29}$$
 
 > **NOTE:**
 >
@@ -2229,19 +2287,19 @@ $$\begin{aligned}
 
 Setting the [score function](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score) to zero gives the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation):
 
-$$\sum_{i=1}^n\mathopen{}\left\{\underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}_{(p+1) \times 1} \underbrace{\mathopen{}\left(y_i - {\operatorname{expit}\mathopen{}\left\{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}\right)\mathclose{}}_{1 \times 1} \right\}\mathclose{} = \mathbf{0}_{(p+1) \times 1} \tag{29}$$
+$$\sum_{i=1}^n\mathopen{}\left\{\underbrace{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}_{(p+1) \times 1} \underbrace{\mathopen{}\left(y_i - {\operatorname{expit}\mathopen{}\left\{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}\right)\mathclose{}}_{1 \times 1} \right\}\mathclose{} = \mathbf{0}_{(p+1) \times 1} \tag{30}$$
 
 > **NOTE:**
 >
-> *Remark 2* (Why the logistic score equation has no closed-form solution). In [linear regression](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-linear-regression), the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) is [linear in](../chapters/Linear-models-overview.llms.md#eq-scorefun-linreg) $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$. Rearranging a linear system isolates $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$, which gives the [normal equations](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-normal-equations).
+> *Remark 3* (Why the logistic score equation has no closed-form solution). In [linear regression](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-linear-regression), the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) is [linear in](../chapters/Linear-models-overview.llms.md#eq-scorefun-linreg) $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$. Rearranging a linear system isolates $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$, which gives the [normal equations](https://morrison-lab.github.io/sds/basic-statistical-methods.html#def-normal-equations).
 >
-> In [logistic regression](#def-logistic-regression), $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$ appears inside ${\operatorname{expit}\mathopen{}\left\{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}$ in every term of [Equation 29](#eq-score-logistic). The equations are therefore non-linear in $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$. No rearrangement isolates $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$ on one side. A system of $p+1$ non-linear equations in $p+1$ unknowns has no general solution formula.
+> In [logistic regression](#def-logistic-regression), $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$ appears inside ${\operatorname{expit}\mathopen{}\left\{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}_i}^{\top}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}\right\}\mathclose{}}$ in every term of [Equation 30](#eq-score-logistic). The equations are therefore non-linear in $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$. No rearrangement isolates $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{\beta}}\vphantom{\beta}}$ on one side. A system of $p+1$ non-linear equations in $p+1$ unknowns has no general solution formula.
 >
 > The [log-likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-loglik) is [concave](#rem-hessian-nsd), so every solution of the score equation is a global maximum. Concavity does not give a formula for such a solution.
 >
 > Some models do have closed-form solutions. In the intercept-only model, the [MLE](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle) of the [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) is the log-odds of the [sample proportion](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-proportion) of the $y_i$ that equal 1.
 
-In general, the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) has no closed-form solution ([Remark 2](#rem-score-no-closed-form)). Instead, we can use the [Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson):
+In general, the [score equation](https://morrison-lab.github.io/sds/intro-MLEs.html#def-score-equation) has no closed-form solution ([Remark 3](#rem-score-no-closed-form)). Instead, we can use the [Newton-Raphson method](https://morrison-lab.github.io/sds/intro-MLEs.html#sec-newton-raphson):
 
 $${\widehat{\theta}}^*
 \leftarrow {\widehat{\theta}}^* - {\mathopen{}\left({\ell''\mathopen{}\left(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{y}}\vphantom{y}};{\widehat{\theta}}^*\right)\mathclose{}}\right)\mathclose{}}^{-1}
@@ -2505,7 +2563,7 @@ beetles_glm_ungrouped |>
 >
 > and then apply $\operatorname{expit}$ to the endpoints of that log-odds-scale confidence interval:
 >
-> $$\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \in (\operatorname{expit}(L), \operatorname{expit}(R)) \tag{30}$$
+> $$\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) \in (\operatorname{expit}(L), \operatorname{expit}(R)) \tag{31}$$
 
 > **NOTE:**
 >
@@ -2521,7 +2579,7 @@ beetles_glm_ungrouped |>
 
 > **NOTE:**
 >
-> **Example 11 (Confidence interval for a beetle mortality probability)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below first computes a 95% confidence interval for the log-odds at dose 1.8, then applies $\operatorname{expit}$ to its endpoints as in [Theorem 14](#thm-ci-prob):
+> **Example 12 (Confidence interval for a beetle mortality probability)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below first computes a 95% confidence interval for the log-odds at dose 1.8, then applies $\operatorname{expit}$ to its endpoints as in [Theorem 14](#thm-ci-prob):
 >
 > Show R code
 >
@@ -2562,7 +2620,7 @@ beetles_glm_ungrouped |>
 
 > **NOTE:**
 >
-> **Example 12 (Confidence interval for a beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below applies [Theorem 15](#thm-ci-logodds) at dose 1.8, using the standard error from [`predict()`](https://rdrr.io/r/stats/predict.html) and, as a check, the standard error from the estimated covariance matrix:
+> **Example 13 (Confidence interval for a beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below applies [Theorem 15](#thm-ci-logodds) at dose 1.8, using the standard error from [`predict()`](https://rdrr.io/r/stats/predict.html) and, as a check, the standard error from the estimated covariance matrix:
 >
 > Show R code
 >
@@ -2593,7 +2651,7 @@ beetles_glm_ungrouped |>
 >
 > *Solution 20*. $${\color{green}{{\operatorname{SE}\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} =
 > \sqrt{{\color{red}{{\operatorname{Var}\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}}}
-> \tag{31}$$
+> \tag{32}$$
 >
 > By the definition $\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\hat{\beta}$ and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
 >
@@ -2605,11 +2663,11 @@ beetles_glm_ungrouped |>
 > \\
 > &= {\color{red}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
 > \end{aligned}
-> \tag{32}$$
+> \tag{33}$$
 >
 > where $\Sigma \stackrel{\text{def}}{=}\operatorname{Cov}(\hat{\beta})$.
 >
-> Expanding [Equation 32](#eq-var-logodds) out of matrix-vector notation, we have:
+> Expanding [Equation 33](#eq-var-logodds) out of matrix-vector notation, we have:
 >
 > $$\begin{aligned}
 > {\color{red}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
@@ -2630,7 +2688,7 @@ beetles_glm_ungrouped |>
 
 > **NOTE:**
 >
-> **Example 13 (Variance of an estimated beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below applies [Theorem 16](#thm-var-logodds) at $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$, using the estimated covariance matrix of the coefficients in place of $\Sigma$, and compares the result with the squared standard error from [`predict()`](https://rdrr.io/r/stats/predict.html):
+> **Example 14 (Variance of an estimated beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), the code below applies [Theorem 16](#thm-var-logodds) at $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$, using the estimated covariance matrix of the coefficients in place of $\Sigma$, and compares the result with the squared standard error from [`predict()`](https://rdrr.io/r/stats/predict.html):
 >
 > Show R code
 >
@@ -2647,24 +2705,24 @@ beetles_glm_ungrouped |>
 >
 > The quadratic form gives 0.02104, and the squared standard error from [`predict()`](https://rdrr.io/r/stats/predict.html) is 0.02104, so the two agree.
 
-Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
+Combining [Equation 33](#eq-var-logodds) with the invariance property of MLEs gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
 > **NOTE:**
 >
 > **Theorem 17 (Estimated variance and standard error of log-odds)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} = {\color{orange}{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}
-> \tag{33}$$
+> \tag{34}$$
 >
 > $${\color{teal}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}}}} =
 > {\color{teal}{\sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}}}
-> \tag{34}$$
+> \tag{35}$$
 
 > **NOTE:**
 >
-> *Proof*. By [Theorem 16](#thm-var-logodds), ${\operatorname{Var}\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}} = {\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ ([Equation 32](#eq-var-logodds)). By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle), we estimate $\Sigma$ with $\hat{\Sigma}\stackrel{\text{def}}{=}\widehat{\operatorname{Cov}}(\hat{\beta})$, which yields [Equation 33](#eq-est-var-logodds); taking the square root gives [Equation 34](#eq-est-se-logodds).
+> *Proof*. By [Theorem 16](#thm-var-logodds), ${\operatorname{Var}\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}} = {\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ ([Equation 33](#eq-var-logodds)). By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle), we estimate $\Sigma$ with $\hat{\Sigma}\stackrel{\text{def}}{=}\widehat{\operatorname{Cov}}(\hat{\beta})$, which yields [Equation 34](#eq-est-var-logodds); taking the square root gives [Equation 35](#eq-est-se-logodds).
 
 > **NOTE:**
 >
-> **Example 14 (Standard error and CI for a beetle log-odds)**  
+> **Example 15 (Standard error and CI for a beetle log-odds)**  
 >
 > We instantiate [Theorem 17](#thm-est-se-logodds) for the `beetles` [logistic regression model](#def-logistic-regression) ([Table 5](#tbl-beetles-model-ungrouped)).
 >
@@ -2680,9 +2738,9 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 > ci_logodds <- logodds_hat + c(-1, 1) * 1.96 * se_logodds
 > ```
 >
-> By [Equation 34](#eq-est-se-logodds), the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) is ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}} = \sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}} = 0.145056$, while the estimated log-odds itself is $\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\hat{\beta}= 0.969132$.
+> By [Equation 35](#eq-est-se-logodds), the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) is ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\right)\mathclose{}} = \sqrt{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}} = 0.145056$, while the estimated log-odds itself is $\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\hat{\beta}= 0.969132$.
 >
-> The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the log-odds is $(0.684823, 1.253441)$, and applying $\operatorname{expit}$ to its endpoints ([Equation 30](#eq-ci-prob-exp)) gives a 95% confidence interval for $\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})$ of $(0.664814, 0.777895)$.
+> The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for the log-odds is $(0.684823, 1.253441)$, and applying $\operatorname{expit}$ to its endpoints ([Equation 31](#eq-ci-prob-exp)) gives a 95% confidence interval for $\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})$ of $(0.664814, 0.777895)$.
 >
 > These values match the `dose = 1.8` row of [Table 14](#tbl-beetles-pred-logodds), which uses [`predict()`](https://rdrr.io/r/stats/predict.html) with `type = "link"` and `se.fit = TRUE` to compute the estimated log-odds $\hat\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}'\hat{\beta}$ and its estimated standard error for each covariate pattern:
 >
@@ -2735,15 +2793,15 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 >
 > By [the central limit theorem for MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#thm-dist-mle), a 95% confidence interval for $\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})$ can be constructed as:
 >
-> $$\hat{\text{ϙ}}_{\omega}\pm 1.96 * {\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\text{ϙ}}_{\omega}\right)\mathclose{}} \tag{35}$$ However, ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\text{ϙ}}_{\omega}\right)\mathclose{}}$ seems difficult to compute; doing so would require using the [delta method](https://en.wikipedia.org/wiki/Delta_method).
+> $$\hat{\text{ϙ}}_{\omega}\pm 1.96 * {\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\text{ϙ}}_{\omega}\right)\mathclose{}} \tag{36}$$ However, ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\hat{\text{ϙ}}_{\omega}\right)\mathclose{}}$ seems difficult to compute; doing so would require using the [delta method](https://en.wikipedia.org/wiki/Delta_method).
 >
 > Instead, using the invariance property of MLEs, we can first calculate a confidence interval for the logarithm of the odds ratio,
 >
-> $${\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}} \in (L,R) \tag{36}$$
+> $${\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}} \in (L,R) \tag{37}$$
 >
 > and then exponentiate the endpoints of that log-odds-scale confidence interval:
 >
-> $$\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \in (e^L, e^R) \tag{37}$$
+> $$\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) \in (e^L, e^R) \tag{38}$$
 
 > **NOTE:**
 >
@@ -2759,7 +2817,7 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 
 > **NOTE:**
 >
-> **Example 15 (Confidence interval for a beetle odds ratio)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$. The code below computes a 95% confidence interval for ${\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}$ and exponentiates its endpoints as in [Theorem 18](#thm-ci-OR):
+> **Example 16 (Confidence interval for a beetle odds ratio)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$. The code below computes a 95% confidence interval for ${\operatorname{log}\mathopen{}\left\{\text{ϙ}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}})\right\}\mathclose{}}$ and exponentiates its endpoints as in [Theorem 18](#thm-ci-OR):
 >
 > Show R code
 >
@@ -2799,7 +2857,7 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 
 > **NOTE:**
 >
-> **Example 16 (Confidence interval for a beetle log odds ratio)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$. The code below applies [Theorem 19](#thm-ci-log-OR), and compares the interval with the one obtained by scaling the confidence interval for the dose coefficient by $0.1$, which is valid here because $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (0, 0.1)^{\top}$:
+> **Example 17 (Confidence interval for a beetle log odds ratio)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$. The code below applies [Theorem 19](#thm-ci-log-OR), and compares the interval with the one obtained by scaling the confidence interval for the dose coefficient by $0.1$, which is valid here because $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (0, 0.1)^{\top}$:
 >
 > Show R code
 >
@@ -2825,7 +2883,7 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 >
 > *Solution 23*. $${\color{green}{{\operatorname{SE}\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}}}} =
 > \sqrt{{\color{red}{{\operatorname{Var}\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}}}}}
-> \tag{38}$$
+> \tag{39}$$
 >
 > By [Lemma 5](#lem-diff-logodds) and [the variance of a linear combination](https://morrison-lab.github.io/pds/variance-covariance.html#thm-var-lincom):
 >
@@ -2837,11 +2895,11 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 > \\
 > &= {\color{red}{{\mathopen{}\left(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\right)\mathclose{}}^{\top}\Sigma(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
 > \end{aligned}
-> \tag{39}$$
+> \tag{40}$$
 >
 > where $\Sigma \stackrel{\text{def}}{=}\operatorname{Cov}(\hat{\beta})$.
 >
-> Expanding [Equation 39](#eq-var-diff-logodds) out of matrix-vector notation, we have:
+> Expanding [Equation 40](#eq-var-diff-logodds) out of matrix-vector notation, we have:
 >
 > $$\begin{aligned}
 > {\color{red}{{\mathopen{}\left(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}\right)\mathclose{}}^{\top}\Sigma(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
@@ -2864,7 +2922,7 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 
 > **NOTE:**
 >
-> **Example 17 (Variance of an estimated difference in beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$, so that $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (0, 0.1)^{\top}$. The code below applies [Theorem 20](#thm-var-diff-logodds), using the estimated covariance matrix of the coefficients in place of $\Sigma$:
+> **Example 18 (Variance of an estimated difference in beetle log-odds)** For the `beetles` [logistic regression model](#def-logistic-regression) (`beetles_glm_ungrouped`), let $\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (1, 1.8)^{\top}$ and $\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}= (1, 1.7)^{\top}$, so that $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}= (0, 0.1)^{\top}$. The code below applies [Theorem 20](#thm-var-diff-logodds), using the estimated covariance matrix of the coefficients in place of $\Sigma$:
 >
 > Show R code
 >
@@ -2877,26 +2935,26 @@ Combining [Equation 32](#eq-var-logodds) with the invariance property of MLEs g
 >
 > The quadratic form gives 0.084804. Because $\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}$ has a zero in the intercept position, the variance should equal $0.1^2$ times the estimated variance of the dose coefficient, which is 0.084804.
 
-Combining [Equation 39](#eq-var-diff-logodds) with the invariance property of MLEs gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
+Combining [Equation 40](#eq-var-diff-logodds) with the invariance property of MLEs gives an [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) for the [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) and standard error:
 
 > **NOTE:**
 >
 > **Theorem 21 (Estimated variance and standard error of difference in log-odds)** $${\color{orange}{{\mathop{\widehat{\operatorname{Var}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{}}}} = {\color{orange}{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}
-> \tag{40}$$
+> \tag{41}$$
 >
 > $${\color{teal}{{\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta{\hat\eta}\right)\mathclose{}}}} =
 > {\color{teal}{\sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})}}}
-> \tag{41}$$
+> \tag{42}$$
 
 > **NOTE:**
 >
-> *Proof*. By [Theorem 20](#thm-var-diff-logodds), ${\operatorname{Var}\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}} = {\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})$ ([Equation 39](#eq-var-diff-logodds)). By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle), we estimate $\Sigma$ with $\hat{\Sigma}\stackrel{\text{def}}{=}\widehat{\operatorname{Cov}}(\hat{\beta})$, which yields [Equation 40](#eq-est-var-difflogodds); taking the square root gives [Equation 41](#eq-est-se-diff-logodds).
+> *Proof*. By [Theorem 20](#thm-var-diff-logodds), ${\operatorname{Var}\mathopen{}\left(\widehat{\Delta\eta}\right)\mathclose{}} = {\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\Sigma(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})$ ([Equation 40](#eq-var-diff-logodds)). By the invariance property of [MLEs](https://morrison-lab.github.io/sds/intro-MLEs.html#def-mle), we estimate $\Sigma$ with $\hat{\Sigma}\stackrel{\text{def}}{=}\widehat{\operatorname{Cov}}(\hat{\beta})$, which yields [Equation 41](#eq-est-var-difflogodds); taking the square root gives [Equation 42](#eq-est-se-diff-logodds).
 
 Compare [Theorem 21](#thm-est-se-diff-logodds) with [confidence intervals](../chapters/Linear-models-overview.llms.md#sec-se-fitted).
 
 > **NOTE:**
 >
-> **Example 18 (Standard error and CI for a beetle odds ratio)**  
+> **Example 19 (Standard error and CI for a beetle odds ratio)**  
 >
 > We instantiate [Theorem 21](#thm-est-se-diff-logodds) for the `beetles` [logistic regression model](#def-logistic-regression) ([Table 5](#tbl-beetles-model-ungrouped)).
 >
@@ -2912,9 +2970,9 @@ Compare [Theorem 21](#thm-est-se-diff-logodds) with [confidence intervals](../c
 > ci_diff <- diff_logodds_hat + c(-1, 1) * 1.96 * se_diff
 > ```
 >
-> By [Equation 41](#eq-est-se-diff-logodds), the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [difference in log-odds](#def-difflogodds) is ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta\hat\eta\right)\mathclose{}} = \sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} = 0.291211$, and the estimated difference in log-odds is $\Delta\hat\eta= (\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\cdot\hat{\beta}= 3.427033$.
+> By [Equation 42](#eq-est-se-diff-logodds), the estimated [standard error](https://morrison-lab.github.io/sds/estimation.html#def-SE) of the [difference in log-odds](#def-difflogodds) is ${\mathop{\widehat{\operatorname{SE}}}\nolimits\mathopen{}\left(\Delta\hat\eta\right)\mathclose{}} = \sqrt{{\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}}^{\top}\hat{\Sigma}(\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})} = 0.291211$, and the estimated difference in log-odds is $\Delta\hat\eta= (\Delta\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}})\cdot\hat{\beta}= 3.427033$.
 >
-> The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\Delta\eta$ is $(2.856258, 3.997807)$, so by [Equation 37](#eq-ci-OR-exp) the estimated [odds ratio](../chapters/binary-outcome-associations.llms.md#def-OR) and its 95% confidence interval are $\hat{\text{ϙ}}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = e^{3.427033} = 30.785154$, with CI $(17.396309, 54.478551)$.
+> The resulting 95% [confidence interval](https://morrison-lab.github.io/sds/inference.html#def-confidence-interval) for $\Delta\eta$ is $(2.856258, 3.997807)$, so by [Equation 38](#eq-ci-OR-exp) the estimated [odds ratio](../chapters/binary-outcome-associations.llms.md#def-OR) and its 95% confidence interval are $\hat{\text{ϙ}}_{\omega}(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}},\mathord{{\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}^*}}) = e^{3.427033} = 30.785154$, with CI $(17.396309, 54.478551)$.
 
 # 7 Multiple logistic regression
 
@@ -3260,7 +3318,7 @@ Y_i | \mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{X}}\vpha
 \\
 \eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) &= \beta_0 + \beta_P p + \beta_A a + \beta_{PA} pa
 \end{aligned}
-\tag{42}$$
+\tag{43}$$
 
 ### 7.2.2 Models superimposed on data
 
@@ -3300,7 +3358,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 > print(chd_plot_probs_2)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-31-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-31-1.png "Figure 14: Fitted CHD risk by age and behavior pattern (probability scale)")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-32-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-32-1.png "Figure 14: Fitted CHD risk by age and behavior pattern (probability scale)")
 >
 > Figure 14: Fitted CHD [risk](../chapters/binary-outcome-associations.llms.md#def-risk-epi) by age and behavior pattern (probability scale)
 
@@ -3325,7 +3383,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 > print(chd_plot_odds_2)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-32-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-32-1.png "Figure 15: Fitted CHD odds by age and behavior pattern (odds scale)")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-33-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-33-1.png "Figure 15: Fitted CHD odds by age and behavior pattern (odds scale)")
 >
 > Figure 15: Fitted CHD [odds](../chapters/binary-outcome-associations.llms.md#def-odds) by age and behavior pattern (odds scale)
 
@@ -3351,7 +3409,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 > print(chd_plot_logit_2)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-33-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-33-1.png "Figure 16: Fitted CHD log-odds by age and behavior pattern (log-odds scale)")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-34-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-34-1.png "Figure 16: Fitted CHD log-odds by age and behavior pattern (log-odds scale)")
 >
 > Figure 16: Fitted CHD [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) by age and behavior pattern (log-odds scale)
 
@@ -3359,7 +3417,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Exercise 25** For [Equation 42](#eq-wcgs-model-1), derive interpretations of $\beta_0$, $\beta_P$, $\beta_A$, and $\beta_{PA}$ on the [odds](../chapters/binary-outcome-associations.llms.md#def-odds) **and** [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) scales, State the interpretations concisely in math **and** in words.
+> **Exercise 25** For [Equation 43](#eq-wcgs-model-1), derive interpretations of $\beta_0$, $\beta_P$, $\beta_A$, and $\beta_{PA}$ on the [odds](../chapters/binary-outcome-associations.llms.md#def-odds) **and** [log-odds](../chapters/binary-outcome-associations.llms.md#def-logodds) scales, State the interpretations concisely in math **and** in words.
 >
 > *(Hint: apply the [general procedure for interpreting a regression coefficient](../chapters/Linear-models-overview.llms.md#def-coef-interp-procedure) to the log-odds [linear predictor](../chapters/Intro-to-GLMs.llms.md#def-linear-predictor)* $\eta(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}) = \operatorname{logit}(\pi(\mathord{\smash[b]{\underset{\raise.3ex\hbox{$\scriptstyle\sim$}}{x}}\vphantom{x}}))$.)
 
@@ -3387,7 +3445,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 >
 > Therefore:
 >
-> $$\beta_{0} = \eta(P=0,A=0) \tag{43}$$
+> $$\beta_{0} = \eta(P=0,A=0) \tag{44}$$
 >
 > $\beta_{0}$ is the [natural logarithm](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-natural-log) of the odds (“log-odds”) of experiencing CHD for a 0 year-old person with a type B personality; that is,
 >
@@ -3438,7 +3496,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 >
 > Therefore:
 >
-> $$\beta_A = \frac{\partial}{\partial a}\eta(P=0, A = a) \tag{44}$$
+> $$\beta_A = \frac{\partial}{\partial a}\eta(P=0, A = a) \tag{45}$$
 >
 > $\beta_A$ is the slope of the log-odds of CHD with respect to age, for individuals with personality type B.
 >
@@ -3487,7 +3545,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 >
 > $\beta_{P}$ is the [difference in log-odds](#def-difflogodds) of experiencing CHD for a 0 year-old person with type A personality compared to a 0 year-old person with type B personality; specifically,
 >
-> $$\beta_P = \eta(P = 1, A = 0) - \eta(P=0, A = 0) \tag{45}$$
+> $$\beta_P = \eta(P = 1, A = 0) - \eta(P=0, A = 0) \tag{46}$$
 >
 > - $\text{e}^{\beta_{P}}$ is the ratio of the odds (aka “the odds ratio”) of experiencing CHD, for a 0-year old individual with type A personality vs a 0-year old individual with type B personality; specifically,
 >
@@ -3559,7 +3617,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Theorem 22 (Interpretation of the intercept in the WCGS interaction model)** In the model of [Equation 42](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ for the odds of CHD at covariate values $(p, a)$. Then the intercept $\beta_0$ is the log-odds of CHD for a person with type B personality ($P = 0$) and age $0$:
+> **Theorem 22 (Interpretation of the intercept in the WCGS interaction model)** In the model of [Equation 43](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ for the odds of CHD at covariate values $(p, a)$. Then the intercept $\beta_0$ is the log-odds of CHD for a person with type B personality ($P = 0$) and age $0$:
 >
 > $$\beta_{0} = \eta(P=0,A=0)$$
 >
@@ -3573,7 +3631,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Example 19 (The fitted WCGS intercept as a log-odds)** The code below compares the intercept of the fitted model (`chd_glm_contrasts`) with the predicted log-odds for a type B participant at age 0, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_0\right\}\mathclose{}}$ with the corresponding predicted odds:
+> **Example 20 (The fitted WCGS intercept as a log-odds)** The code below compares the intercept of the fitted model (`chd_glm_contrasts`) with the predicted log-odds for a type B participant at age 0, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_0\right\}\mathclose{}}$ with the corresponding predicted odds:
 >
 > Show R code
 >
@@ -3592,7 +3650,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Theorem 23 (Interpretation of the age coefficient in the WCGS interaction model)** In the model of [Equation 42](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ and $\text{ϙ}_{\omega}(\Delta a = 1 | P = p) \stackrel{\text{def}}{=}\omega(p, a + 1) / \omega(p, a)$. Then for every age $a$, the age coefficient $\beta_A$ is the slope of the log-odds of CHD with respect to age among participants with type B personality ($P = 0$):
+> **Theorem 23 (Interpretation of the age coefficient in the WCGS interaction model)** In the model of [Equation 43](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ and $\text{ϙ}_{\omega}(\Delta a = 1 | P = p) \stackrel{\text{def}}{=}\omega(p, a + 1) / \omega(p, a)$. Then for every age $a$, the age coefficient $\beta_A$ is the slope of the log-odds of CHD with respect to age among participants with type B personality ($P = 0$):
 >
 > $$\beta_A
 > = \frac{\partial}{\partial a}\eta(P=0, A = a)
@@ -3608,7 +3666,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Example 20 (The fitted WCGS age coefficient for type B participants)** The code below compares the age coefficient of the fitted model (`chd_glm_contrasts`) with the change in predicted log-odds between ages 50 and 51 for type B participants, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_A\right\}\mathclose{}}$ with the corresponding ratio of predicted odds:
+> **Example 21 (The fitted WCGS age coefficient for type B participants)** The code below compares the age coefficient of the fitted model (`chd_glm_contrasts`) with the change in predicted log-odds between ages 50 and 51 for type B participants, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_A\right\}\mathclose{}}$ with the corresponding ratio of predicted odds:
 >
 > Show R code
 >
@@ -3627,7 +3685,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Theorem 24 (Interpretation of the personality coefficient in the WCGS interaction model)** In the model of [Equation 42](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$. Then the personality coefficient $\beta_P$ is the difference in log-odds of CHD between type A ($P = 1$) and type B ($P = 0$) participants at age $0$:
+> **Theorem 24 (Interpretation of the personality coefficient in the WCGS interaction model)** In the model of [Equation 43](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$. Then the personality coefficient $\beta_P$ is the difference in log-odds of CHD between type A ($P = 1$) and type B ($P = 0$) participants at age $0$:
 >
 > $$\beta_P = \eta(P = 1, A = 0) - \eta(P=0, A = 0)$$
 >
@@ -3642,7 +3700,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Example 21 (The fitted WCGS personality coefficient)** The code below compares the personality coefficient of the fitted model (`chd_glm_contrasts`) with the difference in predicted log-odds between type A and type B participants at age 0, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_P\right\}\mathclose{}}$ with the corresponding ratio of predicted odds:
+> **Example 22 (The fitted WCGS personality coefficient)** The code below compares the personality coefficient of the fitted model (`chd_glm_contrasts`) with the difference in predicted log-odds between type A and type B participants at age 0, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_P\right\}\mathclose{}}$ with the corresponding ratio of predicted odds:
 >
 > Show R code
 >
@@ -3661,7 +3719,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Theorem 25 (Interpretation of the interaction coefficient in the WCGS interaction model)** In the model of [Equation 42](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ and $\text{ϙ}_{\omega}(\Delta a = 1 | P = p) \stackrel{\text{def}}{=}\omega(p, a + 1) / \omega(p, a)$. Then for every age $a$, the interaction coefficient $\beta_{PA}$ is the difference between the slopes of the log-odds of CHD over age for type A ($P = 1$) and type B ($P = 0$) participants:
+> **Theorem 25 (Interpretation of the interaction coefficient in the WCGS interaction model)** In the model of [Equation 43](#eq-wcgs-model-1), write $\omega(p, a) \stackrel{\text{def}}{=}\operatorname{odds}(Y=1|P=p, A=a)$ and $\text{ϙ}_{\omega}(\Delta a = 1 | P = p) \stackrel{\text{def}}{=}\omega(p, a + 1) / \omega(p, a)$. Then for every age $a$, the interaction coefficient $\beta_{PA}$ is the difference between the slopes of the log-odds of CHD over age for type A ($P = 1$) and type B ($P = 0$) participants:
 >
 > $$\beta_{PA} = \frac{\partial}{\partial a}\eta(P=1, A = a) - \frac{\partial}{\partial a}\eta(P=0, A = a)$$
 >
@@ -3678,7 +3736,7 @@ We can graph our fitted models on each scale (probability, [odds](../chapters/bi
 
 > **NOTE:**
 >
-> **Example 22 (The fitted WCGS interaction coefficient)** The code below compares the interaction coefficient of the fitted model (`chd_glm_contrasts`) with the difference between the type A and type B changes in predicted log-odds from age 50 to age 51, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_{PA}\right\}\mathclose{}}$ with the ratio of the two odds ratios:
+> **Example 23 (The fitted WCGS interaction coefficient)** The code below compares the interaction coefficient of the fitted model (`chd_glm_contrasts`) with the difference between the type A and type B changes in predicted log-odds from age 50 to age 51, and compares ${\operatorname{exp}\mathopen{}\left\{\hat\beta_{PA}\right\}\mathclose{}}$ with the ratio of the two odds ratios:
 >
 > Show R code
 >
@@ -3811,7 +3869,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 
 > **NOTE:**
 >
-> *Solution 26*. Model 1 is the corner-point (reference/contrast) parametrization fitted in `chd_glm_contrasts`, with linear predictor ([Equation 42](#eq-wcgs-model-1)):
+> *Solution 26*. Model 1 is the corner-point (reference/contrast) parametrization fitted in `chd_glm_contrasts`, with linear predictor ([Equation 43](#eq-wcgs-model-1)):
 >
 > $$\eta(p, a) = \beta_0 + \beta_P p + \beta_A a + \beta_{PA} pa$$
 >
@@ -3819,13 +3877,13 @@ Compare with [Table 17](#tbl-model-corner-point).
 >
 > $$\eta(p, a) \stackrel{\text{def}}{=}
 > \gamma_B (1 - p) + \gamma_A p + \delta_B (1 - p) a + \delta_A p a
-> \tag{46}$$
+> \tag{47}$$
 >
 > The two parametrizations span the same set of linear-predictor functions, so both models have the same fitted linear predictor $\eta(p, a)$. We can therefore recover the model 2 coefficients by equating the two expressions for $\eta(p, a)$ within each personality-type stratum.
 >
 > **Type B stratum (**$p = 0$):
 >
-> In model 1 ([Equation 42](#eq-wcgs-model-1)):
+> In model 1 ([Equation 43](#eq-wcgs-model-1)):
 >
 > $$\begin{aligned}
 > \eta(0, a)
@@ -3839,7 +3897,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > && \text{(drop the zero terms)}
 > \end{aligned}$$
 >
-> In model 2 ([Equation 46](#eq-wcgs-model-strat)):
+> In model 2 ([Equation 47](#eq-wcgs-model-strat)):
 >
 > $$\begin{aligned}
 > \eta(0, a)
@@ -3859,9 +3917,9 @@ Compare with [Table 17](#tbl-model-corner-point).
 > Equating the two expressions for $\eta(0, a)$, for all ages $a$:
 >
 > $$\gamma_B + \delta_B a = \beta_0 + \beta_A a
-> \tag{47}$$
+> \tag{48}$$
 >
-> Setting $a = 0$ in [Equation 47](#eq-wcgs-strat-match-b):
+> Setting $a = 0$ in [Equation 48](#eq-wcgs-strat-match-b):
 >
 > $$\begin{aligned}
 > \gamma_B + \delta_B \cdot 0
@@ -3877,7 +3935,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > && \text{(drop the zero terms)}
 > \end{aligned}$$
 >
-> Subtracting $\gamma_B = \beta_0$ from both sides of [Equation 47](#eq-wcgs-strat-match-b) and then setting $a = 1$:
+> Subtracting $\gamma_B = \beta_0$ from both sides of [Equation 48](#eq-wcgs-strat-match-b) and then setting $a = 1$:
 >
 > $$\begin{aligned}
 > \delta_B a
@@ -3895,7 +3953,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 >
 > **Type A stratum (**$p = 1$):
 >
-> In model 1 ([Equation 42](#eq-wcgs-model-1)):
+> In model 1 ([Equation 43](#eq-wcgs-model-1)):
 >
 > $$\begin{aligned}
 > \eta(1, a)
@@ -3909,7 +3967,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > && \text{(group the constant terms; factor out } a \text{)}
 > \end{aligned}$$
 >
-> In model 2 ([Equation 46](#eq-wcgs-model-strat)):
+> In model 2 ([Equation 47](#eq-wcgs-model-strat)):
 >
 > $$\begin{aligned}
 > \eta(1, a)
@@ -3945,9 +4003,9 @@ Compare with [Table 17](#tbl-model-corner-point).
 > \\
 > \delta_A &= \beta_A + \beta_{PA}
 > \end{aligned}
-> \tag{48}$$
+> \tag{49}$$
 >
-> Solving [Equation 48](#eq-wcgs-strat-from-contrast) for the model 1 coefficients inverts the conversion, so either parametrization determines the other:
+> Solving [Equation 49](#eq-wcgs-strat-from-contrast) for the model 1 coefficients inverts the conversion, so either parametrization determines the other:
 >
 > $$\begin{aligned}
 > \beta_0 &= \gamma_B
@@ -3963,7 +4021,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > && \text{(subtract the third equation from the fourth)}
 > \end{aligned}$$
 >
-> **Numerical check:** applying [Equation 48](#eq-wcgs-strat-from-contrast) to the fitted model 1 coefficients ([Table 17](#tbl-model-corner-point)) reproduces the fitted model 2 coefficients ([Table 19](#tbl-chd-strat)):
+> **Numerical check:** applying [Equation 49](#eq-wcgs-strat-from-contrast) to the fitted model 1 coefficients ([Table 17](#tbl-model-corner-point)) reproduces the fitted model 2 coefficients ([Table 19](#tbl-chd-strat)):
 >
 > Show R code
 >
@@ -3990,7 +4048,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 
 > **NOTE:**
 >
-> **Theorem 26 (Converting between the corner-point and stratified parametrizations)** Let $\beta_0$, $\beta_P$, $\beta_A$ and $\beta_{PA}$ be the coefficients of the corner-point parametrization ([Equation 42](#eq-wcgs-model-1)). Let $\gamma_B$ and $\gamma_A$ be the stratum-specific intercepts, and $\delta_B$ and $\delta_A$ the stratum-specific age slopes, of the stratified parametrization of the same linear predictor ([Equation 46](#eq-wcgs-model-strat)). Then:
+> **Theorem 26 (Converting between the corner-point and stratified parametrizations)** Let $\beta_0$, $\beta_P$, $\beta_A$ and $\beta_{PA}$ be the coefficients of the corner-point parametrization ([Equation 43](#eq-wcgs-model-1)). Let $\gamma_B$ and $\gamma_A$ be the stratum-specific intercepts, and $\delta_B$ and $\delta_A$ the stratum-specific age slopes, of the stratified parametrization of the same linear predictor ([Equation 47](#eq-wcgs-model-strat)). Then:
 >
 > $$\begin{aligned}
 > \gamma_B &= \beta_0
@@ -4020,7 +4078,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 
 > **NOTE:**
 >
-> **Example 23 (Converting the fitted WCGS coefficients)** The code below applies [Theorem 26](#thm-wcgs-strat-from-contrast) to the coefficients of the fitted corner-point model (`chd_glm_contrasts`), and compares the result with the coefficients of the model fitted directly with the stratified parametrization (`chd_glm_strat`):
+> **Example 24 (Converting the fitted WCGS coefficients)** The code below applies [Theorem 26](#thm-wcgs-strat-from-contrast) to the coefficients of the fitted corner-point model (`chd_glm_contrasts`), and compares the result with the coefficients of the model fitted directly with the stratified parametrization (`chd_glm_strat`):
 >
 > Show R code
 >
@@ -4036,7 +4094,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 > ex_max_gap <- max(abs(ex_converted - ex_direct))
 > ```
 >
-> The largest difference between the converted coefficients and the directly fitted ones is 6.2e-15, which is zero up to numerical error.
+> The largest difference between the converted coefficients and the directly fitted ones is 4.4e-15, which is zero up to numerical error.
 
 # 8 Model comparisons for logistic models
 
@@ -4064,7 +4122,7 @@ Compare with [Table 17](#tbl-model-corner-point).
 
 > **NOTE:**
 >
-> *Remark 3* (Interpreting the deviance test). A significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this deviance statistic indicates that there’s some detectable pattern in the data that our model isn’t flexible enough to catch.
+> *Remark 4* (Interpreting the deviance test). A significant [p-value](https://morrison-lab.github.io/sds/inference.html#def-p-value) for this deviance statistic indicates that there’s some detectable pattern in the data that our model isn’t flexible enough to catch.
 
 > **CAUTION:**
 >
@@ -4074,7 +4132,7 @@ If you have covariates measured on a continuous scale, you may not be able to us
 
 > **NOTE:**
 >
-> **Example 24 (Deviance test for the WCGS CHD model)** Our CHD model `chd_glm_contrasts` was fit to individual-level observations, but its covariate patterns are just the combinations of personality type (`dibpat`) and whole-year `age`, so we can refit the same model to the grouped data and perform the [deviance test](#def-deviance-test):
+> **Example 25 (Deviance test for the WCGS CHD model)** Our CHD model `chd_glm_contrasts` was fit to individual-level observations, but its covariate patterns are just the combinations of personality type (`dibpat`) and whole-year `age`, so we can refit the same model to the grouped data and perform the [deviance test](#def-deviance-test):
 >
 > Show R code
 >
@@ -4127,7 +4185,7 @@ If our covariate patterns produce groups that are too small, a reasonable soluti
 
 > **NOTE:**
 >
-> **Example 25 (Hosmer-Lemeshow test for the WCGS CHD model)** For our CHD model, this procedure would be:
+> **Example 26 (Hosmer-Lemeshow test for the WCGS CHD model)** For our CHD model, this procedure would be:
 >
 > Show R code
 >
@@ -4289,7 +4347,7 @@ See also [the likelihood ratio test for linear models](../chapters/Linear-models
 
 > **NOTE:**
 >
-> **Example 26 (Testing the WCGS interaction term with a likelihood ratio test)** Our CHD model `chd_glm_contrasts` includes a `dibpat:age` [interaction term](../chapters/Intro-to-GLMs.llms.md#def-interaction-term). Does that interaction term improve the fit enough to justify its extra parameter? Let’s fit the nested model without the interaction term and compare the two models with a [likelihood ratio test](#def-lrt):
+> **Example 27 (Testing the WCGS interaction term with a likelihood ratio test)** Our CHD model `chd_glm_contrasts` includes a `dibpat:age` [interaction term](../chapters/Intro-to-GLMs.llms.md#def-interaction-term). Does that interaction term improve the fit enough to justify its extra parameter? Let’s fit the nested model without the interaction term and compare the two models with a [likelihood ratio test](#def-lrt):
 >
 > Show R code
 >
@@ -4476,7 +4534,7 @@ library(ggfortify)
 chd_glm_contrasts_grouped |> autoplot()
 ```
 
-[![](logistic-regression_files/figure-revealjs/unnamed-chunk-42-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-42-1.png)
+[![](logistic-regression_files/figure-revealjs/unnamed-chunk-43-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-43-1.png)
 
 ### 9.0.2 (Response) residuals
 
@@ -4494,7 +4552,7 @@ chd_glm_contrasts_grouped |> autoplot()
 
 > **NOTE:**
 >
-> **Example 27 (Response residuals for the WCGS CHD model)** We can graph these residuals $e_k$ ([Definition 8](#def-response-residual-logistic)) against the [fitted values](https://morrison-lab.github.io/sds/prediction.html#def-fitted-value) $\hat\pi(x_k)$:
+> **Example 28 (Response residuals for the WCGS CHD model)** We can graph these residuals $e_k$ ([Definition 8](#def-response-residual-logistic)) against the [fitted values](https://morrison-lab.github.io/sds/prediction.html#def-fitted-value) $\hat\pi(x_k)$:
 >
 > Show R code
 >
@@ -4572,7 +4630,7 @@ However, we might want to divide by the [standard error](https://morrison-lab.gi
 
 > **NOTE:**
 >
-> **Example 28 (Pearson residuals for the WCGS CHD model)** Let’s take a look at the Pearson residuals ([Definition 9](#def-pearson-residual)) for our CHD model from the WCGS data (graphed against the [fitted values](https://morrison-lab.github.io/sds/prediction.html#def-fitted-value) on the [logit](../chapters/binary-outcome-associations.llms.md#def-logit-fn) scale):
+> **Example 29 (Pearson residuals for the WCGS CHD model)** Let’s take a look at the Pearson residuals ([Definition 9](#def-pearson-residual)) for our CHD model from the WCGS data (graphed against the [fitted values](https://morrison-lab.github.io/sds/prediction.html#def-fitted-value) on the [logit](../chapters/binary-outcome-associations.llms.md#def-logit-fn) scale):
 >
 > Show R code
 >
@@ -4586,13 +4644,13 @@ However, we might want to divide by the [standard error](https://morrison-lab.gi
 > autoplot(chd_glm_contrasts_grouped, which = 1, ncol = 1) |> print()
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-45-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-45-1.png)
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-46-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-46-1.png)
 >
 > The fan-shape is gone, and these residuals don’t show any obvious signs of model fit issues.
 
 > **NOTE:**
 >
-> **Example 29 (Counterexample: Pearson residuals for the beetles model)** If we create the same plot for the `beetles` model, we see some strong evidence of a lack of fit; this plot is a **counterexample** to a well-fitting model:
+> **Example 30 (Counterexample: Pearson residuals for the beetles model)** If we create the same plot for the `beetles` model, we see some strong evidence of a lack of fit; this plot is a **counterexample** to a well-fitting model:
 >
 > Show R code
 >
@@ -4614,7 +4672,7 @@ However, we might want to divide by the [standard error](https://morrison-lab.gi
 > autoplot(beetles_glm_grouped, which = 1, ncol = 1) |> print()
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-46-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-46-1.png)
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-47-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-47-1.png)
 >
 > The clear pattern in the residuals signals that the straight-line [logit](../chapters/binary-outcome-associations.llms.md#def-logit-fn) model does not fit the beetle-mortality data well.
 
@@ -4640,7 +4698,7 @@ chd_glm_strat <- glm(
 autoplot(chd_glm_strat, which = 1, ncol = 1) |> print()
 ```
 
-[![](logistic-regression_files/figure-revealjs/unnamed-chunk-48-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-48-1.png)
+[![](logistic-regression_files/figure-revealjs/unnamed-chunk-49-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-49-1.png)
 
 This residuals-vs-fitted plot is meaningless: with ungrouped (individual-level) data, each covariate pattern contains only one observation ($n_k = 1$), so each residual can take only one of two possible values, both determined by the fitted probability $\hat\pi(x_k)$ (one value when $y_k = 1$ and another when $y_k = 0$). With a single binary observation per covariate pattern, the residuals have no meaningful reference distribution to assess the model fit against; this lack of a reference distribution is why [logistic regression](#def-logistic-regression) residuals only work for grouped data, with multiple observations per covariate pattern.
 
@@ -4693,7 +4751,7 @@ Show R code
 wcgs_resid_plot1 |> print()
 ```
 
-[![](logistic-regression_files/figure-revealjs/unnamed-chunk-50-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-50-1.png)
+[![](logistic-regression_files/figure-revealjs/unnamed-chunk-51-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-51-1.png)
 
 #### Pearson chi-squared goodness of fit test
 
@@ -4738,7 +4796,7 @@ For our CHD model, the [p-value](https://morrison-lab.github.io/sds/inference.ht
 
 > **NOTE:**
 >
-> *Remark 4* (The weighted hat matrix as the GLM analog of the linear-model hat matrix). This weighted hat matrix is the GLM analog of [the linear-model hat matrix](../chapters/Linear-models-overview.llms.md#def-hat-matrix); the weight matrix $\mathbf{W}$ reduces to the identity in the ordinary-least-squares case.
+> *Remark 5* (The weighted hat matrix as the GLM analog of the linear-model hat matrix). This weighted hat matrix is the GLM analog of [the linear-model hat matrix](../chapters/Linear-models-overview.llms.md#def-hat-matrix); the weight matrix $\mathbf{W}$ reduces to the identity in the ordinary-least-squares case.
 
 > **NOTE:**
 >
@@ -4750,7 +4808,7 @@ For our CHD model, the [p-value](https://morrison-lab.github.io/sds/inference.ht
 
 > **NOTE:**
 >
-> *Remark 5* (Standardized Pearson residuals in R diagnostic plots). The functions [`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html) and `plot.lm()` use these for some of their graphs.
+> *Remark 6* (Standardized Pearson residuals in R diagnostic plots). The functions [`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html) and `plot.lm()` use these for some of their graphs.
 
 ### 9.0.4 Deviance residuals
 
@@ -4791,11 +4849,11 @@ where $h_k$ is the leverage of covariate pattern $k$ ([Definition 11](#def-leve
 
 > **NOTE:**
 >
-> *Remark 6* (Relation to Cook’s distance for linear models). This diagnostic is the GLM analog of [Cook’s distance](../chapters/Linear-models-overview.llms.md#def-cooks-distance) for linear models, and shares its closed-form structure.
+> *Remark 7* (Relation to Cook’s distance for linear models). This diagnostic is the GLM analog of [Cook’s distance](../chapters/Linear-models-overview.llms.md#def-cooks-distance) for linear models, and shares its closed-form structure.
 
 > **NOTE:**
 >
-> **Example 30 (Diagnostics for the WCGS CHD model)** Let’s take a look at the full set of [`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html) diagnostics now for our `CHD` model:
+> **Example 31 (Diagnostics for the WCGS CHD model)** Let’s take a look at the full set of [`autoplot()`](https://ggplot2.tidyverse.org/reference/autoplot.html) diagnostics now for our `CHD` model:
 >
 > Show R code
 >
@@ -4815,7 +4873,7 @@ where $h_k$ is the leverage of covariate pattern $k$ ([Definition 11](#def-leve
 
 > **NOTE:**
 >
-> **Example 31 (Diagnostics for the beetles model)** Let’s look at the beetles model diagnostic plots for comparison:
+> **Example 32 (Diagnostics for the beetles model)** Let’s look at the beetles model diagnostic plots for comparison:
 >
 > Show R code
 >
@@ -4845,7 +4903,7 @@ Another objection is that odds ratios (and [risk ratios](../chapters/binary-outc
 
 $$\mathbb{P}(Y=y|X=x,C=c) = {\color{red}{\pi(x,c)}}^y (1-{\color{red}{\pi(x,c)}})^{1-y}$$
 
-$${\color{red}{\pi(x,c)}} = {\operatorname{expit}\mathopen{}\left\{\eta_0 + \beta_Xx + \beta_Cc\right\}\mathclose{}} \tag{49}$$
+$${\color{red}{\pi(x,c)}} = {\operatorname{expit}\mathopen{}\left\{\eta_0 + \beta_Xx + \beta_Cc\right\}\mathclose{}} \tag{50}$$
 
 Then:
 
@@ -4872,7 +4930,7 @@ In contrast, consider a model with an identity [link function](../chapters/Intro
 
 $$\mathbb{P}(Y=y|X=x,C=c) = {\color{red}{\pi(x,c)}}^y (1-{\color{red}{\pi(x,c)}})^{1-y}$$
 
-$${\color{red}{\pi(x,c)}} = \eta_0 + \beta_Xx + \beta_Cc \tag{50}$$
+$${\color{red}{\pi(x,c)}} = \eta_0 + \beta_Xx + \beta_Cc \tag{51}$$
 
 Then:
 
@@ -4943,7 +5001,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Exercise 27** What are the expressions for ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ and $\frac{\partial}{\partial x} {\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ for the identity-link model in [Equation 50](#eq-or-objections-identity-model), if ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$?
+> **Exercise 27** What are the expressions for ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ and $\frac{\partial}{\partial x} {\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ for the identity-link model in [Equation 51](#eq-or-objections-identity-model), if ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$?
 
 > **NOTE:**
 >
@@ -4977,7 +5035,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Theorem 27 (Marginal mean under an identity link when the covariates are associated)** In the identity-link model of [Equation 50](#eq-or-objections-identity-model), suppose ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$. Then:
+> **Theorem 27 (Marginal mean under an identity link when the covariates are associated)** In the identity-link model of [Equation 51](#eq-or-objections-identity-model), suppose ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$. Then:
 >
 > $${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}} = (\eta_0 + \beta_C \gamma_0) + (\beta_X + \beta_C \gamma_x) x$$
 
@@ -4987,7 +5045,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Example 32 (A marginal mean under an identity link)** Suppose $\eta_0 = 0.1$, $\beta_X = 0.05$ and $\beta_C = 0.1$ in the identity-link model of [Equation 50](#eq-or-objections-identity-model), and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = 1 + 0.5 x$, so that $\gamma_0 = 1$ and $\gamma_x = 0.5$. The code below computes ${\mathbb{E}\mathopen{}\left[Y|X=2\right]\mathclose{}}$ by substituting ${\mathbb{E}\mathopen{}\left[C|X=2\right]\mathclose{}}$ into the model, and from the formula of [Theorem 27](#thm-marginal-mean-nonindep):
+> **Example 33 (A marginal mean under an identity link)** Suppose $\eta_0 = 0.1$, $\beta_X = 0.05$ and $\beta_C = 0.1$ in the identity-link model of [Equation 51](#eq-or-objections-identity-model), and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = 1 + 0.5 x$, so that $\gamma_0 = 1$ and $\gamma_x = 0.5$. The code below computes ${\mathbb{E}\mathopen{}\left[Y|X=2\right]\mathclose{}}$ by substituting ${\mathbb{E}\mathopen{}\left[C|X=2\right]\mathclose{}}$ into the model, and from the formula of [Theorem 27](#thm-marginal-mean-nonindep):
 >
 > Show R code
 >
@@ -5006,7 +5064,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Corollary 10 (Marginal slope under an identity link when the covariates are associated)** Under the assumptions of [Theorem 27](#thm-marginal-mean-nonindep):
+> **Corollary 11 (Marginal slope under an identity link when the covariates are associated)** Under the assumptions of [Theorem 27](#thm-marginal-mean-nonindep):
 >
 > $$\frac{\partial}{\partial x}{\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}} = \beta_X + \beta_C \gamma_x$$
 
@@ -5016,7 +5074,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Example 33 (A marginal slope under an identity link)** Take the parameter values of [Example 32](#exm-marginal-mean-nonindep). Because the marginal mean is linear in $x$, the change in ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ from $x = 2$ to $x = 3$ equals its slope. The code below computes that change, and the slope from [Corollary 10](#cor-marginal-slope-nonindep):
+> **Example 34 (A marginal slope under an identity link)** Take the parameter values of [Example 33](#exm-marginal-mean-nonindep). Because the marginal mean is linear in $x$, the change in ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ from $x = 2$ to $x = 3$ equals its slope. The code below computes that change, and the slope from [Corollary 11](#cor-marginal-slope-nonindep):
 >
 > Show R code
 >
@@ -5032,7 +5090,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Exercise 28** What are the expressions for ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ and $\frac{\partial}{\partial x} {\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$, if instead of the identity-link model in [Equation 50](#eq-or-objections-identity-model), $$\pi(x,c) = \eta_0 + \beta_Xx + \beta_Cc +\beta_{XC}xc$$ and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$?
+> **Exercise 28** What are the expressions for ${\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$ and $\frac{\partial}{\partial x} {\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}$, if instead of the identity-link model in [Equation 51](#eq-or-objections-identity-model), $$\pi(x,c) = \eta_0 + \beta_Xx + \beta_Cc +\beta_{XC}xc$$ and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = \gamma_0 + \gamma_x x$?
 
 > **NOTE:**
 >
@@ -5081,7 +5139,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Example 34 (A marginal mean under an identity link with an interaction)** Suppose $\eta_0 = 0.1$, $\beta_X = 0.05$, $\beta_C = 0.1$ and $\beta_{XC} = 0.02$, and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = 1 + 0.5 x$, so that $\gamma_0 = 1$ and $\gamma_x = 0.5$. The code below computes ${\mathbb{E}\mathopen{}\left[Y|X=2\right]\mathclose{}}$ by substituting ${\mathbb{E}\mathopen{}\left[C|X=2\right]\mathclose{}}$ into the model, and from the formula of [Theorem 28](#thm-marginal-mean-nonindep-interaction):
+> **Example 35 (A marginal mean under an identity link with an interaction)** Suppose $\eta_0 = 0.1$, $\beta_X = 0.05$, $\beta_C = 0.1$ and $\beta_{XC} = 0.02$, and ${\mathbb{E}\mathopen{}\left[C|X=x\right]\mathclose{}} = 1 + 0.5 x$, so that $\gamma_0 = 1$ and $\gamma_x = 0.5$. The code below computes ${\mathbb{E}\mathopen{}\left[Y|X=2\right]\mathclose{}}$ by substituting ${\mathbb{E}\mathopen{}\left[C|X=2\right]\mathclose{}}$ into the model, and from the formula of [Theorem 28](#thm-marginal-mean-nonindep-interaction):
 >
 > Show R code
 >
@@ -5104,7 +5162,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Corollary 11 (Marginal slope under an identity link with an interaction)** Under the assumptions of [Theorem 28](#thm-marginal-mean-nonindep-interaction):
+> **Corollary 12 (Marginal slope under an identity link with an interaction)** Under the assumptions of [Theorem 28](#thm-marginal-mean-nonindep-interaction):
 >
 > $$\frac{\partial}{\partial x}{\mathbb{E}\mathopen{}\left[Y|X=x\right]\mathclose{}}
 > = (\beta_X + \beta_C\gamma_x + \beta_{XC}\gamma_0) + 2\beta_{XC}\gamma_x x$$
@@ -5115,7 +5173,7 @@ In other words, for a model with an identity link function, if covariates $X$ an
 
 > **NOTE:**
 >
-> **Example 35 (A marginal slope under an identity link with an interaction)** Take the parameter values of [Example 34](#exm-marginal-mean-nonindep-interaction). Because the marginal mean is now quadratic in $x$, its slope varies with $x$. The code below approximates the slope at $x = 2$ and $x = 4$ with a central difference, and compares it with the formula of [Corollary 11](#cor-marginal-slope-nonindep-interaction):
+> **Example 36 (A marginal slope under an identity link with an interaction)** Take the parameter values of [Example 35](#exm-marginal-mean-nonindep-interaction). Because the marginal mean is now quadratic in $x$, its slope varies with $x$. The code below approximates the slope at $x = 2$ and $x = 4$ with a central difference, and compares it with the formula of [Corollary 12](#cor-marginal-slope-nonindep-interaction):
 >
 > Show R code
 >
@@ -5153,7 +5211,7 @@ To compute [risk ratios](../chapters/binary-outcome-associations.llms.md#def-RR)
 For example, suppose we have a logistic regression model with a binary exposure $A$ and a covariate $Z$:
 
 $${\operatorname{logit}\mathopen{}\left\{\Pr(Y = 1 | A, Z)\right\}\mathclose{}} = \beta_0 + \beta_A A + \beta_Z Z
-\tag{51}$$
+\tag{52}$$
 
 > **NOTE:**
 >
@@ -5161,7 +5219,7 @@ $${\operatorname{logit}\mathopen{}\left\{\Pr(Y = 1 | A, Z)\right\}\mathclose{}} 
 >
 > $$\pi(a, z) \stackrel{\text{def}}{=}\Pr(Y = 1 \mid A = a, Z = z).$$
 
-Under the logistic model in [Equation 51](#eq-logistic-rr-rd-model), this population risk equals
+Under the logistic model in [Equation 52](#eq-logistic-rr-rd-model), this population risk equals
 
 $$\pi(a, z) = {\operatorname{expit}\mathopen{}\left\{\beta_0 + \beta_A a + \beta_Z z\right\}\mathclose{}}.$$
 
@@ -5179,7 +5237,7 @@ $$\pi(a, z) = {\operatorname{expit}\mathopen{}\left\{\beta_0 + \beta_A a + \beta
 
 > **NOTE:**
 >
-> **Example 36 (Numerical example: conditional RD and RR at a fixed covariate value)** Using the WCGS data with `dibpat` (behavior pattern) as the exposure and `chd69` (coronary heart disease by 1969) as the outcome, adjusted for `age`:
+> **Example 37 (Numerical example: conditional RD and RR at a fixed covariate value)** Using the WCGS data with `dibpat` (behavior pattern) as the exposure and `chd69` (coronary heart disease by 1969) as the outcome, adjusted for `age`:
 >
 > Show R code
 >
@@ -5249,7 +5307,7 @@ Note that these [risk differences](../chapters/binary-outcome-associations.llms.
 
 > **NOTE:**
 >
-> **Example 37 (Illustration: observed marginal risk)** Continuing the WCGS example ([Example 36](#exm-cond-rd-rr)):
+> **Example 38 (Illustration: observed marginal risk)** Continuing the WCGS example ([Example 37](#exm-cond-rd-rr)):
 >
 > Show R code
 >
@@ -5288,7 +5346,7 @@ Note that these [risk differences](../chapters/binary-outcome-associations.llms.
 
 > **NOTE:**
 >
-> **Example 38 (Observed marginal risk by standardization)** Take $Z$ to be an indicator for age 50 or older. Among the WCGS men with $A = 1$ (Type A):
+> **Example 39 (Observed marginal risk by standardization)** Take $Z$ to be an indicator for age 50 or older. Among the WCGS men with $A = 1$ (Type A):
 >
 > Show R code
 >
@@ -5315,7 +5373,7 @@ Note that these [risk differences](../chapters/binary-outcome-associations.llms.
 > && \text{[arithmetic]}
 > \end{aligned}$$
 >
-> matching the direct estimate $\hat{\pi}(1) = 0.112$ from [Example 37](#exm-observed-marginal-risk-direct) (up to rounding).
+> matching the direct estimate $\hat{\pi}(1) = 0.112$ from [Example 38](#exm-observed-marginal-risk-direct) (up to rounding).
 
 > **NOTE:**
 >
@@ -5331,11 +5389,11 @@ In causal inference, [potential outcomes](../chapters/causal-inference.llms.md#d
 
 > **NOTE:**
 >
-> *Remark 7* (Interpretation of the potential mean). The potential mean is what the average outcome would be if the entire population were assigned treatment $a$.
+> *Remark 8* (Interpretation of the potential mean). The potential mean is what the average outcome would be if the entire population were assigned treatment $a$.
 
 > **NOTE:**
 >
-> **Example 39 (Illustration: potential mean)** Suppose, hypothetically, that if every man in the WCGS cohort had exhibited Type A behavior pattern ($a = 1$), the fraction who would go on to develop CHD by 1969 were close to the fraction actually observed among the men who really did have that behavior pattern, $\hat{\pi}(1) = 0.112$ ([Example 37](#exm-observed-marginal-risk-direct)). Under that supposition, the [potential mean](#def-potential-mean) is $\mu_1 = {\mathbb{E}\mathopen{}\left[Y^1\right]\mathclose{}} = 0.112$.
+> **Example 40 (Illustration: potential mean)** Suppose, hypothetically, that if every man in the WCGS cohort had exhibited Type A behavior pattern ($a = 1$), the fraction who would go on to develop CHD by 1969 were close to the fraction actually observed among the men who really did have that behavior pattern, $\hat{\pi}(1) = 0.112$ ([Example 38](#exm-observed-marginal-risk-direct)). Under that supposition, the [potential mean](#def-potential-mean) is $\mu_1 = {\mathbb{E}\mathopen{}\left[Y^1\right]\mathclose{}} = 0.112$.
 
 For a [binary outcome](https://morrison-lab.github.io/sds/data.html#def-binary-var), the potential mean is a probability, which we give its own name:
 
@@ -5349,11 +5407,11 @@ We use the term **causal marginal risk** throughout.
 
 > **NOTE:**
 >
-> **Example 40 (Illustration: causal marginal risk)** Continuing [Example 39](#exm-potential-mean), under that same supposition the [causal marginal risk](#def-causal-marginal-risk) is $\pi_1 = \Pr(Y^1 = 1) = 0.112$ — the fraction who would develop CHD if every man in the cohort had Type A behavior pattern.
+> **Example 41 (Illustration: causal marginal risk)** Continuing [Example 40](#exm-potential-mean), under that same supposition the [causal marginal risk](#def-causal-marginal-risk) is $\pi_1 = \Pr(Y^1 = 1) = 0.112$ — the fraction who would develop CHD if every man in the cohort had Type A behavior pattern.
 
 > **NOTE:**
 >
-> **Theorem 30 (Causal marginal risk equals potential mean)** The matching values in [Example 39](#exm-potential-mean) and [Example 40](#exm-causal-marginal-risk-illustration) are no coincidence: the causal marginal risk ([Definition 20](#def-causal-marginal-risk)) is a special case of the potential mean ([Definition 19](#def-potential-mean)):
+> **Theorem 30 (Causal marginal risk equals potential mean)** The matching values in [Example 40](#exm-potential-mean) and [Example 41](#exm-causal-marginal-risk-illustration) are no coincidence: the causal marginal risk ([Definition 20](#def-causal-marginal-risk)) is a special case of the potential mean ([Definition 19](#def-potential-mean)):
 >
 > $$\pi_a = {\mathbb{E}\mathopen{}\left[Y^a\right]\mathclose{}}$$
 >
@@ -5375,7 +5433,7 @@ We use the term **causal marginal risk** throughout.
 
 > **NOTE:**
 >
-> **Example 41 (Illustration: causal marginal risk equals potential mean)** With $\pi_1 = 0.112$ as in [Example 40](#exm-causal-marginal-risk-illustration), reading the [potential mean](#def-potential-mean) as an [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation) gives the same value:
+> **Example 42 (Illustration: causal marginal risk equals potential mean)** With $\pi_1 = 0.112$ as in [Example 41](#exm-causal-marginal-risk-illustration), reading the [potential mean](#def-potential-mean) as an [expectation](https://morrison-lab.github.io/pds/expectation.html#def-expectation) gives the same value:
 >
 > $${\mathbb{E}\mathopen{}\left[Y^1\right]\mathclose{}} = 1 \cdot 0.112 + 0 \cdot 0.888
 > = 0.112 = \pi_1.$$
@@ -5417,7 +5475,7 @@ Under causal identification assumptions (see [Consistency](../chapters/causal-in
 
 > **NOTE:**
 >
-> **Example 42 (Causal marginal risk by standardization)** Continuing [Example 38](#exm-observed-marginal-risk) with the same age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$, now weight by the age distribution of the **whole** WCGS population rather than just the Type A men:
+> **Example 43 (Causal marginal risk by standardization)** Continuing [Example 39](#exm-observed-marginal-risk) with the same age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$, now weight by the age distribution of the **whole** WCGS population rather than just the Type A men:
 >
 > Show R code
 >
@@ -5446,7 +5504,7 @@ We can now place the observed and causal marginal risks side by side:
 
 > **NOTE:**
 >
-> *Remark 8* (Observed vs. causal marginal risk). The two risks differ in what they define — one conditions on the **observed** exposure $A = a$, the other on a **[potential outcome](../chapters/causal-inference.llms.md#def-potential-outcomes)** $Y^a$ — and, once unpacked through ${\color{teal}{\pi(a, z)}} = \Pr(Y = 1 \mid A = a, Z = z)$, in the distribution of $Z$ they average over:
+> *Remark 9* (Observed vs. causal marginal risk). The two risks differ in what they define — one conditions on the **observed** exposure $A = a$, the other on a **[potential outcome](../chapters/causal-inference.llms.md#def-potential-outcomes)** $Y^a$ — and, once unpacked through ${\color{teal}{\pi(a, z)}} = \Pr(Y = 1 \mid A = a, Z = z)$, in the distribution of $Z$ they average over:
 >
 > $$\begin{aligned}
 > \text{observed: } \quad \pi(a)
@@ -5468,7 +5526,7 @@ We can now place the observed and causal marginal risks side by side:
 
 > **NOTE:**
 >
-> **Corollary 12 (Observed and causal marginal risks coincide without confounding)** Assume [Consistency](../chapters/causal-inference.llms.md#def-consistency), [Conditional Exchangeability](../chapters/causal-inference.llms.md#def-exchangeability), [Positivity](../chapters/causal-inference.llms.md#def-positivity), and $Z \perp\!\!\!\perp A$. Then the observed and [causal marginal risks](#def-causal-marginal-risk) are equal:
+> **Corollary 13 (Observed and causal marginal risks coincide without confounding)** Assume [Consistency](../chapters/causal-inference.llms.md#def-consistency), [Conditional Exchangeability](../chapters/causal-inference.llms.md#def-exchangeability), [Positivity](../chapters/causal-inference.llms.md#def-positivity), and $Z \perp\!\!\!\perp A$. Then the observed and [causal marginal risks](#def-causal-marginal-risk) are equal:
 >
 > $$\pi(a) = \pi_a$$
 >
@@ -5492,7 +5550,7 @@ Under complete randomization of $A$, the design delivers $Z \perp\!\!\!\perp A$ 
 
 > **NOTE:**
 >
-> **Example 43 (Illustration: coincidence under randomization)** Take the same age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$ of [Example 38](#exm-observed-marginal-risk), but now suppose $A$ had been randomized, so the exposed would carry the population’s age distribution instead of the actual, older-skewing one: $\Pr(Z = 1 \mid A = 1) = \Pr(Z = 1) = 0.287$. Then the [observed marginal risk](#def-observed-marginal-risk) would be
+> **Example 44 (Illustration: coincidence under randomization)** Take the same age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$ of [Example 39](#exm-observed-marginal-risk), but now suppose $A$ had been randomized, so the exposed would carry the population’s age distribution instead of the actual, older-skewing one: $\Pr(Z = 1 \mid A = 1) = \Pr(Z = 1) = 0.287$. Then the [observed marginal risk](#def-observed-marginal-risk) would be
 >
 > $$\begin{aligned}
 > \pi(1)
@@ -5507,7 +5565,7 @@ Under complete randomization of $A$, the design delivers $Z \perp\!\!\!\perp A$ 
 > && \text{[arithmetic]}
 > \end{aligned}$$
 >
-> equal to the [causal marginal risk](#def-causal-marginal-risk) $\pi_1 = 0.109$ of [Example 42](#exm-causal-marginal-risk), exactly as [Corollary 12](#cor-observed-equals-causal) predicts.
+> equal to the [causal marginal risk](#def-causal-marginal-risk) $\pi_1 = 0.109$ of [Example 43](#exm-causal-marginal-risk), exactly as [Corollary 13](#cor-observed-equals-causal) predicts.
 
 Two related procedures estimate these marginal risks from a fitted [regression model](../chapters/Intro-to-GLMs.llms.md#def-regression-model):
 
@@ -5525,7 +5583,7 @@ The following example carries out this procedure on the WCGS data.
 
 > **NOTE:**
 >
-> **Example 44 (Estimated causal marginal risks (WCGS))** Continuing with the same WCGS data and fitted model (`wcgs_clean` and `fit`) introduced in [Example 36](#exm-cond-rd-rr) — `dibpat` (behavior pattern) as the exposure and `chd69` (coronary heart disease by 1969) as the outcome, adjusted for `age`:
+> **Example 45 (Estimated causal marginal risks (WCGS))** Continuing with the same WCGS data and fitted model (`wcgs_clean` and `fit`) introduced in [Example 37](#exm-cond-rd-rr) — `dibpat` (behavior pattern) as the exposure and `chd69` (coronary heart disease by 1969) as the outcome, adjusted for `age`:
 >
 > The **[causal marginal risks](#def-causal-marginal-risk)** $\hat\pi_a = \frac{1}{n}\sum_{i=1}^n\hat\pi_{a,i}$ standardize the fitted risks $\hat\pi_{a,i} = \hat\pi(a, z_i)$ over the full covariate distribution ([Definition 21](#def-g-computation)):
 >
@@ -5636,7 +5694,7 @@ Under the identification assumptions of [Theorem 31](#thm-causal-marginal-risk)
 > > && \text{[causal marginal risk identification]}
 > > \end{aligned}$$
 
-The WCGS estimate $\hat\pi_1$ computed in [Example 44](#exm-wcgs-causal-marginal-risks) is a realization of the [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) that [Theorem 32](#thm-g-computation-consistency) covers: as the sample grows, that estimate is guaranteed to converge to the causal marginal risk $\pi_1$.
+The WCGS estimate $\hat\pi_1$ computed in [Example 45](#exm-wcgs-causal-marginal-risks) is a realization of the [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) that [Theorem 32](#thm-g-computation-consistency) covers: as the sample grows, that estimate is guaranteed to converge to the causal marginal risk $\pi_1$.
 
 > **NOTE:**
 >
@@ -5648,7 +5706,7 @@ The WCGS estimate $\hat\pi_1$ computed in [Example 44](#exm-wcgs-causal-margina
 
 > **NOTE:**
 >
-> *Remark 9* (Where the term “predictive margins” is used). The term “predictive margins” is commonly used in social science and in Stata’s `margins` command.
+> *Remark 10* (Where the term “predictive margins” is used). The term “predictive margins” is commonly used in social science and in Stata’s `margins` command.
 
 > **NOTE:**
 >
@@ -5658,13 +5716,13 @@ The WCGS estimate $\hat\pi_1$ computed in [Example 44](#exm-wcgs-causal-margina
 
 > **NOTE:**
 >
-> **Example 45 (Illustration: full-sample predictive margin)** In the WCGS example ([Example 44](#exm-wcgs-causal-marginal-risks)), the [g-computation](#def-g-computation) estimate $\hat\pi_1$ is simultaneously the full-sample predictive margin $\widehat{\text{PM}}(1)$: both are the same average $\frac{1}{n}\sum_{i=1}^n\hat\pi_{1,i}$ of the fitted Type A risks over the whole sample.
+> **Example 46 (Illustration: full-sample predictive margin)** In the WCGS example ([Example 45](#exm-wcgs-causal-marginal-risks)), the [g-computation](#def-g-computation) estimate $\hat\pi_1$ is simultaneously the full-sample predictive margin $\widehat{\text{PM}}(1)$: both are the same average $\frac{1}{n}\sum_{i=1}^n\hat\pi_{1,i}$ of the fitted Type A risks over the whole sample.
 
-Because the [full-sample predictive margin](#def-full-sample-predictive-margin) is defined identically to the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) ([Example 45](#exm-full-sample-pm)), it inherits the same consistency guarantee:
+Because the [full-sample predictive margin](#def-full-sample-predictive-margin) is defined identically to the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) ([Example 46](#exm-full-sample-pm)), it inherits the same consistency guarantee:
 
 > **NOTE:**
 >
-> **Corollary 13 (Full-sample predictive margin estimates the causal marginal risk)** The [full-sample predictive margin](#def-full-sample-predictive-margin) is consistent for the causal marginal risk $\pi_a$ ([Definition 20](#def-causal-marginal-risk)):
+> **Corollary 14 (Full-sample predictive margin estimates the causal marginal risk)** The [full-sample predictive margin](#def-full-sample-predictive-margin) is consistent for the causal marginal risk $\pi_a$ ([Definition 20](#def-causal-marginal-risk)):
 >
 > $$\widehat{\text{PM}}(a) = \hat\pi_a \overset{p}{\to} \pi_a$$
 >
@@ -5672,7 +5730,7 @@ Because the [full-sample predictive margin](#def-full-sample-predictive-margin) 
 > >
 > > *Proof*. The full-sample predictive margin $\frac{1}{n}\sum_{i=1}^n\hat\pi_{a,i}$ is, term for term, the g-computation [estimator](https://morrison-lab.github.io/sds/estimation.html#def-estimator) $\hat\pi_a$ of [Definition 21](#def-g-computation), so its consistency for $\pi_a$ is exactly [Theorem 32](#thm-g-computation-consistency).
 
-The WCGS [predictive margin](#def-predictive-margins) computed in [Example 45](#exm-full-sample-pm) is therefore consistent for the [causal marginal risk](#def-causal-marginal-risk) $\pi_1$ by [Corollary 13](#cor-full-sample-pm).
+The WCGS [predictive margin](#def-predictive-margins) computed in [Example 46](#exm-full-sample-pm) is therefore consistent for the [causal marginal risk](#def-causal-marginal-risk) $\pi_1$ by [Corollary 14](#cor-full-sample-pm).
 
 > **NOTE:**
 >
@@ -5684,13 +5742,13 @@ The WCGS [predictive margin](#def-predictive-margins) computed in [Example 45](
 
 > **NOTE:**
 >
-> **Example 46 (Illustration: exposed-subgroup predictive margin)** Continuing [Example 38](#exm-observed-marginal-risk), where the exposed ($A = 1$) have $\Pr(Z = 1 \mid A = 1) = 0.329$ and age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$, averaging the fitted risks over the exposed subgroup gives
+> **Example 47 (Illustration: exposed-subgroup predictive margin)** Continuing [Example 39](#exm-observed-marginal-risk), where the exposed ($A = 1$) have $\Pr(Z = 1 \mid A = 1) = 0.329$ and age-specific risks $\pi(1, 0) = 0.089$ and $\pi(1, 1) = 0.159$, averaging the fitted risks over the exposed subgroup gives
 >
 > $$\hat\pi_1(1) = (1 - 0.329)(0.089)
 > + (0.329)(0.159)
 > = 0.112,$$
 >
-> which coincides with the [observed marginal risk](#def-observed-marginal-risk) $\pi(1) = 0.112$ ([Example 38](#exm-observed-marginal-risk)), not the [causal marginal risk](#def-causal-marginal-risk) $\pi_1 = 0.109$ ([Example 42](#exm-causal-marginal-risk)); [Theorem 33](#thm-subgroup-pm) shows this agreement is no coincidence.
+> which coincides with the [observed marginal risk](#def-observed-marginal-risk) $\pi(1) = 0.112$ ([Example 39](#exm-observed-marginal-risk)), not the [causal marginal risk](#def-causal-marginal-risk) $\pi_1 = 0.109$ ([Example 43](#exm-causal-marginal-risk)); [Theorem 33](#thm-subgroup-pm) shows this agreement is no coincidence.
 
 > **NOTE:**
 >
@@ -5726,7 +5784,7 @@ The WCGS [predictive margin](#def-predictive-margins) computed in [Example 45](
 > >
 > > Combining the three steps, $\hat\pi_a(a) \overset{p}{\to} \pi(a)$.
 
-The WCGS exposed-subgroup predictive margin from [Example 46](#exm-subgroup-pm) is therefore consistent for the observed marginal risk $\pi(1)$ by [Theorem 33](#thm-subgroup-pm).
+The WCGS exposed-subgroup predictive margin from [Example 47](#exm-subgroup-pm) is therefore consistent for the observed marginal risk $\pi(1)$ by [Theorem 33](#thm-subgroup-pm).
 
 > **NOTE:**
 >
@@ -5752,7 +5810,7 @@ The following example applies these [predictive margins](#def-predictive-margins
 
 > **NOTE:**
 >
-> **Example 47 (Estimated observed marginal risks (WCGS))** Continuing the WCGS example ([Example 44](#exm-wcgs-causal-marginal-risks)), the **[observed marginal risks](#def-observed-marginal-risk)** $\pi(a) = \Pr(Y=1 \mid A=a)$ can be estimated in two equivalent ways.
+> **Example 48 (Estimated observed marginal risks (WCGS))** Continuing the WCGS example ([Example 45](#exm-wcgs-causal-marginal-risks)), the **[observed marginal risks](#def-observed-marginal-risk)** $\pi(a) = \Pr(Y=1 \mid A=a)$ can be estimated in two equivalent ways.
 >
 > Directly, as the [sample proportion](https://morrison-lab.github.io/sds/exploratory-descriptive.html#def-sample-proportion) of events within each exposure group:
 >
@@ -5781,7 +5839,7 @@ The following example applies these [predictive margins](#def-predictive-margins
 >
 > The two estimates agree exactly (to displayed precision), as [Lemma 10](#lem-subgroup-pm-proportion) guarantees: because the model includes `dibpat` as a covariate, the [exposed-subgroup predictive margin](#def-subgroup-predictive-margin) reproduces the raw event proportion in each `dibpat` group.
 >
-> Note that $\hat\pi(1) \neq \hat\pi_1$ and $\hat\pi(0) \neq \hat\pi_0$ ([Example 44](#exm-wcgs-causal-marginal-risks)): because age is associated with behavioral pattern (Type A and Type B men have different age distributions), the observed marginal and causal marginal risks differ. Standardization via [g-computation](#def-g-computation) adjusts for this difference.
+> Note that $\hat\pi(1) \neq \hat\pi_1$ and $\hat\pi(0) \neq \hat\pi_0$ ([Example 45](#exm-wcgs-causal-marginal-risks)): because age is associated with behavioral pattern (Type A and Type B men have different age distributions), the observed marginal and causal marginal risks differ. Standardization via [g-computation](#def-g-computation) adjusts for this difference.
 
 Contrasting marginal risks across exposure levels gives the corresponding marginal risk differences:
 
@@ -5793,7 +5851,7 @@ Contrasting marginal risks across exposure levels gives the corresponding margin
 
 > **NOTE:**
 >
-> **Example 48 (Estimated observed marginal risk difference)** Continuing from [Example 47](#exm-wcgs-observed-marginal-risks), the [observed marginal risk difference](#def-observed-marginal-rd) estimate is:
+> **Example 49 (Estimated observed marginal risk difference)** Continuing from [Example 48](#exm-wcgs-observed-marginal-risks), the [observed marginal risk difference](#def-observed-marginal-rd) estimate is:
 >
 > Show R code
 >
@@ -5821,7 +5879,7 @@ Contrasting marginal risks across exposure levels gives the corresponding margin
 
 > **NOTE:**
 >
-> **Example 49 (Estimated causal marginal risk difference)** Continuing from [Example 44](#exm-wcgs-causal-marginal-risks), the [causal marginal risk difference](#def-causal-marginal-rd) estimate is:
+> **Example 50 (Estimated causal marginal risk difference)** Continuing from [Example 45](#exm-wcgs-causal-marginal-risks), the [causal marginal risk difference](#def-causal-marginal-rd) estimate is:
 >
 > Show R code
 >
@@ -5866,13 +5924,13 @@ The bootstrap is a resampling method that allows us to estimate the sampling dis
 
 > **NOTE:**
 >
-> **Example 50 (Example: CHD risk and behavioral pattern)** We’ll use the Western Collaborative Group Study (WCGS) data to illustrate computing marginal risk differences from a [logistic regression model](#def-logistic-regression).
+> **Example 51 (Example: CHD risk and behavioral pattern)** We’ll use the Western Collaborative Group Study (WCGS) data to illustrate computing marginal risk differences from a [logistic regression model](#def-logistic-regression).
 >
 > The research question is: what is the marginal effect of Type A behavioral pattern on CHD risk, adjusting for age?
 >
 > ##### Fit the model
 >
-> We reuse `wcgs_clean` and `fit` from [Example 44](#exm-wcgs-causal-marginal-risks):
+> We reuse `wcgs_clean` and `fit` from [Example 45](#exm-wcgs-causal-marginal-risks):
 >
 > Show R code
 >
@@ -5889,7 +5947,7 @@ The bootstrap is a resampling method that allows us to estimate the sampling dis
 >
 > ##### Compute the point estimate
 >
-> We define helper functions for [g-computation](#def-g-computation) — these helper functions are reused in the bootstrap loop of [Section 10.2.2.0.3](#sec-wcgs-rd-bootstrap-ci) — and extract the point estimate already computed in [Example 49](#exm-causal-marginal-rd) for the contrast comparing Type A to Type B behavioral patterns:
+> We define helper functions for [g-computation](#def-g-computation) — these helper functions are reused in the bootstrap loop of [Section 10.2.2.0.3](#sec-wcgs-rd-bootstrap-ci) — and extract the point estimate already computed in [Example 50](#exm-causal-marginal-rd) for the contrast comparing Type A to Type B behavioral patterns:
 >
 > Show R code
 >
@@ -6080,7 +6138,7 @@ The bootstrap is a resampling method that allows us to estimate the sampling dis
 > >   theme_minimal()
 > > ```
 > >
-> > [![](logistic-regression_files/figure-revealjs/unnamed-chunk-53-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-53-1.png "Figure 22: Bootstrap distribution of the marginal risk difference (Type A vs Type B behavioral pattern, adjusted for age). Red dashed line: point estimate. Green dotted lines: 95% CI bounds.")
+> > [![](logistic-regression_files/figure-revealjs/unnamed-chunk-54-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-54-1.png "Figure 22: Bootstrap distribution of the marginal risk difference (Type A vs Type B behavioral pattern, adjusted for age). Red dashed line: point estimate. Green dotted lines: 95% CI bounds.")
 > >
 > > Figure 22: Bootstrap distribution of the marginal risk difference (Type A vs Type B behavioral pattern, adjusted for age). Red dashed line: point estimate. Green dotted lines: 95% CI bounds.
 >
@@ -6146,7 +6204,7 @@ Contrasting marginal risks by ratio rather than by difference gives the correspo
 
 > **NOTE:**
 >
-> **Example 51 (Estimated observed marginal risk ratio)** Continuing from [Example 47](#exm-wcgs-observed-marginal-risks), the [observed marginal risk ratio](#def-observed-marginal-rr) estimate is:
+> **Example 52 (Estimated observed marginal risk ratio)** Continuing from [Example 48](#exm-wcgs-observed-marginal-risks), the [observed marginal risk ratio](#def-observed-marginal-rr) estimate is:
 >
 > Show R code
 >
@@ -6174,7 +6232,7 @@ Contrasting marginal risks by ratio rather than by difference gives the correspo
 
 > **NOTE:**
 >
-> **Example 52 (Estimated causal marginal risk ratio)** Continuing from [Example 44](#exm-wcgs-causal-marginal-risks), the [causal marginal risk ratio](#def-causal-marginal-rr) estimate is:
+> **Example 53 (Estimated causal marginal risk ratio)** Continuing from [Example 45](#exm-wcgs-causal-marginal-risks), the [causal marginal risk ratio](#def-causal-marginal-rr) estimate is:
 >
 > Show R code
 >
@@ -6194,7 +6252,7 @@ Contrasting marginal risks by ratio rather than by difference gives the correspo
 > && \text{[arithmetic, computed from full-precision } \hat\pi_1 / \hat\pi_0 \text{]}
 > \end{aligned}$$
 
-The point estimates in [Example 51](#exm-observed-marginal-rr) and [Example 52](#exm-causal-marginal-rr) use the same fitted model as [Example 49](#exm-causal-marginal-rd). To quantify their uncertainty, we bootstrap the marginal risk ratio, modifying the statistic function to compute ratios instead of differences:
+The point estimates in [Example 52](#exm-observed-marginal-rr) and [Example 53](#exm-causal-marginal-rr) use the same fitted model as [Example 50](#exm-causal-marginal-rd). To quantify their uncertainty, we bootstrap the marginal risk ratio, modifying the statistic function to compute ratios instead of differences:
 
 Show R code
 
@@ -6272,13 +6330,13 @@ cat("95% Percentile CI: (",
 > **Definition 30 (Collapsibility)** An [estimand](https://morrison-lab.github.io/sds/estimation.html#def-estimand) $\theta$ is **collapsible** with respect to a covariate $Z$ if the population-level estimand equals the marginal-distribution-weighted average of stratum-specific estimands:
 >
 > $$\theta \stackrel{\text{def}}{=}{\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}}.
-> \tag{52}$$
+> \tag{53}$$
 
 > **NOTE:**
 >
 > **Definition 31 (Collapsibility bias)** In the setting of [Definition 30](#def-collapsibility), **collapsibility bias** is the discrepancy that arises when $\theta \neq {\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}}$.
 
-By LOTUS (the [Law of the Unconscious Statistician](https://morrison-lab.github.io/pds/expectation.html#thm-lotus)), [Equation 52](#eq-def-collapsibility) expands into a weighted sum or integral over $Z$’s distribution, depending on whether $Z$ is discrete or continuous:
+By LOTUS (the [Law of the Unconscious Statistician](https://morrison-lab.github.io/pds/expectation.html#thm-lotus)), [Equation 53](#eq-def-collapsibility) expands into a weighted sum or integral over $Z$’s distribution, depending on whether $Z$ is discrete or continuous:
 
 $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
 \begin{cases}
@@ -6306,7 +6364,7 @@ $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
 > > && \text{[linearity of expectation]}
 > > \end{aligned}$$
 > >
-> > Ratio and log-odds measures are not collapsible in general: [Example 53](#exm-collapsibility) gives a counterexample in which the marginal risk ratio and [odds ratio](../chapters/binary-outcome-associations.llms.md#def-OR) differ from the marginal-distribution-weighted average of their stratum-specific values, and [Equation 54](#eq-rr-not-collapsible) derives the discrepancy algebraically for the risk-ratio case.
+> > Ratio and log-odds measures are not collapsible in general: [Example 54](#exm-collapsibility) gives a counterexample in which the marginal risk ratio and [odds ratio](../chapters/binary-outcome-associations.llms.md#def-OR) differ from the marginal-distribution-weighted average of their stratum-specific values, and [Equation 55](#eq-rr-not-collapsible) derives the discrepancy algebraically for the risk-ratio case.
 > >
 > > For the **observational** case, when $Z \perp\!\!\!\perp A$ the conditional weights coincide with the marginal ones, $f_{Z \mid A}(z \mid a) = f_Z(z)$, so by [Theorem 29](#thm-observed-marginal-risk):
 > >
@@ -6323,7 +6381,7 @@ $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
 
 > **NOTE:**
 >
-> **Example 53 (Collapsibility: numerical illustration)** Continuing the WCGS example with `dibpat` as the exposure, `chd69` as the outcome, and age 50 or older as $Z$ ([Example 38](#exm-observed-marginal-risk)): the causal marginal risk ([Definition 20](#def-causal-marginal-risk)) standardizes **both** exposure groups’ stratum-specific risks to the same population age distribution $f_Z(z)$ ([Remark 8](#rem-observed-vs-causal-marginal-risk)), so this standardization is exactly the common weighting [Definition 30](#def-collapsibility) requires – no simplifying assumptions needed:
+> **Example 54 (Collapsibility: numerical illustration)** Continuing the WCGS example with `dibpat` as the exposure, `chd69` as the outcome, and age 50 or older as $Z$ ([Example 39](#exm-observed-marginal-risk)): the causal marginal risk ([Definition 20](#def-causal-marginal-risk)) standardizes **both** exposure groups’ stratum-specific risks to the same population age distribution $f_Z(z)$ ([Remark 9](#rem-observed-vs-causal-marginal-risk)), so this standardization is exactly the common weighting [Definition 30](#def-collapsibility) requires – no simplifying assumptions needed:
 >
 > Show R code
 >
@@ -6378,7 +6436,7 @@ $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
 
 1.  **Target population**: The marginal effect is specific to the covariate distribution in your sample. If your sample is not representative of your target population, you may want to use standardization or weighting.
 
-2.  **Collapsibility** (see [Definition 30](#def-collapsibility)): [Equation 53](#eq-rd-collapsible) and [Equation 54](#eq-rr-not-collapsible) re-derive [Theorem 34](#thm-collapsibility) concretely for the risk-difference and risk-ratio/odds-ratio cases. [Risk differences](../chapters/binary-outcome-associations.llms.md#def-RD) are **[collapsible](#def-collapsibility)**: the causal marginal RD ($\pi_1 - \pi_0$) equals the average of stratum-specific causal RDs ($\pi(1,z) - \pi(0,z)$) weighted by the [marginal distribution](https://morrison-lab.github.io/pds/random-variables.html#def-marginal) $f_Z$,
+2.  **Collapsibility** (see [Definition 30](#def-collapsibility)): [Equation 54](#eq-rd-collapsible) and [Equation 55](#eq-rr-not-collapsible) re-derive [Theorem 34](#thm-collapsibility) concretely for the risk-difference and risk-ratio/odds-ratio cases. [Risk differences](../chapters/binary-outcome-associations.llms.md#def-RD) are **[collapsible](#def-collapsibility)**: the causal marginal RD ($\pi_1 - \pi_0$) equals the average of stratum-specific causal RDs ($\pi(1,z) - \pi(0,z)$) weighted by the [marginal distribution](https://morrison-lab.github.io/pds/random-variables.html#def-marginal) $f_Z$,
 
     $$\begin{aligned}
     \pi_1 - \pi_0
@@ -6391,7 +6449,7 @@ $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
     &= {\mathbb{E}\mathopen{}\left[\text{RD}(Z)\right]\mathclose{}},
     && \text{[definition of conditional risk difference]}
     \end{aligned}
-    \tag{53}$$
+    \tag{54}$$
 
     so there is no collapsibility bias from averaging over a covariate $Z$. [Risk ratios](../chapters/binary-outcome-associations.llms.md#def-RR) are **not** collapsible in general: when the conditional RR varies across strata, the marginal RR does not equal the marginal-distribution-weighted average of conditional RRs, ${\mathbb{E}\mathopen{}\left[\text{RR}(Z)\right]\mathclose{}}$, because a ratio of [expectations](https://morrison-lab.github.io/pds/expectation.html#def-expectation) is not the same as an expectation of ratios:
 
@@ -6406,7 +6464,7 @@ $${\mathbb{E}\mathopen{}\left[\theta(Z)\right]\mathclose{}} =
     &= {\mathbb{E}\mathopen{}\left[\text{RR}(Z)\right]\mathclose{}}.
     && \text{[definition of conditional risk ratio]}
     \end{aligned}
-    \tag{54}$$
+    \tag{55}$$
 
     Unlike the [odds ratio](../chapters/binary-outcome-associations.llms.md#def-OR), though, this discrepancy is entirely a consequence of the conditional RR *varying* across strata: when the [conditional risk ratio](#def-cond-rrr) is instead **constant**, $\text{RR}(z) = r$ for every $z$, the marginal RR reproduces it exactly:
 
@@ -6551,7 +6609,7 @@ We can compare the two link functions by plotting their fitted germination proba
 >   theme_bw()
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-57-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-57-1.png "Figure 23: Fitted germination probabilities from the log-link and logit-link models for the anthers data, with the observed proportions as points. The two link functions nearly coincide here because the model is saturated (two parameters fit to two storage conditions), so both reproduce the observed proportions at the data points and differ only slightly in between.")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-58-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-58-1.png "Figure 23: Fitted germination probabilities from the log-link and logit-link models for the anthers data, with the observed proportions as points. The two link functions nearly coincide here because the model is saturated (two parameters fit to two storage conditions), so both reproduce the observed proportions at the data points and differ only slightly in between.")
 >
 > Figure 23: Fitted germination probabilities from the log-link and logit-link models for the `anthers` data, with the observed proportions as points. The two link functions nearly coincide here because the model is saturated (two parameters fit to two storage conditions), so both reproduce the observed proportions at the data points and differ only slightly in between.
 
@@ -6598,7 +6656,7 @@ wcgs_glm_identity_link |>
 > wcgs_glm_logit_link |> autoplot(which = c(1), ncol = 1) + facet_wrap(~dibpat)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-59-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-59-1.png "Figure 24 (a): Logistic link")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-60-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-60-1.png "Figure 24 (a): Logistic link")
 >
 > \(a\) Logistic link
 >
@@ -6608,7 +6666,7 @@ wcgs_glm_identity_link |>
 > wcgs_glm_identity_link |> autoplot(which = c(1), ncol = 1) + facet_wrap(~dibpat)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-60-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-60-1.png "Figure 24 (b): Identity link")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-61-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-61-1.png "Figure 24 (b): Identity link")
 >
 > \(b\) Identity link
 >
@@ -6634,7 +6692,7 @@ wcgs_glm_identity_link |>
 > beetles_glm_grouped |> autoplot(which = c(1), ncol = 1)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-61-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-61-1.png "Figure 25 (a): Logistic link")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-62-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-62-1.png "Figure 25 (a): Logistic link")
 >
 > \(a\) Logistic link
 >
@@ -6644,7 +6702,7 @@ wcgs_glm_identity_link |>
 > beetles_lm |> autoplot(which = c(1), ncol = 1)
 > ```
 >
-> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-62-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-62-1.png "Figure 25 (b): Identity link")
+> [![](logistic-regression_files/figure-revealjs/unnamed-chunk-63-1.png)](logistic-regression_files/figure-revealjs/unnamed-chunk-63-1.png "Figure 25 (b): Identity link")
 >
 > \(b\) Identity link
 >
@@ -6766,7 +6824,7 @@ These association-measure results are covered in [Measures of Association for Bi
 **Expit / inverse-logit function, and equivalent expressions** ([def](../chapters/binary-outcome-associations.llms.md#def-expit), [thm](../chapters/binary-outcome-associations.llms.md#thm-expit-expressions)) $$\operatorname{expit}(\eta) \stackrel{\text{def}}{=}{\operatorname{invodds}\mathopen{}\left\{{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}\right\}\mathclose{}}
 = \frac{{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}}{1+{\operatorname{exp}\mathopen{}\left\{\eta\right\}\mathclose{}}} = (1 + {\operatorname{exp}\mathopen{}\left\{-\eta\right\}\mathclose{}})^{-1}$$
 
-**Probability as expit** ([thm](../chapters/binary-outcome-associations.llms.md#thm-expit-prob-logodds)) $$\pi= {\operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}} \tag{55}$$
+**Probability as expit** ([thm](../chapters/binary-outcome-associations.llms.md#thm-expit-prob-logodds)) $$\pi= {\operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}} \tag{56}$$
 
 **Logit and expit are inverses** ([thm](../chapters/binary-outcome-associations.llms.md#thm-logit-expit)) $${\operatorname{logit}\mathopen{}\left\{{\operatorname{expit}\mathopen{}\left\{\eta\right\}\mathclose{}}\right\}\mathclose{}} = \eta\qquad {\operatorname{expit}\mathopen{}\left\{{\operatorname{logit}\mathopen{}\left\{\pi\right\}\mathclose{}}\right\}\mathclose{}} = \pi$$
 
