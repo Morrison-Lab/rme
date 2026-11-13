@@ -263,6 +263,85 @@ by about $`r round(exp(coef(beetles_glm_grouped)["dose"] * (beetles$dose[2] - be
 
 {{< slidebreak >}}
 
+:::{#cor-odds-multiplier}
+
+#### Odds at one covariate pattern from the odds at another
+
+The [odds](binary-outcome-associations.qmd#def-odds) at covariate pattern $\vx$
+are the odds at $\vxs$
+times the exponential of $\diffvx \cdot \vb$:
+
+$$\odds(\vx) = \odds(\vxs) \cdot \expf{\diffvx \cdot \vb}$${#eq-odds-multiplier}
+
+The factor $\expf{\diffvx \cdot \vb}$ is the [odds multiplier](https://morrison-lab.github.io/sds/logistic-inference.html#def-odds-multiplier) of the change $\diffvx$.
+
+:::
+
+::: proof
+
+$$
+\ba
+\odds(\vx)
+&= \odds(\vxs) \cdot \frac{\odds(\vx)}{\odds(\vxs)}
+&& \text{(multiply and divide by } \odds(\vxs) > 0 \text{)}
+\\
+&= \odds(\vxs) \cdot \ror(\vx,\vxs)
+&& \text{(definition of the odds ratio, @eq-def-ror)}
+\\
+&= \odds(\vxs) \cdot \expf{\diffvx \cdot \vb}
+&& \text{(@thm-logistic-OR)}
+\ea
+$$
+
+:::
+
+{{< slidebreak >}}
+
+:::{#exm-cor-odds-multiplier}
+
+#### Odds of death at the second-lowest beetle dose
+
+<!-- no-figure: the example checks one product of two numbers -->
+
+In @exm-logistic-or-beetles,
+$\vxs$ is the lowest dose level and $\vx$ is the next one.
+The code computes the estimated [odds](binary-outcome-associations.qmd#def-odds) of death at both dose levels
+from the `beetles` model (@tbl-beetles-model-grouped),
+and the odds at $\vxs$ times $\expf{\diffvx \cdot \evb}$.
+
+```{r}
+#| code-fold: false
+# estimated probabilities of death at the two lowest dose levels
+beetles_low_doses <- beetles |> dplyr::slice(1:2)
+beetles_low_probs <- predict(
+  beetles_glm_grouped,
+  newdata = beetles_low_doses,
+  type = "response"
+)
+beetles_low_probs <- unname(beetles_low_probs)
+# estimated odds of death at those dose levels
+beetles_low_odds <- beetles_low_probs / (1 - beetles_low_probs)
+# exp of the dose difference times the dose coefficient
+beetles_dose_gap <- beetles$dose[2] - beetles$dose[1]
+beetles_dose_coef <- coef(beetles_glm_grouped)[["dose"]]
+beetles_gap_term <- beetles_dose_gap * beetles_dose_coef
+beetles_multiplier <- exp(beetles_gap_term)
+beetles_odds_product <- beetles_low_odds[1] * beetles_multiplier
+c(
+  odds_lowest = beetles_low_odds[1],
+  odds_next = beetles_low_odds[2],
+  lowest_times_multiplier = beetles_odds_product
+)
+```
+
+The estimated odds of death are $`r signif(beetles_low_odds[1], 4)`$ at the lowest dose level,
+and $`r signif(beetles_low_odds[1], 4)` \times `r signif(beetles_multiplier, 4)` = `r signif(beetles_odds_product, 4)`$,
+which equals the estimated odds at the next dose level, as @cor-odds-multiplier states.
+
+:::
+
+{{< slidebreak >}}
+
 :::{#cor-log-or}
 
 #### Log odds ratio equals the difference in log-odds
