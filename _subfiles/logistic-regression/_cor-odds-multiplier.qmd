@@ -1,0 +1,29 @@
+:::{#cor-odds-multiplier}
+
+#### Odds at one covariate pattern from the odds at another
+
+The [odds](binary-outcome-associations.qmd#def-odds) at [covariate pattern](https://morrison-lab.github.io/sds/logistic-inference.html#def-covariate-pattern) $\vx$
+are the odds at $\vxs$
+times the [exponential](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-exponential-function) of $\diffvx \cdot \vb$:
+
+$$\odds(\vx) = \odds(\vxs) \cdot \expf{\diffvx \cdot \vb}$${#eq-odds-multiplier}
+
+:::
+
+::: proof
+
+$$
+\ba
+\odds(\vx)
+&= \odds(\vxs) \cdot \frac{\odds(\vx)}{\odds(\vxs)}
+&& \text{(multiply and divide by } \odds(\vxs) > 0 \text{)}
+\\
+&= \odds(\vxs) \cdot \ror(\vx,\vxs)
+&& \text{(definition of the odds ratio, @eq-def-ror)}
+\\
+&= \odds(\vxs) \cdot \expf{\diffvx \cdot \vb}
+&& \text{(@thm-logistic-OR)}
+\ea
+$$
+
+:::
