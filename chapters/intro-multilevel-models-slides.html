@@ -14,8 +14,7 @@
 <link href="../site_libs/quarto-contrib/code-language-labels-1.0.2/code-language-labels.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="UTF-8">
 <meta name="generator" content="quarto-1.11.9">
 <title>Regression Models for Epidemiology – Introduction to Multi-level Models</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -993,7 +992,7 @@ w_j
 <span id="cb11-4"><a aria-label="4"></a>radon_ybar <span class="ot">&lt;-</span> <span class="fu">tapply</span>(radon<span class="sc">$</span>log_radon, radon<span class="sc">$</span>county, mean)</span>
 <span id="cb11-5"><a aria-label="5"></a>radon_pp <span class="ot">&lt;-</span> radon_w <span class="sc">*</span> radon_ybar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> radon_w) <span class="sc">*</span> <span class="fu">fixef</span>(radon_lmer0)</span>
 <span id="cb11-6"><a aria-label="6"></a><span class="fu">max</span>(<span class="fu">abs</span>(radon_pp <span class="sc">-</span> <span class="fu">coef</span>(radon_lmer0)<span class="sc">$</span>county[, <span class="dv">1</span>]))</span>
-<span id="cb11-7"><a aria-label="7"></a><span class="co">#&gt; [1] 3.77476e-15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-7"><a aria-label="7"></a><span class="co">#&gt; [1] 2.22045e-15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
@@ -1258,7 +1257,7 @@ c &amp;= \frac{\sigma_\alpha^2}{\sigma_\alpha^2 + \sigma^2 / n_j}
 <span id="cb16-7"><a aria-label="7"></a><span class="co">#&gt;              Estimate Std. Error  z value    Pr(&gt;|z|)</span></span>
 <span id="cb16-8"><a aria-label="8"></a><span class="co">#&gt; (Intercept) -1.398343   0.231214 -6.04783 1.46810e-09</span></span>
 <span id="cb16-9"><a aria-label="9"></a><span class="co">#&gt; period2     -0.991925   0.303151 -3.27205 1.06769e-03</span></span>
-<span id="cb16-10"><a aria-label="10"></a><span class="co">#&gt; period3     -1.128216   0.322830 -3.49477 4.74473e-04</span></span>
+<span id="cb16-10"><a aria-label="10"></a><span class="co">#&gt; period3     -1.128216   0.322830 -3.49477 4.74475e-04</span></span>
 <span id="cb16-11"><a aria-label="11"></a><span class="co">#&gt; period4     -1.579745   0.422049 -3.74304 1.81808e-04</span></span>
 <span id="cb16-12"><a aria-label="12"></a><span class="fu">VarCorr</span>(cbpp_glmer)</span>
 <span id="cb16-13"><a aria-label="13"></a><span class="co">#&gt;  Groups Name        Std.Dev.</span></span>

@@ -14,7 +14,7 @@ Code
 
 Published
 
-Last modified: 2026-11-13: 18:56:42 (UTC)
+Last modified: 2026-11-18: 7:25:43 (UTC)
 
 ------------------------------------------------------------------------
 
@@ -695,7 +695,7 @@ The proof of [Theorem 4](#thm-partial-pooling) uses the conditional distributio
 > radon_ybar <- tapply(radon$log_radon, radon$county, mean)
 > radon_pp <- radon_w * radon_ybar + (1 - radon_w) * fixef(radon_lmer0)
 > max(abs(radon_pp - coef(radon_lmer0)$county[, 1]))
-> #> [1] 3.77476e-15
+> #> [1] 2.22045e-15
 > ```
 
 > **NOTE:**
@@ -912,7 +912,7 @@ $${\operatorname{log}\mathopen{}\left\{\frac{\pi_{ij}}{1 - \pi_{ij}}\right\}\mat
 > #>              Estimate Std. Error  z value    Pr(>|z|)
 > #> (Intercept) -1.398343   0.231214 -6.04783 1.46810e-09
 > #> period2     -0.991925   0.303151 -3.27205 1.06769e-03
-> #> period3     -1.128216   0.322830 -3.49477 4.74473e-04
+> #> period3     -1.128216   0.322830 -3.49477 4.74475e-04
 > #> period4     -1.579745   0.422049 -3.74304 1.81808e-04
 > VarCorr(cbpp_glmer)
 > #>  Groups Name        Std.Dev.
