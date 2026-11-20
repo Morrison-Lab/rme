@@ -4,7 +4,7 @@ Code
 
 Published
 
-Last modified: 2026-11-20: 10:11:25 (UTC)
+Last modified: 2026-11-20: 18:48:57 (UTC)
 
 This appendix lists the package versions currently recorded in `renv.lock`. [Table 1](#tbl-renv-package-versions) is generated directly from the lockfile.
 
