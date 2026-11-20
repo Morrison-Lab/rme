@@ -1,34 +1,62 @@
 To evaluate whether overdispersion and excess zeros distort inference
 in the needle-sharing dataset,
-we fit a negative binomial model and compare its coefficient estimates
-and standard errors against the baseline Poisson model.
+we fit a [negative binomial regression model](#def-nb-reg)
+with the same [covariates](https://morrison-lab.github.io/sds/model-validation.html#def-covariate)
+as the baseline [Poisson regression model](#def-poisson-reg),
+and compare its coefficient [estimates](https://morrison-lab.github.io/sds/estimation.html#def-estimate)
+and [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE)
+against that [Poisson model](#def-poisson-reg).
 
 ```{r}
 #| label: fit-nb-model
-library(MASS) # for glm.nb()
-glm1_nb <- glm.nb(
+# fit the negative binomial model by direct maximum likelihood,
+# with the same covariates as the Poisson model `glm1`
+glm1_nb <- glmmTMB::glmmTMB(
   formula = shared_syr ~ homeless +
     age + sex + ethn + polydrug + hivstat + sexabuse + hplsns,
+  family = glmmTMB::nbinom2,
   data = needles
 )
-
-equatiomatic::extract_eq(glm1_nb)
 ```
+
+::: notes
+We fit this model with `glmmTMB::glmmTMB()` [@brooks2017glmmTMB],
+which maximizes the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik)
+over the [coefficients](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination)
+of the [linear predictor](Intro-to-GLMs.qmd#def-linear-predictor)
+and $\rho$ jointly.
+`MASS::glm.nb()` [@venables2002modern] instead alternates between
+[iteratively reweighted least squares](https://morrison-lab.github.io/sds/logistic-inference.html#def-irls) for the coefficients
+and a separate fit of $\rho$.
+On these data the [sequence](https://morrison-lab.github.io/mcs/functions.html#def-sequence) of alternating fits does not
+[converge](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-convergent-sequence).
+`glm.nb()` warns "alternation limit reached", <!-- check-term-links: allow: "limit" here is part of a quoted R warning, not a mathematical limit -->
+and on some platforms it stops with an R error instead. <!-- check-term-links: allow: an R error message, not a statistical error -->
+The `nbinom2` family in `glmmTMB` has [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) $\mu + \mu^2 / \rho$,
+matching @eq-nb-reg-var,
+and `sigma(glm1_nb)` returns $\est{\rho}$.
+:::
 
 ```{r}
 #| tbl-cap: "Negative binomial model for needle-sharing data"
 #| label: tbl-needles-nb
-summary(glm1_nb)
+# show the log-mean coefficients, on the same scale as the comparison table
+glm1_nb |>
+  parameters() |>
+  print_md()
 ```
 
 ---
 
 Evaluating the estimated parameters across models reveals
 how accounting for overdispersion affects inference.
-While the estimated log-rate coefficients remain comparable
-between the Poisson and negative binomial specifications,
-the standard errors under the negative binomial model appropriately widen
-to reflect the excess outcome variability.
+The coefficient for homelessness, the exposure of interest,
+changes little between the [Poisson](#def-poisson-reg) and [negative binomial models](#def-nb-reg),
+while several adjustment [coefficients](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) shift substantially,
+and some change sign.
+The [negative binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) standard errors are several times
+the Poisson standard errors,
+reflecting the excess variability of the [outcome](Intro-to-GLMs.qmd#def-outcome).
 
 ```{r}
 #| tbl-cap: "Poisson vs. Negative Binomial regression estimates"
@@ -37,8 +65,8 @@ tibble(
   Parameter = names(coef(glm1)),
   `Poisson Coef` = coef(glm1),
   `Poisson SE` = summary(glm1)$coefficients[, "Std. Error"],
-  `NB Coef` = coef(glm1_nb),
-  `NB SE` = summary(glm1_nb)$coefficients[, "Std. Error"]
+  `NB Coef` = glmmTMB::fixef(glm1_nb)$cond,
+  `NB SE` = summary(glm1_nb)$coefficients$cond[, "Std. Error"]
 ) |>
   pander::pander()
 ```

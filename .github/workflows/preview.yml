@@ -96,6 +96,16 @@ jobs:
     uses: Morrison-Lab/gha/.github/workflows/preview.yml@v3
     with:
       r-version: '4.6.0'
+      # gha@v3's default list pins `libnode109`, which Ubuntu 26.04
+      # (`resolute`, now `ubuntu-latest`) no longer ships: apt stops with
+      # "Package 'libnode109' has no installation candidate" before any
+      # render. This list is that default without `libnode109`;
+      # `libnode-dev` still pulls the runner's current libnode.
+      # Drop this override once gha's default no longer names libnode109.
+      apt-packages: >-
+        jags libcurl4-openssl-dev libpng-dev libfontconfig1-dev libjpeg-dev
+        libglpk-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libtiff-dev
+        libwebp-dev cmake libgit2-dev libnode-dev libx11-dev pandoc
 
   bypass:
     name: build
