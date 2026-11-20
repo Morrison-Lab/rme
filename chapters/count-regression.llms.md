@@ -16,7 +16,7 @@ Poisson regression and variations
 
 Published
 
-Last modified: 2026-11-20: 18:37:12 (UTC)
+Last modified: 2026-11-20: 19:08:38 (UTC)
 
 # Acknowledgements
 
@@ -1882,73 +1882,61 @@ The negative binomial variance in [Equation 8](#eq-nb-reg-var) arises naturally
 
 ### 8.1.1 Example: needle-sharing model extensions
 
-To evaluate whether overdispersion and excess zeros distort inference in the needle-sharing dataset, we fit a negative binomial model and compare its coefficient estimates and standard errors against the baseline Poisson model.
+To evaluate whether overdispersion and excess zeros distort inference in the needle-sharing dataset, we fit a [negative binomial regression model](#def-nb-reg) with the same [covariates](https://morrison-lab.github.io/sds/model-validation.html#def-covariate) as the baseline [Poisson regression model](#def-poisson-reg), and compare its coefficient [estimates](https://morrison-lab.github.io/sds/estimation.html#def-estimate) and [standard errors](https://morrison-lab.github.io/sds/estimation.html#def-SE) against that [Poisson model](#def-poisson-reg).
 
 Show R code
 
 ``` downlit
-library(MASS) # for glm.nb()
-glm1_nb <- glm.nb(
+# fit the negative binomial model by direct maximum likelihood,
+# with the same covariates as the Poisson model `glm1`
+glm1_nb <- glmmTMB::glmmTMB(
   formula = shared_syr ~ homeless +
     age + sex + ethn + polydrug + hivstat + sexabuse + hplsns,
+  family = glmmTMB::nbinom2,
   data = needles
 )
-
-equatiomatic::extract_eq(glm1_nb)
 ```
 
-$$\log ({ E( \operatorname{shared_syr} ) })  = \alpha + \beta_{1}(\operatorname{homeless}) + \beta_{2}(\operatorname{age}) + \beta_{3}(\operatorname{sex}_{\operatorname{F}}) + \beta_{4}(\operatorname{ethn}_{\operatorname{AA}}) + \beta_{5}(\operatorname{ethn}_{\operatorname{Hispanic}}) + \beta_{6}(\operatorname{ethn}_{\operatorname{Other}}) + \beta_{7}(\operatorname{polydrug}) + \beta_{8}(\operatorname{hivstat}_{\operatorname{HIV+}}) + \beta_{9}(\operatorname{sex}_{\operatorname{abuseyes}} \times \operatorname{sexabuse}_{\operatorname{yes}}) + \beta_{10}(\operatorname{hplsns})$$
+We fit this model with [`glmmTMB::glmmTMB()`](https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html) [\[8\]](#ref-brooks2017glmmTMB), which maximizes the [likelihood](https://morrison-lab.github.io/sds/intro-MLEs.html#def-lik) over the [coefficients](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) of the [linear predictor](../chapters/Intro-to-GLMs.llms.md#def-linear-predictor) and $\rho$ jointly. [`MASS::glm.nb()`](https://rdrr.io/pkg/MASS/man/glm.nb.html) [\[7\]](#ref-venables2002modern) instead alternates between [iteratively reweighted least squares](https://morrison-lab.github.io/sds/logistic-inference.html#def-irls) for the coefficients and a separate fit of $\rho$. On these data the [sequence](https://morrison-lab.github.io/mcs/functions.html#def-sequence) of alternating fits does not [converge](https://morrison-lab.github.io/mds/algebra-exponentials.html#def-convergent-sequence). `glm.nb()` warns “alternation limit reached”, and on some platforms it stops with an R error instead. The `nbinom2` family in `glmmTMB` has [variance](https://morrison-lab.github.io/pds/variance-covariance.html#def-variance) $\mu + \mu^2 / \rho$, matching [Equation 8](#eq-nb-reg-var), and `sigma(glm1_nb)` returns $\hat{\rho}$.
+
+Show R code
+
+``` downlit
+# show the log-mean coefficients, on the same scale as the comparison table
+glm1_nb |>
+  parameters() |>
+  print_md()
+```
 
 > **NOTE:**
 >
-> Show R code
+> | Parameter                      | Log-Mean |  SE  |     95% CI     |   z   |   p   |
+> |:-------------------------------|:--------:|:----:|:--------------:|:-----:|:-----:|
+> | (Intercept)                    |   3.52   | 3.18 | (-2.71, 9.76)  | 1.11  | 0.268 |
+> | homeless (homeless)            |   2.02   | 0.90 |  (0.25, 3.79)  | 2.24  | 0.025 |
+> | age                            |  -0.09   | 0.06 | (-0.20, 0.03)  | -1.44 | 0.151 |
+> | sex (F)                        |  -0.35   | 1.16 | (-2.62, 1.92)  | -0.30 | 0.762 |
+> | ethn (AA)                      |   0.27   | 1.15 | (-1.98, 2.52)  | 0.24  | 0.814 |
+> | ethn (Hispanic)                |   2.41   | 2.15 | (-1.80, 6.62)  | 1.12  | 0.262 |
+> | ethn (Other)                   |  -1.94   | 2.11 | (-6.07, 2.20)  | -0.92 | 0.359 |
+> | polydrug (multiple drugs used) |  -3.77   | 1.79 | (-7.28, -0.26) | -2.11 | 0.035 |
+> | hivstat (HIV+)                 |  -2.67   | 1.74 | (-6.09, 0.75)  | -1.53 | 0.126 |
+> | sexabuse (yes)                 |  -2.13   | 1.33 | (-4.74, 0.47)  | -1.61 | 0.108 |
+> | hplsns                         |  -0.01   | 0.10 | (-0.20, 0.18)  | -0.10 | 0.918 |
 >
-> ``` downlit
-> summary(glm1_nb)
-> #> 
-> #> Call:
-> #> glm.nb(formula = shared_syr ~ homeless + age + sex + ethn + polydrug + 
-> #>     hivstat + sexabuse + hplsns, data = needles, init.theta = 0.04754291413, 
-> #>     link = log)
-> #> 
-> #> Coefficients:
-> #>                             Estimate Std. Error z value Pr(>|z|)   
-> #> (Intercept)                   3.0310     1.9260    1.57   0.1156   
-> #> homelesshomeless              2.2906     0.8030    2.85   0.0043 **
-> #> age                          -0.0760     0.0446   -1.71   0.0880 . 
-> #> sexF                         -0.4252     0.8858   -0.48   0.6312   
-> #> ethnAA                        0.6326     0.9379    0.67   0.5000   
-> #> ethnHispanic                  2.5079     1.5782    1.59   0.1120   
-> #> ethnOther                    -1.6741     2.1514   -0.78   0.4365   
-> #> polydrugmultiple drugs used  -3.6977     1.3224   -2.80   0.0052 **
-> #> hivstatHIV+                  -3.1206     1.5162   -2.06   0.0396 * 
-> #> sexabuseyes                  -1.8198     1.2467   -1.46   0.1444   
-> #> hplsns                       -0.0290     0.0686   -0.42   0.6722   
-> #> ---
-> #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-> #> 
-> #> (Dispersion parameter for Negative Binomial(0.0902) family taken to be 1)
-> #> 
-> #>     Null deviance: 61.698  on 108  degrees of freedom
-> #> Residual deviance: 49.349  on  98  degrees of freedom
-> #>   (18 observations deleted due to missingness)
-> #> AIC: 263.2
-> #> 
-> #> Number of Fisher Scoring iterations: 25
-> #> 
-> #> 
-> #>               Theta:  0.0475 
-> #>           Std. Err.:  0.0115 
-> #> Warning while fitting theta: alternation limit reached 
-> #> 
-> #>  2 x log-likelihood:  -239.2480
-> ```
+> Fixed Effects {.cell .caption-top .table .table-sm .table-striped .small}
+>
+> | Parameter   | Coefficient |    95% CI    |
+> |:------------|:-----------:|:------------:|
+> | (Intercept) |    0.09     | (0.05, 0.15) |
+>
+> Dispersion {.cell .caption-top .table .table-sm .table-striped .small}
 >
 > Table 7: Negative binomial model for needle-sharing data
 
 ------------------------------------------------------------------------
 
-Evaluating the estimated parameters across models reveals how accounting for overdispersion affects inference. While the estimated log-rate coefficients remain comparable between the Poisson and negative binomial specifications, the standard errors under the negative binomial model appropriately widen to reflect the excess outcome variability.
+Evaluating the estimated parameters across models reveals how accounting for overdispersion affects inference. The coefficient for homelessness, the exposure of interest, changes little between the [Poisson](#def-poisson-reg) and [negative binomial models](#def-nb-reg), while several adjustment [coefficients](https://morrison-lab.github.io/mds/linear-algebra-vectors.html#def-linear-combination) shift substantially, and some change sign. The [negative binomial](https://morrison-lab.github.io/pds/distributions.html#def-nb) standard errors are several times the Poisson standard errors, reflecting the excess variability of the [outcome](../chapters/Intro-to-GLMs.llms.md#def-outcome).
 
 Show R code
 
@@ -1957,8 +1945,8 @@ tibble(
   Parameter = names(coef(glm1)),
   `Poisson Coef` = coef(glm1),
   `Poisson SE` = summary(glm1)$coefficients[, "Std. Error"],
-  `NB Coef` = coef(glm1_nb),
-  `NB SE` = summary(glm1_nb)$coefficients[, "Std. Error"]
+  `NB Coef` = glmmTMB::fixef(glm1_nb)$cond,
+  `NB SE` = summary(glm1_nb)$coefficients$cond[, "Std. Error"]
 ) |>
   pander::pander()
 ```
@@ -1967,17 +1955,17 @@ tibble(
 >
 > |          Parameter          | Poisson Coef | Poisson SE | NB Coef  |  NB SE  |
 > |:---------------------------:|:------------:|:----------:|:--------:|:-------:|
-> |         (Intercept)         |    1.306     |   0.3649   |  3.031   |  1.926  |
-> |      homelesshomeless       |    1.799     |   0.1676   |  2.291   |  0.803  |
-> |             age             |   -0.0436    |  0.009183  | -0.07605 | 0.04458 |
-> |            sexF             |    0.8835    |   0.1479   | -0.4252  | 0.8858  |
-> |           ethnAA            |    0.9525    |   0.1858   |  0.6326  | 0.9379  |
-> |        ethnHispanic         |    0.5775    |   0.3183   |  2.508   |  1.578  |
-> |          ethnOther          |   0.03598    |   0.3933   |  -1.674  |  2.151  |
-> | polydrugmultiple drugs used |    -1.676    |   0.3062   |  -3.698  |  1.322  |
-> |         hivstatHIV+         |    -2.179    |   0.4617   |  -3.121  |  1.516  |
-> |         sexabuseyes         |    -1.474    |   0.3132   |  -1.82   |  1.247  |
-> |           hplsns            |   -0.03147   |  0.01423   | -0.02901 | 0.06856 |
+> |         (Intercept)         |    1.306     |   0.3649   |  3.523   |  3.182  |
+> |      homelesshomeless       |    1.799     |   0.1676   |  2.022   | 0.9025  |
+> |             age             |   -0.0436    |  0.009183  | -0.0859  | 0.05984 |
+> |            sexF             |    0.8835    |   0.1479   | -0.3503  |  1.156  |
+> |           ethnAA            |    0.9525    |   0.1858   |  0.2699  |  1.149  |
+> |        ethnHispanic         |    0.5775    |   0.3183   |  2.409   |  2.148  |
+> |          ethnOther          |   0.03598    |   0.3933   |  -1.936  |  2.111  |
+> | polydrugmultiple drugs used |    -1.676    |   0.3062   |  -3.773  |  1.792  |
+> |         hivstatHIV+         |    -2.179    |   0.4617   |  -2.669  |  1.745  |
+> |         sexabuseyes         |    -1.474    |   0.3132   |  -2.135  |  1.328  |
+> |           hplsns            |   -0.03147   |  0.01423   | -0.01003 | 0.0979  |
 >
 > Table 8: Poisson vs. Negative Binomial regression estimates
 
@@ -2031,7 +2019,7 @@ zinf_pois |>
 >
 > Table 9: Zero-inflated Poisson model
 
-Another R package for zero-inflated models is [`pscl`](https://cran.r-project.org/web/packages/pscl/index.html) (Zeileis et al. [\[8\]](#ref-pscl08)).
+Another R package for zero-inflated models is [`pscl`](https://cran.r-project.org/web/packages/pscl/index.html) (Zeileis et al. [\[9\]](#ref-pscl08)).
 
 #### Zero-inflated negative binomial model
 
@@ -2149,7 +2137,7 @@ See [`?quasipoisson`](https://rdrr.io/r/stats/family.html) in R for implementati
 
 > **NOTE:**
 >
-> **Exercise 7 (Interpreting Poisson regression coefficients)** (adapted from Dunn and Smyth [\[9\]](#ref-dunn2018generalized), Chapter 5, and Dobson and Barnett [\[1\]](#ref-dobson4e), Chapter 9)
+> **Exercise 7 (Interpreting Poisson regression coefficients)** (adapted from Dunn and Smyth [\[10\]](#ref-dunn2018generalized), Chapter 5, and Dobson and Barnett [\[1\]](#ref-dobson4e), Chapter 9)
 >
 > Consider a Poisson log-linear model for the expected number of events $\mu_i$:
 >
@@ -2199,7 +2187,7 @@ See [`?quasipoisson`](https://rdrr.io/r/stats/family.html) in R for implementati
 
 > **NOTE:**
 >
-> **Exercise 8 (Score equations for a Poisson GLM)** (adapted from Dobson and Barnett [\[1\]](#ref-dobson4e), Chapter 4, and Dunn and Smyth [\[9\]](#ref-dunn2018generalized), Chapter 4)
+> **Exercise 8 (Score equations for a Poisson GLM)** (adapted from Dobson and Barnett [\[1\]](#ref-dobson4e), Chapter 4, and Dunn and Smyth [\[10\]](#ref-dunn2018generalized), Chapter 4)
 >
 > Consider the Poisson log-linear model ${\operatorname{log}\mathopen{}\left\{\mu_i\right\}\mathclose{}} = \beta_0 + \beta_1 x_i$, with $Y_i \mid x_i \ \sim_{\perp\!\!\!\perp}\ \operatorname{Pois}(\mu_i)$.
 >
@@ -2282,9 +2270,13 @@ W. N. Venables and B. D. Ripley, *Modern applied statistics with S*, 4th ed. New
 
 \[8\]
 
-A. Zeileis, C. Kleiber, and S. Jackman, “Regression models for count data in R,” *Journal of Statistical Software*, vol. 27, no. 8, 2008, Available: <https://www.jstatsoft.org/v27/i08/>
+M. E. Brooks *et al.*, “glmmTMB balances speed and flexibility among packages for zero-inflated generalized linear mixed modeling,” *The R Journal*, vol. 9, no. 2, pp. 378–400, 2017, doi: [10.32614/RJ-2017-066](https://doi.org/10.32614/RJ-2017-066).
 
 \[9\]
+
+A. Zeileis, C. Kleiber, and S. Jackman, “Regression models for count data in R,” *Journal of Statistical Software*, vol. 27, no. 8, 2008, Available: <https://www.jstatsoft.org/v27/i08/>
+
+\[10\]
 
 P. K. Dunn and G. K. Smyth, *Generalized linear models with examples in R*, vol. 53. Springer, 2018. Available: <https://link.springer.com/book/10.1007/978-1-4419-0118-7>
 
