@@ -16,7 +16,7 @@ Risks, odds, odds ratios, and the logit and expit functions
 
 Published
 
-Last modified: 2026-11-18: 7:25:43 (UTC)
+Last modified: 2026-11-20: 18:37:12 (UTC)
 
 ------------------------------------------------------------------------
 
