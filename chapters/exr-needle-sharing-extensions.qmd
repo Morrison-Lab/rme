@@ -1,34 +1,56 @@
 To evaluate whether overdispersion and excess zeros distort inference
 in the needle-sharing dataset,
-we fit a negative binomial model and compare its coefficient estimates
-and standard errors against the baseline Poisson model.
+we fit a [negative binomial regression model](#def-nb-reg)
+with the same covariates as the baseline Poisson model,
+and compare its coefficient estimates and standard errors
+against that Poisson model.
 
 ```{r}
 #| label: fit-nb-model
-library(MASS) # for glm.nb()
-glm1_nb <- glm.nb(
+# fit the negative binomial model by direct maximum likelihood,
+# with the same covariates as the Poisson model `glm1`
+glm1_nb <- glmmTMB::glmmTMB(
   formula = shared_syr ~ homeless +
     age + sex + ethn + polydrug + hivstat + sexabuse + hplsns,
+  family = glmmTMB::nbinom2,
   data = needles
 )
-
-equatiomatic::extract_eq(glm1_nb)
 ```
+
+::: notes
+We fit this model with `glmmTMB::glmmTMB()` [@brooks2017glmmTMB],
+which maximizes the likelihood over the coefficients and $\rho$ jointly.
+`MASS::glm.nb()` [@venables2002modern] instead alternates between
+iteratively reweighted least squares for the coefficients
+and a separate fit of $\rho$;
+on these data that alternation does not converge
+("alternation limit reached"),
+and on some platforms it stops with an error.
+The `nbinom2` family in `glmmTMB` has variance $\mu + \mu^2 / \rho$,
+matching @eq-nb-reg-var,
+and `sigma(glm1_nb)` returns $\est{\rho}$.
+:::
 
 ```{r}
 #| tbl-cap: "Negative binomial model for needle-sharing data"
 #| label: tbl-needles-nb
-summary(glm1_nb)
+# show the log-mean coefficients, on the same scale as the comparison table
+glm1_nb |>
+  parameters() |>
+  print_md()
 ```
 
 ---
 
 Evaluating the estimated parameters across models reveals
 how accounting for overdispersion affects inference.
-While the estimated log-rate coefficients remain comparable
-between the Poisson and negative binomial specifications,
-the standard errors under the negative binomial model appropriately widen
-to reflect the excess outcome variability.
+The coefficient for homelessness, the exposure of interest,
+changes little between the Poisson and negative binomial models,
+while several adjustment coefficients shift substantially,
+and some change sign.
+The negative binomial standard errors are several times
+the Poisson standard errors,
+reflecting the excess outcome variability.
 
 ```{r}
 #| tbl-cap: "Poisson vs. Negative Binomial regression estimates"
@@ -37,8 +59,8 @@ tibble(
   Parameter = names(coef(glm1)),
   `Poisson Coef` = coef(glm1),
   `Poisson SE` = summary(glm1)$coefficients[, "Std. Error"],
-  `NB Coef` = coef(glm1_nb),
-  `NB SE` = summary(glm1_nb)$coefficients[, "Std. Error"]
+  `NB Coef` = glmmTMB::fixef(glm1_nb)$cond,
+  `NB SE` = summary(glm1_nb)$coefficients$cond[, "Std. Error"]
 ) |>
   pander::pander()
 ```
