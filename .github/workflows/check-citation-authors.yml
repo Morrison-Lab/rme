@@ -1,0 +1,24 @@
+# Flags an author's surname typed next to a citation of the same source,
+# such as "James et al. [@james2021islr, Figure 6.7]",
+# where "@james2021islr [Figure 6.7]" already prints the names (psw#679).
+# Fix the wording, write [-@key] to suppress the names on purpose, or put
+# `<!-- check-citation-authors: allow: <reason> -->` on the line.
+# Warn-only here; where annotation-gate runs, its warning fails the run.
+# No push trigger: a push run has no base to diff against and would report
+# success having checked nothing. A manual run scans the whole tree.
+# Check: Morrison-Lab/gha#2149; wiring: Morrison-Lab/gha#2150.
+name: Check citation authors
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-citation-authors.yml@v3
+    with:
+      fail: false
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
+      paths-ignore: '_extensions/**,**/outtakes/**'
