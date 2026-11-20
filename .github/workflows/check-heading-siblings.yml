@@ -1,0 +1,23 @@
+# Flags a heading a PR adds to a group of more than 7 sibling headings, and a
+# lone numbered subheading (a 1.1 with no 1.2) a PR adds or changes
+# (Morrison-Lab/gha#2170; the rule is "A heading with no sibling" in psw's
+# chapters/paper-organization.qmd, psw#692). Headings inside divs and tabsets,
+# and .unnumbered or .unlisted headings, are not counted.
+# The fix for a lone subheading is usually to add a sibling or promote a child,
+# not to remove the lone heading.
+# No push trigger: a push run has no base to diff against and would report
+# success having checked nothing. A manual run scans the whole tree.
+name: Check heading siblings
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-heading-siblings.yml@v3
+    with:
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
+      paths-ignore: '_extensions/**,**/outtakes/**,latex-macros/**'
