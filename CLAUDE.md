@@ -66,7 +66,10 @@ Before committing any `.qmd`, `.R`, or config file change:
   - `{{< slidebreak >}}` and `---` are **not equivalent** and must not be combined: per `_extensions/slidebreak/slidebreak.lua`, the shortcode only renders a rule in the `revealjs` profile and is a no-op everywhere else, while a bare `---` renders a visible `<hr>` in *every* profile (book, website, PDF handout).
     When relocating an example/theorem div next to an existing `---` separator, replace that `---` with `{{< slidebreak >}}` rather than adding the shortcode alongside it --- leaving both introduces a stray `<hr>` in the non-slide renders.
 - Default to `#| code-fold: true` for figure/table chunks
-- Check that every model fit a chapter shows has converged (its `converged` flag, and any fitting warnings), not only that the chunk ran.
+- Check that every model fit a chapter shows has converged, not only that the chunk ran:
+  read any fitting warnings, and check the fit's own convergence record
+  (`fit$converged` for `glm()` and `MASS::glm.nb()`;
+  `fit$fit$convergence == 0` and `fit$sdr$pdHess` for `glmmTMB::glmmTMB()`).
   A fit that does not converge can pass one CI render with a warning and fail the next with an error, with no content change:
   `MASS::glm.nb()` on the needle-sharing data did this on main in 2026-11
   ([#1505](https://github.com/Morrison-Lab/rme/pull/1505)).
