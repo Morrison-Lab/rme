@@ -1,0 +1,22 @@
+# Flags the title of a theorem, lemma, proposition, corollary, or conjecture
+# div that a PR adds or changes when the title is not a declarative sentence
+# stating the result (Morrison-Lab/gha#2169). A customary name may come first,
+# followed by a colon ("Bayes' rule: the posterior is proportional to ...").
+# It also flags a touched statement that does not say the result both in words
+# and in a display formula.
+# No push trigger: a push run has no base to diff against and would report
+# success having checked nothing. A manual run scans the whole tree.
+name: Check result titles
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-result-titles.yml@v3
+    with:
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
+      paths-ignore: '_extensions/**,**/outtakes/**,latex-macros/**'
