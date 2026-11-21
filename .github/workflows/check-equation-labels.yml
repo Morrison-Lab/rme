@@ -1,0 +1,22 @@
+# Flags a $$ ... $$ display equation with no {#eq-...} label when a PR adds
+# or edits a line of it, since the equation-anchors filter gives a number
+# and a permalink only to a labeled equation.
+# Put a label after the closing $$, such as $$ ... $$ {#eq-entropy}, or put
+# `<!-- check-equation-labels: allow: <reason> -->` on the line before it.
+# Existing unlabeled equations are not reported until a PR touches them.
+# Blocking. No push trigger: a push run has no base to diff against.
+# A manual run scans the whole tree.
+# Check: Morrison-Lab/gha#2177; wiring: Morrison-Lab/gha#2178.
+name: Check equation labels
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-equation-labels.yml@v3
+    with:
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
