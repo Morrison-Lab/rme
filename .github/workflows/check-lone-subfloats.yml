@@ -1,0 +1,21 @@
+# Flags a figure or table whose reader sees one subfigure or subtable,
+# such as a figure div wrapping a language tabset whose chunks keep their
+# fig- labels, so each tab shows a lone "(a)" or "(b)" (psw#697).
+# Drop the inner labels, or put
+# `<!-- check-lone-subfloats: allow: <reason> -->` in the div.
+# Blocking. No push trigger: a push run has no base to diff against.
+# A manual run scans the whole tree.
+# Check: Morrison-Lab/gha#2173; wiring: Morrison-Lab/gha#2175.
+name: Check lone subfloats
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    permissions:
+      contents: read
+    uses: Morrison-Lab/gha/.github/workflows/check-lone-subfloats.yml@v3
+    with:
+      whole-tree: ${{ github.event_name == 'workflow_dispatch' }}
