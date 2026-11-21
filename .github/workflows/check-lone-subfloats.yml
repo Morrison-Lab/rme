@@ -1,0 +1,23 @@
+# Diff-scoped check: flags a figure or table whose reader sees one subfigure
+# or subtable, such as a figure wrapping a language tabset whose chunks keep
+# their fig- labels, when a PR adds a line to it. Drop the inner labels, or
+# add <!-- check-lone-subfloats: allow: reason --> in the div.
+# Blocking by default.
+# Only contents:read is needed (the default), so no permissions block is required.
+name: Check lone subfloats
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: Morrison-Lab/gha/.github/workflows/check-lone-subfloats.yml@v3
+    # with:
+    #   globs: '*.qmd'                        # pathspecs to check (recursive)
+    #   paths-ignore: 'chapters/outtakes/**'   # skip known-noisy paths
+    #   fail: true                             # set false to warn only (defaults to true)
+    #   whole-tree: true                       # scan every file, not just a PR's additions
